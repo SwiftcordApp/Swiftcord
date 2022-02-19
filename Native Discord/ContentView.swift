@@ -25,6 +25,12 @@ struct ContentView: View {
                     } label: {
                         Text(item.timestamp!, formatter: itemFormatter)
                     }
+                    .contextMenu {
+                        Button(action: {
+                        }){
+                            Text("Delete")
+                        }
+                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -35,7 +41,9 @@ struct ContentView: View {
                     }
                 }
             }
-            Text("Select an item")
+            SecondView()
+            // SafariWebView(urlString: "https://canary.discord.com/login")
+            // SafariWebView(urlString: "https://stackoverflow.com")
         }
     }
 
@@ -81,5 +89,25 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+
+var secondItems = ["Second 1", "Second 2", "Second 3", "Second 4"]
+
+struct SecondView: View {
+
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach((0..<secondItems.count), id: \.self) { index in
+                    NavigationLink {
+                        Text("Item: \(secondItems[index])")
+                    } label: {
+                        Text(secondItems[index])
+                    }
+                }
+            }
+        }
     }
 }
