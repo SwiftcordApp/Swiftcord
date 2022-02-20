@@ -52,7 +52,7 @@ enum GatewayIncomingOpcodes: Int, Codable {
 protocol GatewayData: Codable {
 }
 
-struct GatewayConnProperties: GatewayData {
+class GatewayConnProperties: GatewayData {
     let os: String
     let browser: String
     let release_channel: String?
@@ -146,10 +146,9 @@ struct GatewayIncoming: Decodable {
     }
 }
 
-/*struct GatewayOutgoing: Encodable {
+struct GatewayOutgoing<T: GatewayData>: Encodable {
     let op: GatewayOutgoingOpcodes
-    let d: Encodable
+    let d: T
     let s: Int? // Sequence #
     let t: String?
 }
-*/

@@ -11,6 +11,7 @@ import Starscream
 class DiscordGateway: WebSocketDelegate {
     private var socket: WebSocket
     private(set) var isConnected = false
+    private var seq: Int? = nil
     
     init(connectionTimeout: Double = 5) {
         var request = URLRequest(url: URL(string: apiConfig.gateway)!)
@@ -20,6 +21,23 @@ class DiscordGateway: WebSocketDelegate {
         
         print("Attempting connection to Gateway: \(apiConfig.gateway)")
         socket.connect()
+    }
+    
+    func initHeartbeat(interval: Int) {
+        func sendHeartbeat() {
+            socket.write(data: "")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(interval)) {
+                sendHeartbeat()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() +
+            .milliseconds(Int(Double(interval) * Double.random(in: 0...1)))
+        ) { // First heartbeat delayed by jitter interval as per Discord docs
+            sendHeartbeat()
+        }
     }
     
     func didReceive(event: WebSocketEvent, client: WebSocket) {
@@ -49,6 +67,19 @@ class DiscordGateway: WebSocketDelegate {
     
     func handleIncoming(received: String) {
         // Should handle exceptions in the future
-        print(try! JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!) )
+        guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!)
+        else {
+            return
+        }
+        
+        print(decoded)
+        switch (decoded.op) {
+        case .hello:
+            print("Gateway hello, init heartbeat")
+            initHeartbeat(interval: decoded.d.heartbeat_interval)
+            break;
+        default:
+            print("Unimplimented opcode: \(decoded.op)")
+        }
     }
 }
