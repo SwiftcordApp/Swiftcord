@@ -35,6 +35,9 @@
 		DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */; };
 		DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = DA4A88CA27C1EC5500720909 /* Starscream */; };
 		DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CC27C1FAEE00720909 /* Config.swift */; };
+		DA4A88D027C2068F00720909 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CF27C2068F00720909 /* Gateway.swift */; };
+		DA4A88D227C20FC300720909 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D127C20FC300720909 /* Activity.swift */; };
+		DA4A88D527C23F0200720909 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D427C23F0200720909 /* Heartbeat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +70,9 @@
 		DA4A88C527C1E77000720909 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordGateway.swift; sourceTree = "<group>"; };
 		DA4A88CC27C1FAEE00720909 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		DA4A88CF27C2068F00720909 /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
+		DA4A88D127C20FC300720909 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		DA4A88D427C23F0200720909 /* Heartbeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +130,8 @@
 		DA4A889D27C1133300720909 /* DiscordAPI */ = {
 			isa = PBXGroup;
 			children = (
+				DA4A88D327C228CB00720909 /* Gateway */,
 				DA4A88A027C1243000720909 /* Objects */,
-				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
 				DA4A88CC27C1FAEE00720909 /* Config.swift */,
 			);
 			path = DiscordAPI;
@@ -134,7 +140,6 @@
 		DA4A88A027C1243000720909 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				DA4A88CE27C204C800720909 /* Gateway */,
 				DA4A88A127C1244200720909 /* Embed.swift */,
 				DA4A88A327C12CD100720909 /* Message.swift */,
 				DA4A88A527C12DD700720909 /* Mention.swift */,
@@ -153,13 +158,17 @@
 				DA4A88C127C1432300720909 /* Interaction.swift */,
 				DA4A88C327C1442300720909 /* Sticker.swift */,
 				DA4A88C527C1E77000720909 /* Permission.swift */,
+				DA4A88CF27C2068F00720909 /* Gateway.swift */,
+				DA4A88D127C20FC300720909 /* Activity.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
 		};
-		DA4A88CE27C204C800720909 /* Gateway */ = {
+		DA4A88D327C228CB00720909 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
+				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
+				DA4A88D427C23F0200720909 /* Heartbeat.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -244,6 +253,7 @@
 				DA4A88AC27C1332600720909 /* Locale.swift in Sources */,
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
 				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
+				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
@@ -253,6 +263,7 @@
 				DA4A88C027C1417900720909 /* Team.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
+				DA4A88D527C23F0200720909 /* Heartbeat.swift in Sources */,
 				DA4A88BC27C13FA200720909 /* Presence.swift in Sources */,
 				DA4A88A427C12CD100720909 /* Message.swift in Sources */,
 				DA4A88A627C12DD700720909 /* Mention.swift in Sources */,
@@ -263,6 +274,7 @@
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
 				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
+				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
 				DA4A88AA27C1324400720909 /* User.swift in Sources */,
 				DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */,
 			);

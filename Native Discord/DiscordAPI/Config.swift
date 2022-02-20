@@ -22,4 +22,4 @@ struct GatewayConfig {
     }
 }
 
-let gatewayCfg = GatewayConfig(baseURL: "canary.discord.com", version: 9)
+let apiConfig = GatewayConfig(baseURL: "canary.discord.com", version: 9)
