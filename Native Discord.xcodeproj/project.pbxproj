@@ -23,7 +23,6 @@
 		DA4A88AE27C135F300720909 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88AD27C135F300720909 /* Member.swift */; };
 		DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88AF27C136B400720909 /* ISOTimestamp.swift */; };
 		DA4A88B227C1385100720909 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B127C1385100720909 /* Attachment.swift */; };
-		DA4A88B427C1390700720909 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B327C1390700720909 /* Role.swift */; };
 		DA4A88B627C13A9800720909 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B527C13A9800720909 /* Channel.swift */; };
 		DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B727C13BAF00720909 /* Reaction.swift */; };
 		DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B927C13BDF00720909 /* Emoji.swift */; };
@@ -32,6 +31,9 @@
 		DA4A88C027C1417900720909 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88BF27C1417900720909 /* Team.swift */; };
 		DA4A88C227C1432300720909 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C127C1432300720909 /* Interaction.swift */; };
 		DA4A88C427C1442300720909 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C327C1442300720909 /* Sticker.swift */; };
+		DA4A88C627C1E77000720909 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C527C1E77000720909 /* Permission.swift */; };
+		DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */; };
+		DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = DA4A88CA27C1EC5500720909 /* Starscream */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +55,6 @@
 		DA4A88AD27C135F300720909 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		DA4A88AF27C136B400720909 /* ISOTimestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISOTimestamp.swift; sourceTree = "<group>"; };
 		DA4A88B127C1385100720909 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
-		DA4A88B327C1390700720909 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		DA4A88B527C13A9800720909 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		DA4A88B727C13BAF00720909 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		DA4A88B927C13BDF00720909 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
@@ -62,6 +63,8 @@
 		DA4A88BF27C1417900720909 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		DA4A88C127C1432300720909 /* Interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
 		DA4A88C327C1442300720909 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
+		DA4A88C527C1E77000720909 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordGateway.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +98,7 @@
 		DA4A888627C0AF3000720909 /* Native Discord */ = {
 			isa = PBXGroup;
 			children = (
-				DA4A889D27C1133300720909 /* API */,
+				DA4A889D27C1133300720909 /* Gateway */,
 				DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
 				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
@@ -115,12 +119,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		DA4A889D27C1133300720909 /* API */ = {
+		DA4A889D27C1133300720909 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
 				DA4A88A027C1243000720909 /* Objects */,
+				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
 			);
-			path = API;
+			path = Gateway;
 			sourceTree = "<group>";
 		};
 		DA4A88A027C1243000720909 /* Objects */ = {
@@ -135,7 +140,6 @@
 				DA4A88AD27C135F300720909 /* Member.swift */,
 				DA4A88AF27C136B400720909 /* ISOTimestamp.swift */,
 				DA4A88B127C1385100720909 /* Attachment.swift */,
-				DA4A88B327C1390700720909 /* Role.swift */,
 				DA4A88B527C13A9800720909 /* Channel.swift */,
 				DA4A88B727C13BAF00720909 /* Reaction.swift */,
 				DA4A88B927C13BDF00720909 /* Emoji.swift */,
@@ -144,6 +148,7 @@
 				DA4A88BF27C1417900720909 /* Team.swift */,
 				DA4A88C127C1432300720909 /* Interaction.swift */,
 				DA4A88C327C1442300720909 /* Sticker.swift */,
+				DA4A88C527C1E77000720909 /* Permission.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -164,6 +169,9 @@
 			dependencies = (
 			);
 			name = "Native Discord";
+			packageProductDependencies = (
+				DA4A88CA27C1EC5500720909 /* Starscream */,
+			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Native Discord.app */;
 			productType = "com.apple.product-type.application";
@@ -192,6 +200,9 @@
 				Base,
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
+			packageReferences = (
+				DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -227,6 +238,7 @@
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
+				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA4A88C027C1417900720909 /* Team.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				DA4A88BC27C13FA200720909 /* Presence.swift in Sources */,
@@ -238,9 +250,9 @@
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
+				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
 				DA4A88AA27C1324400720909 /* User.swift in Sources */,
 				DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */,
-				DA4A88B427C1390700720909 /* Role.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +450,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DA4A88CA27C1EC5500720909 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DA4A889227C0AF3200720909 /* Native_Discord.xcdatamodeld */ = {

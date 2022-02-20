@@ -21,7 +21,7 @@ struct Embed: Codable {
     let type: EmbedType?
     let description: String?
     let url: String?
-    let timestamp: Int?
+    let timestamp: ISOTimestamp?
     let color: Int?
     let footer: EmbedFooter?
     let image: EmbedMedia?

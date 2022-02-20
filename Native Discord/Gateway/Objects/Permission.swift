@@ -1,11 +1,23 @@
 //
-//  Role.swift
+//  Permission.swift
 //  Native Discord
 //
-//  Created by Vincent Kwok on 19/2/22.
+//  Created by Vincent Kwok on 20/2/22.
 //
 
 import Foundation
+
+enum PermOverwriteType: Int, Codable {
+    case role = 0
+    case member = 1
+}
+
+struct PermOverwrite: Codable {
+    let id: Snowflake
+    let type: PermOverwriteType
+    let allow: String
+    let deny: String
+}
 
 /*
  From discord docs:
