@@ -4,6 +4,7 @@
 //
 //  Created by Vincent Kwok on 20/2/22.
 //
+//  Base config for many parts in Discord API
 
 import Foundation
 
@@ -15,10 +16,10 @@ struct GatewayConfig {
     let gateway: String
     
     init(baseURL: String, version: Int) {
-        self.baseURL = baseURL
+        self.baseURL = "https://\(baseURL)"
         self.version = version
         gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json"
-        restBase = "https://\(baseURL)/api/v\(version)/"
+        restBase = "\(self.baseURL)/api/v\(version)/"
     }
 }
 

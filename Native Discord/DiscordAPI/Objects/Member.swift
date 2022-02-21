@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Member: Codable {
+struct Member: Codable, GatewayData {
     let user: User?
     let nick: String?
     let avatar: String?
@@ -19,4 +19,5 @@ struct Member: Codable {
     let pending: Bool?
     let permissions: String? // Total permissions of the member in the channel, including overwrites, returned when in the interaction object
     let communication_disabled_until: ISOTimestamp? // When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
+    let guild_id: Snowflake?
 }

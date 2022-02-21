@@ -26,7 +26,7 @@ enum ChannelType: Int, Codable {
     case stageVoice = 13
 }
 
-struct Channel: Codable {
+struct Channel: Codable, GatewayData {
     let id: Snowflake
     let type: ChannelType
     let guild_id: Snowflake?
@@ -69,9 +69,10 @@ struct ThreadMeta: Codable {
     let create_timestamp: ISOTimestamp? // Timestamp when the thread was created; only populated for threads created after 2022-01-09
 }
 
-struct ThreadMember: Codable {
+struct ThreadMember: Codable, GatewayData {
     let id: Snowflake? // ID of thread
     let user_id: Snowflake? // ID of user
     let join_timestamp: ISOTimestamp // When user last joined thread
     let flags: Int // Any user-thread settings, currently only used for notifications
+    let guild_id: Snowflake?
 }

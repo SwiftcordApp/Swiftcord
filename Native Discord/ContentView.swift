@@ -16,6 +16,8 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     
+    @State private var sheetOpen = false
+    
     private let gateway = DiscordGateway()
 
     var body: some View {
@@ -37,13 +39,23 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
+                    }
+                    Button(action: {
+                        Task {
+                            print(await DiscordAPI().getChannel(id: "944947098598637588"))
+                        }
+                    }) {
+                        Text("Press me")
                     }
                 }
             }
             SecondView()
+                .sheet(isPresented: $sheetOpen) {
+                    Button(action: {sheetOpen.toggle()}) {Text("Close sheet")}
+                }
             // SafariWebView(urlString: "https://canary.discord.com/login")
             // SafariWebView(urlString: "https://stackoverflow.com")
         }

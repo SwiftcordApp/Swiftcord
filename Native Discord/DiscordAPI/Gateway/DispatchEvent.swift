@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+func dispatchGatewayEvent(type: GatewayEvent, data: GatewayData) {
+    
+}
