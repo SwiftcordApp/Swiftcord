@@ -64,6 +64,7 @@
 		DA4A890E27C4876900720909 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890D27C4876900720909 /* Heartbeat.swift */; };
 		DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890F27C48A7B00720909 /* SendToGateway.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
+		DA4A891627C4B06500720909 /* CachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* CachedState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,8 @@
 		DA4A890D27C4876900720909 /* Heartbeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		DA4A890F27C48A7B00720909 /* SendToGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendToGateway.swift; sourceTree = "<group>"; };
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
+		DA4A891527C4B06500720909 /* CachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedState.swift; sourceTree = "<group>"; };
+		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DA4A891727C4B0DF00720909 /* README.md */,
 				DA4A888627C0AF3000720909 /* Native Discord */,
 				DA4A888527C0AF3000720909 /* Products */,
 			);
@@ -232,6 +236,7 @@
 				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
 				DA4A890D27C4876900720909 /* Heartbeat.swift */,
 				DA4A890F27C48A7B00720909 /* SendToGateway.swift */,
+				DA4A891527C4B06500720909 /* CachedState.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
 				DA4A890E27C4876900720909 /* Heartbeat.swift in Sources */,
+				DA4A891627C4B06500720909 /* CachedState.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
