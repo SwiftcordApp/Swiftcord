@@ -9,15 +9,37 @@ import Foundation
 import Starscream
 
 class DiscordGateway: WebSocketDelegate {
-    private let missedACKTolerance: Int
+    // Events
+    let onStateChange = EventDispatch<(Bool, Bool, GatewayCloseCode?)>()
+    let onEvent = EventDispatch<(GatewayEvent, GatewayData)>()
     
-    private var socket: WebSocket!
+    // Config
+    let missedACKTolerance: Int
     
+    // WebSocket object
+    private(set) var socket: WebSocket!
+    
+    // State
     private(set) var isConnected = false
     private(set) var isResuming = false // Attempt to resume broken conn
-    private(set) var sessionInvalid = false // Invalid session
-    private var seq: Int? = nil // Sequence int of latest received payload
-    private var missedACK = 0
+    private(set) var missedACK = 0
+    private(set) var seq: Int? = nil // Sequence int of latest received payload
+    private var sessionID: String? = nil
+    
+    func incMissedACK() {
+        missedACK += 1
+    }
+    
+    // Attempt reconnection with resume after 1-5s as per spec
+    func attemptReconnect(resume: Bool = true) {
+        isResuming = resume
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() +
+            .milliseconds(1000 + Int(Double(4000) * Double.random(in: 0...1)))
+        ) {
+            self.socket.connect()
+        }
+    }
     
     init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
         missedACKTolerance = maxMissedACK
@@ -31,67 +53,32 @@ class DiscordGateway: WebSocketDelegate {
         socket.connect()
     }
     
-    func initHeartbeat(interval: Int) {
-        func sendHeartbeat(after: Int) {
-            // Do not continue sending heartbeats to a dead connection
-            guard isConnected else { return }
-            
-            sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
-            print("Sent heartbeat, missed ACKs: \(missedACK)")
-            missedACK += 1
-            
-            // Connection is dead ☠️
-            if (missedACK > missedACKTolerance) {
-                socket.forceDisconnect()
-                isResuming = true
-                // socket.connect()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(after)) {
-                sendHeartbeat(after: after)
-            }
-        }
-        
-        // First heartbeat delayed by jitter interval as per Discord docs
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() +
-            .milliseconds(Int(Double(interval) * Double.random(in: 0...1)))
-        ) {
-            sendHeartbeat(after: interval)
-        }
-    }
-    
-    func sendToGateway<T: GatewayData>(op: GatewayOutgoingOpcodes, d: T?) {
-        guard isConnected else { return }
-
-        let sendPayload = GatewayOutgoing(op: op, d: d, s: seq)
-        guard let encoded = try? JSONEncoder().encode(sendPayload)
-        else { return }
-        
-        print(sendPayload)
-        socket.write(string: String(data: encoded, encoding: .utf8)!)
-    }
-    
+    // MARK: Low level receive handler
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         switch (event) {
         case .connected(_):
             print("Gateway Connected")
             isConnected = true
-            break
-        case .disconnected(let reason, let code):
+            onStateChange.notify(event: (isConnected, isResuming, nil))
+        case .disconnected(_, let c):
             isConnected = false
-            print("Gateway Disconnected: \(reason) with code: \(code)")
-            break
-        case .text(let string):
-            handleIncoming(received: string)
-            break
+            guard let code = GatewayCloseCode(rawValue: Int(c)) else {
+                print("Unknown close code: \(c)")
+                return
+            }
+            // Check if code isn't an unrecoverable code, then attempt resume
+            if code != .authenthicationFail { attemptReconnect() }
+            print("Gateway Disconnected: \(code)")
+            onStateChange.notify(event: (isConnected, isResuming, code))
+        case .text(let string): handleIncoming(received: string)
         case .error(let error):
             isConnected = false
+            attemptReconnect()
+            onStateChange.notify(event: (isConnected, isResuming, nil))
             print("Connection error: \(String(describing: error))")
-            break
         case .cancelled:
             isConnected = false
-            break
+            onStateChange.notify(event: (isConnected, isResuming, nil))
         case .binary(_): break // Won't receive binary
         case .ping(_): break   // Don't care
         case .pong(_): break   // Don't care
@@ -113,34 +100,45 @@ class DiscordGateway: WebSocketDelegate {
             // Immediately send heartbeat as requested
             print("Send heartbeat by server request")
             sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
-            break
         case .hello:
             // Start heartbeating and send identify
             guard let d = decoded.d as? GatewayHello else { return }
             initHeartbeat(interval: d.heartbeat_interval)
-            
-            guard let identify = getIdentify() else {
-                print("TOKEN NOT IN KEYCHAIN!!!")
-                return
+        
+            // Check if we're attempting to and can resume
+            if isResuming && sessionID != nil && seq != nil {
+                print("Attempting resume")
+                guard let resume = getResume(seq: seq!, sessionID: sessionID!)
+                else { return }
+                sendToGateway(op: .resume, d: resume)
             }
-            sendToGateway(op: .identify, d: identify)
-            break;
-        case .heartbeatAck:
-            missedACK = 0
-            break;
+            else {
+                // Send identify
+                seq = nil // Clear sequence #
+                isResuming = false // Resuming failed/not attempted
+                guard let identify = getIdentify() else {
+                    print("TOKEN NOT IN KEYCHAIN!!!")
+                    return
+                }
+                sendToGateway(op: .identify, d: identify)
+            }
+        case .heartbeatAck: missedACK = 0
         case .dispatchEvent:
             guard let type = decoded.t else { return }
             guard let data = decoded.d else { return }
-            dispatchGatewayEvent(type: type, data: data)
-            break
+            switch (type) {
+            case .ready:
+                guard let d = data as? ReadyEvt else { return }
+                sessionID = d.session_id
+                print("Gateway ready")
+            default: break
+            }
+            onEvent.notify(event: (type, data))
         case .invalidSession:
             // Check if the session can be resumed
             guard let shouldResume = decoded.primitiveData as? Bool else { return }
-            if shouldResume { isResuming = true }
-            else { sessionInvalid = true }
-            break
-        default:
-            print("Unimplemented opcode: \(decoded.op)")
+            attemptReconnect(resume: shouldResume)
+        default: print("Unimplemented opcode: \(decoded.op)")
         }
     }
 }

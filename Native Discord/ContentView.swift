@@ -59,6 +59,11 @@ struct ContentView: View {
             // SafariWebView(urlString: "https://canary.discord.com/login")
             // SafariWebView(urlString: "https://stackoverflow.com")
         }
+        .onAppear {
+            let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
+                print("Connection state change: \(connected), \(resuming)")
+            }
+        }
     }
 
     private func addItem() {

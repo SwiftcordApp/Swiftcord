@@ -17,6 +17,7 @@ struct GatewayConnProperties: GatewayData {
     let os_version: String?
     let os_arch: String?
     let system_locale: String?
+    let client_build_number: Int?
 }
 
 // MARK: Opcode 1 (Heartbeat)
