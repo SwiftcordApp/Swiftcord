@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA32EF2427C6249000A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessageView.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -65,9 +66,15 @@
 		DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890F27C48A7B00720909 /* SendToGateway.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
 		DA4A891627C4B06500720909 /* CachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* CachedState.swift */; };
+		DA4A891927C4E90900720909 /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891827C4E90900720909 /* APIUser.swift */; };
+		DA4A891C27C4EFF400720909 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891B27C4EFF400720909 /* Connection.swift */; };
+		DA4A891E27C4F06B00720909 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891D27C4F06B00720909 /* Integration.swift */; };
+		DA4A892027C5167A00720909 /* APIGuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891F27C5167900720909 /* APIGuild.swift */; };
+		DA4A892427C5D6C500720909 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A892327C5D6C500720909 /* ServerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA32EF2327C6249000A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +136,12 @@
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
 		DA4A891527C4B06500720909 /* CachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedState.swift; sourceTree = "<group>"; };
 		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DA4A891827C4E90900720909 /* APIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUser.swift; sourceTree = "<group>"; };
+		DA4A891A27C4EE1B00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DA4A891B27C4EFF400720909 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		DA4A891D27C4F06B00720909 /* Integration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integration.swift; sourceTree = "<group>"; };
+		DA4A891F27C5167900720909 /* APIGuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGuild.swift; sourceTree = "<group>"; };
+		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +213,7 @@
 		DA4A88A027C1243000720909 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				DA4A891A27C4EE1B00720909 /* README.md */,
 				DA4A88D627C2792F00720909 /* Gateway */,
 				DA4A88A127C1244200720909 /* Embed.swift */,
 				DA4A88FE27C3609900720909 /* ApplicationObj.swift */,
@@ -225,6 +239,8 @@
 				DA4A88EE27C34EB100720909 /* Levels.swift */,
 				DA4A88F027C3543A00720909 /* Voice.swift */,
 				DA4A88F227C3576D00720909 /* Stage.swift */,
+				DA4A891B27C4EFF400720909 /* Connection.swift */,
+				DA4A891D27C4F06B00720909 /* Integration.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -254,10 +270,12 @@
 		DA4A88DB27C326BC00720909 /* REST */ = {
 			isa = PBXGroup;
 			children = (
+				DA4A890A27C3D02A00720909 /* README.md */,
 				DA4A890627C38E4300720909 /* DiscordAPI.swift */,
 				DA4A890827C3CFA700720909 /* APIRequest.swift */,
-				DA4A890A27C3D02A00720909 /* README.md */,
 				DA4A890B27C3D29C00720909 /* APIChannel.swift */,
+				DA4A891827C4E90900720909 /* APIUser.swift */,
+				DA4A891F27C5167900720909 /* APIGuild.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -294,6 +312,8 @@
 			children = (
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
+				DA4A892327C5D6C500720909 /* ServerView.swift */,
+				DA32EF2327C6249000A9ED72 /* MessageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -380,10 +400,12 @@
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
 				DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */,
 				DA4A88ED27C34DD100720909 /* Guild.swift in Sources */,
+				DA32EF2427C6249000A9ED72 /* MessageView.swift in Sources */,
 				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
 				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
+				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
 				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
 				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
@@ -411,6 +433,7 @@
 				DA4A88BC27C13FA200720909 /* Presence.swift in Sources */,
 				DA4A88A427C12CD100720909 /* Message.swift in Sources */,
 				DA4A88A627C12DD700720909 /* Mention.swift in Sources */,
+				DA4A892027C5167A00720909 /* APIGuild.swift in Sources */,
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
@@ -423,10 +446,13 @@
 				DA4A88DA27C27A1100720909 /* GatewayEvent.swift in Sources */,
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
 				DA4A88F327C3576D00720909 /* Stage.swift in Sources */,
+				DA4A891C27C4EFF400720909 /* Connection.swift in Sources */,
+				DA4A891927C4E90900720909 /* APIUser.swift in Sources */,
 				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
 				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
 				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
 				DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */,
+				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
 				DA4A88AA27C1324400720909 /* User.swift in Sources */,
 				DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */,
 			);

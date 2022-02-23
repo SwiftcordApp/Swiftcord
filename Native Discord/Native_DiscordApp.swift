@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+func hideZoomButton() {
+    for window in NSApplication.shared.windows {
+        window.standardWindowButton(NSWindow.ButtonType.zoomButton)?.isHidden = true
+    }
+}
+
 @main
 struct Native_DiscordApp: App {
     let persistenceController = PersistenceController.shared
@@ -15,6 +21,14 @@ struct Native_DiscordApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onReceive(
+                    NotificationCenter.default.publisher(for: NSApplication.didFinishLaunchingNotification),
+                    perform: { _ in hideZoomButton() }
+                )
+                .onReceive(
+                    NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification),
+                    perform: { _ in hideZoomButton() }
+                )
         }
     }
 }

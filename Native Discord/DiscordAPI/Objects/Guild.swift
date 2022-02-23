@@ -87,9 +87,19 @@ struct Guild: Codable, GatewayData {
     let premium_progress_bar_enabled: Bool
 }
 
+// Partial Guild, returned when listing guilds
+struct PartialGuild: Codable, GatewayData {
+    let id: Snowflake
+    let name: String
+    let icon: String? // Icon hash
+    let owner: Bool // If current user is owner of guild
+    let permissions: String
+    let features: [GuildFeature]
+}
+
 struct GuildUnavailable: Codable, GatewayData {
     let id: Snowflake
-    let unavailable: Bool? // If not set, user was removed from guild
+    let unavailable: Bool?
 }
 
 struct GuildWelcomeScreen: Codable, GatewayData {

@@ -8,5 +8,5 @@
 import Foundation
 
 struct CachedState {
-    
+    var guilds: [GuildUnavailable]
 }

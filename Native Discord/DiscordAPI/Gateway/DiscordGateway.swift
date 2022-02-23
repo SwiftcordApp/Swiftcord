@@ -25,6 +25,7 @@ class DiscordGateway: WebSocketDelegate {
     private(set) var missedACK = 0
     private(set) var seq: Int? = nil // Sequence int of latest received payload
     private var sessionID: String? = nil
+    private var cache: CachedState?
     
     func incMissedACK() {
         missedACK += 1
@@ -130,6 +131,7 @@ class DiscordGateway: WebSocketDelegate {
             case .ready:
                 guard let d = data as? ReadyEvt else { return }
                 sessionID = d.session_id
+                cache?.guilds = d.guilds
                 print("Gateway ready")
             default: break
             }

@@ -17,51 +17,40 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     @State private var sheetOpen = false
+    @State private var guilds: [PartialGuild] = []
+    @State private var selectedGuild: Guild? = nil
     
     private let gateway = DiscordGateway()
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                    .contextMenu {
-                        Button(action: {
-                        }){
-                            Text("Delete")
-                        }
+        HStack(spacing: 0) {
+            ScrollView {
+                LazyVStack(spacing: 8) {
+                    ForEach(guilds, id: \.id) { guild in
+                        ServerButton(
+                            selected: selectedGuild?.id == guild.id,
+                            name: guild.name,
+                            onSelect: { Task {
+                                selectedGuild = await DiscordAPI().getGuild(id: guild.id)
+                            }}
+                        )
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .frame(width: 72)
+            }.frame(maxHeight: .infinity, alignment: .top)
+            
+            if selectedGuild != nil {
+                ServerView(guild: selectedGuild!)
             }
-            .toolbar {
-                ToolbarItemGroup {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                    Button(action: {
-                        Task {
-                            print(await DiscordAPI().getChannel(id: "944947098598637588"))
-                        }
-                    }) {
-                        Text("Press me")
-                    }
-                }
-            }
-            SecondView()
-                .sheet(isPresented: $sheetOpen) {
-                    Button(action: {sheetOpen.toggle()}) {Text("Close sheet")}
-                }
-            // SafariWebView(urlString: "https://canary.discord.com/login")
-            // SafariWebView(urlString: "https://stackoverflow.com")
         }
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")
+            }
+            Task {
+                guard let g = await DiscordAPI().getGuilds()
+                else { return }
+                guilds = g
             }
         }
     }
@@ -118,15 +107,6 @@ struct SecondView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach((0..<secondItems.count), id: \.self) { index in
-                    NavigationLink {
-                        Text("Item: \(secondItems[index])")
-                    } label: {
-                        Text(secondItems[index])
-                    }
-                }
-            }
         }
     }
 }
