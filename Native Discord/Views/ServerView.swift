@@ -12,7 +12,8 @@ struct ServerView: View {
     @State private var channels: [Channel] = []
     
     let chIcons = [
-        ChannelType.voice: "speaker.wave.2.fill"
+        ChannelType.voice: "speaker.wave.2.fill",
+        .news: "newspaper.fill",
     ]
     
     var body: some View {
@@ -28,7 +29,8 @@ struct ServerView: View {
                             id: \.id
                         ) { channel in
                             NavigationLink {
-                                Text(String(describing: channel))
+                                MessagesView(channel: channel)
+                                    .navigationTitle(guild.name)
                             } label: {
                                 Label(
                                     channel.name ?? "",
@@ -40,7 +42,7 @@ struct ServerView: View {
                     }
                 }
             }
-            .frame(minWidth: 200)
+            .frame(minWidth: 240)
             .toolbar {
                 ToolbarItemGroup {
                     Text(guild.name).font(.title3).fontWeight(.semibold)
@@ -52,15 +54,11 @@ struct ServerView: View {
                 }
             }
             
-            VStack {
-                Text("Test")
-
-            }
-            .frame(minWidth: 300)
+            Text("Select a channel from the list").frame(minWidth: 400)
         }
         .onAppear {
             Task {
-                guard let c = await DiscordAPI().getGuildChannels(id: guild.id) else { return }
+                guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
                 channels = c
             }
         }

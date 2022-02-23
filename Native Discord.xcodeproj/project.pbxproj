@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA32EF2427C6249000A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessageView.swift */; };
+		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
+		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
+		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
+		DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2927C65D2C00A9ED72 /* LottieView.swift */; };
+		DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DA32EF2C27C65E2700A9ED72 /* Lottie */; };
+		DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */; };
+		DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
+		DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -74,7 +81,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DA32EF2327C6249000A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
+		DA32EF2927C65D2C00A9ED72 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperLottieView.swift; sourceTree = "<group>"; };
+		DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoopMode.swift; sourceTree = "<group>"; };
+		DA32EF3327C6861800A9ED72 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,12 +163,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */,
+				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA32EF2E27C6766200A9ED72 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF2927C65D2C00A9ED72 /* LottieView.swift */,
+				DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */,
+				DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
@@ -310,10 +334,14 @@
 		DA4A88E327C3481700720909 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
-				DA32EF2327C6249000A9ED72 /* MessageView.swift */,
+				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
+				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
+				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
+				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +364,7 @@
 			name = "Native Discord";
 			packageProductDependencies = (
 				DA4A88CA27C1EC5500720909 /* Starscream */,
+				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Native Discord.app */;
@@ -367,6 +396,7 @@
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
 				DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */,
+				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -400,9 +430,10 @@
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
 				DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */,
 				DA4A88ED27C34DD100720909 /* Guild.swift in Sources */,
-				DA32EF2427C6249000A9ED72 /* MessageView.swift in Sources */,
+				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
 				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
 				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
+				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
@@ -412,6 +443,7 @@
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */,
 				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
+				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
 				DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
@@ -427,6 +459,7 @@
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
 				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
+				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
 				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
 				DA4A88D827C2795600720909 /* DataStructs.swift in Sources */,
 				DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */,
@@ -436,9 +469,11 @@
 				DA4A892027C5167A00720909 /* APIGuild.swift in Sources */,
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
+				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
 				DA4A890E27C4876900720909 /* Heartbeat.swift in Sources */,
+				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
 				DA4A891627C4B06500720909 /* CachedState.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
@@ -447,6 +482,7 @@
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
 				DA4A88F327C3576D00720909 /* Stage.swift in Sources */,
 				DA4A891C27C4EFF400720909 /* Connection.swift in Sources */,
+				DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */,
 				DA4A891927C4E90900720909 /* APIUser.swift in Sources */,
 				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
 				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
@@ -654,6 +690,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
 		DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/daltoniam/Starscream.git";
@@ -665,6 +709,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DA32EF2C27C65E2700A9ED72 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		DA4A88CA27C1EC5500720909 /* Starscream */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */;

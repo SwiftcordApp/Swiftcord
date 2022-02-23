@@ -10,13 +10,13 @@ import Foundation
 extension DiscordAPI {
     // MARK: Get Current User
     // GET /users/@me
-    func getCurrentUser() async -> User? {
+    static func getCurrentUser() async -> User? {
         return await getReq(path: "users/@me")
     }
     
     // MARK: Get User (Get user object from ID)
     // GET /users/{user.id}
-    func getUser(user: Snowflake) async -> User? {
+    static func getUser(user: Snowflake) async -> User? {
         return await getReq(path: "users/\(user)")
     }
     
@@ -25,7 +25,7 @@ extension DiscordAPI {
     
     // MARK: Get Current User Guilds
     // GET /users/@me/guilds
-    func getGuilds(
+    static func getGuilds(
         before: Snowflake? = nil,
         after: Snowflake? = nil,
         limit: Int = 200
@@ -36,7 +36,7 @@ extension DiscordAPI {
     // MARK: Get Current User Guild Member
     // Get guild member object for current user in a guild
     // GET /users/@me/guilds/{guild.id}/member
-    func getGuildMember(guild: Snowflake) async -> Member? {
+    static func getGuildMember(guild: Snowflake) async -> Member? {
         return await getReq(path: "users/@me/guilds/\(guild)/member")
     }
     

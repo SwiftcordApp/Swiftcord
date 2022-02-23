@@ -29,9 +29,12 @@ struct ServerButtonStyle: ButtonStyle {
 struct ServerButton: View {
     let selected: Bool
     let name: String
+    // Not a good way to pass icons, but works
+    let systemIconName: String?
+    let assetIconName: String?
+    let serverIconURL: String?
     let onSelect: () -> Void
     @State private var hovered = false
-    @State private var dummy = true
 
     var body: some View {
         HStack {
@@ -49,7 +52,6 @@ struct ServerButton: View {
             }*/
             .padding(.trailing, 8)
             
-            
             Spacer()
         }
         .frame(width: 72, height: 48)
@@ -58,6 +60,13 @@ struct ServerButton: View {
 
 struct ServerButton_Previews: PreviewProvider {
     static var previews: some View {
-        ServerButton(selected: false, name: "Hello world, discord!", onSelect: {})
+        ServerButton(
+            selected: false,
+            name: "Hello world, discord!",
+            systemIconName: nil,
+            assetIconName: nil,
+            serverIconURL: nil,
+            onSelect: {}
+        )
     }
 }

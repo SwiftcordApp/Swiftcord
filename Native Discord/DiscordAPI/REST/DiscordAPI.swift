@@ -7,6 +7,6 @@
 
 import Foundation
 
-class DiscordAPI {
+struct DiscordAPI {
     // How empty, everything is broken into smaller files (for now xD)
 }

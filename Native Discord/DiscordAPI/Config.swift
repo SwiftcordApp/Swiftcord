@@ -22,6 +22,7 @@ struct ClientParityVersion {
 
 struct GatewayConfig {
     let baseURL: String
+    let cdnURL: String
     let version: Int
     let parity: ClientParityVersion
     
@@ -33,11 +34,12 @@ struct GatewayConfig {
         version: Int,
         clientParity: ClientParityVersion
     ) {
-        self.baseURL = "https://\(baseURL)"
+        self.cdnURL = "https://cdn.discordapp.com/"
+        self.baseURL = "https://\(baseURL)/"
         self.version = version
         parity = clientParity
         gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json"
-        restBase = "\(self.baseURL)/api/v\(version)/"
+        restBase = "\(self.baseURL)api/v\(version)/"
     }
 }
 

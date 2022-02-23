@@ -8,7 +8,7 @@
 import Foundation
 import Starscream
 
-class DiscordGateway: WebSocketDelegate {
+class DiscordGateway: WebSocketDelegate, ObservableObject {
     // Events
     let onStateChange = EventDispatch<(Bool, Bool, GatewayCloseCode?)>()
     let onEvent = EventDispatch<(GatewayEvent, GatewayData)>()

@@ -9,7 +9,6 @@ import Foundation
 
 extension DiscordAPI {
     /// Utility wrappers for easy request making
-    
     enum RequestMethod: String {
         case get = "GET"
         case post = "POST"
@@ -18,7 +17,7 @@ extension DiscordAPI {
     }
     
     // Low level Discord API request, meant to be as generic as possible
-    func makeRequest(
+    static func makeRequest(
         path: String,
         query: [URLQueryItem] = [],
         body: String? = nil,
@@ -45,28 +44,32 @@ extension DiscordAPI {
         
         // Make request
         let (data, response) = try await URLSession.shared.data(for: req)
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else { return nil }
+        guard let httpResponse = response as? HTTPURLResponse else { return nil }
+        guard httpResponse.statusCode == 200 else {
+            print("Status code is not 200: \(httpResponse.statusCode)")
+            return nil
+        }
         
         return data
     }
     
     // Make a get request, and decode body with JSONDecoder
-    func getReq<T: Codable>(
+    static func getReq<T: Codable>(
         path: String,
         query: [URLQueryItem] = []
     ) async -> T? {
+        print("GET: \(path)")
         guard let d = try? await makeRequest(path: path, query: query)
         else { return nil }
         
         return try? JSONDecoder().decode(T.self, from: d)
     }
     
-    func postReq<T: Codable>(
+    static func postReq<T: Codable>(
         path: String,
         body: T
     ) async -> T? {
-        
+        print("POST: \(path)")
         guard let d = try? await makeRequest(path: path, method: .post)
         else { return nil }
         

@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var guilds: [PartialGuild] = []
     @State private var selectedGuild: Guild? = nil
     
-    private let gateway = DiscordGateway()
+    @StateObject private var gateway = DiscordGateway()
 
     var body: some View {
         HStack(spacing: 0) {
@@ -30,8 +30,11 @@ struct ContentView: View {
                         ServerButton(
                             selected: selectedGuild?.id == guild.id,
                             name: guild.name,
+                            systemIconName: nil,
+                            assetIconName: nil,
+                            serverIconURL: nil,
                             onSelect: { Task {
-                                selectedGuild = await DiscordAPI().getGuild(id: guild.id)
+                                selectedGuild = await DiscordAPI.getGuild(id: guild.id)
                             }}
                         )
                     }
@@ -48,7 +51,7 @@ struct ContentView: View {
                 print("Connection state change: \(connected), \(resuming)")
             }
             Task {
-                guard let g = await DiscordAPI().getGuilds()
+                guard let g = await DiscordAPI.getGuilds()
                 else { return }
                 guilds = g
             }
