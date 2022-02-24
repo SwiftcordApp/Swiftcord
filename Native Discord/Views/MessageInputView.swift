@@ -26,7 +26,7 @@ struct MessageInputView: View {
                 .overlay(alignment: .leading) {
                     if message.isEmpty {
                         Text(placeholder)
-                            .padding([.leading, .trailing], 5)
+                            .padding([.leading, .trailing], 4)
                             .opacity(0.75)
                             .font(.system(size: 16))
                             .allowsHitTesting(false)
