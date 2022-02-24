@@ -33,6 +33,7 @@ struct ContentView: View {
                             systemIconName: nil,
                             assetIconName: nil,
                             serverIconURL: nil,
+                            bgColor: nil,
                             onSelect: { Task {
                                 selectedGuild = await DiscordAPI.getGuild(id: guild.id)
                             }}

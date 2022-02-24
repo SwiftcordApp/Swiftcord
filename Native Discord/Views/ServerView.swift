@@ -10,6 +10,8 @@ import SwiftUI
 struct ServerView: View {
     let guild: Guild
     @State private var channels: [Channel] = []
+    @State private var selectedCh: String? = nil
+    @State private var isLoading = true
     
     let chIcons = [
         ChannelType.voice: "speaker.wave.2.fill",
@@ -28,10 +30,11 @@ struct ServerView: View {
                             channels.filter { $0.parent_id == category.id },
                             id: \.id
                         ) { channel in
-                            NavigationLink {
-                                MessagesView(channel: channel)
-                                    .navigationTitle(guild.name)
-                            } label: {
+                            NavigationLink(
+                                destination: MessagesView(channel: channel),
+                                tag: channel.id,
+                                selection: $selectedCh
+                            ) {
                                 Label(
                                     channel.name ?? "",
                                     systemImage: chIcons[channel.type] ?? "number"
@@ -54,11 +57,26 @@ struct ServerView: View {
                 }
             }
             
-            Text("Select a channel from the list").frame(minWidth: 400)
+            VStack {
+                Spacer()
+                if isLoading {
+                    ProgressView("Loading channels...")
+                        .progressViewStyle(.circular)
+                        .controlSize(.large)
+                }
+                else {
+                    Text("There aren't any text channels in this server")
+                }
+                Spacer()
+            }.frame(minWidth: 400, minHeight: 250)
         }
         .onAppear {
             Task {
                 guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
+                let txtChs = c.filter({ $0.type == .text })
+                if !txtChs.isEmpty {
+                    selectedCh = txtChs[0].id
+                }
                 channels = c
             }
         }

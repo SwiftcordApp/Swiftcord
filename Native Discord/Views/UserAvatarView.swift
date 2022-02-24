@@ -22,7 +22,8 @@ extension Color {
 
 struct UserAvatarView: View {
     let user: User
-    @State private var fullUser: User? = nil // Lazy-loaded full user
+    let guildID: Snowflake?
+    @State private var profile: UserProfile? = nil // Lazy-loaded full user
     @State private var infoPresenting = false
     
     var body: some View {
@@ -36,15 +37,17 @@ struct UserAvatarView: View {
         .frame(width: 40, height: 40)
         .clipShape(Circle())
         .onTapGesture {
-            if fullUser == nil { Task {
-                fullUser = await DiscordAPI.getUser(user: user.id)
+            // Get user profile for a fuller User object
+            if profile == nil { Task {
+                profile = await DiscordAPI.getProfile(user: user.id, guildID: guildID)
+                // print(profile)
             }}
             infoPresenting.toggle()
         }
         .popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
             VStack(alignment: .leading, spacing: 0) {
-                if (fullUser?.accent_color ?? user.accent_color) != nil {
-                    Rectangle().fill(Color(hex: UInt(fullUser?.accent_color ?? user.accent_color ?? 0)))
+                if (profile?.user.accent_color ?? user.accent_color) != nil {
+                    Rectangle().fill(Color(hex: UInt(profile?.user.accent_color ?? user.accent_color ?? 0)))
                         .frame(maxWidth: .infinity, minHeight: 60)
                 }
                 else {
@@ -69,7 +72,8 @@ struct UserAvatarView: View {
                     .clipShape(Circle())
                     .frame(width: 80, height: 80)
                 }
-                .offset(x: 14, y: -46)
+                .offset(x: 14)
+                .padding(.top, -46)
                 
                 VStack(alignment: .leading, spacing: 14) {
                     HStack(alignment: .bottom, spacing: 0) {
@@ -78,15 +82,17 @@ struct UserAvatarView: View {
                     }
                     
                     Divider()
-                    Text("ABOUT ME").font(.headline)
-                    Text("This is just filler text, currently fetching user's about is not yet supported because it has to be received from the Gateway")
-                        .fixedSize(horizontal: false, vertical: true)
+                    // Optionals are silly
+                    if (profile?.user.bio) != nil
+                        && !(profile?.user.bio!.isEmpty ?? false) {
+                        Text("ABOUT ME").font(.headline)
+                        Text((profile?.user.bio)!)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                     
                     Text("ROLES").font(.headline).padding(.top, 2)
                 }
-                .padding(.top, 10)
-                .padding([.trailing, .leading], 14)
-                .offset(y: -46)
+                .padding(14)
             }.frame(width: 300)
         }
     }

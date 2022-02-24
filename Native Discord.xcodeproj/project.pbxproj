@@ -15,6 +15,10 @@
 		DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */; };
 		DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
 		DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
+		DA32EF3627C72F7D00A9ED72 /* APISticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3527C72F7D00A9ED72 /* APISticker.swift */; };
+		DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
+		DA32EF3B27C7973500A9ED72 /* FormatFileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */; };
+		DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -88,6 +92,10 @@
 		DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperLottieView.swift; sourceTree = "<group>"; };
 		DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoopMode.swift; sourceTree = "<group>"; };
 		DA32EF3327C6861800A9ED72 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
+		DA32EF3527C72F7D00A9ED72 /* APISticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISticker.swift; sourceTree = "<group>"; };
+		DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
+		DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatFileSize.swift; sourceTree = "<group>"; };
+		DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFileExtension.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +188,13 @@
 			path = Lottie;
 			sourceTree = "<group>";
 		};
+		DA32EF3727C7440800A9ED72 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +215,9 @@
 		DA4A888627C0AF3000720909 /* Native Discord */ = {
 			isa = PBXGroup;
 			children = (
+				DA32EF3727C7440800A9ED72 /* Styles */,
 				DA4A88E327C3481700720909 /* Views */,
+				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
 				DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */,
@@ -300,6 +317,7 @@
 				DA4A890B27C3D29C00720909 /* APIChannel.swift */,
 				DA4A891827C4E90900720909 /* APIUser.swift */,
 				DA4A891F27C5167900720909 /* APIGuild.swift */,
+				DA32EF3527C72F7D00A9ED72 /* APISticker.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -309,6 +327,8 @@
 			children = (
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
+				DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */,
+				DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -430,10 +450,12 @@
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
 				DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */,
 				DA4A88ED27C34DD100720909 /* Guild.swift in Sources */,
+				DA32EF3627C72F7D00A9ED72 /* APISticker.swift in Sources */,
 				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
 				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
 				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
+				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
@@ -451,8 +473,10 @@
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
 				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
+				DA32EF3B27C7973500A9ED72 /* FormatFileSize.swift in Sources */,
 				DA4A88C027C1417900720909 /* Team.swift in Sources */,
 				DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */,
+				DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */,
 				DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */,
 				DA4A890327C3824800720909 /* Identify.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,

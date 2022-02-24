@@ -12,15 +12,30 @@ enum ConnectionVisibility: Int, Codable {
     case everyone = 1
 }
 
+// Note: purely by observation
+enum ConnectionType: String, Codable {
+    case steam = "steam"
+    case youtube = "youtube"
+    case spotify = "spotify"
+    case github = "github"
+    case twitch = "twitch"
+    case reddit = "reddit"
+    case facebook = "facebook"
+    case twitter = "twitter"
+    case xbox = "xbox"
+    case battleNet = "battle.net" // Guess
+    // Cannot guess PlayStation Network
+}
+
 // Connections with external accounts (e.g. Reddit, YouTube, Steam etc.)
 struct Connection: Codable, GatewayData {
     let id: String
     let name: String
-    let type: String
+    let type: ConnectionType
     let revoked: Bool?
     let integrations: [Integration]?
     let verified: Bool
-    let friend_sync: Bool
-    let show_activity: Bool
-    let visibility: ConnectionVisibility
+    let friend_sync: Bool?
+    let show_activity: Bool?
+    let visibility: ConnectionVisibility?
 }

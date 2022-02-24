@@ -53,7 +53,7 @@ public struct LottieView: NSViewRepresentable {
     }
 
     public func updateNSView(_ uiView: WrapperAnimationView, context: Context) {
-        print("Updated: \(play)")
+        // print("Updated: \(play)")
         uiView.loopMode = loopMode
         if play {
             uiView.play { completed in if completed { self.play = false } }

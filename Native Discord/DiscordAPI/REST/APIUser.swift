@@ -20,6 +20,19 @@ extension DiscordAPI {
         return await getReq(path: "users/\(user)")
     }
     
+    // MARK: Get Profile (Undocumented endpoint!)
+    // GET /users/{user.id}
+    static func getProfile(
+        user: Snowflake,
+        mutualGuilds: Bool = false,
+        guildID: Snowflake? = nil
+    ) async -> UserProfile? {
+        return await getReq(path: "users/\(user)/profile", query: [
+            URLQueryItem(name: "with_mutual_guilds", value: String(mutualGuilds)),
+            URLQueryItem(name: "guild_id", value: guildID)
+        ])
+    }
+    
     // MARK: Modify Current User
     // TODO: Patch not yet implemented
     

@@ -97,6 +97,11 @@ struct PartialGuild: Codable, GatewayData {
     let features: [GuildFeature]
 }
 
+struct MutualGuild: Codable, GatewayData {
+    let id: Snowflake
+    let nick: String?
+}
+
 struct GuildUnavailable: Codable, GatewayData {
     let id: Snowflake
     let unavailable: Bool?

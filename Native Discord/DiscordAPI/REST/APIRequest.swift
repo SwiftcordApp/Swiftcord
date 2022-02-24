@@ -61,6 +61,7 @@ extension DiscordAPI {
         print("GET: \(path)")
         guard let d = try? await makeRequest(path: path, query: query)
         else { return nil }
+        // print(String(decoding: d, as: UTF8.self))
         
         return try? JSONDecoder().decode(T.self, from: d)
     }
