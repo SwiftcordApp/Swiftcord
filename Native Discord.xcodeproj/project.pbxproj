@@ -19,6 +19,7 @@
 		DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
 		DA32EF3B27C7973500A9ED72 /* FormatFileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */; };
 		DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */; };
+		DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
 		DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatFileSize.swift; sourceTree = "<group>"; };
 		DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFileExtension.swift; sourceTree = "<group>"; };
+		DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
+				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
 				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
 				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
+				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */,

@@ -19,7 +19,7 @@ struct MessagesView: View {
     let channel: Channel
     @State private var reachedTop = false
     @State private var messages: [Message] = []
-    @State private var enteredText = ""
+    @State private var enteredText = " "
     @State private var loading = false
     @State private var scrollTopID: Snowflake? = nil
     
@@ -42,10 +42,12 @@ struct MessagesView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView {
+            ScrollView(.vertical) {
                 ScrollViewReader { proxy in
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
+                        Spacer(minLength: 20)
+                        
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (i, message) in
                             MessageView(
                                 guildID: channel.guild_id,
@@ -101,9 +103,10 @@ struct MessagesView: View {
             
             // RoundedRectangle(cornerRadius: 12).fill(.gray)
                 //.frame(maxWidth: .infinity, maxHeight: 16)
-            TextField("Message #\(channel.name ?? "")", text: $enteredText)
+            // TextField("Message #\(channel.name ?? "")", text: $enteredText)
+            MessageInputView(placeholder: "Message #\(channel.name ?? "")", message: $enteredText).onAppear { enteredText = "" }
         }
-        .frame(minWidth: 520)
+        .frame(minWidth: 525)
     }
 }
 
