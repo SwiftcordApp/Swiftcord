@@ -31,15 +31,23 @@ extension DiscordAPI {
         return await getReq(path: "channels/\(id)/messages", query: query)
     }
     
-    // MARK: Get Channel Message
-    // GET /channels/{channel.id}/messages/{message.id}
+    // MARK: Get Channel Message (Actual endpoint only available to bots, so we're using a workaround)
+    // Ailas of getChannelMsgs with predefined params
     static func getChannelMsg(
         id: Snowflake,
         msgID: Snowflake
     ) async -> Message? {
-        return await getReq(path: "channels/\(id)/messages/\(msgID)")
+        guard let m = await getChannelMsgs(id: id, limit: 1, around: msgID), !m.isEmpty
+        else { return nil }
+        return m[0]
     }
     
     // MARK: Create Channel Message
-
+    // POST /channels/{channel.id}/messages
+    static func createChannelMsg(
+        message: NewMessage,
+        id: Snowflake
+    ) async -> Message? {
+        return await postReq(path: "/channels/\(id)/messages", body: message)
+    }
 }

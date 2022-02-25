@@ -14,6 +14,8 @@ struct CustomHorizontalDivider: View {
     }
 }
 
+let dmGuild = Guild(id: "@me", name: "DMs", owner_id: "", afk_timeout: 0, verification_level: .none, default_message_notifications: .all, explicit_content_filter: .disabled, roles: [], emojis: [], features: [], mfa_level: .none, system_channel_flags: 0, premium_tier: .none, preferred_locale: .englishUS, nsfw_level: .default, premium_progress_bar_enabled: false) // Dummy guild for DMs
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -24,7 +26,7 @@ struct ContentView: View {
     
     @State private var sheetOpen = false
     @State private var guilds: [PartialGuild] = []
-    @State private var selectedGuild: Guild? = nil
+    @State private var selectedGuild: Guild = dmGuild
     
     @StateObject private var gateway = DiscordGateway()
 
@@ -33,27 +35,30 @@ struct ContentView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: selectedGuild?.id == "@me",
+                        selected: selectedGuild.id == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
-                        onSelect: {}
+                        onSelect: { selectedGuild = dmGuild }
                     )
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
                     ForEach(guilds, id: \.id) { guild in
                         ServerButton(
-                            selected: selectedGuild?.id == guild.id,
+                            selected: selectedGuild.id == guild.id,
                             name: guild.name,
+                            serverIconURL: guild.icon != nil ? "\(apiConfig.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             onSelect: { Task {
-                                selectedGuild = await DiscordAPI.getGuild(id: guild.id)
+                                guard let g = await DiscordAPI.getGuild(id: guild.id)
+                                else { return }
+                                selectedGuild = g
                             }}
                         )
                     }
                     
                     ServerButton(
-                        selected: selectedGuild?.id == "@me",
-                        name: "Home",
+                        selected: false,
+                        name: "Add a Server",
                         systemIconName: "plus",
                         bgColor: .green,
                         noIndicator: true,
@@ -63,9 +68,7 @@ struct ContentView: View {
                 .frame(width: 72)
             }.frame(maxHeight: .infinity, alignment: .top)
             
-            if selectedGuild != nil {
-                ServerView(guild: selectedGuild!)
-            }
+            ServerView(guild: $selectedGuild)
         }
         .environmentObject(gateway)
         .onAppear {

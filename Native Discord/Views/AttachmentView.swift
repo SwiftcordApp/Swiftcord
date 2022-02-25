@@ -56,15 +56,21 @@ struct AttachmentView: View {
         "application/zip": "doc.zipper"
     ]
     
+    private func getResizedDimens(width: Int, height: Int) -> (Int, Int) {
+        let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
+        let h = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
+        let w = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
+        if width < w && height < h { return (width, height) }
+        return (w, h)
+    }
+    
     var body: some View {
         // Guard doesn't work in views
         ZStack {
             if let url = URL(string: attachment.url) {
                 if attachment.width != nil && attachment.height != nil {
                     // This is an image/video
-                    let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
-                    let height = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
-                    let width = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
+                    let (width, height) = getResizedDimens(width: attachment.width!, height: attachment.height!)
                     switch attachment.content_type?.prefix(5) {
                     case "image":
                         AsyncImage(url: url) { phase in

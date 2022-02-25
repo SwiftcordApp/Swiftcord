@@ -16,10 +16,7 @@ struct UserAvatarView: View {
     @State private var note = ""
     
     var body: some View {
-        let avatarURL = URL(string: user.avatar != nil
-            ? "\(apiConfig.cdnURL)avatars/\(user.id)/\(user.avatar!).webp"
-            : "\(apiConfig.cdnURL)embed/avatars/\(Int(user.discriminator) ?? 0 % 5).png"
-        )
+        let avatarURL = user.avatarURL()
         AsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
         } placeholder: {
@@ -38,7 +35,7 @@ struct UserAvatarView: View {
             }}
             if guildRoles == nil { Task {
                 guildRoles = await DiscordAPI.getGuildRoles(id: guildID)
-                print(guildRoles)
+                // print(guildRoles)
             }}
             infoPresenting.toggle()
         }
@@ -73,16 +70,16 @@ struct UserAvatarView: View {
                 .offset(x: 14)
                 .padding(.top, -46)
                 
-                VStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .bottom, spacing: 0) {
                         Text(user.username)
                             .font(.title)
                             .fontWeight(.medium)
-                            .textSelection(.enabled)
                         Text("#\(user.discriminator)").font(.title3)
                     }
                     
                     Divider()
+                        .padding(.vertical, 8)
                     
                     if profile == nil {
                         ProgressView("Loading full profile...")
@@ -96,6 +93,8 @@ struct UserAvatarView: View {
                         Text("ABOUT ME").font(.headline)
                         Text((profile?.user.bio)!)
                             .fixedSize(horizontal: false, vertical: true)
+                    } else if profile != nil {
+                        Text("NO ABOUT").font(.headline)
                     }
                     
                     if profile != nil {
@@ -111,7 +110,7 @@ struct UserAvatarView: View {
                             Text(roles.isEmpty
                                  ? "NO ROLES"
                                  : (roles.count == 1 ? "ROLE" : "ROLES")
-                            ).font(.headline).padding(.top, 2)
+                            ).font(.headline).padding(.top, 8)
                             if !roles.isEmpty {
                                 TagCloudView(content: roles.map({ role in
                                     AnyView(
@@ -126,14 +125,14 @@ struct UserAvatarView: View {
                                         }
                                         .frame(height: 24)
                                         .background(Color.gray.opacity(0.2))
-                                        .cornerRadius(20)
+                                        .cornerRadius(7)
                                     )
-                                })).padding(.vertical, -2)
+                                })).padding(-2)
                             }
                         }
                     }
                     
-                    Text("NOTE").font(.headline).padding(.top, 2)
+                    Text("NOTE").font(.headline).padding(.top, 8)
                     // Notes are stored locally for now, but eventually will be synced with the Discord API
                     TextField("Add a note to this user (only visible to you)", text: $note)
                         .onChange(of: note) { _ in

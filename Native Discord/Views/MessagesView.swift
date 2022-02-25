@@ -44,6 +44,23 @@ struct MessagesView: View {
         }
     }
     
+    private func sendMessage(content: String) {
+        enteredText = ""
+        Task {
+            guard let m = await DiscordAPI.createChannelMsg(
+                message: NewMessage(
+                    content: content
+                ),
+                id: channel.id
+            ) else {
+                // TODO: Show some sort of indication that the message didn't send
+                enteredText = content // Message failed to send
+                return
+            }
+            print(m)
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(.vertical) {
@@ -52,11 +69,15 @@ struct MessagesView: View {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         Spacer(minLength: 38)
                         
-                        ForEach(Array(messages.enumerated()), id: \.1.id) { (i, message) in
+                        ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
                             MessageView(
                                 guildID: guildID,
-                                message: message,
-                                shrunk: i < messages.count - 1 && messages[i + 1].author.id == message.author.id && (messages[i + 1].type == .defaultMsg || messages[i + 1].type == .reply)
+                                message: msg,
+                                shrunk: i < messages.count - 1 && msg.messageIsShrunk(prev: messages[i + 1]),
+                                quotedMsg: msg.message_reference != nil
+                                ? messages.first { m in
+                                    m.id == msg.message_reference!.message_id
+                                } : nil
                             )
                             .flip()
                         }
@@ -108,7 +129,11 @@ struct MessagesView: View {
             // RoundedRectangle(cornerRadius: 12).fill(.gray)
                 //.frame(maxWidth: .infinity, maxHeight: 16)
             // TextField("Message #\(channel.name ?? "")", text: $enteredText)
-            MessageInputView(placeholder: "Message #\(channel.name ?? "")", message: $enteredText).onAppear { enteredText = "" }
+            MessageInputView(placeholder: "Message #\(channel.name ?? "")", message: $enteredText, onSend: sendMessage).onAppear { enteredText = "" }
+            .onChange(of: enteredText) { content in
+                guard !content.isEmpty && content.last!.isNewline else { return }
+                sendMessage(content: content)
+            }
         }
         .frame(minWidth: 525)
         .onAppear {
@@ -116,7 +141,7 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    messages.insert(msg, at: 0)
+                    if msg.channel_id == channel.id { messages.insert(msg, at: 0) }
                 default: print("Handling event \(evt) not implemented")
                 }
             })

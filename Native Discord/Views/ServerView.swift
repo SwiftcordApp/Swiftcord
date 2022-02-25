@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerView: View {
-    let guild: Guild
+    @Binding var guild: Guild
     @State private var channels: [Channel] = []
     @State private var selectedCh: String? = nil
     @State private var isLoading = true
@@ -75,11 +75,14 @@ struct ServerView: View {
                 Spacer()
             }.frame(minWidth: 400, minHeight: 250)
         }
-        .onAppear {
+        .onChange(of: guild) { _ in
             Task {
                 // print(await DiscordAPI.getDMs())
+                isLoading = true
+                selectedCh = nil
                 guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
                 channels = c
+                isLoading = false
                 
                 if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
                     p.id == lastChannel

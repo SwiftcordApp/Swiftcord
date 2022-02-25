@@ -45,7 +45,7 @@ struct Message: Codable, GatewayData {
     let tts: Bool
     let mention_everyone: Bool
     let mentions: [User]
-    let mention_roles: [Role]
+    let mention_roles: [Snowflake] // Role IDs that were mentioned
     let mention_channels: [ChannelMention]?
     let attachments: [Attachment]
     let embeds: [Embed]

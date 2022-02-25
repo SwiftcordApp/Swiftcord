@@ -78,7 +78,18 @@ struct StickerItemView: View {
                         height: size
                     ).lottieLoopMode(.loop).frame(width: size, height: size)
                 }
-            default: StickerErrorView(size: size)
+            default:
+                // Well it doesn't animate for some reason
+                AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+                    switch phase {
+                    case .empty: StickerLoadingView(size: size)
+                    case .success(let image): image.resizable().scaledToFill()
+                    case .failure: StickerErrorView(size: size)
+                    default: StickerErrorView(size: size)
+                    }
+                }
+                .frame(width: size, height: size)
+                .clipShape(RoundedRectangle(cornerRadius: 7))
             }}
             else { StickerErrorView(size: size) } // if error
         }
@@ -91,6 +102,7 @@ struct StickerView: View {
     @State private var infoShow = false
     @State private var error = false
     @State private var fullSticker: Sticker? = nil
+    @State private var packPresenting = false
     
     var body: some View {
         StickerItemView(sticker: sticker, size: 160, play: $play)
@@ -101,13 +113,26 @@ struct StickerView: View {
                     Divider()
                     Text(fullSticker!.name).font(.title2).fontWeight(.bold)
                     Text(fullSticker!.description ?? "").padding(.top, -8)
+                    if sticker.format_type == .aPNG {
+                        Text("Sorry, aPNG stickers can't be played (yet)").font(.footnote)
+                    }
+                            
                     if fullSticker!.pack_id != nil {
-                        Button(action: {}) {
+                        Button(action: { packPresenting = true }) {
                             Label("View Sticker Pack", systemImage: "square.on.square")
                                 .frame(maxWidth: .infinity)
                         }
                         .controlSize(.large)
                         .buttonStyle(.borderedProminent)
+                        .sheet(isPresented: $packPresenting, content: {
+                            VStack {
+                                Text("Sticker Pack").font(.title)
+                                Text("Unimplemented").font(.footnote)
+                                Button { packPresenting = false } label: {
+                                    Text("Close")
+                                }
+                            }.padding(14)
+                        })
                     }
                 }
                 else {

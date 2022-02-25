@@ -13,6 +13,7 @@ struct ServerButtonStyle: ButtonStyle {
     let bgColor: Color?
     let systemName: String?
     let assetName: String?
+    let serverIconURL: String?
     @Binding var hovered: Bool
     
     func makeBody(configuration: Configuration) -> some View {
@@ -27,7 +28,18 @@ struct ServerButtonStyle: ButtonStyle {
                 Image(systemName: systemName!)
                     .font(.system(size: 24))
             }
-            configuration.label.font(.system(size: 18))
+            else if serverIconURL != nil {
+                AsyncImage(url: URL(string: serverIconURL!)) { phase in
+                    if let image = phase.image {
+                        image.resizable().scaledToFill()
+                    } else if phase.error != nil {
+                        configuration.label.font(.system(size: 18))
+                    } else {
+                        ProgressView().progressViewStyle(.circular)
+                    }
+                }
+            }
+            else { configuration.label.font(.system(size: 18)) }
         }
         .frame(width: 48, height: 48)
         .background(hovered || selected ? bgColor ?? Color("DiscordTheme") : .gray.opacity(0.25))
@@ -61,7 +73,7 @@ struct ServerButton: View {
                 .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
                 
             Button(action: { onSelect() }) {
-                Text(systemIconName == nil && assetIconName == nil && serverIconURL == nil
+                Text(systemIconName == nil && assetIconName == nil
                      ? name.split(separator: " ").map({ s in s.prefix(1)}).joined(separator: "")
                      : ""
                 )
@@ -73,6 +85,7 @@ struct ServerButton: View {
                     bgColor: bgColor,
                     systemName: systemIconName,
                     assetName: assetIconName,
+                    serverIconURL: serverIconURL,
                     hovered: $hovered
                 )
             )

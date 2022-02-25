@@ -47,6 +47,7 @@ extension DiscordAPI {
         guard let httpResponse = response as? HTTPURLResponse else { return nil }
         guard httpResponse.statusCode == 200 else {
             print("Status code is not 200: \(httpResponse.statusCode)")
+            print(String(decoding: data, as: UTF8.self))
             return nil
         }
         
@@ -59,11 +60,27 @@ extension DiscordAPI {
         query: [URLQueryItem] = []
     ) async -> T? {
         print("GET: \(path)")
-        guard let d = try? await makeRequest(path: path, query: query)
-        else { return nil }
-        // print(String(decoding: d, as: UTF8.self))
-        
-        return try? JSONDecoder().decode(T.self, from: d)
+        do {
+            guard let d = try? await makeRequest(path: path, query: query)
+            else { return nil }
+            print(String(decoding: d, as: UTF8.self))
+            
+            return try JSONDecoder().decode(T.self, from: d)
+        } catch let DecodingError.dataCorrupted(context) {
+             print(context)
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch {
+            print("error: ", error)
+        }
+        return nil
     }
     
     static func postReq<D: Codable, B: Codable>(

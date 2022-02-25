@@ -32,9 +32,7 @@ struct TagCloudView: View {
         return ZStack(alignment: .topLeading) {
             ForEach(0..<content.count, id: \.self) { i in
                 content[i]
-                    .padding(.leading, i == 0 ? 0 : 2)
-                    .padding(.trailing, i == content.count - 1 ? 0 : 2)
-                    .padding(.vertical, 2)
+                    .padding(2)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width)
                         {

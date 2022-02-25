@@ -25,6 +25,9 @@
 		DA32EF4827C8ABFF00A9ED72 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */; };
 		DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */; };
 		DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
+		DA32EF4E27C8D6CA00A9ED72 /* SubtractDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */; };
+		DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */; };
+		DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -108,6 +111,9 @@
 		DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDate.swift; sourceTree = "<group>"; };
 		DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitColorFromHexInt.swift; sourceTree = "<group>"; };
 		DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
+		DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractDates.swift; sourceTree = "<group>"; };
+		DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageIsShrunk.swift; sourceTree = "<group>"; };
+		DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserAvatarURL.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -237,7 +243,6 @@
 			children = (
 				DA32EF3727C7440800A9ED72 /* Styles */,
 				DA4A88E327C3481700720909 /* Views */,
-				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
 				DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */,
@@ -353,6 +358,9 @@
 				DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */,
 				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
 				DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */,
+				DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */,
+				DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */,
+				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -380,12 +388,13 @@
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
+				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
+				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
-				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 			);
@@ -504,11 +513,14 @@
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
 				DA32EF3B27C7973500A9ED72 /* FormatFileSize.swift in Sources */,
 				DA4A88C027C1417900720909 /* Team.swift in Sources */,
+				DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */,
 				DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */,
 				DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */,
 				DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */,
+				DA32EF4E27C8D6CA00A9ED72 /* SubtractDates.swift in Sources */,
 				DA4A890327C3824800720909 /* Identify.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
+				DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */,
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
 				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
@@ -687,7 +699,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cryptoalgo.Native-Discord";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -714,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cryptoalgo.Native-Discord";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

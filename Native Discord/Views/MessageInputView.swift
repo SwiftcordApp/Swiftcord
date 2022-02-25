@@ -10,6 +10,7 @@ import SwiftUI
 struct MessageInputView: View {
     let placeholder: String
     @Binding var message: String
+    let onSend: (String) -> Void
     
     var body: some View {
         /*GeometryReader { geometry in
@@ -41,9 +42,14 @@ struct MessageInputView: View {
                 }
             
 
-            Button(action: {}) { Image(systemName: "arrow.up").font(.system(size: 20)) }
+            Button(action: { onSend(message) }) {
+                Image(systemName: "arrow.up").font(.system(size: 20))
+            }
                 .buttonStyle(.plain)
                 .padding(.trailing, 15)
+                .onTapGesture {
+                    print("Tap gesture!!!")
+                }
         }
         .frame(minHeight: 40)
         .background(

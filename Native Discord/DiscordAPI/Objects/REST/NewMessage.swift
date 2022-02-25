@@ -9,14 +9,14 @@ import Foundation
 
 struct NewMessage: Codable, GatewayData {
     let content: String?
-    let tts: Bool?
-    let embeds: [Embed]?
-    let allowed_mentions: AllowedMentions?
-    let message_reference: MessageReference?
-    let components: [MessageComponent]?
-    let sticker_ids: [Snowflake]?
+    var tts: Bool? = false
+    var embeds: [Embed]? = nil
+    var allowed_mentions: AllowedMentions? = nil
+    var message_reference: MessageReference? = nil
+    var components: [MessageComponent]? = nil
+    var sticker_ids: [Snowflake]? = nil
     // file[n] // Handle file uploading later
     // attachments
     // let payload_json: Codable? // Handle this later
-    let flags: Int?
+    var flags: Int? = nil
 }

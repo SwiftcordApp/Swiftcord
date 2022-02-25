@@ -21,6 +21,8 @@ enum GuildFeature: String, Codable {
     case news = "NEWS"
     case partnered = "PARTNERED"
     case previewEnabled = "PREVIEW_ENABLED"
+    case threadsEnabled = "THREADS_ENABLED"
+    case newThreads = "NEW_THREAD_PERMISSIONS"
     case privateThreads = "PRIVATE_THREADS"
     case roleIcons = "ROLE_ICINS"
     case thread7DayArchive = "SEVEN_DAY_THREAD_ARCHIVE"
@@ -32,21 +34,25 @@ enum GuildFeature: String, Codable {
     case welcomeScreen = "WELCOME_SCREEN_ENABLED"
 }
 
-struct Guild: Codable, GatewayData {
+struct Guild: Codable, GatewayData, Equatable {
+    static func == (lhs: Guild, rhs: Guild) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: Snowflake
     let name: String
-    let icon: String? // Icon hash
-    let icon_hash: String? // Also icon hash
-    let splash: String? // Splash hash
-    let discovery_splash: String?
-    let owner: Bool? // If current user is owner of guild
+    var icon: String? = nil // Icon hash
+    var icon_hash: String? = nil // Also icon hash
+    var splash: String? = nil // Splash hash
+    var discovery_splash: String? = nil
+    var owner: Bool? = nil // If current user is owner of guild
     let owner_id: Snowflake
-    let permissions: String?
-    let region: String? // Voice region id for the guild (deprecated)
-    let afk_channel_id: Snowflake?
+    var permissions: String? = nil
+    var region: String? = nil // Voice region id for the guild (deprecated)
+    var afk_channel_id: Snowflake? = nil
     let afk_timeout: Int
-    let widget_enabled: Bool?
-    let widget_channel_id: Snowflake?
+    var widget_enabled: Bool? = nil
+    var widget_channel_id: Snowflake? = nil
     let verification_level: VerificationLevel
     let default_message_notifications: MessageNotifLevel
     let explicit_content_filter: ExplicitContentFilterLevel
@@ -54,36 +60,36 @@ struct Guild: Codable, GatewayData {
     let emojis: [Emoji]
     let features: [GuildFeature]
     let mfa_level: MFALevel
-    let application_id: Snowflake? // For bot-created guilds
-    let system_channel_id: Snowflake? // ID of channel for system-created messages
+    var application_id: Snowflake? = nil // For bot-created guilds
+    var system_channel_id: Snowflake? = nil // ID of channel for system-created messages
     let system_channel_flags: Int
-    let rules_channel_id: Snowflake?
-    let joined_at: ISOTimestamp?
-    let large: Bool?
-    let unavailable: Bool? // If guild is unavailable due to an outage
-    let member_count: Int?
-    let voice_states: [VoiceState]?
-    let members: [Member]?
-    let channels: [Channel]?
-    let threads: [Channel]?
-    let presences: [PresenceUpdate]?
-    let max_presences: Int? // null is always returned, apart from the largest of guilds
-    let max_members: Int?
-    let vanity_url_code: String?
-    let description: String?
-    let banner: String? // Banner hash
+    var rules_channel_id: Snowflake? = nil
+    var joined_at: ISOTimestamp? = nil
+    var large: Bool? = nil
+    var unavailable: Bool? = nil // If guild is unavailable due to an outage
+    var member_count: Int? = nil
+    var voice_states: [VoiceState]? = nil
+    var members: [Member]? = nil
+    var channels: [Channel]? = nil
+    var threads: [Channel]? = nil
+    var presences: [PresenceUpdate]? = nil
+    var max_presences: Int? = nil // null is always returned, apart from the largest of guilds
+    var max_members: Int? = nil
+    var vanity_url_code: String? = nil
+    var description: String? = nil
+    var banner: String? = nil // Banner hash
     let premium_tier: PremiumLevel
-    let premium_subscription_count: Int? // Number of server boosts
+    var premium_subscription_count: Int? = nil // Number of server boosts
     let preferred_locale: Locale // Defaults to en-US
-    let public_updates_channel_id: Snowflake?
-    let max_video_channel_users: Int?
-    let approximate_member_count: Int? // Approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
-    let approximate_presence_count: Int? // Approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
-    let welcome_screen: GuildWelcomeScreen?
+    var public_updates_channel_id: Snowflake? = nil
+    var max_video_channel_users: Int? = nil
+    var approximate_member_count: Int? = nil // Approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
+    var approximate_presence_count: Int? = nil // Approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
+    var welcome_screen: GuildWelcomeScreen? = nil
     let nsfw_level: NSFWLevel
-    let stage_instances: [StageInstance]?
-    let stickers: [Sticker]?
-    let guild_scheduled_events: [GuildScheduledEvent]?
+    var stage_instances: [StageInstance]? = nil
+    var stickers: [Sticker]? = nil
+    var guild_scheduled_events: [GuildScheduledEvent]? = nil
     let premium_progress_bar_enabled: Bool
 }
 
