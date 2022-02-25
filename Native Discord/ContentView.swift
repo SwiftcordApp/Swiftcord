@@ -8,6 +8,12 @@
 import SwiftUI
 import CoreData
 
+struct CustomHorizontalDivider: View {
+    var body: some View {
+        Rectangle().fill(Color(NSColor.separatorColor))
+    }
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -26,19 +32,33 @@ struct ContentView: View {
         HStack(spacing: 0) {
             ScrollView {
                 LazyVStack(spacing: 8) {
+                    ServerButton(
+                        selected: selectedGuild?.id == "@me",
+                        name: "Home",
+                        assetIconName: "DiscordIcon",
+                        onSelect: {}
+                    )
+                    
+                    CustomHorizontalDivider().frame(width: 32, height: 1)
+                    
                     ForEach(guilds, id: \.id) { guild in
                         ServerButton(
                             selected: selectedGuild?.id == guild.id,
                             name: guild.name,
-                            systemIconName: nil,
-                            assetIconName: nil,
-                            serverIconURL: nil,
-                            bgColor: nil,
                             onSelect: { Task {
                                 selectedGuild = await DiscordAPI.getGuild(id: guild.id)
                             }}
                         )
                     }
+                    
+                    ServerButton(
+                        selected: selectedGuild?.id == "@me",
+                        name: "Home",
+                        systemIconName: "plus",
+                        bgColor: .green,
+                        noIndicator: true,
+                        onSelect: {}
+                    )
                 }
                 .frame(width: 72)
             }.frame(maxHeight: .infinity, alignment: .top)
@@ -47,6 +67,7 @@ struct ContentView: View {
                 ServerView(guild: selectedGuild!)
             }
         }
+        .environmentObject(gateway)
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")

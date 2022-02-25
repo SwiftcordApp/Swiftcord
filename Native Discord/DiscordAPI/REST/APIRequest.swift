@@ -66,14 +66,20 @@ extension DiscordAPI {
         return try? JSONDecoder().decode(T.self, from: d)
     }
     
-    static func postReq<T: Codable>(
+    static func postReq<D: Codable, B: Codable>(
         path: String,
-        body: T
-    ) async -> T? {
+        body: B? = nil
+    ) async -> D? {
         print("POST: \(path)")
-        guard let d = try? await makeRequest(path: path, method: .post)
+        
+        let p = body != nil ? try? JSONEncoder().encode(body) : nil
+        guard let d = try? await makeRequest(
+            path: path,
+            body: p != nil ? String(decoding: p!, as: UTF8.self) : nil,
+            method: .post
+        )
         else { return nil }
         
-        return try? JSONDecoder().decode(T.self, from: d)
+        return try? JSONDecoder().decode(D.self, from: d)
     }
 }

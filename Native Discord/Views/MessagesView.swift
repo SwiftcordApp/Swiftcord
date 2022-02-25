@@ -17,18 +17,22 @@ extension View {
 
 struct MessagesView: View {
     let channel: Channel
+    let guildID: Snowflake
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
     @State private var loading = false
     @State private var scrollTopID: Snowflake? = nil
     
+    @EnvironmentObject var gateway: DiscordGateway
+    
     private func fetchMoreMessages() {
         loading = true
         Task {
+            let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
             guard let m = await DiscordAPI.getChannelMsgs(
                 id: channel.id,
-                before: messages.isEmpty ? nil : messages[messages.count - 1].id
+                before: lastMsg
             ) else {
                 loading = false
                 return
@@ -46,11 +50,11 @@ struct MessagesView: View {
                 ScrollViewReader { proxy in
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        Spacer(minLength: 20)
+                        Spacer(minLength: 38)
                         
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (i, message) in
                             MessageView(
-                                guildID: channel.guild_id,
+                                guildID: guildID,
                                 message: message,
                                 shrunk: i < messages.count - 1 && messages[i + 1].author.id == message.author.id && (messages[i + 1].type == .defaultMsg || messages[i + 1].type == .reply)
                             )
@@ -58,7 +62,7 @@ struct MessagesView: View {
                         }
                         .onChange(of: messages.count) { _ in
                             guard messages.count >= 1 else { return }
-                            // This is bugged
+                            // This is _not_ bugged
                             if scrollTopID != nil {
                                 proxy.scrollTo(scrollTopID!, anchor: .bottom)
                                 scrollTopID = nil
@@ -107,6 +111,16 @@ struct MessagesView: View {
             MessageInputView(placeholder: "Message #\(channel.name ?? "")", message: $enteredText).onAppear { enteredText = "" }
         }
         .frame(minWidth: 525)
+        .onAppear {
+            let _ = gateway.onEvent.addHandler(handler: { (evt, d) in
+                switch evt {
+                case .messageCreate:
+                    guard let msg = d as? Message else { break }
+                    messages.insert(msg, at: 0)
+                default: print("Handling event \(evt) not implemented")
+                }
+            })
+        }
     }
 }
 

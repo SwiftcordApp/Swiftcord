@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct MessageView: View {
-    let guildID: Snowflake?
+    let guildID: Snowflake
     let message: Message
     let shrunk: Bool
-    let lineSpacing = 3 as CGFloat
+    let lineSpacing = 4 as CGFloat
     
     @State private var hovered = false
     
@@ -26,7 +26,13 @@ struct MessageView: View {
                 if !shrunk {
                     UserAvatarView(user: message.author, guildID: guildID)
                 }
-                else { ZStack { EmptyView() }.frame(width: 40) }
+                else {
+                    Text(message.timestamp.toDate()?.toTimeString() ?? "")
+                        .font(.custom("SF Compact Rounded", size: 10))
+                        .frame(width: 40, height: 22, alignment: .center)
+                        .animation(.linear(duration: 0.1), value: hovered)
+                        .opacity(hovered ? 0.5 : 0)
+                }
                 VStack(alignment: .leading, spacing: lineSpacing) {
                     if !shrunk {
                         Text(message.member?.nick ?? message.author.username)
@@ -34,7 +40,7 @@ struct MessageView: View {
                             .fontWeight(.medium)
                     }
                     // For including additional message components
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 4) {
                         if !message.content.isEmpty {
                             Text(message.content)
                                 .font(.system(size: 15))
@@ -47,12 +53,8 @@ struct MessageView: View {
                         }
                         ForEach(message.attachments, id: \.id) { attachment in
                             AttachmentView(attachment: attachment)
-                                .onAppear {
-                                    print(attachment)
-                                }
                         }
                     }
-                    .padding(.bottom, shrunk ? 0 : 2) // Pixel perfection ✨
                 }
             }
             else if message.type == .guildMemberJoin {
@@ -66,9 +68,72 @@ struct MessageView: View {
         }
         .padding(.leading, 16)
         .padding(.trailing, 48)
-        .padding(.top, shrunk ? 0 : 16)
-        .padding(.bottom, shrunk ? lineSpacing : 0)
+        .padding([.bottom, .top], lineSpacing / 2)
+        .background(hovered ? .gray.opacity(0.07) : .clear)
+        .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
+        .animation(.linear(duration: 0.1), value: hovered)
         .onHover { h in hovered = h }
+        .contextMenu {
+            Button {
+                
+            } label: {
+                // For some reason Label() with icon doesn't work...
+                Image(systemName: "arrowshape.turn.up.left.fill")
+                Text("Reply")
+            }
+            
+            Group {
+                Divider()
+                Button {
+                    
+                } label: {
+                    Image(systemName: "face.smiling.fill")
+                    Text("Add Reaction")
+                }
+                Button {
+                    
+                } label: {
+                    Image(systemName: "number")
+                    Text("Create Thread")
+                }
+                Button {
+                    
+                } label: {
+                    Image(systemName: "pin.fill")
+                    Text("Pin Message")
+                }
+                
+            }
+            
+            Divider()
+            Button {
+                
+            } label: {
+                Image(systemName: "pencil")
+                Text("Edit")
+            }
+            Button {
+                
+            } label: {
+                // role: .destructive does nothing
+                Image(systemName: "xmark.bin.fill") // ...and .foregroundColor does nothing here
+                Text("Delete Message").foregroundColor(.red)
+            }
+            
+            Divider()
+            Button {
+                
+            } label: {
+                Image(systemName: "link")
+                Text("Copy Link")
+            }
+            Button {
+                
+            } label: {
+                Image(systemName: "number.circle.fill")
+                Text("Copy ID")
+            }
+        }
     }
 }
 

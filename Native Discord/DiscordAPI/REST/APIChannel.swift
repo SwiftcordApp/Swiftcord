@@ -39,4 +39,7 @@ extension DiscordAPI {
     ) async -> Message? {
         return await getReq(path: "channels/\(id)/messages/\(msgID)")
     }
+    
+    // MARK: Create Channel Message
+
 }

@@ -39,11 +39,18 @@ struct AttachmentView: View {
     @State private var enlarged = false
     
     private let mimeFileMapping = [
+        // Rich Documents
         "application/pdf": "doc.text.image",
-        "application/msword": "doc.richtext",
-        "application/vnd.ms-word": "doc.richtext",
+        // Word
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "doc.richtext",
+        // PowerPoint
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation": "doc.text.image",
+        // Excel
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "chart.bar.doc.horizontal",
+        // Plain documents
         "text/plain": "doc.plaintext",
+        "text/html": "doc.richtext.fill",
+        "application/json": "doc.text",
         // Archives
         "application/gzip": "doc.zipper",
         "application/zip": "doc.zipper"
@@ -93,10 +100,10 @@ struct AttachmentView: View {
                         .padding(.top, 8)
                         .padding([.leading, .trailing], 12)
                         VideoPlayer(player: AVPlayer(url: url))
-                            .frame(width: 300, height: 42)
+                            .frame(maxWidth: .infinity, maxHeight: 42)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    .frame(width: 300)
+                    .frame(width: 400)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(.gray.opacity(0.2), lineWidth: 1)
@@ -122,12 +129,13 @@ struct AttachmentView: View {
                             Spacer()
                             Button(action: {}) {
                                 Image(systemName: "arrow.down.circle")
-                                    .font(.system(size: 24))
+                                    .font(.system(size: 20))
                             }
+                            .help("Download attachment")
                             .buttonStyle(.plain)
                             .padding(.trailing, 4)
                         }
-                    }.frame(width: 300)
+                    }.frame(width: 400)
                 }
             }
             else { AttachmentError(height: 160, width: 160) }

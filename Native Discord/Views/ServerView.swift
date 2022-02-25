@@ -31,7 +31,12 @@ struct ServerView: View {
                             id: \.id
                         ) { channel in
                             NavigationLink(
-                                destination: MessagesView(channel: channel),
+                                destination: MessagesView(
+                                    channel: channel,
+                                    guildID: guild.id
+                                ).onAppear {
+                                    UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild.id)")
+                                },
                                 tag: channel.id,
                                 selection: $selectedCh
                             ) {
@@ -72,12 +77,20 @@ struct ServerView: View {
         }
         .onAppear {
             Task {
+                // print(await DiscordAPI.getDMs())
                 guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
+                channels = c
+                
+                if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
+                    p.id == lastChannel
+                }) {
+                    selectedCh = lastChannel
+                    return
+                }
                 let txtChs = c.filter({ $0.type == .text })
                 if !txtChs.isEmpty {
                     selectedCh = txtChs[0].id
                 }
-                channels = c
             }
         }
     }

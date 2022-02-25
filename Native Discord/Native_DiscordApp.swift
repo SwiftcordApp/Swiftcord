@@ -13,6 +13,14 @@ func hideZoomButton() {
     }
 }
 
+// Get rid of over the top focus indicator
+extension NSTextField {
+    open override var focusRingType: NSFocusRingType {
+        get { .none }
+        set { }
+    }
+}
+
 @main
 struct Native_DiscordApp: App {
     let persistenceController = PersistenceController.shared

@@ -11,10 +11,22 @@ struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
     let name: String
     let bgColor: Color?
+    let systemName: String?
+    let assetName: String?
     @Binding var hovered: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
+            if assetName != nil {
+                Image(assetName!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 26)
+            }
+            else if systemName != nil {
+                Image(systemName: systemName!)
+                    .font(.system(size: 24))
+            }
             configuration.label.font(.system(size: 18))
         }
         .frame(width: 48, height: 48)
@@ -31,17 +43,18 @@ struct ServerButton: View {
     let selected: Bool
     let name: String
     // Not a good way to pass icons, but works
-    let systemIconName: String?
-    let assetIconName: String?
-    let serverIconURL: String?
-    let bgColor: Color?
+    var systemIconName: String? = nil
+    var assetIconName: String? = nil
+    var serverIconURL: String? = nil
+    var bgColor: Color? = nil
+    var noIndicator = false // Don't show capsule
     let onSelect: () -> Void
     @State private var hovered = false
 
     var body: some View {
         HStack {
             Capsule()
-                .scale(selected || hovered ? 1 : 0)
+                .scale((selected || hovered) && !noIndicator ? 1 : 0)
                 .fill(.white)
                 .frame(width: 8, height: selected ? 40 : (hovered ? 20 : 8))
                 .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: selected)
@@ -53,7 +66,16 @@ struct ServerButton: View {
                      : ""
                 )
             }
-            .buttonStyle(ServerButtonStyle(selected: selected, name: name, bgColor: bgColor, hovered: $hovered))
+            .buttonStyle(
+                ServerButtonStyle(
+                    selected: selected,
+                    name: name,
+                    bgColor: bgColor,
+                    systemName: systemIconName,
+                    assetName: assetIconName,
+                    hovered: $hovered
+                )
+            )
             /*.popover(isPresented: .constant(true)) {
                 Text(name).padding(8)
             }*/

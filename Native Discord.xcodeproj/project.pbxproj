@@ -20,6 +20,11 @@
 		DA32EF3B27C7973500A9ED72 /* FormatFileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */; };
 		DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */; };
 		DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
+		DA32EF4427C880E300A9ED72 /* NewMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4327C880E300A9ED72 /* NewMessage.swift */; };
+		DA32EF4627C8AB6200A9ED72 /* ISODateToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */; };
+		DA32EF4827C8ABFF00A9ED72 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */; };
+		DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */; };
+		DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -98,6 +103,11 @@
 		DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatFileSize.swift; sourceTree = "<group>"; };
 		DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFileExtension.swift; sourceTree = "<group>"; };
 		DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		DA32EF4327C880E300A9ED72 /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
+		DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISODateToDate.swift; sourceTree = "<group>"; };
+		DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDate.swift; sourceTree = "<group>"; };
+		DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitColorFromHexInt.swift; sourceTree = "<group>"; };
+		DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -197,6 +207,14 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
+		DA32EF4227C880D300A9ED72 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF4327C880E300A9ED72 /* NewMessage.swift */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				DA4A891A27C4EE1B00720909 /* README.md */,
+				DA32EF4227C880D300A9ED72 /* REST */,
 				DA4A88D627C2792F00720909 /* Gateway */,
 				DA4A88A127C1244200720909 /* Embed.swift */,
 				DA4A88FE27C3609900720909 /* ApplicationObj.swift */,
@@ -331,6 +350,9 @@
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
 				DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */,
 				DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */,
+				DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */,
+				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
+				DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -365,6 +387,7 @@
 				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -450,6 +473,7 @@
 				DA4A88E127C3341400720909 /* EventDispatch.swift in Sources */,
 				DA4A88BE27C140BC00720909 /* Application.swift in Sources */,
 				DA4A88AC27C1332600720909 /* Locale.swift in Sources */,
+				DA32EF4427C880E300A9ED72 /* NewMessage.swift in Sources */,
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
 				DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */,
 				DA4A88ED27C34DD100720909 /* Guild.swift in Sources */,
@@ -460,6 +484,7 @@
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
+				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
 				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
@@ -497,6 +522,7 @@
 				DA4A892027C5167A00720909 /* APIGuild.swift in Sources */,
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
+				DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
@@ -516,8 +542,10 @@
 				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
 				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
 				DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */,
+				DA32EF4827C8ABFF00A9ED72 /* FormatDate.swift in Sources */,
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
 				DA4A88AA27C1324400720909 /* User.swift in Sources */,
+				DA32EF4627C8AB6200A9ED72 /* ISODateToDate.swift in Sources */,
 				DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
