@@ -11,6 +11,7 @@ struct ServerView: View {
     @Binding var guild: Guild
     @State private var channels: [Channel] = []
     @State private var selectedCh: String? = nil
+    @State private var initialCh: String? = nil
     @State private var isLoading = true
     
     let chIcons = [
@@ -20,37 +21,44 @@ struct ServerView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(
-                    channels.filter { $0.type == .category },
-                    id: \.id
-                ) { category in
-                    Section(header: Text(category.name?.uppercased() ?? "")) {
-                        ForEach(
-                            channels.filter { $0.parent_id == category.id },
-                            id: \.id
-                        ) { channel in
-                            NavigationLink(
-                                destination: MessagesView(
-                                    channel: channel,
-                                    guildID: guild.id
-                                ).onAppear {
-                                    UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild.id)")
-                                },
-                                tag: channel.id,
-                                selection: $selectedCh
-                            ) {
-                                Label(
-                                    channel.name ?? "",
-                                    systemImage: chIcons[channel.type] ?? "number"
-                                )
+            ScrollViewReader { proxy in
+                List {
+                    ForEach(
+                        channels.filter { $0.type == .category },
+                        id: \.id
+                    ) { category in
+                        Section(header: Text(category.name?.uppercased() ?? "")) {
+                            ForEach(
+                                channels.filter { $0.parent_id == category.id },
+                                id: \.id
+                            ) { channel in
+                                NavigationLink(
+                                    destination: MessagesView(
+                                        channel: channel,
+                                        guildID: guild.id
+                                    ).onAppear {
+                                        UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild.id)")
+                                    },
+                                    tag: channel.id,
+                                    selection: $selectedCh
+                                ) {
+                                    Label(
+                                        channel.name ?? "",
+                                        systemImage: chIcons[channel.type] ?? "number"
+                                    )
+                                }
+                                .accentColor(Color.gray)
                             }
-                            .accentColor(Color.gray)
                         }
                     }
                 }
+                .frame(minWidth: 240)
+                .onChange(of: selectedCh, perform: { [selectedCh] newCh in
+                    if selectedCh == nil && newCh != nil {
+                        proxy.scrollTo(newCh!)
+                    }
+                })
             }
-            .frame(minWidth: 240)
             .toolbar {
                 ToolbarItemGroup {
                     Text(guild.name).font(.title3).fontWeight(.semibold)
@@ -69,9 +77,10 @@ struct ServerView: View {
                         .progressViewStyle(.circular)
                         .controlSize(.large)
                 }
-                else {
-                    Text("There aren't any text channels in this server")
+                else if initialCh != nil {
+                    
                 }
+                else { Text("There aren't any text channels in this server") }
                 Spacer()
             }.frame(minWidth: 400, minHeight: 250)
         }

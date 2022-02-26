@@ -15,6 +15,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     
     // Config
     let missedACKTolerance: Int
+    let connTimeout: Double
     
     // WebSocket object
     private(set) var socket: WebSocket!
@@ -33,6 +34,21 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         missedACK += 1
     }
     
+    func initWSConn() {
+        var request = URLRequest(url: URL(string: apiConfig.gateway)!)
+        request.timeoutInterval = connTimeout
+        socket = WebSocket(request: request)
+        socket.delegate = self
+        
+        print("Attempting connection to Gateway: \(apiConfig.gateway)")
+        socket.connect()
+        
+        // If connection isn't connected after timeout, try again
+        DispatchQueue.main.asyncAfter(deadline: .now() + connTimeout) {
+            if !self.isConnected { self.attemptReconnect() }
+        }
+    }
+    
     // Attempt reconnection with resume after 1-5s as per spec
     func attemptReconnect(resume: Bool = true, overrideViability: Bool = false) {
         // Kill connection if connection is still active
@@ -46,21 +62,15 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             deadline: .now() +
             .milliseconds(reconnectAfter)
         ) {
-            print("Attempting resume now")
-            self.socket.connect()
+            print("Attempting reconnection now")
+            self.initWSConn() // Recreate WS object because sometimes it gets stuck in a "not gonna reconnect" state
         }
     }
     
     init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
         missedACKTolerance = maxMissedACK
-        
-        var request = URLRequest(url: URL(string: apiConfig.gateway)!)
-        request.timeoutInterval = connectionTimeout
-        socket = WebSocket(request: request)
-        socket.delegate = self
-        
-        print("Attempting connection to Gateway: \(apiConfig.gateway)")
-        socket.connect()
+        connTimeout = connectionTimeout
+        initWSConn()
     }
     
     // MARK: Low level receive handler

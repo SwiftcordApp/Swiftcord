@@ -49,17 +49,16 @@ struct MessagesView: View {
         guard !text.isEmpty else { return }
         enteredText = ""
         Task {
-            guard let m = await DiscordAPI.createChannelMsg(
+            guard (await DiscordAPI.createChannelMsg(
                 message: NewMessage(
                     content: content
                 ),
                 id: channel.id
-            ) else {
+            )) != nil else {
                 // TODO: Show some sort of indication that the message didn't send
                 enteredText = content // Message failed to send
                 return
             }
-            print(m)
         }
     }
     

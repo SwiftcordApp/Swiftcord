@@ -18,6 +18,7 @@ struct MessageView: View {
     @State private var hovered = false
     @State private var loadedQuotedMsg: Message? = nil
     @State private var loadQuotedMsgErr = false
+    @State private var playLoadAnim = false // Will turn true when first appeared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -153,6 +154,10 @@ struct MessageView: View {
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .animation(.linear(duration: 0.1), value: hovered)
         .onHover { h in hovered = h }
+        .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: playLoadAnim)
+        .onAppear(perform: {
+            playLoadAnim = true
+        })
         .contextMenu {
             Button {
                 
