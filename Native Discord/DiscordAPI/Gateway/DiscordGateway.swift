@@ -21,9 +21,11 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     
     // State
     private(set) var isConnected = false
-    private(set) var isResuming = false // Attempt to resume broken conn
+    private(set) var isReconnecting = false // Attempt to resume broken conn
+    private(set) var doNotResume = false // Cannot resume
     private(set) var missedACK = 0
     private(set) var seq: Int? = nil // Sequence int of latest received payload
+    private(set) var viability = true
     private var sessionID: String? = nil
     private var cache: CachedState?
     
@@ -32,12 +34,19 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     }
     
     // Attempt reconnection with resume after 1-5s as per spec
-    func attemptReconnect(resume: Bool = true) {
-        isResuming = resume
+    func attemptReconnect(resume: Bool = true, overrideViability: Bool = false) {
+        // Kill connection if connection is still active
+        if isConnected { self.socket.forceDisconnect() }
+        guard viability || overrideViability, !isReconnecting else { return }
+        isReconnecting = true
+        if !resume { doNotResume = true }
+        let reconnectAfter = 1000 + Int(Double(4000) * Double.random(in: 0...1))
+        print("Reconnecting in \(reconnectAfter)ms")
         DispatchQueue.main.asyncAfter(
             deadline: .now() +
-            .milliseconds(1000 + Int(Double(4000) * Double.random(in: 0...1)))
+            .milliseconds(reconnectAfter)
         ) {
+            print("Attempting resume now")
             self.socket.connect()
         }
     }
@@ -59,8 +68,9 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         switch (event) {
         case .connected(_):
             print("Gateway Connected")
+            isReconnecting = false
             isConnected = true
-            onStateChange.notify(event: (isConnected, isResuming, nil))
+            onStateChange.notify(event: (isConnected, isReconnecting, nil))
         case .disconnected(_, let c):
             isConnected = false
             guard let code = GatewayCloseCode(rawValue: Int(c)) else {
@@ -70,21 +80,29 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             // Check if code isn't an unrecoverable code, then attempt resume
             if code != .authenthicationFail { attemptReconnect() }
             print("Gateway Disconnected: \(code)")
-            onStateChange.notify(event: (isConnected, isResuming, code))
+            onStateChange.notify(event: (isConnected, isReconnecting, code))
         case .text(let string): handleIncoming(received: string)
         case .error(let error):
             isConnected = false
             attemptReconnect()
-            onStateChange.notify(event: (isConnected, isResuming, nil))
+            onStateChange.notify(event: (isConnected, isReconnecting, nil))
             print("Connection error: \(String(describing: error))")
         case .cancelled:
             isConnected = false
-            onStateChange.notify(event: (isConnected, isResuming, nil))
+            onStateChange.notify(event: (isConnected, isReconnecting, nil))
         case .binary(_): break // Won't receive binary
         case .ping(_): break   // Don't care
         case .pong(_): break   // Don't care
-        case .viabilityChanged(_): break   // Ignore
-        case .reconnectSuggested(_): break // Thanks but I choose to ignore your suggestion
+        case .viabilityChanged(let viability):
+            // If viability is false, reconnection will most likely fail
+            print("Viability changed: \(viability)")
+            if viability && !self.viability {
+                // We should reconnect since connection is now viable
+                attemptReconnect(resume: true, overrideViability: true)
+            }
+            self.viability = viability
+        case .reconnectSuggested(_):
+            print("Reconnect suggested!")
         }
     }
     
@@ -107,7 +125,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             initHeartbeat(interval: d.heartbeat_interval)
         
             // Check if we're attempting to and can resume
-            if isResuming && sessionID != nil && seq != nil {
+            if isReconnecting && !doNotResume && sessionID != nil && seq != nil {
                 print("Attempting resume")
                 guard let resume = getResume(seq: seq!, sessionID: sessionID!)
                 else { return }
@@ -116,7 +134,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             else {
                 // Send identify
                 seq = nil // Clear sequence #
-                isResuming = false // Resuming failed/not attempted
+                isReconnecting = false // Resuming failed/not attempted
                 guard let identify = getIdentify() else {
                     print("TOKEN NOT IN KEYCHAIN!!!")
                     return
@@ -130,6 +148,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             switch (type) {
             case .ready:
                 guard let d = data as? ReadyEvt else { return }
+                doNotResume = false
                 sessionID = d.session_id
                 cache?.guilds = d.guilds
                 print("Gateway ready")
@@ -138,7 +157,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             onEvent.notify(event: (type, data))
         case .invalidSession:
             // Check if the session can be resumed
-            guard let shouldResume = decoded.primitiveData as? Bool else { return }
+            let shouldResume = (decoded.primitiveData as? Bool) ?? false
             attemptReconnect(resume: shouldResume)
         default: print("Unimplemented opcode: \(decoded.op)")
         }

@@ -25,7 +25,7 @@ struct ServerView: View {
                     channels.filter { $0.type == .category },
                     id: \.id
                 ) { category in
-                    Section(header: Text(category.name ?? "")) {
+                    Section(header: Text(category.name?.uppercased() ?? "")) {
                         ForEach(
                             channels.filter { $0.parent_id == category.id },
                             id: \.id

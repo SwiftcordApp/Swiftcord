@@ -45,6 +45,8 @@ struct MessagesView: View {
     }
     
     private func sendMessage(content: String) {
+        let text = content.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return }
         enteredText = ""
         Task {
             guard let m = await DiscordAPI.createChannelMsg(

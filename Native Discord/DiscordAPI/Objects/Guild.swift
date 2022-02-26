@@ -9,6 +9,7 @@ import Foundation
 
 enum GuildFeature: String, Codable {
     case animatedIcon = "ANIMATED_ICON"
+    case animatedBanner = "ANIMATED_BANNER"
     case banner = "BANNER"
     case commerce = "COMMERCE"
     case community = "COMMUNITY"
@@ -24,7 +25,7 @@ enum GuildFeature: String, Codable {
     case threadsEnabled = "THREADS_ENABLED"
     case newThreads = "NEW_THREAD_PERMISSIONS"
     case privateThreads = "PRIVATE_THREADS"
-    case roleIcons = "ROLE_ICINS"
+    case roleIcons = "ROLE_ICONS"
     case thread7DayArchive = "SEVEN_DAY_THREAD_ARCHIVE"
     case thread3DayArchive = "THREE_DAY_THREAD_ARCHIVE"
     case ticketedEvents = "TICKETED_EVENTS_ENABLED"
@@ -32,8 +33,10 @@ enum GuildFeature: String, Codable {
     case verified = "VERIFIED"
     case highBitrateVoice = "VIP_REGIONS"
     case welcomeScreen = "WELCOME_SCREEN_ENABLED"
+    case memberProfiles = "MEMBER_PROFILES"
+    case discoverableBefore = "ENABLED_DISCOVERABLE_BEFORE"
 }
-
+    
 struct Guild: Codable, GatewayData, Equatable {
     static func == (lhs: Guild, rhs: Guild) -> Bool {
         lhs.id == rhs.id

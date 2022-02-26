@@ -28,6 +28,7 @@
 		DA32EF4E27C8D6CA00A9ED72 /* SubtractDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */; };
 		DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */; };
 		DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */; };
+		DA32EF5427C9C65700A9ED72 /* ViewAppearAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5327C9C65700A9ED72 /* ViewAppearAnimation.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 		DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractDates.swift; sourceTree = "<group>"; };
 		DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageIsShrunk.swift; sourceTree = "<group>"; };
 		DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserAvatarURL.swift; sourceTree = "<group>"; };
+		DA32EF5327C9C65700A9ED72 /* ViewAppearAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAppearAnimation.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */,
 				DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */,
 				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
+				DA32EF5327C9C65700A9ED72 /* ViewAppearAnimation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
 				DA4A88DA27C27A1100720909 /* GatewayEvent.swift in Sources */,
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
+				DA32EF5427C9C65700A9ED72 /* ViewAppearAnimation.swift in Sources */,
 				DA4A88F327C3576D00720909 /* Stage.swift in Sources */,
 				DA4A891C27C4EFF400720909 /* Connection.swift in Sources */,
 				DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */,

@@ -4,7 +4,7 @@
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
-//  A view that renders one message
+//  This monstrosity is a view that renders one message
 
 import SwiftUI
 
@@ -21,7 +21,8 @@ struct MessageView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            if message.message_reference != nil {
+            // This message is a reply!
+            if message.message_reference != nil && message.type == .reply {
                 HStack(alignment: .center, spacing: 4) {
                     RoundedRectangle(cornerRadius: 5)
                         .trim(from: 0.5, to: 0.75)
@@ -108,14 +109,19 @@ struct MessageView: View {
                     }
                     VStack(alignment: .leading, spacing: lineSpacing) {
                         if !shrunk {
-                            Text(message.member?.nick ?? message.author.username)
-                                .font(.system(size: 15))
-                                .fontWeight(.medium)
+                            HStack(alignment: .bottom, spacing: 8) {
+                                Text(message.member?.nick ?? message.author.username)
+                                    .font(.system(size: 15))
+                                    .fontWeight(.medium)
+                                Text("at \(message.timestamp.toDate()?.toTimeString() ?? "")")
+                                    .font(.system(size: 12))
+                                    .opacity(0.5)
+                            }
                         }
                         // For including additional message components
                         VStack(alignment: .leading, spacing: 4) {
                             if !message.content.isEmpty {
-                                Text(message.content)
+                                Text(.init(message.content))
                                     .font(.system(size: 15))
                                     .textSelection(.enabled)
                             }

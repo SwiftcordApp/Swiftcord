@@ -70,6 +70,9 @@ struct ContentView: View {
             
             ServerView(guild: $selectedGuild)
         }
+        .onChange(of: selectedGuild, perform: { _ in
+            UserDefaults.standard.set(selectedGuild.id, forKey: "lastSelectedGuild")
+        })
         .environmentObject(gateway)
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
@@ -79,6 +82,12 @@ struct ContentView: View {
                 guard let g = await DiscordAPI.getGuilds()
                 else { return }
                 guilds = g
+                if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
+                    guard g.contains(where: { p in p.id == lGID }) else { return }
+                    guard let fullGuild = await DiscordAPI.getGuild(id: lGID)
+                    else { return }
+                    selectedGuild = fullGuild
+                }
             }
         }
     }
