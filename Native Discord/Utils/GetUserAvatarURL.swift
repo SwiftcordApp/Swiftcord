@@ -11,7 +11,7 @@ extension User {
     func avatarURL() -> URL {
         return URL(string: self.avatar != nil
             ? "\(apiConfig.cdnURL)avatars/\(self.id)/\(self.avatar!).webp"
-            : "\(apiConfig.cdnURL)embed/avatars/\(Int(self.discriminator) ?? 0 % 5).png"
+            : "\(apiConfig.cdnURL)embed/avatars/\((Int(self.discriminator) ?? 0) % 5).png"
         )!
     }
 }

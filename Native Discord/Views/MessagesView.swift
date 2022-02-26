@@ -142,7 +142,11 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    if msg.channel_id == channel.id { messages.insert(msg, at: 0) }
+                    if msg.channel_id == channel.id {
+                        withAnimation {
+                            messages.insert(msg, at: 0)
+                        }
+                    }
                 default: print("Handling event \(evt) not implemented")
                 }
             })

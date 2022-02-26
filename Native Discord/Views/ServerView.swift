@@ -16,7 +16,7 @@ struct ServerView: View {
     
     let chIcons = [
         ChannelType.voice: "speaker.wave.2.fill",
-        .news: "newspaper.fill",
+        .news: "megaphone.fill",
     ]
     
     var body: some View {
@@ -44,7 +44,7 @@ struct ServerView: View {
                                 ) {
                                     Label(
                                         channel.name ?? "",
-                                        systemImage: chIcons[channel.type] ?? "number"
+                                        systemImage: (guild.rules_channel_id != nil && guild.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
                                     )
                                 }
                                 .accentColor(Color.gray)
@@ -53,9 +53,11 @@ struct ServerView: View {
                     }
                 }
                 .frame(minWidth: 240)
-                .onChange(of: selectedCh, perform: { [selectedCh] newCh in
-                    if selectedCh == nil && newCh != nil {
-                        proxy.scrollTo(newCh!)
+                .onChange(of: selectedCh, perform: {newCh in
+                    if selectedCh != nil {
+                        withAnimation {
+                            proxy.scrollTo(selectedCh!)
+                        }
                     }
                 })
             }

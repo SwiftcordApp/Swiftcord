@@ -50,7 +50,7 @@ struct UserAvatarView: View {
                         image.resizable().scaledToFill()
                     } placeholder: { ProgressView().progressViewStyle(.circular)}
                     .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
-                        .blur(radius: 8)
+                        .blur(radius: 4)
                         .clipped()
                 }
                 ZStack {
