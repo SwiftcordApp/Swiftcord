@@ -4,6 +4,7 @@
 //
 //  Created by Vincent Kwok on 24/2/22.
 //
+//  Renders one attachment
 
 import SwiftUI
 import AVKit
@@ -56,24 +57,45 @@ struct AttachmentView: View {
         "application/zip": "doc.zipper"
     ]
     
-    private func getResizedDimens(width: Int, height: Int) -> (Int, Int) {
+    private func getClosestPowOf2(width: Int, height: Int) -> (Int?, Int?) {
+        var p: Double = 4
+        repeat { p += 1 } while Int(pow(Double(2), p)) < max(width, height)
+        let s = Int(pow(Double(2), p))
+        if width > height { return (s, nil) }
+        return (nil, Int(pow(Double(2), p)))
+    }
+    
+    private func getResizedDimens(width: Int, height: Int, srcURL: URL) -> (Int, Int, URL) {
         let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
         let h = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
         let w = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
-        if width < w && height < h { return (width, height) }
-        return (w, h)
+        if width < w && height < h { return (width, height, getURLWithResizedDimens(mediaURL: srcURL, resizedDimens: nil)) }
+        return (w, h, getURLWithResizedDimens(mediaURL: srcURL, resizedDimens: getClosestPowOf2(width: w, height: h)))
+    }
+    
+    private func getURLWithResizedDimens(mediaURL: URL, resizedDimens: (Int?, Int?)?) -> URL {
+        var oURL = URLComponents(url: mediaURL, resolvingAgainstBaseURL: true)!
+        oURL.queryItems = []
+        if resizedDimens?.0 != nil {
+            oURL.queryItems!.append(URLQueryItem(name: "width", value: String((resizedDimens?.0)!)))
+        }
+        else {
+            oURL.queryItems!.append(URLQueryItem(name: "height", value: String((resizedDimens?.1)!)))
+        }
+        return oURL.url!
     }
     
     var body: some View {
         // Guard doesn't work in views
         ZStack {
             if let url = URL(string: attachment.url) {
+                let mime = attachment.content_type ?? url.mimeType()
                 if attachment.width != nil && attachment.height != nil {
                     // This is an image/video
-                    let (width, height) = getResizedDimens(width: attachment.width!, height: attachment.height!)
-                    switch attachment.content_type?.prefix(5) {
+                    let (width, height, resizedURL) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
+                    switch mime.prefix(5) {
                     case "image":
-                        AsyncImage(url: url) { phase in
+                        AsyncImage(url: resizedURL) { phase in
                             if let image = phase.image {
                                 image.resizable().scaledToFill()
                             } else if phase.error != nil {
@@ -86,13 +108,13 @@ struct AttachmentView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                         .onTapGesture { enlarged = true }
                     case "video":
-                        VideoPlayer(player: AVPlayer(url: url))
+                        VideoPlayer(player: AVPlayer(url: resizedURL))
                             .frame(width: CGFloat(width), height: CGFloat(height))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                     default: EmptyView()
                     }
                 }
-                else if attachment.content_type?.prefix(5) == "audio" {
+                else if mime.prefix(5) == "audio" {
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(attachment.filename)

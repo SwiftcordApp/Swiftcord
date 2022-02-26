@@ -41,6 +41,7 @@ struct MessagesView: View {
             if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)
+            print(m)
         }
     }
     
