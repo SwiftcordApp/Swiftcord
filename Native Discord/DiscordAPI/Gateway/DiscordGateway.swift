@@ -27,6 +27,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     private(set) var missedACK = 0
     private(set) var seq: Int? = nil // Sequence int of latest received payload
     private(set) var viability = true
+    private(set) var connTimes = 0
     private var sessionID: String? = nil
     private var cache: CachedState?
     
@@ -44,8 +45,13 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         socket.connect()
         
         // If connection isn't connected after timeout, try again
+        let curConnCnt = connTimes
         DispatchQueue.main.asyncAfter(deadline: .now() + connTimeout) {
-            if !self.isConnected { self.attemptReconnect() }
+            if !self.isConnected && self.connTimes == curConnCnt {
+                print("Connection timed out, trying to reconnect")
+                self.isReconnecting = false
+                self.attemptReconnect()
+            }
         }
     }
     
@@ -80,6 +86,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             print("Gateway Connected")
             isReconnecting = false
             isConnected = true
+            connTimes += 1
             onStateChange.notify(event: (isConnected, isReconnecting, nil))
         case .disconnected(_, let c):
             isConnected = false

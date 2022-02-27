@@ -29,6 +29,7 @@
 		DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */; };
 		DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */; };
 		DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */; };
+		DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
 		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -116,6 +117,7 @@
 		DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageIsShrunk.swift; sourceTree = "<group>"; };
 		DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserAvatarURL.swift; sourceTree = "<group>"; };
 		DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMimeType.swift; sourceTree = "<group>"; };
+		DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStateEnv.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,14 @@
 				DA32EF4327C880E300A9ED72 /* NewMessage.swift */,
 			);
 			path = REST;
+			sourceTree = "<group>";
+		};
+		DA32EF5727CB5F2C00A9ED72 /* EnvObjects */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */,
+			);
+			path = EnvObjects;
 			sourceTree = "<group>";
 		};
 		DA4A887B27C0AF3000720909 = {
@@ -389,6 +399,7 @@
 		DA4A88E327C3481700720909 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA32EF5727CB5F2C00A9ED72 /* EnvObjects */,
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
@@ -505,6 +516,7 @@
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
+				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
 				DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */,
 				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
