@@ -14,6 +14,7 @@ struct UserAvatarView: View {
     @State private var guildRoles: [Role]? = nil // Lazy-loaded guild roles
     @State private var infoPresenting = false
     @State private var note = ""
+    @State private var loadFullFailed = false
     
     var body: some View {
         let avatarURL = user.avatarURL()
@@ -29,9 +30,9 @@ struct UserAvatarView: View {
             if profile == nil { Task {
                 profile = await DiscordAPI.getProfile(user: user.id, guildID: guildID)
                 guard profile != nil else { // Profile is still nil: fetching failed
+                    loadFullFailed = true
                     return
                 }
-                // print(profile)
             }}
             if guildRoles == nil { Task {
                 guildRoles = await DiscordAPI.getGuildRoles(id: guildID)
@@ -71,17 +72,26 @@ struct UserAvatarView: View {
                 .padding(.top, -46)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .bottom, spacing: 0) {
+                    HStack(alignment: .center, spacing: 0) {
                         Text(user.username)
-                            .font(.title)
-                            .fontWeight(.medium)
-                        Text("#\(user.discriminator)").font(.title3)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .lineLimit(1)
+                        Text("#\(user.discriminator)")
+                            .font(.title2)
+                            .opacity(0.7)
+                        Spacer()
+                        if loadFullFailed {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(.orange)
+                        }
                     }
                     
                     Divider()
                         .padding(.vertical, 8)
                     
-                    if profile == nil {
+                    if profile == nil && !loadFullFailed {
                         ProgressView("Loading full profile...")
                             .progressViewStyle(.linear)
                             .frame(maxWidth: .infinity)

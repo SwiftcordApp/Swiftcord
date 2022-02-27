@@ -57,7 +57,7 @@ struct MessagesView: View {
                 id: channel.id
             )) != nil else {
                 // TODO: Show some sort of indication that the message didn't send
-                enteredText = content // Message failed to send
+                enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
                 return
             }
         }

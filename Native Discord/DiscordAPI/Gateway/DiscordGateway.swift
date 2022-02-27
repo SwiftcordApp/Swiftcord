@@ -69,6 +69,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             .milliseconds(reconnectAfter)
         ) {
             print("Attempting reconnection now")
+            print("Can resume: \(!self.doNotResume)")
             self.initWSConn() // Recreate WS object because sometimes it gets stuck in a "not gonna reconnect" state
         }
     }
@@ -149,6 +150,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
                 sendToGateway(op: .resume, d: resume)
             }
             else {
+                print("Sending identify:", isConnected, !doNotResume, sessionID ?? "No sessionID", seq ?? -1)
                 // Send identify
                 seq = nil // Clear sequence #
                 isReconnecting = false // Resuming failed/not attempted

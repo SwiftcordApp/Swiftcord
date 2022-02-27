@@ -29,6 +29,7 @@ struct ContentView: View {
     @State private var selectedGuild: Guild = dmGuild
     
     @StateObject private var gateway = DiscordGateway()
+    @StateObject private var state = UIState()
 
     var body: some View {
         HStack(spacing: 0) {
@@ -74,6 +75,7 @@ struct ContentView: View {
             UserDefaults.standard.set(selectedGuild.id, forKey: "lastSelectedGuild")
         })
         .environmentObject(gateway)
+        .environmentObject(state)
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")

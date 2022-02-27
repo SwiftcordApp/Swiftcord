@@ -1,4 +1,7 @@
-#  Native Discord
+# Swiftcord
+
+> A completely native Discord client for macOS built 100% in
+> Swift and SwiftUI
 
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch. 
@@ -31,6 +34,7 @@ no matter how small!
 ## License
 
 Made with ❤️ by Vincent Kwok
+
 Copyright © 2022 Vincent Kwok
 
 This program is free software: you can redistribute it and/or
