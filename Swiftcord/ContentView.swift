@@ -20,9 +20,9 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<MessageItem>
     
     @State private var sheetOpen = false
     @State private var guilds: [PartialGuild] = []
@@ -96,7 +96,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
+            let newItem = MessageItem(context: viewContext)
             newItem.timestamp = Date()
 
             do {
@@ -136,16 +136,5 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
-
-
-var secondItems = ["Second 1", "Second 2", "Second 3", "Second 4"]
-
-struct SecondView: View {
-
-    var body: some View {
-        NavigationView {
-        }
     }
 }

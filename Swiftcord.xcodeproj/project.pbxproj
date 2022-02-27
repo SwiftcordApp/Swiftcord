@@ -30,12 +30,12 @@
 		DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */; };
 		DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */; };
 		DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
-		DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */; };
+		DA32EF6627CB772300A9ED72 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* MessageModel.xcdatamodeld */; };
+		DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* SwiftcordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
 		DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */; };
 		DA4A889127C0AF3200720909 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889027C0AF3200720909 /* Persistence.swift */; };
-		DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889227C0AF3200720909 /* Native_Discord.xcdatamodeld */; };
 		DA4A889C27C0B23C00720909 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889B27C0B23C00720909 /* WebView.swift */; };
 		DA4A88A227C1244200720909 /* Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A127C1244200720909 /* Embed.swift */; };
 		DA4A88A427C12CD100720909 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A327C12CD100720909 /* Message.swift */; };
@@ -118,14 +118,14 @@
 		DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserAvatarURL.swift; sourceTree = "<group>"; };
 		DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMimeType.swift; sourceTree = "<group>"; };
 		DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStateEnv.swift; sourceTree = "<group>"; };
-		DA4A888427C0AF3000720909 /* Native Discord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Native Discord.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Native_DiscordApp.swift; sourceTree = "<group>"; };
+		DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
+		DA4A888427C0AF3000720909 /* Swiftcord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftcord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4A888727C0AF3000720909 /* SwiftcordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftcordApp.swift; sourceTree = "<group>"; };
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA4A888B27C0AF3200720909 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA4A889027C0AF3200720909 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		DA4A889327C0AF3200720909 /* Native_Discord.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Native_Discord.xcdatamodel; sourceTree = "<group>"; };
-		DA4A889527C0AF3200720909 /* Native_Discord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Native_Discord.entitlements; sourceTree = "<group>"; };
+		DA4A889527C0AF3200720909 /* Swiftcord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swiftcord.entitlements; sourceTree = "<group>"; };
 		DA4A889B27C0B23C00720909 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DA4A88A127C1244200720909 /* Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Embed.swift; sourceTree = "<group>"; };
 		DA4A88A327C12CD100720909 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -233,11 +233,19 @@
 			path = EnvObjects;
 			sourceTree = "<group>";
 		};
+		DA32EF6327CB770E00A9ED72 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF6427CB772300A9ED72 /* MessageModel.xcdatamodeld */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
 				DA4A891727C4B0DF00720909 /* README.md */,
-				DA4A888627C0AF3000720909 /* Native Discord */,
+				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A888527C0AF3000720909 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -245,28 +253,28 @@
 		DA4A888527C0AF3000720909 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA4A888427C0AF3000720909 /* Native Discord.app */,
+				DA4A888427C0AF3000720909 /* Swiftcord.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DA4A888627C0AF3000720909 /* Native Discord */ = {
+		DA4A888627C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXGroup;
 			children = (
+				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA32EF3727C7440800A9ED72 /* Styles */,
 				DA4A88E327C3481700720909 /* Views */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
-				DA4A888727C0AF3000720909 /* Native_DiscordApp.swift */,
+				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
 				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
-				DA4A889527C0AF3200720909 /* Native_Discord.entitlements */,
-				DA4A889227C0AF3200720909 /* Native_Discord.xcdatamodeld */,
+				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
 				DA4A888D27C0AF3200720909 /* Preview Content */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 			);
-			path = "Native Discord";
+			path = Swiftcord;
 			sourceTree = "<group>";
 		};
 		DA4A888D27C0AF3200720909 /* Preview Content */ = {
@@ -418,9 +426,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA4A888327C0AF3000720909 /* Native Discord */ = {
+		DA4A888327C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA4A889827C0AF3200720909 /* Build configuration list for PBXNativeTarget "Native Discord" */;
+			buildConfigurationList = DA4A889827C0AF3200720909 /* Build configuration list for PBXNativeTarget "Swiftcord" */;
 			buildPhases = (
 				DA4A888027C0AF3000720909 /* Sources */,
 				DA4A888127C0AF3000720909 /* Frameworks */,
@@ -430,13 +438,13 @@
 			);
 			dependencies = (
 			);
-			name = "Native Discord";
+			name = Swiftcord;
 			packageProductDependencies = (
 				DA4A88CA27C1EC5500720909 /* Starscream */,
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 			);
 			productName = "Native Discord";
-			productReference = DA4A888427C0AF3000720909 /* Native Discord.app */;
+			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -454,7 +462,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DA4A887F27C0AF3000720909 /* Build configuration list for PBXProject "Native Discord" */;
+			buildConfigurationList = DA4A887F27C0AF3000720909 /* Build configuration list for PBXProject "Swiftcord" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -471,7 +479,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA4A888327C0AF3000720909 /* Native Discord */,
+				DA4A888327C0AF3000720909 /* Swiftcord */,
 			);
 		};
 /* End PBXProject section */
@@ -517,13 +525,13 @@
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
-				DA4A889427C0AF3200720909 /* Native_Discord.xcdatamodeld in Sources */,
 				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
 				DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
+				DA32EF6627CB772300A9ED72 /* MessageModel.xcdatamodeld in Sources */,
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
 				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
@@ -574,7 +582,7 @@
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
 				DA4A88AA27C1324400720909 /* User.swift in Sources */,
 				DA32EF4627C8AB6200A9ED72 /* ISODateToDate.swift in Sources */,
-				DA4A888827C0AF3000720909 /* Native_DiscordApp.swift in Sources */,
+				DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,11 +709,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Native Discord/Native_Discord.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Native Discord/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -716,7 +724,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cryptoalgo.Native-Discord";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -728,11 +736,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Native Discord/Native_Discord.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Native Discord/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -743,7 +751,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cryptoalgo.Native-Discord";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -753,7 +761,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA4A887F27C0AF3000720909 /* Build configuration list for PBXProject "Native Discord" */ = {
+		DA4A887F27C0AF3000720909 /* Build configuration list for PBXProject "Swiftcord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4A889627C0AF3200720909 /* Debug */,
@@ -762,7 +770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA4A889827C0AF3200720909 /* Build configuration list for PBXNativeTarget "Native Discord" */ = {
+		DA4A889827C0AF3200720909 /* Build configuration list for PBXNativeTarget "Swiftcord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4A889927C0AF3200720909 /* Debug */,
@@ -806,13 +814,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		DA4A889227C0AF3200720909 /* Native_Discord.xcdatamodeld */ = {
+		DA32EF6427CB772300A9ED72 /* MessageModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DA4A889327C0AF3200720909 /* Native_Discord.xcdatamodel */,
+				DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */,
 			);
-			currentVersion = DA4A889327C0AF3200720909 /* Native_Discord.xcdatamodel */;
-			path = Native_Discord.xcdatamodeld;
+			currentVersion = DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */;
+			path = MessageModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

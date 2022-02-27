@@ -9,7 +9,7 @@ import Foundation
 
 extension DiscordGateway {
     func getIdentify() -> GatewayIdentify? {
-        // Keychain.save(key: "token", data: "token to set here")
+        // Keychain.save(key: "token", data: "token goes here")
         guard let token: String = Keychain.load(key: "token")
         else { return nil }
         

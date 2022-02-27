@@ -22,7 +22,7 @@ extension NSTextField {
 }
 
 @main
-struct Native_DiscordApp: App {
+struct SwiftcordApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
