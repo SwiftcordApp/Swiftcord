@@ -79,7 +79,7 @@ struct AttachmentView: View {
         if resizedDimens?.0 != nil {
             oURL.queryItems!.append(URLQueryItem(name: "width", value: String((resizedDimens?.0)!)))
         }
-        else {
+        else if resizedDimens?.1 != nil {
             oURL.queryItems!.append(URLQueryItem(name: "height", value: String((resizedDimens?.1)!)))
         }
         return oURL.url!

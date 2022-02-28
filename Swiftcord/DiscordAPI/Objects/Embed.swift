@@ -30,6 +30,12 @@ struct Embed: Codable {
     let provider: EmbedProvider?
     let author: EmbedAuthor?
     let fields: [EmbedField]?
+    var id: String {
+        get {
+            return "\(title ?? "")\(description ?? "")\(url ?? "")\(String(color ?? 0))\(timestamp ?? "")"
+        }
+        set {}
+    }
 }
 
 struct EmbedFooter: Codable {
@@ -61,4 +67,8 @@ struct EmbedField: Codable {
     let name: String
     let value: String
     let inline: Bool?
+    var id: String {
+        get { name + value }
+        set {}
+    }
 }

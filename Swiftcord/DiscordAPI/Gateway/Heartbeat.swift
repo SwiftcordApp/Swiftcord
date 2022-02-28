@@ -9,9 +9,11 @@ import Foundation
 
 extension DiscordGateway {
     func initHeartbeat(interval: Int) {
+        let initialConnTimes = connTimes
         func sendHeartbeat(after: Int) {
             // Do not continue sending heartbeats to a dead connection
-            guard isConnected else { return }
+            // Also check that connection hasn't died between heartbeats
+            guard isConnected && connTimes == initialConnTimes else { return }
             
             sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
             print("Sent heartbeat, missed ACKs: \(missedACK)")

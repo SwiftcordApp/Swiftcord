@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA2384A127CB9714009E15E0 /* CustomiseFontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */; };
+		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
+		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
+		DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -96,6 +100,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomiseFontFamily.swift; sourceTree = "<group>"; };
+		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
+		DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoMedium.otf; sourceTree = "<group>"; };
+		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -200,6 +209,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA23843C27CB9621009E15E0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DA2384B827CBC2CE009E15E0 /* GintoBold.otf */,
+				DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DA2384BC27CCB0CD009E15E0 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF2E27C6766200A9ED72 /* Lottie */,
+				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
+				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
+				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
+				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		DA2384BD27CCB0FD009E15E0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
+				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		DA32EF2E27C6766200A9ED72 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,16 +300,18 @@
 		DA4A888627C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXGroup;
 			children = (
-				DA32EF6327CB770E00A9ED72 /* DataModels */,
+				DA23843C27CB9621009E15E0 /* Fonts */,
 				DA32EF3727C7440800A9ED72 /* Styles */,
 				DA4A88E327C3481700720909 /* Views */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
+				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
 				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
+				DA23843827CB934D009E15E0 /* Info.plist */,
 				DA4A888D27C0AF3200720909 /* Preview Content */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 			);
@@ -382,6 +423,7 @@
 				DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */,
 				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
 				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
+				DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -407,18 +449,14 @@
 		DA4A88E327C3481700720909 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA2384BD27CCB0FD009E15E0 /* User */,
+				DA2384BC27CCB0CD009E15E0 /* Message */,
 				DA32EF5727CB5F2C00A9ED72 /* EnvObjects */,
-				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
-				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
-				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
-				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
-				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
-				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -489,8 +527,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */,
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
+				DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +554,7 @@
 				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
+				DA2384A127CB9714009E15E0 /* CustomiseFontFamily.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
@@ -542,6 +583,7 @@
 				DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */,
 				DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */,
 				DA32EF4E27C8D6CA00A9ED72 /* SubtractDates.swift in Sources */,
+				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
 				DA4A890327C3824800720909 /* Identify.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */,
@@ -718,6 +760,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -745,6 +788,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

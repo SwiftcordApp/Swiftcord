@@ -76,6 +76,15 @@ struct ContentView: View {
         })
         .environmentObject(gateway)
         .environmentObject(state)
+        /*.overlay(
+            VStack {
+                Image("DiscordIcon").frame(width: 150)
+                Text("Loading...").font(.custom("ABC Ginto Normal Unlicensed Trial Bold", size: 32))
+            }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .allowsHitTesting(true)
+             .background(Color(NSColor.windowBackgroundColor))
+        )*/
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")

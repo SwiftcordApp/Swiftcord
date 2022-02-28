@@ -99,7 +99,7 @@ struct MessageView: View {
                 // Would have loved to use switch-case but fallthrough doesn't work :(
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
-                        UserAvatarView(user: message.author, guildID: guildID)
+                        UserAvatarView(user: message.author, guildID: guildID, webhookID: message.webhook_id)
                     }
                     else {
                         Text(message.timestamp.toDate()?.toTimeString() ?? "")
@@ -110,10 +110,29 @@ struct MessageView: View {
                     }
                     VStack(alignment: .leading, spacing: lineSpacing) {
                         if !shrunk {
-                            HStack(alignment: .bottom, spacing: 8) {
+                            HStack(alignment: .bottom, spacing: 6) {
                                 Text(message.member?.nick ?? message.author.username)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
+                                if message.author.bot ?? false {
+                                    HStack(spacing: 0) {
+                                        if ((message.author.public_flags ?? 0) & (1 << 16)) != 0 || message.webhook_id != nil {
+                                            Image(systemName: message.webhook_id == nil ? "checkmark" : "link")
+                                                .font(.system(size: 8, weight: .heavy))
+                                                .frame(width: 15)
+                                                .padding(.leading, -3)
+                                        }
+                                        Text(message.webhook_id == nil
+                                            ? "BOT"
+                                            : "WEBHOOK"
+                                        ).font(.system(size: 10))
+                                    }
+                                    .frame(height: 15)
+                                    .padding(.horizontal, 4)
+                                    .background(Color("DiscordTheme"))
+                                    .cornerRadius(4)
+                                    .offset(y: -2)
+                                }
                                 Text("at \(message.timestamp.toDate()?.toTimeString() ?? "")")
                                     .font(.system(size: 12))
                                     .opacity(0.5)
@@ -133,6 +152,9 @@ struct MessageView: View {
                             }
                             ForEach(message.attachments, id: \.id) { attachment in
                                 AttachmentView(attachment: attachment)
+                            }
+                            ForEach(message.embeds, id: \.id) { embed in
+                                EmbedView(embed: embed)
                             }
                         }
                     }

@@ -57,6 +57,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     
     // Attempt reconnection with resume after 1-5s as per spec
     func attemptReconnect(resume: Bool = true, overrideViability: Bool = false) {
+        print("Resume called")
         // Kill connection if connection is still active
         if isConnected { self.socket.forceDisconnect() }
         guard viability || overrideViability, !isReconnecting else { return }
