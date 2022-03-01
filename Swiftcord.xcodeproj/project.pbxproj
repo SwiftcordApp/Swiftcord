@@ -11,6 +11,10 @@
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
 		DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
+		DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */; };
+		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
+		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
+		DA2384C827CD9418009E15E0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C727CD9418009E15E0 /* Logger.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -105,6 +109,9 @@
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
 		DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoMedium.otf; sourceTree = "<group>"; };
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
+		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
+		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		DA2384C727CD9418009E15E0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -201,6 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
 				DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 			);
@@ -260,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				DA32EF4327C880E300A9ED72 /* NewMessage.swift */,
+				DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -424,6 +433,7 @@
 				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
 				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
 				DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */,
+				DA2384C727CD9418009E15E0 /* Logger.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -457,6 +467,7 @@
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -480,6 +491,7 @@
 			packageProductDependencies = (
 				DA4A88CA27C1EC5500720909 /* Starscream */,
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
+				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -512,6 +524,7 @@
 			packageReferences = (
 				DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */,
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -541,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */,
 				DA4A88E127C3341400720909 /* EventDispatch.swift in Sources */,
 				DA4A88BE27C140BC00720909 /* Application.swift in Sources */,
 				DA4A88AC27C1332600720909 /* Locale.swift in Sources */,
@@ -559,6 +573,7 @@
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */,
+				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
 				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
 				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
@@ -573,6 +588,7 @@
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* MessageModel.xcdatamodeld in Sources */,
+				DA2384C827CD9418009E15E0 /* Logger.swift in Sources */,
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
 				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
@@ -826,6 +842,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -845,6 +869,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
 		DA32EF2C27C65E2700A9ED72 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */;

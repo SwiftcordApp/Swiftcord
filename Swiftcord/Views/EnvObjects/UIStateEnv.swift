@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum LoadingState: Int {
-    case initial = 0
-    case gatewayConn = 1
-    case initialGuildLoad = 2
-    case selGuildLoad = 3
-    case channelLoad = 4
-    case messageLoad = 5
+enum LoadingState {
+    case initial
+    case gatewayConn
+    case initialGuildLoad
+    case selGuildLoad
+    case channelLoad
+    case messageLoad
 }
 
 class UIState: ObservableObject {

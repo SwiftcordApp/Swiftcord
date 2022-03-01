@@ -61,7 +61,7 @@ struct Guild: Codable, GatewayData, Equatable {
     let explicit_content_filter: ExplicitContentFilterLevel
     let roles: [Role]
     let emojis: [Emoji]
-    let features: [GuildFeature]
+    let features: [String] // Creating GuildFeature enum myself for less crashes
     let mfa_level: MFALevel
     var application_id: Snowflake? = nil // For bot-created guilds
     var system_channel_id: Snowflake? = nil // ID of channel for system-created messages

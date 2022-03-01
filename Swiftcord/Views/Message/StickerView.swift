@@ -112,7 +112,9 @@ struct StickerView: View {
                     StickerItemView(sticker: sticker, size: 240, play: .constant(true))
                     Divider()
                     Text(fullSticker!.name).font(.title2).fontWeight(.bold)
-                    Text(fullSticker!.description ?? "").padding(.top, -8)
+                    if fullSticker!.description != nil {
+                        Text(fullSticker!.description ?? "").padding(.top, -8)
+                    }
                     if sticker.format_type == .aPNG {
                         Text("Sorry, aPNG stickers can't be played (yet)").font(.footnote)
                     }

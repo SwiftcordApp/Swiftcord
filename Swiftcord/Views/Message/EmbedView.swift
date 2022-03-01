@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct EmbedView: View {
     let embed: Embed
@@ -28,7 +29,7 @@ struct EmbedView: View {
                 if embed.fields != nil {
                     ForEach(embed.fields!, id: \.id) { field in
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(field.name)
+                            Text(.init(field.name))
                                     .font(.headline)
                                     .textSelection(.enabled)
                             Text(.init(field.value)).opacity(0.9)
@@ -36,6 +37,29 @@ struct EmbedView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
+                }
+                
+                if embed.image != nil {
+                    let width = Double(embed.image!.width == nil ? min(384, embed.image!.width!) : 384)
+                    let height = (embed.image!.width != nil && embed.image!.height != nil)
+                        ? width / (Double(embed.image!.width!) / Double(embed.image!.height!))
+                        : 216
+                    CachedAsyncImage(url: URL(string: embed.image!.url)!) { phase in
+                        if let image = phase.image {
+                            image.resizable().scaledToFill()
+                        } else if phase.error != nil {
+                            
+                        } else {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .frame(width: width, height: height)
+                        }
+                    }
+                    .frame(
+                        width: width,
+                        height: height
+                    )
+                    .cornerRadius(4)
                 }
             }.padding(8)
         }
@@ -53,7 +77,7 @@ struct EmbedView: View {
                 Spacer()
             }
         )
-        .frame(maxWidth: 400, alignment: .leading)
+        .frame(minWidth: 400, maxWidth: 520, alignment: .leading)
     }
 }
 

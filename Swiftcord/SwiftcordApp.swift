@@ -30,13 +30,19 @@ struct SwiftcordApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onReceive(
-                    NotificationCenter.default.publisher(for: NSApplication.didFinishLaunchingNotification),
+                    NotificationCenter.default.publisher(for: NSApplication.didUnhideNotification),
                     perform: { _ in hideZoomButton() }
                 )
                 .onReceive(
                     NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification),
                     perform: { _ in hideZoomButton() }
                 )
+                .onAppear {
+                    // Overwrite shared URLCache with a higher capacity one
+                    URLCache.shared = URLCache(memoryCapacity: 32*1024*1024,  // 32MB
+                                                 diskCapacity: 256*1024*1024, // 256MB
+                                                     diskPath: nil)
+                }
         }
     }
 }

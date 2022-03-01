@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct UserAvatarView: View {
     let user: User
@@ -19,7 +20,7 @@ struct UserAvatarView: View {
     
     var body: some View {
         let avatarURL = user.avatarURL()
-        AsyncImage(url: avatarURL) { image in
+        CachedAsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
         } placeholder: {
             ProgressView().progressViewStyle(.circular)
@@ -48,7 +49,7 @@ struct UserAvatarView: View {
                         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
                 }
                 else {
-                    AsyncImage(url: avatarURL) { image in
+                    CachedAsyncImage(url: avatarURL) { image in
                         image.resizable().scaledToFill()
                     } placeholder: { ProgressView().progressViewStyle(.circular)}
                     .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
@@ -60,7 +61,7 @@ struct UserAvatarView: View {
                         .trim(from: 0.5, to: 1)
                         .fill(.black)
                         .frame(width: 92, height: 92)
-                    AsyncImage(url: avatarURL) { image in
+                    CachedAsyncImage(url: avatarURL) { image in
                         image.resizable().scaledToFill()
                     } placeholder: {
                         ProgressView().progressViewStyle(.circular)
@@ -100,6 +101,14 @@ struct UserAvatarView: View {
                     
                     if webhookID != nil {
                         Text("This user is a webhook")
+                        Button {
+                            
+                        } label: {
+                            Label("Manage Server Webhooks", systemImage: "link")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
                     } else {
                         if profile == nil && !loadFullFailed {
                             ProgressView("Loading full profile...")
@@ -111,7 +120,7 @@ struct UserAvatarView: View {
                         if (profile?.user.bio) != nil
                             && !(profile?.user.bio!.isEmpty ?? false) {
                             Text("ABOUT ME").font(.headline)
-                            Text((profile?.user.bio)!)
+                            Text(.init((profile?.user.bio)!))
                                 .fixedSize(horizontal: false, vertical: true)
                         } else if profile != nil {
                             Text("NO ABOUT").font(.headline)

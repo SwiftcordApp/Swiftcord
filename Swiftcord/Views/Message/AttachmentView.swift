@@ -8,6 +8,7 @@
 
 import SwiftUI
 import AVKit
+import CachedAsyncImage
 
 struct AttachmentError: View {
     let height: Int
@@ -26,7 +27,7 @@ struct AttachmentLoading: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "square.text.square")
+            Image(systemName: "photo")
                 .opacity(0.5)
                 .font(.system(size: CGFloat(min(width, height) - 10)))
             ProgressView().progressViewStyle(.circular).controlSize(.large)
@@ -57,45 +58,35 @@ struct AttachmentView: View {
         "application/zip": "doc.zipper"
     ]
     
-    private func getClosestPowOf2(width: Int, height: Int) -> (Int?, Int?) {
-        var p: Double = 4
-        repeat { p += 1 } while Int(pow(Double(2), p)) < max(width, height)
-        let s = Int(pow(Double(2), p))
-        if width > height { return (s, nil) }
-        return (nil, Int(pow(Double(2), p)))
-    }
-    
     private func getResizedDimens(width: Int, height: Int, srcURL: URL) -> (Int, Int, URL) {
         let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
         let h = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
         let w = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
-        if width < w && height < h { return (width, height, getURLWithResizedDimens(mediaURL: srcURL, resizedDimens: nil)) }
-        return (w, h, getURLWithResizedDimens(mediaURL: srcURL, resizedDimens: getClosestPowOf2(width: w, height: h)))
+        if width < w*2 && height < h*2 { return (width, height, getURLWithResizedDimens(mediaURL: srcURL, width: nil, height: nil)) }
+        return (w, h, getURLWithResizedDimens(mediaURL: srcURL, width: w*2, height: h*2))
     }
     
-    private func getURLWithResizedDimens(mediaURL: URL, resizedDimens: (Int?, Int?)?) -> URL {
+    private func getURLWithResizedDimens(mediaURL: URL, width: Int?, height: Int?) -> URL {
         var oURL = URLComponents(url: mediaURL, resolvingAgainstBaseURL: true)!
-        oURL.queryItems = []
-        if resizedDimens?.0 != nil {
-            oURL.queryItems!.append(URLQueryItem(name: "width", value: String((resizedDimens?.0)!)))
-        }
-        else if resizedDimens?.1 != nil {
-            oURL.queryItems!.append(URLQueryItem(name: "height", value: String((resizedDimens?.1)!)))
-        }
+        oURL.queryItems = width != nil ? [
+            URLQueryItem(name: "width", value: String(width!)),
+            URLQueryItem(name: "height", value: String(height!)),
+        ] : []
+        print(oURL.url!.absoluteString)
         return oURL.url!
     }
     
     var body: some View {
         // Guard doesn't work in views
         ZStack {
-            if let url = URL(string: attachment.url) {
+            if let url = URL(string: attachment.proxy_url) {
                 let mime = attachment.content_type ?? url.mimeType()
                 if attachment.width != nil && attachment.height != nil {
                     // This is an image/video
                     let (width, height, resizedURL) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
                     switch mime.prefix(5) {
                     case "image":
-                        AsyncImage(url: resizedURL) { phase in
+                        CachedAsyncImage(url: resizedURL, scale: 2) { phase in
                             if let image = phase.image {
                                 image.resizable().scaledToFill()
                             } else if phase.error != nil {

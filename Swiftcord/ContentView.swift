@@ -74,30 +74,34 @@ struct ContentView: View {
         .onChange(of: selectedGuild, perform: { _ in
             UserDefaults.standard.set(selectedGuild.id, forKey: "lastSelectedGuild")
         })
+        .overlay(LoadingView())
         .environmentObject(gateway)
         .environmentObject(state)
-        /*.overlay(
-            VStack {
-                Image("DiscordIcon").frame(width: 150)
-                Text("Loading...").font(.custom("ABC Ginto Normal Unlicensed Trial Bold", size: 32))
+        .onChange(of: state.loadingState, perform: { state in
+            if state == .gatewayConn {
+                Task {
+                    guard let g = await DiscordAPI.getGuilds()
+                    else { return }
+                    guilds = g
+                    self.state.loadingState = .initialGuildLoad
+                    if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
+                        guard g.contains(where: { p in p.id == lGID }) else { return }
+                        guard let fullGuild = await DiscordAPI.getGuild(id: lGID)
+                        else { return }
+                        selectedGuild = fullGuild
+                    }
+                }
             }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .allowsHitTesting(true)
-             .background(Color(NSColor.windowBackgroundColor))
-        )*/
+        })
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")
             }
-            Task {
-                guard let g = await DiscordAPI.getGuilds()
-                else { return }
-                guilds = g
-                if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
-                    guard g.contains(where: { p in p.id == lGID }) else { return }
-                    guard let fullGuild = await DiscordAPI.getGuild(id: lGID)
-                    else { return }
-                    selectedGuild = fullGuild
+            let _ = gateway.onEvent.addHandler { (evt, d) in
+                switch evt {
+                case .ready:
+                    state.loadingState = .gatewayConn
+                default: break
                 }
             }
         }

@@ -25,6 +25,7 @@ struct MessagesView: View {
     @State private var scrollTopID: Snowflake? = nil
     
     @EnvironmentObject var gateway: DiscordGateway
+    @EnvironmentObject var state: UIState
     
     private func fetchMoreMessages() {
         loading = true
@@ -38,6 +39,7 @@ struct MessagesView: View {
                 return
             }
             loading = false
+            if state.loadingState == .channelLoad { state.loadingState = .messageLoad }
             if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)

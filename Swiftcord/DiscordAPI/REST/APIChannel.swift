@@ -48,6 +48,15 @@ extension DiscordAPI {
         message: NewMessage,
         id: Snowflake
     ) async -> Message? {
-        return await postReq(path: "/channels/\(id)/messages", body: message)
+        return await postReq(path: "channels/\(id)/messages", body: message)
+    }
+    
+    // MARK: Acknowledge Message Read (Undocumented endpoint!)
+    // POST /channels/{channel.id}/messages/{message.id}/ack
+    static func ackMessageRead(
+        id: Snowflake,
+        msgID: Snowflake
+    ) async -> MessageReadAck? {
+        return await postReq(path: "channels/\(id)/messages/\(msgID)/ack", body: MessageReadAck(token: nil))
     }
 }

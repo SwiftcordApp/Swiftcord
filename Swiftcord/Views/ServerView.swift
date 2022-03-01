@@ -14,6 +14,8 @@ struct ServerView: View {
     @State private var initialCh: String? = nil
     @State private var isLoading = true
     
+    @EnvironmentObject var state: UIState
+    
     let chIcons = [
         ChannelType.voice: "speaker.wave.2.fill",
         .news: "megaphone.fill",
@@ -78,11 +80,7 @@ struct ServerView: View {
                     ProgressView("Loading channels...")
                         .progressViewStyle(.circular)
                         .controlSize(.large)
-                }
-                else if initialCh != nil {
-                    
-                }
-                else { Text("There aren't any text channels in this server") }
+                } else { Text("There aren't any text channels in this server") }
                 Spacer()
             }.frame(minWidth: 400, minHeight: 250)
         }
@@ -94,6 +92,7 @@ struct ServerView: View {
                 guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
                 channels = c
                 isLoading = false
+                if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
                 
                 if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
                     p.id == lastChannel

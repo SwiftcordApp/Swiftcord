@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NewMessage: Codable, GatewayData {
+struct NewMessage: Codable {
     let content: String?
     var tts: Bool? = false
     var embeds: [Embed]? = nil
