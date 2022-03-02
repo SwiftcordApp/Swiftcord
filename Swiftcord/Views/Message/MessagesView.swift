@@ -81,7 +81,10 @@ struct MessagesView: View {
                                 quotedMsg: msg.message_reference != nil
                                 ? messages.first { m in
                                     m.id == msg.message_reference!.message_id
-                                } : nil
+                                } : nil,
+                                onQuoteClick: { id in
+                                    withAnimation { proxy.scrollTo(id, anchor: .center) }
+                                }
                             )
                             .flip()
                         }

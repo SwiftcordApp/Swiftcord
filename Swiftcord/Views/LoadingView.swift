@@ -6,33 +6,6 @@
 //
 
 import SwiftUI
-import AVKit
-
-struct AVPlayerControllerRepresented : NSViewRepresentable {
-    
-    let item: AVPlayerItem
-    var looper: AVPlayerLooper!
-    var player: AVQueuePlayer!
-    
-    init(item: AVPlayerItem) {
-        self.item = item
-        player = AVQueuePlayer(items: [item])
-        looper = AVPlayerLooper(player: player, templateItem: item)
-    }
-
-    func makeNSView(context: Context) -> AVPlayerView {
-
-        let view = AVPlayerView()
-        view.controlsStyle = .none
-        view.player = player
-        player.play()
-        return view
-    }
-    
-    func updateNSView(_ nsView: AVPlayerView, context: Context) {
-        
-    }
-}
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
@@ -86,17 +59,12 @@ struct LoadingView: View {
 
     var body: some View {
         let loadingNum = (loadingSeq.firstIndex(of: state.loadingState) ?? 0)
-        let item = AVPlayerItem(url:  Bundle.main.url(forResource: "loader", withExtension: "mp4")!)
         VStack(spacing: 4) {
-            AVPlayerControllerRepresented(item: item)
-                .onAppear {
-                }
-                .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
-                .animation(.linear(duration: 0.2), value: loadingNum != loadingSeq.count - 1)
-                .frame(width: 200, height: 200)
+            Image("DiscordIcon")
+                .frame(width: 200)
             
             Text(loadingStrings[state.loadingState] ?? "").font(.title3)
-                .padding(.top, 16)
+                .padding(.top, 24)
                 .animation(.spring(), value: state.loadingState)
             ProgressView(value: Double(loadingNum + 1) / Double(loadingSeq.count))
                 .progressViewStyle(.linear)
@@ -112,7 +80,7 @@ struct LoadingView: View {
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(loadingNum != loadingSeq.count - 1)
-        .background(Color("LoadingBG"))
+        .background(Color(NSColor.windowBackgroundColor))
         .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
         .scaleEffect(loadingNum != loadingSeq.count - 1 ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingSeq.count - 1)

@@ -40,6 +40,7 @@ struct EmbedView: View {
                 }
                 
                 if embed.image != nil {
+                    
                     let width = Double(embed.image!.width == nil ? min(384, embed.image!.width!) : 384)
                     let height = (embed.image!.width != nil && embed.image!.height != nil)
                         ? width / (Double(embed.image!.width!) / Double(embed.image!.height!))

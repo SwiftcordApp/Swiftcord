@@ -15,7 +15,7 @@ extension DiscordGateway {
         guard let encoded = try? JSONEncoder().encode(sendPayload)
         else { return }
         
-        print(sendPayload)
+        log.d("Outgoing Payload: <\(op)>", sendPayload.d != nil ? String(describing: sendPayload.d!) : "[No data]", "Seq:", String(describing: sendPayload.s))
         socket.write(string: String(data: encoded, encoding: .utf8)!)
     }
 }

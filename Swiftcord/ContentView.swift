@@ -19,10 +19,10 @@ let dmGuild = Guild(id: "@me", name: "DMs", owner_id: "", afk_timeout: 0, verifi
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
+    /*@FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<MessageItem>
+    private var items: FetchedResults<MessageItem>*/
     
     @State private var sheetOpen = false
     @State private var guilds: [PartialGuild] = []
@@ -107,7 +107,7 @@ struct ContentView: View {
         }
     }
 
-    private func addItem() {
+    /*private func addItem() {
         withAnimation {
             let newItem = MessageItem(context: viewContext)
             newItem.timestamp = Date()
@@ -136,7 +136,7 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
+    }*/
 }
 
 private let itemFormatter: DateFormatter = {

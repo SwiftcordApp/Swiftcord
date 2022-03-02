@@ -40,7 +40,6 @@ struct ServerView: View {
             if !txtChs.isEmpty {
                 selectedCh = txtChs[0].id
             }
-            print(selectedCh)
         }
     }
     

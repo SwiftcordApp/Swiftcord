@@ -87,9 +87,7 @@ extension DiscordAPI {
     static func postReq<D: Codable, B: Codable>(
         path: String,
         body: B? = nil
-    ) async -> D? {
-        print("POST: \(path)")
-        
+    ) async -> D? {        
         let p = body != nil ? try? JSONEncoder().encode(body) : nil
         guard let d = try? await makeRequest(
             path: path,

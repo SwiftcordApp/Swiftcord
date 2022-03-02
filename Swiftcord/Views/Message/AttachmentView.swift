@@ -80,7 +80,6 @@ struct AttachmentView: View {
             URLQueryItem(name: "width", value: String(width!)),
             URLQueryItem(name: "height", value: String(height!)),
         ] : []
-        print(oURL.url!.absoluteString)
         return oURL.url!
     }
     

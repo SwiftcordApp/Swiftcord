@@ -14,6 +14,7 @@ struct MessageView: View {
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
     let quotedMsg: Message?
+    let onQuoteClick: (String) -> Void
     
     @State private var hovered = false
     @State private var loadedQuotedMsg: Message? = nil
@@ -23,12 +24,11 @@ struct MessageView: View {
     private func attributedMessage(content: String) -> AttributedString? {
         guard var str = try? AttributedString(markdown: message.content) else { return nil }
         
+        // This is not really gonna work
         if let range = str.range(of: "<@[^>]*>", options: .regularExpression) {
-            print(str[range].description)
             var mention = AttributedString("@a random user")
             mention.backgroundColor = Color("DiscordTheme").opacity(0.3)
             str.replaceSubrange(range, with: mention)
-
             // str[mention].backgroundColor = Color.indigo
         }
         return str
@@ -61,13 +61,15 @@ struct MessageView: View {
                             }
                             .clipShape(Circle())
                             .frame(width: 16, height: 16)
-                            Text(loadedQuotedMsg?.author.username ?? quotedMsg!.author.username)
-                                .font(.system(size: 14))
-                                .opacity(0.9)
-                            Text(loadedQuotedMsg?.content ?? quotedMsg!.content)
-                                .font(.system(size: 14))
-                                .opacity(0.75)
-                                .lineLimit(1)
+                            Group {
+                                Text(loadedQuotedMsg?.author.username ?? quotedMsg!.author.username)
+                                    .font(.system(size: 14))
+                                    .opacity(0.9)
+                                Text(loadedQuotedMsg?.content ?? quotedMsg!.content)
+                                    .font(.system(size: 14))
+                                    .opacity(0.75)
+                                    .lineLimit(1)
+                            }.onTapGesture { onQuoteClick((loadedQuotedMsg ?? quotedMsg!).id) }
                         }
                         else if loadQuotedMsgErr {
                             Image(systemName: "xmark.octagon.fill")
@@ -102,7 +104,8 @@ struct MessageView: View {
                                 .font(.system(size: 14))
                                 .opacity(0.75)
                         }
-                    }.padding(.bottom, 4)
+                    }
+                    .padding(.bottom, 4)
                     Spacer()
                 }.padding(.leading, 20)
             }
@@ -156,11 +159,15 @@ struct MessageView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             if !message.content.isEmpty {
                                 // Guard doesn't work in a view :(((
-                                if let msg = attributedMessage(content: message.content) {
+                                /*if let msg = attributedMessage(content: message.content) {
                                     Text(msg)
                                         .font(.system(size: 15))
                                         .textSelection(.enabled)
-                                }
+                                 // fix this poor implementation later
+                                }*/
+                                Text(.init(message.content))
+                                    .font(.system(size: 15))
+                                    .textSelection(.enabled)
                             }
                             if message.sticker_items != nil {
                                 ForEach(message.sticker_items!, id: \.id) { sticker in
