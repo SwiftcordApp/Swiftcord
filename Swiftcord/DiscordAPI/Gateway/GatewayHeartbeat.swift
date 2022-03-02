@@ -16,7 +16,7 @@ extension DiscordGateway {
             guard isConnected && connTimes == initialConnTimes else { return }
             
             sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
-            print("Sent heartbeat, missed ACKs: \(missedACK)")
+            log.d("Sent heartbeat, missed ACKs: \(missedACK)")
             incMissedACK()
             
             // Connection is dead ☠️

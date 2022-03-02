@@ -58,12 +58,20 @@ struct AttachmentView: View {
         "application/zip": "doc.zipper"
     ]
     
-    private func getResizedDimens(width: Int, height: Int, srcURL: URL) -> (Int, Int, URL) {
+    private func getResizedDimens(width: Int, height: Int, srcURL: URL) -> (Int, Int, URL, Double) {
         let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
         let h = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
         let w = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
-        if width < w*2 && height < h*2 { return (width, height, getURLWithResizedDimens(mediaURL: srcURL, width: nil, height: nil)) }
-        return (w, h, getURLWithResizedDimens(mediaURL: srcURL, width: w*2, height: h*2))
+        if width < w*2 && height < h*2 {
+            let scale = max(Double(width)/Double(w), 1)
+            return (
+                Int(Double(width)/scale),
+                Int(Double(height)/scale),
+                getURLWithResizedDimens(mediaURL: srcURL, width: width, height: height),
+                scale
+            )
+        }
+        return (w, h, getURLWithResizedDimens(mediaURL: srcURL, width: w*2, height: h*2), 2)
     }
     
     private func getURLWithResizedDimens(mediaURL: URL, width: Int?, height: Int?) -> URL {
@@ -83,10 +91,10 @@ struct AttachmentView: View {
                 let mime = attachment.content_type ?? url.mimeType()
                 if attachment.width != nil && attachment.height != nil {
                     // This is an image/video
-                    let (width, height, resizedURL) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
+                    let (width, height, resizedURL, scale) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
                     switch mime.prefix(5) {
                     case "image":
-                        CachedAsyncImage(url: resizedURL, scale: 2) { phase in
+                        CachedAsyncImage(url: resizedURL, scale: scale) { phase in
                             if let image = phase.image {
                                 image.resizable().scaledToFill()
                             } else if phase.error != nil {

@@ -7,7 +7,6 @@
 
 import Foundation
 
-#if DEBUG
 enum LogLevel { // In increasing levels of importance
     case silly // Very verbose debug messages
     case debug // Stuff for when you're sorting out an issue
@@ -25,8 +24,10 @@ class Logger {
     }
     
     private func log(level: LogLevel, _ items: [Any]) {
+#if DEBUG
         let s = items.map { String(describing: $0) }.joined(separator: " ")
         print("<\(String(describing: level).first?.uppercased() ?? "D")> [\(tag)] \(s)")
+#endif
     }
     
     public func s(_ items: Any...) { log(level: .silly, items) }
@@ -36,4 +37,3 @@ class Logger {
     public func e(_ items: Any...) { log(level: .error, items) }
     public func c(_ items: Any...) { log(level: .crit, items) }
 }
-#endif

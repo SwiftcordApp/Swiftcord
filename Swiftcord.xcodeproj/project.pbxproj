@@ -15,6 +15,7 @@
 		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		DA2384C827CD9418009E15E0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C727CD9418009E15E0 /* Logger.swift */; };
+		DA2384CC27CE63CC009E15E0 /* loader.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DA2384CB27CE63CC009E15E0 /* loader.mp4 */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -87,15 +88,15 @@
 		DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */; };
 		DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88FE27C3609900720909 /* ApplicationObj.swift */; };
 		DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890027C360D300720909 /* ReadyEvt.swift */; };
-		DA4A890327C3824800720909 /* Identify.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890227C3824800720909 /* Identify.swift */; };
+		DA4A890327C3824800720909 /* GatewayIdentify.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890227C3824800720909 /* GatewayIdentify.swift */; };
 		DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890427C383DD00720909 /* MessageDelete.swift */; };
 		DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890627C38E4300720909 /* DiscordAPI.swift */; };
 		DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890827C3CFA700720909 /* APIRequest.swift */; };
 		DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890B27C3D29C00720909 /* APIChannel.swift */; };
-		DA4A890E27C4876900720909 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890D27C4876900720909 /* Heartbeat.swift */; };
-		DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890F27C48A7B00720909 /* SendToGateway.swift */; };
+		DA4A890E27C4876900720909 /* GatewayHeartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */; };
+		DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890F27C48A7B00720909 /* GatewaySend.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
-		DA4A891627C4B06500720909 /* CachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* CachedState.swift */; };
+		DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* GatewayCachedState.swift */; };
 		DA4A891927C4E90900720909 /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891827C4E90900720909 /* APIUser.swift */; };
 		DA4A891C27C4EFF400720909 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891B27C4EFF400720909 /* Connection.swift */; };
 		DA4A891E27C4F06B00720909 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891D27C4F06B00720909 /* Integration.swift */; };
@@ -112,6 +113,7 @@
 		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DA2384C727CD9418009E15E0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		DA2384CB27CE63CC009E15E0 /* loader.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loader.mp4; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -184,16 +186,16 @@
 		DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildSchEvtUserEvt.swift; sourceTree = "<group>"; };
 		DA4A88FE27C3609900720909 /* ApplicationObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationObj.swift; path = Gateway/ApplicationObj.swift; sourceTree = "<group>"; };
 		DA4A890027C360D300720909 /* ReadyEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyEvt.swift; sourceTree = "<group>"; };
-		DA4A890227C3824800720909 /* Identify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identify.swift; sourceTree = "<group>"; };
+		DA4A890227C3824800720909 /* GatewayIdentify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayIdentify.swift; sourceTree = "<group>"; };
 		DA4A890427C383DD00720909 /* MessageDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDelete.swift; sourceTree = "<group>"; };
 		DA4A890627C38E4300720909 /* DiscordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordAPI.swift; sourceTree = "<group>"; };
 		DA4A890827C3CFA700720909 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		DA4A890A27C3D02A00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DA4A890B27C3D29C00720909 /* APIChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChannel.swift; sourceTree = "<group>"; };
-		DA4A890D27C4876900720909 /* Heartbeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
-		DA4A890F27C48A7B00720909 /* SendToGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendToGateway.swift; sourceTree = "<group>"; };
+		DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayHeartbeat.swift; sourceTree = "<group>"; };
+		DA4A890F27C48A7B00720909 /* GatewaySend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewaySend.swift; sourceTree = "<group>"; };
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
-		DA4A891527C4B06500720909 /* CachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedState.swift; sourceTree = "<group>"; };
+		DA4A891527C4B06500720909 /* GatewayCachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCachedState.swift; sourceTree = "<group>"; };
 		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DA4A891827C4E90900720909 /* APIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUser.swift; sourceTree = "<group>"; };
 		DA4A891A27C4EE1B00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -230,8 +232,9 @@
 			isa = PBXGroup;
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
-				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
+				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
+				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
 				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
 			);
@@ -309,6 +312,7 @@
 		DA4A888627C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXGroup;
 			children = (
+				DA2384CB27CE63CC009E15E0 /* loader.mp4 */,
 				DA23843C27CB9621009E15E0 /* Fonts */,
 				DA32EF3727C7440800A9ED72 /* Styles */,
 				DA4A88E327C3481700720909 /* Views */,
@@ -385,11 +389,11 @@
 		DA4A88D327C228CB00720909 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
-				DA4A890227C3824800720909 /* Identify.swift */,
 				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
-				DA4A890D27C4876900720909 /* Heartbeat.swift */,
-				DA4A890F27C48A7B00720909 /* SendToGateway.swift */,
-				DA4A891527C4B06500720909 /* CachedState.swift */,
+				DA4A890227C3824800720909 /* GatewayIdentify.swift */,
+				DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */,
+				DA4A890F27C48A7B00720909 /* GatewaySend.swift */,
+				DA4A891527C4B06500720909 /* GatewayCachedState.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -465,7 +469,6 @@
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
-				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
 			);
@@ -540,6 +543,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2384CC27CE63CC009E15E0 /* loader.mp4 in Resources */,
 				DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */,
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
@@ -584,7 +588,7 @@
 				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
-				DA4A891027C48A7B00720909 /* SendToGateway.swift in Sources */,
+				DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* MessageModel.xcdatamodeld in Sources */,
@@ -600,7 +604,7 @@
 				DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */,
 				DA32EF4E27C8D6CA00A9ED72 /* SubtractDates.swift in Sources */,
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
-				DA4A890327C3824800720909 /* Identify.swift in Sources */,
+				DA4A890327C3824800720909 /* GatewayIdentify.swift in Sources */,
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */,
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
@@ -620,9 +624,9 @@
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
-				DA4A890E27C4876900720909 /* Heartbeat.swift in Sources */,
+				DA4A890E27C4876900720909 /* GatewayHeartbeat.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
-				DA4A891627C4B06500720909 /* CachedState.swift in Sources */,
+				DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,

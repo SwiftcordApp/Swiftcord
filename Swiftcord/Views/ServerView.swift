@@ -11,7 +11,6 @@ struct ServerView: View {
     @Binding var guild: Guild
     @State private var channels: [Channel] = []
     @State private var selectedCh: String? = nil
-    @State private var initialCh: String? = nil
     @State private var isLoading = true
     
     @EnvironmentObject var state: UIState
@@ -20,6 +19,30 @@ struct ServerView: View {
         ChannelType.voice: "speaker.wave.2.fill",
         .news: "megaphone.fill",
     ]
+    
+    private func loadChannels() {
+        Task {
+            // print(await DiscordAPI.getDMs())
+            isLoading = true
+            selectedCh = nil
+            guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
+            channels = c
+            isLoading = false
+            if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
+            
+            if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
+                p.id == lastChannel
+            }) {
+                selectedCh = lastChannel
+                return
+            }
+            let txtChs = c.filter({ $0.type == .text })
+            if !txtChs.isEmpty {
+                selectedCh = txtChs[0].id
+            }
+            print(selectedCh)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -84,28 +107,13 @@ struct ServerView: View {
                 Spacer()
             }.frame(minWidth: 400, minHeight: 250)
         }
-        .onChange(of: guild) { _ in
-            Task {
-                // print(await DiscordAPI.getDMs())
-                isLoading = true
-                selectedCh = nil
-                guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
-                channels = c
-                isLoading = false
-                if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
-                
-                if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
-                    p.id == lastChannel
-                }) {
-                    selectedCh = lastChannel
-                    return
-                }
-                let txtChs = c.filter({ $0.type == .text })
-                if !txtChs.isEmpty {
-                    selectedCh = txtChs[0].id
-                }
+        .onChange(of: guild) { _ in loadChannels() }
+        .onChange(of: state.loadingState, perform: { s in
+            if s == .initialGuildLoad && !isLoading {
+                // Put everything back into their initial states
+                loadChannels()
             }
-        }
+        })
     }
 }
 

@@ -20,6 +20,20 @@ struct MessageView: View {
     @State private var loadQuotedMsgErr = false
     @State private var playLoadAnim = false // Will turn true when first appeared
     
+    private func attributedMessage(content: String) -> AttributedString? {
+        guard var str = try? AttributedString(markdown: message.content) else { return nil }
+        
+        if let range = str.range(of: "<@[^>]*>", options: .regularExpression) {
+            print(str[range].description)
+            var mention = AttributedString("@a random user")
+            mention.backgroundColor = Color("DiscordTheme").opacity(0.3)
+            str.replaceSubrange(range, with: mention)
+
+            // str[mention].backgroundColor = Color.indigo
+        }
+        return str
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
@@ -141,9 +155,12 @@ struct MessageView: View {
                         // For including additional message components
                         VStack(alignment: .leading, spacing: 4) {
                             if !message.content.isEmpty {
-                                Text(.init(message.content))
-                                    .font(.system(size: 15))
-                                    .textSelection(.enabled)
+                                // Guard doesn't work in a view :(((
+                                if let msg = attributedMessage(content: message.content) {
+                                    Text(msg)
+                                        .font(.system(size: 15))
+                                        .textSelection(.enabled)
+                                }
                             }
                             if message.sticker_items != nil {
                                 ForEach(message.sticker_items!, id: \.id) { sticker in

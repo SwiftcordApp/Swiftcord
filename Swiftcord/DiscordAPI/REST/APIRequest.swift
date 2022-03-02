@@ -23,6 +23,8 @@ extension DiscordAPI {
         body: String? = nil,
         method: RequestMethod = .get
     ) async throws -> Data? {
+        DiscordAPI.log.d("\(method.rawValue): \(path)")
+        
         guard let token = Keychain.load(key: "token") else { return nil }
         guard var apiURL = URL(string: apiConfig.restBase) else { return nil }
         apiURL.appendPathComponent(path, isDirectory: false)
@@ -59,7 +61,6 @@ extension DiscordAPI {
         path: String,
         query: [URLQueryItem] = []
     ) async -> T? {
-        print("GET: \(path)")
         do {
             guard let d = try? await makeRequest(path: path, query: query)
             else { return nil }
