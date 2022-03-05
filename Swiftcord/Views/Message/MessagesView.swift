@@ -153,6 +153,13 @@ struct MessagesView: View {
                             messages.insert(msg, at: 0)
                         }
                     }
+                case .messageUpdate:
+                    guard let newMsg = d as? PartialMessage else { break }
+                    if let updatedIdx = messages.firstIndex(where: { m in m.id == newMsg.id }) {
+                        var updatedMsg = messages[updatedIdx]
+                        updatedMsg.mergeWithPartialMsg(newMsg)
+                        messages[updatedIdx] = updatedMsg
+                    }
                 default: print("Handling event \(evt) not implemented")
                 }
             })

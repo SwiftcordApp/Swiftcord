@@ -31,7 +31,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     private(set) var connTimes = 0
     private(set) var authFailed = false
     private var sessionID: String? = nil
-    private var cache: CachedState?
+    @Published var cache: CachedState?
     
     // Logger
     let log = Logger(tag: "DiscordGateway")

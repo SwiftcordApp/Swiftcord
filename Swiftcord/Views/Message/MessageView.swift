@@ -151,7 +151,7 @@ struct MessageView: View {
                                     .cornerRadius(4)
                                     .offset(y: -2)
                                 }
-                                Text(timestring)
+                                Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))
                                     .opacity(0.5)
                             }

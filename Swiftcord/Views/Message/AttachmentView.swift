@@ -106,7 +106,7 @@ struct AttachmentView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                         .onTapGesture { enlarged = true }
                     case "video":
-                        VideoPlayer(player: AVPlayer(url: resizedURL))
+                        VideoPlayer(player: AVPlayer(url: url)) // Don't use resizedURL
                             .frame(width: CGFloat(width), height: CGFloat(height))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                     default: EmptyView()
