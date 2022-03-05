@@ -160,6 +160,20 @@ struct MessagesView: View {
                         updatedMsg.mergeWithPartialMsg(newMsg)
                         messages[updatedIdx] = updatedMsg
                     }
+                case .messageDelete:
+                    guard let deletedMsg = d as? MessageDelete else { break }
+                    guard deletedMsg.channel_id == channel.id else { break }
+                    if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
+                        withAnimation { let _ = messages.remove(at: delIdx) }
+                    }
+                case .messageDeleteBulk:
+                    guard let deletedMsgs = d as? MessageDeleteBulk else { break }
+                    guard deletedMsgs.channel_id == channel.id else { break }
+                    for msgID in deletedMsgs.id {
+                        if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
+                            withAnimation { let _ = messages.remove(at: delIdx) }
+                        }
+                    }
                 default: print("Handling event \(evt) not implemented")
                 }
             })
