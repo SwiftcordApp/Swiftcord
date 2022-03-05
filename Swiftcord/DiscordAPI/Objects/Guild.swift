@@ -103,7 +103,7 @@ struct PartialGuild: Codable, GatewayData {
     let icon: String? // Icon hash
     let owner: Bool // If current user is owner of guild
     let permissions: String
-    let features: [GuildFeature]
+    let features: [String]
 }
 
 struct MutualGuild: Codable, GatewayData {
