@@ -10,11 +10,7 @@ import Foundation
 extension DiscordGateway {
     func initHeartbeat(interval: Int) {
         let initialConnTimes = connTimes
-        func sendHeartbeat(after: Int) {
-            // Do not continue sending heartbeats to a dead connection
-            // Also check that connection hasn't died between heartbeats
-            guard isConnected && connTimes == initialConnTimes else { return }
-            
+        func sendHeartbeat() {
             sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
             log.d("Sent heartbeat, missed ACKs: \(missedACK)")
             incMissedACK()
@@ -24,18 +20,23 @@ extension DiscordGateway {
                 socket.forceDisconnect()
                 attemptReconnect()
             }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(after)) {
-                sendHeartbeat(after: after)
-            }
         }
         
         // First heartbeat delayed by jitter interval as per Discord docs
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() +
-            .milliseconds(Int(Double(interval) * Double.random(in: 0...1)))
-        ) {
-            sendHeartbeat(after: interval)
+        let firstAfter = (Double(interval) * Double.random(in: 0...1)) / 1000
+        log.i("Sending first heartbeat after \(firstAfter)s")
+        DispatchQueue.main.asyncAfter(deadline: .now() + firstAfter) {
+            sendHeartbeat()
+            
+            Timer.scheduledTimer(withTimeInterval: Double(interval) / Double(1000), repeats: true) { t in
+                // Do not continue sending heartbeats to a dead connection
+                // Also check that connection hasn't died between heartbeats
+                guard self.isConnected && self.connTimes == initialConnTimes else {
+                    t.invalidate()
+                    return
+                }
+                sendHeartbeat()
+            }
         }
     }
 }

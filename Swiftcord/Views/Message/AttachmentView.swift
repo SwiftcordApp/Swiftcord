@@ -29,7 +29,7 @@ struct AttachmentLoading: View {
         ZStack {
             Image(systemName: "photo")
                 .opacity(0.5)
-                .font(.system(size: CGFloat(min(width, height) - 10)))
+                .font(.system(size: CGFloat(min(Double(width), Double(height) / (84/66)) - 10)))
             ProgressView().progressViewStyle(.circular).controlSize(.large)
         }
         .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)

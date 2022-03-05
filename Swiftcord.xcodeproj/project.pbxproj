@@ -38,7 +38,7 @@
 		DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */; };
 		DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */; };
 		DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
-		DA32EF6627CB772300A9ED72 /* ContentModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* ContentModel.xcdatamodeld */; };
+		DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */; };
 		DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* SwiftcordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -101,7 +101,6 @@
 		DA4A891E27C4F06B00720909 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891D27C4F06B00720909 /* Integration.swift */; };
 		DA4A892027C5167A00720909 /* APIGuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891F27C5167900720909 /* APIGuild.swift */; };
 		DA4A892427C5D6C500720909 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A892327C5D6C500720909 /* ServerView.swift */; };
-		DA6550F127CF94D400326DCD /* loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = DA6550F027CF94D400326DCD /* loader.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,7 +201,7 @@
 		DA4A891D27C4F06B00720909 /* Integration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integration.swift; sourceTree = "<group>"; };
 		DA4A891F27C5167900720909 /* APIGuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGuild.swift; sourceTree = "<group>"; };
 		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
-		DA6550F027CF94D400326DCD /* loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loader.gif; sourceTree = "<group>"; };
+		DA520ABE27D32ED2009FD740 /* loginBG.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginBG.webp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,13 +259,6 @@
 			path = Lottie;
 			sourceTree = "<group>";
 		};
-		DA32EF3727C7440800A9ED72 /* Styles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
 		DA32EF4227C880D300A9ED72 /* REST */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +279,7 @@
 		DA32EF6327CB770E00A9ED72 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				DA32EF6427CB772300A9ED72 /* ContentModel.xcdatamodeld */,
+				DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -312,21 +304,19 @@
 		DA4A888627C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXGroup;
 			children = (
-				DA6550F027CF94D400326DCD /* loader.gif */,
-				DA23843C27CB9621009E15E0 /* Fonts */,
-				DA32EF3727C7440800A9ED72 /* Styles */,
+				DA520ABD27D322F0009FD740 /* Resources */,
 				DA4A88E327C3481700720909 /* Views */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
-				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
+				DA4A889B27C0B23C00720909 /* WebView.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
 				DA23843827CB934D009E15E0 /* Info.plist */,
+				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
 				DA4A888D27C0AF3200720909 /* Preview Content */,
-				DA4A889B27C0B23C00720909 /* WebView.swift */,
 			);
 			path = Swiftcord;
 			sourceTree = "<group>";
@@ -475,6 +465,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DA520ABD27D322F0009FD740 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA520ABE27D32ED2009FD740 /* loginBG.webp */,
+				DA23843C27CB9621009E15E0 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -543,7 +542,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA6550F127CF94D400326DCD /* loader.gif in Resources */,
 				DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */,
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
@@ -591,7 +589,7 @@
 				DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
-				DA32EF6627CB772300A9ED72 /* ContentModel.xcdatamodeld in Sources */,
+				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				DA2384C827CD9418009E15E0 /* Logger.swift in Sources */,
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
 				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
@@ -891,13 +889,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		DA32EF6427CB772300A9ED72 /* ContentModel.xcdatamodeld */ = {
+		DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */,
 			);
 			currentVersion = DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */;
-			path = ContentModel.xcdatamodeld;
+			path = CacheModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

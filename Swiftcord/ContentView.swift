@@ -30,6 +30,11 @@ struct ContentView: View {
     
     @StateObject private var gateway = DiscordGateway()
     @StateObject private var state = UIState()
+    @ObservedObject var loginWVModel: WebViewModel
+    
+    init() {
+        loginWVModel = WebViewModel(link: "https://canary.discord.com/login") // Much hardcoding
+    }
 
     var body: some View {
         HStack(spacing: 0) {
@@ -91,6 +96,15 @@ struct ContentView: View {
                         selectedGuild = fullGuild
                     }
                 }
+            }
+        })
+        .sheet(isPresented: .constant(loginWVModel.token == nil), onDismiss: {
+            
+        }, content: {
+            ZStack(alignment: .topLeading) {
+                WebView(viewModel: loginWVModel)
+                    .frame(width: 831, height: 580)
+                Button("Quit", role: .cancel) { exit(0) }.padding(8)
             }
         })
         .onAppear {

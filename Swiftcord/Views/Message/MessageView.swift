@@ -114,12 +114,13 @@ struct MessageView: View {
                 spacing: 16
             ) {
                 // Would have loved to use switch-case but fallthrough doesn't work :(
+                let timestring = message.timestamp.toDate()?.toTimeString() ?? ""
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
                         UserAvatarView(user: message.author, guildID: guildID, webhookID: message.webhook_id)
                     }
                     else {
-                        Text(message.timestamp.toDate()?.toTimeString() ?? "")
+                        Text(timestring)
                             .font(.custom("SF Compact Rounded", size: 10))
                             .frame(width: 40, height: 22, alignment: .center)
                             .animation(.linear(duration: 0.1), value: hovered)
@@ -150,7 +151,7 @@ struct MessageView: View {
                                     .cornerRadius(4)
                                     .offset(y: -2)
                                 }
-                                Text("at \(message.timestamp.toDate()?.toTimeString() ?? "")")
+                                Text(timestring)
                                     .font(.system(size: 12))
                                     .opacity(0.5)
                             }

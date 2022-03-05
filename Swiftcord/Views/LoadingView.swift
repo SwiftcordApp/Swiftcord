@@ -64,7 +64,7 @@ struct LoadingView: View {
                 .frame(width: 200)
             
             Text(loadingStrings[state.loadingState] ?? "").font(.title3)
-                .padding(.top, 24)
+                .padding(.top, 36)
                 .animation(.spring(), value: state.loadingState)
             ProgressView(value: Double(loadingNum + 1) / Double(loadingSeq.count))
                 .progressViewStyle(.linear)
