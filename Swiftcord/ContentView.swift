@@ -98,18 +98,27 @@ struct ContentView: View {
                 }
             }
         })
-        .sheet(isPresented: .constant(loginWVModel.token == nil), onDismiss: {
-            
-        }, content: {
+        // Using .constant to prevent dismissing
+        .sheet(isPresented: .constant(state.attemptLogin)) {
             ZStack(alignment: .topLeading) {
                 WebView(viewModel: loginWVModel)
                     .frame(width: 831, height: 580)
                 Button("Quit", role: .cancel) { exit(0) }.padding(8)
             }
+        }
+        .onChange(of: loginWVModel.token, perform: { tk in
+            if tk != nil {
+                state.attemptLogin = false
+                let _ = Keychain.save(key: "token", data: tk!)
+                gateway.initWSConn() // Reconnect to the socket
+            }
         })
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
                 print("Connection state change: \(connected), \(resuming)")
+            }
+            let _ = gateway.onAuthFailure.addHandler {
+                state.attemptLogin = true
             }
             let _ = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {

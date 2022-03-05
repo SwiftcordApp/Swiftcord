@@ -101,6 +101,7 @@
 		DA4A891E27C4F06B00720909 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891D27C4F06B00720909 /* Integration.swift */; };
 		DA4A892027C5167A00720909 /* APIGuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891F27C5167900720909 /* APIGuild.swift */; };
 		DA4A892427C5D6C500720909 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A892327C5D6C500720909 /* ServerView.swift */; };
+		DA520AC027D3306D009FD740 /* loginBG.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ABF27D3306D009FD740 /* loginBG.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,6 +203,7 @@
 		DA4A891F27C5167900720909 /* APIGuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGuild.swift; sourceTree = "<group>"; };
 		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		DA520ABE27D32ED2009FD740 /* loginBG.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginBG.webp; sourceTree = "<group>"; };
+		DA520ABF27D3306D009FD740 /* loginBG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginBG.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +472,7 @@
 			children = (
 				DA520ABE27D32ED2009FD740 /* loginBG.webp */,
 				DA23843C27CB9621009E15E0 /* Fonts */,
+				DA520ABF27D3306D009FD740 /* loginBG.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
+				DA520AC027D3306D009FD740 /* loginBG.swift in Sources */,
 				DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,

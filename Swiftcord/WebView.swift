@@ -78,15 +78,27 @@ struct WebView: NSViewRepresentable {
           document.querySelector('#app-mount > div[class^="app-"] > div:first-child > svg').remove();
           // Remove the fallback Discord logo
           document.querySelector('#app-mount > div[class^="app-"] > div:first-child > a').remove();
-          // Make the background less boring
-          // Hardcoding for now since there isn't an easy way to get accentColor here
-          document.querySelector('#app-mount').style.backgroundImage = 'url("https://preview.redd.it/vda9rbt01en01.png?width=960&crop=smart&auto=webp&s=a669dd6fe1a2f38c08684b43f0253f2dd4d6f9a0")';
+          // Some things can only be styled thru a style since they are dynamically modified
+          const s = document.createElement('style');
+          s.innerHTML = `
+            #app-mount {
+              background: url(\(loginBG));
+              background-size: cover;
+              background-position: center;
+            }
+            form[class*="authBox-"] {
+              background-color: rgba(0, 0, 0, .7)!important;
+              -webkit-backdrop-filter: blur(24px) saturate(140%);
+            }
+          `;
+          document.body.appendChild(s);
         }
         """
         webView.configuration.userContentController.addUserScript(WKUserScript(source: interceptJS, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         webView.configuration.userContentController.add(EvtHandler(viewModel), name: "tkEvt")
+#if DEBUG
         webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
-        
+#endif
         
         webView.load(URLRequest(url: URL(string: viewModel.link)!))
         return webView

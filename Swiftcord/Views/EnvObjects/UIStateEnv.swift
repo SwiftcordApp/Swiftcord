@@ -18,4 +18,5 @@ enum LoadingState {
 
 class UIState: ObservableObject {
     @Published var loadingState: LoadingState = .initial
+    @Published var attemptLogin = false
 }
