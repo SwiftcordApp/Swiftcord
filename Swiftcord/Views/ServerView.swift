@@ -14,6 +14,7 @@ struct ServerView: View {
     @State private var isLoading = true
     
     @EnvironmentObject var state: UIState
+    @EnvironmentObject var gateway: DiscordGateway
     
     let chIcons = [
         ChannelType.voice: "speaker.wave.2.fill",
@@ -45,45 +46,51 @@ struct ServerView: View {
     
     var body: some View {
         NavigationView {
-            ScrollViewReader { proxy in
-                List {
-                    ForEach(
-                        channels.filter { $0.type == .category },
-                        id: \.id
-                    ) { category in
-                        Section(header: Text(category.name?.uppercased() ?? "")) {
-                            ForEach(
-                                channels.filter { $0.parent_id == category.id },
-                                id: \.id
-                            ) { channel in
-                                NavigationLink(
-                                    destination: MessagesView(
-                                        channel: channel,
-                                        guildID: guild.id
-                                    ).onAppear {
-                                        UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild.id)")
-                                    },
-                                    tag: channel.id,
-                                    selection: $selectedCh
-                                ) {
-                                    Label(
-                                        channel.name ?? "",
-                                        systemImage: (guild.rules_channel_id != nil && guild.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
-                                    )
+            VStack(spacing: 0) {
+                ScrollViewReader { proxy in
+                    List {
+                        ForEach(
+                            channels.filter { $0.type == .category },
+                            id: \.id
+                        ) { category in
+                            Section(header: Text(category.name?.uppercased() ?? "")) {
+                                ForEach(
+                                    channels.filter { $0.parent_id == category.id },
+                                    id: \.id
+                                ) { channel in
+                                    NavigationLink(
+                                        destination: MessagesView(
+                                            channel: channel,
+                                            guildID: guild.id
+                                        ).onAppear {
+                                            UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild.id)")
+                                        },
+                                        tag: channel.id,
+                                        selection: $selectedCh
+                                    ) {
+                                        Label(
+                                            channel.name ?? "",
+                                            systemImage: (guild.rules_channel_id != nil && guild.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
+                                        )
+                                    }
+                                    .accentColor(Color.gray)
                                 }
-                                .accentColor(Color.gray)
                             }
                         }
                     }
-                }
-                .frame(minWidth: 240)
-                .onChange(of: selectedCh, perform: {newCh in
-                    if selectedCh != nil {
-                        withAnimation {
-                            proxy.scrollTo(selectedCh!)
+                    .frame(minWidth: 240, maxHeight: .infinity)
+                    .onChange(of: selectedCh, perform: {newCh in
+                        if selectedCh != nil {
+                            withAnimation {
+                                proxy.scrollTo(selectedCh!)
+                            }
                         }
-                    }
-                })
+                    })
+                }
+                
+                if gateway.cache.user != nil {
+                    CurrentUserFooter(user: gateway.cache.user!)
+                }
             }
             .toolbar {
                 ToolbarItemGroup {

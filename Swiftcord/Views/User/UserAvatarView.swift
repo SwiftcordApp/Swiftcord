@@ -12,6 +12,7 @@ struct UserAvatarView: View {
     let user: User
     let guildID: Snowflake
     let webhookID: Snowflake?
+    let clickDisabled: Bool
     @State private var profile: UserProfile? = nil // Lazy-loaded full user
     @State private var guildRoles: [Role]? = nil // Lazy-loaded guild roles
     @State private var infoPresenting = false
@@ -28,6 +29,7 @@ struct UserAvatarView: View {
         .frame(width: 40, height: 40)
         .clipShape(Circle())
         .onTapGesture {
+            guard !clickDisabled else { return }
             // Get user profile for a fuller User object
             if profile == nil && webhookID == nil { Task {
                 profile = await DiscordAPI.getProfile(user: user.id, guildID: guildID)

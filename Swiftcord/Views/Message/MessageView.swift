@@ -117,7 +117,7 @@ struct MessageView: View {
                 let timestring = message.timestamp.toDate()?.toTimeString() ?? ""
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
-                        UserAvatarView(user: message.author, guildID: guildID, webhookID: message.webhook_id)
+                        UserAvatarView(user: message.author, guildID: guildID, webhookID: message.webhook_id, clickDisabled: false)
                     }
                     else {
                         Text(timestring)
@@ -128,7 +128,7 @@ struct MessageView: View {
                     }
                     VStack(alignment: .leading, spacing: lineSpacing) {
                         if !shrunk {
-                            HStack(alignment: .bottom, spacing: 6) {
+                            HStack(spacing: 6) {
                                 Text(message.member?.nick ?? message.author.username)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
@@ -149,7 +149,7 @@ struct MessageView: View {
                                     .padding(.horizontal, 4)
                                     .background(Color("DiscordTheme"))
                                     .cornerRadius(4)
-                                    .offset(y: -2)
+                                    // .offset(y: -2)
                                 }
                                 Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))
@@ -166,9 +166,16 @@ struct MessageView: View {
                                         .textSelection(.enabled)
                                  // fix this poor implementation later
                                 }*/
-                                Text(.init(message.content))
-                                    .font(.system(size: 15))
-                                    .textSelection(.enabled)
+                                Group {
+                                    Text(.init(message.content))
+                                        .font(.system(size: 15)) +
+                                    Text(message.edited_timestamp != nil && shrunk
+                                         ? " (edited)"
+                                         : "")
+                                        .font(.system(size: 8))
+                                        .italic()
+                                        .foregroundColor(Color(NSColor.textColor).opacity(0.4))
+                                }.textSelection(.enabled)
                             }
                             if message.sticker_items != nil {
                                 ForEach(message.sticker_items!, id: \.id) { sticker in

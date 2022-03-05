@@ -31,7 +31,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     private(set) var connTimes = 0
     private(set) var authFailed = false
     private var sessionID: String? = nil
-    @Published var cache: CachedState?
+    @Published var cache: CachedState = CachedState()
     
     // Logger
     let log = Logger(tag: "DiscordGateway")
@@ -180,7 +180,8 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
                 guard let d = data as? ReadyEvt else { return }
                 doNotResume = false
                 sessionID = d.session_id
-                cache?.guilds = d.guilds
+                cache.guilds = d.guilds
+                cache.user = d.user
                 log.i("Gateway ready")
             default: log.i("Dispatched event <\(type)>: \(data)")
             }
