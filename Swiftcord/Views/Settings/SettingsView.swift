@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ProfileSettingsView: View {
+    private let dummyList = ["test", "Another test", "lol"]
+    
     var body: some View {
-        Text("Profile Settings")
-            .font(.title)
+        NavigationView {
+            List {
+                ForEach(dummyList, id: \.self) { item in
+                    NavigationLink(item) {
+                        Text("This is the \(item) item")
+                    }
+                }
+            }.listStyle(SidebarListStyle())
+        }
     }
 }
  
@@ -31,7 +40,7 @@ struct PrivacySettingsView: View {
 }
  
 
-struct PreferencesView: View {
+struct SettingsView: View {
     var body: some View {
         TabView {
             ProfileSettingsView()
@@ -49,12 +58,12 @@ struct PreferencesView: View {
                     Label("Privacy", systemImage: "hand.raised")
                 }
         }
-        .frame(width: 450)
+        .frame(width: 900, height: 600)
     }
 }
 
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        PreferencesView()
+        EmptyView()
     }
 }

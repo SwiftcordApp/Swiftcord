@@ -46,7 +46,7 @@ struct SwiftcordApp: App {
         }
         
         Settings {
-            PreferencesView()
+            SettingsView()
         }
     }
 }
