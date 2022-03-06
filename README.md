@@ -29,30 +29,37 @@ connection is unstable or macOS has been sleeping for a very long time.
 
 ## Milestones/Roadmap
 
-[x] Gateway/REST API Implementation
-[x] Load server list, channels and message
-[x] Basic message, channel and server rendering
-[x] Rich message rendering (stickers, embeds, markdown, media)
-[x] Message replies
-[x] Load and display full user profile (bio + roles)
-[x] Save last server and last channel viewed in servers (QoL)
-[x] Better loading screen
-[x] Find and request most optimised photo size from CDN
-[ ] Partial user and app settings
-[ ] DM loading and groups support
-[ ] User roles + overwrites
-[ ] Message notifications
-[ ] Full list of users in a server, especially for larger servers (1000+ members)
-[ ] Ordering of channels, servers and categories
-[ ] Threads support
-[ ] Full user settings
-[ ] Server creation
-[ ] Server discovery
-[ ] Server banner, boost widget and other misc. boosted features
-[ ] Voice channels (ambitious)
-[ ] Video channels (very ambitious)
+- [x] Gateway/REST API Implementation
+- [x] Load server list, channels and message
+- [x] Basic message, channel and server rendering
+- [x] Rich message rendering (stickers, embeds, markdown, media)
+- [x] Message replies
+- [x] Load and display full user profile (bio + roles)
+- [x] Save last server and last channel viewed in servers (QoL)
+- [x] Better loading screen
+- [x] Find and request most optimised photo size from CDN
+- [ ] Partial user and app settings
+- [ ] DM loading and groups support
+- [ ] User roles + overwrites
+- [ ] Message notifications
+- [ ] Full list of users in a server, especially for larger servers (1000+ members)
+- [ ] Ordering of channels, servers and categories
+- [ ] Threads support
+- [ ] Full user settings
+- [ ] Server creation
+- [ ] Server discovery
+- [ ] Server banner, boost widget and other misc. boosted features
+- [ ] Voice channels (ambitious)
+- [ ] Video channels (very ambitious)
 
 ## Screenshots
+
+![General messages and replies in a channel](README_Resources/generalMessages.png)
+![Rich embeds and webhook messages](README_Resources/webhookEmbeds.png)
+![Welcome messages with stickers](README_Resources/stickers.png)
+![A user's profile](README_Resources/userProfile.png)
+![Loading screen](README_Resources/loadingChannels.png)
+<video src="README_Resources/loginFlow.mov" alt="Login flow"></video>
 
 ## Contributions
 
