@@ -4,7 +4,8 @@
 > Swift and SwiftUI
 
 This project aims to create a fully functional native Discord
-client in Swift for macOS from scratch. 
+client in Swift for macOS from scratch. Look below for a bunch
+of screenshots!
 
 ## Client Feature Parity
 
@@ -17,12 +18,41 @@ Feature parity with the following Discord client is targeted:
 
 ## Current State
 
-This project is currently in a *non-functional* state, with
-the GUI being completely non-functional. All the magic goes
-on in the terminal. Connection with the Discord WebSocket
-Gateway is fully functional (but unstable), and the HTTP REST
-API is partially implemented (press the button in the header
-of the UI to test that out)
+Implemented most core message-related features from the official
+client, including basic markdown and embeds, stickers (lottie/PNG),
+editing and deleting events. Token retrival from Discord login 
+page is reliable and storing + retrival from keychain works.
+
+Gateway connection and event handling is stable, but reconnection
+is not. Reconnection/resuming might not be successful when internet
+connection is unstable or macOS has been sleeping for a very long time.
+
+## Milestones/Roadmap
+
+[x] Gateway/REST API Implementation
+[x] Load server list, channels and message
+[x] Basic message, channel and server rendering
+[x] Rich message rendering (stickers, embeds, markdown, media)
+[x] Message replies
+[x] Load and display full user profile (bio + roles)
+[x] Save last server and last channel viewed in servers (QoL)
+[x] Better loading screen
+[x] Find and request most optimised photo size from CDN
+[ ] Partial user and app settings
+[ ] DM loading and groups support
+[ ] User roles + overwrites
+[ ] Message notifications
+[ ] Full list of users in a server, especially for larger servers (1000+ members)
+[ ] Ordering of channels, servers and categories
+[ ] Threads support
+[ ] Full user settings
+[ ] Server creation
+[ ] Server discovery
+[ ] Server banner, boost widget and other misc. boosted features
+[ ] Voice channels (ambitious)
+[ ] Video channels (very ambitious)
+
+## Screenshots
 
 ## Contributions
 
@@ -47,5 +77,5 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-See <https://www.gnu.org/licenses/> for a copy of the GNU
-General Public License.
+See <https://www.gnu.org/licenses/> or LICENSE for a copy of
+the GNU General Public License.
