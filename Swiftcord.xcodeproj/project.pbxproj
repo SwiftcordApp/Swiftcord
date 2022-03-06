@@ -211,6 +211,7 @@
 		DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserFooter.swift; sourceTree = "<group>"; };
 		DA520AC827D3A55D009FD740 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtensions.swift; sourceTree = "<group>"; };
+		DA520ACD27D4C6AA009FD740 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +390,7 @@
 		DA4A88D327C228CB00720909 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
+				DA520ACD27D4C6AA009FD740 /* README.md */,
 				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
 				DA4A890227C3824800720909 /* GatewayIdentify.swift */,
 				DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */,

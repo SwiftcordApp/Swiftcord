@@ -1,4 +1,4 @@
-# Objects 🧱
+# API Objects 🧱
 
 Welcome, to the folder of endless structs and enums!
 Here, a struct for almost every Discord object that can be

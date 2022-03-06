@@ -29,47 +29,52 @@ connection is unstable or macOS has been sleeping for a very long time.
 
 ## Milestones/Roadmap
 
-- [x] Gateway/REST API Implementation
-- [x] Load server list, channels and message
-- [x] Basic message, channel and server rendering
-- [x] Rich message rendering (stickers, embeds, markdown, media)
-- [x] Message replies
-- [x] Load and display full user profile (bio + roles)
-- [x] Save last server and last channel viewed in servers (QoL)
-- [x] Better loading screen
-- [x] Find and request most optimised photo size from CDN
-- [ ] Partial user and app settings
-- [ ] DM loading and groups support
-- [ ] User roles + overwrites
-- [ ] Message notifications
-- [ ] Full list of users in a server, especially for larger servers (1000+ members)
-- [ ] Ordering of channels, servers and categories
-- [ ] Threads support
-- [ ] Full user settings
-- [ ] Server creation
-- [ ] Server discovery
-- [ ] Server banner, boost widget and other misc. boosted features
-- [ ] Voice channels (ambitious)
-- [ ] Video channels (very ambitious)
+- ✅ Gateway/REST API Implementation
+- ✅ Load server list, channels and message
+- ✅ Basic message, channel and server rendering
+- ✅ Rich message rendering (stickers, embeds, markdown, media)
+- ✅ Message replies
+- ✅ Load and display full user profile (bio + roles)
+- ✅ Save last server and last channel viewed in servers (QoL)
+- ✅ Better loading screen
+- ✅ Find and request most optimised photo size from CDN
+- ⏱ Partial user and app settings
+- ⏱ DM loading and groups support
+- ❌ User roles + overwrites
+- ❌ Message notifications
+- ❌ Full list of users in a server, especially for larger servers (1000+ members)
+- ❌ Ordering of channels, servers and categories
+- ❌ Threads support
+- ❌ Full user settings
+- ❌ Server creation
+- ❌ Server discovery
+- ❌ Server banner, boost widget and other misc. boosted features
+- ❌ Voice channels (ambitious)
+- ❌ Video channels (very ambitious)
+
+#### Legend: 
+* ✅ -> Complete
+* ⏱ -> Implementation in progress
+* ❌ -> Not started
 
 ## Screenshots
 
-###### General messages with replies
+#### General messages with replies
 ![General messages and replies in a channel](README_Resources/generalMessages.png)
 
-###### Rich embeds sent by a webhook
+#### Rich embeds sent by a webhook
 ![Rich embeds and webhook messages](README_Resources/webhookEmbeds.png)
 
-###### Channel with welcome message and animated stickers
+#### Channel with welcome message and animated stickers
 ![Welcome messages with stickers](README_Resources/stickers.png)
 
-###### User profile popover
+#### User profile popover
 ![A user's profile](README_Resources/userProfile.png)
 
-###### Loading screen
+#### Loading screen
 ![Loading screen](README_Resources/loadingChannels.png)
 
-###### Login flow (video)
+#### Login flow (video)
 ![Login flow](README_Resources/loginFlow.mp4)
 
 ## Contributions
