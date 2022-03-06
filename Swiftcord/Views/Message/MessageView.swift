@@ -7,6 +7,7 @@
 //  This monstrosity is a view that renders one message
 
 import SwiftUI
+import CachedAsyncImage
 
 struct MessageView: View {
     let guildID: Snowflake
@@ -47,7 +48,7 @@ struct MessageView: View {
                         .padding(.trailing, -30)
                     Group {
                         if (quotedMsg != nil || loadedQuotedMsg != nil) && !loadQuotedMsgErr {
-                            AsyncImage(url: loadedQuotedMsg?.author.avatarURL() ?? quotedMsg!.author.avatarURL()) { phase in
+                            CachedAsyncImage(url: loadedQuotedMsg?.author.avatarURL() ?? quotedMsg!.author.avatarURL()) { phase in
                                 if let image = phase.image {
                                     image.resizable().scaledToFill()
                                 }
@@ -65,7 +66,7 @@ struct MessageView: View {
                                 Text(loadedQuotedMsg?.author.username ?? quotedMsg!.author.username)
                                     .font(.system(size: 14))
                                     .opacity(0.9)
-                                Text(loadedQuotedMsg?.content ?? quotedMsg!.content)
+                                Text(.init(loadedQuotedMsg?.content ?? quotedMsg!.content))
                                     .font(.system(size: 14))
                                     .opacity(0.75)
                                     .lineLimit(1)
@@ -167,8 +168,12 @@ struct MessageView: View {
                                  // fix this poor implementation later
                                 }*/
                                 Group {
-                                    Text(.init(message.content))
-                                        .font(.system(size: 15)) +
+                                    Text(.init(message.content.replacingOccurrences(
+                                        of: " ",
+                                        with: message.content.containsOnlyEmojiAndSpaces ? " " : " "
+                                    ))).font(.system(
+                                        size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
+                                    )) +
                                     Text(message.edited_timestamp != nil && shrunk
                                          ? " (edited)"
                                          : "")

@@ -104,6 +104,8 @@
 		DA520AC027D3306D009FD740 /* loginBG.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ABF27D3306D009FD740 /* loginBG.swift */; };
 		DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC227D37873009FD740 /* MergePartialMessage.swift */; };
 		DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */; };
+		DA520AC927D3A55D009FD740 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC827D3A55D009FD740 /* PreferencesView.swift */; };
+		DA520ACB27D4A23A009FD740 /* EmojiExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +209,8 @@
 		DA520ABF27D3306D009FD740 /* loginBG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginBG.swift; sourceTree = "<group>"; };
 		DA520AC227D37873009FD740 /* MergePartialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergePartialMessage.swift; sourceTree = "<group>"; };
 		DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserFooter.swift; sourceTree = "<group>"; };
+		DA520AC827D3A55D009FD740 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +321,7 @@
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
+				DA520AC827D3A55D009FD740 /* PreferencesView.swift */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
@@ -435,6 +440,7 @@
 				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
 				DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */,
 				DA2384C727CD9418009E15E0 /* Logger.swift */,
+				DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -574,6 +580,7 @@
 				DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */,
 				DA4A88E127C3341400720909 /* EventDispatch.swift in Sources */,
 				DA4A88BE27C140BC00720909 /* Application.swift in Sources */,
+				DA520ACB27D4A23A009FD740 /* EmojiExtensions.swift in Sources */,
 				DA4A88AC27C1332600720909 /* Locale.swift in Sources */,
 				DA32EF4427C880E300A9ED72 /* NewMessage.swift in Sources */,
 				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
@@ -626,6 +633,7 @@
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
 				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
+				DA520AC927D3A55D009FD740 /* PreferencesView.swift in Sources */,
 				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
 				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
 				DA4A88D827C2795600720909 /* DataStructs.swift in Sources */,

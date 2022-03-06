@@ -42,7 +42,19 @@ struct ServerButtonStyle: ButtonStyle {
             else { configuration.label.font(.system(size: 18)) }
         }
         .frame(width: 48, height: 48)
-        .background(hovered || selected ? bgColor ?? Color("DiscordTheme") : .gray.opacity(0.25))
+        .background(
+            hovered || selected
+            ? bgColor ?? Color("DiscordTheme")
+            : .gray.opacity(0.25)
+        )
+        /*.background(LinearGradient(
+            gradient: hovered || selected
+            ? (bgColor != nil ? Gradient(colors: [bgColor!])
+               : Gradient(stops: [
+                .init(color: .blue, location: 0),
+                .init(color: .yellow, location: 0.5)
+               ]))
+               : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
         .cornerRadius(hovered || selected ? 16 : 24, antialiased: true)
         .scaleEffect(configuration.isPressed ? 0.92 : 1)
         .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: configuration.isPressed)

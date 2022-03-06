@@ -44,5 +44,9 @@ struct SwiftcordApp: App {
                                                      diskPath: nil)
                 }
         }
+        
+        Settings {
+            PreferencesView()
+        }
     }
 }

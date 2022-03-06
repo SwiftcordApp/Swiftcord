@@ -30,7 +30,7 @@ struct CurrentUserFooter: View {
             }
             Spacer()
             Button(action: {
-                
+                NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
             }, label: {
                 Image(systemName: "gearshape.fill")
                     .font(.system(size: 18))
@@ -39,7 +39,7 @@ struct CurrentUserFooter: View {
             .padding(.trailing, 14)
         }
         .frame(height: 52)
-        .background(Color(NSColor.controlBackgroundColor))
+        .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
     }
 }
 
