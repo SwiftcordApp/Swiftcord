@@ -1,4 +1,4 @@
-# Discord REST API 😴
+# REST API 😴
 
 Here are the library files to get and carry out operations
 with Discord's HTTP REST API.
