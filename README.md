@@ -54,12 +54,23 @@ connection is unstable or macOS has been sleeping for a very long time.
 
 ## Screenshots
 
+###### General messages with replies
 ![General messages and replies in a channel](README_Resources/generalMessages.png)
+
+###### Rich embeds sent by a webhook
 ![Rich embeds and webhook messages](README_Resources/webhookEmbeds.png)
+
+###### Channel with welcome message and animated stickers
 ![Welcome messages with stickers](README_Resources/stickers.png)
+
+###### User profile popover
 ![A user's profile](README_Resources/userProfile.png)
+
+###### Loading screen
 ![Loading screen](README_Resources/loadingChannels.png)
-<video src="README_Resources/loginFlow.mov" alt="Login flow"></video>
+
+###### Login flow (video)
+![Login flow](README_Resources/loginFlow.mp4)
 
 ## Contributions
 

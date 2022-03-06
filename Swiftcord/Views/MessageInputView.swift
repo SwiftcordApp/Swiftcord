@@ -30,6 +30,7 @@ struct MessageInputView: View {
                 .lineSpacing(4)
                 .font(.system(size: 16))
                 .lineLimit(4)
+                .disableAutocorrection(false)
                 .padding([.top, .bottom], 12)
                 .overlay(alignment: .leading) {
                     if message.isEmpty {
