@@ -256,9 +256,9 @@ struct MessageView: View {
                 Image(systemName: "pencil")
                 Text("Edit")
             }
-            Button {
-                
-            } label: {
+            Button { Task {
+                await DiscordAPI.deleteMsg(id: message.channel_id, msgID: message.id)
+            } } label: {
                 // role: .destructive does nothing
                 Image(systemName: "xmark.bin.fill") // ...and .foregroundColor does nothing here
                 Text("Delete Message").foregroundColor(.red)

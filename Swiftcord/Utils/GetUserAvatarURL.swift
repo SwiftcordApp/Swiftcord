@@ -8,9 +8,9 @@
 import Foundation
 
 extension User {
-    func avatarURL() -> URL {
+    func avatarURL(size: Int = 160) -> URL {
         return URL(string: self.avatar != nil
-            ? "\(apiConfig.cdnURL)avatars/\(self.id)/\(self.avatar!).webp"
+            ? "\(apiConfig.cdnURL)avatars/\(self.id)/\(self.avatar!).webp?size=\(size)"
             : "\(apiConfig.cdnURL)embed/avatars/\((Int(self.discriminator) ?? 0) % 5).png"
         )!
     }

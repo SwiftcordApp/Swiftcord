@@ -28,9 +28,11 @@ struct ContentView: View {
     @State private var guilds: [PartialGuild] = []
     @State private var selectedGuild: Guild = dmGuild
     
-    @StateObject private var gateway = DiscordGateway()
-    @StateObject private var state = UIState()
     @ObservedObject var loginWVModel: WebViewModel
+    @EnvironmentObject var gateway: DiscordGateway
+    @EnvironmentObject var state: UIState
+    
+    let log = Logger(tag: "ContentView")
     
     init() {
         loginWVModel = WebViewModel(link: "https://canary.discord.com/login") // Much hardcoding
@@ -79,9 +81,6 @@ struct ContentView: View {
         .onChange(of: selectedGuild, perform: { _ in
             UserDefaults.standard.set(selectedGuild.id, forKey: "lastSelectedGuild")
         })
-        .overlay(LoadingView())
-        .environmentObject(gateway)
-        .environmentObject(state)
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
                 Task {
@@ -115,10 +114,12 @@ struct ContentView: View {
         })
         .onAppear {
             let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
-                print("Connection state change: \(connected), \(resuming)")
+                log.d("Connection state change: \(connected), \(resuming)")
             }
             let _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
+                state.loadingState = .initial
+                log.d("User isn't logged in, attempting login")
             }
             let _ = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {

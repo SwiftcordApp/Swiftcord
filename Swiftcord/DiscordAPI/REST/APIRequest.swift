@@ -98,4 +98,8 @@ extension DiscordAPI {
         
         return try? JSONDecoder().decode(D.self, from: d)
     }
+    
+    static func deleteReq(path: String) async -> Bool {
+        return (try? await makeRequest(path: path, method: .delete)) != nil
+    }
 }

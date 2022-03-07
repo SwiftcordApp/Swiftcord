@@ -39,7 +39,7 @@ struct ServerButtonStyle: ButtonStyle {
                     }
                 }
             }
-            else { configuration.label.font(.system(size: 18)) }
+            else { configuration.label.font(.system(size: 15)).lineLimit(1) }
         }
         .frame(width: 48, height: 48)
         .background(

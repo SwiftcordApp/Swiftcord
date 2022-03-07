@@ -51,6 +51,15 @@ extension DiscordAPI {
         return await postReq(path: "channels/\(id)/messages", body: message)
     }
     
+    // MARK: Delete Message
+    // DELETE /channels/{channel.id}/messages/{message.id}
+    static func deleteMsg(
+        id: Snowflake,
+        msgID: Snowflake
+    ) async -> Bool {
+        return await deleteReq(path: "channels/\(id)/messages/\(msgID)")
+    }
+    
     // MARK: Acknowledge Message Read (Undocumented endpoint!)
     // POST /channels/{channel.id}/messages/{message.id}/ack
     static func ackMessageRead(

@@ -46,12 +46,6 @@ extension DiscordAPI {
         return await getReq(path: "users/@me/guilds")
     }
     
-    // MARK: Get Current User DMs (Undocumented endpoint!)
-    // GET /users/@me/channels
-    static func getDMs() async -> [Channel]? {
-        return await getReq(path: "users/@me/channels")
-    }
-    
     // MARK: Get Current User Guild Member
     // Get guild member object for current user in a guild
     // GET /users/@me/guilds/{guild.id}/member

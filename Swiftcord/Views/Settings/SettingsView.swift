@@ -6,31 +6,6 @@
 //
 
 import SwiftUI
-
-struct ProfileSettingsView: View {
-    private let dummyList = ["test", "Another test", "lol"]
-    
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(dummyList, id: \.self) { item in
-                    NavigationLink(item) {
-                        Text("This is the \(item) item")
-                    }
-                }
-            }.listStyle(SidebarListStyle())
-        }
-    }
-}
- 
- 
-struct AppearanceSettingsView: View {
-    var body: some View {
-        Text("Appearance Settings\ndlskflkasdfokdasf\nwjfoiewjoifjweof\nsfwe")
-            .font(.title)
-    }
-}
- 
  
 struct PrivacySettingsView: View {
     var body: some View {
@@ -43,20 +18,23 @@ struct PrivacySettingsView: View {
 struct SettingsView: View {
     var body: some View {
         TabView {
-            ProfileSettingsView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.crop.circle")
-                }
+            UserSettingsView().tabItem { Label("User", systemImage: "person.crop.circle") }
                
-            AppearanceSettingsView()
-                .tabItem {
-                    Label("Appearance", systemImage: "paintpalette")
-                }
+            BillingSettingsView().tabItem {
+                Label("Billing", systemImage: "dollarsign.circle")
+            }
            
-            PrivacySettingsView()
-                .tabItem {
-                    Label("Privacy", systemImage: "hand.raised")
-                }
+            AppSettingsView().tabItem {
+                Label("App", systemImage: "macwindow")
+            }
+            
+            ActivitySettingsView().tabItem {
+                Label("Activity", systemImage: "hammer")
+            }
+            
+            MiscSettingsView().tabItem {
+                Label("Misc", systemImage: "ellipsis")
+            }
         }
         .frame(width: 900, height: 600)
     }

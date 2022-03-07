@@ -29,7 +29,11 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     private(set) var seq: Int? = nil // Sequence int of latest received payload
     private(set) var viability = true
     private(set) var connTimes = 0
-    private(set) var authFailed = false
+    private(set) var authFailed = false {
+        didSet {
+            if authFailed { onAuthFailure.notify() }
+        }
+    }
     private var sessionID: String? = nil
     @Published var cache: CachedState = CachedState()
     
@@ -84,6 +88,14 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         }
     }
     
+    // Log out the user - delete token from keychain and disconnect connection
+    func logOut() {
+        log.d("Logging out...")
+        let _ = Keychain.remove(key: "token")
+        socket.disconnect(closeCode: 1000)
+        authFailed = true
+    }
+    
     init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
         missedACKTolerance = maxMissedACK
         connTimeout = connectionTimeout
@@ -108,6 +120,10 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             // Check if code isn't an unrecoverable code, then attempt resume
             if code != .authenthicationFail { attemptReconnect() }
             log.w("Gateway Disconnected: \(code)")
+            switch code {
+            case .authenthicationFail: authFailed = true
+            default: log.w("Unhandled gateway close code:", code)
+            }
             onStateChange.notify(event: (isConnected, isReconnecting, code))
         case .text(let string): handleIncoming(received: string)
         case .error(let error):
@@ -118,6 +134,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         case .cancelled:
             isConnected = false
             onStateChange.notify(event: (isConnected, isReconnecting, nil))
+            log.d("Connection cancelled")
         case .binary(_): break // Won't receive binary
         case .ping(_): break   // Don't care
         case .pong(_): break   // Don't care
@@ -164,7 +181,6 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
                 isReconnecting = false // Resuming failed/not attempted
                 guard let identify = getIdentify() else {
                     log.d("Token not in keychain")
-                    onAuthFailure.notify()
                     authFailed = true
                     socket.disconnect(closeCode: 1000)
                     return
@@ -189,11 +205,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         case .invalidSession:
             // Check if the session can be resumed
             let shouldResume = (decoded.primitiveData as? Bool) ?? false
-            if !shouldResume && doNotResume {
-                onAuthFailure.notify()
-                authFailed = true
-            }
-            else { attemptReconnect(resume: shouldResume) }
+            attemptReconnect(resume: shouldResume)
         default: log.w("Unimplemented opcode: \(decoded.op)")
         }
     }
