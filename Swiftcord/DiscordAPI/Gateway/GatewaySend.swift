@@ -8,7 +8,7 @@
 import Foundation
 
 extension DiscordGateway {
-    func sendToGateway<T: GatewayData>(op: GatewayOutgoingOpcodes, d: T?) {
+    func sendToGateway<T: OutgoingGatewayData>(op: GatewayOutgoingOpcodes, d: T?) {
         guard isConnected else { return }
 
         let sendPayload = GatewayOutgoing(op: op, d: d, s: seq)

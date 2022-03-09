@@ -16,7 +16,7 @@ extension DiscordAPI {
     
     // MARK: Get Guild Channels
     // GET /guilds/{guild.id}/channels
-    static func getGuildChannels(id: Snowflake) async -> [Channel]? {
+    static func getGuildChannels(id: Snowflake) async -> [Throwable<Channel>]? {
         return await getReq(path: "guilds/\(id)/channels")
     }
     

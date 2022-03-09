@@ -123,7 +123,7 @@ struct GatewayIncoming: Decodable {
     }
 }
 
-struct GatewayOutgoing<T: GatewayData>: Encodable {
+struct GatewayOutgoing<T: OutgoingGatewayData>: Encodable {
     let op: GatewayOutgoingOpcodes
     let d: T?
     let s: Int? // Sequence #

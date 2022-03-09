@@ -37,7 +37,7 @@ enum GuildFeature: String, Codable {
     case discoverableBefore = "ENABLED_DISCOVERABLE_BEFORE"
 }
     
-struct Guild: Codable, GatewayData, Equatable {
+struct Guild: GatewayData, Equatable {
     static func == (lhs: Guild, rhs: Guild) -> Bool {
         lhs.id == rhs.id
     }
@@ -59,9 +59,9 @@ struct Guild: Codable, GatewayData, Equatable {
     let verification_level: VerificationLevel
     let default_message_notifications: MessageNotifLevel
     let explicit_content_filter: ExplicitContentFilterLevel
-    let roles: [Role]
-    let emojis: [Emoji]
-    let features: [String] // Creating GuildFeature enum myself for less crashes
+    let roles: [Throwable<Role>]
+    let emojis: [Throwable<Emoji>]
+    let features: [Throwable<GuildFeature>]
     let mfa_level: MFALevel
     var application_id: Snowflake? = nil // For bot-created guilds
     var system_channel_id: Snowflake? = nil // ID of channel for system-created messages

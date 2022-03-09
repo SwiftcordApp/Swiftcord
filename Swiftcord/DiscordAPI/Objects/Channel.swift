@@ -24,6 +24,7 @@ enum ChannelType: Int, Codable {
     case publicThread = 11
     case privateThread = 12
     case stageVoice = 13
+    case unknownType = 15
 }
 
 struct Channel: Codable, GatewayData {

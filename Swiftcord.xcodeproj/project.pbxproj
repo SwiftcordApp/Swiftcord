@@ -116,6 +116,7 @@
 		DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */; };
 		DA520AE027D75147009FD740 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = DA520ADF27D75147009FD740 /* Reachability */; };
 		DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* BoolToString.swift */; };
+		DA520AE727D8ECA6009FD740 /* CodableThrowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE627D8ECA6009FD740 /* CodableThrowable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,6 +232,7 @@
 		DA520ADA27D60A09009FD740 /* APICurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICurrentUser.swift; sourceTree = "<group>"; };
 		DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeIntFlags.swift; sourceTree = "<group>"; };
 		DA520AE127D76BEB009FD740 /* BoolToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolToString.swift; sourceTree = "<group>"; };
+		DA520AE627D8ECA6009FD740 /* CodableThrowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableThrowable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +457,7 @@
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
 				DA2384C727CD9418009E15E0 /* Logger.swift */,
+				DA520AE627D8ECA6009FD740 /* CodableThrowable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				DA4A88C027C1417900720909 /* Team.swift in Sources */,
 				DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */,
 				DA32EF5227C8FBB200A9ED72 /* GetUserAvatarURL.swift in Sources */,
+				DA520AE727D8ECA6009FD740 /* CodableThrowable.swift in Sources */,
 				DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */,
 				DA520AD127D4CFCF009FD740 /* BillingSettingsView.swift in Sources */,
 				DA32EF3D27C79A5000A9ED72 /* StringFileExtension.swift in Sources */,

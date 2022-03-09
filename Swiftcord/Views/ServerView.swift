@@ -27,17 +27,17 @@ struct ServerView: View {
             isLoading = true
             selectedCh = nil
             guard let c = await DiscordAPI.getGuildChannels(id: guild.id) else { return }
-            channels = c
+            channels = c.compactMap({ t in try? t.result.get() })
             isLoading = false
             if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
             
-            if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), c.contains(where: { p in
+            if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guild.id)"), channels.contains(where: { p in
                 p.id == lastChannel
             }) {
                 selectedCh = lastChannel
                 return
             }
-            let txtChs = c.filter({ $0.type == .text })
+            let txtChs = channels.filter({ $0.type == .text })
             if !txtChs.isEmpty {
                 selectedCh = txtChs[0].id
             }
@@ -81,7 +81,7 @@ struct ServerView: View {
                                         selection: $selectedCh
                                     ) {
                                         Label(
-                                            "\(channel.name ?? "") \(channel.position ?? -99)",
+                                            channel.name ?? "",
                                             systemImage: (guild.rules_channel_id != nil && guild.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
                                         )
                                     }

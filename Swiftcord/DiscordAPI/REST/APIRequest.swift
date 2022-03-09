@@ -57,7 +57,7 @@ extension DiscordAPI {
     }
     
     // Make a get request, and decode body with JSONDecoder
-    static func getReq<T: Codable>(
+    static func getReq<T: Decodable>(
         path: String,
         query: [URLQueryItem] = []
     ) async -> T? {
@@ -84,7 +84,7 @@ extension DiscordAPI {
         return nil
     }
     
-    static func postReq<D: Codable, B: Codable>(
+    static func postReq<D: Decodable, B: Encodable>(
         path: String,
         body: B? = nil
     ) async -> D? {        

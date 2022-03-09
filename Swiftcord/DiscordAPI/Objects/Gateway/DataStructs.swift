@@ -7,9 +7,10 @@
 
 import Foundation
 
-protocol GatewayData: Codable {}
+protocol GatewayData: Decodable {}
+protocol OutgoingGatewayData: Encodable {}
 
-struct GatewayConnProperties: GatewayData {
+struct GatewayConnProperties: OutgoingGatewayData {
     let os: String
     let browser: String
     let release_channel: String?
@@ -21,10 +22,10 @@ struct GatewayConnProperties: GatewayData {
 }
 
 // MARK: Opcode 1 (Heartbeat)
-struct GatewayHeartbeat: GatewayData {}
+struct GatewayHeartbeat: OutgoingGatewayData {}
 
 // MARK: Opcode 2 (Identify)
-struct GatewayIdentify: GatewayData {
+struct GatewayIdentify: OutgoingGatewayData {
     let token: String
     let properties: GatewayConnProperties
     let compress: Bool?
@@ -35,7 +36,7 @@ struct GatewayIdentify: GatewayData {
 }
 
 // MARK: Opcode 3 (Presence Update)
-struct GatewayPresenceUpdate: GatewayData {
+struct GatewayPresenceUpdate: OutgoingGatewayData {
     let since: Int // Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
     let activities: [Activity]
     let status: String
@@ -51,7 +52,7 @@ struct GatewayVoiceStateUpdate: GatewayData {
 }
 
 // MARK: Opcode 6 (Resume)
-struct GatewayResume: GatewayData {
+struct GatewayResume: OutgoingGatewayData {
     let token: String
     let session_id: String
     let seq: Int // Last sequence number received
