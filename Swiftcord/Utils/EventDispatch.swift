@@ -7,7 +7,6 @@
 import Foundation
 
 public class EventDispatch<Event>: EventDispatchProtocol {
-    
     public typealias HandlerIdentifier = Int
     
     private typealias Handler = (Event) -> ()

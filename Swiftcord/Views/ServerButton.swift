@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
@@ -29,7 +30,7 @@ struct ServerButtonStyle: ButtonStyle {
                     .font(.system(size: 24))
             }
             else if serverIconURL != nil {
-                AsyncImage(url: URL(string: serverIconURL!)) { phase in
+                CachedAsyncImage(url: URL(string: serverIconURL!)) { phase in
                     if let image = phase.image {
                         image.resizable().scaledToFill()
                     } else if phase.error != nil {

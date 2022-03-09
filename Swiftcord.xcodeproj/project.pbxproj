@@ -113,6 +113,9 @@
 		DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */; };
 		DA520AD927D4E7A4009FD740 /* LargeUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */; };
 		DA520ADB27D60A09009FD740 /* APICurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADA27D60A09009FD740 /* APICurrentUser.swift */; };
+		DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */; };
+		DA520AE027D75147009FD740 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = DA520ADF27D75147009FD740 /* Reachability */; };
+		DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* BoolToString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +229,8 @@
 		DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeUserProfile.swift; sourceTree = "<group>"; };
 		DA520ADA27D60A09009FD740 /* APICurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICurrentUser.swift; sourceTree = "<group>"; };
+		DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeIntFlags.swift; sourceTree = "<group>"; };
+		DA520AE127D76BEB009FD740 /* BoolToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolToString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
+				DA520AE027D75147009FD740 /* Reachability in Frameworks */,
 				DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 			);
@@ -255,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
+				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
@@ -443,21 +450,11 @@
 		DA4A88DC27C3272500720909 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DA520AE327D76BF8009FD740 /* Extensions */,
 				DA520AC127D37863009FD740 /* MergeStructs */,
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
-				DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */,
-				DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */,
-				DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */,
-				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
-				DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */,
-				DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */,
-				DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */,
-				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
-				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
-				DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */,
 				DA2384C727CD9418009E15E0 /* Logger.swift */,
-				DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -490,7 +487,6 @@
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
-				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
 			);
 			path = Views;
@@ -526,6 +522,26 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		DA520AE327D76BF8009FD740 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */,
+				DA520AE127D76BEB009FD740 /* BoolToString.swift */,
+				DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */,
+				DA32EF4F27C8D7E000A9ED72 /* MessageIsShrunk.swift */,
+				DA32EF4D27C8D6CA00A9ED72 /* SubtractDates.swift */,
+				DA2384A027CB9714009E15E0 /* CustomiseFontFamily.swift */,
+				DA32EF5127C8FBB200A9ED72 /* GetUserAvatarURL.swift */,
+				DA32EF4927C8BE8F00A9ED72 /* InitColorFromHexInt.swift */,
+				DA32EF3C27C79A5000A9ED72 /* StringFileExtension.swift */,
+				DA32EF3A27C7973500A9ED72 /* FormatFileSize.swift */,
+				DA32EF4527C8AB6200A9ED72 /* ISODateToDate.swift */,
+				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
+				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -546,6 +562,7 @@
 				DA4A88CA27C1EC5500720909 /* Starscream */,
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
+				DA520ADF27D75147009FD740 /* Reachability */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -579,6 +596,7 @@
 				DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */,
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -649,6 +667,7 @@
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				DA2384C827CD9418009E15E0 /* Logger.swift in Sources */,
+				DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */,
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
 				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
@@ -683,6 +702,7 @@
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
 				DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */,
+				DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
@@ -932,6 +952,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -949,6 +977,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		DA520ADF27D75147009FD740 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 /* End XCSwiftPackageProductDependency section */
 

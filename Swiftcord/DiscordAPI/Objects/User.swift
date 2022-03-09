@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum UserFlags: Int, CaseIterable {
+    case staff = 0
+    case partner = 1
+    case hypesquadEvents = 2
+    case bugHunterLv1 = 3
+    case hypesquadBravery = 6
+    case hypesquadBrilliance = 7
+    case hypesquadBalance = 8
+    case earlySupporter = 9
+    case teamPseudoUser = 10
+    case bugHunterLv2 = 14
+    case verifiedBot = 16
+    case verifiedDev = 17
+    case certifiedMod = 18
+    case botHTTPInteractions = 19
+}
+
 struct User: Codable {
     let id: Snowflake
     let username: String
@@ -34,4 +51,11 @@ struct UserProfile: Codable, GatewayData {
     let premium_since: ISOTimestamp?
     let mutual_guilds: [MutualGuild]?
     let user: User // This user object contains "bio"
+}
+
+extension User {
+    var flagsArr: [UserFlags]? {
+        set {}
+        get { return flags?.decodeFlags(flags: UserFlags.staff) }
+    }
 }

@@ -50,12 +50,20 @@ struct ServerView: View {
                 ScrollViewReader { proxy in
                     List {
                         ForEach(
-                            channels.filter { $0.type == .category },
+                            channels
+                                .filter { $0.type == .category }
+                                .sorted(by: { c1, c2 in
+                                    (c2.position ?? 1) > (c1.position ?? 0)
+                                }),
                             id: \.id
                         ) { category in
                             Section(header: Text(category.name?.uppercased() ?? "")) {
                                 ForEach(
-                                    channels.filter { $0.parent_id == category.id },
+                                    channels
+                                        .filter { $0.parent_id == category.id }
+                                        .sorted(by: { c1, c2 in
+                                            (c2.position ?? 1) > (c1.position ?? 0)
+                                        }),
                                     id: \.id
                                 ) { channel in
                                     NavigationLink(
@@ -81,6 +89,7 @@ struct ServerView: View {
                     .frame(minWidth: 240, maxHeight: .infinity)
                     .onChange(of: selectedCh, perform: {newCh in
                         if selectedCh != nil {
+                            print("Scrolling to \(newCh!)")
                             withAnimation {
                                 proxy.scrollTo(selectedCh!)
                             }

@@ -22,19 +22,20 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     private(set) var socket: WebSocket!
     
     // State
-    private(set) var isConnected = false
-    private(set) var isReconnecting = false // Attempt to resume broken conn
-    private(set) var doNotResume = false // Cannot resume
-    private(set) var missedACK = 0
-    private(set) var seq: Int? = nil // Sequence int of latest received payload
-    private(set) var viability = true
-    private(set) var connTimes = 0
+    @Published private(set) var isConnected = false
+    @Published private(set) var isReconnecting = false // Attempt to resume broken conn
+    @Published private(set) var doNotResume = false // Cannot resume
+    @Published private(set) var missedACK = 0
+    @Published private(set) var seq: Int? = nil // Sequence int of latest received payload
+    @Published private(set) var viability = true
+    @Published private(set) var connTimes = 0
     private(set) var authFailed = false {
         didSet {
             if authFailed { onAuthFailure.notify() }
+            cache = CachedState() // Clear the cache
         }
     }
-    private var sessionID: String? = nil
+    @Published private(set) var sessionID: String? = nil
     @Published var cache: CachedState = CachedState()
     
     // Logger

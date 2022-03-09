@@ -18,7 +18,7 @@ struct UserSettingsAccountView: View {
         VStack(spacing: 4) {
             Image(systemName: "lock")
                 .font(.system(size: 30))
-                .foregroundColor(Color("DiscordTheme"))
+                .foregroundColor(.accentColor)
             
             Text("Change your password")
                 .font(.title)
@@ -65,7 +65,7 @@ struct UserSettingsAccountView: View {
             Text("My Profile").font(.title)
             LargeUserProfile(user: user) {
                 GroupBox {
-                    VStack(alignment: .leading, spacing: 2) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("USERNAME").font(.headline).opacity(0.75)
                         Group {
                             Text(user.username) + Text("#" + user.discriminator).foregroundColor(Color(NSColor.textColor).opacity(0.75))
@@ -73,14 +73,14 @@ struct UserSettingsAccountView: View {
                         .font(.system(size: 16))
                         .textSelection(.enabled)
                         
-                        Divider().padding(.vertical, 12)
+                        Divider().padding(.vertical, 10)
                         
                         Text("EMAIL").font(.headline).opacity(0.75)
                         Text(user.email ?? "No email")
                             .font(.system(size: 16))
                             .textSelection(.enabled)
                         
-                        Divider().padding(.vertical, 12)
+                        Divider().padding(.vertical, 10)
                         
                         Text("PHONE NUMBER").font(.headline).opacity(0.75)
                         Text("Retrieving phone number isn't implemented yet")
@@ -90,19 +90,62 @@ struct UserSettingsAccountView: View {
                 }
             }
             
-            Divider().padding(.vertical, 16)
-            
-            Text("Password and Authenthication").font(.title)
-            Button(action: { changePwSheetShown = true }) {
-                Text("Change Password")
-            }
-            .controlSize(.large)
-            .buttonStyle(.borderedProminent)
-            .sheet(isPresented: $changePwSheetShown, onDismiss: {
-                oldPw = ""
-                newPw = ""
-            }) {
+            Group {
+                Divider().padding(.vertical, 16)
                 
+                Text("Password and Authenthication").font(.title)
+                Button(action: { changePwSheetShown = true }) {
+                    Text("Change Password")
+                }
+                .controlSize(.large)
+                .buttonStyle(.borderedProminent)
+                .sheet(isPresented: $changePwSheetShown, onDismiss: {
+                    oldPw = ""
+                    newPw = ""
+                }) { changePwDialog }
+                
+                Text("TWO-FACTOR AUTHENTHICATION" + ((user.mfa_enabled ?? false) ? " ENABLED" : ""))
+                    .font(.headline)
+                    .foregroundColor((user.mfa_enabled ?? false) ? .green : nil)
+                    .padding(.top, 12)
+                Text("Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in.")
+                    .opacity(0.75)
+                    .padding(.top, -8)
+                
+                
+                HStack(spacing: 16) {
+                    Button("View Backup Codes") {
+                        
+                    }
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                    Button("Remove 2FA", role: .destructive) {
+                        
+                    }
+                    .controlSize(.large)
+                }
+            }
+            
+            Group {
+                Divider().padding(.vertical, 16)
+                
+                Text("ACCOUNT REMOVAL")
+                    .font(.headline)
+                Text("Disabling your account means you can recover it at any time after taking this action.")
+                    .opacity(0.75)
+                    .padding(.top, -8)
+                HStack(spacing: 16) {
+                    Button("Disable Account", role: .destructive) {
+                        
+                    }
+                    .tint(.red)
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                    Button("Delete Account", role: .destructive) {
+                        
+                    }
+                    .controlSize(.large)
+                }
             }
             
             Spacer()
@@ -111,45 +154,52 @@ struct UserSettingsAccountView: View {
 }
 
 struct UserSettingsView: View {
+    let user: User
+    
+    @AppStorage("userSettingsSelected") private var selectedLink = "acct"
     @EnvironmentObject var gateway: DiscordGateway
     
-    var body: some View {
-        let user = gateway.cache.user!
-        
+    var body: some View {        
         NavigationView {
             List {
-                NavigationLink("My Account") {
+                NavigationLink("My Account", tag: "acct", selection: Binding($selectedLink)) {
                     ScrollView { UserSettingsAccountView(user: user).padding(40) }
                 }
                 
-                NavigationLink("User Profile") {
+                NavigationLink("User Profile", tag: "profile", selection: Binding($selectedLink)) {
                     Text("")
                 }
                 
-                NavigationLink("Privacy & Safety") {
+                NavigationLink("Privacy & Safety", tag: "privacy", selection: Binding($selectedLink)) {
                     Text("")
                 }
                 
-                NavigationLink("Authorized Apps") {
+                NavigationLink("Authorized Apps", tag: "apps", selection: Binding($selectedLink)) {
                     Text("")
                 }
                                 
-                NavigationLink("Connections") {
+                NavigationLink("Connections", tag: "conns", selection: Binding($selectedLink)) {
                     Text("")
                 }
                 
-                NavigationLink("Log Out") {
-                    VStack {
+                NavigationLink("Log Out", tag: "logOut", selection: Binding($selectedLink)) {
+                    VStack(alignment: .leading, spacing: 16) {
                         Text("Log Out").font(.title)
+                        Text("Are you sure you want to log out?")
+                        Button(role: .destructive) {
+                            gateway.logOut()
+                        } label: {
+                            Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        }
+                        .controlSize(.large)
+                        .buttonStyle(.borderedProminent)
+                        .tint(.red)
                         
+                        Spacer()
                     }
+                    .padding(40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Button(role: .destructive) {
-                    gateway.logOut()
-                } label: {
-                    Label("Log Out", systemImage: "arrow.turn.up.left")
-                }
-
             }.listStyle(SidebarListStyle())
         }
     }

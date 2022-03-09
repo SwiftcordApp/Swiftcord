@@ -56,6 +56,7 @@ struct SwiftcordApp: App {
         Settings {
             SettingsView()
                 .environmentObject(gateway)
+                .environmentObject(state)
         }
     }
 }

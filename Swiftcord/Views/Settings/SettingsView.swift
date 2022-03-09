@@ -16,27 +16,47 @@ struct PrivacySettingsView: View {
  
 
 struct SettingsView: View {
+    @EnvironmentObject var gateway: DiscordGateway
+
     var body: some View {
-        TabView {
-            UserSettingsView().tabItem { Label("User", systemImage: "person.crop.circle") }
+        if let user = gateway.cache.user {
+            TabView {
+                UserSettingsView(user: user).tabItem {
+                    Label("User", systemImage: "person.crop.circle")
+                }
+                
+                BillingSettingsView().tabItem {
+                    Label("Billing", systemImage: "dollarsign.circle")
+                }
                
-            BillingSettingsView().tabItem {
-                Label("Billing", systemImage: "dollarsign.circle")
+                AppSettingsView().tabItem {
+                    Label("App", systemImage: "macwindow")
+                }
+                
+                ActivitySettingsView().tabItem {
+                    Label("Activity", systemImage: "hammer")
+                }
+                
+                MiscSettingsView().tabItem {
+                    Label("Others", systemImage: "ellipsis")
+                }
             }
-           
-            AppSettingsView().tabItem {
-                Label("App", systemImage: "macwindow")
-            }
-            
-            ActivitySettingsView().tabItem {
-                Label("Activity", systemImage: "hammer")
-            }
-            
-            MiscSettingsView().tabItem {
-                Label("Misc", systemImage: "ellipsis")
-            }
+            .frame(width: 900, height: 600)
         }
-        .frame(width: 900, height: 600)
+        else {
+            VStack(spacing: 8) {
+                Image(systemName: "wifi.slash").font(.system(size: 30)).foregroundColor(.accentColor)
+                Text("Gateway isn't connected")
+                    .font(.title)
+                    .padding(.top, 8)
+                Text("Settings can only be modified after logging in and while the gateway is connected.")
+                    .opacity(0.75)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(width: 400)
+            .padding(16)
+        }
     }
 }
 
