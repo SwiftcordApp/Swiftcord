@@ -53,7 +53,7 @@ struct ServerView: View {
                             channels
                                 .filter { $0.type == .category }
                                 .sorted(by: { c1, c2 in
-                                    (c2.position ?? 1) > (c1.position ?? 0)
+                                    c2.position! > c1.position!
                                 }),
                             id: \.id
                         ) { category in
@@ -62,7 +62,11 @@ struct ServerView: View {
                                     channels
                                         .filter { $0.parent_id == category.id }
                                         .sorted(by: { c1, c2 in
-                                            (c2.position ?? 1) > (c1.position ?? 0)
+                                            if c1.type == .voice, c2.type != .voice { return false }
+                                            if c1.type != .voice, c2.type == .voice { return true }
+                                            if c1.position != nil, c2.position != nil {
+                                                return c2.position! > c1.position!
+                                            } else { return c2.id > c1.id }
                                         }),
                                     id: \.id
                                 ) { channel in
@@ -77,7 +81,7 @@ struct ServerView: View {
                                         selection: $selectedCh
                                     ) {
                                         Label(
-                                            channel.name ?? "",
+                                            "\(channel.name ?? "") \(channel.position ?? -99)",
                                             systemImage: (guild.rules_channel_id != nil && guild.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
                                         )
                                     }

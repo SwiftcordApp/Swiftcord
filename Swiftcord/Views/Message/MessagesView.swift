@@ -22,6 +22,7 @@ struct MessagesView: View {
     @State private var messages: [Message] = []
     @State private var enteredText = " "
     @State private var loading = false
+    @State private var loadError = false
     @State private var scrollTopID: Snowflake? = nil
     
     @EnvironmentObject var gateway: DiscordGateway
@@ -29,18 +30,20 @@ struct MessagesView: View {
     
     private func fetchMoreMessages() {
         loading = true
+        loadError = false
         Task {
             let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
+            if state.loadingState == .channelLoad { state.loadingState = .messageLoad }
+            
             guard let m = await DiscordAPI.getChannelMsgs(
                 id: channel.id,
                 before: lastMsg
             ) else {
                 loading = false
+                loadError = true
                 return
             }
             loading = false
-            print(state.loadingState)
-            if state.loadingState == .channelLoad { state.loadingState = .messageLoad }
             if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)
@@ -67,71 +70,82 @@ struct MessagesView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView(.vertical) {
-                ScrollViewReader { proxy in
-                    // This whole view is flipped, so everything in it needs to be flipped as well
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        Spacer(minLength: 38)
-                        
-                        ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
-                            MessageView(
-                                guildID: guildID,
-                                message: msg,
-                                shrunk: i < messages.count - 1 && msg.messageIsShrunk(prev: messages[i + 1]),
-                                quotedMsg: msg.message_reference != nil
-                                ? messages.first { m in
-                                    m.id == msg.message_reference!.message_id
-                                } : nil,
-                                onQuoteClick: { id in
-                                    withAnimation { proxy.scrollTo(id, anchor: .center) }
+            if !loadError {
+                ScrollView(.vertical) {
+                    ScrollViewReader { proxy in
+                        // This whole view is flipped, so everything in it needs to be flipped as well
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            Spacer(minLength: 38)
+                            
+                            ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
+                                MessageView(
+                                    guildID: guildID,
+                                    message: msg,
+                                    shrunk: i < messages.count - 1 && msg.messageIsShrunk(prev: messages[i + 1]),
+                                    quotedMsg: msg.message_reference != nil
+                                    ? messages.first { m in
+                                        m.id == msg.message_reference!.message_id
+                                    } : nil,
+                                    onQuoteClick: { id in
+                                        withAnimation { proxy.scrollTo(id, anchor: .center) }
+                                    }
+                                )
+                                .flip()
+                            }
+                            .onChange(of: messages.count) { _ in
+                                guard messages.count >= 1 else { return }
+                                // This is _not_ bugged
+                                if scrollTopID != nil {
+                                    proxy.scrollTo(scrollTopID!, anchor: .bottom)
+                                    scrollTopID = nil
                                 }
-                            )
-                            .flip()
-                        }
-                        .onChange(of: messages.count) { _ in
-                            guard messages.count >= 1 else { return }
-                            // This is _not_ bugged
-                            if scrollTopID != nil {
-                                proxy.scrollTo(scrollTopID!, anchor: .bottom)
-                                scrollTopID = nil
                             }
-                        }
-                        
-                        if reachedTop {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Image(systemName: "number")
-                                    .font(.system(size: 60))
-                                Text("Welcome to #\(channel.name ?? "")!")
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
-                                Text("This is the start of the #\(channel.name ?? "") channel.")
-                                    .opacity(0.7)
-                                Divider()
-                                    .padding(.top, 4)
+                            
+                            if reachedTop {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Image(systemName: "number")
+                                        .font(.system(size: 60))
+                                    Text("Welcome to #\(channel.name ?? "")!")
+                                        .font(.largeTitle)
+                                        .fontWeight(.heavy)
+                                    Text("This is the start of the #\(channel.name ?? "") channel.")
+                                        .opacity(0.7)
+                                    Divider()
+                                        .padding(.top, 4)
+                                }
+                                .padding([.top, .leading, .trailing], 16)
+                                .flip()
                             }
-                            .padding([.top, .leading, .trailing], 16)
-                            .flip()
-                        }
-                        else {
-                            VStack(alignment: .center, spacing: 8) {
-                                ProgressView()
-                                    .progressViewStyle(.circular)
-                                    .controlSize(.small)
-                                Text("Loading messages...")
+                            else {
+                                VStack(alignment: .center, spacing: 8) {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                        .controlSize(.small)
+                                    Text("Loading messages...")
+                                }
+                                .onAppear {
+                                    guard !loading else { return }
+                                    fetchMoreMessages()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .flip()
                             }
-                            .onAppear {
-                                guard !loading else { return }
-                                fetchMoreMessages()
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .flip()
                         }
                     }
                 }
+                .flip()
+                .frame(maxHeight: .infinity)
             }
-            .flip()
-            .navigationTitle("#" + (channel.name ?? ""))
-            .frame(maxHeight: .infinity)
+
+            if loadError {
+                VStack(spacing: 12) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 120))
+                        .foregroundColor(.red)
+                    Text("Messages failed to load").font(.title2)
+                    Button("Try Again") { fetchMoreMessages() }.controlSize(.large)
+                }.frame(maxHeight: .infinity)
+            }
             
             // RoundedRectangle(cornerRadius: 12).fill(.gray)
                 //.frame(maxWidth: .infinity, maxHeight: 16)
@@ -142,6 +156,7 @@ struct MessagesView: View {
                 sendMessage(content: content)
             }
         }
+        .navigationTitle("#" + (channel.name ?? ""))
         .frame(minWidth: 525)
         .onAppear {
             let _ = gateway.onEvent.addHandler(handler: { (evt, d) in
