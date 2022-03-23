@@ -24,7 +24,7 @@ struct MiscSettingsView: View {
             DebugTableItem(item: "Gateway reconnecting", val: gateway.isReconnecting.toString()),
             DebugTableItem(item: "Gateway cannot resume", val: gateway.doNotResume.toString()),
             DebugTableItem(item: "Gateway sequence #", val: String(gateway.seq ?? 0)),
-            DebugTableItem(item: "Gateway viability", val: gateway.viability.toString()),
+            // DebugTableItem(item: "Gateway viability", val: gateway.viability.toString()),
             DebugTableItem(item: "Gateway connection #", val: String(gateway.connTimes)),
             DebugTableItem(item: "Gateway session ID", val: gateway.sessionID ?? "nil"),
             DebugTableItem(item: "Gateway missed heartbeat ACKs", val: String(gateway.missedACK)),
