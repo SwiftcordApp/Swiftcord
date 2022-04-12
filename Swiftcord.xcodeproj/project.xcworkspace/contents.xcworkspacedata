@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/vinkwok/XcodeProjects/Native Discord/Swiftcord.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

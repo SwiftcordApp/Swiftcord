@@ -29,10 +29,32 @@ struct AttachmentLoading: View {
         ZStack {
             Image(systemName: "photo")
                 .opacity(0.5)
-                .font(.system(size: CGFloat(min(Double(width), Double(height) / (84/66)) - 10)))
+                .font(.system(size: CGFloat(min(Double(width) / (84/66), Double(height)) - 10)))
             ProgressView().progressViewStyle(.circular).controlSize(.large)
         }
         .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+    }
+}
+
+struct AttachmentImage: View {
+    let height: Int
+    let width: Int
+    let scale: Double
+    let url: URL
+    
+    var body: some View {
+        CachedAsyncImage(url: url, scale: scale) { phase in
+            if let image = phase.image {
+                image.resizable().scaledToFill()
+            } else if phase.error != nil {
+                AttachmentError(height: height, width: width)
+            } else {
+                AttachmentLoading(height: height, width: width)
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .frame(idealWidth: CGFloat(width), idealHeight: CGFloat(height))
+        .fixedSize()
     }
 }
 
@@ -93,18 +115,21 @@ struct AttachmentView: View {
                     let (width, height, resizedURL, scale) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
                     switch mime.prefix(5) {
                     case "image":
-                        CachedAsyncImage(url: resizedURL, scale: scale) { phase in
-                            if let image = phase.image {
-                                image.resizable().scaledToFill()
-                            } else if phase.error != nil {
-                                AttachmentError(height: height, width: width)
-                            } else {
-                                AttachmentLoading(height: height, width: width)
+                        AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)
+                            .onTapGesture { enlarged = true }
+                            .sheet(isPresented: $enlarged, onDismiss: nil) {
+                                VStack(spacing: 8) {
+                                    HStack(spacing: 8) {
+                                        Link(attachment.filename, destination: url)
+                                            .cursor(NSCursor.pointingHand)
+                                        Spacer()
+                                        Button(action: { enlarged = false }) {
+                                            Image(systemName: "xmark.circle.fill")
+                                        }.buttonStyle(.plain)
+                                    }
+                                    AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)
+                                }.padding(8)
                             }
-                        }
-                        .frame(width: CGFloat(width), height: CGFloat(height))
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
-                        .onTapGesture { enlarged = true }
                     case "video":
                         VideoPlayer(player: AVPlayer(url: url)) // Don't use resizedURL
                             .frame(width: CGFloat(width), height: CGFloat(height))

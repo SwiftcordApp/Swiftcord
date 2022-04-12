@@ -43,12 +43,12 @@ extension DiscordAPI {
             req.setValue("application/json", forHTTPHeaderField: "content-type")
             req.httpBody = body.data(using: .utf8)
         }
-        
+                
         // Make request
         let (data, response) = try await URLSession.shared.data(for: req)
         guard let httpResponse = response as? HTTPURLResponse else { return nil }
-        guard httpResponse.statusCode == 200 else {
-            print("Status code is not 200: \(httpResponse.statusCode)")
+        guard httpResponse.statusCode / 100 == 2 else { // Check if status code is 2**
+            print("Status code is not 2xx: \(httpResponse.statusCode)")
             print(String(decoding: data, as: UTF8.self))
             return nil
         }
@@ -64,7 +64,6 @@ extension DiscordAPI {
         do {
             guard let d = try? await makeRequest(path: path, query: query)
             else { return nil }
-            // print(String(decoding: d, as: UTF8.self))
             
             return try JSONDecoder().decode(T.self, from: d)
         } catch let DecodingError.dataCorrupted(context) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DiscordGateway {
+extension DiscordGateway {    
     func initHeartbeat(interval: Int) {
         let initialConnTimes = connTimes
         func sendHeartbeat() {
@@ -16,7 +16,7 @@ extension DiscordGateway {
             incMissedACK()
             
             // Connection is dead ☠️
-            if (missedACK > missedACKTolerance) {
+            if (missedACK > 1) {
                 socket.forceDisconnect()
                 attemptReconnect()
             }

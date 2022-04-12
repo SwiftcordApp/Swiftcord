@@ -26,24 +26,20 @@ struct ContentView: View {
     
     @State private var sheetOpen = false
     @State private var guilds: [PartialGuild] = []
-    @State private var selectedGuild: Guild = dmGuild
+    @State private var selectedGuild: Guild? = nil
     
-    @ObservedObject var loginWVModel: WebViewModel
+    @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
     let log = Logger(tag: "ContentView")
-    
-    init() {
-        loginWVModel = WebViewModel(link: "https://canary.discord.com/login") // Much hardcoding
-    }
 
     var body: some View {
         HStack(spacing: 0) {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: selectedGuild.id == "@me",
+                        selected: selectedGuild?.id == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
                         onSelect: { selectedGuild = dmGuild }
@@ -53,10 +49,11 @@ struct ContentView: View {
                     
                     ForEach(guilds, id: \.id) { guild in
                         ServerButton(
-                            selected: selectedGuild.id == guild.id,
+                            selected: selectedGuild?.id == guild.id,
                             name: guild.name,
                             serverIconURL: guild.icon != nil ? "\(apiConfig.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             onSelect: { Task {
+                                selectedGuild = nil
                                 guard let g = await DiscordAPI.getGuild(id: guild.id)
                                 else { return }
                                 selectedGuild = g
@@ -79,7 +76,8 @@ struct ContentView: View {
             ServerView(guild: $selectedGuild)
         }
         .onChange(of: selectedGuild, perform: { _ in
-            UserDefaults.standard.set(selectedGuild.id, forKey: "lastSelectedGuild")
+            guard let id = selectedGuild?.id else { return }
+            UserDefaults.standard.set(id, forKey: "lastSelectedGuild")
         })
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
@@ -89,6 +87,10 @@ struct ContentView: View {
                     guilds = g
                     self.state.loadingState = .initialGuildLoad
                     if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
+                        if lGID == "@me" {
+                            selectedGuild = dmGuild
+                            return
+                        }
                         guard g.contains(where: { p in p.id == lGID }) else { return }
                         guard let fullGuild = await DiscordAPI.getGuild(id: lGID)
                         else { return }
@@ -100,9 +102,19 @@ struct ContentView: View {
         // Using .constant to prevent dismissing
         .sheet(isPresented: .constant(state.attemptLogin)) {
             ZStack(alignment: .topLeading) {
-                WebView(viewModel: loginWVModel)
+                WebView()
+                    .environmentObject(loginWVModel)
                     .frame(width: 831, height: 580)
                 Button("Quit", role: .cancel) { exit(0) }.padding(8)
+                
+                if !loginWVModel.didFinishLoading {
+                    ZStack {
+                        ProgressView("Loading Discord login...")
+                            .controlSize(.large)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    .background(.background)
+                }
             }
         }
         .onChange(of: loginWVModel.token, perform: { tk in

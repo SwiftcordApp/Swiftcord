@@ -41,6 +41,9 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     // Logger
     let log = Logger(tag: "DiscordGateway")
     
+    // Dispatch queue
+    let queue: DispatchQueue
+    
     func incMissedACK() { missedACK += 1 }
     
     func initWSConn() {
@@ -100,6 +103,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
         missedACKTolerance = maxMissedACK
         connTimeout = connectionTimeout
+        queue = DispatchQueue(label: "com.swiftcord.gatewayQueue", qos: .background, attributes: .concurrent, autoreleaseFrequency: .workItem, target: .global(qos: .background))
         initWSConn()
     }
     
@@ -126,7 +130,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
             default: log.w("Unhandled gateway close code:", code)
             }
             onStateChange.notify(event: (isConnected, isReconnecting, code))
-        case .text(let string): handleIncoming(received: string)
+        case .text(let string): self.handleIncoming(received: string)
         case .error(let error):
             isConnected = false
             attemptReconnect()
@@ -153,61 +157,69 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     }
     
     func handleIncoming(received: String) {
-        guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!)
-        else { return }
-        
-        if (decoded.s != nil) { seq = decoded.s } // Update sequence
-        
-        switch (decoded.op) {
-        case .heartbeat:
-            // Immediately send heartbeat as requested
-            log.d("Send heartbeat by server request")
-            sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
-        case .hello:
-            // Start heartbeating and send identify
-            guard let d = decoded.d as? GatewayHello else { return }
-            initHeartbeat(interval: d.heartbeat_interval)
-        
-            // Check if we're attempting to and can resume
-            if isReconnecting && !doNotResume && sessionID != nil && seq != nil {
-                log.i("Attempting resume")
-                guard let resume = getResume(seq: seq!, sessionID: sessionID!)
-                else { return }
-                sendToGateway(op: .resume, d: resume)
+        queue.async { [self] in
+            guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!)
+            else { return }
+            
+            DispatchQueue.main.async {
+                if (decoded.s != nil) { seq = decoded.s } // Update sequence
             }
-            else {
-                log.d("Sending identify:", isConnected, !doNotResume, sessionID ?? "No sessionID", seq ?? -1)
-                // Send identify
-                seq = nil // Clear sequence #
-                isReconnecting = false // Resuming failed/not attempted
-                guard let identify = getIdentify() else {
-                    log.d("Token not in keychain")
-                    authFailed = true
-                    socket.disconnect(closeCode: 1000)
-                    return
+            
+            switch (decoded.op) {
+            case .heartbeat:
+                // Immediately send heartbeat as requested
+                log.d("Send heartbeat by server request")
+                sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
+            case .hello:
+                // Start heartbeating and send identify
+                guard let d = decoded.d as? GatewayHello else { return }
+                initHeartbeat(interval: d.heartbeat_interval)
+            
+                // Check if we're attempting to and can resume
+                if isReconnecting && !doNotResume && sessionID != nil && seq != nil {
+                    log.i("Attempting resume")
+                    guard let resume = getResume(seq: seq!, sessionID: sessionID!)
+                    else { return }
+                    sendToGateway(op: .resume, d: resume)
                 }
-                sendToGateway(op: .identify, d: identify)
+                else {
+                    log.d("Sending identify:", isConnected, !doNotResume, sessionID ?? "No sessionID", seq ?? -1)
+                    // Send identify
+                    DispatchQueue.main.async {
+                        seq = nil // Clear sequence #
+                        isReconnecting = false // Resuming failed/not attempted
+                    }
+                    guard let identify = getIdentify() else {
+                        log.d("Token not in keychain")
+                        authFailed = true
+                        socket.disconnect(closeCode: 1000)
+                        return
+                    }
+                    sendToGateway(op: .identify, d: identify)
+                }
+            case .heartbeatAck: DispatchQueue.main.async { missedACK = 0 }
+            case .dispatchEvent:
+                guard let type = decoded.t else { return }
+                guard let data = decoded.d else { return }
+                switch (type) {
+                case .ready:
+                    guard let d = data as? ReadyEvt else { return }
+                    DispatchQueue.main.async {
+                        doNotResume = false
+                        sessionID = d.session_id
+                        cache.guilds = d.guilds
+                        cache.user = d.user
+                    }
+                    log.i("Gateway ready")
+                default: log.i("Dispatched event <\(type)>")
+                }
+                onEvent.notify(event: (type, data))
+            case .invalidSession:
+                // Check if the session can be resumed
+                let shouldResume = (decoded.primitiveData as? Bool) ?? false
+                attemptReconnect(resume: shouldResume)
+            default: log.w("Unimplemented opcode: \(decoded.op)")
             }
-        case .heartbeatAck: missedACK = 0
-        case .dispatchEvent:
-            guard let type = decoded.t else { return }
-            guard let data = decoded.d else { return }
-            switch (type) {
-            case .ready:
-                guard let d = data as? ReadyEvt else { return }
-                doNotResume = false
-                sessionID = d.session_id
-                cache.guilds = d.guilds
-                cache.user = d.user
-                log.i("Gateway ready")
-            default: log.i("Dispatched event <\(type)>: \(data)")
-            }
-            onEvent.notify(event: (type, data))
-        case .invalidSession:
-            // Check if the session can be resumed
-            let shouldResume = (decoded.primitiveData as? Bool) ?? false
-            attemptReconnect(resume: shouldResume)
-        default: log.w("Unimplemented opcode: \(decoded.op)")
         }
     }
 }

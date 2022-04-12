@@ -44,6 +44,7 @@ struct UserAvatarView: View {
             }}
             infoPresenting.toggle()
         }
+        .cursor(NSCursor.pointingHand)
         .popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
             VStack(alignment: .leading, spacing: 0) {
                 if (profile?.user.accent_color ?? user.accent_color) != nil {

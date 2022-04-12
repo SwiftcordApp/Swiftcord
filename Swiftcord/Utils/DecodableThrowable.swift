@@ -15,6 +15,14 @@ struct DecodableThrowable<T: Decodable>: Decodable {
     }
 }
 
-extension DecodableThrowable {
-    
+/*extension Sequence where Iterator.Element == DecodableThrowable<T: Decodable>  {
+    var values: [T] = {
+        get {
+            return try? result.get()?.compactMap({ t in
+                t.get
+            })
+        }
+        set {}
+    }
 }
+*/

@@ -14,7 +14,7 @@ import Foundation
 extension DiscordAPI {
     // MARK: Get Current User DMs
     // GET /users/@me/channels
-    static func getDMs() async -> [Channel]? {
+    static func getDMs() async -> [DecodableThrowable<Channel>]? {
         return await getReq(path: "users/@me/channels")
     }
     

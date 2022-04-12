@@ -3,6 +3,7 @@
 ///
 /// Unfortunately the code isn't exactly fully compatible with Swift 5
 /// Changes were made to improve style and to remove all warnings/errors
+/// Adds optimisations to reduce
 
 import Foundation
 
@@ -14,7 +15,11 @@ public class EventDispatch<Event>: EventDispatchProtocol {
     private var handlers = [Handler]()
     private var lastId: HandlerIdentifier = 0
     
-    public init() {}
+    private let evtQueue: DispatchQueue
+    
+    public init() {
+        evtQueue = DispatchQueue(label: UUID().uuidString, qos: .userInteractive, attributes: .concurrent, target: .main)
+    }
     
     public func addHandler(handler: @escaping (Event) -> ()) -> HandlerIdentifier {
         lastId += 1
@@ -44,10 +49,9 @@ public class EventDispatch<Event>: EventDispatchProtocol {
     public func notify(event: Event) {
         let copiedHandlers = handlers
         for handler in copiedHandlers {
-            handler(event)
+            evtQueue.async { handler(event) }
         }
     }
-    
 }
 
 public protocol EventDispatchProtocol {

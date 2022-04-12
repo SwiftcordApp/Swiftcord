@@ -14,17 +14,16 @@ class WebViewModel: ObservableObject {
     @Published var link: String
     @Published var didFinishLoading: Bool = false
     @Published var token: String? = nil
-    @Published var pageTitle: String
+    @Published var pageTitle: String = ""
     
     init(link: String) {
         self.link = link
-        self.pageTitle = ""
     }
 }
 
 struct WebView: NSViewRepresentable {
     public typealias NSViewType = WKWebView
-    @ObservedObject var viewModel: WebViewModel
+    @EnvironmentObject var viewModel: WebViewModel
 
     private let webView: WKWebView = WKWebView()
     
@@ -113,15 +112,14 @@ struct WebView: NSViewRepresentable {
     // Handles the event that's sent from injected JavaScript once the token is available
     class EvtHandler: NSObject, WKScriptMessageHandler {
         private var viewModel: WebViewModel
-
-        init(_ m: WebViewModel) {
-            viewModel = m
+        
+        init(_ viewModel: WebViewModel) {
+           // Initialise the WebViewModel
+           self.viewModel = viewModel
         }
         
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-            self.viewModel.token = message.body as? String
-            print("message: \(message.body)")
-            // and whatever other actions you want to take
+            viewModel.token = message.body as? String
         }
     }
     
@@ -149,7 +147,7 @@ struct WebView: NSViewRepresentable {
         public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) { }
 
         public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            let decision: WKNavigationActionPolicy = navigationAction.request.url?.absoluteString == viewModel.link ? .allow : .cancel
+            let decision: WKNavigationActionPolicy = navigationAction.request.url?.absoluteString == viewModel.link || navigationAction.request.url?.host == "newassets.hcaptcha.com" ? .allow : .cancel
             decisionHandler(decision)
             log.d("Navigation to", String(describing: navigationAction.request.url?.absoluteString), decision == .allow ? "allowed" : "cancelled")
         }

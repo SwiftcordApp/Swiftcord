@@ -61,6 +61,7 @@ struct ServerButtonStyle: ButtonStyle {
         .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: configuration.isPressed)
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }
+        .cursor(NSCursor.pointingHand)
     }
 }
 

@@ -27,7 +27,11 @@ enum ChannelType: Int, Codable {
     case unknownType = 15
 }
 
-struct Channel: Codable, GatewayData {
+struct Channel: Codable, GatewayData, Equatable {
+    static func == (lhs: Channel, rhs: Channel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: Snowflake
     let type: ChannelType
     let guild_id: Snowflake?

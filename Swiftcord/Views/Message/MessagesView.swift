@@ -16,7 +16,7 @@ extension View {
 }
 
 struct MessagesView: View {
-    let channel: Channel
+    @Binding var channel: Channel?
     let guildID: Snowflake
     @State private var reachedTop = false
     @State private var messages: [Message] = []
@@ -28,7 +28,11 @@ struct MessagesView: View {
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
+    // Gateway
+    @State private var evtID: EventDispatch.HandlerIdentifier? = nil
+    
     private func fetchMoreMessages() {
+        guard let ch = channel else { return }
         loading = true
         loadError = false
         Task {
@@ -36,7 +40,7 @@ struct MessagesView: View {
             if state.loadingState == .channelLoad { state.loadingState = .messageLoad }
             
             guard let m = await DiscordAPI.getChannelMsgs(
-                id: channel.id,
+                id: ch.id,
                 before: lastMsg
             ) else {
                 loading = false
@@ -59,7 +63,7 @@ struct MessagesView: View {
                 message: NewMessage(
                     content: content
                 ),
-                id: channel.id
+                id: channel!.id
             )) != nil else {
                 // TODO: Show some sort of indication that the message didn't send
                 enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
@@ -105,10 +109,10 @@ struct MessagesView: View {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image(systemName: "number")
                                         .font(.system(size: 60))
-                                    Text("Welcome to #\(channel.name ?? "")!")
+                                    Text("Welcome to #\(channel?.name ?? "")!")
                                         .font(.largeTitle)
                                         .fontWeight(.heavy)
-                                    Text("This is the start of the #\(channel.name ?? "") channel.")
+                                    Text("This is the start of the #\(channel?.name ?? "") channel.")
                                         .opacity(0.7)
                                     Divider()
                                         .padding(.top, 4)
@@ -150,20 +154,33 @@ struct MessagesView: View {
             // RoundedRectangle(cornerRadius: 12).fill(.gray)
                 //.frame(maxWidth: .infinity, maxHeight: 16)
             // TextField("Message #\(channel.name ?? "")", text: $enteredText)
-            MessageInputView(placeholder: "Message #\(channel.name ?? "")", message: $enteredText, onSend: sendMessage).onAppear { enteredText = "" }
+            MessageInputView(placeholder: "Message #\(channel?.name ?? "")", message: $enteredText, onSend: sendMessage).onAppear { enteredText = "" }
             .onChange(of: enteredText) { content in
                 guard !content.isEmpty && content.last!.isNewline else { return }
                 sendMessage(content: content)
             }
         }
-        .navigationTitle("#" + (channel.name ?? ""))
+        .navigationTitle("#" + (channel?.name ?? ""))
         .frame(minWidth: 525)
+        .onChange(of: channel, perform: { ch in
+            guard ch != nil else { return }
+            messages = []
+            loading = false
+            loadError = false
+            reachedTop = false
+            scrollTopID = nil
+        })
+        .onDisappear {
+            // Remove gateway event handler to prevent memory leaks
+            guard let handlerID = evtID else { return}
+            let _ = gateway.onEvent.removeHandler(handler: handlerID)
+        }
         .onAppear {
-            let _ = gateway.onEvent.addHandler(handler: { (evt, d) in
+            evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    if msg.channel_id == channel.id {
+                    if msg.channel_id == channel?.id {
                         withAnimation {
                             messages.insert(msg, at: 0)
                         }
@@ -177,13 +194,13 @@ struct MessagesView: View {
                     }
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
-                    guard deletedMsg.channel_id == channel.id else { break }
+                    guard deletedMsg.channel_id == channel?.id else { break }
                     if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
                         withAnimation { let _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
                     guard let deletedMsgs = d as? MessageDeleteBulk else { break }
-                    guard deletedMsgs.channel_id == channel.id else { break }
+                    guard deletedMsgs.channel_id == channel?.id else { break }
                     for msgID in deletedMsgs.id {
                         if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
                             withAnimation { let _ = messages.remove(at: delIdx) }

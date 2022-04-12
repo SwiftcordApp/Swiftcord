@@ -59,9 +59,9 @@ struct Guild: GatewayData, Equatable {
     let verification_level: VerificationLevel
     let default_message_notifications: MessageNotifLevel
     let explicit_content_filter: ExplicitContentFilterLevel
-    let roles: [Throwable<Role>]
-    let emojis: [Throwable<Emoji>]
-    let features: [Throwable<GuildFeature>]
+    let roles: [DecodableThrowable<Role>]
+    let emojis: [DecodableThrowable<Emoji>]
+    let features: [DecodableThrowable<GuildFeature>]
     let mfa_level: MFALevel
     var application_id: Snowflake? = nil // For bot-created guilds
     var system_channel_id: Snowflake? = nil // ID of channel for system-created messages

@@ -70,7 +70,9 @@ struct MessageView: View {
                                     .font(.system(size: 14))
                                     .opacity(0.75)
                                     .lineLimit(1)
-                            }.onTapGesture { onQuoteClick((loadedQuotedMsg ?? quotedMsg!).id) }
+                            }
+                            .onTapGesture { onQuoteClick((loadedQuotedMsg ?? quotedMsg!).id) }
+                            .cursor(NSCursor.pointingHand)
                         }
                         else if loadQuotedMsgErr {
                             Image(systemName: "xmark.octagon.fill")
@@ -122,7 +124,7 @@ struct MessageView: View {
                     }
                     else {
                         Text(timestring)
-                            .font(.custom("SF Compact Rounded", size: 10))
+                            .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
                             .animation(.linear(duration: 0.1), value: hovered)
                             .opacity(hovered ? 0.5 : 0)
