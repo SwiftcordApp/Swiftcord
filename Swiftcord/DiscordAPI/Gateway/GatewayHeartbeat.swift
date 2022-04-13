@@ -17,7 +17,8 @@ extension DiscordGateway {
             
             // Connection is dead ☠️
             if (missedACK > 1) {
-                socket.forceDisconnect()
+                // socket.forceDisconnect()
+                socket.cancel()
                 attemptReconnect()
             }
         }

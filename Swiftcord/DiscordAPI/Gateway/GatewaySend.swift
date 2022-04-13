@@ -16,6 +16,12 @@ extension DiscordGateway {
         else { return }
         
         log.d("Outgoing Payload: <\(op)>", sendPayload.d != nil ? String(describing: sendPayload.d!) : "[No data]", "Seq:", String(describing: sendPayload.s))
-        socket.write(string: String(data: encoded, encoding: .utf8)!)
+        // socket.write(string: String(data: encoded, encoding: .utf8)!)
+        socket.send(.data(encoded)) { err in
+            self.log.i("Socket send completed")
+            if let err = err {
+                self.log.e("Socket send error:", err.localizedDescription)
+            }
+        }
     }
 }
