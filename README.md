@@ -3,18 +3,25 @@
 > A completely native Discord client for macOS built 100% in
 > Swift and SwiftUI
 
-## ⚠️ Bug stopping loading from ever completing:
+This project aims to create a fully functional native Discord
+client in Swift for macOS from scratch. Look [below](#screenshots) for
+a bunch of screenshots!
 
+**If you like this project, please give it a ⭐ star! It helps motivate
+me to continue developing it**
+
+### Pre-built packages are now available at [releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/latest)!
+
+> ~~⚠️ Bug stopping loading from ever completing:
 I've identified a bug that might stop the loading from fully
 completing the first time you open the app. If you encounter an 
 issue where the loading progress gets stuck forever on "Loading channels",
 run `defaults write com.cryptoalgo.swiftcord lastSelectedGuild <guild ID of a guild you are in>`
 to fix it. **This is just a temporary fix**, I'll fix it when I
-have the time to (soon).
+have the time to (soon).~~
 
-This project aims to create a fully functional native Discord
-client in Swift for macOS from scratch. Look below for a bunch
-of screenshots!
+^ If you encounter the issue above, pull the latest commits from GitHub
+which contains fixes for that issue
 
 ## Client Feature Parity
 
@@ -48,7 +55,9 @@ connection is unstable or macOS has been sleeping for a very long time.
 - ✅ Better loading screen
 - ✅ Find and request most optimised photo size from CDN
 - ⏱ Partial user and app settings
-- ⏱ DM loading and groups support
+- ✅ DM and group loading
+- ⏱ Display DMs properly in UI
+- ⏱ Send DM messages
 - ❌ User roles + overwrites
 - ❌ Message notifications
 - ❌ Full list of users in a server, especially for larger servers (1000+ members)
