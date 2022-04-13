@@ -118,6 +118,7 @@
 		DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* BoolToString.swift */; };
 		DA520AE727D8ECA6009FD740 /* DecodableThrowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
+		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */; };
 /* End PBXBuildFile section */
 
@@ -236,6 +237,7 @@
 		DA520AE127D76BEB009FD740 /* BoolToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolToString.swift; sourceTree = "<group>"; };
 		DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableThrowable.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
+		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -555,6 +557,7 @@
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
 				DA57F44328056718001DC46E /* ChannelList.swift */,
+				DA57F44528065209001DC46E /* ChannelButton.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
+				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				DA2384C827CD9418009E15E0 /* Logger.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */,
@@ -876,7 +880,7 @@
 				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -888,7 +892,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -904,7 +908,7 @@
 				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -916,7 +920,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -12,11 +12,6 @@ struct ChannelList: View {
     @Binding var selCh: Channel?
     @Binding var guild: Guild?
     
-    let chIcons = [
-        ChannelType.voice: "speaker.wave.2.fill",
-        .news: "megaphone.fill",
-    ]
-    
     var body: some View {
         List {
             ForEach(
@@ -41,31 +36,10 @@ struct ChannelList: View {
                                     } else { return c2.id > c1.id }
                                 }),
                             id: \.id
-                        ) { channel in
-                            Button {
-                                selCh = channel
-                            } label: {
-                                Label(
-                                    channel.name ?? "",
-                                    systemImage: (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
-                                ).frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .accentColor(Color.gray)
-                        }
+                        ) { channel in ChannelButton(channel: channel, guild: guild, selectedCh: $selCh) }
                     }
                 }
-                else if ch.parent_id == nil {
-                    Button {
-                        
-                    } label: {
-                        Label(
-                            ch.name ?? "",
-                            systemImage: (guild?.rules_channel_id != nil && guild?.rules_channel_id! == ch.id) ? "newspaper.fill" : (chIcons[ch.type] ?? "number")
-                        )
-                    }
-                    .accentColor(Color.gray)
-                }
+                else if ch.parent_id == nil { ChannelButton(channel: ch, guild: guild, selectedCh: $selCh) }
             }
         }
         .frame(minWidth: 240, maxHeight: .infinity)

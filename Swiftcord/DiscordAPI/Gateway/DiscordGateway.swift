@@ -53,6 +53,7 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
         request.timeoutInterval = connTimeout
         socket = WebSocket(request: request)
         socket.delegate = self
+        socket.callbackQueue = queue
         
         log.i("Attempting connection to Gateway: \(apiConfig.gateway)")
         socket.connect()
@@ -157,69 +158,67 @@ class DiscordGateway: WebSocketDelegate, ObservableObject {
     }
     
     func handleIncoming(received: String) {
-        queue.async { [self] in
-            guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!)
-            else { return }
-            
-            DispatchQueue.main.async {
-                if (decoded.s != nil) { seq = decoded.s } // Update sequence
+        guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: received.data(using: .utf8)!)
+        else { return }
+        
+        DispatchQueue.main.async {
+            if (decoded.s != nil) { self.seq = decoded.s } // Update sequence
+        }
+        
+        switch (decoded.op) {
+        case .heartbeat:
+            // Immediately send heartbeat as requested
+            log.d("Send heartbeat by server request")
+            sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
+        case .hello:
+            // Start heartbeating and send identify
+            guard let d = decoded.d as? GatewayHello else { return }
+            initHeartbeat(interval: d.heartbeat_interval)
+        
+            // Check if we're attempting to and can resume
+            if isReconnecting && !doNotResume && sessionID != nil && seq != nil {
+                log.i("Attempting resume")
+                guard let resume = getResume(seq: seq!, sessionID: sessionID!)
+                else { return }
+                sendToGateway(op: .resume, d: resume)
             }
-            
-            switch (decoded.op) {
-            case .heartbeat:
-                // Immediately send heartbeat as requested
-                log.d("Send heartbeat by server request")
-                sendToGateway(op: .heartbeat, d: GatewayHeartbeat())
-            case .hello:
-                // Start heartbeating and send identify
-                guard let d = decoded.d as? GatewayHello else { return }
-                initHeartbeat(interval: d.heartbeat_interval)
-            
-                // Check if we're attempting to and can resume
-                if isReconnecting && !doNotResume && sessionID != nil && seq != nil {
-                    log.i("Attempting resume")
-                    guard let resume = getResume(seq: seq!, sessionID: sessionID!)
-                    else { return }
-                    sendToGateway(op: .resume, d: resume)
+            else {
+                log.d("Sending identify:", isConnected, !doNotResume, sessionID ?? "No sessionID", seq ?? -1)
+                // Send identify
+                DispatchQueue.main.async {
+                    self.seq = nil // Clear sequence #
+                    self.isReconnecting = false // Resuming failed/not attempted
                 }
-                else {
-                    log.d("Sending identify:", isConnected, !doNotResume, sessionID ?? "No sessionID", seq ?? -1)
-                    // Send identify
-                    DispatchQueue.main.async {
-                        seq = nil // Clear sequence #
-                        isReconnecting = false // Resuming failed/not attempted
-                    }
-                    guard let identify = getIdentify() else {
-                        log.d("Token not in keychain")
-                        authFailed = true
-                        socket.disconnect(closeCode: 1000)
-                        return
-                    }
-                    sendToGateway(op: .identify, d: identify)
+                guard let identify = getIdentify() else {
+                    log.d("Token not in keychain")
+                    authFailed = true
+                    socket.disconnect(closeCode: 1000)
+                    return
                 }
-            case .heartbeatAck: DispatchQueue.main.async { missedACK = 0 }
-            case .dispatchEvent:
-                guard let type = decoded.t else { return }
-                guard let data = decoded.d else { return }
-                switch (type) {
-                case .ready:
-                    guard let d = data as? ReadyEvt else { return }
-                    DispatchQueue.main.async {
-                        doNotResume = false
-                        sessionID = d.session_id
-                        cache.guilds = d.guilds
-                        cache.user = d.user
-                    }
-                    log.i("Gateway ready")
-                default: log.i("Dispatched event <\(type)>")
-                }
-                onEvent.notify(event: (type, data))
-            case .invalidSession:
-                // Check if the session can be resumed
-                let shouldResume = (decoded.primitiveData as? Bool) ?? false
-                attemptReconnect(resume: shouldResume)
-            default: log.w("Unimplemented opcode: \(decoded.op)")
+                sendToGateway(op: .identify, d: identify)
             }
+        case .heartbeatAck: DispatchQueue.main.async { self.missedACK = 0 }
+        case .dispatchEvent:
+            guard let type = decoded.t else { return }
+            guard let data = decoded.d else { return }
+            switch (type) {
+            case .ready:
+                guard let d = data as? ReadyEvt else { return }
+                DispatchQueue.main.async {
+                    self.doNotResume = false
+                    self.sessionID = d.session_id
+                    self.cache.guilds = d.guilds
+                    self.cache.user = d.user
+                }
+                log.i("Gateway ready")
+            default: log.i("Dispatched event <\(type)>")
+            }
+            onEvent.notify(event: (type, data))
+        case .invalidSession:
+            // Check if the session can be resumed
+            let shouldResume = (decoded.primitiveData as? Bool) ?? false
+            attemptReconnect(resume: shouldResume)
+        default: log.w("Unimplemented opcode: \(decoded.op)")
         }
     }
 }
