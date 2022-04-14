@@ -20,21 +20,12 @@
         }
       },
       {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/daltoniam/Starscream.git",
-        "state": {
-          "branch": null,
-          "revision": "df8d82047f6654d8e4b655d1b1525c64e1059d21",
-          "version": "4.0.4"
-        }
-      },
-      {
         "package": "swiftui-cached-async-image",
         "repositoryURL": "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
         "state": {
           "branch": null,
-          "revision": "6c3847d5a94538213c0ce2c6a42e36a3c5d99042",
-          "version": "2.0.0"
+          "revision": "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
+          "version": "2.1.0"
         }
       }
     ]

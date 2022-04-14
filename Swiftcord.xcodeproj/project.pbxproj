@@ -64,7 +64,6 @@
 		DA4A88C427C1442300720909 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C327C1442300720909 /* Sticker.swift */; };
 		DA4A88C627C1E77000720909 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C527C1E77000720909 /* Permission.swift */; };
 		DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */; };
-		DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = DA4A88CA27C1EC5500720909 /* Starscream */; };
 		DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CC27C1FAEE00720909 /* Config.swift */; };
 		DA4A88D027C2068F00720909 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CF27C2068F00720909 /* Gateway.swift */; };
 		DA4A88D227C20FC300720909 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D127C20FC300720909 /* Activity.swift */; };
@@ -250,7 +249,6 @@
 			files = (
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
 				DA520AE027D75147009FD740 /* Reachability in Frameworks */,
-				DA4A88CB27C1EC5500720909 /* Starscream in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,7 +580,6 @@
 			);
 			name = Swiftcord;
 			packageProductDependencies = (
-				DA4A88CA27C1EC5500720909 /* Starscream */,
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
 				DA520ADF27D75147009FD740 /* Reachability */,
@@ -616,7 +613,6 @@
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
-				DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */,
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */,
@@ -972,14 +968,6 @@
 				minimumVersion = 3.3.0;
 			};
 		};
-		DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daltoniam/Starscream.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
 		DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
@@ -1000,11 +988,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		DA4A88CA27C1EC5500720909 /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA4A88C927C1EC5500720909 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
 		};
 		DA520ADF27D75147009FD740 /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;

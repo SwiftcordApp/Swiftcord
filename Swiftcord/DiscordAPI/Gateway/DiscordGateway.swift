@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Starscream
 
 class DiscordGateway: ObservableObject {
     // Events
