@@ -20,14 +20,14 @@ struct MiscSettingsView: View {
 
     var body: some View {
         let debugValues = [
-            DebugTableItem(item: "Gateway connected", val: gateway.isConnected.toString()),
+            /*DebugTableItem(item: "Gateway connected", val: gateway.isConnected.toString()),
             DebugTableItem(item: "Gateway reconnecting", val: gateway.isReconnecting.toString()),
             DebugTableItem(item: "Gateway cannot resume", val: gateway.doNotResume.toString()),
             DebugTableItem(item: "Gateway sequence #", val: String(gateway.seq ?? 0)),
             // DebugTableItem(item: "Gateway viability", val: gateway.viability.toString()),
             DebugTableItem(item: "Gateway connection #", val: String(gateway.connTimes)),
             DebugTableItem(item: "Gateway session ID", val: gateway.sessionID ?? "nil"),
-            DebugTableItem(item: "Gateway missed heartbeat ACKs", val: String(gateway.missedACK)),
+            DebugTableItem(item: "Gateway missed heartbeat ACKs", val: String(gateway.missedACK)),*/
             
             DebugTableItem(item: "Loading stage", val: String(describing: state.loadingState)),
         ]

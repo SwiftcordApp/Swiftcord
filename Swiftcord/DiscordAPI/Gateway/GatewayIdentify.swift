@@ -49,7 +49,7 @@ extension RobustWebSocket {
             large_threshold: nil,
             shard: nil,
             presence: nil,
-            capabilities: 253
+            capabilities: 0b11111101 // TODO: Reverse engineer this
         )
     }
 

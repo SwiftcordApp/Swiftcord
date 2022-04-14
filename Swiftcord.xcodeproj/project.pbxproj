@@ -92,8 +92,6 @@
 		DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890627C38E4300720909 /* DiscordAPI.swift */; };
 		DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890827C3CFA700720909 /* APIRequest.swift */; };
 		DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890B27C3D29C00720909 /* APIChannel.swift */; };
-		DA4A890E27C4876900720909 /* GatewayHeartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */; };
-		DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890F27C48A7B00720909 /* GatewaySend.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
 		DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* GatewayCachedState.swift */; };
 		DA4A891927C4E90900720909 /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891827C4E90900720909 /* APIUser.swift */; };
@@ -212,8 +210,6 @@
 		DA4A890827C3CFA700720909 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		DA4A890A27C3D02A00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DA4A890B27C3D29C00720909 /* APIChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChannel.swift; sourceTree = "<group>"; };
-		DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayHeartbeat.swift; sourceTree = "<group>"; };
-		DA4A890F27C48A7B00720909 /* GatewaySend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewaySend.swift; sourceTree = "<group>"; };
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
 		DA4A891527C4B06500720909 /* GatewayCachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCachedState.swift; sourceTree = "<group>"; };
 		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -427,8 +423,6 @@
 				DA520ACD27D4C6AA009FD740 /* README.md */,
 				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
 				DA4A890227C3824800720909 /* GatewayIdentify.swift */,
-				DA4A890D27C4876900720909 /* GatewayHeartbeat.swift */,
-				DA4A890F27C48A7B00720909 /* GatewaySend.swift */,
 				DA4A891527C4B06500720909 /* GatewayCachedState.swift */,
 				DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */,
 			);
@@ -688,7 +682,6 @@
 				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
-				DA4A891027C48A7B00720909 /* GatewaySend.swift in Sources */,
 				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
@@ -736,7 +729,6 @@
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
-				DA4A890E27C4876900720909 /* GatewayHeartbeat.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
 				DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
