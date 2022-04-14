@@ -8,20 +8,21 @@
 import Foundation
 import Starscream
 
-class DiscordGateway: NSObject, ObservableObject, URLSessionWebSocketDelegate {
+class DiscordGateway: ObservableObject {
     // Events
     let onStateChange = EventDispatch<(Bool, Bool, GatewayCloseCode?)>()
     let onEvent = EventDispatch<(GatewayEvent, GatewayData)>()
     let onAuthFailure = EventDispatch<Void>()
     
     // Config
-    let missedACKTolerance: Int
-    let connTimeout: Double
+    // let missedACKTolerance: Int
+    // let connTimeout: Double
     
     // WebSocket object
     // private(set) var socket: WebSocket!
-    private(set) var session: URLSession!
-    private(set) var socket: URLSessionWebSocketTask!
+    // private(set) var session: URLSession!
+    // private(set) var socket: URLSessionWebSocketTask!
+    private var socket: RobustWebSocket!
     
     // State
     @Published private(set) var isConnected = false
@@ -31,20 +32,22 @@ class DiscordGateway: NSObject, ObservableObject, URLSessionWebSocketDelegate {
     @Published private(set) var seq: Int? = nil // Sequence int of latest received payload
     @Published private(set) var viability = true
     @Published private(set) var connTimes = 0
-    private(set) var authFailed = false {
+    /*private(set) var authFailed = false {
         didSet {
             if authFailed { onAuthFailure.notify() }
             cache = CachedState() // Clear the cache
         }
-    }
+    }*/
     @Published private(set) var sessionID: String? = nil
     @Published var cache: CachedState = CachedState()
+    
+    private var evtListenerID: EventDispatch.HandlerIdentifier? = nil
     
     // Logger
     let log = Logger(tag: "DiscordGateway")
     
     // Queues
-    let queue: DispatchQueue
+    /*let queue: DispatchQueue
     let opQueue: OperationQueue
     
     func incMissedACK() { missedACK += 1 }
@@ -257,5 +260,40 @@ class DiscordGateway: NSObject, ObservableObject, URLSessionWebSocketDelegate {
         // didCloseConnection?()
         log.w("Session Gateway disconnected")
         didReceive(event: .disconnected("", UInt16(closeCode.rawValue)))
+    }*/
+    
+    public func logout() {
+        log.d("Logging out on request")
+        let _ = Keychain.remove(key: "token")
+        // socket.disconnect(closeCode: 1000)
+        socket.close(code: .normalClosure)
+        // authFailed = true
+    }
+    
+    public func connect() {
+        socket.open()
+    }
+    
+    private func handleEvt(type: GatewayEvent, data: GatewayData) {
+        switch (type) {
+        case .ready:
+            guard let d = data as? ReadyEvt else { return }
+            //self.doNotResume = false
+            //self.sessionID = d.session_id
+            self.cache.guilds = d.guilds
+            self.cache.user = d.user
+            log.i("Gateway ready")
+            //onEvent.notify(event: (type, data))
+        default: break
+        }
+        onEvent.notify(event: (type, data))
+        log.i("Dispatched event <\(type)>")
+    }
+    
+    init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
+        socket = RobustWebSocket()
+        evtListenerID = socket.onEvent.addHandler { [weak self] (t, d) in
+            self?.handleEvt(type: t, data: d)
+        }
     }
 }

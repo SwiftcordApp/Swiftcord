@@ -121,7 +121,7 @@ struct ContentView: View {
             if tk != nil {
                 state.attemptLogin = false
                 let _ = Keychain.save(key: "token", data: tk!)
-                gateway.initWSConn() // Reconnect to the socket
+                gateway.connect() // Reconnect to the socket
             }
         })
         .onAppear {

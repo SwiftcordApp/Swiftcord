@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DiscordGateway {    
+/*extension DiscordGateway {
     func initHeartbeat(interval: Int) {
         let initialConnTimes = connTimes
         func sendHeartbeat() {
@@ -41,3 +41,4 @@ extension DiscordGateway {
         }
     }
 }
+*/

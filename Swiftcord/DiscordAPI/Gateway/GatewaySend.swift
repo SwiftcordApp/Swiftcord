@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DiscordGateway {
+/*extension DiscordGateway {
     func sendToGateway<T: OutgoingGatewayData>(op: GatewayOutgoingOpcodes, d: T?) {
         guard isConnected else { return }
 
@@ -24,4 +24,4 @@ extension DiscordGateway {
             }
         }
     }
-}
+}*/

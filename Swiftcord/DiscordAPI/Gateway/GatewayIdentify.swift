@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DiscordGateway {
+extension RobustWebSocket {
     func getIdentify() -> GatewayIdentify? {
         // Keychain.save(key: "token", data: "token goes here")
         // Keychain.remove(key: "token") // For testing

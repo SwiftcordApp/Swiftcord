@@ -78,7 +78,7 @@ struct GatewayIncoming: Decodable {
             // Cue the long switch case to parse every single event
             switch t {
             case .ready: d = try values.decode(ReadyEvt.self, forKey: .d)
-            /*case .resumed: d = nil
+            case .resumed: d = nil
             case .channelCreate: fallthrough
             case .channelUpdate: fallthrough
             case .channelDelete: fallthrough
@@ -114,7 +114,7 @@ struct GatewayIncoming: Decodable {
             case .messageDelete: d = try values.decode(MessageDelete.self, forKey: .d)
             case .messageDeleteBulk: d = try values.decode(MessageDeleteBulk.self, forKey: .d)
             case .presenceUpdate: d = try values.decode(PartialPresenceUpdate .self, forKey: .d)
-                // TODO: Add the remaining like 100 events*/
+                // TODO: Add the remaining like 100 events
             default: break
             }
         default:
