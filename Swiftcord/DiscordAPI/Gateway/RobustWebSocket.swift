@@ -262,6 +262,8 @@ extension RobustWebSocket {
         log.d("Sending heartbeats every \(interval)s")
         awaitingHb = 0
         
+        // First heartbeat after interval * jitter where jitter is a value from 0-1
+        // ~ Discord API docs
         DispatchQueue.main.asyncAfter(
             deadline: .now() + interval * Double.random(in: 0...1),
             qos: .utility,
@@ -269,6 +271,7 @@ extension RobustWebSocket {
         ) {
             self.sendHeartbeat()
             self.hbTimer = Timer(timeInterval: interval, target: self, selector: #selector(self.sendHeartbeat), userInfo: nil, repeats: true)
+            self.hbTimer!.tolerance = 2 // 2s of tolerance
             RunLoop.current.add(self.hbTimer!, forMode: .common)
         }
     }
