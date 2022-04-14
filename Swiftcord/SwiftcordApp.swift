@@ -23,6 +23,7 @@ extension NSTextField {
 
 @main
 struct SwiftcordApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     let persistenceController = PersistenceController.shared
     
     @StateObject private var gateway = DiscordGateway()

@@ -153,9 +153,19 @@ class RobustWebSocket: NSObject {
         case .invalidSession:
             // Check if the session can be resumed
             let shouldResume = (decoded.primitiveData as? Bool) ?? false
-            if !shouldResume { canResume = false }
-            log.w("Session is invalid, reconnecting without resuming")
-            forceClose(code: .normalClosure)
+            if !shouldResume {
+                log.w("Session is invalid, reconnecting without resuming")
+                canResume = false
+            }
+            /// Close the connection immediately and reconnect after 1-5s, as per Discord docs
+            /// Unfortunately Discord seems to reject the new identify no matter how long I
+            /// wait before sending it, so there will always be at least 2 identify attempts before
+            /// the Gateway session is reestablished
+            close(code: .normalClosure)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1...5)) { [weak self] in
+                self?.log.d("Attempting to reconnect now")
+                self?.open()
+            }
             // attemptReconnect(resume: shouldResume)
         case .dispatchEvent:
             guard let type = decoded.t else { return }
@@ -170,7 +180,7 @@ class RobustWebSocket: NSObject {
             onEvent.notify(event: (type, data))
         case .reconnect:
             log.w("Gateway-requested reconnect: disconnecting and reconnecting immediately")
-            
+            close(code: .goingAway)
         }
     }
     
@@ -248,6 +258,13 @@ extension RobustWebSocket {
 // MARK: - Heartbeating
 extension RobustWebSocket {
     @objc private func sendHeartbeat() {
+        guard connected else {
+            // Obviously, a dead connection will not respond to heartbeats
+            log.w("Socket is not connected, cancelling heartbeat timer")
+            hbTimer?.invalidate()
+            return
+        }
+        
         log.d("Sending heartbeat, awaiting \(awaitingHb) ACKs")
         if awaitingHb > 1 {
             log.e("Too many pending heartbeats, closing socket")
@@ -287,12 +304,15 @@ extension RobustWebSocket {
 
 // MARK: - Extension with public exposed methods
 extension RobustWebSocket {
-    public func forceClose(code: URLSessionWebSocketTask.CloseCode = .abnormalClosure) {
+    public func forceClose(
+        code: URLSessionWebSocketTask.CloseCode = .abnormalClosure,
+        shouldReconnect: Bool = true
+    ) {
         log.w("Forcibly closing connection")
         stopHeartbeating()
         self.socket.cancel(with: code, reason: nil)
         connected = false
-        self.reconnect(code: nil)
+        if shouldReconnect { self.reconnect(code: nil) }
     }
     public func close(code: URLSessionWebSocketTask.CloseCode) {
         clearPendingReconnectIfNeeded()
