@@ -74,6 +74,7 @@ class RobustWebSocket: NSObject {
     
     private func attachSockReceiveListener() {
         socket.receive { [weak self] result in
+            // print(result)
             switch result {
             case .success(let message):
                 switch (message) {

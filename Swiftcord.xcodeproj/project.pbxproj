@@ -15,7 +15,8 @@
 		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
-		DA28027B280912BF00B14E5C /* LoggerInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027A280912BF00B14E5C /* LoggerInit.swift */; };
+		DA28027D280957F200B14E5C /* TypingStartEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027C280957F200B14E5C /* TypingStartEvt.swift */; };
+		DA28027F28095E3100B14E5C /* LoggerInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* LoggerInit.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -129,9 +130,9 @@
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		DA2802772808337800B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA28027A280912BF00B14E5C /* LoggerInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoggerInit.swift; path = "../../../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord/Utils/LoggerInit.swift"; sourceTree = "<group>"; };
+		DA28027C280957F200B14E5C /* TypingStartEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TypingStartEvt.swift; path = "../../../../../../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord/DiscordAPI/Objects/Gateway/Event/TypingStartEvt.swift"; sourceTree = "<group>"; };
+		DA28027E28095E3000B14E5C /* LoggerInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInit.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -327,7 +328,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DA2802772808337800B14E5C /* AppDelegate.swift */,
 				DA4A891727C4B0DF00720909 /* README.md */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A888527C0AF3000720909 /* Products */,
@@ -463,7 +463,6 @@
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
 				DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */,
-				DA28027A280912BF00B14E5C /* LoggerInit.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -482,6 +481,7 @@
 				DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */,
 				DA4A890027C360D300720909 /* ReadyEvt.swift */,
 				DA4A890427C383DD00720909 /* MessageDelete.swift */,
+				DA28027C280957F200B14E5C /* TypingStartEvt.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -533,6 +533,7 @@
 		DA520AE327D76BF8009FD740 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DA28027E28095E3000B14E5C /* LoggerInit.swift */,
 				DA520ACA27D4A23A009FD740 /* EmojiExtensions.swift */,
 				DA520AE127D76BEB009FD740 /* BoolToString.swift */,
 				DA520ADC27D643CE009FD740 /* DecodeIntFlags.swift */,
@@ -675,7 +676,6 @@
 				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,
-				DA28027B280912BF00B14E5C /* LoggerInit.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
@@ -728,9 +728,11 @@
 				DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
+				DA28027F28095E3100B14E5C /* LoggerInit.swift in Sources */,
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
 				DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */,
+				DA28027D280957F200B14E5C /* TypingStartEvt.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
