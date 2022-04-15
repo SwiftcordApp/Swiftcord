@@ -16,7 +16,7 @@ enum LogLevel { // In increasing levels of importance
     case crit  // Unrecoverable errors
 }
 
-class Logger {
+class CustomLogger {
     let tag: String
     
     init(tag: String) {

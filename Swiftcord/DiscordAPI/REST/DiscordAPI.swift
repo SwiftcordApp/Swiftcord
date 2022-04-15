@@ -8,6 +8,6 @@
 import Foundation
 
 struct DiscordAPI {
-    static let log = Logger(tag: "DiscordREST")
+    static let log = CustomLogger(tag: "DiscordREST")
     // How empty, everything is broken into smaller files (for now xD)
 }

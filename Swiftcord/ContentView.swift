@@ -32,7 +32,7 @@ struct ContentView: View {
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
-    let log = Logger(tag: "ContentView")
+    let log = CustomLogger(tag: "ContentView")
 
     var body: some View {
         HStack(spacing: 0) {

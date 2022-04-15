@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 class DiscordGateway: ObservableObject {
     // Events
@@ -19,17 +20,19 @@ class DiscordGateway: ObservableObject {
     // State cache
     @Published var cache: CachedState = CachedState()
     
-    private var evtListenerID: EventDispatch.HandlerIdentifier? = nil
+    private var evtListenerID: EventDispatch.HandlerIdentifier? = nil,
+                authFailureListenerID: EventDispatch.HandlerIdentifier? = nil
     
     // Logger
-    let log = Logger(tag: "DiscordGateway")
+    private let log = Logger(category: "DiscordGateway")
     
     public func logout() {
-        log.d("Logging out on request")
+        log.debug("Logging out on request")
         let _ = Keychain.remove(key: "token")
         // socket.disconnect(closeCode: 1000)
         socket.close(code: .normalClosure)
         // authFailed = true
+        onAuthFailure.notify()
     }
     
     public func connect() {
@@ -42,11 +45,11 @@ class DiscordGateway: ObservableObject {
             guard let d = data as? ReadyEvt else { return }
             self.cache.guilds = d.guilds
             self.cache.user = d.user
-            log.i("Gateway ready")
+            log.info("Gateway ready")
         default: break
         }
         onEvent.notify(event: (type, data))
-        log.i("Dispatched event <\(type)>")
+        log.info("Dispatched event <\(type.rawValue, privacy: .public)>")
     }
     
     init(connectionTimeout: Double = 5, maxMissedACK: Int = 3) {
@@ -54,11 +57,17 @@ class DiscordGateway: ObservableObject {
         evtListenerID = socket.onEvent.addHandler { [weak self] (t, d) in
             self?.handleEvt(type: t, data: d)
         }
+        authFailureListenerID = socket.onAuthFailure.addHandler(handler: { [weak self] in
+            self?.onAuthFailure.notify()
+        })
     }
     
     deinit {
         if let evtListenerID = evtListenerID {
             let _ = socket.onEvent.removeHandler(handler: evtListenerID)
+        }
+        if let authFailureListenerID = authFailureListenerID {
+            let _ = socket.onAuthFailure.removeHandler(handler: authFailureListenerID)
         }
     }
 }

@@ -125,7 +125,7 @@ struct WebView: NSViewRepresentable {
     
     class Coordinator: NSObject, WKNavigationDelegate {
         private var viewModel: WebViewModel
-        private let log = Logger(tag: "WebViewCoordinator")
+        private let log = CustomLogger(tag: "WebViewCoordinator")
 
         init(_ viewModel: WebViewModel) {
            // Initialise the WebViewModel
