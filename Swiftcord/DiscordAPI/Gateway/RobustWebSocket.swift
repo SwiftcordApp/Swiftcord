@@ -173,7 +173,10 @@ class RobustWebSocket: NSObject {
             // attemptReconnect(resume: shouldResume)
         case .dispatchEvent:
             guard let type = decoded.t else { return }
-            guard let data = decoded.d else { return }
+            guard let data = decoded.d else {
+                log.warning("Event type <\(type.rawValue, privacy: .public)> has nil data")
+                return
+            }
             switch type {
             case .ready:
                 guard let d = data as? ReadyEvt else { return }
@@ -350,7 +353,7 @@ extension RobustWebSocket {
         guard let encoded = try? JSONEncoder().encode(sendPayload)
         else { return }
         
-        log.debug("Outgoing Payload: <\(op.rawValue, privacy: .public)> \(String(describing: data), privacy: .sensitive(mask: .hash)) [seq: \(String(describing: self.seq), privacy: .public)]")
+        log.debug("Outgoing Payload: <\(String(describing: op), privacy: .public)> \(String(describing: data), privacy: .sensitive(mask: .hash)) [seq: \(String(describing: self.seq), privacy: .public)]")
         // socket.write(string: String(data: encoded, encoding: .utf8)!)
         socket.send(.data(encoded), completionHandler: completionHandler ?? { [weak self] err in
             if let err = err { self?.log.error("Socket send error: \(err.localizedDescription, privacy: .public)") }

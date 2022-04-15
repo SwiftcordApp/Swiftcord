@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WebKit
+import os
 
 // MARK: Adapted from: https://stackoverflow.com/a/63055549/13409955
 
@@ -125,7 +126,7 @@ struct WebView: NSViewRepresentable {
     
     class Coordinator: NSObject, WKNavigationDelegate {
         private var viewModel: WebViewModel
-        private let log = CustomLogger(tag: "WebViewCoordinator")
+        private let log = Logger(category: "WebViewCoordinator")
 
         init(_ viewModel: WebViewModel) {
            // Initialise the WebViewModel
@@ -141,7 +142,7 @@ struct WebView: NSViewRepresentable {
             self.viewModel.pageTitle = web.title!
             self.viewModel.link = web.url?.absoluteString ?? ""
             self.viewModel.didFinishLoading = true
-            log.i("didFinishNavigation")
+            log.info("didFinishNavigation")
         }
 
         public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) { }
@@ -149,7 +150,7 @@ struct WebView: NSViewRepresentable {
         public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             let decision: WKNavigationActionPolicy = navigationAction.request.url?.absoluteString == viewModel.link || navigationAction.request.url?.host == "newassets.hcaptcha.com" ? .allow : .cancel
             decisionHandler(decision)
-            log.d("Navigation to", String(describing: navigationAction.request.url?.absoluteString), decision == .allow ? "allowed" : "cancelled")
+            log.debug("Navigation to \(navigationAction.request.url?.absoluteString ?? "[unknown URL]", privacy: .public) \(decision == .allow ? "allowed" : "cancelled", privacy: .public)")
         }
         
         func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) { }

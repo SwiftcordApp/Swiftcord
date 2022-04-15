@@ -79,21 +79,17 @@ struct GatewayIncoming: Decodable {
             switch t {
             case .ready: d = try values.decode(ReadyEvt.self, forKey: .d)
             case .resumed: d = nil
-            case .channelCreate: fallthrough
-            case .channelUpdate: fallthrough
-            case .channelDelete: fallthrough
-            case .threadCreate: fallthrough
-            case .threadUpdate: fallthrough
-            case .threadDelete: d = try values.decode(Channel.self, forKey: .d)
+            case .channelCreate, .channelUpdate, .channelDelete, .threadCreate, .threadUpdate, .threadDelete:
+                d = try values.decode(Channel.self, forKey: .d)
+            case .channelPinUpdate: d = try values.decode(ChannelPinsUpdate.self, forKey: .d)
+                
             case .threadListSync: d = try values.decode(ThreadListSync.self, forKey: .d)
             case .threadMemberUpdate: d = try values.decode(ThreadMember.self, forKey: .d)
             case .threadMembersUpdate: d = try values.decode(ThreadMembersUpdate.self, forKey: .d)
-            case .channelPinUpdate: d = try values.decode(ChannelPinsUpdate.self, forKey: .d)
-            case .guildCreate: fallthrough
-            case .guildUpdate: d = try values.decode(Guild.self, forKey: .d)
+                
+            case .guildUpdate, .guildCreate: d = try values.decode(Guild.self, forKey: .d)
             case .guildDelete: d = try values.decode(GuildUnavailable.self, forKey: .d)
-            case .guildBanAdd: fallthrough
-            case .guildBanRemove: d = try values.decode(GuildBan.self, forKey: .d)
+            case .guildBanAdd, .guildBanRemove: d = try values.decode(GuildBan.self, forKey: .d)
             case .guildEmojisUpdate: d = try values.decode(GuildEmojisUpdate.self, forKey: .d)
             case .guildStickersUpdate: d = try values.decode(GuildStickersUpdate.self, forKey: .d)
             case .guildIntegrationsUpdate: d = try values.decode(GuildIntegrationsUpdate.self, forKey: .d)
@@ -103,18 +99,17 @@ struct GatewayIncoming: Decodable {
             case .guildRoleCreate: d = try values.decode(GuildRoleEvt.self, forKey: .d)
             case .guildRoleUpdate: d = try values.decode(GuildRoleEvt.self, forKey: .d)
             case .guildRoleDelete: d = try values.decode(GuildRoleDelete.self, forKey: .d)
-            case .guildSchEvtCreate: fallthrough
-            case .guildSchEvtUpdate: fallthrough
-            case .guildSchEvtDelete: d = try values.decode(GuildScheduledEvent.self, forKey: .d)
-            case .guildSchEvtUserAdd: fallthrough
-            case .guildSchEvtUserRemove: d = try values.decode(GuildSchEvtUserEvt.self, forKey: .d)
+            case .guildSchEvtCreate, .guildSchEvtUpdate, .guildSchEvtDelete: d = try values.decode(GuildScheduledEvent.self, forKey: .d)
+            case .guildSchEvtUserAdd, .guildSchEvtUserRemove: d = try values.decode(GuildSchEvtUserEvt.self, forKey: .d)
+                
                 // TODO: More events go here
             case .messageCreate: d = try values.decode(Message.self, forKey: .d)
             case .messageUpdate: d = try values.decode(PartialMessage.self, forKey: .d)
             case .messageDelete: d = try values.decode(MessageDelete.self, forKey: .d)
             case .messageDeleteBulk: d = try values.decode(MessageDeleteBulk.self, forKey: .d)
-            case .presenceUpdate: d = try values.decode(PartialPresenceUpdate .self, forKey: .d)
+            case .presenceUpdate: d = try values.decode(PartialPresenceUpdate.self, forKey: .d)
                 // TODO: Add the remaining like 100 events
+                
             default: break
             }
         default:

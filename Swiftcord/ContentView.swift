@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import os
 
 struct CustomHorizontalDivider: View {
     var body: some View {
@@ -32,7 +33,7 @@ struct ContentView: View {
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
-    let log = CustomLogger(tag: "ContentView")
+    private let log = Logger(category: "ContentView")
 
     var body: some View {
         HStack(spacing: 0) {
@@ -125,18 +126,14 @@ struct ContentView: View {
             }
         })
         .onAppear {
-            let _ = gateway.onStateChange.addHandler { (connected, resuming, error) in
-                log.d("Connection state change: \(connected), \(resuming)")
-            }
             let _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
                 state.loadingState = .initial
-                log.d("User isn't logged in, attempting login")
+                log.debug("User isn't logged in, attempting login")
             }
             let _ = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
-                case .ready:
-                    state.loadingState = .gatewayConn
+                case .ready: state.loadingState = .gatewayConn
                 default: break
                 }
             }

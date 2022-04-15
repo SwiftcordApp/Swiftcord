@@ -10,7 +10,6 @@ import os
 
 class DiscordGateway: ObservableObject {
     // Events
-    let onStateChange = EventDispatch<(Bool, Bool, GatewayCloseCode?)>()
     let onEvent = EventDispatch<(GatewayEvent, GatewayData)>()
     let onAuthFailure = EventDispatch<Void>()
     

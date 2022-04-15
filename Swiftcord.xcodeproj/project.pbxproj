@@ -14,7 +14,6 @@
 		DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */; };
 		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
-		DA2384C827CD9418009E15E0 /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C727CD9418009E15E0 /* CustomLogger.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
 		DA28027B280912BF00B14E5C /* LoggerInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027A280912BF00B14E5C /* LoggerInit.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
@@ -130,7 +129,6 @@
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		DA2384C727CD9418009E15E0 /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		DA2802772808337800B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA28027A280912BF00B14E5C /* LoggerInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoggerInit.swift; path = "../../../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord/Utils/LoggerInit.swift"; sourceTree = "<group>"; };
@@ -464,7 +462,6 @@
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
-				DA2384C727CD9418009E15E0 /* CustomLogger.swift */,
 				DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */,
 				DA28027A280912BF00B14E5C /* LoggerInit.swift */,
 			);
@@ -690,7 +687,6 @@
 				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
-				DA2384C827CD9418009E15E0 /* CustomLogger.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* BoolToString.swift in Sources */,
 				DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */,
 				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
