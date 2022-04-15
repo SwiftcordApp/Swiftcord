@@ -187,7 +187,7 @@ struct UserSettingsView: View {
                         Text("Log Out").font(.title)
                         Text("Are you sure you want to log out?")
                         Button(role: .destructive) {
-                            gateway.logOut()
+                            gateway.logout()
                         } label: {
                             Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
                         }

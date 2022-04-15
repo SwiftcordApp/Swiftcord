@@ -23,7 +23,7 @@ extension DiscordAPI {
         body: String? = nil,
         method: RequestMethod = .get
     ) async throws -> Data? {
-        DiscordAPI.log.d("\(method.rawValue): \(path)")
+        DiscordAPI.log.debug("\(method.rawValue): \(path)")
         
         guard let token = Keychain.load(key: "token") else { return nil }
         guard var apiURL = URL(string: apiConfig.restBase) else { return nil }
@@ -48,8 +48,8 @@ extension DiscordAPI {
         let (data, response) = try await URLSession.shared.data(for: req)
         guard let httpResponse = response as? HTTPURLResponse else { return nil }
         guard httpResponse.statusCode / 100 == 2 else { // Check if status code is 2**
-            print("Status code is not 2xx: \(httpResponse.statusCode)")
-            print(String(decoding: data, as: UTF8.self))
+            log.warning("Status code is not 2xx: \(httpResponse.statusCode, privacy: .public)")
+            log.warning("Response: \(String(decoding: data, as: UTF8.self), privacy: .public)")
             return nil
         }
         
@@ -61,13 +61,14 @@ extension DiscordAPI {
         path: String,
         query: [URLQueryItem] = []
     ) async -> T? {
+        // This helps debug JSON decoding errors
         do {
             guard let d = try? await makeRequest(path: path, query: query)
             else { return nil }
             
             return try JSONDecoder().decode(T.self, from: d)
         } catch let DecodingError.dataCorrupted(context) {
-             print(context)
+            print(context)
         } catch let DecodingError.keyNotFound(key, context) {
             print("Key '\(key)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)
