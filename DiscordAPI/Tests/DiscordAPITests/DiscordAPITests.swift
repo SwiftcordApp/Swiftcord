@@ -1,11 +1,11 @@
 import XCTest
-@testable import Discord_API
+@testable import DiscordAPI
 
-final class Discord_APITests: XCTestCase {
+final class DiscordAPITests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Discord_API().text, "Hello, World!")
+        XCTAssertEqual(DiscordAPI().text, "Hello, World!")
     }
 }
