@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/DiscordAPI">
+   </FileRef>
+   <FileRef
+      location = "container:../../../../../Data/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord.xcodeproj">
+   </FileRef>
+</Workspace>
