@@ -78,7 +78,17 @@ class RobustWebSocket: NSObject {
             switch result {
             case .success(let message):
                 switch (message) {
-                case .data(_): break
+                case .data(_):
+                    /*do {
+                        let decompressed = try NSData(data: data).decompressed(using: .zlib)
+                        let str = String(decoding: decompressed, as: UTF8.self)
+                        self?.handleMessage(message: str)
+                    } catch {
+                        self?.log.error("Could not decompress Gateway message: \(error.localizedDescription)")
+                        print(error)
+                    }*/
+                    // TODO: Fix this broken decompression implementation
+                    break
                 case .string(let str): self?.handleMessage(message: str)
                 @unknown default: self?.log.warning("Unknown sock message case!")
                 }
@@ -207,8 +217,10 @@ class RobustWebSocket: NSObject {
     
     override convenience init() {
         self.init(timeout: TimeInterval(4), maxMessageSize: 1024*1024*10) { code, times in
-            if code == .policyViolation || code == .internalServerError { return nil }
-            return [2, 5, 10][times]
+            guard code != .policyViolation, code != .internalServerError, times < 10
+            else { return nil }
+            
+            return pow(1.4, Double(times)) * 5
         }
     }
 }
