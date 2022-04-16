@@ -220,7 +220,7 @@ class RobustWebSocket: NSObject {
             guard code != .policyViolation, code != .internalServerError, times < 10
             else { return nil }
             
-            return pow(1.4, Double(times)) * 5
+            return pow(1.4, Double(times)) * 5 - 5
         }
     }
 }

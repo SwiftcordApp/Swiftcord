@@ -14,6 +14,7 @@ struct ServerView: View {
     @State private var channels: [Channel] = []
     @State private var selectedCh: Channel? = nil
     @State private var isLoading = true
+    @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
@@ -93,6 +94,28 @@ struct ServerView: View {
                 loadChannels()
             }
         })
+        .onAppear {
+            evtID = gateway.onEvent.addHandler { (evt, d) in
+                switch evt {
+                case .channelUpdate:
+                    guard let updatedCh = d as? Channel else { break }
+                    if let chPos = channels.firstIndex(where: { ch in ch == updatedCh }) {
+                        // Crappy workaround for channel list to update
+                        var chs = channels
+                        chs[chPos] = updatedCh
+                        channels = []
+                        channels = chs
+                    }
+                    // For some reason, updating one element doesnt update the UI
+                    // loadChannels()
+                    break
+                default: break
+                }
+            }
+        }
+        .onDisappear {
+            if let evtID = evtID { let _ = gateway.onEvent.removeHandler(handler: evtID) }
+        }
     }
 }
 

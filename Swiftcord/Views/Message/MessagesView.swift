@@ -206,7 +206,7 @@ struct MessagesView: View {
                             withAnimation { let _ = messages.remove(at: delIdx) }
                         }
                     }
-                default: print("Handling event \(evt) not implemented")
+                default: break
                 }
             })
         }
