@@ -15,7 +15,6 @@
 		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
-		DA28027D280957F200B14E5C /* TypingStartEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027C280957F200B14E5C /* TypingStartEvt.swift */; };
 		DA28027F28095E3100B14E5C /* LoggerInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* LoggerInit.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
@@ -120,7 +119,6 @@
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA57F4482806C4F5001DC46E /* RobustWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */; };
-		DAF461DD2809789000282B6E /* PresenceUpdateEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF461DC2809789000282B6E /* PresenceUpdateEvt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,7 +130,6 @@
 		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA28027C280957F200B14E5C /* TypingStartEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TypingStartEvt.swift; path = "../../../../../../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord/DiscordAPI/Objects/Gateway/Event/TypingStartEvt.swift"; sourceTree = "<group>"; };
 		DA28027E28095E3000B14E5C /* LoggerInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInit.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -241,7 +238,6 @@
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobustWebSocket.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
-		DAF461DC2809789000282B6E /* PresenceUpdateEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PresenceUpdateEvt.swift; path = "../../../../../../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord/DiscordAPI/Objects/Gateway/Event/PresenceUpdateEvt.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,8 +479,6 @@
 				DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */,
 				DA4A890027C360D300720909 /* ReadyEvt.swift */,
 				DA4A890427C383DD00720909 /* MessageDelete.swift */,
-				DA28027C280957F200B14E5C /* TypingStartEvt.swift */,
-				DAF461DC2809789000282B6E /* PresenceUpdateEvt.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -735,7 +729,6 @@
 				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
 				DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */,
-				DA28027D280957F200B14E5C /* TypingStartEvt.swift in Sources */,
 				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
@@ -748,7 +741,6 @@
 				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
 				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
 				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
-				DAF461DD2809789000282B6E /* PresenceUpdateEvt.swift in Sources */,
 				DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */,
 				DA32EF4827C8ABFF00A9ED72 /* FormatDate.swift in Sources */,
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,

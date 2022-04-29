@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../../Macintosh HD/Users/vinkwok/XcodeProjects/Swiftcord/DiscordAPI">
+      location = "group:DiscordAPI">
    </FileRef>
    <FileRef
-      location = "container:../../../../../Data/Users/vinkwok/XcodeProjects/Swiftcord/Swiftcord.xcodeproj">
+      location = "container:Swiftcord.xcodeproj">
    </FileRef>
 </Workspace>
