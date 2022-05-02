@@ -12,16 +12,7 @@ me to continue developing it**
 
 ### Pre-built packages are now available at [releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/latest)!
 
-> ~~⚠️ Bug stopping loading from ever completing:
-I've identified a bug that might stop the loading from fully
-completing the first time you open the app. If you encounter an 
-issue where the loading progress gets stuck forever on "Loading channels",
-run `defaults write com.cryptoalgo.swiftcord lastSelectedGuild <guild ID of a guild you are in>`
-to fix it. **This is just a temporary fix**, I'll fix it when I
-have the time to (soon).~~
-
-^ If you encounter the issue above, pull the latest commits from GitHub
-which contains fixes for that issue
+### Join the Swiftcord Discord server [here](https://discord.gg/he7n6MGDXS)!
 
 ## Client Feature Parity
 
@@ -101,6 +92,12 @@ Thank you for popping by! If you know the Discord API well,
 have Swift knowledge and feel like contributing, feel free to
 make a pull request! Any (positive) contribution is welcome,
 no matter how small!
+
+Found an issue? Ensure it isn't a duplicate, then open a new issue
+with the appropriate template and fill in the placeholders as
+clearly as you can. Responding promptly to follow up comments
+is appreciated, as debugging is hard without any further input
+from the OP.
 
 ## License
 
