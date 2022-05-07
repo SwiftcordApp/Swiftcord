@@ -3,6 +3,8 @@
 > A completely native Discord client for macOS built 100% in
 > Swift and SwiftUI
 
+## Connection bug: Connection getting stuck at "Loading Channels"? Look at this [issue](https://github.com/cryptoAlgorithm/Swiftcord/issues/13) for a temporary fix!
+
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch. Look [below](#screenshots) for
 a bunch of screenshots!
