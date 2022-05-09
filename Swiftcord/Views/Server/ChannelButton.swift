@@ -36,16 +36,17 @@ struct DiscordChannelButton: ButtonStyle {
     @State var isHovered: Bool = false
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .padding(.horizontal, -4)
             .buttonStyle(.borderless)
             .font(.system(size: 14))
             .accentColor(Color.gray) // makes sf symbol gray
-            .padding(.horizontal, 4)
             .padding(.vertical, 6)
             .foregroundColor(isSelected ? .white : .gray)
-            .background(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
-            .onHover(perform: { over in
-                isHovered = over
-            })
-            .cornerRadius(4)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
+                    .padding(.horizontal, -8)
+            )
+            .onHover(perform: { over in isHovered = over })
     }
 }

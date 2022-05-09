@@ -44,7 +44,7 @@ struct ContentView: View {
                         name: "Home",
                         assetIconName: "DiscordIcon",
                         onSelect: { selectedGuild = dmGuild }
-                    )
+                    ).padding(.top, 4)
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
