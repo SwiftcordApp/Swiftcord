@@ -17,7 +17,7 @@ struct ChannelList: View {
             ForEach(
                 channels
                     .sorted(by: { c1, c2 in
-                        if c1.type == .category || c2.type == .category { return c2.type == .category }
+                        if (c1.type != .category && c2.type == .category) || (c1.type == .category && c2.type != .category) { return c2.type == .category }
                         if c1.position != nil && c2.position != nil { return c2.position! > c1.position! }
                         return true
                     }),
@@ -47,7 +47,7 @@ struct ChannelList: View {
                     .listRowInsets(.init(top: 1, leading: 16, bottom: 1, trailing: 16)) }
             }
         }
-        .padding(.top)
+        .padding(.top, 10)
         .padding(.horizontal, -14) // Horrible hack to work around List's clipping to bounds
         .listStyle(.sidebar)
         .frame(minWidth: 240, maxHeight: .infinity)
