@@ -28,6 +28,7 @@ struct ContentView: View {
     @State private var sheetOpen = false
     @State private var guilds: [PartialGuild] = []
     @State private var selectedGuild: Guild? = nil
+    @State private var loadingGuildID: Snowflake? = nil
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @EnvironmentObject var gateway: DiscordGateway
@@ -50,15 +51,11 @@ struct ContentView: View {
                     
                     ForEach(guilds, id: \.id) { guild in
                         ServerButton(
-                            selected: selectedGuild?.id == guild.id,
+                            selected: selectedGuild?.id == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
                             serverIconURL: guild.icon != nil ? "\(apiConfig.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                            onSelect: { Task {
-                                selectedGuild = nil
-                                guard let g = await DiscordAPI.getGuild(id: guild.id)
-                                else { return }
-                                selectedGuild = g
-                            }}
+                            isLoading: loadingGuildID == guild.id,
+                            onSelect: { loadingGuildID = guild.id }
                         )
                     }
                     
@@ -84,9 +81,17 @@ struct ContentView: View {
             })
             
             
-            
             ServerView(guild: $selectedGuild)
         }
+        .onChange(of: loadingGuildID, perform: { _ in
+            guard let newGuildID = loadingGuildID else { return }
+            selectedGuild = nil
+            Task {
+                guard let g = await DiscordAPI.getGuild(id: newGuildID) else { return }
+                loadingGuildID = nil
+                selectedGuild = g
+            }
+        })
         .onChange(of: selectedGuild, perform: { _ in
             guard let id = selectedGuild?.id else { return }
             UserDefaults.standard.set(id, forKey: "lastSelectedGuild")

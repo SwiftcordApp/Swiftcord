@@ -15,6 +15,7 @@ struct ServerButtonStyle: ButtonStyle {
     let systemName: String?
     let assetName: String?
     let serverIconURL: String?
+    let loading: Bool
     @Binding var hovered: Bool
     
     func makeBody(configuration: Configuration) -> some View {
@@ -41,6 +42,8 @@ struct ServerButtonStyle: ButtonStyle {
                 }
             }
             else { configuration.label.font(.system(size: 15)).lineLimit(1) }
+            
+            if loading { /* TODO: Show some form of feedback */ }
         }
         .frame(width: 48, height: 48)
         .background(
@@ -74,6 +77,7 @@ struct ServerButton: View {
     var serverIconURL: String? = nil
     var bgColor: Color? = nil
     var noIndicator = false // Don't show capsule
+    var isLoading: Bool = false
     let onSelect: () -> Void
     @State private var hovered = false
 
@@ -100,6 +104,7 @@ struct ServerButton: View {
                     systemName: systemIconName,
                     assetName: assetIconName,
                     serverIconURL: serverIconURL,
+                    loading: isLoading,
                     hovered: $hovered
                 )
             )
