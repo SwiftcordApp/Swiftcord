@@ -36,12 +36,17 @@ struct ChannelList: View {
                                     } else { return c2.id > c1.id }
                                 }),
                             id: \.id
-                        ) { channel in ChannelButton(channel: channel, guild: guild, selectedCh: $selCh) }
+                        ) { channel in ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
+                            .listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0)) }
                     }
                 }
-                else if ch.parent_id == nil { ChannelButton(channel: ch, guild: guild, selectedCh: $selCh) }
+                else if ch.parent_id == nil { ChannelButton(channel: ch, guild: guild, selectedCh: $selCh)
+                    .listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0)) }
             }
         }
         .frame(minWidth: 240, maxHeight: .infinity)
+        .padding(.top)
+        // this overlay applies a border on the bottom edge of the view
+        .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
     }
 }
