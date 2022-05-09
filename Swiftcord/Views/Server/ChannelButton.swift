@@ -39,11 +39,11 @@ struct DiscordChannelButton: ButtonStyle {
             .padding(.horizontal, -4)
             .buttonStyle(.borderless)
             .font(.system(size: 14))
-            .accentColor(Color.gray) // makes sf symbol gray
+            .accentColor(.gray) // Makes SF symbol gray
             .padding(.vertical, 6)
             .foregroundColor(isSelected ? .white : .gray)
             .overlay(
-                RoundedRectangle(cornerRadius: 4)
+                RoundedRectangle(cornerRadius: 6)
                     .fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
                     .padding(.horizontal, -8)
             )
