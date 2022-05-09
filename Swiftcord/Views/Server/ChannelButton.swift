@@ -27,7 +27,26 @@ struct ChannelButton: View {
                 systemImage: (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
             ).frame(maxWidth: .infinity, alignment: .leading)
         }
-        .buttonStyle(.borderedProminent)
-        .accentColor(Color.gray)
+        .buttonStyle(DiscordChannelButton(isSelected: Binding<Bool>(get: {selectedCh?.id == channel.id}, set: { _ in })))
+    }
+}
+
+struct DiscordChannelButton: ButtonStyle {
+    @Binding var isSelected: Bool
+    @State var isHovered: Bool = false
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, -4)
+            .buttonStyle(.borderless)
+            .font(.system(size: 14))
+            .accentColor(.gray) // Makes SF symbol gray
+            .padding(.vertical, 6)
+            .foregroundColor(isSelected ? .white : .gray)
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
+                    .padding(.horizontal, -8)
+            )
+            .onHover(perform: { over in isHovered = over })
     }
 }

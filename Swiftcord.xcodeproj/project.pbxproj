@@ -238,6 +238,7 @@
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobustWebSocket.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
+		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +327,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DAB8CA4428291BBD009F079D /* DiscordAPI */,
 				DA4A891727C4B0DF00720909 /* README.md */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A888527C0AF3000720909 /* Products */,

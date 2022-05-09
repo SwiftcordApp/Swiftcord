@@ -37,14 +37,14 @@ struct ContentView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
                         selected: selectedGuild?.id == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
                         onSelect: { selectedGuild = dmGuild }
-                    )
+                    ).padding(.top, 4)
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
@@ -71,8 +71,19 @@ struct ContentView: View {
                         onSelect: {}
                     )
                 }
+                .padding(.bottom, 8)
                 .frame(width: 72)
-            }.frame(maxHeight: .infinity, alignment: .top)
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .safeAreaInset(edge: .top, content: {
+                // allows the top left button area to become transparent, like the sidebar
+                List(){}.listStyle(.sidebar).frame(width: 72, height: 0)
+                    .offset(y: -10)
+                // this overlay applies a border on the bottom edge of the view
+                    .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
+            })
+            
+            
             
             ServerView(guild: $selectedGuild)
         }
