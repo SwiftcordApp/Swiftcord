@@ -38,8 +38,8 @@ struct DiscordChannelButton: ButtonStyle {
         configuration.label
             .padding(.horizontal, -4)
             .buttonStyle(.borderless)
-            .font(.system(size: 14))
-            .accentColor(.gray) // Makes SF symbol gray
+            .font(.system(size: 14, weight: isSelected ? .medium : .regular))
+            .accentColor(isSelected ? .white : .gray) // Changes color of SF symbol
             .padding(.vertical, 6)
             .foregroundColor(isSelected ? .white : .gray)
             .overlay(
