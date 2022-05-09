@@ -47,7 +47,7 @@ struct ChannelList: View {
                     .listRowInsets(.init(top: 1, leading: 16, bottom: 1, trailing: 16)) }
             }
         }
-        .padding(.top)
+        .padding(.top, 10)
         .padding(.horizontal, -14) // Horrible hack to work around List's clipping to bounds
         .listStyle(.sidebar)
         .frame(minWidth: 240, maxHeight: .infinity)
