@@ -16,7 +16,6 @@ struct ChannelButton: View {
     let channel: Channel
     let guild: Guild?
     @Binding var selectedCh: Channel?
-    @State private var isHovered = false
     
     var body: some View {
         Button {
