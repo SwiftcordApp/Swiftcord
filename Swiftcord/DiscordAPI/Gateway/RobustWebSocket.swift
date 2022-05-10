@@ -8,6 +8,7 @@
 import Foundation
 import Reachability
 import OSLog
+import Combine
 
 /// A robust WebSocket that handles resuming, reconnection and heartbeats
 /// with the Discord Gateway, inspired by robust-websocket
@@ -26,7 +27,8 @@ class RobustWebSocket: NSObject {
     private var attempts = 0, reconnects = -1, connected = false, awaitingHb: Int = 0,
                 reachable = false, reconnectWhenOnlineAgain = false, explicitlyClosed = false,
                 seq: Int? = nil, canResume = false, sessionID: String? = nil,
-                pendingReconnect: Timer? = nil, connTimeout: Timer? = nil, hbTimer: Timer? = nil
+                pendingReconnect: Timer? = nil, connTimeout: Timer? = nil
+    fileprivate var hbCancellable: AnyCancellable? = nil
     
     private func clearPendingReconnectIfNeeded() {
         if let reconnectTimer = pendingReconnect {
@@ -302,8 +304,7 @@ extension RobustWebSocket {
     @objc private func sendHeartbeat() {
         guard connected else {
             // Obviously, a dead connection will not respond to heartbeats
-            log.warning("Socket is not connected, cancelling heartbeat timer")
-            hbTimer?.invalidate()
+            log.warning("Socket is not connected, not sending heartbeat")
             return
         }
         
@@ -317,9 +318,10 @@ extension RobustWebSocket {
     }
     
     private func startHeartbeating(interval: TimeInterval) {
-        if hbTimer != nil { stopHeartbeating() }
         log.debug("Sending heartbeats every \(interval)s")
         awaitingHb = 0
+        
+        guard hbCancellable == nil else { return }
         
         // First heartbeat after interval * jitter where jitter is a value from 0-1
         // ~ Discord API docs
@@ -328,18 +330,16 @@ extension RobustWebSocket {
             qos: .utility,
             flags: .enforceQoS
         ) {
+            // Only ever start 1 publishing timer
             self.sendHeartbeat()
-            self.hbTimer = Timer(timeInterval: interval, target: self, selector: #selector(self.sendHeartbeat), userInfo: nil, repeats: true)
-            self.hbTimer!.tolerance = 2 // 2s of tolerance
-            RunLoop.current.add(self.hbTimer!, forMode: .common)
+            
+            self.hbCancellable = Timer.publish(every: interval, tolerance: 2, on: .main, in: .common)
+                .autoconnect()
+                .sink() { _ in self.sendHeartbeat() }
         }
     }
     private func stopHeartbeating() {
-        if let heartbeatTimer = hbTimer {
-            log.debug("Stopping heartbeat timer")
-            heartbeatTimer.invalidate()
-            hbTimer = nil
-        }
+        log.debug("Stop timer is now noop")
     }
 }
 
