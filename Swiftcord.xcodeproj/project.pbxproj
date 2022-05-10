@@ -120,6 +120,9 @@
 		DA57F4482806C4F5001DC46E /* RobustWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */; };
 		DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EC282A3B770021267C /* UserSettings.swift */; };
+		DAA3B6EF282A4CA50021267C /* FilterAndSortChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */; };
+		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
+		DAAFB5BE282A573400807B54 /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BD282A573400807B54 /* FileManagement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -240,6 +243,9 @@
 		DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobustWebSocket.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
 		DAA3B6EC282A3B770021267C /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAndSortChannels.swift; sourceTree = "<group>"; };
+		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		DAAFB5BD282A573400807B54 /* FileManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagement.swift; sourceTree = "<group>"; };
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,6 +277,7 @@
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
@@ -461,10 +468,12 @@
 			children = (
 				DA520AE327D76BF8009FD740 /* Extensions */,
 				DA520AC127D37863009FD740 /* MergeStructs */,
+				DAAFB5BD282A573400807B54 /* FileManagement.swift */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 				DA4A88DD27C3273C00720909 /* Keychain.swift */,
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
 				DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */,
+				DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -675,6 +684,7 @@
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
+				DAA3B6EF282A4CA50021267C /* FilterAndSortChannels.swift in Sources */,
 				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
 				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
@@ -728,6 +738,7 @@
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
 				DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */,
+				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
@@ -746,6 +757,7 @@
 				DA4A891927C4E90900720909 /* APIUser.swift in Sources */,
 				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
 				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
+				DAAFB5BE282A573400807B54 /* FileManagement.swift in Sources */,
 				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
 				DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */,
 				DA32EF4827C8ABFF00A9ED72 /* FormatDate.swift in Sources */,
