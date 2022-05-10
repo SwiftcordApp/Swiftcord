@@ -80,6 +80,14 @@ struct MessagesView: View {
                         // This whole view is flipped, so everything in it needs to be flipped as well
                         LazyVStack(alignment: .leading, spacing: 0) {
                             Spacer(minLength: 38)
+                                .onChange(of: messages.count) { _ in
+                                    guard messages.count >= 1 else { return }
+                                    // This is _not_ bugged
+                                    if scrollTopID != nil {
+                                        proxy.scrollTo(scrollTopID!, anchor: .bottom)
+                                        scrollTopID = nil
+                                    }
+                                }
                             
                             ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
                                 MessageView(
@@ -95,14 +103,6 @@ struct MessagesView: View {
                                     }
                                 )
                                 .flip()
-                            }
-                            .onChange(of: messages.count) { _ in
-                                guard messages.count >= 1 else { return }
-                                // This is _not_ bugged
-                                if scrollTopID != nil {
-                                    proxy.scrollTo(scrollTopID!, anchor: .bottom)
-                                    scrollTopID = nil
-                                }
                             }
                             
                             if reachedTop {
@@ -122,31 +122,14 @@ struct MessagesView: View {
                             }
                             else {
                                 VStack(alignment: .leading, spacing: 16) {
-                                    Group {
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                    }
-                                    Group {
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                        LoFiMessageView()
-                                    }
+                                    // TODO: Use a loop to create this
+                                    LoFiMessageView()
+                                    LoFiMessageView()
+                                    LoFiMessageView()
+                                    LoFiMessageView()
+                                    LoFiMessageView()
                                 }
+                                .id("placeholder")
                                 .onAppear {
                                     guard !loading else { return }
                                     fetchMoreMessages()
