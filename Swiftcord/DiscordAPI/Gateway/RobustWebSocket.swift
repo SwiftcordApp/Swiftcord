@@ -215,7 +215,6 @@ class RobustWebSocket: NSObject {
                 guard let d = data as? ReadyEvt else { return }
                 sessionID = d.session_id
                 canResume = true
-                print(message)
             default: break
             }
             onEvent.notify(event: (type, data))
