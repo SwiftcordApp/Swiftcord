@@ -127,6 +127,25 @@ class RobustWebSocket: NSObject {
     
     // MARK: - Handlers
     private func handleMessage(message: String) {
+        /*
+         For debugging JSON decoding errors, how wonderful!
+        do {
+            try JSONDecoder().decode(GatewayIncoming.self, from: message.data(using: .utf8)!)
+            // process data
+        } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch {
+            print("error: ", error)
+        }*/
         guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: message.data(using: .utf8)!)
         else { return }
         

@@ -15,4 +15,5 @@ struct ReadyEvt: Decodable, GatewayData {
     let shard: [Int]? // Included for inclusivity, will not be used
     let application: PartialApplication? // Discord doesn't send this to human clients
     let user_settings: UserSettings
+    let private_channels: [Channel] // Basically DMs
 }

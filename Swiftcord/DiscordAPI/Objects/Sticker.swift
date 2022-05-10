@@ -24,7 +24,8 @@ struct Sticker: Codable, GatewayData {
     let name: String
     let description: String?
     let tags: String // Autocomplete/suggestion tags for the sticker (max 200 characters), might be CSV
-    let asset: String // Depreciated: now an empty string
+    let asset: String?
+    // Depreciated: now an empty string
     let type: StickerType
     let format_type: StickerFormat
     let available: Bool? // Whether this guild sticker can be used, may be false due to loss of Server Boosts

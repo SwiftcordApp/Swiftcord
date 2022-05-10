@@ -48,6 +48,7 @@ class DiscordGateway: ObservableObject {
                 .filter({ g in !d.user_settings.guild_positions.contains(g.id) })
                 .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
             + d.user_settings.guild_positions.map({ id in d.guilds.first { g in g.id == id }! })
+            self.cache.dms = d.private_channels
             self.cache.user = d.user
             
             log.info("Gateway ready")
