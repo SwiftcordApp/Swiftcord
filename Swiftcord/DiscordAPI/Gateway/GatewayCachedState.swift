@@ -9,5 +9,6 @@ import Foundation
 
 struct CachedState {
     var guilds: [Guild]?
+    var dms: [Channel]?
     var user: User?
 }

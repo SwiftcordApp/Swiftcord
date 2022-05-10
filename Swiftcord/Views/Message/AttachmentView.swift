@@ -178,8 +178,7 @@ struct AttachmentView: View {
                                     quickLookUrl = loadFile(from: url)
                                 }
                             }) {
-                                Image(systemName: "photo")
-                                    .font(.system(size: 20))
+                                Image(systemName: "doc.viewfinder.fill").font(.system(size: 20))
                             }
                             .help("Preview attachment")
                             .buttonStyle(.plain)

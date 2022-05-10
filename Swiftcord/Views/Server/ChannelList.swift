@@ -29,10 +29,11 @@ struct ChannelList: View {
             }
             
             ForEach(
-                filterAndSortChannels(channels) { ch in ch.parent_id == nil && ch.type == .category },
+                filterAndSortChannels(channels) { c in c.parent_id == nil && c.type == .category },
                 id: \.id
             ) { ch in
                 Section(header: Text(ch.name?.uppercased() ?? "")) {
+                    // Channels in this section
                     ForEach(
                         filterAndSortChannels(channels) { c in c.parent_id == ch.id },
                         id: \.id

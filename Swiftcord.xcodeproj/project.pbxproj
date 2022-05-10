@@ -277,7 +277,6 @@
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
-				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
@@ -503,6 +502,7 @@
 				DA520ACC27D4A80C009FD740 /* Settings */,
 				DA2384BD27CCB0FD009E15E0 /* User */,
 				DA2384BC27CCB0CD009E15E0 /* Message */,
+				DAAFB5BF282A635100807B54 /* Utils */,
 				DA32EF5727CB5F2C00A9ED72 /* EnvObjects */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
@@ -572,6 +572,14 @@
 				DA57F44528065209001DC46E /* ChannelButton.swift */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		DAAFB5BF282A635100807B54 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
