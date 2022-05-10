@@ -15,7 +15,6 @@ struct CustomHorizontalDivider: View {
     }
 }
 
-let dmGuild = Guild(id: "@me", name: "DMs", owner_id: "", afk_timeout: 0, verification_level: .none, default_message_notifications: .all, explicit_content_filter: .disabled, roles: [], emojis: [], features: [], mfa_level: .none, system_channel_flags: 0, premium_tier: .none, preferred_locale: .englishUS, nsfw_level: .default, premium_progress_bar_enabled: false) // Dummy guild for DMs
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -34,6 +33,10 @@ struct ContentView: View {
     @EnvironmentObject var state: UIState
     
     private let log = Logger(category: "ContentView")
+    
+    private func makeDMGuild() -> Guild {
+        return Guild(id: "@me", name: "DMs", owner_id: "", afk_timeout: 0, verification_level: .none, default_message_notifications: .all, explicit_content_filter: .disabled, roles: [], emojis: [], features: [], mfa_level: .none, system_channel_flags: 0, channels: gateway.cache.dms, premium_tier: .none, preferred_locale: .englishUS, nsfw_level: .default, premium_progress_bar_enabled: false)
+    }
 
     var body: some View {
         HStack(spacing: 0) {
@@ -43,7 +46,7 @@ struct ContentView: View {
                         selected: selectedGuild?.id == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
-                        onSelect: { selectedGuild = dmGuild }
+                        onSelect: { selectedGuild = makeDMGuild() }
                     ).padding(.top, 4)
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
@@ -93,10 +96,10 @@ struct ContentView: View {
                 self.state.loadingState = .initialGuildLoad
                 if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
                     if lGID == "@me" {
-                        selectedGuild = dmGuild
+                        selectedGuild = makeDMGuild()
                         return
                     }
-                    selectedGuild = gateway.cache.guilds!.first(where: { p in p.id == lGID }) ?? dmGuild
+                    selectedGuild = gateway.cache.guilds!.first(where: { p in p.id == lGID }) ?? makeDMGuild()
                 }
             }
         })

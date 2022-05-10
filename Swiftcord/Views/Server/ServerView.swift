@@ -21,45 +21,20 @@ struct ServerView: View {
     
     private func loadChannels() {
         guard let g = guild else { return }
-        if g.id != "@me" {
-            channels = g.channels!
-            isLoading = false
-            if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
-            if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)") {
-                if let lastChObj = channels.first(where: { p in
-                    p.id == lastChannel
-                }) {
-                    selectedCh = lastChObj
-                    return
-                }
+        channels = g.channels!
+        isLoading = false
+        if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
+        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)") {
+            if let lastChObj = channels.first(where: { p in
+                p.id == lastChannel
+            }) {
+                selectedCh = lastChObj
+                return
             }
-            let txtChs = channels.filter({ $0.type == .text })
-            if !txtChs.isEmpty { selectedCh = txtChs[0] }
-            return
         }
-        channels = []
-        Task {
-            isLoading = true
-            selectedCh = nil
-            guard let c = g.id == "@me"
-                    ? await DiscordAPI.getDMs()
-                    : await DiscordAPI.getGuildChannels(id: g.id)
-            else { return }
-            channels = c.compactMap({ t in try? t.result.get() })
-            isLoading = false
-            if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
-            
-            if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)") {
-                if let lastChObj = channels.first(where: { p in
-                    p.id == lastChannel
-                }) {
-                    selectedCh = lastChObj
-                    return
-                }
-            }
-            let txtChs = channels.filter({ $0.type == .text })
-            if !txtChs.isEmpty { selectedCh = txtChs[0] }
-        }
+        let txtChs = channels.filter({ $0.type == .text })
+        if !txtChs.isEmpty { selectedCh = txtChs[0] }
+        return
     }
     
     var body: some View {

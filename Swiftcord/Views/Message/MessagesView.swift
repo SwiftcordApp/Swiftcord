@@ -42,7 +42,6 @@ struct MessagesView: View {
         
         Task {
             let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
-            if state.loadingState == .channelLoad { state.loadingState = .messageLoad }
             
             guard let m = await DiscordAPI.getChannelMsgs(
                 id: ch.id,
@@ -58,8 +57,10 @@ struct MessagesView: View {
                     buttonIcon: "arrow.clockwise",
                     clickHandler: { fetchMoreMessages() }
                 )
+                state.loadingState = .messageLoad
                 return
             }
+            state.loadingState = .messageLoad
             loading = false
             if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
