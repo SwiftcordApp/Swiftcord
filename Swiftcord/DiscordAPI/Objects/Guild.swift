@@ -165,3 +165,11 @@ struct GuildScheduledEvent: Codable, GatewayData {
 struct GuildScheduledEventEntityMeta: Codable, GatewayData {
     let location: String?
 }
+
+// Guild folders sent in ready event
+struct GuildFolder: Decodable, GatewayData {
+    let name: String?
+    let id: Snowflake?
+    let guild_ids: [Snowflake]
+    let color: Int?
+}

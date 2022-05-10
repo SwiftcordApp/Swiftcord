@@ -10,6 +10,10 @@ import SwiftUI
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
     
+    @State private var loadingImgSeq = 19
+    
+    @State private var imgSeqAdvanceTimer = Timer.publish(every: 0.033, on: .main, in: .common).autoconnect()
+    
     private let loadingStrings: [LoadingState: String] = [
         .initial: "Establishing Gateway connection",
         .gatewayConn: "Fetching your servers",
@@ -60,8 +64,15 @@ struct LoadingView: View {
     var body: some View {
         let loadingNum = (loadingSeq.firstIndex(of: state.loadingState) ?? 0)
         VStack(spacing: 4) {
-            Image("DiscordIcon")
-                .frame(width: 200)
+            Image("Discord_000\(loadingImgSeq)")
+                .resizable()
+                .aspectRatio(8.0/6.0, contentMode: .fill)
+                .frame(width: 280)
+                .frame(height: 150)
+                .onReceive(imgSeqAdvanceTimer, perform: { _ in
+                    loadingImgSeq += 1
+                    if loadingImgSeq > 57 { loadingImgSeq = 19 }
+                })
             
             Text(loadingStrings[state.loadingState] ?? "").font(.title3)
                 .padding(.top, 36)
@@ -84,6 +95,12 @@ struct LoadingView: View {
         .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
         .scaleEffect(loadingNum != loadingSeq.count - 1 ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingSeq.count - 1)
+        .onChange(of: loadingNum != loadingSeq.count - 1) { isLoading in
+            if !isLoading {
+                print("Stop timer")
+                self.imgSeqAdvanceTimer.upstream.connect().cancel()
+            }
+        }
     }
 }
 

@@ -42,9 +42,18 @@ class DiscordGateway: ObservableObject {
         switch (type) {
         case .ready:
             guard let d = data as? ReadyEvt else { return }
-            self.cache.guilds = d.guilds
+            
+            // Populate cache with data sent in ready event
+            self.cache.guilds = (d.guilds
+                .filter({ g in !d.user_settings.guild_positions.contains(g.id) })
+                .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
+            + d.user_settings.guild_positions.map({ id in d.guilds.first { g in g.id == id }! })
             self.cache.user = d.user
+            
             log.info("Gateway ready")
+        case .guildCreate:
+            guard let d = data as? Guild else { return }
+            self.cache.guilds?.insert(d, at: 0) // As per official Discord implementation
         default: break
         }
         onEvent.notify(event: (type, data))
