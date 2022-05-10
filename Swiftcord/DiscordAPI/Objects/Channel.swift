@@ -24,7 +24,8 @@ enum ChannelType: Int, Codable {
     case publicThread = 11
     case privateThread = 12
     case stageVoice = 13
-    case unknownType = 15
+    case directory = 14 // Hubs
+    case forum = 15 // (still in development) a channel that can only contain threads
 }
 
 struct Channel: Codable, GatewayData, Equatable {
