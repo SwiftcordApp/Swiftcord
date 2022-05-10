@@ -9,6 +9,7 @@
 import SwiftUI
 import AVKit
 import CachedAsyncImage
+import QuickLook
 
 struct AttachmentError: View {
     let height: Int
@@ -60,7 +61,13 @@ struct AttachmentImage: View {
 
 struct AttachmentView: View {
     let attachment: Attachment
-    @State private var enlarged = false
+    @State private var quickLookUrl: URL?
+    
+    // Download state
+    @State private var downloadProgress = 0.0
+    @State private var downloadState: DownloadState = .notStarted
+    @State private var dataTask: URLSessionDownloadTask?
+    @State private var observation: NSKeyValueObservation?
     
     private let mimeFileMapping = [
         // Rich Documents
@@ -116,20 +123,7 @@ struct AttachmentView: View {
                     switch mime.prefix(5) {
                     case "image":
                         AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)
-                            .onTapGesture { enlarged = true }
-                            .sheet(isPresented: $enlarged, onDismiss: nil) {
-                                VStack(spacing: 8) {
-                                    HStack(spacing: 8) {
-                                        Link(attachment.filename, destination: url)
-                                            .cursor(NSCursor.pointingHand)
-                                        Spacer()
-                                        Button(action: { enlarged = false }) {
-                                            Image(systemName: "xmark.circle.fill")
-                                        }.buttonStyle(.plain)
-                                    }
-                                    AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)
-                                }.padding(8)
-                            }
+                            .onTapGesture { quickLookUrl = url }
                     case "video":
                         VideoPlayer(player: AVPlayer(url: url)) // Don't use resizedURL
                             .frame(width: CGFloat(width), height: CGFloat(height))
@@ -172,18 +166,43 @@ struct AttachmentView: View {
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
                                     .lineLimit(1)
-                                    //.fixedSize(horizontal: false, vertical: true)
+                                //.fixedSize(horizontal: false, vertical: true)
                                 Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
                                     .font(.caption)
                                     .opacity(0.5)
                             }
                             Spacer()
-                            Button(action: {}) {
-                                Image(systemName: "arrow.down.circle")
+                            
+                            Button(action: {
+                                if let url = URL(string: attachment.url) {
+                                    quickLookUrl = loadFile(from: url)
+                                }
+                            }) {
+                                Image(systemName: "photo")
                                     .font(.system(size: 20))
                             }
-                            .help("Download attachment")
+                            .help("Preview attachment")
                             .buttonStyle(.plain)
+                            
+                            ZStack {
+                                Button(action: {
+                                    if let url = URL(string: attachment.url) {
+                                        downloadFile(from: url)
+                                    }
+                                }) {
+                                    Image(systemName:
+                                            downloadState == .error ?  "exclamationmark.circle" :
+                                            downloadState == .success ? "checkmark.circle" : "arrow.down.circle"
+                                    )
+                                    .font(.system(size: 20))
+                                }
+                                .help("Download attachment")
+                                .buttonStyle(.plain)
+                                
+                                CircularProgressView(lineWidth: 4, progress: $downloadProgress)
+                                    .frame(width: 24, height: 24)
+                                    .opacity(downloadState == .inProgress ? 1 : 0)
+                            }
                             .padding(.trailing, 4)
                         }
                     }.frame(width: 400)
@@ -191,6 +210,143 @@ struct AttachmentView: View {
             }
             else { AttachmentError(height: 160, width: 160) }
         }
+        .quickLookPreview($quickLookUrl)
+    }
+    
+    // Loads a file into cache and returns its URL
+    private func loadFile(from url: URL) -> URL {
+        // Cached file destination
+        let cachedDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(getShortDateString(from: Date.now))
+        
+        try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
+        
+        let destinationURL = cachedDirectory
+            .appendingPathComponent(
+            url.lastPathComponent,
+            isDirectory: false
+        )
+        
+        // Check if cache file exists
+        if FileManager.default.fileExists(atPath: destinationURL.path) {
+            return destinationURL
+        }
+        
+        download(url: url, toFile: destinationURL) { error in
+            if let error = error { print(error) }
+        }
+        
+        return destinationURL
+    }
+    
+    // Specifically for downloading files to the download's folder
+    private func downloadFile(from url: URL) {
+        // Set download state
+        downloadProgress = 0
+        downloadState = .inProgress
+        
+        // Obtain downloads folder
+        // Cached file destination
+        let cachedDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(getShortDateString(from: Date.now))
+        
+        try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
+        
+        let cachedURL = cachedDirectory
+            .appendingPathComponent(
+            url.lastPathComponent,
+            isDirectory: false
+        )
+        
+        // Updates the UI with the download's progress
+        observation?.invalidate()
+        
+        // First downloads file to cache location (for faster quick look)
+        // loadFile function is not called because we want to replace the file from source
+        download(url: url, toFile: cachedURL) { fileError in
+            do {
+                if let fileError = fileError { throw fileError }
+                
+                let downloadsDirectory = try
+                FileManager.default.url(for: .downloadsDirectory,
+                                        in: .userDomainMask,
+                                        appropriateFor: nil,
+                                        create: false)
+                
+                // Append file name to path
+                let destinationURL = downloadsDirectory.appendingPathComponent(url.lastPathComponent)
+                if FileManager.default.fileExists(atPath: destinationURL.path) {
+                    try FileManager.default.removeItem(at: destinationURL)
+                }
+                
+                // Copy item from cache to destination
+                try FileManager.default.copyItem(at: cachedURL, to: destinationURL)
+                
+                // Delay setting success state to show the finished progress bar
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
+                    downloadState = .success
+                    downloadProgress = 0
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+                downloadState = .error
+                downloadProgress = 0
+            }
+        }
+    }
+    
+    // Downloads a file from a URL to another URL, with an optional error returned in closure
+    // TODO: There might be a cleaner way to deal with errors
+    private func download(url: URL, toFile file: URL, completion: @escaping (Error?) -> ()) {
+        
+        dataTask = URLSession.shared.downloadTask(with: url) {
+            urlOrNil, responseOrNil, errorOrNil in
+            
+            do {
+                // Exit on error
+                if let errorOrNil = errorOrNil {
+                    throw errorOrNil
+                }
+                
+                if let response = responseOrNil as? HTTPURLResponse  {
+                    // Exit on bad response
+                    if !(200...299).contains(response.statusCode) {
+                        print("Bad Response Code: \(response.statusCode)")
+                        throw URLError(.badServerResponse)
+                        
+                    }
+                }
+                else {
+                    // Exit on no response
+                    throw URLError(.cannotParseResponse)
+                }
+                
+                // File is downloaded to a temporary URL
+                guard let tempURL = urlOrNil else { return }
+                
+                // If file exists, remove it
+                if FileManager.default.fileExists(atPath: file.path) {
+                    try FileManager.default.removeItem(at: file)
+                }
+                
+                // Move item to destination
+                try FileManager.default.moveItem(at: tempURL, to: file)
+                completion(nil)
+                
+            } catch {
+                completion(error)
+            }
+        }
+        
+        // Keeps track of the progress of the download
+        observation = dataTask?.progress.observe(\.fractionCompleted) { observationProgress, _ in
+            DispatchQueue.main.async {
+                downloadProgress = observationProgress.fractionCompleted
+            }
+        }
+        
+        dataTask?.resume() // Calls the start of the task
     }
 }
 
@@ -199,4 +355,14 @@ struct AttachmentView_Previews: PreviewProvider {
         // AttachmentView()
         EmptyView()
     }
+}
+
+enum DownloadState {
+    case notStarted, inProgress, success, error
+}
+
+func getShortDateString(from date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMddyyyy"
+    return formatter.string(from: date)
 }

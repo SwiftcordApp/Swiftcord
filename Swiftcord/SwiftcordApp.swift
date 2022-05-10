@@ -37,6 +37,8 @@ struct SwiftcordApp: App {
                           diskCapacity: 256*1024*1024, // 256MB
                               diskPath: nil
                     )
+                    
+                    clearCache(olderThan: 24) // Clear cache folders older than 24 hours
                 }
         }
         
