@@ -22,19 +22,6 @@ struct MessageView: View {
     @State private var loadQuotedMsgErr = false
     @State private var playLoadAnim = false // Will turn true when first appeared
     
-    private func attributedMessage(content: String) -> AttributedString? {
-        guard var str = try? AttributedString(markdown: message.content) else { return nil }
-        
-        // This is not really gonna work
-        if let range = str.range(of: "<@[^>]*>", options: .regularExpression) {
-            var mention = AttributedString("@a random user")
-            mention.backgroundColor = Color("DiscordTheme").opacity(0.3)
-            str.replaceSubrange(range, with: mention)
-            // str[mention].backgroundColor = Color.indigo
-        }
-        return str
-    }
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
@@ -55,7 +42,7 @@ struct MessageView: View {
                                 else if phase.error != nil {
                                     Image("DiscordIcon").frame(width: 12, height: 12)
                                 } else {
-                                     ProgressView()
+                                    ProgressView()
                                         .progressViewStyle(.circular)
                                         .controlSize(.mini)
                                 }
