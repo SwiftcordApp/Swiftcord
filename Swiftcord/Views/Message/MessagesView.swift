@@ -121,11 +121,31 @@ struct MessagesView: View {
                                 .flip()
                             }
                             else {
-                                VStack(alignment: .center, spacing: 8) {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
-                                        .controlSize(.small)
-                                    Text("Loading messages...")
+                                VStack(alignment: .leading, spacing: 16) {
+                                    Group {
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                    }
+                                    Group {
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                        LoFiMessageView()
+                                    }
                                 }
                                 .onAppear {
                                     guard !loading else { return }
