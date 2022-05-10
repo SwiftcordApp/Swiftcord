@@ -81,14 +81,8 @@ struct ServerView: View {
             }
             .toolbar {
                 ToolbarItemGroup {
-                    if guild != nil {
-                        Text(guild!.name).font(.title3).fontWeight(.semibold)
-                            .frame(minWidth: 0)
-                    }
-                    Spacer()
-                    Button(action: {}) {
-                        Label("Server options", systemImage: "chevron.down")
-                    }
+                    Text(guild?.name ?? "Loading...").font(.title3).fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
                 }
             }
             

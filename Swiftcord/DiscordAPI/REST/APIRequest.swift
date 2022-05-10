@@ -45,7 +45,7 @@ extension DiscordAPI {
         }
                 
         // Make request
-        let (data, response) = try await URLSession.shared.data(for: req)
+        let (data, response) = try await DiscordAPI.session.data(for: req)
         guard let httpResponse = response as? HTTPURLResponse else { return nil }
         guard httpResponse.statusCode / 100 == 2 else { // Check if status code is 2**
             log.warning("Status code is not 2xx: \(httpResponse.statusCode, privacy: .public)")

@@ -197,7 +197,7 @@ struct MessageView: View {
         }
         .padding(.leading, 16)
         .padding(.trailing, 48)
-        .padding([.bottom, .top], lineSpacing / 2)
+        .padding(.vertical, lineSpacing / 2)
         .background(hovered ? .gray.opacity(0.07) : .clear)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .animation(.linear(duration: 0.1), value: hovered)

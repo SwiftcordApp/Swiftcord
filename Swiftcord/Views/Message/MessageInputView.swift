@@ -60,7 +60,7 @@ struct MessageInputView: View {
                     .fill(Color(NSColor.textBackgroundColor)))
                 .shadow(color: .gray.opacity(0.2), radius: 3)
         )
-        .padding([.leading, .trailing], 16)
+        .padding(.horizontal, 16)
         .offset(y: -16)
     }
 }
