@@ -119,6 +119,7 @@
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA57F4482806C4F5001DC46E /* RobustWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */; };
+		DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EC282A3B770021267C /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -238,6 +239,7 @@
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobustWebSocket.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
+		DAA3B6EC282A3B770021267C /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -350,7 +352,6 @@
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA4A889D27C1133300720909 /* DiscordAPI */,
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
-				DA4A888927C0AF3000720909 /* ContentView.swift */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA2802782808337B00B14E5C /* AppDelegate.swift */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
@@ -435,6 +436,7 @@
 				DA4A88E227C3472C00720909 /* Event */,
 				DA4A88CF27C2068F00720909 /* Gateway.swift */,
 				DA4A88D727C2795600720909 /* DataStructs.swift */,
+				DAA3B6EC282A3B770021267C /* UserSettings.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -495,6 +497,7 @@
 				DA32EF5727CB5F2C00A9ED72 /* EnvObjects */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
+				DA4A888927C0AF3000720909 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA520AC027D3306D009FD740 /* loginBG.swift in Sources */,
+				DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */,
 				DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,

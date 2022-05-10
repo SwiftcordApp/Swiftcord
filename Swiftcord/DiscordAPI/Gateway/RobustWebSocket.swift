@@ -183,7 +183,10 @@ class RobustWebSocket: NSObject {
             }
             // attemptReconnect(resume: shouldResume)
         case .dispatchEvent:
-            guard let type = decoded.t else { return }
+            guard let type = decoded.t else {
+                log.warning("Event has nil type")
+                return
+            }
             guard let data = decoded.d else {
                 log.warning("Event type <\(type.rawValue, privacy: .public)> has nil data")
                 return
@@ -193,6 +196,7 @@ class RobustWebSocket: NSObject {
                 guard let d = data as? ReadyEvt else { return }
                 sessionID = d.session_id
                 canResume = true
+                print(message)
             default: break
             }
             onEvent.notify(event: (type, data))

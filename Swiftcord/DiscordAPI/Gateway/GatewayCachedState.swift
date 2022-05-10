@@ -8,6 +8,6 @@
 import Foundation
 
 struct CachedState {
-    var guilds: [GuildUnavailable]?
+    var guilds: [Guild]?
     var user: User?
 }

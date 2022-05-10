@@ -26,7 +26,6 @@ struct ContentView: View {
     private var items: FetchedResults<MessageItem>*/
     
     @State private var sheetOpen = false
-    @State private var guilds: [PartialGuild] = []
     @State private var selectedGuild: Guild? = nil
     @State private var loadingGuildID: Snowflake? = nil
     
@@ -49,13 +48,15 @@ struct ContentView: View {
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
-                    ForEach(guilds, id: \.id) { guild in
+                    ForEach(gateway.cache.guilds ?? [], id: \.id) { guild in
                         ServerButton(
                             selected: selectedGuild?.id == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
                             serverIconURL: guild.icon != nil ? "\(apiConfig.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             isLoading: loadingGuildID == guild.id,
-                            onSelect: { loadingGuildID = guild.id }
+                            onSelect: {
+                                selectedGuild = guild
+                            }
                         )
                     }
                     
@@ -83,36 +84,19 @@ struct ContentView: View {
             
             ServerView(guild: $selectedGuild)
         }
-        .onChange(of: loadingGuildID, perform: { _ in
-            guard let newGuildID = loadingGuildID else { return }
-            selectedGuild = nil
-            Task {
-                guard let g = await DiscordAPI.getGuild(id: newGuildID) else { return }
-                loadingGuildID = nil
-                selectedGuild = g
-            }
-        })
         .onChange(of: selectedGuild, perform: { _ in
             guard let id = selectedGuild?.id else { return }
             UserDefaults.standard.set(id, forKey: "lastSelectedGuild")
         })
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
-                Task {
-                    guard let g = await DiscordAPI.getGuilds()
-                    else { return }
-                    guilds = g
-                    self.state.loadingState = .initialGuildLoad
-                    if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
-                        if lGID == "@me" {
-                            selectedGuild = dmGuild
-                            return
-                        }
-                        guard g.contains(where: { p in p.id == lGID }) else { return }
-                        guard let fullGuild = await DiscordAPI.getGuild(id: lGID)
-                        else { return }
-                        selectedGuild = fullGuild
+                self.state.loadingState = .initialGuildLoad
+                if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
+                    if lGID == "@me" {
+                        selectedGuild = dmGuild
+                        return
                     }
+                    selectedGuild = gateway.cache.guilds!.first(where: { p in p.id == lGID }) ?? dmGuild
                 }
             }
         })
