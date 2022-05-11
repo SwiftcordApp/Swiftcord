@@ -9,11 +9,7 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
-    
-    @State private var loadingImgSeq = 19
-    
-    @State private var imgSeqAdvanceTimer = Timer.publish(every: 0.033, on: .main, in: .common).autoconnect()
-    
+            
     private let loadingStrings: [LoadingState: String] = [
         .initial: "Establishing Gateway connection",
         .gatewayConn: "Fetching latest messages",
@@ -60,18 +56,16 @@ struct LoadingView: View {
     var body: some View {
         let loadingNum = (loadingSeq.firstIndex(of: state.loadingState) ?? 0)
         VStack(spacing: 4) {
-            Image("Discord_000\(loadingImgSeq)")
-                .resizable()
-                .aspectRatio(8.0/6.0, contentMode: .fill)
-                .frame(width: 280)
-                .frame(height: 150)
-                .onReceive(imgSeqAdvanceTimer, perform: { _ in
-                    loadingImgSeq += 1
-                    if loadingImgSeq > 57 { loadingImgSeq = 19 }
-                })
+            LottieView(
+                name: "discord-loading-animation",
+                play: .constant(loadingNum != loadingSeq.count - 1),
+                width: 280,
+                height: 280
+            )
+            .frame(width: 280, height: 150)
+            .lottieLoopMode(.loop)
             
             Text(loadingStrings[state.loadingState] ?? "").font(.title3)
-                .padding(.top, 36)
                 .animation(.spring(), value: state.loadingState)
             ProgressView(value: Double(loadingNum + 1) / Double(loadingSeq.count))
                 .progressViewStyle(.linear)
@@ -88,15 +82,9 @@ struct LoadingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(loadingNum != loadingSeq.count - 1)
         .background(Color(NSColor.windowBackgroundColor))
-        .opacity(loadingNum != loadingSeq.count - 1 ? 0.2 : 0)
+        .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
         .scaleEffect(loadingNum != loadingSeq.count - 1 ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingSeq.count - 1)
-        .onChange(of: loadingNum != loadingSeq.count - 1) { isLoading in
-            if !isLoading {
-                print("Stop timer")
-                self.imgSeqAdvanceTimer.upstream.connect().cancel()
-            }
-        }
     }
 }
 
