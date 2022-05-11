@@ -43,7 +43,7 @@ struct MediaControllerView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: "backward.end.fill").font(.system(size: 18)).opacity(0.77)
+                    Image(systemName: "repeat.1").font(.system(size: 18)).opacity(0.77)
                 }.buttonStyle(.plain).disabled(audioManager.isStopped)
                 
                 Button {
@@ -55,10 +55,13 @@ struct MediaControllerView: View {
                 }.buttonStyle(.plain).disabled(audioManager.isStopped).frame(width: 34, height: 34)
                 
                 Button {
-                    
+                    audioManager.remove(at: 0)
+                    audioManager.playQueued(index: 0)
                 } label: {
                     Image(systemName: "forward.end.fill").font(.system(size: 18)).opacity(0.77)
-                }.buttonStyle(.plain).disabled(audioManager.isStopped)
+                }
+                .buttonStyle(.plain)
+                .disabled(audioManager.isStopped || audioManager.queue.count == 1)
             }.frame(maxWidth: .infinity)
             
             Divider().padding(.vertical, 8)

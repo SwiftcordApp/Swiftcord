@@ -66,11 +66,12 @@ struct AudioAttachmentView: View {
     
     var body: some View {
         GroupBox {
-            VStack(alignment: .leading) {
+            HStack() {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(attachment.filename)
                         .font(.system(size: 15))
                         .fontWeight(.medium)
+                        .truncationMode(.middle)
                         .lineLimit(1)
                     Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
                         .font(.caption)
@@ -78,10 +79,18 @@ struct AudioAttachmentView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Button("Play") {
+                Button {
                     audioManager.append(source: url, filename: attachment.filename, from: "no")
-                    audioManager.play()
-                }
+                } label: {
+                    Image(systemName: "text.append").font(.system(size: 18))
+                }.buttonStyle(.plain).help("Append to queue")
+                
+                Button {
+                    audioManager.append(source: url, filename: attachment.filename, from: "no", at: 0)
+                    audioManager.playQueued(index: 0)
+                } label: {
+                    Image(systemName: "play.fill").font(.system(size: 24))
+                }.buttonStyle(.plain).help("Play now")
             }.padding(4)
         }.frame(width: 400)
     }

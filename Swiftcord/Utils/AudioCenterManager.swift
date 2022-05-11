@@ -26,15 +26,20 @@ class AudioCenterManager: ObservableObject {
     @Published public var isStopped = true
     @Published public var isPlaying = false
     
-    public func append(source: URL, filename: String, from: String) {
+    public func append(source: URL, filename: String, from: String, at: Int? = nil) {
         let playerItem = AVPlayerItem(url: source)
-        player.insert(playerItem, after: nil)
-        queue.append(AudioCenterItems(
+        player.insert(playerItem,
+                      after: queue.isEmpty ? nil : queue[at ?? (queue.count - 1)].playerItem)
+        queue.insert(AudioCenterItems(
             playerItem: playerItem,
             filename: filename,
             from: from,
             addedAt: Int(Date().timeIntervalSince1970)
-        ))
+        ), at: at ?? queue.count)
+    }
+    
+    public func remove(at: Int) {
+        player.remove(queue.remove(at: at).playerItem)
     }
     
     public func play() {
@@ -46,13 +51,12 @@ class AudioCenterManager: ObservableObject {
         duration = 0
     }
     public func playQueued(index: Int) {
-        queue.swapAt(index, 0)
+        if index != 0 { queue.swapAt(index, 0) }
         player.pause()
         player.removeAllItems()
         for item in queue { player.insert(item.playerItem, after: nil) }
-        player.play()
         player.seek(to: CMTime.zero)
-        isPlaying = true
+        play()
     }
     public func resume() {
         player.volume = 1
