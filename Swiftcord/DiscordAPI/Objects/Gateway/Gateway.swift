@@ -110,6 +110,7 @@ struct GatewayIncoming: Decodable {
             case .presenceUpdate: d = try values.decode(PartialPresenceUpdate.self, forKey: .d)
                 // TODO: Add the remaining like 100 events
                 
+            case .userUpdate: d = try values.decode(User.self, forKey: .d)
             default: d = nil
             }
         default:

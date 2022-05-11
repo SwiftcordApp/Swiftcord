@@ -189,7 +189,8 @@ struct MessagesView: View {
         .onChange(of: channel, perform: { ch in
             guard ch != nil else { return }
             messages = []
-            if loadError { fetchMoreMessages() } // Prevent deadlocked situations
+            // Prevent deadlocked and wrong message situations
+            if loadError || fetchMessagesTask != nil { fetchMoreMessages() }
             loadError = false
             reachedTop = false
             scrollTopID = nil

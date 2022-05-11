@@ -50,11 +50,18 @@ class DiscordGateway: ObservableObject {
             + d.user_settings.guild_positions.map({ id in d.guilds.first { g in g.id == id }! })
             self.cache.dms = d.private_channels
             self.cache.user = d.user
+            self.cache.users = d.users
             
             log.info("Gateway ready")
         case .guildCreate:
             guard let d = data as? Guild else { return }
             self.cache.guilds?.insert(d, at: 0) // As per official Discord implementation
+        case .guildDelete:
+            guard let d = data as? GuildUnavailable else { return }
+            self.cache.guilds?.removeAll { g in g.id == d.id }
+        case .userUpdate:
+            guard let updatedUser = data as? User else { return }
+            self.cache.user = updatedUser
         default: break
         }
         onEvent.notify(event: (type, data))

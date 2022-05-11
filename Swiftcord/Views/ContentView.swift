@@ -104,7 +104,6 @@ struct ContentView: View {
         })
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
-                print("gateway conn")
                 if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
                     if lGID == "@me" {
                         selectedGuild = makeDMGuild()

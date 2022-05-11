@@ -24,7 +24,7 @@ enum UserFlags: Int, CaseIterable {
     case botHTTPInteractions = 19
 }
 
-struct User: Codable {
+struct User: Codable, GatewayData {
     let id: Snowflake
     let username: String
     let discriminator: String

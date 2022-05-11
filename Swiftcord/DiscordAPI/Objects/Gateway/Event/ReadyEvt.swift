@@ -10,6 +10,7 @@ import Foundation
 struct ReadyEvt: Decodable, GatewayData {
     let v: Int
     let user: User
+    let users: [User]
     let guilds: [Guild]
     let session_id: String
     let shard: [Int]? // Included for inclusivity, will not be used

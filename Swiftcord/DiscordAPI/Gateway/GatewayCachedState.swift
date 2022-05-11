@@ -11,4 +11,5 @@ struct CachedState {
     var guilds: [Guild]?
     var dms: [Channel]?
     var user: User?
+    var users: [User]? // Cached users, grows over time
 }
