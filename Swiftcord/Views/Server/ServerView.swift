@@ -29,9 +29,16 @@ struct ServerView: View {
                 return
             }
         }
-        let txtChs = channels.filter { $0.type == .text }
-        if !txtChs.isEmpty { selectedCh = txtChs[0] }
+        let selectableChs = channels.filter { $0.type != .category }
+        if !selectableChs.isEmpty { selectedCh = selectableChs[0] }
         return
+    }
+    
+    private func toggleSidebar() {
+        #if os(iOS)
+        #else
+        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+        #endif
     }
     
     var body: some View {
@@ -52,10 +59,16 @@ struct ServerView: View {
                 }
             }
             .toolbar {
-                ToolbarItem {
-                    Text(guild?.name ?? "Loading...").font(.title3).fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
+                ToolbarItemGroup {
+                    Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
+                        .frame(minWidth: 0)
                 }
+                /*
+                ToolbarItem {
+                    Button(action: toggleSidebar, label: {
+                        Image(systemName: "sidebar.left")
+                    })
+                }*/
             }
             
             ZStack {

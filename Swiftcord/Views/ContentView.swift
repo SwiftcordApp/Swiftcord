@@ -110,7 +110,7 @@ struct ContentView: View {
                         return
                     }
                     selectedGuild = gateway.cache.guilds!.first(where: { p in p.id == lGID }) ?? makeDMGuild()
-                }
+                } else { selectedGuild = makeDMGuild() }
             }
         })
         // Using .constant to prevent dismissing
