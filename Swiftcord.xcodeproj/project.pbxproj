@@ -128,6 +128,7 @@
 		DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */; };
 		DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
+		DAAFB5CC282B879200807B54 /* FormatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* FormatTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -256,6 +257,7 @@
 		DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaControllerView.swift; sourceTree = "<group>"; };
 		DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCenterManager.swift; sourceTree = "<group>"; };
 		DAAFB5C8282B689000807B54 /* discord-loading-animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "discord-loading-animation.json"; sourceTree = "<group>"; };
+		DAAFB5CB282B879200807B54 /* FormatTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatTime.swift; sourceTree = "<group>"; };
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -573,6 +575,7 @@
 				DA32EF5527CA6DF900A9ED72 /* URLMimeType.swift */,
 				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
 				DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */,
+				DAAFB5CB282B879200807B54 /* FormatTime.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */,
 				DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */,
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
+				DAAFB5CC282B879200807B54 /* FormatTime.swift in Sources */,
 				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
 				DA520AC927D3A55D009FD740 /* SettingsView.swift in Sources */,

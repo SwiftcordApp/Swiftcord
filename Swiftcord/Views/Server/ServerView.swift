@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild!.id)")
-
 struct ServerView: View {
     @Binding var guild: Guild?
     @State private var channels: [Channel] = []
@@ -59,6 +57,7 @@ struct ServerView: View {
                 }
             }
             .toolbar {
+                // FIXME: This doesn't appear in the toolbar for some reason
                 ToolbarItemGroup {
                     Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
                         .frame(minWidth: 0)

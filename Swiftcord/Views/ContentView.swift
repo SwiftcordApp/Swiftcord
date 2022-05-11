@@ -30,6 +30,8 @@ struct ContentView: View {
     @State private var mediaCenterOpen: Bool = false
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
+    @StateObject private var audioManager = AudioCenterManager()
+    
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
@@ -90,18 +92,18 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItem {
-                Button(action: { mediaCenterOpen = true }, label: {
-                    Image(systemName: "play.circle")
-                })
-                .popover(isPresented: $mediaCenterOpen) {
-                    MediaControllerView()
-                }
+                Button(action: { mediaCenterOpen = true }, label: { Image(systemName: "play.circle") })
+                    .popover(isPresented: $mediaCenterOpen) { MediaControllerView() }
             }
         }
-        .onChange(of: selectedGuild, perform: { _ in
+        .environmentObject(audioManager)
+        .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
+            if count > oldCount { mediaCenterOpen = true }
+        }
+        .onChange(of: selectedGuild) { _ in
             guard let id = selectedGuild?.id else { return }
             UserDefaults.standard.set(id, forKey: "lastSelectedGuild")
-        })
+        }
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
                 if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
