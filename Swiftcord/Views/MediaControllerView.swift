@@ -40,10 +40,10 @@ struct MediaControllerView: View {
             }
             
             HStack(spacing: 20) {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "repeat.1").font(.system(size: 18)).opacity(0.77)
+                Button { audioManager.cycleLoopMode() } label: {
+                    Image(systemName: audioManager.loopMode == .single ? "repeat.1" : "repeat")
+                        .font(.system(size: 18)).opacity(0.8)
+                        .foregroundColor(audioManager.loopMode == .disabled ? .white: .accentColor)
                 }.buttonStyle(.plain).disabled(audioManager.isStopped)
                 
                 Button {
@@ -58,7 +58,7 @@ struct MediaControllerView: View {
                     audioManager.remove(at: 0)
                     audioManager.playQueued(index: 0)
                 } label: {
-                    Image(systemName: "forward.end.fill").font(.system(size: 18)).opacity(0.77)
+                    Image(systemName: "forward.end.fill").font(.system(size: 18)).opacity(0.8)
                 }
                 .buttonStyle(.plain)
                 .disabled(audioManager.isStopped || audioManager.queue.count == 1)

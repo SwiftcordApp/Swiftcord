@@ -15,6 +15,12 @@ struct AudioCenterItems: Hashable {
     let addedAt: Int
 }
 
+enum AudioLoopMode {
+    case disabled // Do not loop
+    case single   // Loop one song
+    case queue    // Loop the whole queue of songs (not implemented)
+}
+
 class AudioCenterManager: ObservableObject {
     private let player = AVQueuePlayer()
     private var timeObserverToken: Any?
@@ -25,6 +31,7 @@ class AudioCenterManager: ObservableObject {
     @Published public var isSeeking = false
     @Published public var isStopped = true
     @Published public var isPlaying = false
+    @Published public var loopMode: AudioLoopMode = .disabled
     
     public func append(source: URL, filename: String, from: String, at: Int? = nil) {
         let playerItem = AVPlayerItem(url: source)
@@ -53,6 +60,7 @@ class AudioCenterManager: ObservableObject {
     public func playQueued(index: Int) {
         if index != 0 { queue.swapAt(index, 0) }
         player.pause()
+        player.seek(to: CMTime.zero)
         player.removeAllItems()
         for item in queue { player.insert(item.playerItem, after: nil) }
         player.seek(to: CMTime.zero)
@@ -73,6 +81,11 @@ class AudioCenterManager: ObservableObject {
         progress = 0
         isPlaying = false
     }
+    public func cycleLoopMode() {
+        if loopMode == .disabled { loopMode = .single }
+        else { loopMode = .disabled }
+        // Looping the queue is harder and not implemented yet
+    }
     
     public func seekTo(seconds: Double) {
         isSeeking = true
@@ -81,12 +94,17 @@ class AudioCenterManager: ObservableObject {
         ) { [weak self] _ in
             self?.player.volume = 1
             self?.isSeeking = false
-            print("seeked")
         }
     }
     
     @objc func playerDidFinishPlaying(note: NSNotification) {
-        print("items empty: \(player.items().count)")
+        if loopMode == .single {
+            player.pause()
+            player.removeAllItems()
+            // This hack waits just long enough to avoid the race condition
+            DispatchQueue.main.async { [weak self] in self?.playQueued(index: 0) }
+            return
+        }
         if player.items().count <= 1 { stop() }
         isSeeking = false
         queue.remove(at: 0)
