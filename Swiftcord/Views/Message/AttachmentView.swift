@@ -81,13 +81,18 @@ struct AudioAttachmentView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button {
-                    audioManager.append(source: url, filename: attachment.filename, from: "no")
+                    audioManager.append(source: url,
+                                        filename: attachment.filename,
+                                        from: "Source not implemented yet")
                 } label: {
                     Image(systemName: "text.append").font(.system(size: 18))
                 }.buttonStyle(.plain).help("Append to queue")
                 
                 Button {
-                    audioManager.append(source: url, filename: attachment.filename, from: "no", at: 0)
+                    audioManager.append(source: url,
+                                        filename: attachment.filename,
+                                        from: "Source not implemented yet",
+                                        at: 0)
                     audioManager.playQueued(index: 0)
                 } label: {
                     Image(systemName: "play.fill").font(.system(size: 20)).frame(width: 36, height: 36)
