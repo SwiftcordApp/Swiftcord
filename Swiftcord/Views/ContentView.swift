@@ -30,6 +30,8 @@ struct ContentView: View {
     @State private var mediaCenterOpen: Bool = false
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
+    @StateObject private var audioManager = AudioCenterManager()
+    
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     
@@ -88,6 +90,7 @@ struct ContentView: View {
             
             ServerView(guild: $selectedGuild)
         }
+        .environmentObject(audioManager)
         .toolbar {
             ToolbarItem {
                 Button(action: { mediaCenterOpen = true }, label: {
@@ -95,6 +98,7 @@ struct ContentView: View {
                 })
                 .popover(isPresented: $mediaCenterOpen) {
                     MediaControllerView()
+                        .environmentObject(audioManager)
                 }
             }
         }

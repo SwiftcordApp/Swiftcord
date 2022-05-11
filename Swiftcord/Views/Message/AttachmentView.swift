@@ -59,6 +59,34 @@ struct AttachmentImage: View {
     }
 }
 
+struct AudioAttachmentView: View {
+    let attachment: Attachment
+    let url: URL
+    @EnvironmentObject var audioManager: AudioCenterManager
+    
+    var body: some View {
+        GroupBox {
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(attachment.filename)
+                        .font(.system(size: 15))
+                        .fontWeight(.medium)
+                        .lineLimit(1)
+                    Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
+                        .font(.caption)
+                        .opacity(0.5)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Button("Play") {
+                    audioManager.append(source: url, filename: attachment.filename, from: "no")
+                    audioManager.play()
+                }
+            }.padding(4)
+        }.frame(width: 400)
+    }
+}
+
 struct AttachmentView: View {
     let attachment: Attachment
     @State private var quickLookUrl: URL?
@@ -130,31 +158,9 @@ struct AttachmentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                     default: EmptyView()
                     }
-                }
-                else if mime.prefix(5) == "audio" {
-                    VStack(alignment: .leading) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(attachment.filename)
-                                .font(.system(size: 15))
-                                .fontWeight(.medium)
-                                .lineLimit(1)
-                            Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
-                                .font(.caption)
-                                .opacity(0.5)
-                        }
-                        .padding(.top, 8)
-                        .padding([.leading, .trailing], 12)
-                        VideoPlayer(player: AVPlayer(url: url))
-                            .frame(maxWidth: .infinity, maxHeight: 42)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .frame(width: 400)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(.gray.opacity(0.2), lineWidth: 1)
-                    )
-                }
-                else {
+                } else if mime.prefix(5) == "audio" {
+                    AudioAttachmentView(attachment: attachment, url: url)
+                } else {
                     // Display a generic file
                     GroupBox {
                         HStack(alignment: .center, spacing: 4) {
