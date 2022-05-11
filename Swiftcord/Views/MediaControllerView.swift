@@ -19,7 +19,7 @@ struct MediaControllerView: View {
             
             Divider().padding(.vertical, 8)
             
-            Text(audioManager.isStopped ? "Nothing's Playing" : audioManager.queue[0].filename)
+            Text(audioManager.isStopped ? "Nothing's Playing" : audioManager.queue[0].filename.replacingOccurrences(of: "_", with: " "))
                 .font(.headline)
             Text(audioManager.isStopped
                  ? "Select an audio file in a channel to play it!"
@@ -73,7 +73,7 @@ struct MediaControllerView: View {
                         Button {
                             withAnimation { audioManager.playQueued(index: idx) }
                         } label: {
-                            Text(item.filename)
+                            Text(item.filename.replacingOccurrences(of: "_", with: " "))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .buttonStyle(.borderedProminent)

@@ -62,6 +62,7 @@ struct AttachmentImage: View {
 struct AudioAttachmentView: View {
     let attachment: Attachment
     let url: URL
+    
     @EnvironmentObject var audioManager: AudioCenterManager
     
     var body: some View {
@@ -89,8 +90,11 @@ struct AudioAttachmentView: View {
                     audioManager.append(source: url, filename: attachment.filename, from: "no", at: 0)
                     audioManager.playQueued(index: 0)
                 } label: {
-                    Image(systemName: "play.fill").font(.system(size: 24))
-                }.buttonStyle(.plain).help("Play now")
+                    Image(systemName: "play.fill").font(.system(size: 20)).frame(width: 36, height: 36)
+                }
+                .buttonStyle(.plain)
+                .background(Circle().fill(Color.accentColor))
+                .help("Play now")
             }.padding(4)
         }.frame(width: 400)
     }
