@@ -21,7 +21,7 @@ struct MessageInfoBarView: View {
     
     var body: some View {
         HStack {
-            Text(state?.message ?? "''")
+            Text(state?.message ?? "''").fontWeight(.medium)
             Spacer()
             Button { state!.clickHandler() } label: {
                 if let i = state?.buttonIcon { Label(state!.buttonLabel, systemImage: i) }

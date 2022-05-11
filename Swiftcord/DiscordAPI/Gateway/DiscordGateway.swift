@@ -10,7 +10,7 @@ import os
 
 class DiscordGateway: ObservableObject {
     // Events
-    let onEvent = EventDispatch<(GatewayEvent, GatewayData)>()
+    let onEvent = EventDispatch<(GatewayEvent, GatewayData?)>()
     let onAuthFailure = EventDispatch<Void>()
     
     // WebSocket object
@@ -38,7 +38,7 @@ class DiscordGateway: ObservableObject {
         socket.open()
     }
     
-    private func handleEvt(type: GatewayEvent, data: GatewayData) {
+    private func handleEvt(type: GatewayEvent, data: GatewayData?) {
         switch (type) {
         case .ready:
             guard let d = data as? ReadyEvt else { return }

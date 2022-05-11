@@ -21,11 +21,11 @@ struct MessagesView: View {
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
-    @State private var loading = false
     @State private var scrollTopID: Snowflake? = nil
     @State private var showingInfoBar = false
     @State private var loadError = false
     @State private var infoBarData: InfoBarData? = nil
+    @State private var fetchMessagesTask: Task<(), Error>? = nil
     
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
@@ -35,19 +35,24 @@ struct MessagesView: View {
     
     private func fetchMoreMessages() {
         guard let ch = channel else { return }
+        if let oldTask = fetchMessagesTask {
+            oldTask.cancel()
+            fetchMessagesTask = nil
+        }
         
-        loading = true
         if loadError { showingInfoBar = false }
         loadError = false
         
-        Task {
+        fetchMessagesTask = Task {
             let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
             
             guard let m = await DiscordAPI.getChannelMsgs(
                 id: ch.id,
                 before: lastMsg
             ) else {
-                loading = false
+                try Task.checkCancellation() // Check if the task is cancelled before continuing
+                
+                fetchMessagesTask = nil
                 loadError = true
                 showingInfoBar = true
                 infoBarData = InfoBarData(
@@ -61,10 +66,12 @@ struct MessagesView: View {
                 return
             }
             state.loadingState = .messageLoad
-            loading = false
+            try Task.checkCancellation()
+            
             if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)
+            fetchMessagesTask = nil
         }
     }
     
@@ -150,9 +157,12 @@ struct MessagesView: View {
                                 LoFiMessageView()
                             }
                             .id("placeholder")
-                            .onAppear {
-                                guard !loading else { return }
-                                fetchMoreMessages()
+                            .onAppear { fetchMoreMessages() }
+                            .onDisappear {
+                                if let loadTask = fetchMessagesTask {
+                                    loadTask.cancel()
+                                    fetchMessagesTask = nil
+                                }
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
                             .flip()
@@ -180,11 +190,17 @@ struct MessagesView: View {
             guard ch != nil else { return }
             messages = []
             if loadError { fetchMoreMessages() } // Prevent deadlocked situations
-            loading = false
             loadError = false
             reachedTop = false
             scrollTopID = nil
         })
+        .onChange(of: state.loadingState) { ns in
+            if ns == .gatewayConn {
+                guard fetchMessagesTask == nil else { return }
+                messages = []
+                fetchMoreMessages()
+            }
+        }
         .onDisappear {
             // Remove gateway event handler to prevent memory leaks
             guard let handlerID = evtID else { return}

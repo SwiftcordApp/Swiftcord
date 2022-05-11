@@ -27,6 +27,7 @@ struct ContentView: View {
     @State private var sheetOpen = false
     @State private var selectedGuild: Guild? = nil
     @State private var loadingGuildID: Snowflake? = nil
+    @State private var mediaCenterOpen: Bool = false
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @EnvironmentObject var gateway: DiscordGateway
@@ -87,13 +88,23 @@ struct ContentView: View {
             
             ServerView(guild: $selectedGuild)
         }
+        .toolbar {
+            ToolbarItem {
+                Button(action: { mediaCenterOpen = true }, label: {
+                    Image(systemName: "play.circle")
+                })
+                .popover(isPresented: $mediaCenterOpen) {
+                    MediaControllerView()
+                }
+            }
+        }
         .onChange(of: selectedGuild, perform: { _ in
             guard let id = selectedGuild?.id else { return }
             UserDefaults.standard.set(id, forKey: "lastSelectedGuild")
         })
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
-                self.state.loadingState = .initialGuildLoad
+                print("gateway conn")
                 if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
                     if lGID == "@me" {
                         selectedGuild = makeDMGuild()

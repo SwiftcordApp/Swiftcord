@@ -125,6 +125,8 @@
 		DAAFB5BE282A573400807B54 /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BD282A573400807B54 /* FileManagement.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
+		DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */; };
+		DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +252,8 @@
 		DAAFB5BD282A573400807B54 /* FileManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagement.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
 		DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoBarView.swift; sourceTree = "<group>"; };
+		DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaControllerView.swift; sourceTree = "<group>"; };
+		DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCenterManager.swift; sourceTree = "<group>"; };
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -434,9 +438,9 @@
 			children = (
 				DA520ACD27D4C6AA009FD740 /* README.md */,
 				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
+				DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */,
 				DA4A890227C3824800720909 /* GatewayIdentify.swift */,
 				DA4A891527C4B06500720909 /* GatewayCachedState.swift */,
-				DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -478,6 +482,7 @@
 				DA4A88E027C3341400720909 /* EventDispatch.swift */,
 				DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */,
 				DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */,
+				DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				DA32EF5727CB5F2C00A9ED72 /* EnvObjects */,
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
+				DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
 			);
 			path = Views;
@@ -737,6 +743,7 @@
 				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* MessageIsShrunk.swift in Sources */,
+				DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */,
 				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
 				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
@@ -766,6 +773,7 @@
 				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
 				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
 				DA4A88DA27C27A1100720909 /* GatewayEvent.swift in Sources */,
+				DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */,
 				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
 				DA4A88F327C3576D00720909 /* Stage.swift in Sources */,
 				DA4A891C27C4EFF400720909 /* Connection.swift in Sources */,

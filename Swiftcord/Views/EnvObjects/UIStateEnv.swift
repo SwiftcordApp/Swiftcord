@@ -10,9 +10,6 @@ import Foundation
 enum LoadingState {
     case initial
     case gatewayConn
-    case initialGuildLoad
-    case selGuildLoad
-    case channelLoad
     case messageLoad
 }
 

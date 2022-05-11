@@ -14,7 +14,7 @@ import Combine
 /// with the Discord Gateway, inspired by robust-websocket
 
 class RobustWebSocket: NSObject {
-    public let onEvent = EventDispatch<(GatewayEvent, GatewayData)>(),
+    public let onEvent = EventDispatch<(GatewayEvent, GatewayData?)>(),
                onAuthFailure = EventDispatch<Void>()
     
     private var session: URLSession!, socket: URLSessionWebSocketTask!
@@ -208,18 +208,14 @@ class RobustWebSocket: NSObject {
                 log.warning("Event has nil type")
                 return
             }
-            guard let data = decoded.d else {
-                log.warning("Event type <\(type.rawValue, privacy: .public)> has nil data")
-                return
-            }
             switch type {
             case .ready:
-                guard let d = data as? ReadyEvt else { return }
+                guard let d = decoded.d as? ReadyEvt else { return }
                 sessionID = d.session_id
                 canResume = true
             default: break
             }
-            onEvent.notify(event: (type, data))
+            onEvent.notify(event: (type, decoded.d))
         case .reconnect:
             log.warning("Gateway-requested reconnect: disconnecting and reconnecting immediately")
             close(code: .goingAway)

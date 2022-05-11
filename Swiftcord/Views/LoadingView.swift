@@ -16,16 +16,12 @@ struct LoadingView: View {
     
     private let loadingStrings: [LoadingState: String] = [
         .initial: "Establishing Gateway connection",
-        .gatewayConn: "Fetching your servers",
-        .initialGuildLoad: "Loading channels",
-        .channelLoad: "Getting latest messages",
+        .gatewayConn: "Fetching latest messages",
         .messageLoad: "Done!"
     ]
     private let loadingSeq: [LoadingState] = [
         .initial,
         .gatewayConn,
-        .initialGuildLoad,
-        .channelLoad,
         .messageLoad
     ] // Dictionaries are unordered :(
     
@@ -92,7 +88,7 @@ struct LoadingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(loadingNum != loadingSeq.count - 1)
         .background(Color(NSColor.windowBackgroundColor))
-        .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
+        .opacity(loadingNum != loadingSeq.count - 1 ? 0.2 : 0)
         .scaleEffect(loadingNum != loadingSeq.count - 1 ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingSeq.count - 1)
         .onChange(of: loadingNum != loadingSeq.count - 1) { isLoading in

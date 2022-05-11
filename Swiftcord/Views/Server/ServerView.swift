@@ -13,7 +13,6 @@ struct ServerView: View {
     @Binding var guild: Guild?
     @State private var channels: [Channel] = []
     @State private var selectedCh: Channel? = nil
-    @State private var isLoading = true
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     
     @EnvironmentObject var state: UIState
@@ -22,8 +21,6 @@ struct ServerView: View {
     private func loadChannels() {
         guard let g = guild else { return }
         channels = g.channels!
-        isLoading = false
-        if state.loadingState == .initialGuildLoad { state.loadingState = .channelLoad }
         if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)") {
             if let lastChObj = channels.first(where: { p in
                 p.id == lastChannel
@@ -32,7 +29,7 @@ struct ServerView: View {
                 return
             }
         }
-        let txtChs = channels.filter({ $0.type == .text })
+        let txtChs = channels.filter { $0.type == .text }
         if !txtChs.isEmpty { selectedCh = txtChs[0] }
         return
     }
@@ -55,7 +52,7 @@ struct ServerView: View {
                 }
             }
             .toolbar {
-                ToolbarItemGroup {
+                ToolbarItem {
                     Text(guild?.name ?? "Loading...").font(.title3).fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                 }
@@ -74,8 +71,8 @@ struct ServerView: View {
         }
         .onChange(of: guild) { _ in loadChannels() }
         .onChange(of: state.loadingState, perform: { s in
-            if s == .initialGuildLoad && !isLoading {
-                // Put everything back into their initial states
+            if s == .gatewayConn {
+                print("initial guild load")
                 loadChannels()
             }
         })
