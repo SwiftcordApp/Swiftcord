@@ -58,6 +58,15 @@ struct ServerView: View {
                         .frame(maxHeight: .infinity)
                 }
 
+                if !gateway.connected || !gateway.reachable {
+                    HStack {
+                        Image(systemName: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
+                        Text(gateway.reachable ? "Reconnecting..." : "No network connectivity")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 4)
+                    .background(gateway.reachable ? .orange : .red)
+                }
                 if gateway.cache.user != nil {
                     CurrentUserFooter(user: gateway.cache.user!)
                 }

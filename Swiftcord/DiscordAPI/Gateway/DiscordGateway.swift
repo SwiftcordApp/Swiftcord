@@ -7,6 +7,7 @@
 
 import Foundation
 import os
+import SwiftUI
 
 class DiscordGateway: ObservableObject {
     // Events
@@ -14,13 +15,17 @@ class DiscordGateway: ObservableObject {
     let onAuthFailure = EventDispatch<Void>()
     
     // WebSocket object
-    public var socket: RobustWebSocket!
+    @Published public var socket: RobustWebSocket!
     
     // State cache
     @Published var cache: CachedState = CachedState()
     
     private var evtListenerID: EventDispatch.HandlerIdentifier? = nil,
-                authFailureListenerID: EventDispatch.HandlerIdentifier? = nil
+                authFailureListenerID: EventDispatch.HandlerIdentifier? = nil,
+                connStateChangeListenerID: EventDispatch.HandlerIdentifier? = nil
+    
+    @Published var connected = false
+    @Published var reachable = false
     
     // Logger
     private let log = Logger(category: "DiscordGateway")
@@ -80,9 +85,15 @@ class DiscordGateway: ObservableObject {
         evtListenerID = socket.onEvent.addHandler { [weak self] (t, d) in
             self?.handleEvt(type: t, data: d)
         }
-        authFailureListenerID = socket.onAuthFailure.addHandler(handler: { [weak self] in
+        authFailureListenerID = socket.onAuthFailure.addHandler { [weak self] in
             self?.onAuthFailure.notify()
-        })
+        }
+        connStateChangeListenerID = socket.onConnStateChange.addHandler { [weak self] (c, r) in
+            withAnimation {
+                self?.connected = c
+                self?.reachable = r
+            }
+        }
     }
     
     deinit {
@@ -91,6 +102,9 @@ class DiscordGateway: ObservableObject {
         }
         if let authFailureListenerID = authFailureListenerID {
             let _ = socket.onAuthFailure.removeHandler(handler: authFailureListenerID)
+        }
+        if let connStateChangeListenerID = connStateChangeListenerID {
+            let _ = socket.onConnStateChange.removeHandler(handler: connStateChangeListenerID)
         }
     }
 }

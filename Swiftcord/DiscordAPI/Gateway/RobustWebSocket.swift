@@ -13,9 +13,10 @@ import Combine
 /// A robust WebSocket that handles resuming, reconnection and heartbeats
 /// with the Discord Gateway, inspired by robust-websocket
 
-class RobustWebSocket: NSObject {
+class RobustWebSocket: NSObject, ObservableObject {
     public let onEvent = EventDispatch<(GatewayEvent, GatewayData?)>(),
-               onAuthFailure = EventDispatch<Void>()
+               onAuthFailure = EventDispatch<Void>(),
+               onConnStateChange = EventDispatch<(Bool, Bool)>() // session open, reachable
     
     private var session: URLSession!, socket: URLSessionWebSocketTask!
     private let reachability = try! Reachability(), log = Logger(category: "RobustWebSocket")
@@ -24,10 +25,19 @@ class RobustWebSocket: NSObject {
         
     private let timeout: TimeInterval, maxMsgSize: Int,
                 reconnectInterval: (URLSessionWebSocketTask.CloseCode?, Int) -> TimeInterval?
-    private var attempts = 0, reconnects = -1, connected = false, awaitingHb: Int = 0,
-                reachable = false, reconnectWhenOnlineAgain = false, explicitlyClosed = false,
+    private var attempts = 0, reconnects = -1, awaitingHb: Int = 0,
+                reconnectWhenOnlineAgain = false, explicitlyClosed = false,
                 seq: Int? = nil, canResume = false, sessionID: String? = nil,
                 pendingReconnect: Timer? = nil, connTimeout: Timer? = nil
+    public var connected = false {
+        didSet { if !connected { sessionOpen = false } }
+    }
+    public var reachable = false {
+        didSet { onConnStateChange.notify(event: (connected, reachable)) }
+    }
+    public var sessionOpen = false {
+        didSet { onConnStateChange.notify(event: (connected, reachable)) }
+    }
     fileprivate var hbCancellable: AnyCancellable? = nil
     
     private func clearPendingReconnectIfNeeded() {
@@ -35,6 +45,16 @@ class RobustWebSocket: NSObject {
             reconnectTimer.invalidate()
             pendingReconnect = nil
         }
+    }
+    
+    private func hasConnected() {
+        if let timer = connTimeout {
+            timer.invalidate()
+            connTimeout = nil
+        }
+        reconnectWhenOnlineAgain = true
+        attempts = 0
+        connected = true
     }
         
     // MARK: - (Re)Connection
@@ -160,6 +180,7 @@ class RobustWebSocket: NSObject {
             send(op: .heartbeat, data: GatewayHeartbeat())
         case .heartbeatAck: awaitingHb -= 1
         case .hello:
+            hasConnected()
             // Start heartbeating and send identify
             guard let d = decoded.d as? GatewayHello else { return }
             log.debug("Hello payload is: \(String(describing: d), privacy: .public)")
@@ -214,6 +235,9 @@ class RobustWebSocket: NSObject {
                 guard let d = decoded.d as? ReadyEvt else { return }
                 sessionID = d.session_id
                 canResume = true
+                sessionOpen = true
+            case .resumed:
+                sessionOpen = true
             default: break
             }
             onEvent.notify(event: (type, decoded.d))
@@ -250,14 +274,6 @@ class RobustWebSocket: NSObject {
 // MARK: - WebSocketTask delegate functions
 extension RobustWebSocket: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        // didOpenConnection?()
-        if let timer = connTimeout {
-            timer.invalidate()
-            connTimeout = nil
-        }
-        reconnectWhenOnlineAgain = true
-        attempts = 0
-        connected = true
         log.info("Socket connection opened")
     }
     
