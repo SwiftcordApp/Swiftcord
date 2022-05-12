@@ -99,6 +99,8 @@ struct ServerView: View {
             guard let guild = guild else { return }
             serverCtx.guild = guild
             loadChannels()
+            // Sending malformed IDs causes an instant Gateway session termination
+            guard guild.id != "@me" else { return }
             // Subscribe to typing events
             gateway.socket.send(
                 op: .subscribeGuildEvents,
@@ -130,7 +132,7 @@ struct ServerView: View {
                     serverCtx.typingStarted[typingData.channel_id]!.append(typingData)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 9) {
                         serverCtx.typingStarted[typingData.channel_id]?.removeAll { t in
-                            t.member.user?.id == typingData.member.user?.id
+                            t.user_id == typingData.user_id
                             && t.timestamp == typingData.timestamp
                         }
                     }

@@ -193,7 +193,7 @@ struct MessagesView: View {
                     }
                 
                 let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
-                    .map { t in t.member.nick ?? t.member.user!.username } ?? []
+                    .map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
                 if !typingMembers.isEmpty {
                     HStack() {
                         // The dimensions are quite arbitrary
@@ -248,7 +248,7 @@ struct MessagesView: View {
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
                     serverCtx.typingStarted[msg.channel_id]?.removeAll { t in
-                        t.member.user?.id == msg.author.id
+                        t.user_id == msg.author.id
                     }
                 case .messageUpdate:
                     guard let newMsg = d as? PartialMessage else { break }
