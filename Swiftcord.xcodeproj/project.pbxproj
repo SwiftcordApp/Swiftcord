@@ -131,8 +131,8 @@
 		DAAFB5CC282B879200807B54 /* FormatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* FormatTime.swift */; };
 		DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */; };
 		DAE557F5282C0612001F4EF1 /* SubscribeGuildEvts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F4282C0612001F4EF1 /* SubscribeGuildEvts.swift */; };
-		DAE557F7282CE75D001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557F6282CE75D001F4EF1 /* typing-animation.json */; };
 		DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */; };
+		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,8 +265,8 @@
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
 		DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageACKEvt.swift; sourceTree = "<group>"; };
 		DAE557F4282C0612001F4EF1 /* SubscribeGuildEvts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeGuildEvts.swift; sourceTree = "<group>"; };
-		DAE557F6282CE75D001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 		DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStart.swift; sourceTree = "<group>"; };
+		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,7 +355,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DAE557F6282CE75D001F4EF1 /* typing-animation.json */,
+				DAE557FA282D00B6001F4EF1 /* typing-animation.json */,
 				DAAFB5C8282B689000807B54 /* discord-loading-animation.json */,
 				DAB8CA4428291BBD009F079D /* DiscordAPI */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -685,7 +685,7 @@
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
 				DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */,
-				DAE557F7282CE75D001F4EF1 /* typing-animation.json in Resources */,
+				DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

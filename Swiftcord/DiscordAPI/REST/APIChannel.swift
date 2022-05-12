@@ -68,4 +68,9 @@ extension DiscordAPI {
     ) async -> MessageReadAck? {
         return await postReq(path: "channels/\(id)/messages/\(msgID)/ack", body: MessageReadAck(token: nil))
     }
+    
+    // MARK: Typing Start (Undocumented endpoint!)
+    static func typingStart(id: Snowflake) async -> Bool {
+        return await emptyPostReq(path: "channels/\(id)/typing")
+    }
 }

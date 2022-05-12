@@ -16,8 +16,6 @@ extension View {
 }
 
 struct MessagesView: View {
-    @Binding var channel: Channel?
-    let guildID: Snowflake
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
@@ -26,15 +24,17 @@ struct MessagesView: View {
     @State private var loadError = false
     @State private var infoBarData: InfoBarData? = nil
     @State private var fetchMessagesTask: Task<(), Error>? = nil
+    @State private var lastSentTyping = Date(timeIntervalSince1970: 0)
     
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
+    @EnvironmentObject var serverCtx: ServerContext
     
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
-    
+        
     private func fetchMoreMessages() {
-        guard let ch = channel else { return }
+        guard let ch = serverCtx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
             fetchMessagesTask = nil
@@ -78,13 +78,15 @@ struct MessagesView: View {
     private func sendMessage(content: String) {
         let text = content.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !text.isEmpty else { return }
+        lastSentTyping = Date(timeIntervalSince1970: 0)
         enteredText = ""
+        showingInfoBar = false
         Task {
             guard (await DiscordAPI.createChannelMsg(
                 message: NewMessage(
                     content: content
                 ),
-                id: channel!.id
+                id: serverCtx.channel!.id
             )) != nil else {
                 enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
                 showingInfoBar = true
@@ -118,7 +120,6 @@ struct MessagesView: View {
                         
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
                             MessageView(
-                                guildID: guildID,
                                 message: msg,
                                 shrunk: i < messages.count - 1 && msg.messageIsShrunk(prev: messages[i + 1]),
                                 quotedMsg: msg.message_reference != nil
@@ -136,10 +137,10 @@ struct MessagesView: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Image(systemName: "number")
                                     .font(.system(size: 60))
-                                Text("Welcome to #\(channel?.name ?? "")!")
+                                Text("Welcome to #\(serverCtx.channel?.name ?? "")!")
                                     .font(.largeTitle)
                                     .fontWeight(.heavy)
-                                Text("This is the start of the #\(channel?.name ?? "") channel.")
+                                Text("This is the start of the #\(serverCtx.channel?.name ?? "") channel.")
                                     .opacity(0.7)
                                 Divider()
                                     .padding(.top, 4)
@@ -173,20 +174,48 @@ struct MessagesView: View {
             .flip()
             .frame(maxHeight: .infinity)
             
-            ZStack(alignment: .top) {
+            ZStack(alignment: .topLeading) {
                 MessageInfoBarView(isShown: $showingInfoBar, state: $infoBarData)
                 
-                MessageInputView(placeholder: "Message #\(channel?.name ?? "")", message: $enteredText, onSend: sendMessage)
+                MessageInputView(placeholder: "Message #\(serverCtx.channel?.name ?? "")", message: $enteredText, onSend: sendMessage)
                     .onAppear { enteredText = "" }
-                    .onChange(of: enteredText) { content in
+                    .onChange(of: enteredText) { [enteredText] content in
+                        if content.count > enteredText.count,
+                           Date().timeIntervalSince(lastSentTyping) >= 8 {
+                            // Send typing start msg once every 8s while typing
+                            Task {
+                                let _ = await DiscordAPI.typingStart(id: serverCtx.channel!.id)
+                                lastSentTyping = Date()
+                            }
+                        }
                         guard !content.isEmpty && content.last!.isNewline else { return }
                         sendMessage(content: content)
                     }
+                
+                let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
+                    .map { t in t.member.nick ?? t.member.user!.username } ?? []
+                if !typingMembers.isEmpty {
+                    HStack() {
+                        // The dimensions are quite arbitrary
+                        LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+                            .lottieLoopMode(.loop)
+                            .frame(width: 32, height: 24)
+                        Group {
+                            Text(typingMembers.count <= 2
+                                 ? typingMembers.joined(separator: " and ")
+                                 : "Several people"
+                            ).fontWeight(.semibold)
+                            + Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
+                        }.padding(.leading, -4)
+                    }
+                    .padding(.top, 17)
+                    .padding(.horizontal, 16)
+                }
             }
         }
-        .navigationTitle("#" + (channel?.name ?? ""))
+        .navigationTitle("#" + (serverCtx.channel?.name ?? ""))
         .frame(minWidth: 525)
-        .onChange(of: channel, perform: { ch in
+        .onChange(of: serverCtx.channel, perform: { ch in
             guard ch != nil else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
@@ -194,6 +223,7 @@ struct MessagesView: View {
             loadError = false
             reachedTop = false
             scrollTopID = nil
+            lastSentTyping = Date(timeIntervalSince1970: 0)
         })
         .onChange(of: state.loadingState) { ns in
             if ns == .gatewayConn {
@@ -212,8 +242,13 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    if msg.channel_id == channel?.id {
+                    if msg.channel_id == serverCtx.channel?.id {
                         withAnimation { messages.insert(msg, at: 0) }
+                    }
+                    guard msg.webhook_id == nil else { break }
+                    // Remove typing status when user sent a message
+                    serverCtx.typingStarted[msg.channel_id]?.removeAll { t in
+                        t.member.user?.id == msg.author.id
                     }
                 case .messageUpdate:
                     guard let newMsg = d as? PartialMessage else { break }
@@ -224,13 +259,13 @@ struct MessagesView: View {
                     }
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
-                    guard deletedMsg.channel_id == channel?.id else { break }
+                    guard deletedMsg.channel_id == serverCtx.channel?.id else { break }
                     if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
                         withAnimation { let _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
                     guard let deletedMsgs = d as? MessageDeleteBulk else { break }
-                    guard deletedMsgs.channel_id == channel?.id else { break }
+                    guard deletedMsgs.channel_id == serverCtx.channel?.id else { break }
                     for msgID in deletedMsgs.id {
                         if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
                             withAnimation { let _ = messages.remove(at: delIdx) }

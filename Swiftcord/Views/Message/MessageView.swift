@@ -10,7 +10,6 @@ import SwiftUI
 import CachedAsyncImage
 
 struct MessageView: View {
-    let guildID: Snowflake
     let message: Message
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
@@ -21,6 +20,8 @@ struct MessageView: View {
     @State private var loadedQuotedMsg: Message? = nil
     @State private var loadQuotedMsgErr = false
     @State private var playLoadAnim = false // Will turn true when first appeared
+    
+    @EnvironmentObject var serverCtx: ServerContext
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -107,7 +108,7 @@ struct MessageView: View {
                 let timestring = message.timestamp.toDate()?.toTimeString() ?? ""
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
-                        UserAvatarView(user: message.author, guildID: guildID, webhookID: message.webhook_id, clickDisabled: false)
+                        UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id, clickDisabled: false)
                     }
                     else {
                         Text(timestring)

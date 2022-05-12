@@ -99,6 +99,17 @@ extension DiscordAPI {
         return try? JSONDecoder().decode(D.self, from: d)
     }
     
+    // For those weird endpoints that expect an empty post request and returns nothing
+    static func emptyPostReq(path: String) async -> Bool {
+        guard (try? await makeRequest(
+            path: path,
+            body: nil,
+            method: .post
+        )) != nil
+        else { return false }
+        return true
+    }
+    
     static func deleteReq(path: String) async -> Bool {
         return (try? await makeRequest(path: path, method: .delete)) != nil
     }

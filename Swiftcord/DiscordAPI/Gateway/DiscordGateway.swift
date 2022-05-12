@@ -66,10 +66,6 @@ class DiscordGateway: ObservableObject {
         case .guildDelete:
             guard let d = data as? GuildUnavailable else { return }
             self.cache.guilds?.removeAll { g in g.id == d.id }
-        case .typingStart:
-            guard let d = data as? TypingStart else { return }
-            print("Some typing started!")
-            print(d)
         case .userUpdate:
             guard let updatedUser = data as? User else { return }
             self.cache.user = updatedUser

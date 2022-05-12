@@ -40,11 +40,8 @@ struct MessageInputView: View {
             Button(action: { onSend(message) }) {
                 Image(systemName: "arrow.up").font(.system(size: 20))
             }
-                .buttonStyle(.plain)
-                .padding(.trailing, 15)
-                .onTapGesture {
-                    print("Tap gesture!!!")
-                }
+            .buttonStyle(.plain)
+            .padding(.trailing, 15)
         }
         .frame(minHeight: 40)
         .background(

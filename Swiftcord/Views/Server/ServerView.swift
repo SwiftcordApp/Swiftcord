@@ -7,14 +7,20 @@
 
 import SwiftUI
 
+class ServerContext: ObservableObject {
+    @Published public var channel: Channel? = nil
+    @Published public var guild: Guild? = nil
+    @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
+}
+
 struct ServerView: View {
     @Binding var guild: Guild?
     @State private var channels: [Channel] = []
-    @State private var selectedCh: Channel? = nil
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
+    @StateObject private var serverCtx = ServerContext()
     
     private func loadChannels() {
         guard let g = guild else { return }
@@ -23,12 +29,12 @@ struct ServerView: View {
             if let lastChObj = channels.first(where: { p in
                 p.id == lastChannel
             }) {
-                selectedCh = lastChObj
+                serverCtx.channel = lastChObj
                 return
             }
         }
         let selectableChs = channels.filter { $0.type != .category }
-        if !selectableChs.isEmpty { selectedCh = selectableChs[0] }
+        if !selectableChs.isEmpty { serverCtx.channel = selectableChs[0] }
         return
     }
     
@@ -43,7 +49,7 @@ struct ServerView: View {
         NavigationView {
             VStack(spacing: 0) {
                 if guild != nil {
-                    ChannelList(channels: $channels, selCh: $selectedCh, guild: $guild)
+                    ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
                 }
                 else {
                     ProgressView()
@@ -71,9 +77,8 @@ struct ServerView: View {
             }
             
             ZStack {
-                if selectedCh != nil, guild != nil {
-                    MessagesView(channel: $selectedCh, guildID: guild!.id)
-                } else {
+                if serverCtx.channel != nil, guild != nil { MessagesView().environmentObject(serverCtx) }
+                else {
                     ProgressView("Server Loading...")
                         .progressViewStyle(.circular)
                         .controlSize(.large)
@@ -83,6 +88,7 @@ struct ServerView: View {
         }
         .onChange(of: guild) { _ in
             guard let guild = guild else { return }
+            serverCtx.guild = guild
             loadChannels()
             // Subscribe to typing events
             gateway.socket.send(
@@ -90,12 +96,7 @@ struct ServerView: View {
                 data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
             )
         }
-        .onChange(of: state.loadingState, perform: { s in
-            if s == .gatewayConn {
-                print("initial guild load")
-                loadChannels()
-            }
-        })
+        .onChange(of: state.loadingState, perform: { s in if s == .gatewayConn { loadChannels() } })
         .onAppear {
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
@@ -110,7 +111,20 @@ struct ServerView: View {
                     }
                     // For some reason, updating one element doesnt update the UI
                     // loadChannels()
-                    break
+                case .typingStart:
+                    guard let typingData = d as? TypingStart,
+                          typingData.user_id != gateway.cache.user!.id
+                    else { break }
+                    if serverCtx.typingStarted[typingData.channel_id] == nil {
+                        serverCtx.typingStarted[typingData.channel_id] = []
+                    }
+                    serverCtx.typingStarted[typingData.channel_id]!.append(typingData)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 9) {
+                        serverCtx.typingStarted[typingData.channel_id]?.removeAll { t in
+                            t.member.user?.id == typingData.member.user?.id
+                            && t.timestamp == typingData.timestamp
+                        }
+                    }
                 default: break
                 }
             }
