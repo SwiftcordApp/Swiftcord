@@ -149,7 +149,8 @@ class RobustWebSocket: NSObject {
             print("error: ", error)
         }*/
         guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: message.data(using: .utf8)!)
-        else { return }
+        else { print("Decoding error for message: \(message)")
+            return }
         
         if let sequence = decoded.s { seq = sequence }
         

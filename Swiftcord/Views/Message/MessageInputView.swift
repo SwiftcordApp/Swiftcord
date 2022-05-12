@@ -13,12 +13,6 @@ struct MessageInputView: View {
     let onSend: (String) -> Void
     
     var body: some View {
-        /*GeometryReader { geometry in
-            EmptyView().onAppear {
-                print(geometry)
-            }
-        }.frame(minHeight: 40)*/
-
         HStack(alignment: .center, spacing: 14) {
             Button(action: {}) { Image(systemName: "plus").font(.system(size: 20)) }
                 .buttonStyle(.plain)
@@ -54,14 +48,14 @@ struct MessageInputView: View {
         }
         .frame(minHeight: 40)
         .background(
-            RoundedRectangle(cornerRadius: 7)
+            RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.4), lineWidth: 1)
                 .background(RoundedRectangle(cornerRadius: 7)
                     .fill(Color(NSColor.textBackgroundColor)))
                 .shadow(color: .gray.opacity(0.2), radius: 3)
         )
         .padding(.horizontal, 16)
-        .offset(y: -16)
+        .offset(y: -24)
     }
 }
 

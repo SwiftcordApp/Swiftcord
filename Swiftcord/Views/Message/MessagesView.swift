@@ -106,7 +106,7 @@ struct MessagesView: View {
                 ScrollViewReader { proxy in
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        Spacer(minLength: 38)
+                        Spacer(minLength: 46 + (showingInfoBar ? 24 : 0))
                             .onChange(of: messages.count) { _ in
                                 guard messages.count >= 1 else { return }
                                 // This is _not_ bugged
@@ -213,9 +213,7 @@ struct MessagesView: View {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
                     if msg.channel_id == channel?.id {
-                        withAnimation {
-                            messages.insert(msg, at: 0)
-                        }
+                        withAnimation { messages.insert(msg, at: 0) }
                     }
                 case .messageUpdate:
                     guard let newMsg = d as? PartialMessage else { break }

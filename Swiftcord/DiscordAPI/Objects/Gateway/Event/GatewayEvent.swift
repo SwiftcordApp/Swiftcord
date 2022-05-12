@@ -69,6 +69,7 @@ enum GatewayEvent: String, Codable {
     case messageCreate = "MESSAGE_CREATE"
     case messageUpdate = "MESSAGE_UPDATE"
     case messageDelete = "MESSAGE_DELETE"
+    case messageACK = "MESSAGE_ACK" // When messages have been read
     case messageDeleteBulk = "MESSAGE_DELETE_BULK"
     // MARK: Message Reactions
     case messageReactAdd = "MESSAGE_REACTION_ADD"

@@ -81,7 +81,15 @@ struct ServerView: View {
                 }
             }
         }
-        .onChange(of: guild) { _ in loadChannels() }
+        .onChange(of: guild) { _ in
+            guard let guild = guild else { return }
+            loadChannels()
+            // Subscribe to typing events
+            gateway.socket.send(
+                op: .subscribeGuildEvents,
+                data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
+            )
+        }
         .onChange(of: state.loadingState, perform: { s in
             if s == .gatewayConn {
                 print("initial guild load")

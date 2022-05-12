@@ -129,6 +129,10 @@
 		DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
 		DAAFB5CC282B879200807B54 /* FormatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* FormatTime.swift */; };
+		DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */; };
+		DAE557F5282C0612001F4EF1 /* SubscribeGuildEvts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F4282C0612001F4EF1 /* SubscribeGuildEvts.swift */; };
+		DAE557F7282CE75D001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557F6282CE75D001F4EF1 /* typing-animation.json */; };
+		DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -259,6 +263,10 @@
 		DAAFB5C8282B689000807B54 /* discord-loading-animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "discord-loading-animation.json"; sourceTree = "<group>"; };
 		DAAFB5CB282B879200807B54 /* FormatTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatTime.swift; sourceTree = "<group>"; };
 		DAB8CA4428291BBD009F079D /* DiscordAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordAPI; path = ../DiscordAPI; sourceTree = "<group>"; };
+		DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageACKEvt.swift; sourceTree = "<group>"; };
+		DAE557F4282C0612001F4EF1 /* SubscribeGuildEvts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeGuildEvts.swift; sourceTree = "<group>"; };
+		DAE557F6282CE75D001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
+		DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +295,6 @@
 		DA2384BC27CCB0CD009E15E0 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
@@ -348,6 +355,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DAE557F6282CE75D001F4EF1 /* typing-animation.json */,
 				DAAFB5C8282B689000807B54 /* discord-loading-animation.json */,
 				DAB8CA4428291BBD009F079D /* DiscordAPI */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -456,6 +464,7 @@
 				DA4A88E227C3472C00720909 /* Event */,
 				DA4A88CF27C2068F00720909 /* Gateway.swift */,
 				DA4A88D727C2795600720909 /* DataStructs.swift */,
+				DAE557F4282C0612001F4EF1 /* SubscribeGuildEvts.swift */,
 				DAA3B6EC282A3B770021267C /* UserSettings.swift */,
 			);
 			path = Gateway;
@@ -506,6 +515,8 @@
 				DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */,
 				DA4A890027C360D300720909 /* ReadyEvt.swift */,
 				DA4A890427C383DD00720909 /* MessageDelete.swift */,
+				DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */,
+				DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -594,6 +605,7 @@
 		DAAFB5BF282A635100807B54 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 			);
@@ -673,6 +685,7 @@
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
 				DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */,
+				DAE557F7282CE75D001F4EF1 /* typing-animation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +718,7 @@
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
+				DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA520AC027D3306D009FD740 /* loginBG.swift in Sources */,
 				DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */,
@@ -757,11 +771,13 @@
 				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
 				DA520AC927D3A55D009FD740 /* SettingsView.swift in Sources */,
 				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
+				DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */,
 				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
 				DA4A88D827C2795600720909 /* DataStructs.swift in Sources */,
 				DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */,
 				DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */,
 				DA520ADB27D60A09009FD740 /* APICurrentUser.swift in Sources */,
+				DAE557F5282C0612001F4EF1 /* SubscribeGuildEvts.swift in Sources */,
 				DA4A88BC27C13FA200720909 /* Presence.swift in Sources */,
 				DA4A88A427C12CD100720909 /* Message.swift in Sources */,
 				DA4A88A627C12DD700720909 /* Mention.swift in Sources */,

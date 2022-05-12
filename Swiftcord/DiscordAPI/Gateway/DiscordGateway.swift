@@ -14,7 +14,7 @@ class DiscordGateway: ObservableObject {
     let onAuthFailure = EventDispatch<Void>()
     
     // WebSocket object
-    private var socket: RobustWebSocket!
+    public var socket: RobustWebSocket!
     
     // State cache
     @Published var cache: CachedState = CachedState()
@@ -27,10 +27,17 @@ class DiscordGateway: ObservableObject {
     
     public func logout() {
         log.debug("Logging out on request")
+        
+        // Remove token from the keychain
         let _ = Keychain.remove(key: "token")
-        // socket.disconnect(closeCode: 1000)
+        // Reset user defaults
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        // Clear cache
+        cache = CachedState()
+        
         socket.close(code: .normalClosure)
-        // authFailed = true
         onAuthFailure.notify()
     }
     
@@ -59,6 +66,10 @@ class DiscordGateway: ObservableObject {
         case .guildDelete:
             guard let d = data as? GuildUnavailable else { return }
             self.cache.guilds?.removeAll { g in g.id == d.id }
+        case .typingStart:
+            guard let d = data as? TypingStart else { return }
+            print("Some typing started!")
+            print(d)
         case .userUpdate:
             guard let updatedUser = data as? User else { return }
             self.cache.user = updatedUser
