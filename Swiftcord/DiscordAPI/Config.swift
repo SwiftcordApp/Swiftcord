@@ -39,7 +39,7 @@ struct GatewayConfig {
         self.baseURL = "https://\(baseURL)/"
         self.version = version
         parity = clientParity
-        gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json"
+        gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json&compress=zlib-stream"
         restBase = "\(self.baseURL)api/v\(version)/"
     }
 }
