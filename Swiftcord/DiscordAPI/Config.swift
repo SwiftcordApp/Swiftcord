@@ -18,6 +18,7 @@ struct ClientParityVersion {
     let version: String
     let buildNumber: Int
     let releaseCh: ClientReleaseChannel
+    let electronVersion: String
 }
 
 struct GatewayConfig {
@@ -49,6 +50,7 @@ let apiConfig = GatewayConfig(
     clientParity: ClientParityVersion(
         version: "0.0.283",
         buildNumber: 115689,
-        releaseCh: .canary
+        releaseCh: .canary,
+        electronVersion: "13.6.6"
     )
 )

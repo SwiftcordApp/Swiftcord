@@ -128,7 +128,10 @@ class RobustWebSocket: NSObject, ObservableObject {
         awaitingHb = 0
         stopHeartbeating()
         
-        socket = session.webSocketTask(with: URL(string: apiConfig.gateway)!)
+        var gatewayReq = URLRequest(url: URL(string: apiConfig.gateway)!)
+        // The difference in capitalisation is intentional
+        gatewayReq.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
+        socket = session.webSocketTask(with: gatewayReq)
         socket.maximumMessageSize = maxMsgSize
         
         DispatchQueue.main.async { [weak self] in
@@ -298,6 +301,7 @@ extension RobustWebSocket {
             //if let reconnect = self?.reconnectWhenOnlineAgain, reconnect {
             // Temporarily ignore reconnectWhenOnlineAgain since that was causing issues
             self?.clearPendingReconnectIfNeeded()
+            self?.attempts = 0
             self?.reconnect(code: nil)
             //}
         }
@@ -315,11 +319,7 @@ extension RobustWebSocket {
 // MARK: - Heartbeating
 extension RobustWebSocket {
     @objc private func sendHeartbeat() {
-        guard connected else {
-            // Obviously, a dead connection will not respond to heartbeats
-            log.warning("Socket is not connected, not sending heartbeat")
-            return
-        }
+        guard connected else { return }
         
         log.debug("Sending heartbeat, awaiting \(self.awaitingHb) ACKs")
         if awaitingHb > 1 {

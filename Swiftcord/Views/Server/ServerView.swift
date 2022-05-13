@@ -56,7 +56,7 @@ struct ServerView: View {
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
                                 Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
-                                    .frame(maxWidth: 208)
+                                    .frame(maxWidth: 208) // Largest width before disappearing
                             }
                         }
                 }
