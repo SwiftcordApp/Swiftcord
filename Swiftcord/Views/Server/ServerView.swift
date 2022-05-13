@@ -53,6 +53,12 @@ struct ServerView: View {
             VStack(spacing: 0) {
                 if guild != nil {
                     ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
+                                    .frame(maxWidth: 208)
+                            }
+                        }
                 }
                 else {
                     ProgressView()
@@ -73,18 +79,6 @@ struct ServerView: View {
                 if gateway.cache.user != nil {
                     CurrentUserFooter(user: gateway.cache.user!)
                 }
-            }
-            .toolbar {
-                ToolbarItem {
-                    Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
-                        .frame(maxWidth: 208)
-                }
-                /*
-                ToolbarItem {
-                    Button(action: toggleSidebar, label: {
-                        Image(systemName: "sidebar.left")
-                    })
-                }*/
             }
             
             ZStack {
