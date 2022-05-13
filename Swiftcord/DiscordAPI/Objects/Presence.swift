@@ -19,19 +19,23 @@ enum PresenceStatus: String, Codable {
     case offline = "offline"
 }
 
+struct PresenceUser: Codable, GatewayData {
+    let id: Snowflake
+}
+
 struct PresenceUpdate: Codable, GatewayData {
-    let user: User
+    let user: PresenceUser
     let guild_id: Snowflake
     let status: PresenceStatus
-    let activities: Activity
+    let activities: [Activity]
     let client_status: PresenceClientStatus
 }
 
 struct PartialPresenceUpdate: Codable, GatewayData {
-    let user: User
+    let user: PresenceUser
     let guild_id: Snowflake?
     let status: PresenceStatus?
-    let activities: Activity?
+    let activities: [Activity]?
     let client_status: PresenceClientStatus?
 }
 

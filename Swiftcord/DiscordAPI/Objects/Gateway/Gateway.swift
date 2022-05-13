@@ -109,7 +109,7 @@ struct GatewayIncoming: Decodable {
             case .messageDelete: d = try values.decode(MessageDelete.self, forKey: .d)
             case .messageACK: d = try values.decode(MessageACKEvt.self, forKey: .d)
             case .messageDeleteBulk: d = try values.decode(MessageDeleteBulk.self, forKey: .d)
-            case .presenceUpdate: d = try values.decode(PartialPresenceUpdate.self, forKey: .d)
+            case .presenceUpdate: d = try values.decode(PresenceUpdate.self, forKey: .d)
                 // TODO: Add the remaining like 100 events
                 
             case .userUpdate: d = try values.decode(User.self, forKey: .d)
