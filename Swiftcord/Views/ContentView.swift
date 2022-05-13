@@ -27,7 +27,6 @@ struct ContentView: View {
     @State private var sheetOpen = false
     @State private var selectedGuild: Guild? = nil
     @State private var loadingGuildID: Snowflake? = nil
-    @State private var mediaCenterOpen: Bool = false
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @StateObject private var audioManager = AudioCenterManager()
@@ -90,16 +89,7 @@ struct ContentView: View {
             
             ServerView(guild: $selectedGuild)
         }
-        .toolbar {
-            ToolbarItem {
-                Button(action: { mediaCenterOpen = true }, label: { Image(systemName: "play.circle") })
-                    .popover(isPresented: $mediaCenterOpen) { MediaControllerView() }
-            }
-        }
         .environmentObject(audioManager)
-        .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
-            if count > oldCount { mediaCenterOpen = true }
-        }
         .onChange(of: selectedGuild) { _ in
             guard let id = selectedGuild?.id else { return }
             UserDefaults.standard.set(id, forKey: "lastSelectedGuild")

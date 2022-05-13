@@ -213,7 +213,6 @@ struct MessagesView: View {
                 }
             }
         }
-        .navigationTitle("#" + (serverCtx.channel?.name ?? ""))
         .frame(minWidth: 525)
         .onChange(of: serverCtx.channel, perform: { ch in
             guard ch != nil else { return }

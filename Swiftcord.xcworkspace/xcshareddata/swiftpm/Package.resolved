@@ -1,34 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Lottie",
-        "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
-          "version": "3.3.0"
-        }
-      },
-      {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
-        "state": {
-          "branch": "master",
-          "revision": "a81b7367f2c46875f29577e03a60c39cdfad0c8d",
-          "version": null
-        }
-      },
-      {
-        "package": "swiftui-cached-async-image",
-        "repositoryURL": "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
-        "state": {
-          "branch": null,
-          "revision": "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
-          "version": "2.1.0"
-        }
+  "pins" : [
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
+        "version" : "3.3.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a81b7367f2c46875f29577e03a60c39cdfad0c8d"
+      }
+    },
+    {
+      "identity" : "swiftui-cached-async-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
+      "state" : {
+        "revision" : "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
+        "version" : "2.1.0"
+      }
+    }
+  ],
+  "version" : 2
 }

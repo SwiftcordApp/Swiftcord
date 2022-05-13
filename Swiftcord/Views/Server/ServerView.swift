@@ -17,9 +17,12 @@ struct ServerView: View {
     @Binding var guild: Guild?
     @State private var channels: [Channel] = []
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
+    @State private var mediaCenterOpen: Bool = false
     
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
+    @EnvironmentObject var audioManager: AudioCenterManager
+    
     @StateObject private var serverCtx = ServerContext()
     
     private func loadChannels() {
@@ -72,10 +75,9 @@ struct ServerView: View {
                 }
             }
             .toolbar {
-                // FIXME: This doesn't appear in the toolbar for some reason
-                ToolbarItemGroup {
+                ToolbarItem {
                     Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
-                        .frame(minWidth: 0)
+                        .frame(maxWidth: 208)
                 }
                 /*
                 ToolbarItem {
@@ -94,6 +96,22 @@ struct ServerView: View {
                         .frame(minWidth: 400, minHeight: 250, alignment: .center)
                 }
             }
+        }
+        .navigationTitle("")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigation) {
+                HStack {
+                    Image(systemName: "number").font(.system(size: 18)).opacity(0.77)
+                    Text(serverCtx.channel?.name ?? "No Channel").font(.title2)
+                }
+            }
+            ToolbarItem(placement: .navigation) {
+                Button(action: { mediaCenterOpen = true }, label: { Image(systemName: "play.circle") })
+                    .popover(isPresented: $mediaCenterOpen) { MediaControllerView() }
+            }
+        }
+        .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
+            if count > oldCount { mediaCenterOpen = true }
         }
         .onChange(of: guild) { _ in
             guard let guild = guild else { return }
@@ -143,12 +161,5 @@ struct ServerView: View {
         .onDisappear {
             if let evtID = evtID { let _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
-    }
-}
-
-struct ServerView_Previews: PreviewProvider {
-    static var previews: some View {
-        // ServerView()
-        Text("TODO")
     }
 }
