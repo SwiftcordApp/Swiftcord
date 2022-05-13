@@ -93,4 +93,7 @@ enum GatewayEvent: String, Codable {
     case voiceStateUpdate = "VOICE_STATE_UPDATE"
     case voiceServerUpdate = "VOICE_SERVER_UPDATE"
     case webhooksUpdate = "WEBHOOKS_UPDATE"
+    
+    // MARK: Human account-specific Events
+    case channelUnreadUpdate = "CHANNEL_UNREAD_UPDATE"
 }

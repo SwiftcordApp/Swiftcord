@@ -25,7 +25,7 @@ struct PresenceUser: Codable, GatewayData {
 
 struct PresenceUpdate: Codable, GatewayData {
     let user: PresenceUser
-    let guild_id: Snowflake
+    let guild_id: Snowflake?
     let status: PresenceStatus
     let activities: [Activity]
     let client_status: PresenceClientStatus

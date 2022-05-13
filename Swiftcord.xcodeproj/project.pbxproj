@@ -121,6 +121,7 @@
 		DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */; };
 		DA9C3706282E41F0002179D5 /* APIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C3705282E41F0002179D5 /* APIUtils.swift */; };
 		DA9C370A282E67C0002179D5 /* DecompressionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C3709282E67C0002179D5 /* DecompressionEngine.swift */; };
+		DA9C370C282EB640002179D5 /* ChUnreadUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */; };
 		DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EC282A3B770021267C /* UserSettings.swift */; };
 		DAA3B6EF282A4CA50021267C /* FilterAndSortChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
@@ -255,6 +256,7 @@
 		DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnViewHover.swift; sourceTree = "<group>"; };
 		DA9C3705282E41F0002179D5 /* APIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUtils.swift; sourceTree = "<group>"; };
 		DA9C3709282E67C0002179D5 /* DecompressionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecompressionEngine.swift; sourceTree = "<group>"; };
+		DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChUnreadUpdate.swift; sourceTree = "<group>"; };
 		DAA3B6EC282A3B770021267C /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DAA3B6EE282A4CA50021267C /* FilterAndSortChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAndSortChannels.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				DA4A890427C383DD00720909 /* MessageDelete.swift */,
 				DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */,
 				DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */,
+				DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				DA2384A127CB9714009E15E0 /* CustomiseFontFamily.swift in Sources */,
 				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
+				DA9C370C282EB640002179D5 /* ChUnreadUpdate.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */,

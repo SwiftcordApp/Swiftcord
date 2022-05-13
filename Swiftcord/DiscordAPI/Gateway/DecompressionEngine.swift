@@ -59,7 +59,7 @@ extension DecompressionEngine {
         
         // Configure stream source and destinations (will be changed in loop)
         stream.src_size = 0
-        let bufferSize = 4096
+        let bufferSize = DecompressionEngine.BUFFER_SIZE
         let destinationBufferPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
         stream.dst_ptr = destinationBufferPointer
         stream.dst_size = bufferSize
@@ -85,7 +85,7 @@ extension DecompressionEngine {
                 
                 stream.src_size = srcChunk!.count
                 if stream.src_size < bufferSize {
-                    // This technically shouldn't be used...
+                    // This technically shouldn't be used this way...
                     flags = Int32(COMPRESSION_STREAM_FINALIZE.rawValue)
                 }
             }
@@ -116,8 +116,8 @@ extension DecompressionEngine {
                 // Reset the stream to receive the next batch of output.
                 stream.dst_ptr = destinationBufferPointer
                 stream.dst_size = bufferSize
-            case COMPRESSION_STATUS_ERROR:
-                return decompressed // This "error" happens when decompression is done
+            case COMPRESSION_STATUS_ERROR: return decompressed
+                // This "error" happens when decompression is done, what a hack
             default: break
             }
         } while status == COMPRESSION_STATUS_OK
