@@ -18,6 +18,7 @@ struct ClientParityVersion {
     let version: String
     let buildNumber: Int
     let releaseCh: ClientReleaseChannel
+    let electronVersion: String
 }
 
 struct GatewayConfig {
@@ -38,7 +39,7 @@ struct GatewayConfig {
         self.baseURL = "https://\(baseURL)/"
         self.version = version
         parity = clientParity
-        gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json"
+        gateway = "wss://gateway.discord.gg/?v=\(version)&encoding=json&compress=zlib-stream"
         restBase = "\(self.baseURL)api/v\(version)/"
     }
 }
@@ -49,6 +50,7 @@ let apiConfig = GatewayConfig(
     clientParity: ClientParityVersion(
         version: "0.0.283",
         buildNumber: 115689,
-        releaseCh: .canary
+        releaseCh: .canary,
+        electronVersion: "13.6.6"
     )
 )

@@ -39,6 +39,24 @@ extension DiscordAPI {
         req.httpMethod = method.rawValue
         req.setValue(token, forHTTPHeaderField: "authorization")
         req.setValue(apiConfig.baseURL, forHTTPHeaderField: "origin")
+        
+        // These headers are to match headers present in actual requests from the official client
+        // req.setValue("?0", forHTTPHeaderField: "sec-ch-ua-mobile") // The day this runs on iOS...
+        // req.setValue("macOS", forHTTPHeaderField: "sec-ch-ua-platform") // We only run on macOS
+        // The top 2 headers are only sent when running in browsers
+        req.setValue(getUserAgent(), forHTTPHeaderField: "user-agent")
+        req.setValue("cors", forHTTPHeaderField: "sec-fetch-mode")
+        req.setValue("same-origin", forHTTPHeaderField: "sec-fetch-site")
+        req.setValue("empty", forHTTPHeaderField: "sec-fetch-dest")
+        
+        req.setValue(Locale.englishUS.rawValue, forHTTPHeaderField: "x-discord-locale")
+        req.setValue("bugReporterEnabled", forHTTPHeaderField: "x-debug-options")
+        guard let superEncoded = try? JSONEncoder().encode(getSuperProperties()) else {
+            DiscordAPI.log.error("Couldn't encode super properties, something is seriously wrong")
+            return nil
+        }
+        req.setValue(superEncoded.base64EncodedString(), forHTTPHeaderField: "x-super-properties")
+        
         if let body = body {
             req.setValue("application/json", forHTTPHeaderField: "content-type")
             req.httpBody = body.data(using: .utf8)

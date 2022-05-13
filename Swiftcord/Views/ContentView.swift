@@ -138,7 +138,17 @@ struct ContentView: View {
             }
             let _ = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
-                case .ready: state.loadingState = .gatewayConn
+                case .ready:
+                    state.loadingState = .gatewayConn
+                    fallthrough
+                case .resumed:
+                    gateway.socket.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
+                        guild_id: nil,
+                        channel_id: nil,
+                        self_mute: state.selfMute,
+                        self_deaf: state.selfDeaf,
+                        self_video: false
+                    ))
                 default: break
                 }
             }

@@ -75,9 +75,10 @@ class DiscordGateway: ObservableObject {
             guard let updatedUser = data as? User else { return }
             self.cache.user = updatedUser
         case .presenceUpdate:
-            guard let p = data as? PresenceUpdate else { return }
-            print("Presence update!")
-            print(p)
+            break
+            // guard let p = data as? PresenceUpdate else { return }
+            //print("Presence update!")
+            //print(p)
         default: break
         }
         onEvent.notify(event: (type, data))

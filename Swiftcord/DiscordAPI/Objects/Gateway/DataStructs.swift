@@ -44,11 +44,22 @@ struct GatewayPresenceUpdate: OutgoingGatewayData {
 }
 
 // MARK: Opcode 4 (Voice State Update)
-struct GatewayVoiceStateUpdate: GatewayData {
-    let guild_id: Snowflake
+struct GatewayVoiceStateUpdate: OutgoingGatewayData, GatewayData {
+    let guild_id: Snowflake?
     let channel_id: Snowflake? // ID of the voice channel client wants to join (null if disconnecting)
     let self_mute: Bool
     let self_deaf: Bool
+    let self_video: Bool?
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        // Encoding containers directly so nil optionals get encoded as "null" and not just removed
+        try container.encode(self_mute, forKey: .self_mute)
+        try container.encode(self_deaf, forKey: .self_deaf)
+        try container.encode(self_video, forKey: .self_video)
+        try container.encode(channel_id, forKey: .channel_id)
+        try container.encode(guild_id, forKey: .guild_id)
+    }
 }
 
 // MARK: Opcode 6 (Resume)
@@ -71,4 +82,12 @@ struct GatewayGuildRequestMembers: GatewayData {
 // MARK: Opcode 10 (Hello)
 struct GatewayHello: GatewayData {
     let heartbeat_interval: Int
+}
+
+// MARK: Opcode 14 (Subscribe Guild Events)
+struct SubscribeGuildEvts: OutgoingGatewayData {
+    let guild_id: Snowflake
+    var typing: Bool = false
+    var activities: Bool = false
+    var threads: Bool = false
 }

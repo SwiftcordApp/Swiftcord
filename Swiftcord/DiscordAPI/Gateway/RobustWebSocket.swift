@@ -18,7 +18,8 @@ class RobustWebSocket: NSObject, ObservableObject {
                onAuthFailure = EventDispatch<Void>(),
                onConnStateChange = EventDispatch<(Bool, Bool)>() // session open, reachable
     
-    private var session: URLSession!, socket: URLSessionWebSocketTask!
+    private var session: URLSession!, socket: URLSessionWebSocketTask!,
+                decompressor: DecompressionEngine!
     private let reachability = try! Reachability(), log = Logger(category: "RobustWebSocket")
     
     private let queue: OperationQueue
@@ -30,7 +31,7 @@ class RobustWebSocket: NSObject, ObservableObject {
                 seq: Int? = nil, canResume = false, sessionID: String? = nil,
                 pendingReconnect: Timer? = nil, connTimeout: Timer? = nil
     public var connected = false {
-        didSet { if !connected { sessionOpen = false } }
+        didSet { if !connected { sessionOpen = false }}
     }
     public var reachable = false {
         didSet { onConnStateChange.notify(event: (connected, reachable)) }
@@ -100,16 +101,10 @@ class RobustWebSocket: NSObject, ObservableObject {
             switch result {
             case .success(let message):
                 switch (message) {
-                case .data(_):
-                    /*do {
-                        let decompressed = try NSData(data: data).decompressed(using: .zlib)
-                        let str = String(decoding: decompressed, as: UTF8.self)
-                        self?.handleMessage(message: str)
-                    } catch {
-                        self?.log.error("Could not decompress Gateway message: \(error.localizedDescription)")
-                        print(error)
-                    }*/
-                    // TODO: Fix this broken decompression implementation
+                case .data(let data):
+                    if let decompressed = self?.decompressor.push_data(data) {
+                        self?.handleMessage(message: decompressed)
+                    } else { self?.log.debug("Data has not ended yet") }
                     break
                 case .string(let str): self?.handleMessage(message: str)
                 @unknown default: self?.log.warning("Unknown sock message case!")
@@ -128,7 +123,10 @@ class RobustWebSocket: NSObject, ObservableObject {
         awaitingHb = 0
         stopHeartbeating()
         
-        socket = session.webSocketTask(with: URL(string: apiConfig.gateway)!)
+        var gatewayReq = URLRequest(url: URL(string: apiConfig.gateway)!)
+        // The difference in capitalisation is intentional
+        gatewayReq.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
+        socket = session.webSocketTask(with: gatewayReq)
         socket.maximumMessageSize = maxMsgSize
         
         DispatchQueue.main.async { [weak self] in
@@ -141,6 +139,9 @@ class RobustWebSocket: NSObject, ObservableObject {
         }
         
         attempts += 1
+        // Create new instance of decompressor
+        // It's best to do it here, before resuming the task since sometimes, messages arrive before the compressor is initialised in the socket open handler.
+        decompressor = DecompressionEngine()
         socket.resume()
         
         setupReachability()
@@ -235,9 +236,8 @@ class RobustWebSocket: NSObject, ObservableObject {
                 guard let d = decoded.d as? ReadyEvt else { return }
                 sessionID = d.session_id
                 canResume = true
-                sessionOpen = true
-            case .resumed:
-                sessionOpen = true
+                fallthrough
+            case .resumed: sessionOpen = true
             default: break
             }
             onEvent.notify(event: (type, decoded.d))
@@ -298,6 +298,7 @@ extension RobustWebSocket {
             //if let reconnect = self?.reconnectWhenOnlineAgain, reconnect {
             // Temporarily ignore reconnectWhenOnlineAgain since that was causing issues
             self?.clearPendingReconnectIfNeeded()
+            self?.attempts = 0
             self?.reconnect(code: nil)
             //}
         }
@@ -315,11 +316,7 @@ extension RobustWebSocket {
 // MARK: - Heartbeating
 extension RobustWebSocket {
     @objc private func sendHeartbeat() {
-        guard connected else {
-            // Obviously, a dead connection will not respond to heartbeats
-            log.warning("Socket is not connected, not sending heartbeat")
-            return
-        }
+        guard connected else { return }
         
         log.debug("Sending heartbeat, awaiting \(self.awaitingHb) ACKs")
         if awaitingHb > 1 {

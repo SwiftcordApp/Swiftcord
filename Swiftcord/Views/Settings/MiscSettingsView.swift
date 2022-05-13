@@ -29,7 +29,12 @@ struct MiscSettingsView: View {
             DebugTableItem(item: "Gateway session ID", val: gateway.sessionID ?? "nil"),
             DebugTableItem(item: "Gateway missed heartbeat ACKs", val: String(gateway.missedACK)),*/
             
+            DebugTableItem(item: "Gateway session established", val: gateway.connected.toString()),
+            DebugTableItem(item: "Network reachable", val: gateway.reachable.toString()),
             DebugTableItem(item: "Loading stage", val: String(describing: state.loadingState)),
+            DebugTableItem(item: "Base URL", val: apiConfig.baseURL),
+            DebugTableItem(item: "REST API base URL", val: apiConfig.restBase),
+            DebugTableItem(item: "Gateway URL", val: apiConfig.gateway),
         ]
         
         NavigationView {
