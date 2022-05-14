@@ -1,6 +1,6 @@
 //
 //  MessageView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
@@ -35,66 +35,63 @@ struct MessageView: View {
                         .padding(.bottom, -14)
                         .padding(.trailing, -30)
                     Group {
-                        if (quotedMsg != nil || loadedQuotedMsg != nil) && !loadQuotedMsgErr {
-                            CachedAsyncImage(url: loadedQuotedMsg?.author.avatarURL() ?? quotedMsg!.author.avatarURL()) { phase in
-                                if let image = phase.image {
-                                    image.resizable().scaledToFill()
-                                }
-                                else if phase.error != nil {
-                                    Image("DiscordIcon").frame(width: 12, height: 12)
-                                } else {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
-                                        .controlSize(.mini)
-                                }
-                            }
-                            .clipShape(Circle())
-                            .frame(width: 16, height: 16)
-                            Group {
-                                Text(loadedQuotedMsg?.author.username ?? quotedMsg!.author.username)
-                                    .font(.system(size: 14))
-                                    .opacity(0.9)
-                                Text(.init(loadedQuotedMsg?.content ?? quotedMsg!.content))
-                                    .font(.system(size: 14))
-                                    .opacity(0.75)
-                                    .lineLimit(1)
-                            }
-                            .onTapGesture { onQuoteClick((loadedQuotedMsg ?? quotedMsg!).id) }
-                            .cursor(NSCursor.pointingHand)
-                        }
-                        else if loadQuotedMsgErr {
-                            Image(systemName: "xmark.octagon.fill")
-                                .font(.system(size: 12))
-                                .frame(width: 16, height: 16)
-                            Text("Could not load quoted message")
-                                .font(.system(size: 14))
-                                .opacity(0.75)
-                        }
-                        else {
-                             ProgressView()
-                                .progressViewStyle(.circular)
-                                .controlSize(.mini)
-                                .frame(width: 16, height: 16)
-                                .onAppear { Task {
-                                    guard message.message_reference!.message_id != nil
-                                    else {
-                                        loadQuotedMsgErr = true
-                                        return
-                                    }
-                                    
-                                    guard let m = await DiscordAPI.getChannelMsg(
-                                        id: message.message_reference!.channel_id ?? message.channel_id,
-                                        msgID: message.message_reference!.message_id!
-                                    ) else {
-                                        loadQuotedMsgErr = true
-                                        return
-                                    }
-                                    loadedQuotedMsg = m
-                                }}
-                            Text("Loading message...")
-                                .font(.system(size: 14))
-                                .opacity(0.75)
-                        }
+						if let quotedMsg = loadedQuotedMsg ?? quotedMsg, !loadQuotedMsgErr {
+							CachedAsyncImage(url: quotedMsg.author.avatarURL()) { phase in
+								if let image = phase.image {
+									image.resizable().scaledToFill()
+								} else if phase.error != nil {
+									Image("DiscordIcon").frame(width: 12, height: 12)
+								} else {
+									ProgressView()
+										.progressViewStyle(.circular)
+										.controlSize(.mini)
+								}
+							}
+							.clipShape(Circle())
+							.frame(width: 16, height: 16)
+							Group {
+								Text(quotedMsg.author.username)
+									.font(.system(size: 14))
+									.opacity(0.9)
+								Text(quotedMsg.content)
+									.font(.system(size: 14))
+									.opacity(0.75)
+									.lineLimit(1)
+							}
+							.onTapGesture { onQuoteClick(quotedMsg.id) }
+							.cursor(NSCursor.pointingHand)
+						} else if loadQuotedMsgErr {
+							Image(systemName: "xmark.octagon.fill")
+								.font(.system(size: 12))
+								.frame(width: 16, height: 16)
+							Text("Could not load quoted message")
+								.font(.system(size: 14))
+								.opacity(0.75)
+						} else {
+							ProgressView()
+								.progressViewStyle(.circular)
+								.controlSize(.mini)
+								.frame(width: 16, height: 16)
+								.onAppear { Task {
+									guard message.message_reference!.message_id != nil
+									else {
+										loadQuotedMsgErr = true
+										return
+									}
+
+									guard let m = await DiscordAPI.getChannelMsg(
+										id: message.message_reference!.channel_id ?? message.channel_id,
+										msgID: message.message_reference!.message_id!
+									) else {
+										loadQuotedMsgErr = true
+										return
+									}
+									loadedQuotedMsg = m
+								}}
+							Text("Loading message...")
+								.font(.system(size: 14))
+								.opacity(0.75)
+						}
                     }
                     .padding(.bottom, 4)
                     Spacer()
@@ -138,7 +135,7 @@ struct MessageView: View {
                                     }
                                     .frame(height: 15)
                                     .padding(.horizontal, 4)
-                                    .background(Color("DiscordTheme"))
+									.background(Color.accentColor)
                                     .cornerRadius(4)
                                     // .offset(y: -2)
                                 }
@@ -172,15 +169,15 @@ struct MessageView: View {
                                         .foregroundColor(Color(NSColor.textColor).opacity(0.4))
                                 }.textSelection(.enabled)
                             }
-                            if message.sticker_items != nil {
-                                ForEach(message.sticker_items!, id: \.id) { sticker in
+                            if let stickerItems = message.sticker_items {
+                                ForEach(stickerItems) { sticker in
                                     StickerView(sticker: sticker)
                                 }
                             }
-                            ForEach(message.attachments, id: \.id) { attachment in
+                            ForEach(message.attachments) { attachment in
                                 AttachmentView(attachment: attachment)
                             }
-                            ForEach(message.embeds, id: \.id) { embed in
+                            ForEach(message.embeds) { embed in
                                 EmbedView(embed: embed)
                             }
                         }
@@ -208,67 +205,92 @@ struct MessageView: View {
             playLoadAnim = true
         })
         .contextMenu {
-            Button {
-                
-            } label: {
-                // For some reason Label() with icon doesn't work...
+			Button(action: reply) {
+                // Using Label(_:systemImage:) doesn't show image on macOS
                 Image(systemName: "arrowshape.turn.up.left.fill")
                 Text("Reply")
             }
+
+			Divider()
             
             Group {
-                Divider()
-                Button {
-                    
-                } label: {
+				Button(action: addReaction) {
                     Image(systemName: "face.smiling.fill")
                     Text("Add Reaction")
                 }
-                Button {
-                    
-                } label: {
+				Button(action: createThread) {
                     Image(systemName: "number")
                     Text("Create Thread")
                 }
-                Button {
-                    
-                } label: {
+				Button(action: pinMessage) {
                     Image(systemName: "pin.fill")
                     Text("Pin Message")
                 }
-                
             }
             
             Divider()
-            Button {
-                
-            } label: {
-                Image(systemName: "pencil")
-                Text("Edit")
-            }
-            Button { Task {
-                await DiscordAPI.deleteMsg(id: message.channel_id, msgID: message.id)
-            } } label: {
-                // role: .destructive does nothing
-                Image(systemName: "xmark.bin.fill") // ...and .foregroundColor does nothing here
-                Text("Delete Message").foregroundColor(.red)
-            }
+
+			Group {
+				Button(action: editMessage) {
+					Image(systemName: "pencil")
+					Text("Edit")
+				}
+				Button(role: .destructive, action: deleteMessage) {
+					Image(systemName: "xmark.bin.fill")
+					Text("Delete Message").foregroundColor(.red)
+				}
+			}
             
             Divider()
-            Button {
-                
-            } label: {
-                Image(systemName: "link")
-                Text("Copy Link")
-            }
-            Button {
-                
-            } label: {
-                Image(systemName: "number.circle.fill")
-                Text("Copy ID")
-            }
+
+			Group {
+				Button(action: copyLink) {
+					Image(systemName: "link")
+					Text("Copy Link")
+				}
+				Button(action: copyID) {
+					Image(systemName: "number.circle.fill")
+					Text("Copy ID")
+				}
+			}
         }
     }
+}
+
+private extension MessageView {
+	func reply() {
+		print(#function)
+	}
+
+	func addReaction() {
+		print(#function)
+	}
+
+	func createThread() {
+		print(#function)
+	}
+
+	func pinMessage() {
+		print(#function)
+	}
+
+	func editMessage() {
+		print(#function)
+	}
+
+	func deleteMessage() {
+		Task {
+			await DiscordAPI.deleteMsg(id: message.channel_id, msgID: message.id)
+		}
+	}
+
+	func copyLink() {
+		print(#function)
+	}
+
+	func copyID() {
+		NSPasteboard.general.setString(message.id, forType: .string)
+	}
 }
 
 struct MessageView_Previews: PreviewProvider {

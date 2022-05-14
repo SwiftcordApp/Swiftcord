@@ -1,19 +1,11 @@
 //
 //  Native_DiscordApp.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
 
 import SwiftUI
-
-// Get rid of over the top focus indicator
-extension NSTextField {
-    open override var focusRingType: NSFocusRingType {
-        get { .none }
-        set { }
-    }
-}
 
 @main
 struct SwiftcordApp: App {
@@ -30,16 +22,6 @@ struct SwiftcordApp: App {
                 .environmentObject(gateway)
                 .environmentObject(state)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .onAppear {
-                    // Overwrite shared URLCache with a higher capacity one
-                    URLCache.shared = URLCache(
-                        memoryCapacity: 32*1024*1024,  // 32MB
-                          diskCapacity: 256*1024*1024, // 256MB
-                              diskPath: nil
-                    )
-                    
-                    clearCache(olderThan: 24) // Clear cache folders older than 24 hours
-                }
         }
         
         Settings {

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -45,7 +45,7 @@ struct ContentView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: selectedGuild?.id == "@me",
+                        selected: selectedGuild?.isDMChannel ?? false,
                         name: "Home",
                         assetIconName: "DiscordIcon",
                         onSelect: { selectedGuild = makeDMGuild() }
@@ -53,7 +53,7 @@ struct ContentView: View {
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
-                    ForEach(gateway.cache.guilds ?? [], id: \.id) { guild in
+                    ForEach(gateway.cache.guilds ?? []) { guild in
                         ServerButton(
                             selected: selectedGuild?.id == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
@@ -124,9 +124,9 @@ struct ContentView: View {
             }
         }
         .onChange(of: loginWVModel.token, perform: { tk in
-            if tk != nil {
+            if let tk = tk {
                 state.attemptLogin = false
-                let _ = Keychain.save(key: "token", data: tk!)
+                let _ = Keychain.save(key: "token", data: tk)
                 gateway.connect() // Reconnect to the socket
             }
         })

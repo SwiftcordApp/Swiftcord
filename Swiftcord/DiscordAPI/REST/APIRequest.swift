@@ -1,6 +1,6 @@
 //
 //  APIRequest.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //
@@ -20,7 +20,7 @@ extension DiscordAPI {
     static func makeRequest(
         path: String,
         query: [URLQueryItem] = [],
-        body: String? = nil,
+        body: Data? = nil,
         method: RequestMethod = .get
     ) async throws -> Data? {
         DiscordAPI.log.debug("\(method.rawValue): \(path)")
@@ -59,7 +59,7 @@ extension DiscordAPI {
         
         if let body = body {
             req.setValue("application/json", forHTTPHeaderField: "content-type")
-            req.httpBody = body.data(using: .utf8)
+            req.httpBody = body
         }
                 
         // Make request
@@ -105,11 +105,10 @@ extension DiscordAPI {
     static func postReq<D: Decodable, B: Encodable>(
         path: String,
         body: B? = nil
-    ) async -> D? {        
-        let p = body != nil ? try? JSONEncoder().encode(body) : nil
+    ) async -> D? {
         guard let d = try? await makeRequest(
             path: path,
-            body: p != nil ? String(decoding: p!, as: UTF8.self) : nil,
+            body: try? JSONEncoder().encode(body),
             method: .post
         )
         else { return nil }

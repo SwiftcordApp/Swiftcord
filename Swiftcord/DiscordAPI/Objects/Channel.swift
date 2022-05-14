@@ -1,6 +1,6 @@
 //
 //  Channel.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -28,7 +28,7 @@ enum ChannelType: Int, Codable {
     case forum = 15 // (still in development) a channel that can only contain threads
 }
 
-struct Channel: Codable, GatewayData, Equatable {
+struct Channel: Identifiable, Codable, GatewayData, Equatable {
     static func == (lhs: Channel, rhs: Channel) -> Bool {
         lhs.id == rhs.id
     }

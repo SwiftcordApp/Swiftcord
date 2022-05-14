@@ -1,6 +1,6 @@
 //
 //  ServerView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
@@ -26,25 +26,23 @@ struct ServerView: View {
     @StateObject private var serverCtx = ServerContext()
     
     private func loadChannels() {
-        guard let g = guild else { return }
-        channels = g.channels!
-        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)") {
-            if let lastChObj = channels.first(where: { p in
-                p.id == lastChannel
-            }) {
-                serverCtx.channel = lastChObj
-                return
-            }
+        guard let g = guild, let channels = g.channels else {
+			return
+		}
+		self.channels = channels
+
+        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)"),
+		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
+			   serverCtx.channel = lastChObj
+			   return
         }
         let selectableChs = channels.filter { $0.type != .category }
-        if !selectableChs.isEmpty { serverCtx.channel = selectableChs[0] }
-        return
+		serverCtx.channel = selectableChs.first
     }
     
     private func toggleSidebar() {
-        #if os(iOS)
-        #else
-        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+        #if os(macOS)
+		NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
         #endif
     }
     
@@ -55,12 +53,13 @@ struct ServerView: View {
                     ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
-                                Text(guild?.name ?? "Loading").font(.title3).fontWeight(.semibold)
-                                    .frame(maxWidth: 208) // Largest width before disappearing
+                                Text(guild?.name ?? "Loading")
+									.font(.title3)
+									.fontWeight(.semibold)
+									.frame(maxWidth: .infinity)
                             }
                         }
-                }
-                else {
+                } else {
                     ProgressView()
                         .progressViewStyle(.circular)
                         .controlSize(.large)
@@ -68,35 +67,34 @@ struct ServerView: View {
                 }
 
                 if !gateway.connected || !gateway.reachable {
-                    HStack {
-                        Image(systemName: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
-                        Text(gateway.reachable ? "Reconnecting..." : "No network connectivity")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 4)
-                    .background(gateway.reachable ? .orange : .red)
+					Label(gateway.reachable ? "Reconnecting..." : "No network connectivity", systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
+						.frame(maxWidth: .infinity)
+						.padding(.vertical, 4)
+						.background(gateway.reachable ? .orange : .red)
                 }
-                if gateway.cache.user != nil {
-                    CurrentUserFooter(user: gateway.cache.user!)
+				if let user = gateway.cache.user {
+                    CurrentUserFooter(user: user)
                 }
             }
             
-            ZStack {
-                if serverCtx.channel != nil, guild != nil { MessagesView().environmentObject(serverCtx) }
-                else {
-                    ProgressView("Server Loading...")
-                        .progressViewStyle(.circular)
-                        .controlSize(.large)
-                        .frame(minWidth: 400, minHeight: 250, alignment: .center)
-                }
-            }
+			if serverCtx.channel != nil, guild != nil {
+				MessagesView()
+					.environmentObject(serverCtx)
+			} else {
+				ProgressView("Server Loading...")
+					.progressViewStyle(.circular)
+					.controlSize(.large)
+					.frame(minWidth: 400, minHeight: 250, alignment: .center)
+			}
         }
         .navigationTitle("")
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
                 HStack {
-                    Image(systemName: "number").font(.system(size: 18)).opacity(0.77)
-                    Text(serverCtx.channel?.name ?? "No Channel").font(.title2)
+                    Image(systemName: "number")
+						.font(.system(size: 18)).opacity(0.77)
+                    Text(serverCtx.channel?.name ?? "No Channel")
+						.font(.title2)
                 }
             }
             ToolbarItem(placement: .navigation) {
@@ -112,7 +110,7 @@ struct ServerView: View {
             serverCtx.guild = guild
             loadChannels()
             // Sending malformed IDs causes an instant Gateway session termination
-            guard guild.id != "@me" else { return }
+            guard !guild.isDMChannel else { return }
             // Subscribe to typing events
             gateway.socket.send(
                 op: .subscribeGuildEvents,

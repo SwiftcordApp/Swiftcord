@@ -1,6 +1,6 @@
 //
 //  Guild.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //
@@ -37,7 +37,7 @@ enum GuildFeature: String, Codable {
     case discoverableBefore = "ENABLED_DISCOVERABLE_BEFORE"
 }
     
-struct Guild: GatewayData, Equatable {
+struct Guild: GatewayData, Equatable, Identifiable {
     static func == (lhs: Guild, rhs: Guild) -> Bool {
         lhs.id == rhs.id
     }

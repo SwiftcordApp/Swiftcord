@@ -1,6 +1,6 @@
 //
 //  WebView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -32,7 +32,14 @@ struct WebView: NSViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator as? WKUIDelegate
         webView.configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
-        
+		let backgroundImageB64: String? = {
+			let image = NSImage(named: "LoginBackground")
+			guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
+			let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+			let jpegData = bitmapRep.representation(using: .png, properties: [:])
+			return jpegData?.base64EncodedString()
+		}()
+
         let interceptJS = """
         // Get rid of everything in localStorage for a fresh state
         localStorage.clear();
@@ -82,7 +89,7 @@ struct WebView: NSViewRepresentable {
           const s = document.createElement('style');
           s.innerHTML = `
             #app-mount {
-              background: url(\(loginBG));
+              background: url(data:image/gif;base64,\(backgroundImageB64 ?? ""));
               background-size: cover;
               background-position: center;
             }

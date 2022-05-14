@@ -3,7 +3,7 @@
 //  Creating a file called Application.swift causes a build error
 //  Xcode, why didn't you tell me?
 //
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //

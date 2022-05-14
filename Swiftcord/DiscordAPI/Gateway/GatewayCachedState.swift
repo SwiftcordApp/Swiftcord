@@ -1,6 +1,6 @@
 //
 //  CachedState.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 22/2/22.
 //

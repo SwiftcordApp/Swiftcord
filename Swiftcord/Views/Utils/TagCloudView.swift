@@ -1,6 +1,6 @@
 //
 //  WrappingHStack.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 25/2/22.
 //
@@ -8,8 +8,8 @@
 import SwiftUI
 
 // Adapted from: https://stackoverflow.com/a/62103264
-struct TagCloudView: View {
-    let content: [AnyView]
+struct TagCloudView<C: View>: View {
+    let content: [C]
 
     @State private var totalHeight
           = CGFloat.zero       // << variant for ScrollView/List

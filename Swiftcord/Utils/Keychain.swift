@@ -1,6 +1,6 @@
 //
 //  Keychain.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //
@@ -11,10 +11,13 @@ import Security
 
 class Keychain {
     static let tag = Bundle.main.bundleIdentifier!.data(using: .utf8)!
-    
+
+	@discardableResult
     class func save(key: String, data: String) -> OSStatus {
         return save(key: key, data: data.data(using: .utf8)!)
     }
+
+	@discardableResult
     class func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
@@ -27,7 +30,8 @@ class Keychain {
 
         return SecItemAdd(query as CFDictionary, nil)
     }
-    
+
+	@discardableResult
     class func remove(key: String) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
@@ -44,6 +48,7 @@ class Keychain {
         else { return nil }
         return String(data: d, encoding: .utf8)
     }
+	
     class func loadData(key: String) -> Data? {
         let query = [
             kSecClass as String       : kSecClassGenericPassword,

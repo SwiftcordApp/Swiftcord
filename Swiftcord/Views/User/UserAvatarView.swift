@@ -1,6 +1,6 @@
 //
 //  UserAvatarView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
@@ -47,8 +47,8 @@ struct UserAvatarView: View {
         .cursor(NSCursor.pointingHand)
         .popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
             VStack(alignment: .leading, spacing: 0) {
-                if (profile?.user.accent_color ?? user.accent_color) != nil {
-                    Rectangle().fill(Color(hex: profile?.user.accent_color ?? user.accent_color ?? 0))
+                if let accentColor = profile?.user.accent_color ?? user.accent_color {
+                    Rectangle().fill(Color(hex: accentColor))
                         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
                 }
                 else {
@@ -120,23 +120,19 @@ struct UserAvatarView: View {
                         }
                         
                         // Optionals are silly
-                        if (profile?.user.bio) != nil
-                            && !(profile?.user.bio!.isEmpty ?? false) {
-                            Text("ABOUT ME").font(.headline)
-                            Text(.init((profile?.user.bio)!))
+						if let bio = profile?.user.bio, !bio.isEmpty {
+                            Text("ABOUT ME")
+								.font(.headline)
+                            Text(bio)
                                 .fixedSize(horizontal: false, vertical: true)
                         } else if profile != nil {
                             Text("NO ABOUT").font(.headline)
                         }
                         
-                        if profile != nil {
-                            if guildRoles == nil {
-                                ProgressView("Loading roles...")
-                                    .progressViewStyle(.linear)
-                                    .frame(maxWidth: .infinity)
-                            } else {
-                                let roles = guildRoles!.filter({ r in
-                                    profile!.guild_member!.roles.contains(r.id)
+                        if let profile = profile {
+                            if let guildRoles = guildRoles {
+                                let roles = guildRoles.filter({ r in
+                                    profile.guild_member!.roles.contains(r.id)
                                 })
                                 
                                 Text(roles.isEmpty
@@ -145,23 +141,25 @@ struct UserAvatarView: View {
                                 ).font(.headline).padding(.top, 8)
                                 if !roles.isEmpty {
                                     TagCloudView(content: roles.map({ role in
-                                        AnyView(
-                                            HStack(spacing: 6) {
-                                                Circle()
-                                                    .fill(Color(hex: role.color))
-                                                    .frame(width: 14, height: 14)
-                                                    .padding(.leading, 6)
-                                                Text(role.name)
-                                                    .font(.system(size: 12))
-                                                    .padding(.trailing, 8)
-                                            }
-                                            .frame(height: 24)
-                                            .background(Color.gray.opacity(0.2))
-                                            .cornerRadius(7)
-                                        )
+										HStack(spacing: 6) {
+											Circle()
+												.fill(Color(hex: role.color))
+												.frame(width: 14, height: 14)
+												.padding(.leading, 6)
+											Text(role.name)
+												.font(.system(size: 12))
+												.padding(.trailing, 8)
+										}
+										.frame(height: 24)
+										.background(Color.gray.opacity(0.2))
+										.cornerRadius(7)
                                     })).padding(-2)
                                 }
-                            }
+							} else {
+								ProgressView("Loading roles...")
+									.progressViewStyle(.linear)
+									.frame(maxWidth: .infinity)
+							}
                         }
                         
                         Text("NOTE").font(.headline).padding(.top, 8)
