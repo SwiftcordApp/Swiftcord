@@ -31,8 +31,8 @@ struct LargeUserProfile<Content: View>: View {
         let avatarURL = user.avatarURL(size: 240)
         
         VStack(alignment: .leading, spacing: 0) {
-            if user.accent_color != nil {
-                Rectangle().fill(Color(hex: user.accent_color!))
+            if let accentColor = user.accent_color {
+                Rectangle().fill(Color(hex: accentColor))
                     .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120)
             }
             else {

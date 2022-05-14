@@ -1,6 +1,6 @@
 //
 //  Team.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //

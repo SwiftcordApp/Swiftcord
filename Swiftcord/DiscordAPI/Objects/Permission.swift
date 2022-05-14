@@ -1,6 +1,6 @@
 //
 //  Permission.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 20/2/22.
 //

@@ -1,6 +1,6 @@
 //
 //  AttachmentView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 24/2/22.
 //
@@ -153,10 +153,14 @@ struct AttachmentView: View {
     
     private func getURLWithResizedDimens(mediaURL: URL, width: Int?, height: Int?) -> URL {
         var oURL = URLComponents(url: mediaURL, resolvingAgainstBaseURL: true)!
-        oURL.queryItems = width != nil ? [
-            URLQueryItem(name: "width", value: String(width!)),
-            URLQueryItem(name: "height", value: String(height!)),
-        ] : []
+		if let width = width, let height = height {
+			oURL.queryItems = [
+				URLQueryItem(name: "width", value: String(width)),
+				URLQueryItem(name: "height", value: String(height))
+			]
+		} else {
+			oURL.queryItems = []
+		}
         return oURL.url!
     }
     
@@ -165,9 +169,9 @@ struct AttachmentView: View {
         ZStack {
             if let url = URL(string: attachment.proxy_url) {
                 let mime = attachment.content_type ?? url.mimeType()
-                if attachment.width != nil && attachment.height != nil {
+                if let width = attachment.width, let height = attachment.height {
                     // This is an image/video
-                    let (width, height, resizedURL, scale) = getResizedDimens(width: attachment.width!, height: attachment.height!, srcURL: url)
+                    let (width, height, resizedURL, scale) = getResizedDimens(width: width, height: height, srcURL: url)
                     switch mime.prefix(5) {
                     case "image":
                         AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)

@@ -18,12 +18,10 @@ struct LoFiMessageView: View {
                 TagCloudView(content: (0..<Int.random(in: 3...24))
                     .map { _ in Double.random(in: 30...80) }
                     .map { width in
-                        AnyView(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(.gray.opacity(0.12))
-                                .frame(width: width, height: 16)
-                                .padding(.bottom, 1)
-                        )
+						RoundedRectangle(cornerRadius: 8)
+							.fill(.gray.opacity(0.12))
+							.frame(width: width, height: 16)
+							.padding(.bottom, 1)
                     }
                 ).padding(.horizontal, -2)
                 

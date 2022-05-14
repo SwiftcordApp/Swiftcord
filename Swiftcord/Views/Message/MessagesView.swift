@@ -1,6 +1,6 @@
 //
 //  MessageView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
@@ -112,9 +112,9 @@ struct MessagesView: View {
                             .onChange(of: messages.count) { _ in
                                 guard messages.count >= 1 else { return }
                                 // This is _not_ bugged
-                                if scrollTopID != nil {
-                                    proxy.scrollTo(scrollTopID!, anchor: .bottom)
-                                    scrollTopID = nil
+                                if let scrollTopID = scrollTopID {
+                                    proxy.scrollTo(scrollTopID, anchor: .bottom)
+									self.scrollTopID = nil
                                 }
                             }
                         
