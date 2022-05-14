@@ -16,7 +16,8 @@ import Combine
 class RobustWebSocket: NSObject, ObservableObject {
     public let onEvent = EventDispatch<(GatewayEvent, GatewayData?)>(),
                onAuthFailure = EventDispatch<Void>(),
-               onConnStateChange = EventDispatch<(Bool, Bool)>() // session open, reachable
+               onConnStateChange = EventDispatch<(Bool, Bool)>(), // session open, reachable
+               onSessionInvalid = EventDispatch<Void>() // When the session cannot be resumed
     
     private var session: URLSession!, socket: URLSessionWebSocketTask!,
                 decompressor: DecompressionEngine!
@@ -61,19 +62,14 @@ class RobustWebSocket: NSObject, ObservableObject {
     // MARK: - (Re)Connection
     private func reconnect(code: URLSessionWebSocketTask.CloseCode?) {
         guard !explicitlyClosed else {
-            log.warning("Not reconnecting: connection was explicitly closed")
             attempts = 0
             return
         }
         guard reachable else {
-            log.warning("Not reconnecting: connection is unreachable")
             reconnectWhenOnlineAgain = true
             return
         }
-        guard connTimeout == nil else {
-            log.warning("Not reconnecting: already attempting a connection")
-            return
-        }
+        guard connTimeout == nil else { return }
         
         let delay = reconnectInterval(code, attempts)
         if let delay = delay {
@@ -121,7 +117,6 @@ class RobustWebSocket: NSObject, ObservableObject {
     private func connect() {
         pendingReconnect = nil
         awaitingHb = 0
-        stopHeartbeating()
         
         var gatewayReq = URLRequest(url: URL(string: apiConfig.gateway)!)
         // The difference in capitalisation is intentional
@@ -214,6 +209,7 @@ class RobustWebSocket: NSObject, ObservableObject {
             let shouldResume = (decoded.primitiveData as? Bool) ?? false
             if !shouldResume {
                 log.warning("Session is invalid, reconnecting without resuming")
+                onSessionInvalid.notify()
                 canResume = false
             }
             /// Close the connection immediately and reconnect after 1-5s, as per Discord docs
@@ -280,7 +276,6 @@ extension RobustWebSocket: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
         reconnect(code: closeCode)
         connected = false
-        stopHeartbeating()
         // didCloseConnection?()
         // didReceive(event: .disconnected("", UInt16(closeCode.rawValue)))
         reconnectWhenOnlineAgain = false
@@ -348,9 +343,6 @@ extension RobustWebSocket {
                 .sink() { _ in self.sendHeartbeat() }
         }
     }
-    private func stopHeartbeating() {
-        log.debug("Stop timer is now noop")
-    }
 }
 
 
@@ -361,7 +353,6 @@ extension RobustWebSocket {
         shouldReconnect: Bool = true
     ) {
         log.warning("Forcibly closing connection")
-        stopHeartbeating()
         self.socket.cancel(with: code, reason: nil)
         connected = false
         if shouldReconnect { self.reconnect(code: nil) }
@@ -375,7 +366,6 @@ extension RobustWebSocket {
         reachability.stopNotifier()
         
         socket.cancel(with: code, reason: nil)
-        stopHeartbeating()
     }
     
     public func open() {

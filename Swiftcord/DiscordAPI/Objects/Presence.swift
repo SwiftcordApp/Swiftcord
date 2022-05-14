@@ -21,6 +21,9 @@ enum PresenceStatus: String, Codable {
 
 struct PresenceUser: Codable, GatewayData {
     let id: Snowflake
+    let username: String?
+    let discriminator: String?
+    let avatar: String?
 }
 
 struct PresenceUpdate: Codable, GatewayData {
