@@ -1,6 +1,6 @@
 //
 //  StickerView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //
@@ -40,59 +40,60 @@ struct StickerItemView: View {
     @Binding var play: Bool
     
     var body: some View {
-        ZStack {
-            if !error { switch sticker.format_type {
-            case .png:
-                // Literally a walk in the park compared to lottie
-                AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png")!) { phase in
-                    switch phase {
-                    case .empty: StickerLoadingView(size: size)
-                    case .success(let image): image.resizable().scaledToFill()
-                    case .failure: StickerErrorView(size: size)
-                    default: StickerErrorView(size: size)
-                    }
-                }
-                .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-            case .lottie:
-                if animation == nil {
-                    StickerLoadingView(size: size).onAppear {
-                        Lottie.Animation.loadedFrom(
-                            url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).json")!,
-                            closure: { anim in
-                                guard anim != nil else {
-                                    error = true
-                                    return
-                                }
-                                animation = anim
-                            },
-                            animationCache: nil
-                        )
-                    }
-                }
-                else {
-                    LottieView(
-                        animation: animation!,
-                        play: $play,
-                        width: size,
-                        height: size
-                    ).lottieLoopMode(.loop).frame(width: size, height: size)
-                }
-            default:
-                // Well it doesn't animate for some reason
-                AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
-                    switch phase {
-                    case .empty: StickerLoadingView(size: size)
-                    case .success(let image): image.resizable().scaledToFill()
-                    case .failure: StickerErrorView(size: size)
-                    default: StickerErrorView(size: size)
-                    }
-                }
-                .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-            }}
-            else { StickerErrorView(size: size) } // if error
-        }
+		if error {
+			StickerErrorView(size: size)
+		} else {
+			switch sticker.format_type {
+				case .png:
+					// Literally a walk in the park compared to lottie
+					AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png")!) { phase in
+						switch phase {
+							case .empty: StickerLoadingView(size: size)
+							case .success(let image): image.resizable().scaledToFill()
+							case .failure: StickerErrorView(size: size)
+							default: StickerErrorView(size: size)
+						}
+					}
+					.frame(width: size, height: size)
+					.clipShape(RoundedRectangle(cornerRadius: 7))
+				case .lottie:
+					if animation == nil {
+						StickerLoadingView(size: size).onAppear {
+							Lottie.Animation.loadedFrom(
+								url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).json")!,
+								closure: { anim in
+									guard let anim = anim else {
+										error = true
+										return
+									}
+									animation = anim
+								},
+								animationCache: nil
+							)
+						}
+					}
+					else {
+						LottieView(
+							animation: animation!,
+							play: $play,
+							width: size,
+							height: size
+						).lottieLoopMode(.loop).frame(width: size, height: size)
+					}
+				default:
+					// Well it doesn't animate for some reason
+					AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+						switch phase {
+							case .empty: StickerLoadingView(size: size)
+							case .success(let image): image.resizable().scaledToFill()
+							case .failure: StickerErrorView(size: size)
+							default: StickerErrorView(size: size)
+						}
+					}
+					.frame(width: size, height: size)
+					.clipShape(RoundedRectangle(cornerRadius: 7))
+			}
+		}
     }
 }
 
@@ -108,18 +109,18 @@ struct StickerView: View {
         StickerItemView(sticker: sticker, size: 160, play: $play)
         .popover(isPresented: $infoShow, arrowEdge: .trailing) {
             VStack(alignment: .leading, spacing: 14) {
-                if fullSticker != nil {
+                if let fullSticker = fullSticker {
                     StickerItemView(sticker: sticker, size: 240, play: .constant(true))
                     Divider()
-                    Text(fullSticker!.name).font(.title2).fontWeight(.bold)
-                    if fullSticker!.description != nil {
-                        Text(fullSticker!.description ?? "").padding(.top, -8)
+                    Text(fullSticker.name).font(.title2).fontWeight(.bold)
+                    if let description = fullSticker.description {
+                        Text(description).padding(.top, -8)
                     }
                     if sticker.format_type == .aPNG {
                         Text("Sorry, aPNG stickers can't be played (yet)").font(.footnote)
                     }
                             
-                    if fullSticker!.pack_id != nil {
+                    if fullSticker.pack_id != nil {
                         Button(action: { packPresenting = true }) {
                             Label("View Sticker Pack", systemImage: "square.on.square")
                                 .frame(maxWidth: .infinity)
@@ -142,6 +143,7 @@ struct StickerView: View {
                     ProgressView()
                         .progressViewStyle(.linear)
                         .frame(width: 240)
+						.tint(.blue)
                 }
             }.padding(14)
         }

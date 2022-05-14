@@ -1,6 +1,6 @@
 //
 //  Sticker.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -34,7 +34,7 @@ struct Sticker: Codable, GatewayData {
     let sort_value: Int? // Sticker's sort order in its pack
 }
 
-struct StickerItem: Codable {
+struct StickerItem: Codable, Identifiable {
     let id: Snowflake
     let name: String
     let format_type: StickerFormat

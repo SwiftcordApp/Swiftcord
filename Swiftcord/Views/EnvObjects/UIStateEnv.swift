@@ -1,6 +1,6 @@
 //
 //  UIStateEnv.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 27/2/22.
 //

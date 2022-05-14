@@ -1,6 +1,6 @@
 //
 //  LottieLoopMode.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
 //

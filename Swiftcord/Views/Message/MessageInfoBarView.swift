@@ -28,10 +28,11 @@ struct MessageInfoBarView: View {
                 else { Text(state?.buttonLabel ?? "") }
             }.buttonStyle(.plain)
         }
+		.foregroundColor(.white)
         .frame(height: 24)
         .padding(.horizontal) // Padding for content
         .padding(.bottom, 14)
-        .background(.red)
+		.background(state?.color ?? .clear)
         .cornerRadius(8) // Visually match corner radius to message field
         .padding(.horizontal, 16) // Padding outside the background
         .offset(y: isShown ? -48 : -24)

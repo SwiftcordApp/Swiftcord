@@ -1,6 +1,6 @@
 //
 //  GuildMember.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //

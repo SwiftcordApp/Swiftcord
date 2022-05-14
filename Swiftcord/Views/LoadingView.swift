@@ -10,16 +10,11 @@ import SwiftUI
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
             
-    private let loadingStrings: [LoadingState: String] = [
-        .initial: "Establishing Gateway connection",
-        .gatewayConn: "Fetching latest messages",
-        .messageLoad: "Done!"
+	private let loadingStrings: [(LoadingState, String)] = [
+        (.initial, "Establishing Gateway connection"),
+        (.gatewayConn, "Fetching latest messages"),
+        (.messageLoad, "Done!")
     ]
-    private let loadingSeq: [LoadingState] = [
-        .initial,
-        .gatewayConn,
-        .messageLoad
-    ] // Dictionaries are unordered :(
     
     private let loadingTips = [
         "You can use Streamer Mode to hide personal details while streaming.",
@@ -54,22 +49,23 @@ struct LoadingView: View {
     @State private var displayedTip = ""
 
     var body: some View {
-        let loadingNum = (loadingSeq.firstIndex(of: state.loadingState) ?? 0)
+		let loadingNum = (loadingStrings.map(\.0).firstIndex(of: state.loadingState) ?? 0)
         VStack(spacing: 4) {
             LottieView(
                 name: "discord-loading-animation",
-                play: .constant(loadingNum != loadingSeq.count - 1),
+                play: .constant(loadingNum != loadingStrings.count - 1),
                 width: 280,
                 height: 280
             )
             .frame(width: 280, height: 150)
             .lottieLoopMode(.loop)
             
-            Text(loadingStrings[state.loadingState] ?? "").font(.title3)
+			Text(loadingStrings.first(where: { $0.0 == state.loadingState })?.1 ?? "").font(.title3)
                 .animation(.spring(), value: state.loadingState)
-            ProgressView(value: Double(loadingNum + 1) / Double(loadingSeq.count))
+            ProgressView(value: Double(loadingNum + 1) / Double(loadingStrings.count))
                 .progressViewStyle(.linear)
                 .frame(width: 180)
+				.tint(.blue)
             Text(.init(displayedTip))
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
@@ -80,11 +76,11 @@ struct LoadingView: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .allowsHitTesting(loadingNum != loadingSeq.count - 1)
+        .allowsHitTesting(loadingNum != loadingStrings.count - 1)
         .background(Color(NSColor.windowBackgroundColor))
-        .opacity(loadingNum != loadingSeq.count - 1 ? 1 : 0)
-        .scaleEffect(loadingNum != loadingSeq.count - 1 ? 1 : 2)
-        .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingSeq.count - 1)
+        .opacity(loadingNum != loadingStrings.count - 1 ? 1 : 0)
+        .scaleEffect(loadingNum != loadingStrings.count - 1 ? 1 : 2)
+        .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingStrings.count - 1)
     }
 }
 

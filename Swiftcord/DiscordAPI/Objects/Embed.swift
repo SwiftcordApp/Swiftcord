@@ -1,6 +1,6 @@
 //
 //  Embed.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -16,7 +16,7 @@ enum EmbedType: String, Codable {
     case link = "link"
 }
 
-struct Embed: Codable {
+struct Embed: Codable, Identifiable {
     let title: String?
     let type: EmbedType?
     let description: String?
@@ -31,10 +31,7 @@ struct Embed: Codable {
     let author: EmbedAuthor?
     let fields: [EmbedField]?
     var id: String {
-        get {
-            return "\(title ?? "")\(description ?? "")\(url ?? "")\(String(color ?? 0))\(timestamp ?? "")"
-        }
-        set {}
+		"\(title ?? "")\(description ?? "")\(url ?? "")\(String(color ?? 0))\(timestamp ?? "")"
     }
 }
 
@@ -63,12 +60,11 @@ struct EmbedAuthor: Codable {
     let proxy_icon_url: String?
 }
 
-struct EmbedField: Codable {
+struct EmbedField: Codable, Identifiable {
     let name: String
     let value: String
     let inline: Bool?
     var id: String {
-        get { name + value }
-        set {}
+		name + value
     }
 }

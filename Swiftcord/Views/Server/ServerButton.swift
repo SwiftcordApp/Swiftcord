@@ -1,12 +1,64 @@
 //
 //  ServerButton.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 22/2/22.
 //
 
 import SwiftUI
 import CachedAsyncImage
+
+struct ServerButton: View {
+	let selected: Bool
+	let name: String
+	var systemIconName: String? = nil
+	var assetIconName: String? = nil
+	var serverIconURL: String? = nil
+	var bgColor: Color? = nil
+	var noIndicator = false // Don't show capsule
+	var isLoading: Bool = false
+	let onSelect: () -> Void
+	@State private var hovered = false
+
+	let capsuleAnimation = Animation.interpolatingSpring(stiffness: 500, damping: 30)
+
+	var body: some View {
+		HStack {
+			Capsule()
+				.scale((selected || hovered) && !noIndicator ? 1 : 0)
+				.fill(Color(nsColor: .labelColor))
+				.frame(width: 8, height: selected ? 40 : (hovered ? 20 : 8))
+				.animation(capsuleAnimation, value: selected)
+				.animation(capsuleAnimation, value: hovered)
+
+			Button(action: onSelect) {
+				Text(systemIconName == nil && assetIconName == nil
+					 ? name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+					 : ""
+				)
+			}
+			.buttonStyle(
+				ServerButtonStyle(
+					selected: selected,
+					name: name,
+					bgColor: bgColor,
+					systemName: systemIconName,
+					assetName: assetIconName,
+					serverIconURL: serverIconURL,
+					loading: isLoading,
+					hovered: $hovered
+				)
+			)
+			/*.popover(isPresented: .constant(true)) {
+			 Text(name).padding(8)
+			 }*/
+			.padding(.trailing, 8)
+
+			Spacer()
+		}
+		.frame(width: 72, height: 48)
+	}
+}
 
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
@@ -20,18 +72,16 @@ struct ServerButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
-            if assetName != nil {
-                Image(assetName!)
+            if let assetName = assetName {
+                Image(assetName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 26)
-            }
-            else if systemName != nil {
-                Image(systemName: systemName!)
+            } else if let systemName = systemName {
+                Image(systemName: systemName)
                     .font(.system(size: 24))
-            }
-            else if serverIconURL != nil {
-                CachedAsyncImage(url: URL(string: serverIconURL!)) { phase in
+            } else if let serverIconURL = serverIconURL {
+                CachedAsyncImage(url: URL(string: serverIconURL)) { phase in
                     if let image = phase.image {
                         image.resizable().scaledToFill()
                     } else if phase.error != nil {
@@ -40,15 +90,19 @@ struct ServerButtonStyle: ButtonStyle {
                         ProgressView().progressViewStyle(.circular)
                     }
                 }
-            }
-            else { configuration.label.font(.system(size: 15)).lineLimit(1) }
+            } else {
+				configuration.label
+					.font(.system(size: 15))
+					.lineLimit(1)
+			}
             
             if loading { /* TODO: Show some form of feedback */ }
         }
         .frame(width: 48, height: 48)
+		.foregroundColor(hovered || selected ? Color.white : Color(nsColor: .labelColor))
         .background(
             hovered || selected
-            ? bgColor ?? Color("DiscordTheme")
+			? bgColor ?? Color.accentColor
             : .gray.opacity(0.25)
         )
         /*.background(LinearGradient(
@@ -65,57 +119,6 @@ struct ServerButtonStyle: ButtonStyle {
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }
         .cursor(NSCursor.pointingHand)
-    }
-}
-
-struct ServerButton: View {
-    let selected: Bool
-    let name: String
-    // Not a good way to pass icons, but works
-    var systemIconName: String? = nil
-    var assetIconName: String? = nil
-    var serverIconURL: String? = nil
-    var bgColor: Color? = nil
-    var noIndicator = false // Don't show capsule
-    var isLoading: Bool = false
-    let onSelect: () -> Void
-    @State private var hovered = false
-
-    var body: some View {
-        HStack {
-            Capsule()
-                .scale((selected || hovered) && !noIndicator ? 1 : 0)
-                .fill(.white)
-                .frame(width: 8, height: selected ? 40 : (hovered ? 20 : 8))
-                .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: selected)
-                .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
-                
-            Button(action: { onSelect() }) {
-                Text(systemIconName == nil && assetIconName == nil
-                     ? name.split(separator: " ").map({ s in s.prefix(1)}).joined(separator: "")
-                     : ""
-                )
-            }
-            .buttonStyle(
-                ServerButtonStyle(
-                    selected: selected,
-                    name: name,
-                    bgColor: bgColor,
-                    systemName: systemIconName,
-                    assetName: assetIconName,
-                    serverIconURL: serverIconURL,
-                    loading: isLoading,
-                    hovered: $hovered
-                )
-            )
-            /*.popover(isPresented: .constant(true)) {
-                Text(name).padding(8)
-            }*/
-            .padding(.trailing, 8)
-            
-            Spacer()
-        }
-        .frame(width: 72, height: 48)
     }
 }
 

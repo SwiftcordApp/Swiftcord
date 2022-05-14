@@ -1,6 +1,6 @@
 //
 //  User.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
@@ -55,7 +55,6 @@ struct UserProfile: Codable, GatewayData {
 
 extension User {
     var flagsArr: [UserFlags]? {
-        set {}
-        get { return flags?.decodeFlags(flags: UserFlags.staff) }
+		flags?.decodeFlags(flags: UserFlags.staff)
     }
 }

@@ -9,10 +9,47 @@ import Foundation
 import AppKit
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+	func applicationDidFinishLaunching(_ notification: Notification) {
+		setupURLCache()
+		clearOldCache()
+	}
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         /// Close the app when there are no more open windows
         /// This is mostly to fix bugs occuring when windows are
         /// reopened after all windows are closed
         return true
     }
+}
+
+private extension AppDelegate {
+	/// Overwrite shared URLCache with a higher capacity one
+	func setupURLCache() {
+		URLCache.shared = URLCache(
+			memoryCapacity: 32 * 1024 * 1024,  // 32MB
+			diskCapacity: 256 * 1024 * 1024, // 256MB
+			diskPath: nil
+		)
+	}
+
+	// Remove cached files older than the specified number of hours
+	func clearOldCache() {
+		let hoursThreshold = 24
+
+		do {
+			if let directories = try? FileManager.default.contentsOfDirectory(atPath: FileManager.default.temporaryDirectory.path) {
+				for directory in directories {
+					let directoryURL = FileManager.default.temporaryDirectory.appendingPathComponent(directory)
+					let directoryAttributes = try FileManager.default.attributesOfItem(atPath: directoryURL.path)
+					if let creationDate = directoryAttributes[FileAttributeKey.creationDate] as? Date {
+						if let diff = Calendar.current.dateComponents([.hour], from: creationDate, to: Date()).hour, diff > hoursThreshold {
+							try FileManager.default.removeItem(at: directoryURL)
+						}
+					}
+				}
+			}
+		} catch {
+			print(error)
+		}
+	}
 }

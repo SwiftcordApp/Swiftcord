@@ -1,13 +1,13 @@
 //
 //  Attachment.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 19/2/22.
 //
 
 import Foundation
 
-struct Attachment: Codable {
+struct Attachment: Codable, Identifiable {
     let id: Snowflake
     let filename: String
     let description: String?

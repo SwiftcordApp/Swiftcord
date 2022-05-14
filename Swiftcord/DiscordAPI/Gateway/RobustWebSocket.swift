@@ -164,13 +164,18 @@ class RobustWebSocket: NSObject, ObservableObject {
         } catch {
             print("error: ", error)
         }*/
-        guard let decoded = try? JSONDecoder().decode(GatewayIncoming.self, from: message.data(using: .utf8)!)
-        else { print("Decoding error for message: \(message)")
-            return }
+
+		let decoded: GatewayIncoming
+		do {
+			decoded = try JSONDecoder().decode(GatewayIncoming.self, from: message.data(using: .utf8) ?? Data())
+		} catch {
+			print(error)
+			return
+		}
         
         if let sequence = decoded.s { seq = sequence }
         
-        switch(decoded.op) {
+        switch decoded.op {
         case .heartbeat:
             log.debug("Sending expedited heartbeat as requested")
             send(op: .heartbeat, data: GatewayHeartbeat())

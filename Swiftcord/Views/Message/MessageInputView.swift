@@ -1,6 +1,6 @@
 //
 //  MessageInputView.swift
-//  Native Discord
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 24/2/22.
 //
