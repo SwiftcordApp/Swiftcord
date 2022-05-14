@@ -117,7 +117,7 @@ struct AttachmentView: View {
     @State private var dataTask: URLSessionDownloadTask?
     @State private var observation: NSKeyValueObservation?
     
-    private let mimeFileMapping = [
+    public static let mimeFileMapping = [
         // Rich Documents
         "application/pdf": "doc.text.image",
         // Word
@@ -184,7 +184,7 @@ struct AttachmentView: View {
                     // Display a generic file
                     GroupBox {
                         HStack(alignment: .center, spacing: 4) {
-                            Image(systemName: mimeFileMapping[attachment.content_type ?? ""] ?? "doc")
+                            Image(systemName: AttachmentView.mimeFileMapping[attachment.content_type ?? ""] ?? "doc")
                                 .font(.system(size: 36))
                                 .opacity(0.8)
                             VStack(alignment: .leading, spacing: 4) {

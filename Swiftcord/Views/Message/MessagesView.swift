@@ -75,7 +75,7 @@ struct MessagesView: View {
         }
     }
     
-    private func sendMessage(content: String) {
+    private func sendMessage(content: String, attachments: [URL]) {
         let text = content.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !text.isEmpty else { return }
         lastSentTyping = Date(timeIntervalSince1970: 0)
@@ -86,6 +86,7 @@ struct MessagesView: View {
                 message: NewMessage(
                     content: content
                 ),
+                attachments: attachments,
                 id: serverCtx.channel!.id
             )) != nil else {
                 enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
@@ -95,7 +96,7 @@ struct MessagesView: View {
                     buttonLabel: "Try again",
                     color: .red,
                     buttonIcon: "arrow.clockwise",
-                    clickHandler: { sendMessage(content: enteredText) }
+                    clickHandler: { sendMessage(content: enteredText, attachments: attachments) }
                 )
                 return
             }
@@ -181,15 +182,13 @@ struct MessagesView: View {
                     .onAppear { enteredText = "" }
                     .onChange(of: enteredText) { [enteredText] content in
                         if content.count > enteredText.count,
-                           Date().timeIntervalSince(lastSentTyping) >= 8 {
+                           Date().timeIntervalSince(lastSentTyping) > 8 {
                             // Send typing start msg once every 8s while typing
+                            lastSentTyping = Date()
                             Task {
                                 let _ = await DiscordAPI.typingStart(id: serverCtx.channel!.id)
-                                lastSentTyping = Date()
                             }
                         }
-                        guard !content.isEmpty && content.last!.isNewline else { return }
-                        sendMessage(content: content)
                     }
                 
                 let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?

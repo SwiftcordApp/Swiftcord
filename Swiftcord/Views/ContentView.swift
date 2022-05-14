@@ -152,6 +152,7 @@ struct ContentView: View {
                 default: break
                 }
             }
+            let _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
     }
 

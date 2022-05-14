@@ -13,7 +13,8 @@ class DecompressionEngine {
     private static let ZLIB_SUFFIX = Data([0x00, 0x00, 0xff, 0xff]), BUFFER_SIZE = 32_768
     
     private static let log = Logger(category: "DecompressionEngine")
-    private var buf = Data(), stream: compression_stream, status: compression_status, decompressing = false
+    private var buf = Data(), stream: compression_stream, status: compression_status,
+                decompressing = false
     
     init() {
         stream = UnsafeMutablePointer<compression_stream>.allocate(capacity: 1).pointee
@@ -38,7 +39,6 @@ class DecompressionEngine {
         }
         
         // Figure out how to make a shared zlib decompression context
-        DecompressionEngine.log.debug("Decompressing buf of len \(self.buf.count, privacy: .public)")
         let output = decompress(buf)
         
         buf.removeAll()
@@ -48,6 +48,7 @@ class DecompressionEngine {
 
 extension DecompressionEngine {
     fileprivate func decompress(_ data: Data) -> Data {
+        let initialSize = data.count
         guard !decompressing else {
             DecompressionEngine.log.warning("Another decompression is currently taking place, skipping")
             return Data()
@@ -68,7 +69,7 @@ extension DecompressionEngine {
         var decompressed = Data(), srcChunk: Data?
         
         defer {
-            DecompressionEngine.log.debug("Decompression done, decompressed \(decompressed.count, privacy: .public) bytes")
+            DecompressionEngine.log.debug("Decompressed \(initialSize)B -> \(decompressed.count, privacy: .public)B")
             decompressing = false
             destinationBufferPointer.deallocate()
         }
