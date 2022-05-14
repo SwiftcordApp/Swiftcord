@@ -49,7 +49,7 @@ extension DiscordAPI {
         attachments: [URL],
         id: Snowflake
     ) async -> Message? {
-        return await postReq(path: "channels/\(id)/messages", body: message)
+        return await postReq(path: "channels/\(id)/messages", body: message, attachments: attachments)
     }
     
     // MARK: Delete Message

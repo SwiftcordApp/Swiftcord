@@ -20,6 +20,7 @@ extension DiscordAPI {
     static func makeRequest(
         path: String,
         query: [URLQueryItem] = [],
+        attachments: [URL] = [],
         body: String? = nil,
         method: RequestMethod = .get
     ) async throws -> Data? {
@@ -57,7 +58,12 @@ extension DiscordAPI {
         }
         req.setValue(superEncoded.base64EncodedString(), forHTTPHeaderField: "x-super-properties")
         
-        if let body = body {
+        if !attachments.isEmpty {
+            // Exact boundary format used by Electron (WebKit) in Discord Desktop
+            let boundary = "----WebKitFormBoundary\(String.random(count: 16))"
+            req.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "content-type")
+            req.httpBody = createMultipartBody(with: body, boundary: boundary, attachments: attachments)
+        } else if let body = body {
             req.setValue("application/json", forHTTPHeaderField: "content-type")
             req.httpBody = body.data(using: .utf8)
         }
@@ -104,11 +110,13 @@ extension DiscordAPI {
     
     static func postReq<D: Decodable, B: Encodable>(
         path: String,
-        body: B? = nil
+        body: B? = nil,
+        attachments: [URL] = []
     ) async -> D? {        
         let p = body != nil ? try? JSONEncoder().encode(body) : nil
         guard let d = try? await makeRequest(
             path: path,
+            attachments: attachments,
             body: p != nil ? String(decoding: p!, as: UTF8.self) : nil,
             method: .post
         )

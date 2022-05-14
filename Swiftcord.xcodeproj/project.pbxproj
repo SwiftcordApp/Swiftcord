@@ -135,6 +135,10 @@
 		DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */; };
 		DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
+		DAE973AC282F9F9E00403DAD /* DataAppendString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE973AB282F9F9E00403DAD /* DataAppendString.swift */; };
+		DAE973AE282FA3D800403DAD /* StringRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE973AD282FA3D800403DAD /* StringRandom.swift */; };
+		DAE973B0282FAA5700403DAD /* APIMultipartFormBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE973AF282FAA5700403DAD /* APIMultipartFormBody.swift */; };
+		DAE973B2282FACCA00403DAD /* StringHasContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE973B1282FACCA00403DAD /* StringHasContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -271,6 +275,10 @@
 		DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageACKEvt.swift; sourceTree = "<group>"; };
 		DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStart.swift; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
+		DAE973AB282F9F9E00403DAD /* DataAppendString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAppendString.swift; sourceTree = "<group>"; };
+		DAE973AD282FA3D800403DAD /* StringRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRandom.swift; sourceTree = "<group>"; };
+		DAE973AF282FAA5700403DAD /* APIMultipartFormBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMultipartFormBody.swift; sourceTree = "<group>"; };
+		DAE973B1282FACCA00403DAD /* StringHasContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHasContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,14 +307,14 @@
 		DA2384BC27CCB0CD009E15E0 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
+				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
 				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
-				DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -481,6 +489,7 @@
 				DA4A890A27C3D02A00720909 /* README.md */,
 				DA4A890627C38E4300720909 /* DiscordAPI.swift */,
 				DA4A890827C3CFA700720909 /* APIRequest.swift */,
+				DAE973AF282FAA5700403DAD /* APIMultipartFormBody.swift */,
 				DA4A890B27C3D29C00720909 /* APIChannel.swift */,
 				DA4A891827C4E90900720909 /* APIUser.swift */,
 				DA4A891F27C5167900720909 /* APIGuild.swift */,
@@ -593,6 +602,9 @@
 				DA32EF4727C8ABFF00A9ED72 /* FormatDate.swift */,
 				DA585C9827E1F6AC00FA4EE0 /* CursorOnViewHover.swift */,
 				DAAFB5CB282B879200807B54 /* FormatTime.swift */,
+				DAE973AB282F9F9E00403DAD /* DataAppendString.swift */,
+				DAE973AD282FA3D800403DAD /* StringRandom.swift */,
+				DAE973B1282FACCA00403DAD /* StringHasContent.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -717,6 +729,7 @@
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
 				DA9C370A282E67C0002179D5 /* DecompressionEngine.swift in Sources */,
 				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
+				DAE973B2282FACCA00403DAD /* StringHasContent.swift in Sources */,
 				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
@@ -729,6 +742,7 @@
 				DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA520AC027D3306D009FD740 /* loginBG.swift in Sources */,
+				DAE973AE282FA3D800403DAD /* StringRandom.swift in Sources */,
 				DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */,
 				DA32EF5627CA6DF900A9ED72 /* URLMimeType.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
@@ -782,6 +796,7 @@
 				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
 				DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */,
 				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
+				DAE973B0282FAA5700403DAD /* APIMultipartFormBody.swift in Sources */,
 				DA4A88D827C2795600720909 /* DataStructs.swift in Sources */,
 				DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */,
 				DA585C9927E1F6AC00FA4EE0 /* CursorOnViewHover.swift in Sources */,
@@ -792,6 +807,7 @@
 				DA4A892027C5167A00720909 /* APIGuild.swift in Sources */,
 				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
 				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
+				DAE973AC282F9F9E00403DAD /* DataAppendString.swift in Sources */,
 				DA32EF4A27C8BE8F00A9ED72 /* InitColorFromHexInt.swift in Sources */,
 				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* DecodeIntFlags.swift in Sources */,

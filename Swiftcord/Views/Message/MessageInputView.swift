@@ -12,11 +12,23 @@ struct MessageAttachmentView: View {
     
     var body: some View {
         GroupBox {
-            VStack() {
-                Spacer()
-                Image(systemName: AttachmentView.mimeFileMapping[attachment.mimeType()] ?? "doc")
-                    .font(.system(size: 84))
-                Spacer()
+            VStack(spacing: 0) {
+                let mime = attachment.mimeType()
+                if mime.prefix(5) == "image" {
+                    AsyncImage(url: attachment) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 140, height: 120)
+                            .cornerRadius(2)
+                            .clipped()
+                    } placeholder: { ProgressView() }
+                } else {
+                    Spacer()
+                    Image(systemName: AttachmentView.mimeFileMapping[mime] ?? "doc")
+                        .font(.system(size: 84))
+                }
+                Spacer(minLength: 0)
                 Text(try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!)
                     .lineLimit(1)
                     .truncationMode(.middle)
@@ -31,6 +43,12 @@ struct MessageInputView: View {
     @Binding var message: String
     @State private var attachments: [URL] = []
     let onSend: (String, [URL]) -> Void
+    
+    private func send() {
+        guard message.hasContent() || !attachments.isEmpty else { return }
+        onSend(message, attachments)
+        withAnimation { attachments.removeAll() }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -85,13 +103,10 @@ struct MessageInputView: View {
                                 .allowsHitTesting(false)
                         }
                     }
-                    .onChange(of: message) { content in
-                        guard !content.isEmpty && content.last!.isNewline else { return }
-                        onSend(content, attachments)
-                    }
+                    .onChange(of: message) { _ in send() }
                 
 
-                Button(action: { onSend(message, attachments) }) {
+                Button(action: { send() }) {
                     Image(systemName: "arrow.up").font(.system(size: 20))
                 }
                 .buttonStyle(.plain)

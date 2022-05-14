@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct NewAttachment: Codable {
+    let id: String // Will not be a valid snowflake for new attachments
+    let filename: String
+}
+
 struct NewMessage: Codable {
     let content: String?
     var tts: Bool? = false
@@ -15,6 +20,7 @@ struct NewMessage: Codable {
     var message_reference: MessageReference? = nil
     var components: [MessageComponent]? = nil
     var sticker_ids: [Snowflake]? = nil
+    var attachments: [NewAttachment]? = nil
     // file[n] // Handle file uploading later
     // attachments
     // let payload_json: Codable? // Handle this later

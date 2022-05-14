@@ -74,17 +74,21 @@ struct MessagesView: View {
             fetchMessagesTask = nil
         }
     }
-    
+        
     private func sendMessage(content: String, attachments: [URL]) {
-        let text = content.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty else { return }
         lastSentTyping = Date(timeIntervalSince1970: 0)
         enteredText = ""
         showingInfoBar = false
         Task {
             guard (await DiscordAPI.createChannelMsg(
                 message: NewMessage(
-                    content: content
+                    content: content,
+                    attachments: attachments.isEmpty ? nil : attachments.enumerated().map { (i, a) in
+                        NewAttachment(
+                            id: String(i),
+                            filename: try! a.resourceValues(forKeys: [URLResourceKey.nameKey]).name!
+                        )
+                    }
                 ),
                 attachments: attachments,
                 id: serverCtx.channel!.id
