@@ -93,7 +93,7 @@ struct UserAvatarView: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 20))
                                 .foregroundColor(.orange)
-                                .help("Failed to ")
+                                .help("Failed to get full user profile")
                         }
                     }
                     .padding(.bottom, -2)

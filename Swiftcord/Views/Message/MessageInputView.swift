@@ -42,6 +42,7 @@ struct MessageInputView: View {
     let placeholder: String
     @Binding var message: String
     @State private var attachments: [URL] = []
+	@State private var inhibitingSend = false
     let onSend: (String, [URL]) -> Void
     
     private func send() {
@@ -103,14 +104,30 @@ struct MessageInputView: View {
                                 .allowsHitTesting(false)
                         }
                     }
-                    .onChange(of: message) { _ in send() }
+                    .onChange(of: message) { _ in
+						guard message.hasSuffix("\n") else { return }
+						guard !inhibitingSend else {
+							inhibitingSend = false
+							return
+						}
+						send()
+					}
                 
 
                 Button(action: { send() }) {
                     Image(systemName: "arrow.up").font(.system(size: 20))
                 }
+				.keyboardShortcut(.return, modifiers: [])
                 .buttonStyle(.plain)
                 .padding(.trailing, 15)
+				
+				Button {
+					print("make a newline")
+					message.append("\n")
+					inhibitingSend = true
+				} label: { EmptyView() }
+				.buttonStyle(.plain)
+				.keyboardShortcut(.return, modifiers: [.command])
             }
         }
         .frame(minHeight: 40)
