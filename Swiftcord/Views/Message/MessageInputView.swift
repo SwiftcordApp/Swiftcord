@@ -7,8 +7,39 @@
 
 import SwiftUI
 
+// FIXME: This doesn't work when the TextEditor is focused
+struct KeyEventHandling: NSViewRepresentable {
+	class KeyView: NSView {
+		override var acceptsFirstResponder: Bool { true }
+		
+		override func keyDown(with event: NSEvent) {
+			print("keydown event")
+		}
+
+		override func flagsChanged(with event: NSEvent) {
+			switch event.modifierFlags.intersection(.deviceIndependentFlagsMask) {
+			case [.shift]:
+				print("shift key pressed")
+			default:
+				print("no modifier keys are pressed")
+			}
+		}
+	}
+
+	func makeNSView(context: Context) -> NSView {
+		let view = KeyView()
+		DispatchQueue.main.async { // wait till next event cycle
+			view.window?.makeFirstResponder(view)
+		}
+		return view
+	}
+
+	func updateNSView(_ nsView: NSView, context: Context) { }
+}
+
 struct MessageAttachmentView: View {
     let attachment: URL
+	let onRemove: () -> Void
     
     var body: some View {
         GroupBox {
@@ -57,7 +88,9 @@ struct MessageInputView: View {
                 ScrollView([.horizontal]) {
                     HStack {
                         ForEach(attachments, id: \.absoluteURL) { item in
-                            MessageAttachmentView(attachment: item)
+							MessageAttachmentView(attachment: item) {
+								
+							}
                         }
                     }.padding(16)
                 }.fixedSize(horizontal: false, vertical: true)
@@ -88,6 +121,7 @@ struct MessageInputView: View {
                     .padding(.leading, 15)
             
                 TextEditor(text: $message)
+					.overlay(KeyEventHandling().focusable())
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .lineSpacing(4)
