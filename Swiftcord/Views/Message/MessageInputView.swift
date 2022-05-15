@@ -120,8 +120,8 @@ struct MessageInputView: View {
                     .buttonStyle(.plain)
                     .padding(.leading, 15)
             
-                TextEditor(text: $message)
-					.overlay(KeyEventHandling().focusable())
+				TextField(placeholder, text: $message) { send() }
+					.textFieldStyle(.plain)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
                     .lineSpacing(4)
@@ -129,23 +129,6 @@ struct MessageInputView: View {
                     .lineLimit(4)
                     .disableAutocorrection(false)
                     .padding([.top, .bottom], 12)
-                    .overlay(alignment: .leading) {
-                        if message.isEmpty {
-                            Text(placeholder)
-                                .padding([.leading, .trailing], 4)
-                                .opacity(0.5)
-                                .font(.system(size: 16, weight: .light))
-                                .allowsHitTesting(false)
-                        }
-                    }
-                    .onChange(of: message) { _ in
-						guard message.hasSuffix("\n") else { return }
-						guard !inhibitingSend else {
-							inhibitingSend = false
-							return
-						}
-						send()
-					}
                 
 
                 Button(action: { send() }) {
@@ -154,14 +137,6 @@ struct MessageInputView: View {
 				.keyboardShortcut(.return, modifiers: [])
                 .buttonStyle(.plain)
                 .padding(.trailing, 15)
-				
-				Button {
-					print("make a newline")
-					message.append("\n")
-					inhibitingSend = true
-				} label: { EmptyView() }
-				.buttonStyle(.plain)
-				.keyboardShortcut(.return, modifiers: [.command])
             }
         }
         .frame(minHeight: 40)
