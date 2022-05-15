@@ -1,3 +1,5 @@
+<image src="https://github.com/cryptoAlgorithm/Swiftcord/raw/main/Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="128px" height="128px" align="left" />
+
 # Swiftcord
 
 > A completely native Discord client for macOS built 100% in
@@ -11,29 +13,87 @@ a bunch of screenshots!
 me to continue developing it**
 
 ### Join the Swiftcord Discord server [here](https://discord.gg/he7n6MGDXS)!
-### Pre-built packages are now available at [releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/latest)!
 
-## Client Feature Parity
+## Contents
+* [Releases](#releases)
+* [FAQ](#faq)
+* [Current State](#current-state)
+* [Roadmap](#roadmap)
+* [Screenshots](#screenshots) (Might be outdated)
+* [Contributions](#contributions)
 
-Feature parity with the following Discord client is targeted:
+---
 
-| Version         | `0.0.283`|
-| --------------- | -------- |
-| Build #         | `115689` |
-| Release Channel | `canary` |
+## Releases
+Pre-built releases are available from [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/).
+However, you're recommended to build Swiftcord from source if possible,
+for the latest features and fixes.
+
+### Requirements
+* OS: macOS Monterey and above (>= 12.0)
+* Arch: Apple Silicon or Intel (Most releases are universal bundles)
+
+> Note: To open Swiftcord, please right click on the icon > press open. 
+> This is due to the app not being signed with an Apple Developer account.
+
+---
+
+## FAQ
+
+Covers a few common questions I have encountered, click on the question
+to expand the answer
+
+<details>
+  <summary><b>Will I get banned for using Swiftcord/Is using Swiftcord illegal?</b></summary>
+  Using Swiftcord <i>isn't illegal</i> and you will <b>not</b> get banned for
+  doing so. Contrary to what many people say on various platforms, 3rd
+  party clients (i.e. Swiftcord) <b>aren't against</b> the Discord ToS,
+  and you will not get banned for using one. You can read the section in 
+  Discord's ToS regarding their software
+  <a href="https://discord.com/terms#software-in-discord’s-services">here</a>.
+</details>
+<details>
+  <summary><b>Feature <i>x</i> is missing! When will <i>y</i> be implemented?</b></summary>
+  Swiftcord currently is in the alpha stage, and hasn't achieved feature
+  parity with the official Discord client yet (its quite far behind). 
+  Many features are on the <a href="#roadmap">roadmap</a>, but I do not
+  currently have a timeline for them. Development is progressing at a 
+  fast pace, but sometimes bugs may take an unexpectedly long time to fix.
+  I appreciate contributions, bug reports and suggestions :)
+</details>
+<details>
+  <summary><b>Swiftcord just crashed!</b></summary>
+  Although I'm aiming for 0 crashes (which is made easy by Swift),
+  sometimes the unexpected happens xD. If you experience a crash, please
+  open an issue with appropriete infomation like the line the error
+  occurs on, relevent logs and what you were doing that might have casued
+  the crash. If you can solve the bug causing the crash, that's even better!
+</details>
+
+---
 
 ## Current State
 
 Implemented most core message-related features from the official
 client, including basic markdown and embeds, stickers (lottie/PNG),
 editing and deleting events. Token retrival from Discord login 
-page is reliable and storing + retrival from keychain works.
+page is reliable and storing + retrival from keychain works. You can
+now send attachments with your messages too! 
 
-Gateway connection and event handling is stable, but reconnection
-is not. Reconnection/resuming might not be successful when internet
-connection is unstable or macOS has been sleeping for a very long time.
+More advanced features like voice channels, DMs, editing messages etc 
+aren't supported yet, refer to the [roadmap](#roadmap) below.
 
-## Milestones/Roadmap
+Gateway connection event handling is stable, and reconnection
+is rock solid (as far as I can test). If you encounter a reconnection
+bug (not reconnecting, reconnection loop etc), please open an issue
+with the relevant logs.
+
+---
+
+## Roadmap
+
+I do not have a definite timeline for when a feature would be implemented,
+and they may not neccessarily be implemented in sequence. 
 
 - ✅ Gateway/REST API Implementation
 - ✅ Load server list, channels and message
@@ -48,10 +108,11 @@ connection is unstable or macOS has been sleeping for a very long time.
 - ✅ DM and group loading
 - ⏱ Display DMs properly in UI
 - ⏱ Send DM messages
+- ✅ Send attachments
 - ❌ User roles + overwrites
 - ❌ Message notifications
 - ❌ Full list of users in a server, especially for larger servers (1000+ members)
-- ❌ Ordering of channels, servers and categories
+- ✅ Ordering of channels, servers and categories
 - ❌ Threads support
 - ❌ Full user settings
 - ❌ Server creation
@@ -64,6 +125,8 @@ connection is unstable or macOS has been sleeping for a very long time.
 * ✅ -> Complete
 * ⏱ -> Implementation in progress
 * ❌ -> Not started
+
+---
 
 ## Screenshots
 
@@ -85,6 +148,8 @@ connection is unstable or macOS has been sleeping for a very long time.
 #### Login flow (video)
 ![Login flow](README_Resources/loginFlow.mp4)
 
+---
+
 ## Contributions
 
 Thank you for popping by! If you know the Discord API well, 
@@ -98,21 +163,8 @@ clearly as you can. Responding promptly to follow up comments
 is appreciated, as debugging is hard without any further input
 from the OP.
 
-## License
+---
 
 Made with ❤️ by Vincent Kwok
 
 Copyright © 2022 Vincent Kwok
-
-This program is free software: you can redistribute it and/or
-modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation, either version 3 of
-the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-See <https://www.gnu.org/licenses/> or LICENSE for a copy of
-the GNU General Public License.
