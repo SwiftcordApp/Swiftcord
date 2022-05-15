@@ -1,9 +1,9 @@
-<image src="https://github.com/cryptoAlgorithm/Swiftcord/raw/main/Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="128px" height="128px" align="left" />
+<image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="128px" height="128px" align="left" />
 
 # Swiftcord
+A completely native Discord client for macOS built 100% in Swift and SwiftUI
 
-> A completely native Discord client for macOS built 100% in
-> Swift and SwiftUI
+![Viewing the general-talk channel in the r/MacBookPro server in Swiftcord](README_Resources/heroScreenshot.png)
 
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch. Look [below](#screenshots) for
@@ -15,12 +15,23 @@ me to continue developing it**
 ### Join the Swiftcord Discord server [here](https://discord.gg/he7n6MGDXS)!
 
 ## Contents
+* [Motivation](#motivation)
 * [Releases](#releases)
 * [FAQ](#faq)
 * [Current State](#current-state)
 * [Roadmap](#roadmap)
 * [Screenshots](#screenshots) (Might be outdated)
 * [Contributions](#contributions)
+
+---
+
+## Motivation
+
+Swiftcord was created to offer a Discord-like UI and experience while
+having the performance and memory benefits of native apps. The idea started
+brewing when I was tight on RAM, then noticed Discord using 600+MB of RAM.
+I then realised that that was the perfect opportunity to explore SwiftUI,
+since it was relatively new to me at that time. Hence, Swiftcord was born!
 
 ---
 
