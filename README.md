@@ -1,4 +1,6 @@
-<image src="https://github.com/cryptoAlgorithm/Swiftcord/raw/main/Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="128px" height="128px" align="left" />
+![Viewing the general-talk channel in the r/MacBookPro server in Swiftcord](README_Resources/heroScreenshot.png)
+
+<image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="100px" height="100px" align="left" />
 
 # Swiftcord
 
