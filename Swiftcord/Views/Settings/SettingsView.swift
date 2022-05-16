@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 struct SettingsView: View {
     @EnvironmentObject var gateway: DiscordGateway

@@ -15,7 +15,7 @@ struct MessageAttachmentView: View {
 		ZStack(alignment: .topTrailing) {
 			GroupBox {
 				VStack(spacing: 0) {
-					let mime = attachment.mimeType()
+					let mime = attachment.mimeType
 					if mime.prefix(5) == "image" {
 						AsyncImage(url: attachment) { image in
 							image

@@ -10,6 +10,7 @@ import SwiftUI
 import AVKit
 import CachedAsyncImage
 import QuickLook
+import DiscordAPI
 
 struct AttachmentError: View {
     let height: Int
@@ -168,7 +169,7 @@ struct AttachmentView: View {
         // Guard doesn't work in views
         ZStack {
             if let url = URL(string: attachment.proxy_url) {
-                let mime = attachment.content_type ?? url.mimeType()
+                let mime = attachment.content_type ?? url.mimeType
                 if let width = attachment.width, let height = attachment.height {
                     // This is an image/video
                     let (width, height, resizedURL, scale) = getResizedDimens(width: width, height: height, srcURL: url)

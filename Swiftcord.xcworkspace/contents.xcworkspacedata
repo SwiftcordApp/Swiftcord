@@ -4,4 +4,7 @@
    <FileRef
       location = "container:Swiftcord.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:DiscordKit">
+   </FileRef>
 </Workspace>

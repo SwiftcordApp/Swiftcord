@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 extension View {
     public func flip() -> some View {

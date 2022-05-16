@@ -46,13 +46,6 @@ extension String {
 }
 
 extension String {
-	static func random(count: Int) -> String {
-		let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-		return String((0..<count).map{ _ in letters.randomElement()! })
-	}
-}
-
-extension String {
 	/// Returns true if the string has any content after stripping spaces/newlines
 	func hasContent() -> Bool {
 		let text = self.trimmingCharacters(in: .whitespacesAndNewlines)

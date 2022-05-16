@@ -5,6 +5,8 @@
 //  Created by royal on 14/05/2022.
 //
 
+import DiscordAPI
+
 extension Array where Element == Channel {
 	func discordSorted() -> Self {
 		sorted { c1, c2 in

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 struct ChannelButton: View {
     let channel: Channel
@@ -20,7 +21,7 @@ struct ChannelButton: View {
     var body: some View {
         Button {
             selectedCh = channel
-            UserDefaults.standard.setValue(channel.id, forKey: "guildLastCh.\(guild!.id)")
+			UserDefaults.standard.setValue(channel.id.description, forKey: "guildLastCh.\(guild!.id.description)")
         } label: {
 			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
             Label(channel.label ?? "", systemImage: image)
