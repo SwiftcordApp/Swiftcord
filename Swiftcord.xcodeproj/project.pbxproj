@@ -482,6 +482,7 @@
 			packageReferences = (
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				DABB28422832A3FF00390244 /* XCRemoteSwiftPackageReference "DiscordKit" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -785,6 +786,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.3.0;
+			};
+		};
+		DABB28422832A3FF00390244 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
