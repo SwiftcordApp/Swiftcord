@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_canary_release:
+  build_nightly_release:
     runs-on: macos-12
     
     steps:
@@ -59,12 +59,12 @@ jobs:
         run: npm install --global create-dmg
         
       - name: Make Release Dmg
-        run: create-dmg Export/Swiftcord.app --dmg-title=Swiftcord
+        run: create-dmg Export/Swiftcord.app
       
       - name: "Notarize Release Build"
         run: |
             xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
-            xcrun notarytool submit Swiftcord.dmg --keychain-profile "AC_PASSWORD" --wait
+            xcrun notarytool submit Swiftcord*.dmg --keychain-profile "AC_PASSWORD" --wait
           
       - name: "Staple Release Build"
         run: xcrun stapler staple Swiftcord.dmg
@@ -75,5 +75,5 @@ jobs:
           # Artifact name
           name: Swiftcord_Canary # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: Swiftcord.dmg
+          path: Swiftcord*.dmg
 
