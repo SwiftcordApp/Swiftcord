@@ -25,6 +25,7 @@ struct MessagesView: View {
     @State private var infoBarData: InfoBarData? = nil
     @State private var fetchMessagesTask: Task<(), Error>? = nil
     @State private var lastSentTyping = Date(timeIntervalSince1970: 0)
+	@State private var messageInputHeight = 0.0
     
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
@@ -108,12 +109,12 @@ struct MessagesView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+		ZStack(alignment: .bottom) {
             ScrollView(.vertical) {
                 ScrollViewReader { proxy in
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        Spacer(minLength: 46 + (showingInfoBar ? 24 : 0))
+                        Spacer(minLength: 16 + (showingInfoBar ? 24 : 0) + messageInputHeight)
                             .onChange(of: messages.count) { _ in
                                 guard messages.count >= 1 else { return }
                                 // This is _not_ bugged
@@ -162,7 +163,6 @@ struct MessagesView: View {
                                 LoFiMessageView()
                                 LoFiMessageView()
                             }
-                            .id("placeholder")
                             .onAppear { fetchMoreMessages() }
                             .onDisappear {
                                 if let loadTask = fetchMessagesTask {
@@ -177,6 +177,7 @@ struct MessagesView: View {
                 }
             }
             .flip()
+			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
             .frame(maxHeight: .infinity)
             
             ZStack(alignment: .topLeading) {
@@ -194,26 +195,34 @@ struct MessagesView: View {
                             }
                         }
                     }
-                
-                let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
-                    .map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
-                if !typingMembers.isEmpty {
-                    HStack() {
-                        // The dimensions are quite arbitrary
-                        LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
-                            .lottieLoopMode(.loop)
-                            .frame(width: 32, height: 24)
-                        Group {
-                            Text(typingMembers.count <= 2
-                                 ? typingMembers.joined(separator: " and ")
-                                 : "Several people"
-                            ).fontWeight(.semibold)
-                            + Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
-                        }.padding(.leading, -4)
-                    }
-                    .padding(.top, 17)
-                    .padding(.horizontal, 16)
-                }
+					.overlay {
+						let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
+							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
+						if !typingMembers.isEmpty {
+							HStack() {
+								// The dimensions are quite arbitrary
+								LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+									.lottieLoopMode(.loop)
+									.frame(width: 32, height: 24)
+								Group {
+									Text(typingMembers.count <= 2
+										 ? typingMembers.joined(separator: " and ")
+										 : "Several people"
+									).fontWeight(.semibold)
+									+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
+								}.padding(.leading, -4)
+							}
+							.padding(.horizontal, 16)
+							.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+						}
+					}
+					.background {
+						GeometryReader { g in
+							ZStack {}
+								.onAppear { messageInputHeight = g.size.height }
+								.onChange(of: g.size.height) { h in messageInputHeight = h }
+						}
+					}
             }
         }
         .frame(minWidth: 525)

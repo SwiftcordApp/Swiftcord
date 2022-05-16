@@ -99,7 +99,7 @@ struct ServerButtonStyle: ButtonStyle {
             if loading { /* TODO: Show some form of feedback */ }
         }
         .frame(width: 48, height: 48)
-		.foregroundColor(hovered || selected ? Color.white : Color(nsColor: .labelColor))
+		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
         .background(
             hovered || selected
 			? bgColor ?? Color.accentColor

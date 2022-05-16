@@ -7,36 +7,6 @@
 
 import SwiftUI
 
-// FIXME: This doesn't work when the TextEditor is focused
-struct KeyEventHandling: NSViewRepresentable {
-	class KeyView: NSView {
-		override var acceptsFirstResponder: Bool { true }
-		
-		override func keyDown(with event: NSEvent) {
-			print("keydown event")
-		}
-
-		override func flagsChanged(with event: NSEvent) {
-			switch event.modifierFlags.intersection(.deviceIndependentFlagsMask) {
-			case [.shift]:
-				print("shift key pressed")
-			default:
-				print("no modifier keys are pressed")
-			}
-		}
-	}
-
-	func makeNSView(context: Context) -> NSView {
-		let view = KeyView()
-		DispatchQueue.main.async { // wait till next event cycle
-			view.window?.makeFirstResponder(view)
-		}
-		return view
-	}
-
-	func updateNSView(_ nsView: NSView, context: Context) { }
-}
-
 struct MessageAttachmentView: View {
     let attachment: URL
 	let onRemove: () -> Void
@@ -74,6 +44,8 @@ struct MessageInputView: View {
     @Binding var message: String
     @State private var attachments: [URL] = []
 	@State private var inhibitingSend = false
+	@State private var showingAttachmentErr = false
+	@State private var attachmentErr = ""
     let onSend: (String, [URL]) -> Void
     
     private func send() {
@@ -97,7 +69,7 @@ struct MessageInputView: View {
                 Divider()
             }
             
-            HStack(alignment: .center, spacing: 14) {
+            HStack(alignment: .center, spacing: 17) {
                 Button {
                     let panel = NSOpenPanel()
                     panel.allowsMultipleSelection = false
@@ -106,19 +78,25 @@ struct MessageInputView: View {
                     panel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: { num in
                         if num == NSApplication.ModalResponse.OK {
                             guard let size = try? panel.url?.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).fileSize, size < 8*1024*1024 else {
-                                print("file too big")
+                                attachmentErr = "That file's too huge! Choose something that's <= 8MiB."
+								showingAttachmentErr = true
                                 return
                             }
                             
-                            guard !attachments.contains(panel.url!) else { return }
+                            guard !attachments.contains(panel.url!) else {
+								attachmentErr = "You've already selected that file"
+								showingAttachmentErr = true
+								return
+							}
                             withAnimation { attachments.append(panel.url!) }
-                        } else {
-                            print("nothing chosen")
                         }
                     })
-                } label: { Image(systemName: "plus").font(.system(size: 20)) }
+                } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)) }
+					.alert(attachmentErr, isPresented: $showingAttachmentErr) {
+						Button("Got It!", role: .cancel) { }
+					}
                     .buttonStyle(.plain)
-                    .padding(.leading, 15)
+                    .padding(.leading, 18)
             
 				TextField(placeholder, text: $message) { send() }
 					.textFieldStyle(.plain)
@@ -126,7 +104,6 @@ struct MessageInputView: View {
                     .frame(maxWidth: .infinity)
                     .lineSpacing(4)
                     .font(.system(size: 16))
-                    .lineLimit(4)
                     .disableAutocorrection(false)
                     .padding([.top, .bottom], 12)
                 
@@ -140,13 +117,8 @@ struct MessageInputView: View {
             }
         }
         .frame(minHeight: 40)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.4), lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 7)
-                    .fill(Color(NSColor.textBackgroundColor)))
-                .shadow(color: .gray.opacity(0.2), radius: 3)
-        )
+		.background(.ultraThickMaterial)
+		.cornerRadius(7)
         .padding(.horizontal, 16)
         .offset(y: -24)
     }
