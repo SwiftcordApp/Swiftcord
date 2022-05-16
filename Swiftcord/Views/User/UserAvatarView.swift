@@ -167,6 +167,7 @@ struct UserAvatarView: View {
                         Text("NOTE").font(.headline).padding(.top, 8)
                         // Notes are stored locally for now, but eventually will be synced with the Discord API
                         TextField("Add a note to this user (only visible to you)", text: $note)
+							.textFieldStyle(.roundedBorder)
                             .onChange(of: note) { _ in
                                 if note.isEmpty {
                                     UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")

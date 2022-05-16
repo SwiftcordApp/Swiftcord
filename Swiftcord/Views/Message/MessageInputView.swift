@@ -12,31 +12,42 @@ struct MessageAttachmentView: View {
 	let onRemove: () -> Void
     
     var body: some View {
-        GroupBox {
-            VStack(spacing: 0) {
-                let mime = attachment.mimeType()
-                if mime.prefix(5) == "image" {
-                    AsyncImage(url: attachment) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 140, height: 120)
-                            .cornerRadius(2)
-                            .clipped()
-                    } placeholder: { ProgressView() }
-                } else {
-                    Spacer()
-                    Image(systemName: AttachmentView.mimeFileMapping[mime] ?? "doc")
-                        .font(.system(size: 84))
-                }
-                Spacer(minLength: 0)
-                Text(try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-        }.frame(width: 150, height: 150)
-    }
+		ZStack(alignment: .topTrailing) {
+			GroupBox {
+				VStack(spacing: 0) {
+					let mime = attachment.mimeType()
+					if mime.prefix(5) == "image" {
+						AsyncImage(url: attachment) { image in
+							image
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: 140, height: 120)
+								.cornerRadius(2)
+								.clipped()
+						} placeholder: { ProgressView() }
+					} else {
+						Spacer()
+						Image(systemName: AttachmentView.mimeFileMapping[mime] ?? "doc")
+							.font(.system(size: 84))
+					}
+					Spacer(minLength: 0)
+					Text(try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!)
+						.lineLimit(1)
+						.truncationMode(.middle)
+						.frame(maxWidth: .infinity, alignment: .leading)
+				}.frame(maxWidth: .infinity, maxHeight: .infinity)
+			}.frame(width: 150, height: 150)
+			
+			Button(action: onRemove) {
+				Image(systemName: "trash.square.fill")
+					.foregroundColor(.red)
+					.font(.system(size: 30))
+			}
+			.help("Remove attachment")
+			.buttonStyle(.plain)
+			.offset(x: 8, y: -8)
+		}
+	}
 }
 
 struct MessageInputView: View {
@@ -59,9 +70,9 @@ struct MessageInputView: View {
             if !attachments.isEmpty {
                 ScrollView([.horizontal]) {
                     HStack {
-                        ForEach(attachments, id: \.absoluteURL) { item in
-							MessageAttachmentView(attachment: item) {
-								
+						ForEach(attachments.indices, id: \.self) { idx in
+							MessageAttachmentView(attachment: attachments[idx]) {
+								withAnimation { let _ = attachments.remove(at: idx) }
 							}
                         }
                     }.padding(16)
