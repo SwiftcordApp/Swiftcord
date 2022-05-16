@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel? = nil
     @Published public var guild: Guild? = nil
-    @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
+    @Published public var typingStarted: [Snowflake: [TypingStartEventData]] = [:]
 }
 
 struct ServerView: View {
@@ -32,7 +33,7 @@ struct ServerView: View {
 		self.channels = channels
 
         if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)"),
-		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
+		   let lastChObj = channels.first(where: { $0.id.description == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
         }
@@ -114,7 +115,7 @@ struct ServerView: View {
             // Subscribe to typing events
             gateway.socket.send(
                 op: .subscribeGuildEvents,
-                data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
+                data: SubscribeGuildEvents(guild_id: guild.id, typing: true)
             )
         }
         .onChange(of: state.loadingState, perform: { s in if s == .gatewayConn { loadChannels() } })
@@ -133,7 +134,7 @@ struct ServerView: View {
                     // For some reason, updating one element doesnt update the UI
                     // loadChannels()
                 case .typingStart:
-                    guard let typingData = d as? TypingStart,
+                    guard let typingData = d as? TypingStartEventData,
                           typingData.user_id != gateway.cache.user!.id
                     else { break }
                     if serverCtx.typingStarted[typingData.channel_id] == nil {

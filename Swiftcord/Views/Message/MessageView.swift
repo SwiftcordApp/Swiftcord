@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordAPI
 
 struct MessageView: View {
     let message: Message
@@ -58,7 +59,7 @@ struct MessageView: View {
 									.opacity(0.75)
 									.lineLimit(1)
 							}
-							.onTapGesture { onQuoteClick(quotedMsg.id) }
+							.onTapGesture { onQuoteClick(quotedMsg.id.description) }
 							.cursor(NSCursor.pointingHand)
 						} else if loadQuotedMsgErr {
 							Image(systemName: "xmark.octagon.fill")
@@ -289,7 +290,7 @@ private extension MessageView {
 	}
 
 	func copyID() {
-		NSPasteboard.general.setString(message.id, forType: .string)
+		NSPasteboard.general.setString(message.id.description, forType: .string)
 	}
 }
 

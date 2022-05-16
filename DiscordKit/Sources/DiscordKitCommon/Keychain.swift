@@ -1,24 +1,24 @@
 //
 //  Keychain.swift
-//  Swiftcord
+//  DiscordKitCommon
 //
 //  Created by Vincent Kwok on 21/2/22.
-//
 //  Adapted from: https://stackoverflow.com/a/37539998 (actually had a Swift 5 example)
+//
 
 import Foundation
 import Security
 
-class Keychain {
+public class Keychain {
     static let tag = Bundle.main.bundleIdentifier!.data(using: .utf8)!
 
 	@discardableResult
-    class func save(key: String, data: String) -> OSStatus {
+    public class func save(key: String, data: String) -> OSStatus {
         return save(key: key, data: data.data(using: .utf8)!)
     }
 
 	@discardableResult
-    class func save(key: String, data: Data) -> OSStatus {
+	public class func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
             kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
@@ -32,7 +32,7 @@ class Keychain {
     }
 
 	@discardableResult
-    class func remove(key: String) -> OSStatus {
+	public class func remove(key: String) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
             kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
@@ -43,13 +43,13 @@ class Keychain {
         return SecItemDelete(query as CFDictionary)
     }
 
-    class func load(key: String) -> String? {
+	public class func load(key: String) -> String? {
         guard let d: Data = loadData(key: key)
         else { return nil }
         return String(data: d, encoding: .utf8)
     }
 	
-    class func loadData(key: String) -> Data? {
+	public class func loadData(key: String) -> Data? {
         let query = [
             kSecClass as String       : kSecClassGenericPassword,
             kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
@@ -66,7 +66,7 @@ class Keychain {
         return dataTypeRef as! Data?
     }
 
-    class func createUniqueID() -> String {
+	public class func createUniqueID() -> String {
         let uuid: CFUUID = CFUUIDCreate(nil)
         let cfStr: CFString = CFUUIDCreateString(nil, uuid)
 

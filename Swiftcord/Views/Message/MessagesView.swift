@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 extension View {
     public func flip() -> some View {
@@ -257,13 +258,13 @@ struct MessagesView: View {
                         messages[updatedIdx] = updatedMsg
                     }
                 case .messageDelete:
-                    guard let deletedMsg = d as? MessageDelete else { break }
+                    guard let deletedMsg = d as? MessageDeleteEventData else { break }
                     guard deletedMsg.channel_id == serverCtx.channel?.id else { break }
                     if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
                         withAnimation { let _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
-                    guard let deletedMsgs = d as? MessageDeleteBulk else { break }
+                    guard let deletedMsgs = d as? MessageDeleteBulkEventData else { break }
                     guard deletedMsgs.channel_id == serverCtx.channel?.id else { break }
                     for msgID in deletedMsgs.id {
                         if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {

@@ -8,6 +8,7 @@
 //  Fields from PartialMessage are favored
 
 import Foundation
+import DiscordAPI
 
 extension Message {
     mutating func mergeWithPartialMsg(_ p: PartialMessage) {

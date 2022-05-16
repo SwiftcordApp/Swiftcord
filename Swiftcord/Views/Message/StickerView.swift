@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Lottie
+import DiscordAPI
 
 struct StickerLoadingView: View {
     let size: Double
@@ -46,7 +47,7 @@ struct StickerItemView: View {
 			switch sticker.format_type {
 				case .png:
 					// Literally a walk in the park compared to lottie
-					AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png")!) { phase in
+					AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
 						switch phase {
 							case .empty: StickerLoadingView(size: size)
 							case .success(let image): image.resizable().scaledToFill()
@@ -60,7 +61,7 @@ struct StickerItemView: View {
 					if animation == nil {
 						StickerLoadingView(size: size).onAppear {
 							Lottie.Animation.loadedFrom(
-								url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).json")!,
+								url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
 								closure: { anim in
 									guard let anim = anim else {
 										error = true
@@ -82,7 +83,7 @@ struct StickerItemView: View {
 					}
 				default:
 					// Well it doesn't animate for some reason
-					AsyncImage(url: URL(string: "\(apiConfig.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+					AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
 						switch phase {
 							case .empty: StickerLoadingView(size: size)
 							case .success(let image): image.resizable().scaledToFill()

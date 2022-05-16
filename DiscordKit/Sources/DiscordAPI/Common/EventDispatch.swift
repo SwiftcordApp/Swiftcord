@@ -1,6 +1,11 @@
-/// EventDispatch.swift
-/// Adapted from: https://github.com/gongzhang/swift-event-dispatch
-///
+//
+//  EventDispatch.swift
+//  DiscordAPI
+//
+//  Created by Vincent Kwok on 21/2/22.
+//  Adapted from: https://github.com/gongzhang/swift-event-dispatch
+//
+
 /// Unfortunately the code isn't exactly fully compatible with Swift 5
 /// Changes were made to improve style and to remove all warnings/errors
 /// Adds optimisations to reduce

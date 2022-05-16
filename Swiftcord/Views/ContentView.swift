@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 import os
+import DiscordAPI
+import DiscordKitCommon
 
 struct CustomHorizontalDivider: View {
     var body: some View {
@@ -57,7 +59,7 @@ struct ContentView: View {
                         ServerButton(
                             selected: selectedGuild?.id == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
-                            serverIconURL: guild.icon != nil ? "\(apiConfig.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                            serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             isLoading: loadingGuildID == guild.id,
                             onSelect: {
                                 selectedGuild = guild
@@ -92,7 +94,7 @@ struct ContentView: View {
         .environmentObject(audioManager)
         .onChange(of: selectedGuild) { _ in
             guard let id = selectedGuild?.id else { return }
-            UserDefaults.standard.set(id, forKey: "lastSelectedGuild")
+			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
@@ -101,7 +103,7 @@ struct ContentView: View {
                         selectedGuild = makeDMGuild()
                         return
                     }
-                    selectedGuild = gateway.cache.guilds!.first(where: { p in p.id == lGID }) ?? makeDMGuild()
+					selectedGuild = gateway.cache.guilds!.first(where: { p in p.id.description == lGID }) ?? makeDMGuild()
                 } else { selectedGuild = makeDMGuild() }
             }
         })
@@ -126,7 +128,7 @@ struct ContentView: View {
         .onChange(of: loginWVModel.token, perform: { tk in
             if let tk = tk {
                 state.attemptLogin = false
-                let _ = Keychain.save(key: "authToken", data: tk)
+                Keychain.save(key: "authToken", data: tk)
                 gateway.connect() // Reconnect to the socket
             }
         })

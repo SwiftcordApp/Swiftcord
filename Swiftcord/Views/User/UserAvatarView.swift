@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordAPI
 
 struct UserAvatarView: View {
     let user: User
