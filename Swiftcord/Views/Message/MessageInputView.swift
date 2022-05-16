@@ -91,7 +91,7 @@ struct MessageInputView: View {
                             withAnimation { attachments.append(panel.url!) }
                         }
                     })
-                } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)) }
+                } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)).opacity(0.75) }
 					.alert(attachmentErr, isPresented: $showingAttachmentErr) {
 						Button("Got It!", role: .cancel) { }
 					}
@@ -109,7 +109,7 @@ struct MessageInputView: View {
                 
 
                 Button(action: { send() }) {
-                    Image(systemName: "arrow.up").font(.system(size: 20))
+					Image(systemName: "arrow.up").font(.system(size: 20)).opacity(0.75)
                 }
 				.keyboardShortcut(.return, modifiers: [])
                 .buttonStyle(.plain)
@@ -117,8 +117,13 @@ struct MessageInputView: View {
             }
         }
         .frame(minHeight: 40)
-		.background(.ultraThickMaterial)
-		.cornerRadius(7)
+		.background(RoundedRectangle(cornerRadius: 7, style: .continuous)
+			.fill(.regularMaterial)
+			.overlay(
+				RoundedRectangle(cornerRadius: 7, style: .continuous)
+					.stroke(Color(nsColor: .separatorColor), lineWidth: 1)
+			)
+		)
         .padding(.horizontal, 16)
         .offset(y: -24)
     }
