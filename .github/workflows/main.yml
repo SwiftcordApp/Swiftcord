@@ -38,6 +38,11 @@ jobs:
           certificate-passphrase: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSPHRASE }}
           keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
           
+      - name: "Update Xcode Team ID"
+        run: |
+            TEAMID=`awk -F '=' '/DEVELOPMENT_TEAM/ {print $2; exit}' Swiftcord.xcodeproj/project.pbxproj`
+            sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
+          
       - name: "Archive"
         uses: devbotsxyz/xcode-archive@v1
         with:
@@ -50,8 +55,6 @@ jobs:
         with:
           workspace: Swiftcord.xcworkspace
           scheme: Swiftcord
-      
-      
       
       - name: "Notarize Release Build"
         run: |
