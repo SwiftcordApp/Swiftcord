@@ -26,7 +26,7 @@ struct PresenceUser: Codable, GatewayData {
     let avatar: String?
 }
 
-struct PresenceUpdate: Codable, GatewayData {
+struct PresenceUpdate: GatewayData {
     let user: PresenceUser
     let guild_id: Snowflake?
     let status: PresenceStatus
@@ -34,7 +34,7 @@ struct PresenceUpdate: Codable, GatewayData {
     let client_status: PresenceClientStatus
 }
 
-struct PartialPresenceUpdate: Codable, GatewayData {
+struct PartialPresenceUpdate: GatewayData {
     let user: PresenceUser
     let guild_id: Snowflake?
     let status: PresenceStatus?

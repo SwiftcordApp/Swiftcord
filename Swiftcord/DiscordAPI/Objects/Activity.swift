@@ -16,7 +16,25 @@ enum ActivityType: Int, Codable {
     case competing = 5 // Competing in {name}
 }
 
-struct Activity: Codable {
+struct Activity: GatewayData {
+    let name: String
+    let type: ActivityType
+    let url: String?
+    let created_at: Int // Unix timestamp (in milliseconds) of when the activity was added to the user's session
+    let timestamps: ActivityTimestamp?
+    let application_id: Snowflake?
+    let details: String?
+    let state: String?
+    let emoji: ActivityEmoji?
+    let party: ActivityParty?
+    let assets: ActivityAssets?
+    let secrets: ActivitySecrets?
+    let instance: Bool?
+    let flags: Int?
+    let buttons: [String]?
+}
+
+struct ActivityOutgoing: OutgoingGatewayData {
     let name: String
     let type: ActivityType
     let url: String?

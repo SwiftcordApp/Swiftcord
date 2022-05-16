@@ -46,9 +46,10 @@ extension DiscordAPI {
     // POST /channels/{channel.id}/messages
     static func createChannelMsg(
         message: NewMessage,
+        attachments: [URL],
         id: Snowflake
     ) async -> Message? {
-        return await postReq(path: "channels/\(id)/messages", body: message)
+        return await postReq(path: "channels/\(id)/messages", body: message, attachments: attachments)
     }
     
     // MARK: Delete Message

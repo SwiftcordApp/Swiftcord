@@ -143,6 +143,7 @@ struct StickerView: View {
                     ProgressView()
                         .progressViewStyle(.linear)
                         .frame(width: 240)
+						.tint(.blue)
                 }
             }.padding(14)
         }

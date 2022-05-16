@@ -93,7 +93,7 @@ struct UserAvatarView: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 20))
                                 .foregroundColor(.orange)
-                                .help("Failed to ")
+                                .help("Failed to get full user profile")
                         }
                     }
                     .padding(.bottom, -2)
@@ -117,6 +117,7 @@ struct UserAvatarView: View {
                             ProgressView("Loading full profile...")
                                 .progressViewStyle(.linear)
                                 .frame(maxWidth: .infinity)
+								.tint(.blue)
                         }
                         
                         // Optionals are silly
@@ -159,12 +160,14 @@ struct UserAvatarView: View {
 								ProgressView("Loading roles...")
 									.progressViewStyle(.linear)
 									.frame(maxWidth: .infinity)
+									.tint(.blue)
 							}
                         }
                         
                         Text("NOTE").font(.headline).padding(.top, 8)
                         // Notes are stored locally for now, but eventually will be synced with the Discord API
                         TextField("Add a note to this user (only visible to you)", text: $note)
+							.textFieldStyle(.roundedBorder)
                             .onChange(of: note) { _ in
                                 if note.isEmpty {
                                     UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")

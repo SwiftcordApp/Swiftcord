@@ -38,7 +38,7 @@ struct GatewayIdentify: OutgoingGatewayData {
 // MARK: Opcode 3 (Presence Update)
 struct GatewayPresenceUpdate: OutgoingGatewayData {
     let since: Int // Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
-    let activities: [Activity]
+    let activities: [ActivityOutgoing]
     let status: String
     let afk: Bool
 }

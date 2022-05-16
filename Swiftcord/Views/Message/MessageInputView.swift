@@ -7,50 +7,134 @@
 
 import SwiftUI
 
+struct MessageAttachmentView: View {
+    let attachment: URL
+	let onRemove: () -> Void
+    
+    var body: some View {
+		ZStack(alignment: .topTrailing) {
+			GroupBox {
+				VStack(spacing: 0) {
+					let mime = attachment.mimeType()
+					if mime.prefix(5) == "image" {
+						AsyncImage(url: attachment) { image in
+							image
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: 140, height: 120)
+								.cornerRadius(2)
+								.clipped()
+						} placeholder: { ProgressView() }
+					} else {
+						Spacer()
+						Image(systemName: AttachmentView.mimeFileMapping[mime] ?? "doc")
+							.font(.system(size: 84))
+					}
+					Spacer(minLength: 0)
+					Text(try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!)
+						.lineLimit(1)
+						.truncationMode(.middle)
+						.frame(maxWidth: .infinity, alignment: .leading)
+				}.frame(maxWidth: .infinity, maxHeight: .infinity)
+			}.frame(width: 150, height: 150)
+			
+			Button(action: onRemove) {
+				Image(systemName: "trash.square.fill")
+					.foregroundColor(.red)
+					.font(.system(size: 30))
+			}
+			.help("Remove attachment")
+			.buttonStyle(.plain)
+			.offset(x: 8, y: -8)
+		}
+	}
+}
+
 struct MessageInputView: View {
     let placeholder: String
     @Binding var message: String
-    let onSend: (String) -> Void
+    @State private var attachments: [URL] = []
+	@State private var inhibitingSend = false
+	@State private var showingAttachmentErr = false
+	@State private var attachmentErr = ""
+    let onSend: (String, [URL]) -> Void
+    
+    private func send() {
+        guard message.hasContent() || !attachments.isEmpty else { return }
+        onSend(message, attachments)
+        withAnimation { attachments.removeAll() }
+    }
     
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
-            Button(action: {}) { Image(systemName: "plus").font(.system(size: 20)) }
-                .buttonStyle(.plain)
-                .padding(.leading, 15)
-        
-            TextEditor(text: $message)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity)
-                .lineSpacing(4)
-                .font(.system(size: 16))
-                .lineLimit(4)
-                .disableAutocorrection(false)
-                .padding([.top, .bottom], 12)
-                .overlay(alignment: .leading) {
-                    if message.isEmpty {
-                        Text(placeholder)
-                            .padding([.leading, .trailing], 4)
-                            .opacity(0.5)
-                            .font(.system(size: 16, weight: .light))
-                            .allowsHitTesting(false)
-                    }
-                }
-            
-
-            Button(action: { onSend(message) }) {
-                Image(systemName: "arrow.up").font(.system(size: 20))
+        VStack(alignment: .leading, spacing: 0) {
+            if !attachments.isEmpty {
+                ScrollView([.horizontal]) {
+                    HStack {
+						ForEach(attachments.indices, id: \.self) { idx in
+							MessageAttachmentView(attachment: attachments[idx]) {
+								withAnimation { let _ = attachments.remove(at: idx) }
+							}
+                        }
+                    }.padding(16)
+                }.fixedSize(horizontal: false, vertical: true)
+                Divider()
             }
-            .buttonStyle(.plain)
-            .padding(.trailing, 15)
+            
+            HStack(alignment: .center, spacing: 17) {
+                Button {
+                    let panel = NSOpenPanel()
+                    panel.allowsMultipleSelection = false
+                    panel.canChooseDirectories = false
+                    panel.treatsFilePackagesAsDirectories = true
+                    panel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: { num in
+                        if num == NSApplication.ModalResponse.OK {
+                            guard let size = try? panel.url?.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).fileSize, size < 8*1024*1024 else {
+                                attachmentErr = "That file's too huge! Choose something that's <= 8MiB."
+								showingAttachmentErr = true
+                                return
+                            }
+                            
+                            guard !attachments.contains(panel.url!) else {
+								attachmentErr = "You've already selected that file"
+								showingAttachmentErr = true
+								return
+							}
+                            withAnimation { attachments.append(panel.url!) }
+                        }
+                    })
+                } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)).opacity(0.75) }
+					.alert(attachmentErr, isPresented: $showingAttachmentErr) {
+						Button("Got It!", role: .cancel) { }
+					}
+                    .buttonStyle(.plain)
+                    .padding(.leading, 18)
+            
+				TextField(placeholder, text: $message) { send() }
+					.textFieldStyle(.plain)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
+                    .lineSpacing(4)
+                    .font(.system(size: 16))
+                    .disableAutocorrection(false)
+                    .padding([.top, .bottom], 12)
+                
+
+                Button(action: { send() }) {
+					Image(systemName: "arrow.up").font(.system(size: 20)).opacity(0.75)
+                }
+				.keyboardShortcut(.return, modifiers: [])
+                .buttonStyle(.plain)
+                .padding(.trailing, 15)
+            }
         }
         .frame(minHeight: 40)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.4), lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 7)
-                    .fill(Color(NSColor.textBackgroundColor)))
-                .shadow(color: .gray.opacity(0.2), radius: 3)
-        )
+		.background(RoundedRectangle(cornerRadius: 7, style: .continuous)
+			.fill(.regularMaterial)
+			.overlay(
+				RoundedRectangle(cornerRadius: 7, style: .continuous)
+					.stroke(Color(nsColor: .separatorColor), lineWidth: 1)
+			)
+		)
         .padding(.horizontal, 16)
         .offset(y: -24)
     }

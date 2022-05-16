@@ -52,11 +52,11 @@ struct ServerView: View {
                 if guild != nil {
                     ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
                         .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
+                            ToolbarItem {
                                 Text(guild?.name ?? "Loading")
 									.font(.title3)
 									.fontWeight(.semibold)
-									.frame(maxWidth: .infinity)
+									.frame(maxWidth: 208) // Largest width before disappearing
                             }
                         }
                 } else {

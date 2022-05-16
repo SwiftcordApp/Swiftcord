@@ -26,7 +26,7 @@ struct ServerButton: View {
 		HStack {
 			Capsule()
 				.scale((selected || hovered) && !noIndicator ? 1 : 0)
-				.fill(Color(nsColor: .systemGray))
+				.fill(Color(nsColor: .labelColor))
 				.frame(width: 8, height: selected ? 40 : (hovered ? 20 : 8))
 				.animation(capsuleAnimation, value: selected)
 				.animation(capsuleAnimation, value: hovered)
@@ -99,7 +99,7 @@ struct ServerButtonStyle: ButtonStyle {
             if loading { /* TODO: Show some form of feedback */ }
         }
         .frame(width: 48, height: 48)
-		.foregroundColor(hovered || selected ? Color.white : Color(nsColor: .labelColor))
+		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
         .background(
             hovered || selected
 			? bgColor ?? Color.accentColor
@@ -113,8 +113,10 @@ struct ServerButtonStyle: ButtonStyle {
                 .init(color: .yellow, location: 0.5)
                ]))
                : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
-        .cornerRadius(hovered || selected ? 16 : 24, antialiased: true)
-        .scaleEffect(configuration.isPressed ? 0.92 : 1)
+		.mask {
+			RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
+		}
+		.offset(y: configuration.isPressed ? 2 : 0)
         .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: configuration.isPressed)
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }

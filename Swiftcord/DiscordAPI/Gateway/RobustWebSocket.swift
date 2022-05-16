@@ -244,7 +244,7 @@ class RobustWebSocket: NSObject, ObservableObject {
             onEvent.notify(event: (type, decoded.d))
         case .reconnect:
             log.warning("Gateway-requested reconnect: disconnecting and reconnecting immediately")
-            close(code: .goingAway)
+            forceClose()
         }
     }
     

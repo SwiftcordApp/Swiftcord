@@ -65,6 +65,7 @@ struct LoadingView: View {
             ProgressView(value: Double(loadingNum + 1) / Double(loadingStrings.count))
                 .progressViewStyle(.linear)
                 .frame(width: 180)
+				.tint(.blue)
             Text(.init(displayedTip))
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
