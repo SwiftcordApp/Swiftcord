@@ -56,7 +56,8 @@ jobs:
       - name: "Notarize Release Build"
         run: |
             ditto -V -c -k --keepParent "Export/Swiftcord.app" "tmp/Swiftcord.zip"
-            xcrun altool --notarize-app --username ${{ secrets.APPSTOREONNECT_USERNAME }} --password ${{ secrets.APPSTORECONNECT_PASSWORD }} --asc-provider RJNC97Y8QD --primary-bundle-id com.candy.Swiftcord --file tmp/Swiftcord.zip 
+            xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
+            xcrun notarytool submit tmp/Swiftcord.zip --keychain-profile "AC_PASSWORD" --wait
           
       - name: "Staple Release Build"
         uses: devbotsxyz/xcode-staple@v1
