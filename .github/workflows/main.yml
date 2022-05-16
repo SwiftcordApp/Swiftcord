@@ -1,0 +1,75 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_canary_release:
+    runs-on: macos-12
+    
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v3
+      
+      - name: "Select Xcode 12.0.0"
+        uses: devbotsxyz/xcode-select@main
+        with:
+          version: "13.3.1"
+      
+      - name: "Import Certificate: Development"
+        uses: devbotsxyz/import-signing-certificate@main
+        with:
+          certificate-data: ${{ secrets.DEVELOPMENT_CERTIFICATE_DATA }}
+          certificate-passphrase: ${{ secrets.DEVELOPMENT_CERTIFICATE_PASSPHRASE }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+      
+      - name: "Import Certificate: Distribution"
+        uses: devbotsxyz/import-signing-certificate@main
+        with:
+          certificate-data: ${{ secrets.DISTRIBUTION_CERTIFICATE_DATA }}
+          certificate-passphrase: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSPHRASE }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+          
+      - name: "Archive"
+        uses: devbotsxyz/xcode-archive@v1
+        with:
+          workspace: Swiftcord.xcworkspace
+          scheme: Swiftcord
+          configuration: Release
+          
+      - name: "Export & Sign Release Build"
+        uses: devbotsxyz/xcode-export-archive@main
+        with:
+          workspace: Swiftcord.xcworkspace
+          scheme: Swiftcord
+          
+      - name: "Notarize Release Build"
+        uses: devbotsxyz/xcode-notarize@v1
+        with:
+          product-path: "Export/Swiftcord.app"
+          appstore-connect-api-key: ${{ secrets.APPSTORECONNECT_API_KEY }}
+          appstore-connect-api-issuer: ${{ secrets.APPSTORECONNECT_API_ISSUER }}
+          
+      - name: "Staple Release Build"
+        uses: devbotsxyz/xcode-staple@v1
+        with:
+          product-path: "Export/Swiftcord.app"
+          
+      - name: Package for Distribution
+        run: ditto -V -c -k --keepParent "Export/Swiftcord.app" "Swiftcord.zip"
+        
+      - name: Release app
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Rings.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
