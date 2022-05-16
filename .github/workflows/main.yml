@@ -54,23 +54,20 @@ jobs:
         with:
           workspace: Swiftcord.xcworkspace
           scheme: Swiftcord
-      
-      - name: "Notarize Release Build"
-        run: |
-            ditto -V -c -k --keepParent "Export/Swiftcord.app" "tmp/Swiftcord.zip"
-            xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
-            xcrun notarytool submit tmp/Swiftcord.zip --keychain-profile "AC_PASSWORD" --wait
-          
-      - name: "Staple Release Build"
-        uses: devbotsxyz/xcode-staple@v1
-        with:
-          product-path: "Export/Swiftcord.app"
           
       - name: Install create-dmg
         run: npm install --global create-dmg
         
       - name: Make Release Dmg
-        run: create-dmg Export/Swiftcord.app
+        run: create-dmg Export/Swiftcord.app --dmg-title=Swiftcord
+      
+      - name: "Notarize Release Build"
+        run: |
+            xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
+            xcrun notarytool submit Swiftcord.dmg --keychain-profile "AC_PASSWORD" --wait
+          
+      - name: "Staple Release Build"
+        run: xcrun stapler staple Swiftcord.dmg
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -78,5 +75,5 @@ jobs:
           # Artifact name
           name: Swiftcord_Canary # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: Swiftcord*.dmg
+          path: Swiftcord.dmg
 
