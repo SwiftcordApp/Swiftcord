@@ -43,11 +43,7 @@ jobs:
             sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
           
       - name: "Archive"
-        uses: devbotsxyz/xcode-archive@v1
-        with:
-          workspace: Swiftcord.xcworkspace
-          scheme: Swiftcord
-          configuration: Release
+        run: xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive COMPILER_INDEX_STORE_ENABLE=NO | xcpretty
           
       - name: "Export & Sign Release Build"
         uses: devbotsxyz/xcode-export-archive@main
@@ -67,7 +63,7 @@ jobs:
             xcrun notarytool submit Swiftcord*.dmg --keychain-profile "AC_PASSWORD" --wait
           
       - name: "Staple Release Build"
-        run: xcrun stapler staple Swiftcord.dmg
+        run: xcrun stapler staple Swiftcord*.dmg
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
