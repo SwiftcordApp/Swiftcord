@@ -66,8 +66,11 @@ jobs:
         with:
           product-path: "Export/Swiftcord.app"
           
-      - name: Zip Release Binary
-        run: ditto -V -c -k --keepParent "Export/" "Swiftcord.zip"
+      - name: Install create-dmg
+        run: npm install --global create-dmg
+        
+      - name: Make Release Dmg
+        run: create-dmg Export/Swiftcord.app
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
