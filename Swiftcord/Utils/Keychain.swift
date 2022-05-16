@@ -21,7 +21,7 @@ class Keychain {
     class func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
-            kSecAttrAccount as String : key,
+            kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
             kSecAttrApplicationTag as String: tag,
             kSecValueData as String   : data
         ] as [String : Any]
@@ -35,7 +35,7 @@ class Keychain {
     class func remove(key: String) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
-            kSecAttrAccount as String : key,
+            kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
             kSecAttrApplicationTag as String: tag,
             kSecMatchLimit as String  : kSecMatchLimitOne
         ] as [String : Any]
@@ -52,7 +52,7 @@ class Keychain {
     class func loadData(key: String) -> Data? {
         let query = [
             kSecClass as String       : kSecClassGenericPassword,
-            kSecAttrAccount as String : key,
+            kSecAttrAccount as String : "\(Bundle.main.bundleIdentifier!).\(key)",
             kSecReturnData as String  : kCFBooleanTrue!,
             kSecAttrApplicationTag as String: tag,
             kSecMatchLimit as String  : kSecMatchLimitOne

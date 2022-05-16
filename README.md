@@ -21,7 +21,8 @@ me to continue developing it**
 * [Current State](#current-state)
 * [Roadmap](#roadmap)
 * [Screenshots](#screenshots) (Might be outdated)
-* [Contributions](#contributions)
+* [Contributions](#contributions) - Read this before contributing
+* [Copyright Notice](#copyright-notice)
 
 ---
 
@@ -56,12 +57,19 @@ to expand the answer
 
 <details>
   <summary><b>Will I get banned for using Swiftcord/Is using Swiftcord illegal?</b></summary>
-  Using Swiftcord <i>isn't illegal</i> and you will <b>not</b> get banned for
-  doing so. Contrary to what many people say on various platforms, 3rd
-  party clients (i.e. Swiftcord) <b>aren't against</b> the Discord ToS,
-  and you will not get banned for using one. You can read the section in 
-  Discord's ToS regarding their software
-  <a href="https://discord.com/terms#software-in-discord’s-services">here</a>.
+  Using Swiftcord <i>isn't illegal</i>. Contrary to what many people say
+  on various platforms, 3rd party clients (i.e. Swiftcord) <b>aren't against</b>
+  the Discord ToS. You can read the section in Discord's ToS regarding their software
+  <a href="https://discord.com/terms#software-in-discord’s-services">here</a>. 
+  However, I <b>cannot guarantee</b> Swiftcord's use of Discord's endpoints won't
+  trip selfbot ban detection. As far as possible, Swiftcord aims to
+  use endpoints as similarly to the official client as possible, and I (the developer)
+  have not been banned for using Swiftcord with either my main or alt account.
+  <i>
+    I do not take any responsibility for account bans due to the use of Swiftcord,
+    whether direct or indirect, although there's a very low possibility of that occuring. 
+    I recommend trying Swiftcord with an alt if possible.
+  </i>
 </details>
 <details>
   <summary><b>Feature <i>x</i> is missing! When will <i>y</i> be implemented?</b></summary>
@@ -166,7 +174,8 @@ and they may not neccessarily be implemented in sequence.
 Thank you for popping by! If you know the Discord API well, 
 have Swift knowledge and feel like contributing, feel free to
 make a pull request! Any (positive) contribution is welcome,
-no matter how small!
+no matter how small! You can also join the Swiftcord Discord server
+to discuss improvements and bugfixes!
 
 Found an issue? Ensure it isn't a duplicate, then open a new issue
 with the appropriate template and fill in the placeholders as
@@ -176,6 +185,22 @@ from the OP.
 
 ---
 
-Made with ❤️ by Vincent Kwok
+## Copyright Notice
 
-Copyright © 2022 Vincent Kwok
+Copyright (c) 2022 Vincent Kwok
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+The above copyright notice, this permission notice and its license shall be included in all copies or substantial portions of the Software.
+
+You can find a copy of the GNU General Public License v3 in LICENSE, or https://www.gnu.org/licenses/.
+
+I ❤️ Open Source
