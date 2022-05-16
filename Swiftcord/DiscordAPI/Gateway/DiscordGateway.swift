@@ -34,7 +34,7 @@ class DiscordGateway: ObservableObject {
         log.debug("Logging out on request")
         
         // Remove token from the keychain
-        let _ = Keychain.remove(key: "token")
+        let _ = Keychain.remove(key: "swifchordAuthToken")
         // Reset user defaults
         if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)

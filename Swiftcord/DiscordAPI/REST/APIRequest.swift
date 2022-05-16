@@ -25,7 +25,7 @@ extension DiscordAPI {
     ) async throws -> Data? {
         DiscordAPI.log.debug("\(method.rawValue): \(path)")
         
-        guard let token = Keychain.load(key: "token") else { return nil }
+        guard let token = Keychain.load(key: "swifchordAuthToken") else { return nil }
         guard var apiURL = URL(string: apiConfig.restBase) else { return nil }
         apiURL.appendPathComponent(path, isDirectory: false)
         
