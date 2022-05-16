@@ -11,7 +11,7 @@ extension RobustWebSocket {
     func getIdentify() -> GatewayIdentify? {
         // Keychain.save(key: "token", data: "token goes here")
         // Keychain.remove(key: "token") // For testing
-        guard let token: String = Keychain.load(key: "swifchordAuthToken")
+        guard let token: String = Keychain.load(key: "authToken")
         else { return nil }
             
         return GatewayIdentify(
@@ -26,7 +26,7 @@ extension RobustWebSocket {
     }
 
     func getResume(seq: Int, sessionID: String) -> GatewayResume? {
-        guard let token: String = Keychain.load(key: "swifchordAuthToken")
+        guard let token: String = Keychain.load(key: "authToken")
         else { return nil }
         
         return GatewayResume(

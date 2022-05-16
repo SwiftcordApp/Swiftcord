@@ -126,7 +126,7 @@ struct ContentView: View {
         .onChange(of: loginWVModel.token, perform: { tk in
             if let tk = tk {
                 state.attemptLogin = false
-                let _ = Keychain.save(key: "swifchordAuthToken", data: tk)
+                let _ = Keychain.save(key: "authToken", data: tk)
                 gateway.connect() // Reconnect to the socket
             }
         })
