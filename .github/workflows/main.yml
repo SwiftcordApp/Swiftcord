@@ -50,16 +50,15 @@ jobs:
         with:
           workspace: Swiftcord.xcworkspace
           scheme: Swiftcord
-          
-      - run: ditto -V -c -k --keepParent "Export/Swiftcord.app" "tmp/Swiftcord.zip"
+      
+      
       
       - name: "Notarize Release Build"
-        uses: actions/notarization-action@v1
-        with:
-          primary-bundle-id: 'com.candy.Swiftcord'
-          username: ${{ secrets.APPSTOREONNECT_USERNAME }}
-          password: ${{ secrets.APPSTORECONNECT_PASSWORD }}
-          file: 'tmp/Swiftcord.zip'
+        uses: GuillaumeFalourd/xcode-notarize@v1
+        with: 
+          appstore-connect-username: ${{ secrets.APPSTOREONNECT_USERNAME }}
+          appstore-connect-password: ${{ secrets.APPSTORECONNECT_PASSWORD }}
+          verbose: true
           
       - name: "Staple Release Build"
         uses: devbotsxyz/xcode-staple@v1
