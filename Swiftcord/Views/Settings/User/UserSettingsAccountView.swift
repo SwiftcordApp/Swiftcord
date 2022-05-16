@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 struct UserSettingsAccountView: View {
 	let user: User

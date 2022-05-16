@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel? = nil
@@ -32,7 +33,7 @@ struct ServerView: View {
 		self.channels = channels
 
         if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)"),
-		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
+		   let lastChObj = channels.first(where: { $0.id.description == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
         }

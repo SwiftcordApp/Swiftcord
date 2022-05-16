@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordAPI
 
 @main
 struct SwiftcordApp: App {

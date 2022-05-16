@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordAPI
 
 struct LargeUserProfile<Content: View>: View {
     let user: User

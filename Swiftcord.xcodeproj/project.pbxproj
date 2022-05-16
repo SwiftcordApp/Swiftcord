@@ -12,7 +12,6 @@
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
 		DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
 		DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */; };
-		DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
 		DA28027F28095E3100B14E5C /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
@@ -24,17 +23,14 @@
 		DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */; };
 		DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
 		DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
-		DA32EF3627C72F7D00A9ED72 /* APISticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3527C72F7D00A9ED72 /* APISticker.swift */; };
 		DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
 		DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
-		DA32EF4427C880E300A9ED72 /* NewMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4327C880E300A9ED72 /* NewMessage.swift */; };
 		DA32EF4627C8AB6200A9ED72 /* ISOTimestamp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4527C8AB6200A9ED72 /* ISOTimestamp+.swift */; };
 		DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* Date+.swift */; };
 		DA32EF4A27C8BE8F00A9ED72 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4927C8BE8F00A9ED72 /* Color+.swift */; };
 		DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
 		DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4F27C8D7E000A9ED72 /* Message+.swift */; };
 		DA32EF5227C8FBB200A9ED72 /* User+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* User+.swift */; };
-		DA32EF5627CA6DF900A9ED72 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5527CA6DF900A9ED72 /* URL+.swift */; };
 		DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
 		DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */; };
 		DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* SwiftcordApp.swift */; };
@@ -43,58 +39,8 @@
 		DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */; };
 		DA4A889127C0AF3200720909 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889027C0AF3200720909 /* Persistence.swift */; };
 		DA4A889C27C0B23C00720909 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889B27C0B23C00720909 /* WebView.swift */; };
-		DA4A88A227C1244200720909 /* Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A127C1244200720909 /* Embed.swift */; };
-		DA4A88A427C12CD100720909 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A327C12CD100720909 /* Message.swift */; };
-		DA4A88A627C12DD700720909 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A527C12DD700720909 /* Mention.swift */; };
-		DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A727C12E9C00720909 /* Snowflake.swift */; };
-		DA4A88AA27C1324400720909 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88A927C1324400720909 /* User.swift */; };
-		DA4A88AC27C1332600720909 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88AB27C1332600720909 /* Locale.swift */; };
-		DA4A88AE27C135F300720909 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88AD27C135F300720909 /* Member.swift */; };
-		DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88AF27C136B400720909 /* ISOTimestamp.swift */; };
-		DA4A88B227C1385100720909 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B127C1385100720909 /* Attachment.swift */; };
-		DA4A88B627C13A9800720909 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B527C13A9800720909 /* Channel.swift */; };
-		DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B727C13BAF00720909 /* Reaction.swift */; };
-		DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88B927C13BDF00720909 /* Emoji.swift */; };
-		DA4A88BC27C13FA200720909 /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88BB27C13FA200720909 /* Presence.swift */; };
-		DA4A88BE27C140BC00720909 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88BD27C140BC00720909 /* Application.swift */; };
-		DA4A88C027C1417900720909 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88BF27C1417900720909 /* Team.swift */; };
-		DA4A88C227C1432300720909 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C127C1432300720909 /* Interaction.swift */; };
-		DA4A88C427C1442300720909 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C327C1442300720909 /* Sticker.swift */; };
-		DA4A88C627C1E77000720909 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C527C1E77000720909 /* Permission.swift */; };
-		DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */; };
-		DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CC27C1FAEE00720909 /* Config.swift */; };
-		DA4A88D027C2068F00720909 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88CF27C2068F00720909 /* Gateway.swift */; };
-		DA4A88D227C20FC300720909 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D127C20FC300720909 /* Activity.swift */; };
-		DA4A88D827C2795600720909 /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D727C2795600720909 /* DataStructs.swift */; };
-		DA4A88DA27C27A1100720909 /* GatewayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88D927C27A1100720909 /* GatewayEvent.swift */; };
-		DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88DD27C3273C00720909 /* Keychain.swift */; };
-		DA4A88E127C3341400720909 /* EventDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E027C3341400720909 /* EventDispatch.swift */; };
 		DA4A88E527C3482A00720909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E427C3482A00720909 /* LoginView.swift */; };
-		DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E627C34BB200720909 /* ThreadListSync.swift */; };
-		DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E827C34CA900720909 /* ThreadMembersUpdate.swift */; };
-		DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88EA27C34D1C00720909 /* ChannelPinsUpdate.swift */; };
-		DA4A88ED27C34DD100720909 /* Guild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88EC27C34DD100720909 /* Guild.swift */; };
-		DA4A88EF27C34EB100720909 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88EE27C34EB100720909 /* Levels.swift */; };
-		DA4A88F127C3543A00720909 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88F027C3543A00720909 /* Voice.swift */; };
-		DA4A88F327C3576D00720909 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88F227C3576D00720909 /* Stage.swift */; };
-		DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88F427C35B9E00720909 /* GuildBan.swift */; };
-		DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88F627C35C1300720909 /* GuildMiscUpdate.swift */; };
-		DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88F827C35D5000720909 /* GuildMemberEvt.swift */; };
-		DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88FA27C35F2100720909 /* GuildRoleEvt.swift */; };
-		DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */; };
-		DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88FE27C3609900720909 /* ApplicationObj.swift */; };
-		DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890027C360D300720909 /* ReadyEvt.swift */; };
-		DA4A890327C3824800720909 /* GatewayIdentify.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890227C3824800720909 /* GatewayIdentify.swift */; };
-		DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890427C383DD00720909 /* MessageDelete.swift */; };
-		DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890627C38E4300720909 /* DiscordAPI.swift */; };
-		DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890827C3CFA700720909 /* APIRequest.swift */; };
-		DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A890B27C3D29C00720909 /* APIChannel.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
-		DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891527C4B06500720909 /* GatewayCachedState.swift */; };
-		DA4A891927C4E90900720909 /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891827C4E90900720909 /* APIUser.swift */; };
-		DA4A891C27C4EFF400720909 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891B27C4EFF400720909 /* Connection.swift */; };
-		DA4A891E27C4F06B00720909 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891D27C4F06B00720909 /* Integration.swift */; };
-		DA4A892027C5167A00720909 /* APIGuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891F27C5167900720909 /* APIGuild.swift */; };
 		DA4A892427C5D6C500720909 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A892327C5D6C500720909 /* ServerView.swift */; };
 		DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC227D37873009FD740 /* MergePartialMessage.swift */; };
 		DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */; };
@@ -106,19 +52,11 @@
 		DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD427D4D120009FD740 /* ActivitySettingsView.swift */; };
 		DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */; };
 		DA520AD927D4E7A4009FD740 /* LargeUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */; };
-		DA520ADB27D60A09009FD740 /* APICurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADA27D60A09009FD740 /* APICurrentUser.swift */; };
 		DA520ADD27D643CE009FD740 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADC27D643CE009FD740 /* Int+.swift */; };
-		DA520AE027D75147009FD740 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = DA520ADF27D75147009FD740 /* Reachability */; };
 		DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* Bool+.swift */; };
-		DA520AE727D8ECA6009FD740 /* DecodableThrowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
-		DA57F4482806C4F5001DC46E /* RobustWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
-		DA9C3706282E41F0002179D5 /* APIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C3705282E41F0002179D5 /* APIUtils.swift */; };
-		DA9C370A282E67C0002179D5 /* DecompressionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C3709282E67C0002179D5 /* DecompressionEngine.swift */; };
-		DA9C370C282EB640002179D5 /* ChUnreadUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */; };
-		DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3B6EC282A3B770021267C /* UserSettings.swift */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
@@ -126,11 +64,9 @@
 		DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
 		DAAFB5CC282B879200807B54 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
-		DAD26C31282FECFE004EFC4A /* APIMultipartFormBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD26C30282FECFE004EFC4A /* APIMultipartFormBody.swift */; };
-		DAD26C33282FED8E004EFC4A /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD26C32282FED8E004EFC4A /* Data+.swift */; };
-		DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */; };
-		DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
+		E7938D3F28329BFF00B8DC94 /* DiscordAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E7938D3E28329BFF00B8DC94 /* DiscordAPI */; };
+		E7938D4128329C0100B8DC94 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = E7938D4028329C0100B8DC94 /* DiscordKitCommon */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
 		E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
@@ -144,7 +80,6 @@
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
 		DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoMedium.otf; sourceTree = "<group>"; };
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
-		DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadAck.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
@@ -155,17 +90,14 @@
 		DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperLottieView.swift; sourceTree = "<group>"; };
 		DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoopMode.swift; sourceTree = "<group>"; };
 		DA32EF3327C6861800A9ED72 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
-		DA32EF3527C72F7D00A9ED72 /* APISticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISticker.swift; sourceTree = "<group>"; };
 		DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
 		DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
-		DA32EF4327C880E300A9ED72 /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
 		DA32EF4527C8AB6200A9ED72 /* ISOTimestamp+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISOTimestamp+.swift"; sourceTree = "<group>"; };
 		DA32EF4727C8ABFF00A9ED72 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		DA32EF4927C8BE8F00A9ED72 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
 		DA32EF4F27C8D7E000A9ED72 /* Message+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+.swift"; sourceTree = "<group>"; };
 		DA32EF5127C8FBB200A9ED72 /* User+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+.swift"; sourceTree = "<group>"; };
-		DA32EF5527CA6DF900A9ED72 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStateEnv.swift; sourceTree = "<group>"; };
 		DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Swiftcord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftcord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,85 +108,25 @@
 		DA4A889027C0AF3200720909 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DA4A889527C0AF3200720909 /* Swiftcord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swiftcord.entitlements; sourceTree = "<group>"; };
 		DA4A889B27C0B23C00720909 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		DA4A88A127C1244200720909 /* Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Embed.swift; sourceTree = "<group>"; };
-		DA4A88A327C12CD100720909 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		DA4A88A527C12DD700720909 /* Mention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
-		DA4A88A727C12E9C00720909 /* Snowflake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snowflake.swift; sourceTree = "<group>"; };
-		DA4A88A927C1324400720909 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		DA4A88AB27C1332600720909 /* Locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
-		DA4A88AD27C135F300720909 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
-		DA4A88AF27C136B400720909 /* ISOTimestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISOTimestamp.swift; sourceTree = "<group>"; };
-		DA4A88B127C1385100720909 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
-		DA4A88B527C13A9800720909 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		DA4A88B727C13BAF00720909 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
-		DA4A88B927C13BDF00720909 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
-		DA4A88BB27C13FA200720909 /* Presence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
-		DA4A88BD27C140BC00720909 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		DA4A88BF27C1417900720909 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		DA4A88C127C1432300720909 /* Interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
-		DA4A88C327C1442300720909 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
-		DA4A88C527C1E77000720909 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
-		DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordGateway.swift; sourceTree = "<group>"; };
-		DA4A88CC27C1FAEE00720909 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		DA4A88CF27C2068F00720909 /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
-		DA4A88D127C20FC300720909 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		DA4A88D727C2795600720909 /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
-		DA4A88D927C27A1100720909 /* GatewayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayEvent.swift; sourceTree = "<group>"; };
-		DA4A88DD27C3273C00720909 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
-		DA4A88E027C3341400720909 /* EventDispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDispatch.swift; sourceTree = "<group>"; };
 		DA4A88E427C3482A00720909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		DA4A88E627C34BB200720909 /* ThreadListSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadListSync.swift; sourceTree = "<group>"; };
-		DA4A88E827C34CA900720909 /* ThreadMembersUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMembersUpdate.swift; sourceTree = "<group>"; };
-		DA4A88EA27C34D1C00720909 /* ChannelPinsUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPinsUpdate.swift; sourceTree = "<group>"; };
-		DA4A88EC27C34DD100720909 /* Guild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guild.swift; sourceTree = "<group>"; };
-		DA4A88EE27C34EB100720909 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
-		DA4A88F027C3543A00720909 /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
-		DA4A88F227C3576D00720909 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
-		DA4A88F427C35B9E00720909 /* GuildBan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildBan.swift; sourceTree = "<group>"; };
-		DA4A88F627C35C1300720909 /* GuildMiscUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildMiscUpdate.swift; sourceTree = "<group>"; };
-		DA4A88F827C35D5000720909 /* GuildMemberEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildMemberEvt.swift; sourceTree = "<group>"; };
-		DA4A88FA27C35F2100720909 /* GuildRoleEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildRoleEvt.swift; sourceTree = "<group>"; };
-		DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuildSchEvtUserEvt.swift; sourceTree = "<group>"; };
-		DA4A88FE27C3609900720909 /* ApplicationObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationObj.swift; path = Gateway/ApplicationObj.swift; sourceTree = "<group>"; };
-		DA4A890027C360D300720909 /* ReadyEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyEvt.swift; sourceTree = "<group>"; };
-		DA4A890227C3824800720909 /* GatewayIdentify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayIdentify.swift; sourceTree = "<group>"; };
-		DA4A890427C383DD00720909 /* MessageDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDelete.swift; sourceTree = "<group>"; };
-		DA4A890627C38E4300720909 /* DiscordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordAPI.swift; sourceTree = "<group>"; };
-		DA4A890827C3CFA700720909 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		DA4A890A27C3D02A00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DA4A890B27C3D29C00720909 /* APIChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChannel.swift; sourceTree = "<group>"; };
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
-		DA4A891527C4B06500720909 /* GatewayCachedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCachedState.swift; sourceTree = "<group>"; };
 		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DA4A891827C4E90900720909 /* APIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUser.swift; sourceTree = "<group>"; };
-		DA4A891A27C4EE1B00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DA4A891B27C4EFF400720909 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		DA4A891D27C4F06B00720909 /* Integration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integration.swift; sourceTree = "<group>"; };
-		DA4A891F27C5167900720909 /* APIGuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGuild.swift; sourceTree = "<group>"; };
 		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		DA520AC227D37873009FD740 /* MergePartialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergePartialMessage.swift; sourceTree = "<group>"; };
 		DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserFooter.swift; sourceTree = "<group>"; };
 		DA520AC827D3A55D009FD740 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DA520ACA27D4A23A009FD740 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		DA520ACD27D4C6AA009FD740 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DA520ACE27D4CE5E009FD740 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD027D4CFCF009FD740 /* BillingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD227D4D073009FD740 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD427D4D120009FD740 /* ActivitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingsView.swift; sourceTree = "<group>"; };
 		DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeUserProfile.swift; sourceTree = "<group>"; };
-		DA520ADA27D60A09009FD740 /* APICurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICurrentUser.swift; sourceTree = "<group>"; };
 		DA520ADC27D643CE009FD740 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		DA520AE127D76BEB009FD740 /* Bool+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+.swift"; sourceTree = "<group>"; };
-		DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableThrowable.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
-		DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobustWebSocket.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
-		DA9C3705282E41F0002179D5 /* APIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUtils.swift; sourceTree = "<group>"; };
-		DA9C3709282E67C0002179D5 /* DecompressionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecompressionEngine.swift; sourceTree = "<group>"; };
-		DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChUnreadUpdate.swift; sourceTree = "<group>"; };
-		DAA3B6EC282A3B770021267C /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
 		DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoBarView.swift; sourceTree = "<group>"; };
@@ -262,10 +134,6 @@
 		DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCenterManager.swift; sourceTree = "<group>"; };
 		DAAFB5C8282B689000807B54 /* discord-loading-animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "discord-loading-animation.json"; sourceTree = "<group>"; };
 		DAAFB5CB282B879200807B54 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
-		DAD26C30282FECFE004EFC4A /* APIMultipartFormBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMultipartFormBody.swift; sourceTree = "<group>"; };
-		DAD26C32282FED8E004EFC4A /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
-		DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageACKEvt.swift; sourceTree = "<group>"; };
-		DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStart.swift; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C28282FA3F7001F78DF /* Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+.swift"; sourceTree = "<group>"; };
@@ -279,9 +147,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7938D3F28329BFF00B8DC94 /* DiscordAPI in Frameworks */,
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
-				DA520AE027D75147009FD740 /* Reachability in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
+				E7938D4128329C0100B8DC94 /* DiscordKitCommon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,15 +201,6 @@
 			path = Lottie;
 			sourceTree = "<group>";
 		};
-		DA32EF4227C880D300A9ED72 /* REST */ = {
-			isa = PBXGroup;
-			children = (
-				DA32EF4327C880E300A9ED72 /* NewMessage.swift */,
-				DA2384C327CCFEF3009E15E0 /* MessageReadAck.swift */,
-			);
-			path = REST;
-			sourceTree = "<group>";
-		};
 		DA32EF5727CB5F2C00A9ED72 /* EnvObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +223,7 @@
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
 				DA4A888527C0AF3000720909 /* Products */,
+				E7938D3D28329BFF00B8DC94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -380,7 +241,6 @@
 			children = (
 				DA520ABD27D322F0009FD740 /* Resources */,
 				DA4A88E327C3481700720909 /* Views */,
-				DA4A889D27C1133300720909 /* DiscordAPI */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
@@ -402,127 +262,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		DA4A889D27C1133300720909 /* DiscordAPI */ = {
-			isa = PBXGroup;
-			children = (
-				DA4A88DB27C326BC00720909 /* REST */,
-				DA4A88D327C228CB00720909 /* Gateway */,
-				DA4A88A027C1243000720909 /* Objects */,
-				DA4A88CC27C1FAEE00720909 /* Config.swift */,
-				DA9C3705282E41F0002179D5 /* APIUtils.swift */,
-			);
-			path = DiscordAPI;
-			sourceTree = "<group>";
-		};
-		DA4A88A027C1243000720909 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				DA4A891A27C4EE1B00720909 /* README.md */,
-				DA32EF4227C880D300A9ED72 /* REST */,
-				DA4A88D627C2792F00720909 /* Gateway */,
-				DA4A88A127C1244200720909 /* Embed.swift */,
-				DA4A88FE27C3609900720909 /* ApplicationObj.swift */,
-				DA4A88A327C12CD100720909 /* Message.swift */,
-				DA4A88A527C12DD700720909 /* Mention.swift */,
-				DA4A88AD27C135F300720909 /* Member.swift */,
-				DA4A88A727C12E9C00720909 /* Snowflake.swift */,
-				DA4A88A927C1324400720909 /* User.swift */,
-				DA4A88AB27C1332600720909 /* Locale.swift */,
-				DA4A88AF27C136B400720909 /* ISOTimestamp.swift */,
-				DA4A88B127C1385100720909 /* Attachment.swift */,
-				DA4A88B527C13A9800720909 /* Channel.swift */,
-				DA4A88B727C13BAF00720909 /* Reaction.swift */,
-				DA4A88B927C13BDF00720909 /* Emoji.swift */,
-				DA4A88BB27C13FA200720909 /* Presence.swift */,
-				DA4A88BD27C140BC00720909 /* Application.swift */,
-				DA4A88BF27C1417900720909 /* Team.swift */,
-				DA4A88C127C1432300720909 /* Interaction.swift */,
-				DA4A88C327C1442300720909 /* Sticker.swift */,
-				DA4A88C527C1E77000720909 /* Permission.swift */,
-				DA4A88D127C20FC300720909 /* Activity.swift */,
-				DA4A88EC27C34DD100720909 /* Guild.swift */,
-				DA4A88EE27C34EB100720909 /* Levels.swift */,
-				DA4A88F027C3543A00720909 /* Voice.swift */,
-				DA4A88F227C3576D00720909 /* Stage.swift */,
-				DA4A891B27C4EFF400720909 /* Connection.swift */,
-				DA4A891D27C4F06B00720909 /* Integration.swift */,
-			);
-			path = Objects;
-			sourceTree = "<group>";
-		};
-		DA4A88D327C228CB00720909 /* Gateway */ = {
-			isa = PBXGroup;
-			children = (
-				DA520ACD27D4C6AA009FD740 /* README.md */,
-				DA4A88C727C1EB8F00720909 /* DiscordGateway.swift */,
-				DA57F4472806C4F5001DC46E /* RobustWebSocket.swift */,
-				DA4A890227C3824800720909 /* GatewayIdentify.swift */,
-				DA4A891527C4B06500720909 /* GatewayCachedState.swift */,
-				DA9C3709282E67C0002179D5 /* DecompressionEngine.swift */,
-			);
-			path = Gateway;
-			sourceTree = "<group>";
-		};
-		DA4A88D627C2792F00720909 /* Gateway */ = {
-			isa = PBXGroup;
-			children = (
-				DA4A88E227C3472C00720909 /* Event */,
-				DA4A88CF27C2068F00720909 /* Gateway.swift */,
-				DA4A88D727C2795600720909 /* DataStructs.swift */,
-				DAA3B6EC282A3B770021267C /* UserSettings.swift */,
-			);
-			path = Gateway;
-			sourceTree = "<group>";
-		};
-		DA4A88DB27C326BC00720909 /* REST */ = {
-			isa = PBXGroup;
-			children = (
-				DA4A890A27C3D02A00720909 /* README.md */,
-				DA4A890627C38E4300720909 /* DiscordAPI.swift */,
-				DA4A890827C3CFA700720909 /* APIRequest.swift */,
-				DAD26C30282FECFE004EFC4A /* APIMultipartFormBody.swift */,
-				DA4A890B27C3D29C00720909 /* APIChannel.swift */,
-				DA4A891827C4E90900720909 /* APIUser.swift */,
-				DA4A891F27C5167900720909 /* APIGuild.swift */,
-				DA32EF3527C72F7D00A9ED72 /* APISticker.swift */,
-				DA520ADA27D60A09009FD740 /* APICurrentUser.swift */,
-			);
-			path = REST;
-			sourceTree = "<group>";
-		};
 		DA4A88DC27C3272500720909 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				DA520AE327D76BF8009FD740 /* Extensions */,
 				DA520AC127D37863009FD740 /* MergeStructs */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
-				DA4A88DD27C3273C00720909 /* Keychain.swift */,
-				DA4A88E027C3341400720909 /* EventDispatch.swift */,
-				DA520AE627D8ECA6009FD740 /* DecodableThrowable.swift */,
 				DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		DA4A88E227C3472C00720909 /* Event */ = {
-			isa = PBXGroup;
-			children = (
-				DA4A88D927C27A1100720909 /* GatewayEvent.swift */,
-				DA4A88E627C34BB200720909 /* ThreadListSync.swift */,
-				DA4A88E827C34CA900720909 /* ThreadMembersUpdate.swift */,
-				DA4A88EA27C34D1C00720909 /* ChannelPinsUpdate.swift */,
-				DA4A88F427C35B9E00720909 /* GuildBan.swift */,
-				DA4A88F627C35C1300720909 /* GuildMiscUpdate.swift */,
-				DA4A88F827C35D5000720909 /* GuildMemberEvt.swift */,
-				DA4A88FA27C35F2100720909 /* GuildRoleEvt.swift */,
-				DA4A88FC27C35FC700720909 /* GuildSchEvtUserEvt.swift */,
-				DA4A890027C360D300720909 /* ReadyEvt.swift */,
-				DA4A890427C383DD00720909 /* MessageDelete.swift */,
-				DAE557F2282C039C001F4EF1 /* MessageACKEvt.swift */,
-				DAE557F8282CEA4F001F4EF1 /* TypingStart.swift */,
-				DA9C370B282EB640002179D5 /* ChUnreadUpdate.swift */,
-			);
-			path = Event;
 			sourceTree = "<group>";
 		};
 		DA4A88E327C3481700720909 /* Views */ = {
@@ -586,7 +334,6 @@
 				DA28027E28095E3000B14E5C /* Logger+.swift */,
 				E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */,
 				DA520ACA27D4A23A009FD740 /* String+.swift */,
-				DA32EF5527CA6DF900A9ED72 /* URL+.swift */,
 				DA585C9827E1F6AC00FA4EE0 /* View+.swift */,
 			);
 			path = Extensions;
@@ -613,6 +360,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E7938D3D28329BFF00B8DC94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E7AF1C24282F9F44001F78DF /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -630,7 +384,6 @@
 				E7AF1C2A282FA400001F78DF /* Guild+.swift */,
 				DA32EF4F27C8D7E000A9ED72 /* Message+.swift */,
 				DA32EF5127C8FBB200A9ED72 /* User+.swift */,
-				DAD26C32282FED8E004EFC4A /* Data+.swift */,
 			);
 			path = DiscordAPI;
 			sourceTree = "<group>";
@@ -695,7 +448,8 @@
 			packageProductDependencies = (
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
-				DA520ADF27D75147009FD740 /* Reachability */,
+				E7938D3E28329BFF00B8DC94 /* DiscordAPI */,
+				E7938D4028329C0100B8DC94 /* DiscordKitCommon */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -728,7 +482,6 @@
 			packageReferences = (
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -760,124 +513,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA2384C427CCFEF3009E15E0 /* MessageReadAck.swift in Sources */,
-				DA4A88E127C3341400720909 /* EventDispatch.swift in Sources */,
-				DA4A88BE27C140BC00720909 /* Application.swift in Sources */,
 				DA520ACB27D4A23A009FD740 /* String+.swift in Sources */,
-				DA4A88AC27C1332600720909 /* Locale.swift in Sources */,
-				DA32EF4427C880E300A9ED72 /* NewMessage.swift in Sources */,
-				DA4A88B627C13A9800720909 /* Channel.swift in Sources */,
-				DA4A88F727C35C1300720909 /* GuildMiscUpdate.swift in Sources */,
-				DA4A88ED27C34DD100720909 /* Guild.swift in Sources */,
 				DA57F44428056718001DC46E /* ChannelList.swift in Sources */,
-				DA32EF3627C72F7D00A9ED72 /* APISticker.swift in Sources */,
 				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
-				DA9C370A282E67C0002179D5 /* DecompressionEngine.swift in Sources */,
-				DA4A88B027C136B400720909 /* ISOTimestamp.swift in Sources */,
-				DA4A88D027C2068F00720909 /* Gateway.swift in Sources */,
 				E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */,
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
 				DA2384A127CB9714009E15E0 /* Font+.swift in Sources */,
-				DA4A88B827C13BAF00720909 /* Reaction.swift in Sources */,
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
-				DA9C370C282EB640002179D5 /* ChUnreadUpdate.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
-				DAE557F9282CEA4F001F4EF1 /* TypingStart.swift in Sources */,
-				DAD26C33282FED8E004EFC4A /* Data+.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
-				DAA3B6ED282A3B770021267C /* UserSettings.swift in Sources */,
-				DA32EF5627CA6DF900A9ED72 /* URL+.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
-				DA4A891E27C4F06B00720909 /* Integration.swift in Sources */,
-				DA4A890C27C3D29C00720909 /* APIChannel.swift in Sources */,
-				DA4A88F927C35D5000720909 /* GuildMemberEvt.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
-				DA57F4482806C4F5001DC46E /* RobustWebSocket.swift in Sources */,
-				DA9C3706282E41F0002179D5 /* APIUtils.swift in Sources */,
-				DA4A890527C383DD00720909 /* MessageDelete.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
-				DA4A88F127C3543A00720909 /* Voice.swift in Sources */,
-				DA4A88C827C1EB8F00720909 /* DiscordGateway.swift in Sources */,
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				E7AF1C33282FB02A001F78DF /* UserSettingsAccountView.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */,
 				DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */,
-				DA4A88DE27C3273C00720909 /* Keychain.swift in Sources */,
-				DA4A88E727C34BB200720909 /* ThreadListSync.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
 				DA520AD927D4E7A4009FD740 /* LargeUserProfile.swift in Sources */,
 				DA520ACF27D4CE5E009FD740 /* UserSettingsView.swift in Sources */,
-				DA4A88C027C1417900720909 /* Team.swift in Sources */,
 				E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */,
 				DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */,
 				DA32EF5227C8FBB200A9ED72 /* User+.swift in Sources */,
-				DA520AE727D8ECA6009FD740 /* DecodableThrowable.swift in Sources */,
-				DA4A890727C38E4300720909 /* DiscordAPI.swift in Sources */,
 				DA520AD127D4CFCF009FD740 /* BillingSettingsView.swift in Sources */,
-				DA4A88FD27C35FC700720909 /* GuildSchEvtUserEvt.swift in Sources */,
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
-				DAD26C31282FECFE004EFC4A /* APIMultipartFormBody.swift in Sources */,
-				DA4A890327C3824800720909 /* GatewayIdentify.swift in Sources */,
-				DA4A88C227C1432300720909 /* Interaction.swift in Sources */,
 				E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */,
 				DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */,
-				DA4A88EF27C34EB100720909 /* Levels.swift in Sources */,
 				DAAFB5CC282B879200807B54 /* Double+.swift in Sources */,
-				DA4A88E927C34CA900720909 /* ThreadMembersUpdate.swift in Sources */,
-				DA4A88FB27C35F2100720909 /* GuildRoleEvt.swift in Sources */,
 				DA520AC927D3A55D009FD740 /* SettingsView.swift in Sources */,
 				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
-				DAE557F3282C039C001F4EF1 /* MessageACKEvt.swift in Sources */,
-				DA4A88CD27C1FAEE00720909 /* Config.swift in Sources */,
-				DA4A88D827C2795600720909 /* DataStructs.swift in Sources */,
-				DA4A890927C3CFA700720909 /* APIRequest.swift in Sources */,
 				DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */,
-				DA520ADB27D60A09009FD740 /* APICurrentUser.swift in Sources */,
-				DA4A88BC27C13FA200720909 /* Presence.swift in Sources */,
-				DA4A88A427C12CD100720909 /* Message.swift in Sources */,
-				DA4A88A627C12DD700720909 /* Mention.swift in Sources */,
-				DA4A892027C5167A00720909 /* APIGuild.swift in Sources */,
-				DA4A890127C360D300720909 /* ReadyEvt.swift in Sources */,
-				DA4A88B227C1385100720909 /* Attachment.swift in Sources */,
 				DA32EF4A27C8BE8F00A9ED72 /* Color+.swift in Sources */,
 				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
-				DA4A88AE27C135F300720909 /* Member.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
-				DA4A88BA27C13BDF00720909 /* Emoji.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
-				DA4A891627C4B06500720909 /* GatewayCachedState.swift in Sources */,
-				DA4A88C427C1442300720909 /* Sticker.swift in Sources */,
-				DA4A88A227C1244200720909 /* Embed.swift in Sources */,
-				DA4A88FF27C3609900720909 /* ApplicationObj.swift in Sources */,
-				DA4A88DA27C27A1100720909 /* GatewayEvent.swift in Sources */,
 				DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */,
-				DA4A88A827C12E9C00720909 /* Snowflake.swift in Sources */,
-				DA4A88F327C3576D00720909 /* Stage.swift in Sources */,
-				DA4A891C27C4EFF400720909 /* Connection.swift in Sources */,
 				DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */,
-				DA4A891927C4E90900720909 /* APIUser.swift in Sources */,
-				DA4A88C627C1E77000720909 /* Permission.swift in Sources */,
-				DA4A88EB27C34D1C00720909 /* ChannelPinsUpdate.swift in Sources */,
-				DA4A88D227C20FC300720909 /* Activity.swift in Sources */,
-				DA4A88F527C35B9E00720909 /* GuildBan.swift in Sources */,
 				DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */,
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
-				DA4A88AA27C1324400720909 /* User.swift in Sources */,
 				DA32EF4627C8AB6200A9ED72 /* ISOTimestamp+.swift in Sources */,
 				DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */,
 			);
@@ -1099,14 +787,6 @@
 				minimumVersion = 3.3.0;
 			};
 		};
-		DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1120,10 +800,13 @@
 			package = DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
-		DA520ADF27D75147009FD740 /* Reachability */ = {
+		E7938D3E28329BFF00B8DC94 /* DiscordAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DA520ADE27D75147009FD740 /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
+			productName = DiscordAPI;
+		};
+		E7938D4028329C0100B8DC94 /* DiscordKitCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DiscordKitCommon;
 		};
 /* End XCSwiftPackageProductDependency section */
 
