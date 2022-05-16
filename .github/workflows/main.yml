@@ -69,7 +69,7 @@ jobs:
       - name: Release app
         uses: softprops/action-gh-release@v1
         with:
-          files: Rings.zip
+          files: Swiftcord.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
