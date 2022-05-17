@@ -9,6 +9,9 @@ This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch. Look [below](#screenshots) for
 a bunch of screenshots!
 
+I'd also recommend checking out [DiscordKit](https://github.com/SwiftcordApp/DiscordKit),
+the Discord API implementation Swiftcord relies on.
+
 **If you like this project, please give it a ⭐ star! It helps motivate
 me to continue developing it**
 
@@ -37,16 +40,18 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 ---
 
 ## Releases
-Pre-built releases are available from [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/).
-However, you're recommended to build Swiftcord from source if possible,
+For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip).
+
+Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/).
+However, it is recommended to download the nightly version or build Swiftcord from source 
 for the latest features and fixes.
 
 ### Requirements
 * OS: macOS Monterey and above (>= 12.0)
 * Arch: Apple Silicon or Intel (Most releases are universal bundles)
 
-> Note: To open Swiftcord, please right click on the icon > press open. 
-> This is due to the app not being signed with an Apple Developer account.
+> Note: Note: To open Swiftcord, you may need to right click on the icon > press open. 
+> Some older releases were not signed or notarized with an Apple developer account.
 
 ---
 
