@@ -9,6 +9,9 @@ This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch. Look [below](#screenshots) for
 a bunch of screenshots!
 
+I'd also recommend checking out [DiscordKit](https://github.com/SwiftcordApp/DiscordKit),
+the Discord API implementation Swiftcord relies on.
+
 **If you like this project, please give it a ⭐ star! It helps motivate
 me to continue developing it**
 
