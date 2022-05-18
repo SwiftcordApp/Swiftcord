@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel? = nil
@@ -39,6 +39,9 @@ struct ServerView: View {
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
+		
+		if channels.isEmpty { state.loadingState = .messageLoad }
+		// Prevent deadlocking if there are no DMs/channels
     }
     
     private func toggleSidebar() {
@@ -81,6 +84,16 @@ struct ServerView: View {
 			if serverCtx.channel != nil, guild != nil {
 				MessagesView()
 					.environmentObject(serverCtx)
+			} else if channels.isEmpty, let g = guild {
+				VStack(spacing: 24) {
+					Image("NoChannelPlaceholder")
+					Text(g.id == "@me"
+						 ? "Wumpus is waiting on friends. You don't have to, though!"
+						 : "There are no channels in this server")
+						.opacity(0.75)
+				}
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
+				.background(.gray.opacity(0.15))
 			} else {
 				ProgressView("Server Loading...")
 					.progressViewStyle(.circular)

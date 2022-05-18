@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 import os
-import DiscordAPI
+import DiscordKit
 import DiscordKitCommon
 
 struct CustomHorizontalDivider: View {

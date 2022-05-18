@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 struct ChannelList: View {
 	@Binding var channels: [Channel]

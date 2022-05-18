@@ -8,7 +8,7 @@
 
 import SwiftUI
 import CachedAsyncImage
-import DiscordAPI
+import DiscordKit
 
 struct MessageView: View {
     let message: Message

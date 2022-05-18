@@ -58,6 +58,8 @@
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
 		DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */; };
+		DA67491E2835126B001F51CC /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA67491D2835126B001F51CC /* DiscordKit */; };
+		DA6749202835126D001F51CC /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA67491F2835126D001F51CC /* DiscordKitCommon */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
@@ -66,8 +68,6 @@
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
 		DAAFB5CC282B879200807B54 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
-		E7938D3F28329BFF00B8DC94 /* DiscordAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E7938D3E28329BFF00B8DC94 /* DiscordAPI */; };
-		E7938D4128329C0100B8DC94 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = E7938D4028329C0100B8DC94 /* DiscordKitCommon */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
 		E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
@@ -149,10 +149,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7938D3F28329BFF00B8DC94 /* DiscordAPI in Frameworks */,
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
+				DA6749202835126D001F51CC /* DiscordKitCommon in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
-				E7938D4128329C0100B8DC94 /* DiscordKitCommon in Frameworks */,
+				DA67491E2835126B001F51CC /* DiscordKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,10 +171,10 @@
 		DA2384BC27CCB0CD009E15E0 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
+				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */,
 				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
@@ -451,8 +451,8 @@
 			packageProductDependencies = (
 				DA32EF2C27C65E2700A9ED72 /* Lottie */,
 				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
-				E7938D3E28329BFF00B8DC94 /* DiscordAPI */,
-				E7938D4028329C0100B8DC94 /* DiscordKitCommon */,
+				DA67491D2835126B001F51CC /* DiscordKit */,
+				DA67491F2835126D001F51CC /* DiscordKitCommon */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -485,7 +485,7 @@
 			packageReferences = (
 				DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				DABB28422832A3FF00390244 /* XCRemoteSwiftPackageReference "DiscordKit" */,
+				DA67491C28351253001F51CC /* XCRemoteSwiftPackageReference "DiscordKit" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -792,11 +792,11 @@
 				minimumVersion = 3.3.0;
 			};
 		};
-		DABB28422832A3FF00390244 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
+		DA67491C28351253001F51CC /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
+				branch = devel;
 				kind = branch;
 			};
 		};
@@ -813,12 +813,14 @@
 			package = DA32EF2B27C65E2700A9ED72 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
-		E7938D3E28329BFF00B8DC94 /* DiscordAPI */ = {
+		DA67491D2835126B001F51CC /* DiscordKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DiscordAPI;
+			package = DA67491C28351253001F51CC /* XCRemoteSwiftPackageReference "DiscordKit" */;
+			productName = DiscordKit;
 		};
-		E7938D4028329C0100B8DC94 /* DiscordKitCommon */ = {
+		DA67491F2835126D001F51CC /* DiscordKitCommon */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = DA67491C28351253001F51CC /* XCRemoteSwiftPackageReference "DiscordKit" */;
 			productName = DiscordKitCommon;
 		};
 /* End XCSwiftPackageProductDependency section */

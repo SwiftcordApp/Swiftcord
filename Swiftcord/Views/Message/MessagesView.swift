@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 extension View {
     public func flip() -> some View {
@@ -197,8 +197,11 @@ struct MessagesView: View {
                         }
                     }
 					.overlay {
-						let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
+						let typingMembers = serverCtx.channel == nil
+						? []
+						: serverCtx.typingStarted[serverCtx.channel!.id]?
 							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
+						
 						if !typingMembers.isEmpty {
 							HStack() {
 								// The dimensions are quite arbitrary

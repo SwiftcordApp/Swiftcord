@@ -5,7 +5,7 @@
 //  Created by royal on 14/05/2022.
 //
 
-import DiscordAPI
+import DiscordKit
 
 extension Channel {
 	var label: String? {

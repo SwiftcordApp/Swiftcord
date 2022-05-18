@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordAPI
+import DiscordKit
 
 extension User {
     func avatarURL(size: Int = 160) -> URL {
