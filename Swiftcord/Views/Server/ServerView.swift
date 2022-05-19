@@ -15,8 +15,7 @@ class ServerContext: ObservableObject {
 }
 
 struct ServerView: View {
-    @Binding var guild: Guild?
-    @State private var channels: [Channel] = []
+	let guildID: Snowflake?
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     @State private var mediaCenterOpen: Bool = false
     
@@ -26,23 +25,47 @@ struct ServerView: View {
     
     @StateObject private var serverCtx = ServerContext()
     
-    private func loadChannels() {
-        guard let g = guild, let channels = g.channels else {
-			return
-		}
-		self.channels = channels
-
-        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)"),
-		   let lastChObj = channels.first(where: { $0.id.description == lastChannel }) {
+	private func makeDMGuild() -> Guild {
+		return Guild(id: "@me",
+					 name: "DMs",
+					 owner_id: "",
+					 afk_timeout: 0,
+					 verification_level: .none,
+					 default_message_notifications: .all,
+					 explicit_content_filter: .disabled,
+					 roles: [], emojis: [], features: [],
+					 mfa_level: .none,
+					 system_channel_flags: 0,
+					 channels: gateway.cache.dms,
+					 premium_tier: .none,
+					 preferred_locale: .englishUS,
+					 nsfw_level: .default,
+					 premium_progress_bar_enabled: false)
+	}
+	
+	private func loadChannels(_ overrideGuildID: Snowflake? = nil) {
+		guard let guildID = overrideGuildID ?? guildID,
+			  let channels = serverCtx.guild?.channels
+		else {
+			print("what the")
+			return }
+		
+        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guildID)"),
+		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
 		
-		if channels.isEmpty { state.loadingState = .messageLoad }
+		if serverCtx.channel == nil {
+			state.loadingState = .messageLoad
+		}
 		// Prevent deadlocking if there are no DMs/channels
     }
+	
+	private func guildChange(id: Snowflake?) {
+	}
     
     private func toggleSidebar() {
         #if os(macOS)
@@ -53,38 +76,38 @@ struct ServerView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                if guild != nil {
-                    ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
-                        .toolbar {
-                            ToolbarItem {
-                                Text(guild?.name ?? "Loading")
+				if let guild = serverCtx.guild {
+					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
+						.toolbar {
+							ToolbarItem {
+								Text(guild.name)
 									.font(.title3)
 									.fontWeight(.semibold)
 									.frame(maxWidth: 208) // Largest width before disappearing
-                            }
-                        }
-                } else {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .controlSize(.large)
-                        .frame(maxHeight: .infinity)
-                }
+							}
+						}
+				} else {
+					Text("Guild loading")
+						.frame(maxHeight: .infinity)
+				}
+				
 
                 if !gateway.connected || !gateway.reachable {
-					Label(gateway.reachable ? "Reconnecting..." : "No network connectivity", systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
+					Label(gateway.reachable
+						  ? "Reconnecting..."
+						  : "No network connectivity",
+						  systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
 						.frame(maxWidth: .infinity)
 						.padding(.vertical, 4)
 						.background(gateway.reachable ? .orange : .red)
                 }
-				if let user = gateway.cache.user {
-                    CurrentUserFooter(user: user)
-                }
+				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
             
-			if serverCtx.channel != nil, guild != nil {
+			if serverCtx.channel != nil {
 				MessagesView()
 					.environmentObject(serverCtx)
-			} else if channels.isEmpty, let g = guild {
+			} else if serverCtx.guild?.channels?.isEmpty ?? true, let g = serverCtx.guild {
 				VStack(spacing: 24) {
 					Image("NoChannelPlaceholder")
 					Text(g.id == "@me"
@@ -119,23 +142,25 @@ struct ServerView: View {
         .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
             if count > oldCount { mediaCenterOpen = true }
         }
-        .onChange(of: guild) { _ in
-            guard let guild = guild else { return }
-            serverCtx.guild = guild
-            loadChannels()
-            // Sending malformed IDs causes an instant Gateway session termination
-            guard !guild.isDMChannel else { return }
-            // Subscribe to typing events
-            gateway.socket.send(
-                op: .subscribeGuildEvents,
-                data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
-            )
-        }
-        .onChange(of: state.loadingState, perform: { s in if s == .gatewayConn { loadChannels() } })
+        .onChange(of: guildID) { id in
+			serverCtx.guild = id == "@me"
+				 ? makeDMGuild()
+				 : gateway.cache.guilds?.first { g in g.id == id }
+			 guard let guild = serverCtx.guild else { return }
+			 loadChannels(id)
+			 // Sending malformed IDs causes an instant Gateway session termination
+			 guard !guild.isDMChannel else { return }
+			 // Subscribe to typing events
+			 gateway.socket.send(
+				 op: .subscribeGuildEvents,
+				 data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
+			 )
+		}
+        .onChange(of: state.loadingState) { s in if s == .gatewayConn { loadChannels() }}
         .onAppear {
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
-                case .channelUpdate:
+                /*case .channelUpdate:
                     guard let updatedCh = d as? Channel else { break }
                     if let chPos = channels.firstIndex(where: { ch in ch == updatedCh }) {
                         // Crappy workaround for channel list to update
@@ -145,7 +170,7 @@ struct ServerView: View {
                         channels = chs
                     }
                     // For some reason, updating one element doesnt update the UI
-                    // loadChannels()
+                    // loadChannels()*/
                 case .typingStart:
                     guard let typingData = d as? TypingStart,
                           typingData.user_id != gateway.cache.user!.id

@@ -78,7 +78,7 @@ struct LoadingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(loadingNum != loadingStrings.count - 1)
         .background(Color(NSColor.windowBackgroundColor))
-        .opacity(loadingNum != loadingStrings.count - 1 ? 1 : 0)
+		.opacity(loadingNum != loadingStrings.count - 1 ? 0.1 : 0)
         .scaleEffect(loadingNum != loadingStrings.count - 1 ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingStrings.count - 1)
     }

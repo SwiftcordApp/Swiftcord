@@ -36,6 +36,7 @@ struct MessagesView: View {
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
         
     private func fetchMoreMessages() {
+		print("load masssages")
         guard let ch = serverCtx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
@@ -253,6 +254,9 @@ struct MessagesView: View {
             let _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
+			print("appear")
+			fetchMoreMessages()
+			
             evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:
