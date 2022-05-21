@@ -12,6 +12,31 @@ import DiscordAPI
 struct EmbedView: View {
 	@State var embed: Embed
 	
+	func groupFields(_fields: [EmbedField]) -> [[EmbedField]] {
+		var newArray = [[EmbedField]]()
+
+		var count = 0
+		var array_i = 0
+		
+		_fields.forEach { field in
+			if field.inline == true {
+				if count == 0 {
+					newArray.append([])
+					array_i = newArray.count - 1
+				}
+				newArray[array_i].append(field)
+				count = (count+1 == 3) ? 0 : count + 1
+			} else {
+				if count > 0 {
+					count = 0
+				}
+				newArray.append([field])
+			}
+		}
+		
+		return newArray
+	}
+	
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
@@ -60,14 +85,20 @@ struct EmbedView: View {
 				}
 
 				if let fields = embed.fields {
-					ForEach(fields) { field in
-						VStack(alignment: .leading, spacing: 2) {
-							Text(field.name)
-									.font(.headline)
-									.textSelection(.enabled)
-							Text(field.value).opacity(0.9)
-								.textSelection(.enabled)
-								.frame(maxWidth: .infinity, alignment: .leading)
+					let grouped_fields = groupFields(_fields: fields)
+
+					ForEach (0 ..< grouped_fields.count, id: \.self) { group_index in
+						HStack (alignment: .top, spacing: 5) {
+							ForEach(grouped_fields[group_index]) { field in
+								VStack(alignment: .leading, spacing: 2) {
+									Text(field.name)
+										.font(.headline)
+										.textSelection(.enabled)
+									Text(.init(field.value)).opacity(0.9)
+										.textSelection(.enabled)
+										.frame(maxWidth: .infinity, alignment: .leading)
+								}
+							}
 						}
 					}
 				}
