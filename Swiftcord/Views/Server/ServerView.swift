@@ -15,7 +15,7 @@ class ServerContext: ObservableObject {
 }
 
 struct ServerView: View {
-	let guildID: Snowflake?
+	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     @State private var mediaCenterOpen: Bool = false
     
@@ -24,33 +24,12 @@ struct ServerView: View {
     @EnvironmentObject var audioManager: AudioCenterManager
     
     @StateObject private var serverCtx = ServerContext()
-    
-	private func makeDMGuild() -> Guild {
-		return Guild(id: "@me",
-					 name: "DMs",
-					 owner_id: "",
-					 afk_timeout: 0,
-					 verification_level: .none,
-					 default_message_notifications: .all,
-					 explicit_content_filter: .disabled,
-					 roles: [], emojis: [], features: [],
-					 mfa_level: .none,
-					 system_channel_flags: 0,
-					 channels: gateway.cache.dms,
-					 premium_tier: .none,
-					 preferred_locale: .englishUS,
-					 nsfw_level: .default,
-					 premium_progress_bar_enabled: false)
-	}
 	
-	private func loadChannels(_ overrideGuildID: Snowflake? = nil) {
-		guard let guildID = overrideGuildID ?? guildID,
-			  let channels = serverCtx.guild?.channels
-		else {
-			print("what the")
-			return }
+	private func loadChannels() {
+		guard let channels = serverCtx.guild?.channels
+		else { return }
 		
-        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(guildID)"),
+		if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(serverCtx.guild!.id)"),
 		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
@@ -63,9 +42,6 @@ struct ServerView: View {
 		}
 		// Prevent deadlocking if there are no DMs/channels
     }
-	
-	private func guildChange(id: Snowflake?) {
-	}
     
     private func toggleSidebar() {
         #if os(macOS)
@@ -76,7 +52,7 @@ struct ServerView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-				if let guild = serverCtx.guild {
+				if let guild = guild {
 					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
 						.toolbar {
 							ToolbarItem {
@@ -142,19 +118,17 @@ struct ServerView: View {
         .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
             if count > oldCount { mediaCenterOpen = true }
         }
-        .onChange(of: guildID) { id in
-			serverCtx.guild = id == "@me"
-				 ? makeDMGuild()
-				 : gateway.cache.guilds?.first { g in g.id == id }
-			 guard let guild = serverCtx.guild else { return }
-			 loadChannels(id)
-			 // Sending malformed IDs causes an instant Gateway session termination
-			 guard !guild.isDMChannel else { return }
-			 // Subscribe to typing events
-			 gateway.socket.send(
-				 op: .subscribeGuildEvents,
-				 data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
-			 )
+        .onChange(of: guild) { newGuild in
+			guard let g = newGuild else { return }
+			serverCtx.guild = g
+			loadChannels()
+			// Sending malformed IDs causes an instant Gateway session termination
+			guard !g.isDMChannel else { return }
+			// Subscribe to typing events
+			gateway.socket.send(
+				op: .subscribeGuildEvents,
+				data: SubscribeGuildEvts(guild_id: g.id, typing: true)
+			)
 		}
         .onChange(of: state.loadingState) { s in if s == .gatewayConn { loadChannels() }}
         .onAppear {
