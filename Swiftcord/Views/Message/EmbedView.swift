@@ -15,6 +15,7 @@ struct EmbedView: View {
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
+				
 				if let author = embed.author {
 					HStack (alignment: .center, spacing: 8) {
 						if let icon_url = author.icon_url {
@@ -36,39 +37,26 @@ struct EmbedView: View {
 						}
 
 						if let author_name = author.name {
-							if let author_url = author.url {
-								// Text need to be white with no underline like on Discord
-								Text(.init("[" + author_name + "](" + author_url + ")"))
-									.font(.headline)
-									.textSelection(.enabled)
-							} else {
-								Text(author_name)
-									.font(.headline)
-									.textSelection(.enabled)
-							}
+							Text(.init(author.url != nil ? "[\(author_name)](\(author.url ?? ""))" : author_name))
+								 .font(.title3)
+								 .textSelection(.enabled)
 						}
 					}
 				}
-				
+
 				if let title = embed.title {
-					if let url = embed.url {
-						Text(.init("[" + title + "](" + url + ")"))
-							 .font(.title3)
-							 .textSelection(.enabled)
-					} else {
-						Text(title)
-							.font(.title3)
-							.textSelection(.enabled)
-					}
+					Text(.init(embed.url != nil ? "[\(title)](\(embed.url ?? ""))" : title))
+						 .font(.title3)
+						 .textSelection(.enabled)
 				}
-				
+
 				if let description = embed.description {
 					Text(.init(description))
 						.textSelection(.enabled)
 						.opacity(0.9)
 						.frame(maxWidth: .infinity, alignment: .leading)
 				}
-				
+
 				if let fields = embed.fields {
 					ForEach(fields) { field in
 						VStack(alignment: .leading, spacing: 2) {
@@ -81,7 +69,7 @@ struct EmbedView: View {
 						}
 					}
 				}
-				
+
 				if let image = embed.image {
 					let width = Double(image.width != nil ? min(384, image.width!) : 384)
 					let height = (image.width != nil && image.height != nil)
@@ -91,7 +79,7 @@ struct EmbedView: View {
 						if let image = phase.image {
 							image.resizable().scaledToFill()
 						} else if phase.error != nil {
-							
+
 						} else {
 							ProgressView()
 								.progressViewStyle(.circular)
@@ -103,6 +91,40 @@ struct EmbedView: View {
 						height: height
 					)
 					.cornerRadius(4)
+				}
+				
+				HStack {
+					if let footer = embed.footer {
+						if let icon_url = footer.icon_url {
+							let width = 20.0
+							let height = 20.0
+							CachedAsyncImage(url: URL(string: icon_url)) { phase in
+								if let image = phase.image {
+									image.resizable().scaledToFill()
+								} else {
+									Spacer()
+										.frame(width: width, height: height)
+								}
+							}
+							.frame(
+								width: width,
+								height: height
+							)
+							.cornerRadius(10)
+						}
+						
+						Text(footer.text)
+							.textSelection(.enabled)
+					}
+					
+					if let timestamp = embed.timestamp {
+						Text("•")
+							.font(.title3)
+							.textSelection(.enabled)
+						
+						Text(timestamp.toDate()?.toDateString() ?? "")
+							.textSelection(.enabled)
+					}
 				}
 			}.padding(10)
 		}
