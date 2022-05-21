@@ -38,8 +38,10 @@ struct EmbedView: View {
 
 						if let author_name = author.name {
 							Text(.init(author.url != nil ? "[\(author_name)](\(author.url ?? ""))" : author_name))
-								 .font(.title3)
-								 .textSelection(.enabled)
+								.font(.title3)
+								.underline(true, color: .clear)
+								.textSelection(.enabled)
+								.foregroundColor(.white)
 						}
 					}
 				}
@@ -114,15 +116,18 @@ struct EmbedView: View {
 						}
 						
 						Text(footer.text)
+							.font(.system(size: 12, weight: .semibold))
 							.textSelection(.enabled)
 					}
 					
 					if let timestamp = embed.timestamp {
 						Text("•")
 							.font(.title3)
+							.font(.system(size: 12, weight: .semibold))
 							.textSelection(.enabled)
 						
 						Text(timestamp.toDate()?.toDateString() ?? "")
+							.font(.system(size: 12, weight: .semibold))
 							.textSelection(.enabled)
 					}
 				}
