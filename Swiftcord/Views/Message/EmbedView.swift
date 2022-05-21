@@ -15,13 +15,95 @@ struct EmbedView: View {
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
-				EmbedAuthor(embed: $embed)
+				if let author = embed.author {
+					HStack (alignment: .center, spacing: 8) {
+						if let icon_url = author.icon_url {
+							let width = 24.0
+							let height = 24.0
+							CachedAsyncImage(url: URL(string: icon_url)) { phase in
+								if let image = phase.image {
+									image.resizable().scaledToFill()
+								} else {
+									Spacer()
+										.frame(width: width, height: height)
+								}
+							}
+							.frame(
+								width: width,
+								height: height
+							)
+							.cornerRadius(12)
+						}
+
+						if let author_name = author.name {
+							if let author_url = author.url {
+								// Text need to be white with no underline like on Discord
+								Text(.init("[" + author_name + "](" + author_url + ")"))
+									.font(.headline)
+									.textSelection(.enabled)
+							} else {
+								Text(author_name)
+									.font(.headline)
+									.textSelection(.enabled)
+							}
+						}
+					}
+				}
 				
-				EmbedTD(embed: $embed)
+				if let title = embed.title {
+					if let url = embed.url {
+						Text(.init("[" + title + "](" + url + ")"))
+							 .font(.title3)
+							 .textSelection(.enabled)
+					} else {
+						Text(title)
+							.font(.title3)
+							.textSelection(.enabled)
+					}
+				}
 				
-				EmbedFields(embed: $embed)
+				if let description = embed.description {
+					Text(.init(description))
+						.textSelection(.enabled)
+						.opacity(0.9)
+						.frame(maxWidth: .infinity, alignment: .leading)
+				}
 				
-				EmbedImg(embed: $embed)
+				if let fields = embed.fields {
+					ForEach(fields) { field in
+						VStack(alignment: .leading, spacing: 2) {
+							Text(field.name)
+									.font(.headline)
+									.textSelection(.enabled)
+							Text(field.value).opacity(0.9)
+								.textSelection(.enabled)
+								.frame(maxWidth: .infinity, alignment: .leading)
+						}
+					}
+				}
+				
+				if let image = embed.image {
+					let width = Double(image.width != nil ? min(384, image.width!) : 384)
+					let height = (image.width != nil && image.height != nil)
+						? width / (Double(image.width!) / Double(image.height!))
+						: 216
+					CachedAsyncImage(url: URL(string: image.url)!) { phase in
+						if let image = phase.image {
+							image.resizable().scaledToFill()
+						} else if phase.error != nil {
+							
+						} else {
+							ProgressView()
+								.progressViewStyle(.circular)
+								.frame(width: width, height: height)
+						}
+					}
+					.frame(
+						width: width,
+						height: height
+					)
+					.cornerRadius(4)
+				}
 			}.padding(10)
 		}
 		.overlay(
@@ -39,128 +121,6 @@ struct EmbedView: View {
 			}
 		)
 		.frame(minWidth: 400, maxWidth: 520, alignment: .leading)
-	}
-}
-
-struct EmbedAuthor: View {
-	@Binding var embed: Embed
-	
-	var body: some View {
-		if let author = embed.author {
-			HStack (alignment: .center, spacing: 8) {
-				if let icon_url = author.icon_url {
-					let width = 24.0
-					let height = 24.0
-					CachedAsyncImage(url: URL(string: icon_url)) { phase in
-						if let image = phase.image {
-							image.resizable().scaledToFill()
-						} else {
-							Spacer()
-								.frame(width: width, height: height)
-						}
-					}
-					.frame(
-						width: width,
-						height: height
-					)
-					.cornerRadius(12)
-				}
-
-				if let author_name = author.name {
-					if let author_url = author.url {
-						Text(.init("[" + author_name + "](" + author_url + ")"))
-							.font(.headline)
-							.textSelection(.enabled)
-					} else {
-						Text(author_name)
-							.font(.headline)
-							.textSelection(.enabled)
-					}
-				}
-			}
-		}
-	}
-}
-
-struct EmbedTD: View {
-	@Binding var embed: Embed
-	var body: some View {
-		if let title = embed.title {
-			if let url = embed.url {
-				Text(.init("[" + title + "](" + url + ")"))
-					 .font(.title3)
-					 .textSelection(.enabled)
-			} else {
-				Text(title)
-					.font(.title3)
-					.textSelection(.enabled)
-			}
-		}
-		
-		if let description = embed.description {
-			Text(.init(description))
-				.textSelection(.enabled)
-				.opacity(0.9)
-				.frame(maxWidth: .infinity, alignment: .leading)
-		}
-	}
-}
-
-struct EmbedFields: View {
-	@Binding var embed: Embed
-	
-	func getFields() {
-		
-	}
-	var body: some View {
-		if let fields = embed.fields {
-			let f = fields.chunks(3)
-			
-			ForEach (f.indices, id: \.self) { fsi in
-				let fs = f[fsi]
-				HStack (alignment: .top, spacing: 5) {
-					ForEach(fs) { field in
-						VStack(alignment: .leading, spacing: 2) {
-							Text(field.name)
-								.font(.headline)
-								.textSelection(.enabled)
-							Text(field.value).opacity(0.9)
-								.textSelection(.enabled)
-								.frame(maxWidth: .infinity, alignment: .leading)
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-struct EmbedImg: View {
-	@Binding var embed: Embed
-	var body: some View {
-		
-		if let image = embed.image {
-			let width = Double(image.width != nil ? min(384, image.width!) : 384)
-			let height = (image.width != nil && image.height != nil)
-				? width / (Double(image.width!) / Double(image.height!))
-				: 216
-			CachedAsyncImage(url: URL(string: image.url)!) { phase in
-				if let image = phase.image {
-					image.resizable().scaledToFill()
-				} else if phase.error != nil {
-					
-				} else {
-					ProgressView()
-						.progressViewStyle(.circular)
-						.frame(width: width, height: height)
-				}
-			}
-			.frame(
-				width: width,
-				height: height
-			)
-			.cornerRadius(4)
-		}
 	}
 }
 
