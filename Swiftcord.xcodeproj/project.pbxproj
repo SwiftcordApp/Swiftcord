@@ -798,7 +798,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = "cache-updating";
+				branch = main;
 				kind = branch;
 			};
 		};
