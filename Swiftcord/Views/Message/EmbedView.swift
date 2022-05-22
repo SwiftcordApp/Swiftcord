@@ -40,16 +40,14 @@ struct EmbedView: View {
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
-				
 				if let author = embed.author {
 					HStack (alignment: .center, spacing: 8) {
 						if let icon_url = author.icon_url {
 							let width = 24.0
 							let height = 24.0
 							CachedAsyncImage(url: URL(string: icon_url)) { phase in
-								if let image = phase.image {
-									image.resizable().scaledToFill()
-								} else {
+								if let image = phase.image { image.resizable().scaledToFill() }
+								else {
 									Spacer()
 										.frame(width: width, height: height)
 								}
@@ -126,17 +124,16 @@ struct EmbedView: View {
 					.cornerRadius(4)
 				}
 				
-				HStack {
-					if let footer = embed.footer {
-						if let icon_url = footer.icon_url {
+				if let footer = embed.footer {
+					HStack {
+						if let iconURL = footer.icon_url {
 							let width = 20.0
 							let height = 20.0
-							CachedAsyncImage(url: URL(string: icon_url)) { phase in
+							CachedAsyncImage(url: URL(string: iconURL)) { phase in
 								if let image = phase.image {
 									image.resizable().scaledToFill()
 								} else {
-									Spacer()
-										.frame(width: width, height: height)
+									Spacer().frame(width: width, height: height)
 								}
 							}
 							.frame(
@@ -149,17 +146,17 @@ struct EmbedView: View {
 						Text(footer.text)
 							.font(.system(size: 12, weight: .semibold))
 							.textSelection(.enabled)
-					}
-					
-					if let timestamp = embed.timestamp {
-						Text("•")
-							.font(.title3)
-							.font(.system(size: 12, weight: .semibold))
-							.textSelection(.enabled)
 						
-						Text(timestamp.toDate()?.toDateString() ?? "")
-							.font(.system(size: 12, weight: .semibold))
-							.textSelection(.enabled)
+						if let timestamp = embed.timestamp {
+							Text("•")
+								.font(.title3)
+								.font(.system(size: 12, weight: .semibold))
+								.textSelection(.enabled)
+							
+							Text(timestamp.toDate()?.toDateString() ?? "")
+								.font(.system(size: 12, weight: .semibold))
+								.textSelection(.enabled)
+						}
 					}
 				}
 			}.padding(10)
