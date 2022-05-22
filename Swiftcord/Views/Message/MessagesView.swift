@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 extension View {
     public func flip() -> some View {
@@ -36,6 +36,7 @@ struct MessagesView: View {
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
         
     private func fetchMoreMessages() {
+		print("load masssages")
         guard let ch = serverCtx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
@@ -197,8 +198,11 @@ struct MessagesView: View {
                         }
                     }
 					.overlay {
-						let typingMembers = serverCtx.typingStarted[serverCtx.channel!.id]?
+						let typingMembers = serverCtx.channel == nil
+						? []
+						: serverCtx.typingStarted[serverCtx.channel!.id]?
 							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
+						
 						if !typingMembers.isEmpty {
 							HStack() {
 								// The dimensions are quite arbitrary
@@ -250,6 +254,9 @@ struct MessagesView: View {
             let _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
+			print("appear")
+			fetchMoreMessages()
+			
             evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:

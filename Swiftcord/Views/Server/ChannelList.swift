@@ -6,18 +6,18 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 struct ChannelList: View {
-	@Binding var channels: [Channel]
+	let channels: [Channel]
 	@Binding var selCh: Channel?
-	@Binding var guild: Guild?
+	let guild: Guild
 
 	var body: some View {
 		List {
 			let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category }
 			if !filteredChannels.isEmpty {
-				let sectionHeadline = guild?.isDMChannel ?? false ? "DMs" : "No category"
+				let sectionHeadline = guild.isDMChannel ? "DMs" : "No category"
 				Section(header: Text(sectionHeadline)) {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels) { channel in

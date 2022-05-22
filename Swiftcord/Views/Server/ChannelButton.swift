@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 struct ChannelButton: View {
     let channel: Channel

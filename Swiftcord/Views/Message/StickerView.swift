@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Lottie
-import DiscordAPI
+import DiscordKit
 
 struct StickerLoadingView: View {
     let size: Double

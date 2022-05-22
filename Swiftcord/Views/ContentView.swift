@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 import os
-import DiscordAPI
+import DiscordKit
 import DiscordKitCommon
 
 struct CustomHorizontalDivider: View {
@@ -27,7 +27,7 @@ struct ContentView: View {
     private var items: FetchedResults<MessageItem>*/
     
     @State private var sheetOpen = false
-    @State private var selectedGuild: Guild? = nil
+    @State private var selectedGuildID: Snowflake? = nil
     @State private var loadingGuildID: Snowflake? = nil
     
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
@@ -37,33 +37,50 @@ struct ContentView: View {
     @EnvironmentObject var state: UIState
     
     private let log = Logger(category: "ContentView")
-    
-    private func makeDMGuild() -> Guild {
-        return Guild(id: "@me", name: "DMs", owner_id: "", afk_timeout: 0, verification_level: .none, default_message_notifications: .all, explicit_content_filter: .disabled, roles: [], emojis: [], features: [], mfa_level: .none, system_channel_flags: 0, channels: gateway.cache.dms, premium_tier: .none, preferred_locale: .englishUS, nsfw_level: .default, premium_progress_bar_enabled: false)
-    }
+	
+	private func makeDMGuild() -> Guild {
+		return Guild(id: "@me",
+					 name: "DMs",
+					 owner_id: "",
+					 afk_timeout: 0,
+					 verification_level: .none,
+					 default_message_notifications: .all,
+					 explicit_content_filter: .disabled,
+					 roles: [], emojis: [], features: [],
+					 mfa_level: .none,
+					 system_channel_flags: 0,
+					 channels: gateway.cache.dms,
+					 premium_tier: .none,
+					 preferred_locale: .englishUS,
+					 nsfw_level: .default,
+					 premium_progress_bar_enabled: false)
+	}
 
     var body: some View {
         HStack(spacing: 0) {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: selectedGuild?.isDMChannel ?? false,
+                        selected: selectedGuildID == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
-                        onSelect: { selectedGuild = makeDMGuild() }
+                        onSelect: { selectedGuildID = "@me" }
                     ).padding(.top, 4)
                     
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
-                    ForEach(gateway.cache.guilds ?? []) { guild in
+					ForEach(
+						(gateway.cache.guilds.values
+							.filter({ !gateway.cache.guildSequence.contains($0.id) })
+						 .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
+						+ gateway.cache.guildSequence.compactMap({ gateway.cache.guilds[$0] })
+					) { guild in
                         ServerButton(
-                            selected: selectedGuild?.id == guild.id || loadingGuildID == guild.id,
+                            selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
                             serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             isLoading: loadingGuildID == guild.id,
-                            onSelect: {
-                                selectedGuild = guild
-                            }
+                            onSelect: { selectedGuildID = guild.id }
                         )
                     }
                     
@@ -88,23 +105,20 @@ struct ContentView: View {
                     .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
             })
             
-            
-            ServerView(guild: $selectedGuild)
+			ServerView(guild: selectedGuildID == nil ? nil :
+						selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
         }
         .environmentObject(audioManager)
-        .onChange(of: selectedGuild) { _ in
-            guard let id = selectedGuild?.id else { return }
+        .onChange(of: selectedGuildID) { id in
+            guard let id = id else { return }
 			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
         .onChange(of: state.loadingState, perform: { state in
             if state == .gatewayConn {
-                if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild") {
-                    if lGID == "@me" {
-                        selectedGuild = makeDMGuild()
-                        return
-                    }
-					selectedGuild = gateway.cache.guilds!.first(where: { p in p.id.description == lGID }) ?? makeDMGuild()
-                } else { selectedGuild = makeDMGuild() }
+				if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
+				   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
+					selectedGuildID = lGID 
+                } else { selectedGuildID = "@me" }
             }
         })
         // Using .constant to prevent dismissing
@@ -167,7 +181,9 @@ struct ContentView: View {
                 try viewContext.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and terminate.
+	 You should not use this function in a shipping application, although it may be useful
+	 during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -182,7 +198,9 @@ struct ContentView: View {
                 try viewContext.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and terminate.
+	 You should not use this function in a shipping application, although it may be useful
+	 during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }

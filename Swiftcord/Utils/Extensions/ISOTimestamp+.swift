@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordAPI
+import DiscordKit
 
 extension ISOTimestamp {
     func toDate() -> Date? {

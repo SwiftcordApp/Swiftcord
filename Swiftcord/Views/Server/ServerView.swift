@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordAPI
+import DiscordKit
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel? = nil
@@ -15,8 +15,7 @@ class ServerContext: ObservableObject {
 }
 
 struct ServerView: View {
-    @Binding var guild: Guild?
-    @State private var channels: [Channel] = []
+	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
     @State private var mediaCenterOpen: Bool = false
     
@@ -25,20 +24,24 @@ struct ServerView: View {
     @EnvironmentObject var audioManager: AudioCenterManager
     
     @StateObject private var serverCtx = ServerContext()
-    
-    private func loadChannels() {
-        guard let g = guild, let channels = g.channels else {
-			return
-		}
-		self.channels = channels
-
-        if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(g.id)"),
-		   let lastChObj = channels.first(where: { $0.id.description == lastChannel }) {
+	
+	private func loadChannels() {
+		print("load chs")
+		guard let channels = serverCtx.guild?.channels
+		else { return }
+		
+		if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(serverCtx.guild!.id)"),
+		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
+		
+		if serverCtx.channel == nil {
+			state.loadingState = .messageLoad
+		}
+		// Prevent deadlocking if there are no DMs/channels
     }
     
     private func toggleSidebar() {
@@ -50,42 +53,53 @@ struct ServerView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                if guild != nil {
-                    ChannelList(channels: $channels, selCh: $serverCtx.channel, guild: $guild)
-                        .toolbar {
-                            ToolbarItem {
-                                Text(guild?.name ?? "Loading")
+				if let guild = guild {
+					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
+						.toolbar {
+							ToolbarItem {
+								Text(guild.name)
 									.font(.title3)
 									.fontWeight(.semibold)
 									.frame(maxWidth: 208) // Largest width before disappearing
-                            }
-                        }
-                } else {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .controlSize(.large)
-                        .frame(maxHeight: .infinity)
-                }
+							}
+						}
+				} else {
+					Text("Guild loading")
+						.frame(maxHeight: .infinity)
+				}
+				
 
                 if !gateway.connected || !gateway.reachable {
-					Label(gateway.reachable ? "Reconnecting..." : "No network connectivity", systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
+					Label(gateway.reachable
+						  ? "Reconnecting..."
+						  : "No network connectivity",
+						  systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
 						.frame(maxWidth: .infinity)
 						.padding(.vertical, 4)
 						.background(gateway.reachable ? .orange : .red)
                 }
-				if let user = gateway.cache.user {
-                    CurrentUserFooter(user: user)
-                }
+				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
             
-			if serverCtx.channel != nil, guild != nil {
+			if serverCtx.channel != nil {
 				MessagesView()
 					.environmentObject(serverCtx)
 			} else {
-				ProgressView("Server Loading...")
-					.progressViewStyle(.circular)
-					.controlSize(.large)
-					.frame(minWidth: 400, minHeight: 250, alignment: .center)
+				VStack(spacing: 24) {
+					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
+					if serverCtx.guild?.id == "@me" {
+						Text("Wumpus is waiting on friends. You don't have to, though!").opacity(0.75)
+					} else {
+						Text("NO TEXT CHANNELS").font(.headline)
+						Text("""
+You find yourself in a strange place. \
+You don't have access to any text channels or there are none in this server.
+""").padding(.top, -16).multilineTextAlignment(.center)
+					}
+				}
+				.padding()
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
+				.background(.gray.opacity(0.15))
 			}
         }
         .navigationTitle("")
@@ -106,23 +120,23 @@ struct ServerView: View {
         .onChange(of: audioManager.queue.count) { [oldCount = audioManager.queue.count] count in
             if count > oldCount { mediaCenterOpen = true }
         }
-        .onChange(of: guild) { _ in
-            guard let guild = guild else { return }
-            serverCtx.guild = guild
-            loadChannels()
-            // Sending malformed IDs causes an instant Gateway session termination
-            guard !guild.isDMChannel else { return }
-            // Subscribe to typing events
-            gateway.socket.send(
-                op: .subscribeGuildEvents,
-                data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
-            )
-        }
-        .onChange(of: state.loadingState, perform: { s in if s == .gatewayConn { loadChannels() } })
+        .onChange(of: guild) { newGuild in
+			guard let g = newGuild else { return }
+			serverCtx.guild = g
+			loadChannels()
+			// Sending malformed IDs causes an instant Gateway session termination
+			guard !g.isDMChannel else { return }
+			// Subscribe to typing events
+			gateway.socket.send(
+				op: .subscribeGuildEvents,
+				data: SubscribeGuildEvts(guild_id: g.id, typing: true)
+			)
+		}
+        .onChange(of: state.loadingState) { s in if s == .gatewayConn { loadChannels() }}
         .onAppear {
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
-                case .channelUpdate:
+                /*case .channelUpdate:
                     guard let updatedCh = d as? Channel else { break }
                     if let chPos = channels.firstIndex(where: { ch in ch == updatedCh }) {
                         // Crappy workaround for channel list to update
@@ -132,7 +146,7 @@ struct ServerView: View {
                         channels = chs
                     }
                     // For some reason, updating one element doesnt update the UI
-                    // loadChannels()
+                    // loadChannels()*/
                 case .typingStart:
                     guard let typingData = d as? TypingStart,
                           typingData.user_id != gateway.cache.user!.id
