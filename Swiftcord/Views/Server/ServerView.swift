@@ -26,6 +26,7 @@ struct ServerView: View {
     @StateObject private var serverCtx = ServerContext()
 	
 	private func loadChannels() {
+		print("load chs")
 		guard let channels = serverCtx.guild?.channels
 		else { return }
 		
@@ -83,21 +84,22 @@ struct ServerView: View {
 			if serverCtx.channel != nil {
 				MessagesView()
 					.environmentObject(serverCtx)
-			} else if serverCtx.guild?.channels?.isEmpty ?? true, let g = serverCtx.guild {
+			} else {
 				VStack(spacing: 24) {
-					Image("NoChannelPlaceholder")
-					Text(g.id == "@me"
-						 ? "Wumpus is waiting on friends. You don't have to, though!"
-						 : "There are no channels in this server")
-						.opacity(0.75)
+					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
+					if serverCtx.guild?.id == "@me" {
+						Text("Wumpus is waiting on friends. You don't have to, though!").opacity(0.75)
+					} else {
+						Text("NO TEXT CHANNELS").font(.headline)
+						Text("""
+You find yourself in a strange place. \
+You don't have access to any text channels or there are none in this server.
+""").padding(.top, -16).multilineTextAlignment(.center)
+					}
 				}
+				.padding()
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.background(.gray.opacity(0.15))
-			} else {
-				ProgressView("Server Loading...")
-					.progressViewStyle(.circular)
-					.controlSize(.large)
-					.frame(minWidth: 400, minHeight: 250, alignment: .center)
 			}
         }
         .navigationTitle("")
