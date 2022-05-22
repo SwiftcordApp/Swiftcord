@@ -10,9 +10,9 @@ import CachedAsyncImage
 import DiscordAPI
 
 struct EmbedView: View {
-	@State var embed: Embed
+	let embed: Embed
 	
-	func groupFields(_fields: [EmbedField]) -> [[EmbedField]] {
+	private func groupFields(_fields: [EmbedField]) -> [[EmbedField]] {
 		var newArray = [[EmbedField]]()
 
 		var count = 0
@@ -27,9 +27,7 @@ struct EmbedView: View {
 				newArray[array_i].append(field)
 				count = (count+1 == 3) ? 0 : count + 1
 			} else {
-				if count > 0 {
-					count = 0
-				}
+				if count > 0 { count = 0 }
 				newArray.append([field])
 			}
 		}
@@ -60,7 +58,8 @@ struct EmbedView: View {
 						}
 
 						if let author_name = author.name {
-							Text(.init(author.url != nil ? "[\(author_name)](\(author.url ?? ""))" : author_name))
+							Text(.init(author.url != nil ? "[\(author_name)](\(author.url ?? ""))"
+									   : author_name))
 								.font(.title3)
 								.underline(true, color: .clear)
 								.textSelection(.enabled)
@@ -117,10 +116,7 @@ struct EmbedView: View {
 								.frame(width: width, height: height)
 						}
 					}
-					.frame(
-						width: width,
-						height: height
-					)
+					.frame(width: width, height: height)
 					.cornerRadius(4)
 				}
 				
@@ -136,10 +132,7 @@ struct EmbedView: View {
 									Spacer().frame(width: width, height: height)
 								}
 							}
-							.frame(
-								width: width,
-								height: height
-							)
+							.frame(width: width, height: height)
 							.cornerRadius(10)
 						}
 						
