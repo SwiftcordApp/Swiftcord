@@ -67,6 +67,12 @@ struct DMButton: View {
 					} placeholder: { ProgressView().progressViewStyle(.circular) }
 					.frame(width: 32, height: 32)
 					.clipShape(Circle())
+				} else {
+					Image(systemName: "person.2.fill")
+						.foregroundColor(.white)
+						.frame(width: 32, height: 32)
+						.background(.red)
+						.clipShape(Circle())
 				}
 				
 				Text(dm.recipient_ids?
@@ -74,7 +80,6 @@ struct DMButton: View {
 					.joined(separator: ", ") ?? "nil")
 				Spacer()
 			}
-			.padding(.horizontal, 2)
 			.padding(.vertical, 5)
 		}
 	}
