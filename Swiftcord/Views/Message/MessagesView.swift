@@ -20,7 +20,6 @@ struct MessagesView: View {
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
-    @State private var scrollTopID: Snowflake? = nil
     @State private var showingInfoBar = false
     @State private var loadError = false
     @State private var infoBarData: InfoBarData? = nil
@@ -36,7 +35,6 @@ struct MessagesView: View {
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
         
     private func fetchMoreMessages() {
-		print("load masssages")
         guard let ch = serverCtx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
@@ -71,7 +69,6 @@ struct MessagesView: View {
             state.loadingState = .messageLoad
             try Task.checkCancellation()
             
-            if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)
             fetchMessagesTask = nil
@@ -117,14 +114,6 @@ struct MessagesView: View {
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
                         Spacer(minLength: 16 + (showingInfoBar ? 24 : 0) + messageInputHeight)
-                            .onChange(of: messages.count) { _ in
-                                guard messages.count >= 1 else { return }
-                                // This is _not_ bugged
-                                if let scrollTopID = scrollTopID {
-                                    proxy.scrollTo(scrollTopID, anchor: .bottom)
-									self.scrollTopID = nil
-                                }
-                            }
                         
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
                             MessageView(
@@ -164,6 +153,13 @@ struct MessagesView: View {
                                 LoFiMessageView()
                                 LoFiMessageView()
                                 LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								// A ForEach with a range works initially
+								// but doesn't show anything for subsequent loads
                             }
                             .onAppear { fetchMoreMessages() }
                             .onDisappear {
@@ -238,7 +234,6 @@ struct MessagesView: View {
             if loadError || fetchMessagesTask != nil { fetchMoreMessages() }
             loadError = false
             reachedTop = false
-            scrollTopID = nil
             lastSentTyping = Date(timeIntervalSince1970: 0)
         })
         .onChange(of: state.loadingState) { ns in

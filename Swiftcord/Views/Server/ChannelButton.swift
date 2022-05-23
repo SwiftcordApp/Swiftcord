@@ -7,39 +7,87 @@
 
 import SwiftUI
 import DiscordKit
+import CachedAsyncImage
 
 struct ChannelButton: View {
     let channel: Channel
     let guild: Guild?
     @Binding var selectedCh: Channel?
-
-	let chIcons = [
-		ChannelType.voice: "speaker.wave.2.fill",
-		.news: "megaphone.fill",
-	]
     
     var body: some View {
-        Button {
-            selectedCh = channel
-			UserDefaults.standard.setValue(channel.id.description, forKey: "guildLastCh.\(guild!.id.description)")
-        } label: {
-			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
-            Label(channel.label ?? "", systemImage: image)
-				.frame(maxWidth: .infinity, alignment: .leading)
-        }
-		.buttonStyle(DiscordChannelButton(isSelected: .constant(selectedCh?.id == channel.id)))
+		if channel.type == .dm || channel.type == .groupDM {
+			DMButton(dm: channel, selectedCh: $selectedCh)
+				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
+		} else {
+			GuildChButton(ch: channel, guild: guild, selectedCh: $selectedCh)
+				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
+		}
     }
 }
 
+struct GuildChButton: View {
+	let ch: Channel
+	let guild: Guild?
+	@Binding var selectedCh: Channel?
+	
+	private let chIcons = [
+		ChannelType.voice: "speaker.wave.2.fill",
+		.news: "megaphone.fill",
+	]
+	
+	var body: some View {
+		Button {
+			selectedCh = ch
+			UserDefaults.standard.setValue(ch.id.description, forKey: "guildLastCh.\(guild!.id.description)")
+		} label: {
+			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == ch.id) ? "newspaper.fill" : (chIcons[ch.type] ?? "number")
+			Label(ch.label ?? "", systemImage: image)
+				.padding(.vertical, 6)
+				.padding(.horizontal, -4)
+				.frame(maxWidth: .infinity, alignment: .leading)
+		}
+	}
+}
+
+struct DMButton: View {
+	let dm: Channel
+	@Binding var selectedCh: Channel?
+	
+	@EnvironmentObject var gateway: DiscordGateway
+	
+	var body: some View {
+		Button {
+			selectedCh = dm
+		} label: {
+			HStack {
+				if dm.recipient_ids?.count == 1,
+				   let avatarURL = gateway.cache.users[dm.recipient_ids![0]]?.avatarURL(size: 64) {
+					CachedAsyncImage(url: avatarURL) { image in
+						image.resizable().scaledToFill()
+					} placeholder: { ProgressView().progressViewStyle(.circular) }
+					.frame(width: 32, height: 32)
+					.clipShape(Circle())
+				}
+				
+				Text(dm.recipient_ids?
+					.compactMap { gateway.cache.users[$0]?.username }
+					.joined(separator: ", ") ?? "nil")
+				Spacer()
+			}
+			.padding(.horizontal, 2)
+			.padding(.vertical, 5)
+		}
+	}
+}
+
 struct DiscordChannelButton: ButtonStyle {
-    @Binding var isSelected: Bool
+    let isSelected: Bool
     @State var isHovered: Bool = false
+	
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.horizontal, -4)
             .buttonStyle(.borderless)
             .font(.system(size: 14, weight: isSelected ? .medium : .regular))
-            .padding(.vertical, 6)
 			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
             .background(

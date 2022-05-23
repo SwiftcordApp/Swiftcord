@@ -26,7 +26,6 @@ struct ServerView: View {
     @StateObject private var serverCtx = ServerContext()
 	
 	private func loadChannels() {
-		print("load chs")
 		guard let channels = serverCtx.guild?.channels
 		else { return }
 		
@@ -38,9 +37,7 @@ struct ServerView: View {
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
 		
-		if serverCtx.channel == nil {
-			state.loadingState = .messageLoad
-		}
+		if serverCtx.channel == nil { state.loadingState = .messageLoad }
 		// Prevent deadlocking if there are no DMs/channels
     }
     
