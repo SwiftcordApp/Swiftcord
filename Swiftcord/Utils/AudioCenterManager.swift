@@ -107,7 +107,8 @@ class AudioCenterManager: ObservableObject {
         }
         if player.items().count <= 1 { stop() }
         isSeeking = false
-        queue.remove(at: 0)
+		guard !queue.isEmpty else { return }
+		queue.removeFirst()
     }
     
     init() {
