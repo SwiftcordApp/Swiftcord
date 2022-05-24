@@ -3,12 +3,20 @@
     <channel>
         <title>Swiftcord</title>
         <item>
-            <title>0.3.1</title>
-            <pubDate>Thu, 19 May 2022 19:01:16 -0400</pubDate>
+            <title>0.1.0</title>
+            <pubDate>Mon, 20 May 2022 21:39:00 -0400</pubDate>
             <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/Candygoblen123/Swiftcord/releases/download/v0.1.0/Swiftcord.0.1.0.dmg" length="6049657" type="application/octet-stream" sparkle:edSignature="6dWh8nuFnSrjcVGAfMT+03V6DpOyFX1Bm/HcimF7b7azjO3Jj4pvolnu9gupgUVaasmM9VD8yDAYwg+haPPlBg=="/>
+        </item>
+        <item>
+            <title>0.3.1</title>
+            <pubDate>Mon, 22 May 2022 21:39:00 -0400</pubDate>
+            <sparkle:version>6</sparkle:version>
             <sparkle:shortVersionString>0.3.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://swiftcordapp.github.io/Swiftcord/Swiftcord%200.3.1.dmg" length="5921747" type="application/octet-stream" sparkle:edSignature="Q8W+bM9qLY1s5V6UBHznmyYaLMfFhiEyS6nBKsHuuC1Z2xdLifMO30DwGgbnk4sEXHKdpHRmhOud7NLVGy0SDA=="/>
+            <enclosure url="https://github.com/Candygoblen123/Swiftcord/releases/download/v0.3.1/Swiftcord.0.3.1.dmg" length="6049650" type="application/octet-stream" sparkle:edSignature="6dWh8nuFnSrjcVGAfMT+03V6DpOyFX1Bm/HcimF7b7azjO3Jj4pvolnu9gupgUVaasmM9VD8yDAYwg+haPPlBg=="/>
         </item>
     </channel>
 </rss>
