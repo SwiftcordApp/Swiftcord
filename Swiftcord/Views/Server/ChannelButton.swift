@@ -64,7 +64,7 @@ struct DMButton: View {
 				   let avatarURL = gateway.cache.users[dm.recipient_ids![0]]?.avatarURL(size: 64) {
 					CachedAsyncImage(url: avatarURL) { image in
 						image.resizable().scaledToFill()
-					} placeholder: { ProgressView().progressViewStyle(.circular) }
+					} placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
 					.frame(width: 32, height: 32)
 					.clipShape(Circle())
 				} else {

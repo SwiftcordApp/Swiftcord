@@ -24,9 +24,7 @@ struct UserAvatarView: View {
         let avatarURL = user.avatarURL()
         CachedAsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
-        } placeholder: {
-            ProgressView().progressViewStyle(.circular)
-        }
+        } placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
         .frame(width: 40, height: 40)
         .clipShape(Circle())
         .onTapGesture {

@@ -42,11 +42,7 @@ struct MessageView: View {
 									image.resizable().scaledToFill()
 								} else if phase.error != nil {
 									Image("DiscordIcon").frame(width: 12, height: 12)
-								} else {
-									ProgressView()
-										.progressViewStyle(.circular)
-										.controlSize(.mini)
-								}
+								} else { Rectangle().fill(.gray.opacity(0.2)) }
 							}
 							.clipShape(Circle())
 							.frame(width: 16, height: 16)
@@ -69,9 +65,8 @@ struct MessageView: View {
 								.font(.system(size: 14))
 								.opacity(0.75)
 						} else {
-							ProgressView()
-								.progressViewStyle(.circular)
-								.controlSize(.mini)
+							Circle()
+								.fill(.gray.opacity(0.2))
 								.frame(width: 16, height: 16)
 								.onAppear { Task {
 									guard message.message_reference!.message_id != nil

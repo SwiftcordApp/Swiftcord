@@ -12,13 +12,9 @@ import DiscordKit
 struct StickerLoadingView: View {
     let size: Double
     var body: some View {
-        ZStack {
-            Image(systemName: "square.dashed")
-                .font(.system(size: size - 10))
-                .opacity(0.5)
-            ProgressView()
-                .progressViewStyle(.circular)
-        }.frame(width: size, height: size)
+		RoundedRectangle(cornerRadius: 4)
+			.fill(.gray.opacity(0.2))
+			.frame(width: size, height: size)
     }
 }
 
