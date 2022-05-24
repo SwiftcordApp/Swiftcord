@@ -9,7 +9,8 @@
             <sparkle:shortVersionString>0.3.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <sparkle:releaseNotesLink>https://github.com/SwiftcordApp/Swiftcord/releases/tag/v0.3.2</sparkle:releaseNotesLink>
-            <enclosure url="https://raw.githubusercontent.com/SwiftcordApp/Swiftcord/main/Swiftcord.0.3.2.dmg" length="6049843" type="application/octet-stream" sparkle:edSignature="h853xgKjbkR3wsyfTdkgmzerlxlvO5zUIssn5T1DL+NlbvRxVwPWnuvnLml8jhuQNfAFHokyaoXm0Tmkp5KRBw=="/>
+            <sparkle:fullReleaseNotesLink>https://github.com/SwiftcordApp/Swiftcord/releases</sparkle:fullReleaseNotesLink>
+            <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.3.2/Swiftcord.0.3.2.dmg" length="6049843" type="application/octet-stream" sparkle:edSignature="h853xgKjbkR3wsyfTdkgmzerlxlvO5zUIssn5T1DL+NlbvRxVwPWnuvnLml8jhuQNfAFHokyaoXm0Tmkp5KRBw=="/>
         </item>
     </channel>
 </rss>
