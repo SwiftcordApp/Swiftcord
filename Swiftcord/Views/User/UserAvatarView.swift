@@ -22,6 +22,7 @@ struct UserAvatarView: View {
     
     var body: some View {
         let avatarURL = user.avatarURL()
+		
         CachedAsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
         } placeholder: { Rectangle().fill(.gray.opacity(0.2)) }

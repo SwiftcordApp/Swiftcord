@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DiscordKit
+import CachedAsyncImage
 
 extension View {
     public func flip() -> some View {
@@ -14,6 +15,59 @@ extension View {
             .rotationEffect(.radians(.pi))
             .scaleEffect(x: -1, y: 1, anchor: .center)
     }
+}
+
+struct MessagesViewHeader: View {
+	let ch: Channel?
+	
+	@EnvironmentObject var gateway: DiscordGateway
+	
+	var body: some View {
+		VStack(alignment: .leading, spacing: 8) {
+			if ch?.type == .dm {
+				if let rID = ch?.recipient_ids?[0],
+				   let url = gateway.cache.users[rID]?.avatarURL(size: 160) {
+					CachedAsyncImage(url: url) { image in
+						image.resizable().scaledToFill()
+					} placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
+						.frame(width: 80, height: 80)
+						.clipShape(Circle())
+				}
+			} else if ch?.type == .groupDM {
+				Image(systemName: "person.2.fill")
+					.font(.system(size: 30))
+					.foregroundColor(.white)
+					.frame(width: 80, height: 80)
+					.background(.red)
+					.clipShape(Circle())
+			} else { Image(systemName: "number").font(.system(size: 60)) }
+			
+			Text(ch?.type == .dm || ch?.type == .groupDM
+				 ? ch?.label(gateway.cache.users) ?? ""
+				 : "Welcome to #\(ch?.label() ?? "")!")
+				.font(.largeTitle)
+				.fontWeight(.heavy)
+			
+			if ch?.type == .dm {
+				Group {
+					Text("This is the beginning of your direct message history with ")
+						+ Text("@\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text(".")
+				}.opacity(0.7)
+			} else if ch?.type == .groupDM {
+				Group {
+					Text("Welcome to the beginning of the ")
+						+ Text("\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text(" group.")
+				}.opacity(0.7)
+			} else {
+				Text("This is the start of the #\(ch?.name ?? "") channel. \(ch?.topic ?? "")")
+					.opacity(0.7)
+			}
+			Divider().padding(.top, 4)
+		}
+		.padding([.top, .leading, .trailing], 16)
+	}
 }
 
 struct MessagesView: View {
@@ -130,21 +184,7 @@ struct MessagesView: View {
                             .flip()
                         }
                         
-                        if reachedTop {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Image(systemName: "number")
-                                    .font(.system(size: 60))
-                                Text("Welcome to #\(ctx.channel?.label(gateway.cache.users) ?? "")!")
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
-								Text("This is the start of the #\(ctx.channel?.name ?? "") channel. \(ctx.channel?.topic ?? "")")
-                                    .opacity(0.7)
-                                Divider()
-                                    .padding(.top, 4)
-                            }
-                            .padding([.top, .leading, .trailing], 16)
-                            .flip()
-                        }
+                        if reachedTop { MessagesViewHeader(ch: ctx.channel).flip() }
                         else {
                             VStack(alignment: .leading, spacing: 16) {
                                 // TODO: Use a loop to create this
