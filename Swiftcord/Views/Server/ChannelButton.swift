@@ -75,7 +75,7 @@ struct DMButton: View {
 						.clipShape(Circle())
 				}
 				
-				Text(dm.label(users: gateway.cache.users) ?? "nil")
+				Text(dm.label(gateway.cache.users) ?? "nil")
 				Spacer()
 			}
 			.padding(.vertical, 5)

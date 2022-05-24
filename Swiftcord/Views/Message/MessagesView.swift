@@ -29,13 +29,13 @@ struct MessagesView: View {
     
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
-    @EnvironmentObject var serverCtx: ServerContext
+    @EnvironmentObject var ctx: ServerContext
     
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
         
     private func fetchMoreMessages() {
-        guard let ch = serverCtx.channel else { return }
+        guard let ch = ctx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
             fetchMessagesTask = nil
@@ -91,7 +91,7 @@ struct MessagesView: View {
                     }
                 ),
                 attachments: attachments,
-                id: serverCtx.channel!.id
+                id: ctx.channel!.id
             )) != nil else {
                 enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
                 showingInfoBar = true
@@ -134,10 +134,10 @@ struct MessagesView: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Image(systemName: "number")
                                     .font(.system(size: 60))
-                                Text("Welcome to #\(serverCtx.channel?.name ?? "")!")
+                                Text("Welcome to #\(ctx.channel?.label(gateway.cache.users) ?? "")!")
                                     .font(.largeTitle)
                                     .fontWeight(.heavy)
-                                Text("This is the start of the #\(serverCtx.channel?.name ?? "") channel.")
+								Text("This is the start of the #\(ctx.channel?.name ?? "") channel. \(ctx.channel?.topic ?? "")")
                                     .opacity(0.7)
                                 Divider()
                                     .padding(.top, 4)
@@ -181,7 +181,10 @@ struct MessagesView: View {
             ZStack(alignment: .topLeading) {
                 MessageInfoBarView(isShown: $showingInfoBar, state: $infoBarData)
                 
-                MessageInputView(placeholder: "Message #\(serverCtx.channel?.name ?? "")", message: $enteredText, onSend: sendMessage)
+                MessageInputView(
+					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
+					message: $enteredText, onSend: sendMessage
+				)
                     .onAppear { enteredText = "" }
                     .onChange(of: enteredText) { [enteredText] content in
                         if content.count > enteredText.count,
@@ -189,14 +192,14 @@ struct MessagesView: View {
                             // Send typing start msg once every 8s while typing
                             lastSentTyping = Date()
                             Task {
-                                let _ = await DiscordAPI.typingStart(id: serverCtx.channel!.id)
+                                let _ = await DiscordAPI.typingStart(id: ctx.channel!.id)
                             }
                         }
                     }
 					.overlay {
-						let typingMembers = serverCtx.channel == nil
+						let typingMembers = ctx.channel == nil
 						? []
-						: serverCtx.typingStarted[serverCtx.channel!.id]?
+						: ctx.typingStarted[ctx.channel!.id]?
 							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
 						
 						if !typingMembers.isEmpty {
@@ -227,7 +230,7 @@ struct MessagesView: View {
             }
         }
         .frame(minWidth: 525)
-        .onChange(of: serverCtx.channel, perform: { ch in
+        .onChange(of: ctx.channel, perform: { ch in
             guard ch != nil else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
@@ -256,12 +259,12 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    if msg.channel_id == serverCtx.channel?.id {
+                    if msg.channel_id == ctx.channel?.id {
                         withAnimation { messages.insert(msg, at: 0) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
-                    serverCtx.typingStarted[msg.channel_id]?.removeAll { t in
+                    ctx.typingStarted[msg.channel_id]?.removeAll { t in
                         t.user_id == msg.author.id
                     }
                 case .messageUpdate:
@@ -273,13 +276,13 @@ struct MessagesView: View {
                     }
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
-                    guard deletedMsg.channel_id == serverCtx.channel?.id else { break }
+                    guard deletedMsg.channel_id == ctx.channel?.id else { break }
                     if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
                         withAnimation { let _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
                     guard let deletedMsgs = d as? MessageDeleteBulk else { break }
-                    guard deletedMsgs.channel_id == serverCtx.channel?.id else { break }
+                    guard deletedMsgs.channel_id == ctx.channel?.id else { break }
                     for msgID in deletedMsgs.id {
                         if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
                             withAnimation { let _ = messages.remove(at: delIdx) }
