@@ -4,5 +4,11 @@
 <dict>
 	<key>ATSApplicationFontsPath</key>
 	<string>.</string>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/SwiftcordApp/Swiftcord/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>u08aYwJaZ3F/qAs2NauIA5DGKhS4nRDccvBDNW8sbi4=</string>
 </dict>
 </plist>
