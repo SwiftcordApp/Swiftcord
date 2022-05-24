@@ -41,7 +41,7 @@ struct GuildChButton: View {
 			UserDefaults.standard.setValue(ch.id.description, forKey: "guildLastCh.\(guild!.id.description)")
 		} label: {
 			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == ch.id) ? "newspaper.fill" : (chIcons[ch.type] ?? "number")
-			Label(ch.label ?? "", systemImage: image)
+			Label(ch.label() ?? "nil", systemImage: image)
 				.padding(.vertical, 6)
 				.padding(.horizontal, -4)
 				.frame(maxWidth: .infinity, alignment: .leading)
@@ -75,9 +75,7 @@ struct DMButton: View {
 						.clipShape(Circle())
 				}
 				
-				Text(dm.recipient_ids?
-					.compactMap { gateway.cache.users[$0]?.username }
-					.joined(separator: ", ") ?? "nil")
+				Text(dm.label(users: gateway.cache.users) ?? "nil")
 				Spacer()
 			}
 			.padding(.vertical, 5)
