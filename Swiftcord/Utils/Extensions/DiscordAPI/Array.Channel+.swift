@@ -11,7 +11,7 @@ extension Array where Element == Channel {
 	func discordSorted() -> Self {
 		sorted { c1, c2 in
 			// This is a DM/Group DM channel
-			if c1.guild_id == nil,
+			if c1.type == .dm || c1.type == .groupDM,
 			   let c1m = c1.last_message_id,
 			   let c2m = c2.last_message_id  {
 				return c1m > c2m
