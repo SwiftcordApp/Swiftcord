@@ -28,13 +28,9 @@ struct AttachmentLoading: View {
     let width: Int
     
     var body: some View {
-        ZStack {
-            Image(systemName: "photo")
-                .opacity(0.5)
-                .font(.system(size: CGFloat(min(Double(width) / (84/66), Double(height)) - 10)))
-            ProgressView().progressViewStyle(.circular).controlSize(.large)
-        }
-        .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+		Rectangle()
+			.fill(.gray.opacity(0.2))
+			.frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
     }
 }
 

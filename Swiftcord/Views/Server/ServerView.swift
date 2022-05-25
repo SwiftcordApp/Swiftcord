@@ -26,7 +26,6 @@ struct ServerView: View {
     @StateObject private var serverCtx = ServerContext()
 	
 	private func loadChannels() {
-		print("load chs")
 		guard let channels = serverCtx.guild?.channels
 		else { return }
 		
@@ -38,9 +37,7 @@ struct ServerView: View {
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
 		
-		if serverCtx.channel == nil {
-			state.loadingState = .messageLoad
-		}
+		if serverCtx.channel == nil { state.loadingState = .messageLoad }
 		// Prevent deadlocking if there are no DMs/channels
     }
     
@@ -106,9 +103,11 @@ You don't have access to any text channels or there are none in this server.
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
                 HStack {
-                    Image(systemName: "number")
-						.font(.system(size: 18)).opacity(0.77)
-                    Text(serverCtx.channel?.name ?? "No Channel")
+					Image(
+						systemName: serverCtx.channel?.type == .dm ? "at" :
+							(serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
+					).font(.system(size: 18)).opacity(0.77).frame(width: 24, height: 24)
+					Text(serverCtx.channel?.label(gateway.cache.users) ?? "No Channel")
 						.font(.title2)
                 }
             }

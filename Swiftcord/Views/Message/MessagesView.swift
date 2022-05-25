@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DiscordKit
+import CachedAsyncImage
 
 extension View {
     public func flip() -> some View {
@@ -16,11 +17,63 @@ extension View {
     }
 }
 
+struct MessagesViewHeader: View {
+	let ch: Channel?
+	
+	@EnvironmentObject var gateway: DiscordGateway
+	
+	var body: some View {
+		VStack(alignment: .leading, spacing: 8) {
+			if ch?.type == .dm {
+				if let rID = ch?.recipient_ids?[0],
+				   let url = gateway.cache.users[rID]?.avatarURL(size: 160) {
+					CachedAsyncImage(url: url) { image in
+						image.resizable().scaledToFill()
+					} placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
+						.frame(width: 80, height: 80)
+						.clipShape(Circle())
+				}
+			} else if ch?.type == .groupDM {
+				Image(systemName: "person.2.fill")
+					.font(.system(size: 30))
+					.foregroundColor(.white)
+					.frame(width: 80, height: 80)
+					.background(.red)
+					.clipShape(Circle())
+			} else { Image(systemName: "number").font(.system(size: 60)) }
+			
+			Text(ch?.type == .dm || ch?.type == .groupDM
+				 ? ch?.label(gateway.cache.users) ?? ""
+				 : "Welcome to #\(ch?.label() ?? "")!")
+				.font(.largeTitle)
+				.fontWeight(.heavy)
+			
+			if ch?.type == .dm {
+				Group {
+					Text("This is the beginning of your direct message history with ")
+						+ Text("@\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text(".")
+				}.opacity(0.7)
+			} else if ch?.type == .groupDM {
+				Group {
+					Text("Welcome to the beginning of the ")
+						+ Text("\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text(" group.")
+				}.opacity(0.7)
+			} else {
+				Text("This is the start of the #\(ch?.name ?? "") channel. \(ch?.topic ?? "")")
+					.opacity(0.7)
+			}
+			Divider().padding(.top, 4)
+		}
+		.padding([.top, .leading, .trailing], 16)
+	}
+}
+
 struct MessagesView: View {
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
-    @State private var scrollTopID: Snowflake? = nil
     @State private var showingInfoBar = false
     @State private var loadError = false
     @State private var infoBarData: InfoBarData? = nil
@@ -30,14 +83,13 @@ struct MessagesView: View {
     
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
-    @EnvironmentObject var serverCtx: ServerContext
+    @EnvironmentObject var ctx: ServerContext
     
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier? = nil
         
     private func fetchMoreMessages() {
-		print("load masssages")
-        guard let ch = serverCtx.channel else { return }
+        guard let ch = ctx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
             fetchMessagesTask = nil
@@ -71,7 +123,6 @@ struct MessagesView: View {
             state.loadingState = .messageLoad
             try Task.checkCancellation()
             
-            if !messages.isEmpty { scrollTopID = messages[messages.count - 1].id }
             reachedTop = m.count < 50
             messages.append(contentsOf: m)
             fetchMessagesTask = nil
@@ -94,7 +145,7 @@ struct MessagesView: View {
                     }
                 ),
                 attachments: attachments,
-                id: serverCtx.channel!.id
+                id: ctx.channel!.id
             )) != nil else {
                 enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
                 showingInfoBar = true
@@ -117,14 +168,6 @@ struct MessagesView: View {
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
                         Spacer(minLength: 16 + (showingInfoBar ? 24 : 0) + messageInputHeight)
-                            .onChange(of: messages.count) { _ in
-                                guard messages.count >= 1 else { return }
-                                // This is _not_ bugged
-                                if let scrollTopID = scrollTopID {
-                                    proxy.scrollTo(scrollTopID, anchor: .bottom)
-									self.scrollTopID = nil
-                                }
-                            }
                         
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
                             MessageView(
@@ -141,21 +184,7 @@ struct MessagesView: View {
                             .flip()
                         }
                         
-                        if reachedTop {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Image(systemName: "number")
-                                    .font(.system(size: 60))
-                                Text("Welcome to #\(serverCtx.channel?.name ?? "")!")
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
-                                Text("This is the start of the #\(serverCtx.channel?.name ?? "") channel.")
-                                    .opacity(0.7)
-                                Divider()
-                                    .padding(.top, 4)
-                            }
-                            .padding([.top, .leading, .trailing], 16)
-                            .flip()
-                        }
+                        if reachedTop { MessagesViewHeader(ch: ctx.channel).flip() }
                         else {
                             VStack(alignment: .leading, spacing: 16) {
                                 // TODO: Use a loop to create this
@@ -164,6 +193,13 @@ struct MessagesView: View {
                                 LoFiMessageView()
                                 LoFiMessageView()
                                 LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								LoFiMessageView()
+								// A ForEach with a range works initially
+								// but doesn't show anything for subsequent loads
                             }
                             .onAppear { fetchMoreMessages() }
                             .onDisappear {
@@ -185,7 +221,10 @@ struct MessagesView: View {
             ZStack(alignment: .topLeading) {
                 MessageInfoBarView(isShown: $showingInfoBar, state: $infoBarData)
                 
-                MessageInputView(placeholder: "Message #\(serverCtx.channel?.name ?? "")", message: $enteredText, onSend: sendMessage)
+                MessageInputView(
+					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
+					message: $enteredText, onSend: sendMessage
+				)
                     .onAppear { enteredText = "" }
                     .onChange(of: enteredText) { [enteredText] content in
                         if content.count > enteredText.count,
@@ -193,14 +232,14 @@ struct MessagesView: View {
                             // Send typing start msg once every 8s while typing
                             lastSentTyping = Date()
                             Task {
-                                let _ = await DiscordAPI.typingStart(id: serverCtx.channel!.id)
+                                let _ = await DiscordAPI.typingStart(id: ctx.channel!.id)
                             }
                         }
                     }
 					.overlay {
-						let typingMembers = serverCtx.channel == nil
+						let typingMembers = ctx.channel == nil
 						? []
-						: serverCtx.typingStarted[serverCtx.channel!.id]?
+						: ctx.typingStarted[ctx.channel!.id]?
 							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
 						
 						if !typingMembers.isEmpty {
@@ -231,14 +270,13 @@ struct MessagesView: View {
             }
         }
         .frame(minWidth: 525)
-        .onChange(of: serverCtx.channel, perform: { ch in
+        .onChange(of: ctx.channel, perform: { ch in
             guard ch != nil else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
             if loadError || fetchMessagesTask != nil { fetchMoreMessages() }
             loadError = false
             reachedTop = false
-            scrollTopID = nil
             lastSentTyping = Date(timeIntervalSince1970: 0)
         })
         .onChange(of: state.loadingState) { ns in
@@ -261,12 +299,12 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
-                    if msg.channel_id == serverCtx.channel?.id {
+                    if msg.channel_id == ctx.channel?.id {
                         withAnimation { messages.insert(msg, at: 0) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
-                    serverCtx.typingStarted[msg.channel_id]?.removeAll { t in
+                    ctx.typingStarted[msg.channel_id]?.removeAll { t in
                         t.user_id == msg.author.id
                     }
                 case .messageUpdate:
@@ -278,13 +316,13 @@ struct MessagesView: View {
                     }
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
-                    guard deletedMsg.channel_id == serverCtx.channel?.id else { break }
+                    guard deletedMsg.channel_id == ctx.channel?.id else { break }
                     if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
                         withAnimation { let _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
                     guard let deletedMsgs = d as? MessageDeleteBulk else { break }
-                    guard deletedMsgs.channel_id == serverCtx.channel?.id else { break }
+                    guard deletedMsgs.channel_id == ctx.channel?.id else { break }
                     for msgID in deletedMsgs.id {
                         if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
                             withAnimation { let _ = messages.remove(at: delIdx) }

@@ -8,7 +8,9 @@
 import DiscordKit
 
 extension Channel {
-	var label: String? {
-		name ?? recipients?.map({ "\($0.username)#\($0.discriminator)" }).joined(separator: ", ") ?? String(describing: self.member)
+	func label(_ users: [Snowflake: User] = [:]) -> String? {
+		name ?? recipient_ids?
+			.compactMap { users[$0]?.username }
+			.joined(separator: ", ")
 	}
 }
