@@ -9,7 +9,7 @@ import Foundation
 import DiscordKit
 
 extension ISOTimestamp {
-	func toDate(hasFractionalSeconds: Bool = true) -> Date? {
+    func toDate(hasFractionalSeconds: Bool = true) -> Date? {
         let isoDateFormatter = ISO8601DateFormatter()
         isoDateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         isoDateFormatter.formatOptions = [
