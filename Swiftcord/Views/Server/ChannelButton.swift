@@ -78,7 +78,7 @@ struct DMButton: View {
 				VStack(alignment: .leading, spacing: 2) {
 					Text(dm.label(gateway.cache.users) ?? "nil")
 					if dm.type == .groupDM {
-						Text("\(dm.recipient_ids?.count ?? 2) Members").font(.caption)
+						Text("\((dm.recipient_ids?.count ?? 2) + 1) Members").font(.caption)
 					}
 				}
 				Spacer()

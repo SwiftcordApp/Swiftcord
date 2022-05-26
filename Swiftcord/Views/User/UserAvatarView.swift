@@ -32,13 +32,16 @@ struct UserAvatarView: View {
             guard !clickDisabled else { return }
             // Get user profile for a fuller User object
             if profile == nil && webhookID == nil { Task {
-                profile = await DiscordAPI.getProfile(user: user.id, guildID: guildID)
+                profile = await DiscordAPI.getProfile(
+					user: user.id,
+					guildID: guildID == "@me" ? nil : guildID
+				)
                 guard profile != nil else { // Profile is still nil: fetching failed
                     loadFullFailed = true
                     return
                 }
             }}
-            if guildRoles == nil && webhookID == nil { Task {
+            if guildRoles == nil, webhookID == nil, guildID != "@me" { Task {
                 guildRoles = await DiscordAPI.getGuildRoles(id: guildID)
                 // print(guildRoles)
             }}
@@ -130,39 +133,37 @@ struct UserAvatarView: View {
                             Text("NO ABOUT").font(.headline)
                         }
                         
-                        if let profile = profile {
-                            if let guildRoles = guildRoles {
-                                let roles = guildRoles.filter({ r in
-                                    profile.guild_member!.roles.contains(r.id)
-                                })
-                                
-                                Text(roles.isEmpty
-                                     ? "NO ROLES"
-                                     : (roles.count == 1 ? "ROLE" : "ROLES")
-                                ).font(.headline).padding(.top, 8)
-                                if !roles.isEmpty {
-                                    TagCloudView(content: roles.map({ role in
-										HStack(spacing: 6) {
-											Circle()
-												.fill(Color(hex: role.color))
-												.frame(width: 14, height: 14)
-												.padding(.leading, 6)
-											Text(role.name)
-												.font(.system(size: 12))
-												.padding(.trailing, 8)
-										}
-										.frame(height: 24)
-										.background(Color.gray.opacity(0.2))
-										.cornerRadius(7)
-                                    })).padding(-2)
-                                }
-							} else {
-								ProgressView("Loading roles...")
-									.progressViewStyle(.linear)
-									.frame(maxWidth: .infinity)
-									.tint(.blue)
+						if let profile = profile, let guildRoles = guildRoles {
+							let roles = guildRoles.filter({ r in
+								profile.guild_member!.roles.contains(r.id)
+							})
+							
+							Text(roles.isEmpty
+								 ? "NO ROLES"
+								 : (roles.count == 1 ? "ROLE" : "ROLES")
+							).font(.headline).padding(.top, 8)
+							if !roles.isEmpty {
+								TagCloudView(content: roles.map({ role in
+									HStack(spacing: 6) {
+										Circle()
+											.fill(Color(hex: role.color))
+											.frame(width: 14, height: 14)
+											.padding(.leading, 6)
+										Text(role.name)
+											.font(.system(size: 12))
+											.padding(.trailing, 8)
+									}
+									.frame(height: 24)
+									.background(Color.gray.opacity(0.2))
+									.cornerRadius(7)
+								})).padding(-2)
 							}
-                        }
+						} else {
+							ProgressView("Loading roles...")
+								.progressViewStyle(.linear)
+								.frame(maxWidth: .infinity)
+								.tint(.blue)
+						}
                         
                         Text("NOTE").font(.headline).padding(.top, 8)
                         // Notes are stored locally for now, but eventually will be synced with the Discord API

@@ -830,7 +830,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
+				branch = "dm-ordering";
 				kind = branch;
 			};
 		};
