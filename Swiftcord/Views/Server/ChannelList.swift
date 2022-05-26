@@ -22,7 +22,7 @@ struct ChannelList: View {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels, id: \.id) { channel in
 						ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
-							.listRowInsets(.init(top: 1, leading: 8, bottom: 1, trailing: 8))
+							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
 					}
 				}
 			}
@@ -34,7 +34,7 @@ struct ChannelList: View {
 					let channels = channels.filter({ $0.parent_id == ch.id }).discordSorted()
 					ForEach(channels, id: \.id) { channel in
 						ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
-							.listRowInsets(.init(top: 1, leading: 8, bottom: 1, trailing: 8))
+							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
 					}
 				}
 			}

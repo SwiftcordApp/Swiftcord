@@ -29,6 +29,9 @@ struct SwiftcordApp: App {
 			CommandGroup(after: .appInfo) {
 				CheckForUpdatesView(updaterViewModel: updaterViewModel)
 			}
+			
+			SidebarCommands()
+			NavigationCommands()
 		}
 
 		Settings {

@@ -61,6 +61,7 @@
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
 		DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */; };
+		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
@@ -134,6 +135,7 @@
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftcordView.swift; sourceTree = "<group>"; };
+		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
 		DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoBarView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			children = (
 				DA520ABD27D322F0009FD740 /* Resources */,
 				DA4A88E327C3481700720909 /* Views */,
+				DA7720CE283F182700D3C335 /* Commands */,
 				DA4A88DC27C3272500720909 /* Utils */,
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
@@ -358,6 +361,14 @@
 				DA57F44528065209001DC46E /* ChannelButton.swift */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		DA7720CE283F182700D3C335 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				DA7720CF283F184100D3C335 /* NavigationCommands.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 		DAAFB5BF282A635100807B54 /* Utils */ = {
@@ -573,6 +584,7 @@
 				DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */,
 				DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */,
 				DA32EF4A27C8BE8F00A9ED72 /* Color+.swift in Sources */,
+				DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */,
 				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
 				3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,

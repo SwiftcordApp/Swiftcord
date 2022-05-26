@@ -43,7 +43,7 @@ struct GuildChButton: View {
 			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == ch.id) ? "newspaper.fill" : (chIcons[ch.type] ?? "number")
 			Label(ch.label() ?? "nil", systemImage: image)
 				.padding(.vertical, 6)
-				.padding(.horizontal, -4)
+				.padding(.horizontal, 2)
 				.frame(maxWidth: .infinity, alignment: .leading)
 		}
 	}
@@ -60,7 +60,7 @@ struct DMButton: View {
 			selectedCh = dm
 		} label: {
 			HStack {
-				if dm.recipient_ids?.count == 1,
+				if dm.type == .dm,
 				   let avatarURL = gateway.cache.users[dm.recipient_ids![0]]?.avatarURL(size: 64) {
 					CachedAsyncImage(url: avatarURL) { image in
 						image.resizable().scaledToFill()
@@ -75,28 +75,33 @@ struct DMButton: View {
 						.clipShape(Circle())
 				}
 				
-				Text(dm.label(gateway.cache.users) ?? "nil")
+				VStack(alignment: .leading, spacing: 2) {
+					Text(dm.label(gateway.cache.users) ?? "nil")
+					if dm.type == .groupDM {
+						Text("\(dm.recipient_ids?.count ?? 2) Members").font(.caption)
+					}
+				}
 				Spacer()
 			}
+			.padding(.horizontal, 6)
 			.padding(.vertical, 5)
 		}
 	}
 }
 
 struct DiscordChannelButton: ButtonStyle {
-    let isSelected: Bool
-    @State var isHovered: Bool = false
+	let isSelected: Bool
+	@State var isHovered: Bool = false
 	
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .buttonStyle(.borderless)
-            .font(.system(size: 14, weight: isSelected ? .medium : .regular))
+	func makeBody(configuration: Configuration) -> some View {
+		configuration.label
+			.buttonStyle(.borderless)
+			.font(.system(size: 14, weight: isSelected ? .medium : .regular))
 			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
-            .background(
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
-                    .padding(.horizontal, -8)
+			.background(
+				RoundedRectangle(cornerRadius: 4)
+					.fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
             )
             .onHover(perform: { isHovered = $0 })
     }
