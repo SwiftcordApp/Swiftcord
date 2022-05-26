@@ -130,8 +130,8 @@ and they may not neccessarily be implemented in sequence.
 - ✅ Find and request most optimised photo size from CDN
 - ⏱ Partial user and app settings
 - ✅ DM and group loading
-- ⏱ Display DMs properly in UI
-- ⏱ Send DM messages
+- ✅ Display DMs properly in UI
+- ✅ Send DM messages
 - ✅ Send attachments
 - ❌ User roles + overwrites
 - ❌ Message notifications
