@@ -55,6 +55,13 @@ struct ContentView: View {
 					 nsfw_level: .default,
 					 premium_progress_bar_enabled: false)
 	}
+	
+	private func loadLastSelectedGuild() {
+		if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
+		   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
+			selectedGuildID = lGID
+		} else { selectedGuildID = "@me" }
+	}
 
     var body: some View {
         HStack(spacing: 0) {
@@ -91,7 +98,7 @@ struct ContentView: View {
                         bgColor: .green,
                         noIndicator: true,
                         onSelect: {}
-                    )
+					).padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
                 .frame(width: 72)
@@ -114,12 +121,7 @@ struct ContentView: View {
 			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
         .onChange(of: state.loadingState, perform: { state in
-            if state == .gatewayConn {
-				if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
-				   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
-					selectedGuildID = lGID 
-                } else { selectedGuildID = "@me" }
-            }
+			if state == .gatewayConn { loadLastSelectedGuild() }
         })
         // Using .constant to prevent dismissing
         .sheet(isPresented: .constant(state.attemptLogin)) {
@@ -147,6 +149,8 @@ struct ContentView: View {
             }
         })
         .onAppear {
+			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
+			
             let _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
                 state.loadingState = .initial

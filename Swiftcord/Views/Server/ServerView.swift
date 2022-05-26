@@ -40,6 +40,18 @@ struct ServerView: View {
 		if serverCtx.channel == nil { state.loadingState = .messageLoad }
 		// Prevent deadlocking if there are no DMs/channels
     }
+	
+	private func bootstrapGuild(_ g: Guild) {
+		serverCtx.guild = g
+		loadChannels()
+		// Sending malformed IDs causes an instant Gateway session termination
+		guard !g.isDMChannel else { return }
+		// Subscribe to typing events
+		gateway.socket.send(
+			op: .subscribeGuildEvents,
+			data: SubscribeGuildEvts(guild_id: g.id, typing: true)
+		)
+	}
     
     private func toggleSidebar() {
         #if os(macOS)
@@ -61,8 +73,8 @@ struct ServerView: View {
 							}
 						}
 				} else {
-					Text("Guild loading")
-						.frame(maxHeight: .infinity)
+					Text("No server selected")
+						.frame(minWidth: 240, maxHeight: .infinity)
 				}
 				
 
@@ -121,18 +133,12 @@ You don't have access to any text channels or there are none in this server.
         }
         .onChange(of: guild) { newGuild in
 			guard let g = newGuild else { return }
-			serverCtx.guild = g
-			loadChannels()
-			// Sending malformed IDs causes an instant Gateway session termination
-			guard !g.isDMChannel else { return }
-			// Subscribe to typing events
-			gateway.socket.send(
-				op: .subscribeGuildEvents,
-				data: SubscribeGuildEvts(guild_id: g.id, typing: true)
-			)
+			bootstrapGuild(g)
 		}
         .onChange(of: state.loadingState) { s in if s == .gatewayConn { loadChannels() }}
         .onAppear {
+			if let g = guild { bootstrapGuild(g) }
+			
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
                 /*case .channelUpdate:

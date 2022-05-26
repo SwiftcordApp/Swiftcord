@@ -17,7 +17,7 @@ struct ChannelList: View {
 		List {
 			let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category }
 			if !filteredChannels.isEmpty {
-				let sectionHeadline = guild.isDMChannel ? "DMs" : "No category"
+				let sectionHeadline = guild.isDMChannel ? "DIRECT MESSAGES" : "NO CATEGORY"
 				Section(header: Text(sectionHeadline)) {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels, id: \.id) { channel in

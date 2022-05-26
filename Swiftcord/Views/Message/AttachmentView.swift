@@ -29,7 +29,7 @@ struct AttachmentLoading: View {
     
     var body: some View {
 		Rectangle()
-			.fill(.gray.opacity(0.2))
+			.fill(.gray.opacity(Double.random(in: 0.15...0.3)))
 			.frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
     }
 }
