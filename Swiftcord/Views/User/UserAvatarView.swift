@@ -133,36 +133,38 @@ struct UserAvatarView: View {
                             Text("NO ABOUT").font(.headline)
                         }
                         
-						if let profile = profile, let guildRoles = guildRoles {
-							let roles = guildRoles.filter({ r in
-								profile.guild_member!.roles.contains(r.id)
-							})
-							
-							Text(roles.isEmpty
-								 ? "NO ROLES"
-								 : (roles.count == 1 ? "ROLE" : "ROLES")
-							).font(.headline).padding(.top, 8)
-							if !roles.isEmpty {
-								TagCloudView(content: roles.map({ role in
-									HStack(spacing: 6) {
-										Circle()
-											.fill(Color(hex: role.color))
-											.frame(width: 14, height: 14)
-											.padding(.leading, 6)
-										Text(role.name)
-											.font(.system(size: 12))
-											.padding(.trailing, 8)
-									}
-									.frame(height: 24)
-									.background(Color.gray.opacity(0.2))
-									.cornerRadius(7)
-								})).padding(-2)
+						if let profile = profile, guildID != "@me" {
+							if let guildRoles = guildRoles {
+								let roles = guildRoles.filter({ r in
+									profile.guild_member!.roles.contains(r.id)
+								})
+								
+								Text(roles.isEmpty
+									 ? "NO ROLES"
+									 : (roles.count == 1 ? "ROLE" : "ROLES")
+								).font(.headline).padding(.top, 8)
+								if !roles.isEmpty {
+									TagCloudView(content: roles.map({ role in
+										HStack(spacing: 6) {
+											Circle()
+												.fill(Color(hex: role.color))
+												.frame(width: 14, height: 14)
+												.padding(.leading, 6)
+											Text(role.name)
+												.font(.system(size: 12))
+												.padding(.trailing, 8)
+										}
+										.frame(height: 24)
+										.background(Color.gray.opacity(0.2))
+										.cornerRadius(7)
+									})).padding(-2)
+								}
+							} else {
+								ProgressView("Loading roles...")
+									.progressViewStyle(.linear)
+									.frame(maxWidth: .infinity)
+									.tint(.blue)
 							}
-						} else {
-							ProgressView("Loading roles...")
-								.progressViewStyle(.linear)
-								.frame(maxWidth: .infinity)
-								.tint(.blue)
 						}
                         
                         Text("NOTE").font(.headline).padding(.top, 8)
