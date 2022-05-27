@@ -1,0 +1,19 @@
+disabled_rules:
+  - line_length
+  - unused_closure_parameter
+  - multiple_closures_with_trailing_closure
+  - large_tuple
+opt_in_rules:
+
+force_cast: warning
+force_try: warning
+
+identifier_name:
+  min_length:
+    warning: 3
+    error: 0
+  max_length:
+    warning: 40
+    error: 50
+  allowed_symbols: ["_"]
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)
