@@ -29,29 +29,29 @@ struct MiscSettingsView: View {
             DebugTableItem(item: "Gateway connection #", val: String(gateway.connTimes)),
             DebugTableItem(item: "Gateway session ID", val: gateway.sessionID ?? "nil"),
             DebugTableItem(item: "Gateway missed heartbeat ACKs", val: String(gateway.missedACK)),*/
-            
+
             DebugTableItem(item: "Gateway session established", val: gateway.connected.toString()),
             DebugTableItem(item: "Network reachable", val: gateway.reachable.toString()),
             DebugTableItem(item: "Loading stage", val: String(describing: state.loadingState)),
             DebugTableItem(item: "Base URL", val: GatewayConfig.default.baseURL),
             DebugTableItem(item: "REST API base URL", val: GatewayConfig.default.restBase),
-            DebugTableItem(item: "Gateway URL", val: GatewayConfig.default.gateway),
+            DebugTableItem(item: "Gateway URL", val: GatewayConfig.default.gateway)
         ]
-        
+
         NavigationView {
 			List {
 				NavigationLink("Change Log", tag: SidebarLink.changelog, selection: $selectedLink) {
                     Text("Nothing")
                 }
-                
+
 				NavigationLink("Hypesquad", tag: SidebarLink.hype, selection: $selectedLink) {
                     Text("Not hype")
                 }
-                
+
 				NavigationLink("About", tag: SidebarLink.about, selection: $selectedLink) {
                     AboutSwiftcordView()
                 }
-                
+
 				NavigationLink("Debug", tag: SidebarLink.debug, selection: $selectedLink) {
                     Table(debugValues) {
                         TableColumn("Item", value: \.item)

@@ -34,62 +34,61 @@ struct StickerItemView: View {
     let sticker: StickerItem
     let size: Double // Width and height of sticker
     @State private var error = false
-    @State private var animation: Lottie.Animation? = nil
+    @State private var animation: Lottie.Animation?
     @Binding var play: Bool
-    
+
     var body: some View {
 		if error {
 			StickerErrorView(size: size)
 		} else {
 			switch sticker.format_type {
-				case .png:
-					// Literally a walk in the park compared to lottie
-					AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
-						switch phase {
-							case .empty: StickerLoadingView(size: size)
-							case .success(let image): image.resizable().scaledToFill()
-							case .failure: StickerErrorView(size: size)
-							default: StickerErrorView(size: size)
-						}
+			case .png:
+				// Literally a walk in the park compared to lottie
+				AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
+					switch phase {
+					case .empty: StickerLoadingView(size: size)
+					case .success(let image): image.resizable().scaledToFill()
+					case .failure: StickerErrorView(size: size)
+					default: StickerErrorView(size: size)
 					}
-					.frame(width: size, height: size)
-					.clipShape(RoundedRectangle(cornerRadius: 7))
-				case .lottie:
-					if animation == nil {
-						StickerLoadingView(size: size).onAppear {
-							Lottie.Animation.loadedFrom(
-								url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
-								closure: { anim in
-									guard let anim = anim else {
-										error = true
-										return
-									}
-									animation = anim
-								},
-								animationCache: nil
-							)
-						}
+				}
+				.frame(width: size, height: size)
+				.clipShape(RoundedRectangle(cornerRadius: 7))
+			case .lottie:
+				if animation == nil {
+					StickerLoadingView(size: size).onAppear {
+						Lottie.Animation.loadedFrom(
+							url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
+							closure: { anim in
+								guard let anim = anim else {
+									error = true
+									return
+								}
+								animation = anim
+							},
+							animationCache: nil
+						)
 					}
-					else {
-						LottieView(
-							animation: animation!,
-							play: $play,
-							width: size,
-							height: size
-						).lottieLoopMode(.loop).frame(width: size, height: size)
+				} else {
+					LottieView(
+						animation: animation!,
+						play: $play,
+						width: size,
+						height: size
+					).lottieLoopMode(.loop).frame(width: size, height: size)
+				}
+			default:
+				// Well it doesn't animate for some reason
+				CachedAsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+					switch phase {
+					case .empty: StickerLoadingView(size: size)
+					case .success(let image): image.resizable().scaledToFill()
+					case .failure: StickerErrorView(size: size)
+					default: StickerErrorView(size: size)
 					}
-				default:
-					// Well it doesn't animate for some reason
-					CachedAsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
-						switch phase {
-							case .empty: StickerLoadingView(size: size)
-							case .success(let image): image.resizable().scaledToFill()
-							case .failure: StickerErrorView(size: size)
-							default: StickerErrorView(size: size)
-						}
-					}
-					.frame(width: size, height: size)
-					.clipShape(RoundedRectangle(cornerRadius: 7))
+				}
+				.frame(width: size, height: size)
+				.clipShape(RoundedRectangle(cornerRadius: 7))
 			}
 		}
     }
@@ -100,9 +99,9 @@ struct StickerView: View {
     @State private var play = false
     @State private var infoShow = false
     @State private var error = false
-    @State private var fullSticker: Sticker? = nil
+    @State private var fullSticker: Sticker?
     @State private var packPresenting = false
-    
+
     var body: some View {
         StickerItemView(sticker: sticker, size: 160, play: $play)
         .popover(isPresented: $infoShow, arrowEdge: .trailing) {
@@ -117,7 +116,7 @@ struct StickerView: View {
                     if sticker.format_type == .aPNG {
                         Text("Sorry, aPNG stickers can't be played (yet)").font(.footnote)
                     }
-                            
+
                     if fullSticker.pack_id != nil {
                         Button(action: { packPresenting = true }) {
                             Label("View Sticker Pack", systemImage: "square.on.square")
@@ -135,8 +134,7 @@ struct StickerView: View {
                             }.padding(14)
                         })
                     }
-                }
-                else {
+                } else {
                     Text("Loading sticker...").font(.headline)
                     ProgressView()
                         .progressViewStyle(.linear)
@@ -145,7 +143,7 @@ struct StickerView: View {
                 }
             }.padding(14)
         }
-        .onHover { h in play = h }
+        .onHover { isHovered in play = isHovered }
         .onTapGesture {
             if fullSticker == nil { Task {
                 fullSticker = await DiscordAPI.getSticker(id: sticker.id)

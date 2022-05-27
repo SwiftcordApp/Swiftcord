@@ -10,33 +10,33 @@ import DiscordKit
 
 struct UserSettingsView: View {
     let user: User
-    
+
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway
-    
-    var body: some View {        
+
+    var body: some View {
         NavigationView {
             List {
 				NavigationLink("My Account", tag: SidebarLink.account, selection: $selectedLink) {
                     ScrollView { UserSettingsAccountView(user: user).padding(40) }
                 }
-                
+
 				NavigationLink("User Profile", tag: SidebarLink.profile, selection: $selectedLink) {
                     Text("")
                 }
-                
+
 				NavigationLink("Privacy & Safety", tag: SidebarLink.privacy, selection: $selectedLink) {
                     Text("")
                 }
-                
+
 				NavigationLink("Authorized Apps", tag: SidebarLink.apps, selection: $selectedLink) {
                     Text("")
                 }
-                                
+
 				NavigationLink("Connections", tag: SidebarLink.connections, selection: $selectedLink) {
                     Text("")
                 }
-                
+
 				NavigationLink("Log Out", tag: SidebarLink.logOut, selection: $selectedLink) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Log Out").font(.title)
@@ -49,7 +49,7 @@ struct UserSettingsView: View {
                         .controlSize(.large)
                         .buttonStyle(.borderedProminent)
                         .tint(.red)
-                        
+
                         Spacer()
                     }
                     .padding(40)

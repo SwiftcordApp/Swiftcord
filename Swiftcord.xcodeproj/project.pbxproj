@@ -464,7 +464,7 @@
 				DA4A888027C0AF3000720909 /* Sources */,
 				DA4A888127C0AF3000720909 /* Frameworks */,
 				DA4A888227C0AF3000720909 /* Resources */,
-				36004E1B283D61FE00F0BA73 /* ShellScript */,
+				36004E1B283D61FE00F0BA73 /* ShellScript */
 			);
 			buildRules = (
 			);
@@ -853,7 +853,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = "user-settings";
+				branch = main;
 				kind = branch;
 			};
 		};

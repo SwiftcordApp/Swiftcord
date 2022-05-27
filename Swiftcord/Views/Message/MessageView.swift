@@ -16,14 +16,14 @@ struct MessageView: View {
     let lineSpacing = 4 as CGFloat
     let quotedMsg: Message?
     let onQuoteClick: (String) -> Void
-    
+
     @State private var hovered = false
-    @State private var loadedQuotedMsg: Message? = nil
+    @State private var loadedQuotedMsg: Message?
     @State private var loadQuotedMsgErr = false
     @State private var playLoadAnim = false // Will turn true when first appeared
-    
+
     @EnvironmentObject var serverCtx: ServerContext
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
@@ -102,8 +102,7 @@ struct MessageView: View {
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id, clickDisabled: false)
-                    }
-                    else {
+                    } else {
                         Text(timestring)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
@@ -178,8 +177,7 @@ struct MessageView: View {
                             }
                         }
                     }
-                }
-                else if message.type == .guildMemberJoin {
+                } else if message.type == .guildMemberJoin {
                     Image(systemName: "person.badge.plus")
                         .font(.system(size: 16))
                         .padding([.leading, .trailing], 12)
@@ -195,7 +193,7 @@ struct MessageView: View {
         .background(hovered ? .gray.opacity(0.07) : .clear)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .animation(.linear(duration: 0.1), value: hovered)
-        .onHover { h in hovered = h }
+        .onHover { isHovered in hovered = isHovered }
         .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: playLoadAnim)
         .onAppear(perform: {
             playLoadAnim = true
@@ -208,7 +206,7 @@ struct MessageView: View {
             }
 
 			Divider()
-            
+
             Group {
 				Button(action: addReaction) {
                     Image(systemName: "face.smiling.fill")
@@ -223,7 +221,7 @@ struct MessageView: View {
                     Text("Pin Message")
                 }
             }
-            
+
             Divider()
 
 			Group {
@@ -236,7 +234,7 @@ struct MessageView: View {
 					Text("Delete Message").foregroundColor(.red)
 				}
 			}
-            
+
             Divider()
 
 			Group {

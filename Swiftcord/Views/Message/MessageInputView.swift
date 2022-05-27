@@ -10,7 +10,7 @@ import SwiftUI
 struct MessageAttachmentView: View {
     let attachment: URL
 	let onRemove: () -> Void
-    
+
     var body: some View {
 		ZStack(alignment: .topTrailing) {
 			GroupBox {
@@ -37,7 +37,7 @@ struct MessageAttachmentView: View {
 						.frame(maxWidth: .infinity, alignment: .leading)
 				}.frame(maxWidth: .infinity, maxHeight: .infinity)
 			}.frame(width: 150, height: 150)
-			
+
 			Button(action: onRemove) {
 				Image(systemName: "trash.square.fill")
 					.foregroundColor(.red)
@@ -58,13 +58,13 @@ struct MessageInputView: View {
 	@State private var showingAttachmentErr = false
 	@State private var attachmentErr = ""
     let onSend: (String, [URL]) -> Void
-    
+
     private func send() {
         guard message.hasContent() || !attachments.isEmpty else { return }
         onSend(message, attachments)
         withAnimation { attachments.removeAll() }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if !attachments.isEmpty {
@@ -72,14 +72,14 @@ struct MessageInputView: View {
                     HStack {
 						ForEach(attachments.indices, id: \.self) { idx in
 							MessageAttachmentView(attachment: attachments[idx]) {
-								withAnimation { let _ = attachments.remove(at: idx) }
+								withAnimation { _ = attachments.remove(at: idx) }
 							}
                         }
                     }.padding(16)
                 }.fixedSize(horizontal: false, vertical: true)
                 Divider()
             }
-            
+
             HStack(alignment: .center, spacing: 17) {
                 Button {
                     let panel = NSOpenPanel()
@@ -93,7 +93,7 @@ struct MessageInputView: View {
 								showingAttachmentErr = true
                                 return
                             }
-                            
+
                             guard !attachments.contains(panel.url!) else {
 								attachmentErr = "You've already selected that file"
 								showingAttachmentErr = true
@@ -108,7 +108,7 @@ struct MessageInputView: View {
 					}
                     .buttonStyle(.plain)
                     .padding(.leading, 18)
-            
+
 				TextField(placeholder, text: $message) { send() }
 					.textFieldStyle(.plain)
                     .fixedSize(horizontal: false, vertical: true)
@@ -117,7 +117,6 @@ struct MessageInputView: View {
                     .font(.system(size: 16))
                     .disableAutocorrection(false)
                     .padding([.top, .bottom], 12)
-                
 
                 Button(action: { send() }) {
 					Image(systemName: "arrow.up").font(.system(size: 20)).opacity(0.75)

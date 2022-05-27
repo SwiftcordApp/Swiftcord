@@ -14,19 +14,19 @@ struct BillingSettingsView: View {
                 NavigationLink("Discord Nitro") {
                     Text("Don't get nitro, nitro bad")
                 }
-                
+
                 NavigationLink("Server Boost") {
                     Text("")
                 }
-                
+
                 NavigationLink("Subscriptions") {
                     Text("")
                 }
-                
+
                 NavigationLink("Gift Inventory") {
                     Text("")
                 }
-                                
+
                 NavigationLink("Billing") {
                     Text("$$$ 💸")
                 }

@@ -12,7 +12,7 @@ import DiscordKit
 
 struct CurrentUserFooter: View {
     let user: User
-    
+
     var body: some View {
         HStack(spacing: 8) {
             ZStack {

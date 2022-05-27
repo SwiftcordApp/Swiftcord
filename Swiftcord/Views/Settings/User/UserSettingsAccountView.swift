@@ -107,7 +107,6 @@ struct UserSettingsAccountView: View {
 					.opacity(0.75)
 					.padding(.top, -8)
 
-
 				HStack(spacing: 16) {
 					Button("View Backup Codes") {
 

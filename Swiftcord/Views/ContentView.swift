@@ -17,7 +17,6 @@ struct CustomHorizontalDivider: View {
     }
 }
 
-
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -25,19 +24,19 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<MessageItem>*/
-    
+
     @State private var sheetOpen = false
-    @State private var selectedGuildID: Snowflake? = nil
-    @State private var loadingGuildID: Snowflake? = nil
-    
+    @State private var selectedGuildID: Snowflake?
+    @State private var loadingGuildID: Snowflake?
+
     @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @StateObject private var audioManager = AudioCenterManager()
-    
+
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
-    
+
     private let log = Logger(category: "ContentView")
-	
+
 	private func makeDMGuild() -> Guild {
 		return Guild(id: "@me",
 					 name: "DMs",
@@ -55,7 +54,7 @@ struct ContentView: View {
 					 nsfw_level: .default,
 					 premium_progress_bar_enabled: false)
 	}
-	
+
 	private func loadLastSelectedGuild() {
 		if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
 		   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
@@ -73,9 +72,9 @@ struct ContentView: View {
                         assetIconName: "DiscordIcon",
                         onSelect: { selectedGuildID = "@me" }
                     ).padding(.top, 4)
-                    
+
                     CustomHorizontalDivider().frame(width: 32, height: 1)
-                    
+
 					ForEach(
 						(gateway.cache.guilds.values.filter({
 							!(gateway.cache.userSettings?.guild_positions ?? []).contains($0.id)
@@ -91,7 +90,7 @@ struct ContentView: View {
                             onSelect: { selectedGuildID = guild.id }
                         )
                     }
-                    
+
                     ServerButton(
                         selected: false,
                         name: "Add a Server",
@@ -107,12 +106,12 @@ struct ContentView: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .safeAreaInset(edge: .top, content: {
                 // allows the top left button area to become transparent, like the sidebar
-                List(){}.listStyle(.sidebar).frame(width: 72, height: 0)
+                List {}.listStyle(.sidebar).frame(width: 72, height: 0)
                     .offset(y: -10)
                 // this overlay applies a border on the bottom edge of the view
                     .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
             })
-            
+
 			ServerView(guild: selectedGuildID == nil ? nil :
 						selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
         }
@@ -131,7 +130,7 @@ struct ContentView: View {
                     .environmentObject(loginWVModel)
                     .frame(width: 831, height: 580)
                 Button("Quit", role: .cancel) { exit(0) }.padding(8)
-                
+
                 if !loginWVModel.didFinishLoading {
                     ZStack {
                         ProgressView("Loading Discord login...")
@@ -142,22 +141,22 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: loginWVModel.token, perform: { tk in
-            if let tk = tk {
+        .onChange(of: loginWVModel.token, perform: { token in
+            if let token = token {
                 state.attemptLogin = false
-                Keychain.save(key: "authToken", data: tk)
+                Keychain.save(key: "authToken", data: token)
                 gateway.connect() // Reconnect to the socket
             }
         })
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
-			
-            let _ = gateway.onAuthFailure.addHandler {
+
+            _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
                 state.loadingState = .initial
                 log.debug("User isn't logged in, attempting login")
             }
-            let _ = gateway.onEvent.addHandler { (evt, d) in
+            _ = gateway.onEvent.addHandler { (evt, _) in
                 switch evt {
                 case .ready:
                     state.loadingState = .gatewayConn
@@ -173,7 +172,7 @@ struct ContentView: View {
                 default: break
                 }
             }
-            let _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
+            _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
     }
 

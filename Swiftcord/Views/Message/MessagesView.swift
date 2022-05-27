@@ -18,14 +18,14 @@ extension View {
 }
 
 struct MessagesViewHeader: View {
-	let ch: Channel?
-	
+	let chl: Channel?
+
 	@EnvironmentObject var gateway: DiscordGateway
-	
+
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
-			if ch?.type == .dm {
-				if let rID = ch?.recipient_ids?[0],
+			if chl?.type == .dm {
+				if let rID = chl?.recipient_ids?[0],
 				   let url = gateway.cache.users[rID]?.avatarURL(size: 160) {
 					CachedAsyncImage(url: url) { image in
 						image.resizable().scaledToFill()
@@ -33,7 +33,7 @@ struct MessagesViewHeader: View {
 						.frame(width: 80, height: 80)
 						.clipShape(Circle())
 				}
-			} else if ch?.type == .groupDM {
+			} else if chl?.type == .groupDM {
 				Image(systemName: "person.2.fill")
 					.font(.system(size: 30))
 					.foregroundColor(.white)
@@ -41,27 +41,27 @@ struct MessagesViewHeader: View {
 					.background(.red)
 					.clipShape(Circle())
 			} else { Image(systemName: "number").font(.system(size: 60)) }
-			
-			Text(ch?.type == .dm || ch?.type == .groupDM
-				 ? ch?.label(gateway.cache.users) ?? ""
-				 : "Welcome to #\(ch?.label() ?? "")!")
+
+			Text(chl?.type == .dm || chl?.type == .groupDM
+				 ? chl?.label(gateway.cache.users) ?? ""
+				 : "Welcome to #\(chl?.label() ?? "")!")
 				.font(.largeTitle)
 				.fontWeight(.heavy)
-			
-			if ch?.type == .dm {
+
+			if chl?.type == .dm {
 				Group {
 					Text("This is the beginning of your direct message history with ")
-						+ Text("@\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text("@\(chl?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
 						+ Text(".")
 				}.opacity(0.7)
-			} else if ch?.type == .groupDM {
+			} else if chl?.type == .groupDM {
 				Group {
 					Text("Welcome to the beginning of the ")
-						+ Text("\(ch?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
+						+ Text("\(chl?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
 						+ Text(" group.")
 				}.opacity(0.7)
 			} else {
-				Text("This is the start of the #\(ch?.name ?? "") channel. \(ch?.topic ?? "")")
+				Text("This is the start of the #\(chl?.name ?? "") channel. \(chl?.topic ?? "")")
 					.opacity(0.7)
 			}
 			Divider().padding(.top, 4)
@@ -76,37 +76,37 @@ struct MessagesView: View {
     @State private var enteredText = " "
     @State private var showingInfoBar = false
     @State private var loadError = false
-    @State private var infoBarData: InfoBarData? = nil
-    @State private var fetchMessagesTask: Task<(), Error>? = nil
+    @State private var infoBarData: InfoBarData?
+    @State private var fetchMessagesTask: Task<(), Error>?
     @State private var lastSentTyping = Date(timeIntervalSince1970: 0)
 	@State private var messageInputHeight = 0.0
-    
+
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
-    
+
     // Gateway
-    @State private var evtID: EventDispatch.HandlerIdentifier? = nil
-        
+    @State private var evtID: EventDispatch.HandlerIdentifier?
+
     private func fetchMoreMessages() {
-        guard let ch = ctx.channel else { return }
+        guard let channel = ctx.channel else { return }
         if let oldTask = fetchMessagesTask {
             oldTask.cancel()
             fetchMessagesTask = nil
         }
-        
+
         if loadError { showingInfoBar = false }
         loadError = false
-        
+
         fetchMessagesTask = Task {
             let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
-            
-            guard let m = await DiscordAPI.getChannelMsgs(
-                id: ch.id,
+
+            guard let newMessages = await DiscordAPI.getChannelMsgs(
+                id: channel.id,
                 before: lastMsg
             ) else {
                 try Task.checkCancellation() // Check if the task is cancelled before continuing
-                
+
                 fetchMessagesTask = nil
                 loadError = true
                 showingInfoBar = true
@@ -122,13 +122,13 @@ struct MessagesView: View {
             }
             state.loadingState = .messageLoad
             try Task.checkCancellation()
-            
-            reachedTop = m.count < 50
-            messages.append(contentsOf: m)
+
+            reachedTop = newMessages.count < 50
+            messages.append(contentsOf: newMessages)
             fetchMessagesTask = nil
         }
     }
-        
+
     private func sendMessage(content: String, attachments: [URL]) {
         lastSentTyping = Date(timeIntervalSince1970: 0)
         enteredText = ""
@@ -137,12 +137,13 @@ struct MessagesView: View {
             guard (await DiscordAPI.createChannelMsg(
                 message: NewMessage(
                     content: content,
-                    attachments: attachments.isEmpty ? nil : attachments.enumerated().map { (i, a) in
-                        NewAttachment(
-                            id: String(i),
-                            filename: try! a.resourceValues(forKeys: [URLResourceKey.nameKey]).name!
-                        )
-                    }
+                    attachments: attachments.isEmpty ? nil : attachments.enumerated()
+						.map { (idx, attachment) in
+							NewAttachment(
+								id: String(idx),
+								filename: try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!
+							)
+						}
                 ),
                 attachments: attachments,
                 id: ctx.channel!.id
@@ -160,7 +161,7 @@ struct MessagesView: View {
             }
         }
     }
-    
+
     var body: some View {
 		ZStack(alignment: .bottom) {
             ScrollView(.vertical) {
@@ -168,14 +169,14 @@ struct MessagesView: View {
                     // This whole view is flipped, so everything in it needs to be flipped as well
                     LazyVStack(alignment: .leading, spacing: 0) {
                         Spacer(minLength: 16 + (showingInfoBar ? 24 : 0) + messageInputHeight)
-                        
-                        ForEach(Array(messages.enumerated()), id: \.1.id) { (i, msg) in
+
+                        ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
                             MessageView(
                                 message: msg,
-                                shrunk: i < messages.count - 1 && msg.messageIsShrunk(prev: messages[i + 1]),
+                                shrunk: idx < messages.count - 1 && msg.messageIsShrunk(prev: messages[idx + 1]),
                                 quotedMsg: msg.message_reference != nil
-                                ? messages.first { m in
-                                    m.id == msg.message_reference!.message_id
+                                ? messages.first {
+                                    $0.id == msg.message_reference!.message_id
                                 } : nil,
                                 onQuoteClick: { id in
                                     withAnimation { proxy.scrollTo(id, anchor: .center) }
@@ -183,9 +184,8 @@ struct MessagesView: View {
                             )
                             .flip()
                         }
-                        
-                        if reachedTop { MessagesViewHeader(ch: ctx.channel).flip() }
-                        else {
+
+                        if reachedTop { MessagesViewHeader(chl: ctx.channel).flip() } else {
                             VStack(alignment: .leading, spacing: 16) {
                                 // TODO: Use a loop to create this
                                 LoFiMessageView()
@@ -217,10 +217,10 @@ struct MessagesView: View {
             .flip()
 			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
             .frame(maxHeight: .infinity)
-            
+
             ZStack(alignment: .topLeading) {
                 MessageInfoBarView(isShown: $showingInfoBar, state: $infoBarData)
-                
+
                 MessageInputView(
 					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
 					message: $enteredText, onSend: sendMessage
@@ -232,7 +232,7 @@ struct MessagesView: View {
                             // Send typing start msg once every 8s while typing
                             lastSentTyping = Date()
                             Task {
-                                let _ = await DiscordAPI.typingStart(id: ctx.channel!.id)
+                                _ = await DiscordAPI.typingStart(id: ctx.channel!.id)
                             }
                         }
                     }
@@ -240,10 +240,10 @@ struct MessagesView: View {
 						let typingMembers = ctx.channel == nil
 						? []
 						: ctx.typingStarted[ctx.channel!.id]?
-							.map { t in t.member?.nick ?? t.member?.user!.username ?? "" } ?? []
-						
+							.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+
 						if !typingMembers.isEmpty {
-							HStack() {
+							HStack {
 								// The dimensions are quite arbitrary
 								LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
 									.lottieLoopMode(.loop)
@@ -261,17 +261,17 @@ struct MessagesView: View {
 						}
 					}
 					.background {
-						GeometryReader { g in
+						GeometryReader { geomatry in
 							ZStack {}
-								.onAppear { messageInputHeight = g.size.height }
-								.onChange(of: g.size.height) { h in messageInputHeight = h }
+								.onAppear { messageInputHeight = geomatry.size.height }
+								.onChange(of: geomatry.size.height) { messageInputHeight = $0 }
 						}
 					}
             }
         }
         .frame(minWidth: 525)
-        .onChange(of: ctx.channel, perform: { ch in
-            guard ch != nil else { return }
+        .onChange(of: ctx.channel, perform: { channel in
+            guard channel != nil else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
             if loadError || fetchMessagesTask != nil { fetchMoreMessages() }
@@ -279,8 +279,8 @@ struct MessagesView: View {
             reachedTop = false
             lastSentTyping = Date(timeIntervalSince1970: 0)
         })
-        .onChange(of: state.loadingState) { ns in
-            if ns == .gatewayConn {
+        .onChange(of: state.loadingState) { loadingState in
+            if loadingState == .gatewayConn {
                 guard fetchMessagesTask == nil else { return }
                 messages = []
                 fetchMoreMessages()
@@ -289,12 +289,13 @@ struct MessagesView: View {
         .onDisappear {
             // Remove gateway event handler to prevent memory leaks
             guard let handlerID = evtID else { return}
-            let _ = gateway.onEvent.removeHandler(handler: handlerID)
+            _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
 			print("appear")
 			fetchMoreMessages()
-			
+
+			// swiftlint:disable identifier_name
             evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:
@@ -304,12 +305,10 @@ struct MessagesView: View {
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
-                    ctx.typingStarted[msg.channel_id]?.removeAll { t in
-                        t.user_id == msg.author.id
-                    }
+                    ctx.typingStarted[msg.channel_id]?.removeAll { $0.user_id == msg.author.id }
                 case .messageUpdate:
                     guard let newMsg = d as? PartialMessage else { break }
-                    if let updatedIdx = messages.firstIndex(where: { m in m.id == newMsg.id }) {
+					if let updatedIdx = messages.firstIndex(where: { $0.id == newMsg.id }) {
                         var updatedMsg = messages[updatedIdx]
                         updatedMsg.mergeWithPartialMsg(newMsg)
                         messages[updatedIdx] = updatedMsg
@@ -317,15 +316,15 @@ struct MessagesView: View {
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
                     guard deletedMsg.channel_id == ctx.channel?.id else { break }
-                    if let delIdx = messages.firstIndex(where: { m in m.id == deletedMsg.id }) {
-                        withAnimation { let _ = messages.remove(at: delIdx) }
+                    if let delIdx = messages.firstIndex(where: { $0.id == deletedMsg.id }) {
+                        withAnimation { _ = messages.remove(at: delIdx) }
                     }
                 case .messageDeleteBulk:
                     guard let deletedMsgs = d as? MessageDeleteBulk else { break }
                     guard deletedMsgs.channel_id == ctx.channel?.id else { break }
                     for msgID in deletedMsgs.id {
-                        if let delIdx = messages.firstIndex(where: { m in m.id == msgID }) {
-                            withAnimation { let _ = messages.remove(at: delIdx) }
+                        if let delIdx = messages.firstIndex(where: { $0.id == msgID }) {
+                            withAnimation { _ = messages.remove(at: delIdx) }
                         }
                     }
                 default: break

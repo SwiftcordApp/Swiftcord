@@ -24,7 +24,7 @@ enum AudioLoopMode {
 class AudioCenterManager: ObservableObject {
     private let player = AVQueuePlayer()
     private var timeObserverToken: Any?
-    
+
     @Published public var queue: [AudioCenterItems] = []
     @Published public var progress = 0.0
     @Published public var duration = 0.0
@@ -32,23 +32,23 @@ class AudioCenterManager: ObservableObject {
     @Published public var isStopped = true
     @Published public var isPlaying = false
     @Published public var loopMode: AudioLoopMode = .disabled
-    
-    public func append(source: URL, filename: String, from: String, at: Int? = nil) {
+
+    public func append(source: URL, filename: String, from: String, at index: Int? = nil) {
         let playerItem = AVPlayerItem(url: source)
         player.insert(playerItem,
-                      after: queue.isEmpty ? nil : queue[at ?? (queue.count - 1)].playerItem)
+                      after: queue.isEmpty ? nil : queue[index ?? (queue.count - 1)].playerItem)
         queue.insert(AudioCenterItems(
             playerItem: playerItem,
             filename: filename,
             from: from,
             addedAt: Int(Date().timeIntervalSince1970)
-        ), at: at ?? queue.count)
+        ), at: index ?? queue.count)
     }
-    
-    public func remove(at: Int) {
-        player.remove(queue.remove(at: at).playerItem)
+
+    public func remove(at index: Int) {
+        player.remove(queue.remove(at: index).playerItem)
     }
-    
+
     public func play() {
         player.volume = 1
         player.play()
@@ -82,11 +82,10 @@ class AudioCenterManager: ObservableObject {
         isPlaying = false
     }
     public func cycleLoopMode() {
-        if loopMode == .disabled { loopMode = .single }
-        else { loopMode = .disabled }
+        if loopMode == .disabled { loopMode = .single } else { loopMode = .disabled }
         // Looping the queue is harder and not implemented yet
     }
-    
+
     public func seekTo(seconds: Double) {
         isSeeking = true
         player.seek(
@@ -96,8 +95,8 @@ class AudioCenterManager: ObservableObject {
             self?.isSeeking = false
         }
     }
-    
-    @objc func playerDidFinishPlaying(note: NSNotification) {
+
+	@objc func playerDidFinishPlaying(note: NSNotification) {
         if loopMode == .single {
             player.pause()
             player.removeAllItems()
@@ -110,27 +109,27 @@ class AudioCenterManager: ObservableObject {
 		guard !queue.isEmpty else { return }
 		queue.removeFirst()
     }
-    
+
     init() {
         let timeScale = CMTimeScale(NSEC_PER_SEC)
         let time = CMTime(seconds: 0.5, preferredTimescale: timeScale)
 
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: time, queue: .main) {
-            [weak self] time in
+        timeObserverToken = player
+			.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
             guard !(self?.isSeeking ?? true) else { return }
             self?.progress = time.seconds
             if self?.player.currentItem?.duration.isValid ?? false {
                 self?.duration = (self?.player.currentItem?.duration.seconds ?? 0).fixNumbers()
             }
         }
-        
+
         NotificationCenter.default.addObserver(self,
             selector: #selector(playerDidFinishPlaying),
             name: .AVPlayerItemDidPlayToEndTime,
             object: player.currentItem
         )
     }
-    
+
     deinit {
         if let timeObserverToken = timeObserverToken {
             player.removeTimeObserver(timeObserverToken)

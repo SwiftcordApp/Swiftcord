@@ -13,35 +13,35 @@ struct ChannelButton: View {
     let channel: Channel
     let guild: Guild?
     @Binding var selectedCh: Channel?
-    
+
     var body: some View {
 		if channel.type == .dm || channel.type == .groupDM {
 			DMButton(dm: channel, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 		} else {
-			GuildChButton(ch: channel, guild: guild, selectedCh: $selectedCh)
+			GuildChButton(channel: channel, guild: guild, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 		}
     }
 }
 
 struct GuildChButton: View {
-	let ch: Channel
+	let channel: Channel
 	let guild: Guild?
 	@Binding var selectedCh: Channel?
-	
+
 	private let chIcons = [
 		ChannelType.voice: "speaker.wave.2.fill",
-		.news: "megaphone.fill",
+		.news: "megaphone.fill"
 	]
-	
+
 	var body: some View {
 		Button {
-			selectedCh = ch
-			UserDefaults.standard.setValue(ch.id.description, forKey: "guildLastCh.\(guild!.id.description)")
+			selectedCh = channel
+			UserDefaults.standard.setValue(channel.id.description, forKey: "guildLastCh.\(guild!.id.description)")
 		} label: {
-			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == ch.id) ? "newspaper.fill" : (chIcons[ch.type] ?? "number")
-			Label(ch.label() ?? "nil", systemImage: image)
+			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
+			Label(channel.label() ?? "nil", systemImage: image)
 				.padding(.vertical, 6)
 				.padding(.horizontal, 2)
 				.frame(maxWidth: .infinity, alignment: .leading)
@@ -52,9 +52,9 @@ struct GuildChButton: View {
 struct DMButton: View {
 	let dm: Channel
 	@Binding var selectedCh: Channel?
-	
+
 	@EnvironmentObject var gateway: DiscordGateway
-	
+
 	var body: some View {
 		Button {
 			selectedCh = dm
@@ -74,7 +74,7 @@ struct DMButton: View {
 						.background(.red)
 						.clipShape(Circle())
 				}
-				
+
 				VStack(alignment: .leading, spacing: 2) {
 					Text(dm.label(gateway.cache.users) ?? "nil")
 					if dm.type == .groupDM {
@@ -92,7 +92,7 @@ struct DMButton: View {
 struct DiscordChannelButton: ButtonStyle {
 	let isSelected: Bool
 	@State var isHovered: Bool = false
-	
+
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.buttonStyle(.borderless)

@@ -14,15 +14,15 @@ struct UserAvatarView: View {
     let guildID: Snowflake
     let webhookID: Snowflake?
     let clickDisabled: Bool
-    @State private var profile: UserProfile? = nil // Lazy-loaded full user
-    @State private var guildRoles: [Role]? = nil // Lazy-loaded guild roles
+    @State private var profile: UserProfile? // Lazy-loaded full user
+    @State private var guildRoles: [Role]? // Lazy-loaded guild roles
     @State private var infoPresenting = false
     @State private var note = ""
     @State private var loadFullFailed = false
-    
+
     var body: some View {
         let avatarURL = user.avatarURL()
-		
+
         CachedAsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
         } placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
@@ -53,8 +53,7 @@ struct UserAvatarView: View {
                 if let accentColor = profile?.user.accent_color ?? user.accent_color {
                     Rectangle().fill(Color(hex: accentColor))
                         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
-                }
-                else {
+                } else {
                     CachedAsyncImage(url: avatarURL) { image in
                         image.resizable().scaledToFill()
                     } placeholder: { ProgressView().progressViewStyle(.circular)}
@@ -78,7 +77,7 @@ struct UserAvatarView: View {
                 }
                 .offset(x: 14)
                 .padding(.top, -46)
-                
+
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .center, spacing: 0) {
                         Text(user.username)
@@ -101,14 +100,14 @@ struct UserAvatarView: View {
                     }
                     .padding(.bottom, -2)
                     .padding(.top, -8)
-                    
+
                     Divider()
                         .padding(.vertical, 8)
-                    
+
                     if webhookID != nil {
                         Text("This user is a webhook")
                         Button {
-                            
+
                         } label: {
                             Label("Manage Server Webhooks", systemImage: "link")
                                 .frame(maxWidth: .infinity)
@@ -122,7 +121,7 @@ struct UserAvatarView: View {
                                 .frame(maxWidth: .infinity)
 								.tint(.blue)
                         }
-                        
+
                         // Optionals are silly
 						if let bio = profile?.user.bio, !bio.isEmpty {
                             Text("ABOUT ME")
@@ -132,13 +131,13 @@ struct UserAvatarView: View {
                         } else if profile != nil {
                             Text("NO ABOUT").font(.headline)
                         }
-                        
+
 						if let profile = profile, guildID != "@me" {
 							if let guildRoles = guildRoles {
-								let roles = guildRoles.filter({ r in
-									profile.guild_member!.roles.contains(r.id)
-								})
-								
+								let roles = guildRoles.filter {
+									profile.guild_member!.roles.contains($0.id)
+								}
+
 								Text(roles.isEmpty
 									 ? "NO ROLES"
 									 : (roles.count == 1 ? "ROLE" : "ROLES")
@@ -166,7 +165,7 @@ struct UserAvatarView: View {
 									.tint(.blue)
 							}
 						}
-                        
+
                         Text("NOTE").font(.headline).padding(.top, 8)
                         // Notes are stored locally for now, but eventually will be synced with the Discord API
                         TextField("Add a note to this user (only visible to you)", text: $note)
@@ -174,8 +173,7 @@ struct UserAvatarView: View {
                             .onChange(of: note) { _ in
                                 if note.isEmpty {
                                     UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")
-                                }
-                                else {
+                                } else {
                                     UserDefaults.standard.set(note, forKey: "notes.\(user.id)")
                                 }
                             }

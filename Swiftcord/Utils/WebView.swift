@@ -14,9 +14,9 @@ import os
 class WebViewModel: ObservableObject {
     @Published var link: String
     @Published var didFinishLoading: Bool = false
-    @Published var token: String? = nil
+    @Published var token: String?
     @Published var pageTitle: String = ""
-    
+
     init(link: String) {
         self.link = link
     }
@@ -27,18 +27,23 @@ struct WebView: NSViewRepresentable {
     @EnvironmentObject var viewModel: WebViewModel
 
     private let webView: WKWebView = WKWebView()
-    
+
+	private func getB64Background(named name: String) -> String? {
+		let image = NSImage(named: name)
+		guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+		else { return nil }
+
+		let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+		let jpegData = bitmapRep.representation(using: .png, properties: [:])
+		return jpegData?.base64EncodedString()
+	}
+
     public func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator as? WKUIDelegate
         webView.configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
-		let backgroundImageB64: String? = {
-			let image = NSImage(named: "LoginBackground")
-			guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
-			let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
-			let jpegData = bitmapRep.representation(using: .png, properties: [:])
-			return jpegData?.base64EncodedString()
-		}()
+
+		let backgroundImageB64 = getB64Background(named: "LoginBackground")
 
         let interceptJS = """
         // Get rid of everything in localStorage for a fresh state
@@ -49,10 +54,10 @@ struct WebView: NSViewRepresentable {
         let c = console.log;
         // Remove window localStorage object to allow overwriting it
         delete window.localStorage;
-        
+
         // console.log wrapper with a tag
         const log = (o, s) => c('%c[LocalStorage Shim]%c', 'color:green;font-weight:700', '', o, s);
-        
+
         // Set
         const s = (k, v) => {
           log('SET', k + ' <- ' + v);
@@ -64,7 +69,7 @@ struct WebView: NSViewRepresentable {
           log('GET', k + ' -> ' + l[k]);
           return l[k];
         }
-        
+
         // Create a new localStorage object with a proxy
         window.localStorage = new Proxy({}, {
           get(target, name) {
@@ -78,7 +83,7 @@ struct WebView: NSViewRepresentable {
           },
           set(target, k, v) { s(k, v) }
         })
-        
+
         // Also overwrite some styles
         window.onload = () => {
           // Remove the oversaturated background
@@ -106,7 +111,7 @@ struct WebView: NSViewRepresentable {
 #if DEBUG
         webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
 #endif
-        
+
         webView.load(URLRequest(url: URL(string: viewModel.link)!))
         return webView
     }
@@ -116,21 +121,21 @@ struct WebView: NSViewRepresentable {
     public func makeCoordinator() -> Coordinator {
         return Coordinator(viewModel)
     }
-    
+
     // Handles the event that's sent from injected JavaScript once the token is available
     class EvtHandler: NSObject, WKScriptMessageHandler {
         private var viewModel: WebViewModel
-        
+
         init(_ viewModel: WebViewModel) {
            // Initialise the WebViewModel
            self.viewModel = viewModel
         }
-        
+
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             viewModel.token = message.body as? String
         }
     }
-    
+
     class Coordinator: NSObject, WKNavigationDelegate {
         private var viewModel: WebViewModel
         private let log = Logger(category: "WebViewCoordinator")
@@ -139,7 +144,7 @@ struct WebView: NSViewRepresentable {
            // Initialise the WebViewModel
            self.viewModel = viewModel
         }
-        
+
         public func webView(_: WKWebView, didFail: WKNavigation!, withError: Error) { }
 
         public func webView(_: WKWebView, didFailProvisionalNavigation: WKNavigation!, withError: Error) { }
@@ -159,9 +164,9 @@ struct WebView: NSViewRepresentable {
             decisionHandler(decision)
             log.debug("Navigation to \(navigationAction.request.url?.absoluteString ?? "[unknown URL]", privacy: .public) \(decision == .allow ? "allowed" : "cancelled", privacy: .public)")
         }
-        
+
         func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) { }
-        
+
         func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
             completionHandler(.performDefaultHandling, nil)
         }

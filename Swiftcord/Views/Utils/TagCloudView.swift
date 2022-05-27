@@ -22,38 +22,37 @@ struct TagCloudView<C: View>: View {
             }
         }
         .frame(height: totalHeight)// << variant for ScrollView/List
-        //.frame(maxHeight: totalHeight) // << variant for VStack
+        // .frame(maxHeight: totalHeight) // << variant for VStack
     }
 
-    private func generateContent(in g: GeometryProxy) -> some View {
+    private func generateContent(in geomatry: GeometryProxy) -> some View {
         var width = CGFloat.zero
         var height = CGFloat.zero
 
         return ZStack(alignment: .topLeading) {
-            ForEach(0..<content.count, id: \.self) { i in
-                content[i]
+            ForEach(0..<content.count, id: \.self) { contentIdx in
+                content[contentIdx]
                     .padding(2)
-                    .alignmentGuide(.leading, computeValue: { d in
-                        if (abs(width - d.width) > g.size.width)
-                        {
+                    .alignmentGuide(.leading) { dimen in
+                        if abs(width - dimen.width) > geomatry.size.width {
                             width = 0
-                            height -= d.height
+                            height -= dimen.height
                         }
                         let result = width
-                        if i == content.count - 1 {
-                            width = 0 //last item
+                        if contentIdx == content.count - 1 {
+                            width = 0 // last item
                         } else {
-                            width -= d.width
+                            width -= dimen.width
                         }
                         return result
-                    })
-                    .alignmentGuide(.top, computeValue: {d in
+                    }
+                    .alignmentGuide(.top) { _ in
                         let result = height
-                        if i == content.count - 1 {
+                        if contentIdx == content.count - 1 {
                             height = 0 // last item
                         }
                         return result
-                    })
+                    }
             }
         }.background(viewHeightReader($totalHeight))
     }

@@ -15,16 +15,18 @@ extension Int {
 
 		// Adapted from http://stackoverflow.com/a/18650828
 		let suffixes = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-		let k: Double = 1000
-		let i = floor(log(Double(self)) / log(k))
+		let base: Double = 1000
+		let unitIdx = floor(log(Double(self)) / log(base))
 
 		// Format number with thousands separator and everything below 1 GB with no decimal places.
 		let numberFormatter = NumberFormatter()
-		numberFormatter.maximumFractionDigits = i < 3 ? 0 : 1
+		numberFormatter.maximumFractionDigits = unitIdx < 3 ? 0 : 1
 		numberFormatter.numberStyle = .decimal
 
-		let numberString = numberFormatter.string(from: NSNumber(value: Double(self) / pow(k, i))) ?? "Unknown"
-		let suffix = suffixes[Int(i)]
+		let numberString = numberFormatter.string(
+			from: NSNumber(value: Double(self) / pow(base, unitIdx))
+		) ?? "Unknown"
+		let suffix = suffixes[Int(unitIdx)]
 		return "\(numberString) \(suffix)"
 	}
 }

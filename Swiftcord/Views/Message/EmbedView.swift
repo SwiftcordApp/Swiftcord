@@ -11,13 +11,13 @@ import DiscordKit
 
 struct EmbedView: View {
 	let embed: Embed
-	
+
 	private func groupFields(_fields: [EmbedField]) -> [[EmbedField]] {
 		var newArray = [[EmbedField]]()
 
 		var count = 0
 		var array_i = 0
-		
+
 		_fields.forEach { field in
 			if field.inline == true {
 				if count == 0 {
@@ -31,21 +31,20 @@ struct EmbedView: View {
 				newArray.append([field])
 			}
 		}
-		
+
 		return newArray
 	}
-	
+
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
 				if let author = embed.author {
-					HStack (alignment: .center, spacing: 8) {
-						if let icon_url = author.icon_url {
+					HStack(alignment: .center, spacing: 8) {
+						if let iconURL = author.icon_url {
 							let width = 24.0
 							let height = 24.0
-							CachedAsyncImage(url: URL(string: icon_url)) { phase in
-								if let image = phase.image { image.resizable().scaledToFill() }
-								else {
+							CachedAsyncImage(url: URL(string: iconURL)) { phase in
+								if let image = phase.image { image.resizable().scaledToFill() } else {
 									Spacer()
 										.frame(width: width, height: height)
 								}
@@ -57,9 +56,9 @@ struct EmbedView: View {
 							.cornerRadius(12)
 						}
 
-						if let author_name = author.name {
-							Text(.init(author.url != nil ? "[\(author_name)](\(author.url ?? ""))"
-									   : author_name))
+						if let authorName = author.name {
+							Text(.init(author.url != nil ? "[\(authorName)](\(author.url ?? ""))"
+									   : authorName))
 								.font(.title3)
 								.underline(true, color: .clear)
 								.textSelection(.enabled)
@@ -84,8 +83,8 @@ struct EmbedView: View {
 				if let fields = embed.fields {
 					let grouped_fields = groupFields(_fields: fields)
 
-					ForEach (0 ..< grouped_fields.count, id: \.self) { group_index in
-						HStack (alignment: .top, spacing: 5) {
+					ForEach(0 ..< grouped_fields.count, id: \.self) { group_index in
+						HStack(alignment: .top, spacing: 5) {
 							ForEach(grouped_fields[group_index]) { field in
 								VStack(alignment: .leading, spacing: 2) {
 									Text(field.name)
@@ -119,7 +118,7 @@ struct EmbedView: View {
 					.frame(width: width, height: height)
 					.cornerRadius(4)
 				}
-				
+
 				if let footer = embed.footer {
 					HStack {
 						if let iconURL = footer.icon_url {
@@ -135,17 +134,17 @@ struct EmbedView: View {
 							.frame(width: width, height: height)
 							.cornerRadius(10)
 						}
-						
+
 						Text(footer.text)
 							.font(.system(size: 12, weight: .semibold))
 							.textSelection(.enabled)
-						
+
 						if let timestamp = embed.timestamp {
 							Text("•")
 								.font(.title3)
 								.font(.system(size: 12, weight: .semibold))
 								.textSelection(.enabled)
-							
+
 							Text(timestamp.toDate(hasFractionalSeconds: false)?.toDateString() ?? "")
 								.font(.system(size: 12, weight: .semibold))
 								.textSelection(.enabled)

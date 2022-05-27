@@ -11,10 +11,10 @@ import CachedAsyncImage
 struct ServerButton: View {
 	let selected: Bool
 	let name: String
-	var systemIconName: String? = nil
-	var assetIconName: String? = nil
-	var serverIconURL: String? = nil
-	var bgColor: Color? = nil
+	var systemIconName: String?
+	var assetIconName: String?
+	var serverIconURL: String?
+	var bgColor: Color?
 	var noIndicator = false // Don't show capsule
 	var isLoading: Bool = false
 	let onSelect: () -> Void
@@ -69,7 +69,7 @@ struct ServerButtonStyle: ButtonStyle {
     let serverIconURL: String?
     let loading: Bool
     @Binding var hovered: Bool
-    
+
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             if let assetName = assetName {
@@ -95,8 +95,6 @@ struct ServerButtonStyle: ButtonStyle {
 					.font(.system(size: 15))
 					.lineLimit(1)
 			}
-            
-            if loading { /* TODO: Show some form of feedback */ }
         }
         .frame(width: 48, height: 48)
 		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))

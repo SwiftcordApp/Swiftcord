@@ -13,7 +13,7 @@ extension Date {
         dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm a")
         return dateFormatter.string(from: self)
     }
-    
+
     func toDateString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.setLocalizedDateFormatFromTemplate("dd/MM/yy")
@@ -22,7 +22,7 @@ extension Date {
 }
 
 extension Date {
-	static func - (d1: Date, d2: Date) -> TimeInterval {
-		return d1.timeIntervalSinceReferenceDate - d2.timeIntervalSinceReferenceDate
+	static func - (lhs: Date, rhs: Date) -> TimeInterval {
+		return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
 	}
 }

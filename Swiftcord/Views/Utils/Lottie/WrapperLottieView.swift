@@ -17,10 +17,10 @@ public final class WrapperAnimationView: NSView {
     init(animation: Lottie.Animation?, width: Double, height: Double) {
         self.width = width
         self.height = height
-        
+
         let animationView = AnimationView(animation: animation)
         animationView.contentMode = .scaleAspectFit
-        //animationView.widthAnchor
+        // animationView.widthAnchor
         animationView.translatesAutoresizingMaskIntoConstraints = false
         self.animationView = animationView
 

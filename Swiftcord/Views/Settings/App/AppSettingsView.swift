@@ -14,35 +14,35 @@ struct AppSettingsView: View {
                 NavigationLink("Appearance") {
                     Text("Don't get nitro, nitro bad")
                 }
-                
+
                 NavigationLink("Accessibility") {
                     Text("")
                 }
-                
+
                 NavigationLink("Voice & Video") {
                     Text("The 2 biggest pain points")
                 }
-                
+
                 NavigationLink("Text & Images") {
                     Text("")
                 }
-                                
+
                 NavigationLink("Notifications") {
                     Text("Cue Discord ping sound")
                 }
-                
+
                 NavigationLink("Keybinds") {
                     Text("")
                 }
-                                
+
                 NavigationLink("Language") {
                     Text("")
                 }
-                                                
+
                 NavigationLink("Streamer Mode") {
                     Text("")
                 }
-                
+
                 NavigationLink("Advanced") {
                     Text("")
                 }

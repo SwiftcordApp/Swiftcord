@@ -10,7 +10,7 @@ import SwiftUI
 struct CircularProgressView: View {
     var lineWidth: Double
     @Binding var progress: Double
-    
+
     var body: some View {
         ZStack {
             Circle()
@@ -18,7 +18,7 @@ struct CircularProgressView: View {
                     Color.secondary.opacity(0.2),
                     lineWidth: lineWidth
                 )
-            
+
             Circle()
                 .trim(from: 0, to: CGFloat(min(self.progress, 1.0)))
                 .stroke(

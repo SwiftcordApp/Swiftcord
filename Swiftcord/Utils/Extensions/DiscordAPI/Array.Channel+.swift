@@ -9,16 +9,16 @@ import DiscordKit
 
 extension Array where Element == Channel {
 	func discordSorted() -> Self {
-		sorted { c1, c2 in
+		sorted {
 			// This is a DM/Group DM channel
-			if c1.type == .dm || c1.type == .groupDM {
-				return c1.last_message_id ?? c1.id > c2.last_message_id ?? c2.id
+			if $0.type == .dm || $0.type == .groupDM {
+				return $0.last_message_id ?? $0.id > $1.last_message_id ?? $1.id
 		    }
-			
-			if c1.type == .voice, c2.type != .voice { return false }
-			if c1.type != .voice, c2.type == .voice { return true }
-			if let p1 = c1.position, let p2 = c2.position { return p2 > p1 }
-			return c2.id > c1.id
+
+			if $0.type == .voice, $1.type != .voice { return false }
+			if $0.type != .voice, $1.type == .voice { return true }
+			if let pos1 = $0.position, let pos2 = $1.position { return pos2 > pos1 }
+			return $1.id > $0.id
 		}
 	}
 }

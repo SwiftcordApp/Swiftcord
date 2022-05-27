@@ -9,13 +9,13 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
-            
+
 	private let loadingStrings: [(LoadingState, String)] = [
         (.initial, "Establishing Gateway connection"),
         (.gatewayConn, "Fetching latest messages"),
         (.messageLoad, "Done!")
     ]
-    
+
     private let loadingTips = [
         "You can use Streamer Mode to hide personal details while streaming.",
         "You can type /tableflip and /unflip to spice up your messages.",
@@ -45,7 +45,7 @@ struct LoadingView: View {
         "You can type / to view bot commands and other built-in commands",
         "You can type !!{asterisks}!! around your words to make them **bold**."
     ]
-    
+
     @State private var displayedTip = ""
 
     var body: some View {
@@ -59,7 +59,7 @@ struct LoadingView: View {
             )
             .frame(width: 280, height: 150)
             .lottieLoopMode(.loop)
-            
+
 			Text(loadingStrings.first(where: { $0.0 == state.loadingState })?.1 ?? "").font(.title3)
                 .animation(.spring(), value: state.loadingState)
             ProgressView(value: Double(loadingNum + 1) / Double(loadingStrings.count))

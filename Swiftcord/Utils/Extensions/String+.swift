@@ -27,7 +27,7 @@ extension String {
     var containsEmoji: Bool { contains { $0.isEmoji } }
 
     var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
-    
+
     var containsOnlyEmojiAndSpaces: Bool {
         replacingOccurrences(of: " ", with: "").containsOnlyEmoji
     }

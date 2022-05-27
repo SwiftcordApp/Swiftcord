@@ -14,16 +14,16 @@ struct NavigationCommands: Commands {
 				.keyboardShortcut(.upArrow, modifiers: [.command, .option])
 			Button("Next Server") {}
 				.keyboardShortcut(.downArrow, modifiers: [.command, .option])
-			
+
 			Divider()
-			
+
 			Button("Previous Channel") {}
 				.keyboardShortcut(.upArrow, modifiers: [.option])
 			Button("Next Channel") {}
 				.keyboardShortcut(.downArrow, modifiers: [.option])
-			
+
 			Divider()
-			
+
 			Button("DMs") {}
 				.keyboardShortcut(.rightArrow, modifiers: [.command, .option])
 			Button("Create/Join Server") {}

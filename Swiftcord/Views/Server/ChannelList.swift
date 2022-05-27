@@ -27,11 +27,11 @@ struct ChannelList: View {
 				}
 			}
 
-			let categoryChannels = channels.filter({ c in c.parent_id == nil && c.type == .category }).discordSorted()
-			ForEach(categoryChannels, id: \.id) { ch in
-				Section(header: Text(ch.name?.uppercased() ?? "")) {
+			let categoryChannels = channels.filter({ $0.parent_id == nil && $0.type == .category }).discordSorted()
+			ForEach(categoryChannels, id: \.id) { channel in
+				Section(header: Text(channel.name?.uppercased() ?? "")) {
 					// Channels in this section
-					let channels = channels.filter({ $0.parent_id == ch.id }).discordSorted()
+					let channels = channels.filter({ $0.parent_id == channel.id }).discordSorted()
 					ForEach(channels, id: \.id) { channel in
 						ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
 							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))

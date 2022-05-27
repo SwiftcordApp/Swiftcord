@@ -24,7 +24,7 @@ struct LoFiMessageView: View {
 							.padding(.bottom, 1)
                     }
                 ).padding(.horizontal, -2)
-                
+
                 if Double.random(in: 0...1) < 0.3 {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(.gray.opacity(0.05))
@@ -36,7 +36,6 @@ struct LoFiMessageView: View {
         .padding(.trailing, 48)
     }
 }
-
 
 struct LoFiMessageView_Previews: PreviewProvider {
     static var previews: some View {

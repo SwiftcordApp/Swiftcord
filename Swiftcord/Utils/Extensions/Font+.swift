@@ -13,12 +13,12 @@ extension Font {
     public static var largeTitle: Font {
         return Font.custom("Ginto Bold", size: NSFont.preferredFont(forTextStyle: .largeTitle).pointSize)
     }
-    
+
     // Headline
     public static var headline: Font {
         return Font.custom("Ginto Medium", size: NSFont.preferredFont(forTextStyle: .headline).pointSize)
     }
-    
+
     // Titles
     public static var title: Font {
         return Font.custom("Ginto Bold", size: NSFont.preferredFont(forTextStyle: .title1).pointSize)

@@ -9,26 +9,26 @@ import SwiftUI
 import DiscordKit
 
 class ServerContext: ObservableObject {
-    @Published public var channel: Channel? = nil
-    @Published public var guild: Guild? = nil
+    @Published public var channel: Channel?
+    @Published public var guild: Guild?
     @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
 }
 
 struct ServerView: View {
 	let guild: Guild?
-    @State private var evtID: EventDispatch.HandlerIdentifier? = nil
+    @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
-    
+
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var audioManager: AudioCenterManager
-    
+
     @StateObject private var serverCtx = ServerContext()
-	
+
 	private func loadChannels() {
 		guard let channels = serverCtx.guild?.channels
 		else { return }
-		
+
 		if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(serverCtx.guild!.id)"),
 		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
 			   serverCtx.channel = lastChObj
@@ -36,29 +36,29 @@ struct ServerView: View {
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
-		
+
 		if serverCtx.channel == nil { state.loadingState = .messageLoad }
 		// Prevent deadlocking if there are no DMs/channels
     }
-	
-	private func bootstrapGuild(_ g: Guild) {
-		serverCtx.guild = g
+
+	private func bootstrapGuild(with guild: Guild) {
+		serverCtx.guild = guild
 		loadChannels()
 		// Sending malformed IDs causes an instant Gateway session termination
-		guard !g.isDMChannel else { return }
+		guard !guild.isDMChannel else { return }
 		// Subscribe to typing events
 		gateway.socket.send(
 			op: .subscribeGuildEvents,
-			data: SubscribeGuildEvts(guild_id: g.id, typing: true)
+			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
 	}
-    
+
     private func toggleSidebar() {
         #if os(macOS)
 		NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
         #endif
     }
-    
+
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -76,7 +76,6 @@ struct ServerView: View {
 					Text("No server selected")
 						.frame(minWidth: 240, maxHeight: .infinity)
 				}
-				
 
                 if !gateway.connected || !gateway.reachable {
 					Label(gateway.reachable
@@ -89,7 +88,7 @@ struct ServerView: View {
                 }
 				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
-            
+
 			if serverCtx.channel != nil {
 				MessagesView()
 					.environmentObject(serverCtx)
@@ -132,13 +131,13 @@ You don't have access to any text channels or there are none in this server.
             if count > oldCount { mediaCenterOpen = true }
         }
         .onChange(of: guild) { newGuild in
-			guard let g = newGuild else { return }
-			bootstrapGuild(g)
+			guard let newGuild = newGuild else { return }
+			bootstrapGuild(with: newGuild)
 		}
-        .onChange(of: state.loadingState) { s in if s == .gatewayConn { loadChannels() }}
+        .onChange(of: state.loadingState) { newState in if newState == .gatewayConn { loadChannels() }}
         .onAppear {
-			if let g = guild { bootstrapGuild(g) }
-			
+			if let guild = guild { bootstrapGuild(with: guild) }
+
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
                 /*case .channelUpdate:
@@ -161,9 +160,9 @@ You don't have access to any text channels or there are none in this server.
                     }
                     serverCtx.typingStarted[typingData.channel_id]!.append(typingData)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 9) {
-                        serverCtx.typingStarted[typingData.channel_id]?.removeAll { t in
-                            t.user_id == typingData.user_id
-                            && t.timestamp == typingData.timestamp
+                        serverCtx.typingStarted[typingData.channel_id]?.removeAll {
+                            $0.user_id == typingData.user_id
+                            && $0.timestamp == typingData.timestamp
                         }
                     }
                 default: break
@@ -171,7 +170,7 @@ You don't have access to any text channels or there are none in this server.
             }
         }
         .onDisappear {
-            if let evtID = evtID { let _ = gateway.onEvent.removeHandler(handler: evtID) }
+            if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
     }
 }
