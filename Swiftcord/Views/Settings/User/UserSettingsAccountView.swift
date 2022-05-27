@@ -57,7 +57,7 @@ struct UserSettingsAccountView: View {
 
 	var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
-			Text("My Profile").font(.title)
+			Text("My Account").font(.title)
 			LargeUserProfile(user: user) {
 				GroupBox {
 					VStack(alignment: .leading, spacing: 4) {
@@ -78,7 +78,7 @@ struct UserSettingsAccountView: View {
 						Divider().padding(.vertical, 10)
 
 						Text("PHONE NUMBER").font(.headline).opacity(0.75)
-						Text("Retrieving phone number isn't implemented yet")
+						Text(user.phone ?? "You haven't added a phone number yet.")
 							.font(.system(size: 16))
 							.textSelection(.enabled)
 					}.padding(10).frame(maxWidth: .infinity)

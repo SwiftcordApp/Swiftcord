@@ -77,10 +77,11 @@ struct ContentView: View {
                     CustomHorizontalDivider().frame(width: 32, height: 1)
                     
 					ForEach(
-						(gateway.cache.guilds.values
-							.filter({ !gateway.cache.guildSequence.contains($0.id) })
-						 .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
-						+ gateway.cache.guildSequence.compactMap({ gateway.cache.guilds[$0] })
+						(gateway.cache.guilds.values.filter({
+							!(gateway.cache.userSettings?.guild_positions ?? []).contains($0.id)
+						}).sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
+						+ (gateway.cache.userSettings?.guild_positions ?? [])
+							.compactMap({ gateway.cache.guilds[$0] })
 					) { guild in
                         ServerButton(
                             selected: selectedGuildID == guild.id || loadingGuildID == guild.id,

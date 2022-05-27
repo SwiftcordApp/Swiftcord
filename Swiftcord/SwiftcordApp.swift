@@ -20,6 +20,7 @@ struct SwiftcordApp: App {
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.preferredColorScheme(gateway.cache.userSettings?.theme == UITheme.light ? .light : .dark)
 				.overlay(LoadingView())
 				.environmentObject(gateway)
 				.environmentObject(state)
@@ -36,6 +37,7 @@ struct SwiftcordApp: App {
 
 		Settings {
 			SettingsView()
+				.preferredColorScheme(gateway.cache.userSettings?.theme == .light ? .light : .dark)
 				.environmentObject(gateway)
 				.environmentObject(state)
 		}
