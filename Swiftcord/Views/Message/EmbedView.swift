@@ -165,7 +165,7 @@ struct EmbedView: View {
 				.frame(maxWidth: 4, maxHeight: .infinity)
 				.clipped()
 				Spacer()
-			}
+			}.drawingGroup()
 		)
 		.frame(minWidth: 400, maxWidth: 520, alignment: .leading)
 	}

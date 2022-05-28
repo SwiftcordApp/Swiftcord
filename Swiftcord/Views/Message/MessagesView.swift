@@ -292,7 +292,6 @@ struct MessagesView: View {
             _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
-			print("appear")
 			fetchMoreMessages()
 
 			// swiftlint:disable identifier_name
@@ -331,12 +330,5 @@ struct MessagesView: View {
                 }
             })
         }
-    }
-}
-
-struct MessagesView_Previews: PreviewProvider {
-    static var previews: some View {
-        // MessagesView()
-        Text("TODO")
     }
 }

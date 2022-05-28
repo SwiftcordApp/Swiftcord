@@ -50,7 +50,7 @@ struct MessageView: View {
 								Text(quotedMsg.author.username)
 									.font(.system(size: 14))
 									.opacity(0.9)
-								Text(quotedMsg.content)
+								Text(.init(quotedMsg.content))
 									.font(.system(size: 14))
 									.opacity(0.75)
 									.lineLimit(1)
@@ -91,7 +91,9 @@ struct MessageView: View {
                     }
                     .padding(.bottom, 4)
                     Spacer()
-                }.padding(.leading, 20)
+                }
+				.drawingGroup()
+				.padding(.leading, 20)
             }
             HStack(
                 alignment: message.type == .guildMemberJoin || message.type == .userPremiumGuildSub ? .center : .top,
