@@ -20,7 +20,6 @@ struct MessageView: View {
     @State private var hovered = false
     @State private var loadedQuotedMsg: Message?
     @State private var loadQuotedMsgErr = false
-    @State private var playLoadAnim = false // Will turn true when first appeared
 
     @EnvironmentObject var serverCtx: ServerContext
 
@@ -194,12 +193,7 @@ struct MessageView: View {
         .padding(.vertical, lineSpacing / 2)
         .background(hovered ? .gray.opacity(0.07) : .clear)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
-        .animation(.linear(duration: 0.1), value: hovered)
         .onHover { isHovered in hovered = isHovered }
-        .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: playLoadAnim)
-        .onAppear(perform: {
-            playLoadAnim = true
-        })
         .contextMenu {
 			Button(action: reply) {
                 // Using Label(_:systemImage:) doesn't show image on macOS

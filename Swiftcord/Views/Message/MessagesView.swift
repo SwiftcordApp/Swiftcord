@@ -21,7 +21,7 @@ struct MessagesViewHeader: View {
 	let chl: Channel?
 
 	@EnvironmentObject var gateway: DiscordGateway
-
+	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			if chl?.type == .dm {
@@ -70,7 +70,11 @@ struct MessagesViewHeader: View {
 	}
 }
 
-struct MessagesView: View {
+struct MessagesView: View, Equatable {
+	static func == (lhs: MessagesView, rhs: MessagesView) -> Bool {
+		lhs.messages == rhs.messages
+	}
+
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
