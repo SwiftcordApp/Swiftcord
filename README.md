@@ -23,7 +23,6 @@ me to continue developing it**
 * [FAQ](#faq)
 * [Current State](#current-state)
 * [Roadmap](#roadmap)
-* [Screenshots](#screenshots) (Might be outdated)
 * [Contributions](#contributions) - Read this before contributing
 * [Copyright Notice](#copyright-notice)
 
@@ -40,11 +39,18 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 ---
 
 ## Releases
-For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip).
 
-Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/).
-However, it is recommended to download the nightly version or build Swiftcord from source 
-for the latest features and fixes.
+### Nightly Builds (Latest fixes/features, might be unstable)
+For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
+
+### Alpha (More stable, less updated)
+Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
+
+### Homebrew
+Swiftcord is also available on homebrew as a cask: `brew install swiftcord`. Versions are
+lockstepped with alpha releases on GitHub releases.
+
+<!-- todo: Add building from source -->
 
 ### Requirements
 * OS: macOS Monterey and above (>= 12.0)
@@ -149,28 +155,6 @@ and they may not neccessarily be implemented in sequence.
 * ✅ -> Complete
 * ⏱ -> Implementation in progress
 * ❌ -> Not started
-
----
-
-## Screenshots
-
-#### General messages with replies
-![General messages and replies in a channel](README_Resources/generalMessages.png)
-
-#### Rich embeds sent by a webhook
-![Rich embeds and webhook messages](README_Resources/webhookEmbeds.png)
-
-#### Channel with welcome message and animated stickers
-![Welcome messages with stickers](README_Resources/stickers.png)
-
-#### User profile popover
-![A user's profile](README_Resources/userProfile.png)
-
-#### Loading screen
-![Loading screen](README_Resources/loadingChannels.png)
-
-#### Login flow (video)
-![Login flow](README_Resources/loginFlow.mp4)
 
 ---
 
