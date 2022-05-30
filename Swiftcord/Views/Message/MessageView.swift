@@ -20,7 +20,6 @@ struct MessageView: View {
     @State private var hovered = false
     @State private var loadedQuotedMsg: Message?
     @State private var loadQuotedMsgErr = false
-    @State private var playLoadAnim = false // Will turn true when first appeared
 
     @EnvironmentObject var serverCtx: ServerContext
 
@@ -50,7 +49,7 @@ struct MessageView: View {
 								Text(quotedMsg.author.username)
 									.font(.system(size: 14))
 									.opacity(0.9)
-								Text(quotedMsg.content)
+								Text(.init(quotedMsg.content))
 									.font(.system(size: 14))
 									.opacity(0.75)
 									.lineLimit(1)
@@ -75,14 +74,14 @@ struct MessageView: View {
 										return
 									}
 
-									guard let m = await DiscordAPI.getChannelMsg(
+									guard let message = await DiscordAPI.getChannelMsg(
 										id: message.message_reference!.channel_id ?? message.channel_id,
 										msgID: message.message_reference!.message_id!
 									) else {
 										loadQuotedMsgErr = true
 										return
 									}
-									loadedQuotedMsg = m
+									loadedQuotedMsg = message
 								}}
 							Text("Loading message...")
 								.font(.system(size: 14))
@@ -91,7 +90,8 @@ struct MessageView: View {
                     }
                     .padding(.bottom, 4)
                     Spacer()
-                }.padding(.leading, 20)
+                }
+				.padding(.leading, 20)
             }
             HStack(
                 alignment: message.type == .guildMemberJoin || message.type == .userPremiumGuildSub ? .center : .top,
@@ -192,12 +192,7 @@ struct MessageView: View {
         .padding(.vertical, lineSpacing / 2)
         .background(hovered ? .gray.opacity(0.07) : .clear)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
-        .animation(.linear(duration: 0.1), value: hovered)
         .onHover { isHovered in hovered = isHovered }
-        .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: playLoadAnim)
-        .onAppear(perform: {
-            playLoadAnim = true
-        })
         .contextMenu {
 			Button(action: reply) {
                 // Using Label(_:systemImage:) doesn't show image on macOS

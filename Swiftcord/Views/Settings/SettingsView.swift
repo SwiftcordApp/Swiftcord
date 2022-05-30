@@ -22,7 +22,7 @@ struct SettingsView: View {
 
 private extension SettingsView {
 	struct SettingsWithUserView: View {
-		let user: User
+		let user: CurrentUser
 
 		var body: some View {
 			TabView {

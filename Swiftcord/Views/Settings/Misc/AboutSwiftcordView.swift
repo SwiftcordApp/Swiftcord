@@ -16,6 +16,10 @@ struct AboutSwiftcordView: View {
 					VStack(alignment: .leading, spacing: 8) {
 						Text("Swiftcord").font(.largeTitle)
 						Text("A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM.")
+
+						// IMO its better to just crash if these are missing in the info dict.
+						// If they are nil there are bigger problems than the app crashing.
+						// swiftlint:disable force_cast
 						Text("Version \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String) (Build: \(Bundle.main.infoDictionary!["CFBundleVersion"] as! String))").font(.caption)
 					}
 					Spacer()

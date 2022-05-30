@@ -104,16 +104,18 @@ struct ContentView: View {
                 .frame(width: 72)
             }
             .frame(maxHeight: .infinity, alignment: .top)
-            .safeAreaInset(edge: .top, content: {
-                // allows the top left button area to become transparent, like the sidebar
+            .safeAreaInset(edge: .top) {
                 List {}.listStyle(.sidebar).frame(width: 72, height: 0)
                     .offset(y: -10)
-                // this overlay applies a border on the bottom edge of the view
-                    .overlay(Rectangle().frame(width: nil, height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
-            })
+            }
 
-			ServerView(guild: selectedGuildID == nil ? nil :
-						selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
+			// Using the .equatable() modifier on this View causes a swift-frontend
+			// bus error when compiling for release. I have no idea why that happens.
+			ServerView(
+				guild: selectedGuildID == nil
+				? nil
+				: (selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
+			)
         }
         .environmentObject(audioManager)
         .onChange(of: selectedGuildID) { id in

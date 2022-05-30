@@ -9,7 +9,7 @@ import SwiftUI
 import DiscordKit
 
 struct UserSettingsAccountView: View {
-	let user: User
+	let user: CurrentUser
 
 	@State private var changePwSheetShown = false
 	@State private var oldPw = ""
@@ -71,7 +71,7 @@ struct UserSettingsAccountView: View {
 						Divider().padding(.vertical, 10)
 
 						Text("EMAIL").font(.headline).opacity(0.75)
-						Text(user.email ?? "No email")
+						Text(user.email)
 							.font(.system(size: 16))
 							.textSelection(.enabled)
 
@@ -99,9 +99,9 @@ struct UserSettingsAccountView: View {
 					newPw = ""
 				}) { changePwDialog }
 
-				Text("TWO-FACTOR AUTHENTHICATION" + ((user.mfa_enabled ?? false) ? " ENABLED" : ""))
+				Text("TWO-FACTOR AUTHENTHICATION" + (user.mfa_enabled ? " ENABLED" : ""))
 					.font(.headline)
-					.foregroundColor((user.mfa_enabled ?? false) ? .green : nil)
+					.foregroundColor(user.mfa_enabled ? .green : nil)
 					.padding(.top, 12)
 				Text("Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in.")
 					.opacity(0.75)

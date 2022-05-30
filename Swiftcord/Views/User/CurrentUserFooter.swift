@@ -11,7 +11,7 @@ import CachedAsyncImage
 import DiscordKit
 
 struct CurrentUserFooter: View {
-    let user: User
+    let user: CurrentUser
 
     var body: some View {
         HStack(spacing: 8) {

@@ -9,7 +9,7 @@ import SwiftUI
 import DiscordKit
 
 struct UserSettingsView: View {
-    let user: User
+    let user: CurrentUser
 
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway

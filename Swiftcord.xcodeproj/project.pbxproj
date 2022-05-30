@@ -54,9 +54,12 @@
 		DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD227D4D073009FD740 /* AppSettingsView.swift */; };
 		DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD427D4D120009FD740 /* ActivitySettingsView.swift */; };
 		DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */; };
-		DA520AD927D4E7A4009FD740 /* LargeUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */; };
+		DA520AD927D4E7A4009FD740 /* LargeUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD827D4E7A3009FD740 /* LargeUserProfileView.swift */; };
 		DA520ADD27D643CE009FD740 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADC27D643CE009FD740 /* Int+.swift */; };
 		DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* Bool+.swift */; };
+		DA54D5712841D6CF00B11857 /* MiniUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */; };
+		DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D573284497E400B11857 /* ProfileAccentMask.swift */; };
+		DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5752844B9C500B11857 /* CurrentUser+.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
@@ -129,9 +132,12 @@
 		DA520AD227D4D073009FD740 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		DA520AD427D4D120009FD740 /* ActivitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingsView.swift; sourceTree = "<group>"; };
 		DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscSettingsView.swift; sourceTree = "<group>"; };
-		DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeUserProfile.swift; sourceTree = "<group>"; };
+		DA520AD827D4E7A3009FD740 /* LargeUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeUserProfileView.swift; sourceTree = "<group>"; };
 		DA520ADC27D643CE009FD740 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		DA520AE127D76BEB009FD740 /* Bool+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+.swift"; sourceTree = "<group>"; };
+		DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniUserProfileView.swift; sourceTree = "<group>"; };
+		DA54D573284497E400B11857 /* ProfileAccentMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccentMask.swift; sourceTree = "<group>"; };
+		DA54D5752844B9C500B11857 /* CurrentUser+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUser+.swift"; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -196,9 +202,9 @@
 		DA2384BD27CCB0FD009E15E0 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				DA54D572284497CC00B11857 /* Profile */,
 				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
 				DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */,
-				DA520AD827D4E7A3009FD740 /* LargeUserProfile.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -365,6 +371,16 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
+		DA54D572284497CC00B11857 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DA520AD827D4E7A3009FD740 /* LargeUserProfileView.swift */,
+				DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */,
+				DA54D573284497E400B11857 /* ProfileAccentMask.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		DA7720CE283F182700D3C335 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +424,7 @@
 				E7AF1C2A282FA400001F78DF /* Guild+.swift */,
 				DA32EF4F27C8D7E000A9ED72 /* Message+.swift */,
 				DA32EF5127C8FBB200A9ED72 /* User+.swift */,
+				DA54D5752844B9C500B11857 /* CurrentUser+.swift */,
 			);
 			path = DiscordAPI;
 			sourceTree = "<group>";
@@ -464,7 +481,7 @@
 				DA4A888027C0AF3000720909 /* Sources */,
 				DA4A888127C0AF3000720909 /* Frameworks */,
 				DA4A888227C0AF3000720909 /* Resources */,
-				36004E1B283D61FE00F0BA73 /* ShellScript */
+				36004E1B283D61FE00F0BA73 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -576,6 +593,7 @@
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
+				DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,
@@ -590,11 +608,12 @@
 				DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */,
 				DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
-				DA520AD927D4E7A4009FD740 /* LargeUserProfile.swift in Sources */,
+				DA520AD927D4E7A4009FD740 /* LargeUserProfileView.swift in Sources */,
 				DA520ACF27D4CE5E009FD740 /* UserSettingsView.swift in Sources */,
 				DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */,
 				E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */,
 				DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */,
+				DA54D5712841D6CF00B11857 /* MiniUserProfileView.swift in Sources */,
 				DA32EF5227C8FBB200A9ED72 /* User+.swift in Sources */,
 				DA520AD127D4CFCF009FD740 /* BillingSettingsView.swift in Sources */,
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
@@ -614,6 +633,7 @@
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
+				DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */,
 				DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */,
 				DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */,
 				DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */,
@@ -853,7 +873,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
+				branch = butter;
 				kind = branch;
 			};
 		};

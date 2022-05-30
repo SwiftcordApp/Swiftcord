@@ -12,9 +12,10 @@ class ServerContext: ObservableObject {
     @Published public var channel: Channel?
     @Published public var guild: Guild?
     @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
+	@Published public var roles: [Role] = []
 }
 
-struct ServerView: View {
+struct ServerView: View, Equatable {
 	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
@@ -43,14 +44,21 @@ struct ServerView: View {
 
 	private func bootstrapGuild(with guild: Guild) {
 		serverCtx.guild = guild
+		serverCtx.roles = []
 		loadChannels()
 		// Sending malformed IDs causes an instant Gateway session termination
 		guard !guild.isDMChannel else { return }
+
 		// Subscribe to typing events
 		gateway.socket.send(
 			op: .subscribeGuildEvents,
 			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
+		// Retrieve guild roles to update context
+		Task {
+			guard let newRoles = await DiscordAPI.getGuildRoles(id: guild.id) else { return }
+			serverCtx.roles = newRoles
+		}
 	}
 
     private func toggleSidebar() {
@@ -64,6 +72,7 @@ struct ServerView: View {
             VStack(spacing: 0) {
 				if let guild = guild {
 					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
+						.equatable()
 						.toolbar {
 							ToolbarItem {
 								Text(guild.name)
@@ -91,6 +100,7 @@ struct ServerView: View {
 
 			if serverCtx.channel != nil {
 				MessagesView()
+					.equatable()
 					.environmentObject(serverCtx)
 			} else {
 				VStack(spacing: 24) {
@@ -138,6 +148,7 @@ You don't have access to any text channels or there are none in this server.
         .onAppear {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
+			// swiftlint:disable identifier_name
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
                 /*case .channelUpdate:
@@ -173,4 +184,8 @@ You don't have access to any text channels or there are none in this server.
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
     }
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.guild == rhs.guild
+	}
 }

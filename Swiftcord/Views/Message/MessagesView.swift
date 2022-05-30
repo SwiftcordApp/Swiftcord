@@ -70,7 +70,11 @@ struct MessagesViewHeader: View {
 	}
 }
 
-struct MessagesView: View {
+struct MessagesView: View, Equatable {
+	static func == (lhs: MessagesView, rhs: MessagesView) -> Bool {
+		lhs.messages == rhs.messages
+	}
+
     @State private var reachedTop = false
     @State private var messages: [Message] = []
     @State private var enteredText = " "
@@ -292,7 +296,6 @@ struct MessagesView: View {
             _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
-			print("appear")
 			fetchMoreMessages()
 
 			// swiftlint:disable identifier_name
@@ -331,12 +334,5 @@ struct MessagesView: View {
                 }
             })
         }
-    }
-}
-
-struct MessagesView_Previews: PreviewProvider {
-    static var previews: some View {
-        // MessagesView()
-        Text("TODO")
     }
 }

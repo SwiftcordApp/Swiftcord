@@ -10,7 +10,7 @@ import CachedAsyncImage
 import DiscordKit
 
 struct LargeUserProfile<Content: View>: View {
-    let user: User
+    let user: CurrentUser
     @ViewBuilder var slot: Content
 
     @State private var selectorIndex = 0
@@ -35,6 +35,7 @@ struct LargeUserProfile<Content: View>: View {
             if let accentColor = user.accent_color {
                 Rectangle().fill(Color(hex: accentColor))
                     .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120)
+					.clipShape(ProfileAccentMask(insetStart: 16, insetWidth: 136))
             } else {
                 CachedAsyncImage(url: avatarURL) { image in
                     image.resizable().scaledToFill()
@@ -42,22 +43,17 @@ struct LargeUserProfile<Content: View>: View {
                 .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120)
                 .blur(radius: 12)
                 .clipped()
+				.clipShape(ProfileAccentMask(insetStart: 16, insetWidth: 136))
             }
             HStack(alignment: .bottom, spacing: 12) {
-                ZStack {
-                    Circle()
-                        .trim(from: 0.5, to: 1)
-                        .fill(Color(NSColor.controlBackgroundColor))
-                        .frame(width: 136, height: 136)
-                    CachedAsyncImage(url: avatarURL) { image in
-                        image.resizable().scaledToFill()
-                    } placeholder: {
-                        ProgressView().progressViewStyle(.circular)
-                    }
-                    .background(.black)
-                    .clipShape(Circle())
-                    .frame(width: 120, height: 120)
-                }
+				CachedAsyncImage(url: avatarURL) { image in
+					image.resizable().scaledToFill()
+				} placeholder: {
+					ProgressView().progressViewStyle(.circular)
+				}
+				.clipShape(Circle())
+				.frame(width: 120, height: 120)
+				.padding(8)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Group {
@@ -67,12 +63,12 @@ struct LargeUserProfile<Content: View>: View {
                     }
                     .font(.title2)
                     HStack {
-                        ForEach(user.flagsArr!, id: \.self) { flag in
+                        ForEach(user.flagsArr, id: \.self) { flag in
                             if let badge = badgeMapping[flag] {
 								Image(badge).frame(width: 22, height: 22)
 							}
                         }
-                        if (user.premium_type ?? 0) != 0 { // nil != 0
+                        if user.premium {
                             Image("NitroSubscriber").frame(width: 22, height: 22)
                         }
                     }.frame(height: 24)
