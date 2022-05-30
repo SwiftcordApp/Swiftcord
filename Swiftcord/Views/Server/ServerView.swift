@@ -14,7 +14,7 @@ class ServerContext: ObservableObject {
     @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
 }
 
-struct ServerView: View {
+struct ServerView: View, Equatable {
 	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
@@ -64,6 +64,7 @@ struct ServerView: View {
             VStack(spacing: 0) {
 				if let guild = guild {
 					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
+						.equatable()
 						.toolbar {
 							ToolbarItem {
 								Text(guild.name)
@@ -91,6 +92,7 @@ struct ServerView: View {
 
 			if serverCtx.channel != nil {
 				MessagesView()
+					.equatable()
 					.environmentObject(serverCtx)
 			} else {
 				VStack(spacing: 24) {
@@ -173,4 +175,8 @@ You don't have access to any text channels or there are none in this server.
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
     }
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.guild == rhs.guild
+	}
 }

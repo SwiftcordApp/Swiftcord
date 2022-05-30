@@ -74,14 +74,14 @@ struct MessageView: View {
 										return
 									}
 
-									guard let m = await DiscordAPI.getChannelMsg(
+									guard let message = await DiscordAPI.getChannelMsg(
 										id: message.message_reference!.channel_id ?? message.channel_id,
 										msgID: message.message_reference!.message_id!
 									) else {
 										loadQuotedMsgErr = true
 										return
 									}
-									loadedQuotedMsg = m
+									loadedQuotedMsg = message
 								}}
 							Text("Loading message...")
 								.font(.system(size: 14))

@@ -8,7 +8,7 @@
 import SwiftUI
 import DiscordKit
 
-struct ChannelList: View {
+struct ChannelList: View, Equatable {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
 	let guild: Guild
@@ -27,7 +27,9 @@ struct ChannelList: View {
 				}
 			}
 
-			let categoryChannels = channels.filter({ $0.parent_id == nil && $0.type == .category }).discordSorted()
+			let categoryChannels = channels
+				.filter { $0.parent_id == nil && $0.type == .category }
+				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				Section(header: Text(channel.name?.uppercased() ?? "")) {
 					// Channels in this section
@@ -44,5 +46,9 @@ struct ChannelList: View {
 		.frame(minWidth: 240, maxHeight: .infinity)
 		// this overlay applies a border on the bottom edge of the view
 		.overlay(Rectangle().fill(Color(nsColor: .separatorColor)).frame(width: nil, height: 1, alignment: .bottom), alignment: .top)
+	}
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.channels == rhs.channels && lhs.selCh == rhs.selCh
 	}
 }

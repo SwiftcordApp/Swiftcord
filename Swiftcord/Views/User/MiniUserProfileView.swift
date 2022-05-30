@@ -16,12 +16,12 @@ struct MiniUserProfileView: View {
 	let guildID: Snowflake
 	let isWebhook: Bool
 	let loadError: Bool
-	
+
 	@State private var note = ""
-	
+
     var body: some View {
 		let avatarURL = user.avatarURL()
-		
+
 		VStack(alignment: .leading, spacing: 0) {
 			if let accentColor = profile?.user.accent_color ?? user.accent_color {
 				Rectangle().fill(Color(hex: accentColor))

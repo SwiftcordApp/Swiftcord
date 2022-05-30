@@ -21,7 +21,7 @@ struct MessagesViewHeader: View {
 	let chl: Channel?
 
 	@EnvironmentObject var gateway: DiscordGateway
-	
+
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			if chl?.type == .dm {
