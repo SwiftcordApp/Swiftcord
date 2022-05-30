@@ -16,6 +16,7 @@ struct MiniUserProfileView: View {
 	let guildID: Snowflake
 	let isWebhook: Bool
 	let loadError: Bool
+	let hideNotes: Bool
 
 	@State private var note = ""
 
@@ -132,20 +133,22 @@ struct MiniUserProfileView: View {
 						}
 					}
 
-					Text("NOTE").font(.headline).padding(.top, 8)
-					// Notes are stored locally for now, but eventually will be synced with the Discord API
-					TextField("Add a note to this user (only visible to you)", text: $note)
-						.textFieldStyle(.roundedBorder)
-						.onChange(of: note) { _ in
-							if note.isEmpty {
-								UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")
-							} else {
-								UserDefaults.standard.set(note, forKey: "notes.\(user.id)")
-							}
-						}
-						.onAppear {
-							note = UserDefaults.standard.string(forKey: "notes.\(user.id)") ?? ""
-						}
+					if !hideNotes {
+						Text("NOTE").font(.headline).padding(.top, 8)
+						 // Notes are stored locally for now, but eventually will be synced with the Discord API
+						 TextField("Add a note to this user (only visible to you)", text: $note)
+							 .textFieldStyle(.roundedBorder)
+							 .onChange(of: note) { _ in
+								 if note.isEmpty {
+									 UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")
+								 } else {
+									 UserDefaults.standard.set(note, forKey: "notes.\(user.id)")
+								 }
+							 }
+							 .onAppear {
+								 note = UserDefaults.standard.string(forKey: "notes.\(user.id)") ?? ""
+							 }
+					}
 				}
 			}
 			.padding(14)

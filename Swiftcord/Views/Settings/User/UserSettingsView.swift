@@ -22,7 +22,7 @@ struct UserSettingsView: View {
                 }
 
 				NavigationLink("User Profile", tag: SidebarLink.profile, selection: $selectedLink) {
-                    Text("")
+					ScrollView { UserSettingsProfileView(user: user).padding(40) }
                 }
 
 				NavigationLink("Privacy & Safety", tag: SidebarLink.privacy, selection: $selectedLink) {

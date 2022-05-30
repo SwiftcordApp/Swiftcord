@@ -66,7 +66,8 @@ struct UserAvatarView: View, Equatable {
 				guildRoles: ctx.roles,
 				guildID: guildID,
 				isWebhook: webhookID != nil,
-				loadError: loadFullFailed
+				loadError: loadFullFailed,
+				hideNotes: false
 			)
         }
 	}
