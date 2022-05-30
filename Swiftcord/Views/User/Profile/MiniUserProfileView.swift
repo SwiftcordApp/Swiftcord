@@ -26,30 +26,25 @@ struct MiniUserProfileView: View {
 			if let accentColor = profile?.user.accent_color ?? user.accent_color {
 				Rectangle().fill(Color(hex: accentColor))
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			} else {
 				CachedAsyncImage(url: avatarURL) { image in
 					image.resizable().scaledToFill()
 				} placeholder: { ProgressView().progressViewStyle(.circular)}
-				.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
 					.blur(radius: 4)
 					.clipped()
+					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
-			ZStack {
-				Circle()
-					.trim(from: 0.5, to: 1)
-					.fill(.black)
-					.frame(width: 92, height: 92)
-				CachedAsyncImage(url: avatarURL) { image in
-					image.resizable().scaledToFill()
-				} placeholder: {
-					ProgressView().progressViewStyle(.circular)
-				}
-				.background(.black)
-				.clipShape(Circle())
-				.frame(width: 80, height: 80)
+			CachedAsyncImage(url: avatarURL) { image in
+				image.resizable().scaledToFill()
+			} placeholder: {
+				ProgressView().progressViewStyle(.circular)
 			}
-			.offset(x: 14)
-			.padding(.top, -46)
+			.clipShape(Circle())
+			.frame(width: 80, height: 80)
+			.offset(x: 20, y: -6)
+			.padding(.top, -34)
 
 			VStack(alignment: .leading, spacing: 8) {
 				HStack(alignment: .center, spacing: 0) {

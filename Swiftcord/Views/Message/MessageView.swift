@@ -91,7 +91,6 @@ struct MessageView: View {
                     .padding(.bottom, 4)
                     Spacer()
                 }
-				.drawingGroup()
 				.padding(.leading, 20)
             }
             HStack(
