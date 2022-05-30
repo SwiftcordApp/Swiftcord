@@ -10,7 +10,7 @@ import CachedAsyncImage
 import DiscordKit
 
 struct LargeUserProfile<Content: View>: View {
-    let user: User
+    let user: CurrentUser
     @ViewBuilder var slot: Content
 
     @State private var selectorIndex = 0
@@ -63,12 +63,12 @@ struct LargeUserProfile<Content: View>: View {
                     }
                     .font(.title2)
                     HStack {
-                        ForEach(user.flagsArr!, id: \.self) { flag in
+                        ForEach(user.flagsArr, id: \.self) { flag in
                             if let badge = badgeMapping[flag] {
 								Image(badge).frame(width: 22, height: 22)
 							}
                         }
-                        if (user.premium_type ?? 0) != 0 { // nil != 0
+                        if user.premium {
                             Image("NitroSubscriber").frame(width: 22, height: 22)
                         }
                     }.frame(height: 24)

@@ -59,6 +59,7 @@
 		DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* Bool+.swift */; };
 		DA54D5712841D6CF00B11857 /* MiniUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */; };
 		DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D573284497E400B11857 /* ProfileAccentMask.swift */; };
+		DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5752844B9C500B11857 /* CurrentUser+.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
@@ -136,6 +137,7 @@
 		DA520AE127D76BEB009FD740 /* Bool+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+.swift"; sourceTree = "<group>"; };
 		DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniUserProfileView.swift; sourceTree = "<group>"; };
 		DA54D573284497E400B11857 /* ProfileAccentMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccentMask.swift; sourceTree = "<group>"; };
+		DA54D5752844B9C500B11857 /* CurrentUser+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUser+.swift"; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				E7AF1C2A282FA400001F78DF /* Guild+.swift */,
 				DA32EF4F27C8D7E000A9ED72 /* Message+.swift */,
 				DA32EF5127C8FBB200A9ED72 /* User+.swift */,
+				DA54D5752844B9C500B11857 /* CurrentUser+.swift */,
 			);
 			path = DiscordAPI;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
+				DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,

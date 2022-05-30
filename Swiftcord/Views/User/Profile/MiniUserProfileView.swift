@@ -69,8 +69,7 @@ struct MiniUserProfileView: View {
 				.padding(.bottom, -2)
 				.padding(.top, -8)
 
-				Divider()
-					.padding(.vertical, 8)
+				Divider().padding(.vertical, 8)
 
 				if isWebhook {
 					Text("This user is a webhook")
@@ -83,7 +82,7 @@ struct MiniUserProfileView: View {
 					.buttonStyle(.borderedProminent)
 					.controlSize(.large)
 				} else {
-					if profile == nil && !loadError {
+					if profile == nil, !loadError {
 						ProgressView("Loading full profile...")
 							.progressViewStyle(.linear)
 							.frame(maxWidth: .infinity)
@@ -103,12 +102,14 @@ struct MiniUserProfileView: View {
 					if let profile = profile, guildID != "@me" {
 						if let guildRoles = guildRoles {
 							let roles = guildRoles.filter {
-								profile.guild_member!.roles.contains($0.id)
+								profile.guild_member?.roles.contains($0.id) ?? false
 							}
 
-							Text(roles.isEmpty
-								 ? "NO ROLES"
-								 : (roles.count == 1 ? "ROLE" : "ROLES")
+							Text(profile.guild_member == nil ? "LOADING ROLES"
+								 : (roles.isEmpty
+									? "NO ROLES"
+									: (roles.count == 1 ? "ROLE" : "ROLES")
+								   )
 							).font(.headline).padding(.top, 8)
 							if !roles.isEmpty {
 								TagCloudView(content: roles.map({ role in

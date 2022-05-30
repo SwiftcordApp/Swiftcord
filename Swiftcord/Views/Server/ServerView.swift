@@ -12,6 +12,7 @@ class ServerContext: ObservableObject {
     @Published public var channel: Channel?
     @Published public var guild: Guild?
     @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
+	@Published public var roles: [Role] = []
 }
 
 struct ServerView: View, Equatable {
@@ -43,14 +44,21 @@ struct ServerView: View, Equatable {
 
 	private func bootstrapGuild(with guild: Guild) {
 		serverCtx.guild = guild
+		serverCtx.roles = []
 		loadChannels()
 		// Sending malformed IDs causes an instant Gateway session termination
 		guard !guild.isDMChannel else { return }
+
 		// Subscribe to typing events
 		gateway.socket.send(
 			op: .subscribeGuildEvents,
 			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
+		// Retrieve guild roles to update context
+		Task {
+			guard let newRoles = await DiscordAPI.getGuildRoles(id: guild.id) else { return }
+			serverCtx.roles = newRoles
+		}
 	}
 
     private func toggleSidebar() {

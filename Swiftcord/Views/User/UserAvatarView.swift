@@ -9,15 +9,17 @@ import SwiftUI
 import CachedAsyncImage
 import DiscordKit
 
-struct UserAvatarView: View {
+struct UserAvatarView: View, Equatable {
     let user: User
     let guildID: Snowflake
     let webhookID: Snowflake?
     let clickDisabled: Bool
     @State private var profile: UserProfile? // Lazy-loaded full user
-    @State private var guildRoles: [Role]? // Lazy-loaded guild roles
     @State private var infoPresenting = false
 	@State private var loadFullFailed = false
+
+	@EnvironmentObject var ctx: ServerContext
+	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
         let avatarURL = user.avatarURL()
@@ -28,23 +30,32 @@ struct UserAvatarView: View {
         .frame(width: 40, height: 40)
         .clipShape(Circle())
         .onTapGesture {
-            infoPresenting.toggle()
-
 			guard !clickDisabled else { return }
-			// Get user profile for a fuller User object
-			if profile == nil && webhookID == nil { Task {
-				profile = await DiscordAPI.getProfile(
+
+			if user.id == gateway.cache.user?.id, profile == nil {
+				profile = UserProfile(
+					connected_accounts: [],
+					guild_member: nil,
+					premium_guild_since: nil,
+					premium_since: nil,
+					mutual_guilds: nil,
+					user: User(from: gateway.cache.user!)
+				)
+			}
+
+			infoPresenting.toggle()
+
+			// Get user profile for a fuller User object and roles
+			if profile?.guild_member == nil, webhookID == nil,
+			   guildID != "@me" || profile?.user == nil { Task {
+				guard let loadedProfile = await DiscordAPI.getProfile(
 					user: user.id,
 					guildID: guildID == "@me" ? nil : guildID
-				)
-				guard profile != nil else { // Profile is still nil: fetching failed
+				) else { // Profile is still nil: fetching failed
 					loadFullFailed = true
 					return
 				}
-			}}
-			if guildRoles == nil, webhookID == nil, guildID != "@me" { Task {
-				guildRoles = await DiscordAPI.getGuildRoles(id: guildID)
-				// print(guildRoles)
+				profile = loadedProfile
 			}}
         }
         .cursor(NSCursor.pointingHand)
@@ -52,18 +63,19 @@ struct UserAvatarView: View {
             MiniUserProfileView(
 				user: user,
 				profile: profile,
-				guildRoles: guildRoles,
+				guildRoles: ctx.roles,
 				guildID: guildID,
 				isWebhook: webhookID != nil,
 				loadError: loadFullFailed
 			)
         }
 	}
-}
 
-struct UserAvatarView_Previews: PreviewProvider {
-    static var previews: some View {
-        // UserAvatarView()
-        Text("TODO")
-    }
+	static func == (lhs: UserAvatarView, rhs: UserAvatarView) -> Bool {
+		return lhs.user == rhs.user &&
+		lhs.profile?.user == rhs.profile?.user &&
+		lhs.profile?.guild_member?.user == rhs.profile?.guild_member?.user &&
+		lhs.infoPresenting == rhs.infoPresenting &&
+		lhs.loadFullFailed == rhs.loadFullFailed
+	}
 }
