@@ -50,6 +50,7 @@ struct GuildChButton: View {
 }
 
 struct DMButton: View {
+	// swiftlint:disable identifier_name
 	let dm: Channel
 	@Binding var selectedCh: Channel?
 

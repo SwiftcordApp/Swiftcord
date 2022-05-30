@@ -109,12 +109,13 @@ struct ContentView: View {
                     .offset(y: -10)
             }
 
-			ServerView(guild: selectedGuildID == nil
-					   ? nil
-					   : (selectedGuildID == "@me"
-						  ? makeDMGuild()
-						  : gateway.cache.guilds[selectedGuildID!]))
-			.equatable()
+			// Using the .equatable() modifier on this View causes a swift-frontend
+			// bus error when compiling for release. I have no idea why that happens.
+			ServerView(
+				guild: selectedGuildID == nil
+				? nil
+				: (selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
+			)
         }
         .environmentObject(audioManager)
         .onChange(of: selectedGuildID) { id in

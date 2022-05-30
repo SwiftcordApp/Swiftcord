@@ -38,6 +38,8 @@ struct WebView: NSViewRepresentable {
 		return jpegData?.base64EncodedString()
 	}
 
+	// If someone can split this into smaller chunks, I'm all open
+	// swiftlint:disable function_body_length
     public func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator as? WKUIDelegate

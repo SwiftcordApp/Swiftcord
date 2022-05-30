@@ -140,6 +140,7 @@ You don't have access to any text channels or there are none in this server.
         .onAppear {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
+			// swiftlint:disable identifier_name
             evtID = gateway.onEvent.addHandler { (evt, d) in
                 switch evt {
                 /*case .channelUpdate:
