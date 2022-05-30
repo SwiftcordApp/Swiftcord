@@ -89,14 +89,11 @@ struct MiniUserProfileView: View {
 							.tint(.blue)
 					}
 
-					// Optionals are silly
 					if let bio = profile?.user.bio, !bio.isEmpty {
-						Text("ABOUT ME")
-							.font(.headline)
+						Text("ABOUT ME").font(.headline)
 						Text(bio)
 							.fixedSize(horizontal: false, vertical: true)
-					} else if profile != nil {
-						Text("NO ABOUT").font(.headline)
+							.padding(.bottom, 8)
 					}
 
 					if let profile = profile, guildID != "@me" {
@@ -110,7 +107,7 @@ struct MiniUserProfileView: View {
 									? "NO ROLES"
 									: (roles.count == 1 ? "ROLE" : "ROLES")
 								   )
-							).font(.headline).padding(.top, 8)
+							).font(.headline)
 							if !roles.isEmpty {
 								TagCloudView(content: roles.map({ role in
 									HStack(spacing: 6) {
