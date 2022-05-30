@@ -15,19 +15,6 @@ struct LargeUserProfile<Content: View>: View {
 
     @State private var selectorIndex = 0
 
-    let badgeMapping: [UserFlags: String] = [
-        .staff: "DiscordStaff",
-        .bugHunterLv1: "BugHunter",
-        .bugHunterLv2: "BugHunter",
-        .certifiedMod: "CertifiedModerator",
-        .earlySupporter: "EarlySupporter",
-        .hypesquadEvents: "HypesquadEvents",
-        .hypesquadBalance: "HypesquadBalance",
-        .hypesquadBravery: "HypesquadBravery",
-        .hypesquadBrilliance: "HypesquadBrilliance",
-        .verifiedDev: "EarlyVerifiedBotDev"
-    ]
-
     var body: some View {
         let avatarURL = user.avatarURL(size: 240)
 
@@ -64,7 +51,7 @@ struct LargeUserProfile<Content: View>: View {
                     .font(.title2)
                     HStack {
                         ForEach(user.flagsArr, id: \.self) { flag in
-                            if let badge = badgeMapping[flag] {
+							if let badge = ProfileBadges.badgeMapping[flag] {
 								Image(badge).frame(width: 22, height: 22)
 							}
                         }

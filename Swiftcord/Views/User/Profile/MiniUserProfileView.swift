@@ -37,15 +37,23 @@ struct MiniUserProfileView: View {
 					.clipped()
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
-			CachedAsyncImage(url: avatarURL) { image in
-				image.resizable().scaledToFill()
-			} placeholder: {
-				ProgressView().progressViewStyle(.circular)
+			HStack(alignment: .bottom, spacing: 4) {
+				CachedAsyncImage(url: avatarURL) { image in
+					image.resizable().scaledToFill()
+				} placeholder: {
+					ProgressView().progressViewStyle(.circular)
+				}
+				.clipShape(Circle())
+				.frame(width: 80, height: 80)
+				.padding(6)
+
+				if let fullUser = profile?.user {
+					ProfileBadges(user: fullUser)
+						.frame(minHeight: 40, alignment: .topLeading)
+				}
 			}
-			.clipShape(Circle())
-			.frame(width: 80, height: 80)
-			.offset(x: 20, y: -6)
-			.padding(.top, -34)
+			.padding(.leading, 14)
+			.padding(.top, -46) // 92/2 = 46
 
 			VStack(alignment: .leading, spacing: 8) {
 				HStack(alignment: .center, spacing: 0) {
@@ -154,7 +162,7 @@ struct MiniUserProfileView: View {
 			.padding(14)
 		}
 		.frame(width: 300)
-    }
+	}
 }
 
 struct MiniUserProfileView_Previews: PreviewProvider {

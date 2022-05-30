@@ -61,6 +61,7 @@
 		DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D573284497E400B11857 /* ProfileAccentMask.swift */; };
 		DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5752844B9C500B11857 /* CurrentUser+.swift */; };
 		DA54D5782844DA1400B11857 /* UserSettingsProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */; };
+		DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5792844E41A00B11857 /* ProfileBadges.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
@@ -140,6 +141,7 @@
 		DA54D573284497E400B11857 /* ProfileAccentMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccentMask.swift; sourceTree = "<group>"; };
 		DA54D5752844B9C500B11857 /* CurrentUser+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUser+.swift"; sourceTree = "<group>"; };
 		DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsProfileView.swift; sourceTree = "<group>"; };
+		DA54D5792844E41A00B11857 /* ProfileBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadges.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				DA520AD827D4E7A3009FD740 /* LargeUserProfileView.swift */,
 				DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */,
 				DA54D573284497E400B11857 /* ProfileAccentMask.swift */,
+				DA54D5792844E41A00B11857 /* ProfileBadges.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
 				DA520AD927D4E7A4009FD740 /* LargeUserProfileView.swift in Sources */,
+				DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */,
 				DA520ACF27D4CE5E009FD740 /* UserSettingsView.swift in Sources */,
 				DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */,
 				E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */,
