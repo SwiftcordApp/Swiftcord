@@ -873,7 +873,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = butter;
+				branch = main;
 				kind = branch;
 			};
 		};

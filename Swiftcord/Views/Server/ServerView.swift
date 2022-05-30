@@ -166,6 +166,12 @@ You don't have access to any text channels or there are none in this server.
                     guard let typingData = d as? TypingStart,
                           typingData.user_id != gateway.cache.user!.id
                     else { break }
+
+					// Remove existing typing items, if present (prevent duplicates)
+					serverCtx.typingStarted[typingData.channel_id]?.removeAll {
+						$0.user_id == typingData.user_id
+					}
+
                     if serverCtx.typingStarted[typingData.channel_id] == nil {
                         serverCtx.typingStarted[typingData.channel_id] = []
                     }
