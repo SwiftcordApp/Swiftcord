@@ -75,14 +75,14 @@ struct MessagesView: View, Equatable {
 		lhs.messages == rhs.messages
 	}
 
-    @State private var reachedTop = false
-    @State private var messages: [Message] = []
-    @State private var enteredText = " "
-    @State private var showingInfoBar = false
-    @State private var loadError = false
-    @State private var infoBarData: InfoBarData?
-    @State private var fetchMessagesTask: Task<(), Error>?
-    @State private var lastSentTyping = Date(timeIntervalSince1970: 0)
+    @State internal var reachedTop = false
+    @State internal var messages: [Message] = []
+    @State internal var newMessage = " "
+    @State internal var showingInfoBar = false
+    @State internal var loadError = false
+    @State internal var infoBarData: InfoBarData?
+    @State internal var fetchMessagesTask: Task<(), Error>?
+    @State internal var lastSentTyping = Date(timeIntervalSince1970: 0)
 	@State private var messageInputHeight = 0.0
 	@State private var dropOver = false
 
@@ -92,80 +92,6 @@ struct MessagesView: View, Equatable {
 
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
-
-    private func fetchMoreMessages() {
-        guard let channel = ctx.channel else { return }
-        if let oldTask = fetchMessagesTask {
-            oldTask.cancel()
-            fetchMessagesTask = nil
-        }
-
-        if loadError { showingInfoBar = false }
-        loadError = false
-
-        fetchMessagesTask = Task {
-            let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
-
-            guard let newMessages = await DiscordAPI.getChannelMsgs(
-                id: channel.id,
-                before: lastMsg
-            ) else {
-                try Task.checkCancellation() // Check if the task is cancelled before continuing
-
-                fetchMessagesTask = nil
-                loadError = true
-                showingInfoBar = true
-                infoBarData = InfoBarData(
-                    message: "Messages failed to load",
-                    buttonLabel: "Try again",
-                    color: .red,
-                    buttonIcon: "arrow.clockwise",
-                    clickHandler: { fetchMoreMessages() }
-                )
-                state.loadingState = .messageLoad
-                return
-            }
-            state.loadingState = .messageLoad
-            try Task.checkCancellation()
-
-            reachedTop = newMessages.count < 50
-            messages.append(contentsOf: newMessages)
-            fetchMessagesTask = nil
-        }
-    }
-
-    private func sendMessage(content: String, attachments: [URL]) {
-        lastSentTyping = Date(timeIntervalSince1970: 0)
-        enteredText = ""
-        showingInfoBar = false
-        Task {
-            guard (await DiscordAPI.createChannelMsg(
-                message: NewMessage(
-                    content: content,
-                    attachments: attachments.isEmpty ? nil : attachments.enumerated()
-						.map { (idx, attachment) in
-							NewAttachment(
-								id: String(idx),
-								filename: try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!
-							)
-						}
-                ),
-                attachments: attachments,
-                id: ctx.channel!.id
-            )) != nil else {
-                enteredText = content.trimmingCharacters(in: .newlines) // Message failed to send
-                showingInfoBar = true
-                infoBarData = InfoBarData(
-                    message: "Could not send message",
-                    buttonLabel: "Try again",
-                    color: .red,
-                    buttonIcon: "arrow.clockwise",
-                    clickHandler: { sendMessage(content: enteredText, attachments: attachments) }
-                )
-                return
-            }
-        }
-    }
 
     var body: some View {
 		ZStack(alignment: .bottom) {
@@ -244,11 +170,11 @@ struct MessagesView: View, Equatable {
 
                 MessageInputView(
 					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
-					message: $enteredText, onSend: sendMessage
+					message: $newMessage, onSend: sendMessage
 				)
-                    .onAppear { enteredText = "" }
-                    .onChange(of: enteredText) { [enteredText] content in
-                        if content.count > enteredText.count,
+                    .onAppear { newMessage = "" }
+                    .onChange(of: newMessage) { [newMessage] content in
+                        if content.count > newMessage.count,
                            Date().timeIntervalSince(lastSentTyping) > 8 {
                             // Send typing start msg once every 8s while typing
                             lastSentTyping = Date()
