@@ -93,6 +93,7 @@ struct MessagesView: View, Equatable {
 	@State internal var newAttachmentErr: NewAttachmentError?
 	@State private var messageInputHeight = 0.0
 	@State private var dropOver = false
+	@State private var highlightMsg: Snowflake?
 
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
@@ -118,8 +119,12 @@ struct MessagesView: View, Equatable {
                                     $0.id == msg.message_reference!.message_id
                                 } : nil,
                                 onQuoteClick: { id in
-                                    withAnimation { proxy.scrollTo(id, anchor: .center) }
-                                }
+                                    withAnimation {
+										highlightMsg = id
+										proxy.scrollTo(id, anchor: .center)
+									}
+                                },
+								highlightMsgId: $highlightMsg
                             )
                             .flip()
                         }

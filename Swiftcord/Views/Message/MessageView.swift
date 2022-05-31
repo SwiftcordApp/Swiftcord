@@ -41,6 +41,8 @@ struct MessageView: View, Equatable {
     let quotedMsg: Message?
     let onQuoteClick: (String) -> Void
 
+	@Binding var highlightMsgId: Snowflake?
+
     @State private var hovered = false
     @State private var loadedQuotedMsg: Message?
     @State private var loadQuotedMsgErr = false
@@ -138,6 +140,14 @@ struct MessageView: View, Equatable {
         .padding(.trailing, 48)
         .padding(.vertical, lineSpacing / 2)
         .background(hovered ? .gray.opacity(0.07) : .clear)
+		.background(
+			Rectangle()
+				.fill(.blue)
+				.modifier(ReversingOpacity(to: highlightMsgId == message.id ? 0.2 : 0, endDelay: 1) {
+					if highlightMsgId == message.id { highlightMsgId = nil }
+				})
+				.animation(.easeOut(duration: 0.5), value: highlightMsgId == message.id ? 0.2 : 0)
+		)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .onHover { isHovered in hovered = isHovered }
         .contextMenu {

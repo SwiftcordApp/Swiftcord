@@ -64,6 +64,7 @@
 		DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5792844E41A00B11857 /* ProfileBadges.swift */; };
 		DA54D57C2845C36E00B11857 /* MessagesView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57B2845C36E00B11857 /* MessagesView+.swift */; };
 		DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */; };
+		DA54D5812846495A00B11857 /* ReversingOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5802846495A00B11857 /* ReversingOpacity.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
@@ -146,6 +147,7 @@
 		DA54D5792844E41A00B11857 /* ProfileBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadges.swift; sourceTree = "<group>"; };
 		DA54D57B2845C36E00B11857 /* MessagesView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesView+.swift"; sourceTree = "<group>"; };
 		DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceMessageView.swift; sourceTree = "<group>"; };
+		DA54D5802846495A00B11857 /* ReversingOpacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversingOpacity.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		DA4A88DC27C3272500720909 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DA54D5822846496900B11857 /* Animation */,
 				DA520AE327D76BF8009FD740 /* Extensions */,
 				DA520AC127D37863009FD740 /* MergeStructs */,
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
@@ -390,6 +393,14 @@
 				DA54D5792844E41A00B11857 /* ProfileBadges.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		DA54D5822846496900B11857 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				DA54D5802846495A00B11857 /* ReversingOpacity.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		DA7720CE283F182700D3C335 /* Commands */ = {
@@ -610,6 +621,7 @@
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,
+				DA54D5812846495A00B11857 /* ReversingOpacity.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
 				DA4A88E527C3482A00720909 /* LoginView.swift in Sources */,
 				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
