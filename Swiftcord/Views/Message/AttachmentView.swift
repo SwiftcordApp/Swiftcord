@@ -50,7 +50,7 @@ struct AttachmentImage: View {
                 AttachmentLoading(height: height, width: width)
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: 4))
+		.cornerRadius(4)
         .frame(idealWidth: CGFloat(width), idealHeight: CGFloat(height))
         .fixedSize()
     }

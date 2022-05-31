@@ -32,7 +32,7 @@ extension User {
 			locale: nil,
 			verified: nil,
 			flags: user.flags,
-			premium_type: user.purchased_flags,
+			premium_type: user.premium ? user.purchased_flags : 0,
 			public_flags: user.public_flags
 		)
 	}

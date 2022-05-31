@@ -38,6 +38,7 @@ struct ProfileBadges: View, Equatable {
 	}
 
 	static func == (lhs: ProfileBadges, rhs: ProfileBadges) -> Bool {
-		return lhs.user == rhs.user
+		return lhs.user.premium_type == rhs.user.premium_type &&
+			lhs.user.flags == rhs.user.flags
 	}
 }
