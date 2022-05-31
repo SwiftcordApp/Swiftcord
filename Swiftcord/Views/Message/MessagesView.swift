@@ -291,6 +291,27 @@ struct MessagesView: View, Equatable {
             }
         }
         .frame(minWidth: 525)
+		.blur(radius: dropOver ? 24 : 0)
+		.overlay {
+			if dropOver {
+				ZStack {
+					VStack(spacing: 24) {
+						Image(systemName: "paperclip")
+							.font(.system(size: 64))
+							.foregroundColor(.accentColor)
+						Text("Drop file to add attachment").font(.largeTitle)
+					}
+					Rectangle()
+						.stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, dash: [25, 20]))
+						.opacity(0.75)
+				}.padding(24)
+			}
+		}
+		.animation(.spring(), value: dropOver)
+		.onDrop(of: ["public.file-url"], isTargeted: $dropOver) { providers -> Bool in
+			print("dropped: \(providers)")
+			return true
+		}
         .onChange(of: ctx.channel, perform: { channel in
             guard channel != nil else { return }
             messages = []
