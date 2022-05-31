@@ -17,6 +17,12 @@ extension View {
     }
 }
 
+struct NewAttachmentError: Identifiable {
+	var id: String { title + message }
+	let title: String
+	let message: String
+}
+
 struct MessagesViewHeader: View {
 	let chl: Channel?
 
@@ -72,7 +78,7 @@ struct MessagesViewHeader: View {
 
 struct MessagesView: View, Equatable {
 	static func == (lhs: MessagesView, rhs: MessagesView) -> Bool {
-		lhs.messages == rhs.messages
+		lhs.messages == rhs.messages && lhs.attachments == rhs.attachments
 	}
 
     @State internal var reachedTop = false
@@ -84,6 +90,7 @@ struct MessagesView: View, Equatable {
     @State internal var infoBarData: InfoBarData?
     @State internal var fetchMessagesTask: Task<(), Error>?
     @State internal var lastSentTyping = Date(timeIntervalSince1970: 0)
+	@State internal var newAttachmentErr: NewAttachmentError?
 	@State private var messageInputHeight = 0.0
 	@State private var dropOver = false
 
@@ -171,7 +178,8 @@ struct MessagesView: View, Equatable {
 
                 MessageInputView(
 					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
-					message: $newMessage, attachments: $attachments, onSend: sendMessage
+					message: $newMessage, attachments: $attachments,
+					onSend: sendMessage, preAttach: preAttachChecks
 				)
                     .onAppear { newMessage = "" }
                     .onChange(of: newMessage) { [newMessage] content in
@@ -236,10 +244,11 @@ struct MessagesView: View, Equatable {
 		}
 		.animation(.easeOut(duration: 0.25), value: dropOver)
 		.onDrop(of: [.fileURL], isTargeted: $dropOver) { providers -> Bool in
-			print("dropped: \(providers)")
 			for provider in providers {
 				_ = provider.loadObject(ofClass: URL.self) { itemURL, err in
-					if let itemURL = itemURL { attachments.append(itemURL) }
+					if let itemURL = itemURL, preAttachChecks(for: itemURL) {
+						attachments.append(itemURL)
+					}
 				}
 			}
 			return true
@@ -304,5 +313,12 @@ struct MessagesView: View, Equatable {
                 }
             })
         }
+		.alert(item: $newAttachmentErr) { err in
+			Alert(
+				title: Text(err.title),
+				message: Text(err.message),
+				dismissButton: .cancel(Text("Got It!"))
+			)
+		}
     }
 }

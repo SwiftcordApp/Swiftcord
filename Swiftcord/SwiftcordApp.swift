@@ -9,7 +9,7 @@ import DiscordKit
 import SwiftUI
 
 @main
-struct SwiftcordApp: App {
+struct SwiftcordApp: App, Equatable {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	let persistenceController = PersistenceController.shared
 	@StateObject var updaterViewModel = UpdaterViewModel()
@@ -41,5 +41,9 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(state)
 		}
+	}
+
+	static func == (lhs: SwiftcordApp, rhs: SwiftcordApp) -> Bool {
+		lhs.gateway == rhs.gateway && lhs.state == rhs.state
 	}
 }

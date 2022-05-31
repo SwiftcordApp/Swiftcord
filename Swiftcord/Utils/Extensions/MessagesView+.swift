@@ -81,4 +81,22 @@ extension MessagesView {
 			}
 		}
 	}
+
+	internal func preAttachChecks(for attachment: URL) -> Bool {
+		guard let size = try? attachment.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).fileSize, size < 8*1024*1024 else {
+			newAttachmentErr = NewAttachmentError(
+				title: "Your files are too powerful",
+				message: "The max file size is 8MB."
+			)
+			return false
+		}
+		guard attachments.count <= 10 else {
+			newAttachmentErr = NewAttachmentError(
+				title: "Too many uploads!",
+				message: "You can only upload 10 files at a time!"
+			)
+			return false
+		}
+		return true
+	}
 }
