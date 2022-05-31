@@ -84,6 +84,7 @@ struct MessagesView: View, Equatable {
     @State private var fetchMessagesTask: Task<(), Error>?
     @State private var lastSentTyping = Date(timeIntervalSince1970: 0)
 	@State private var messageInputHeight = 0.0
+	@State private var dropOver = false
 
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
@@ -192,20 +193,36 @@ struct MessagesView: View, Equatable {
                         if reachedTop { MessagesViewHeader(chl: ctx.channel).flip() } else {
                             VStack(alignment: .leading, spacing: 16) {
                                 // TODO: Use a loop to create this
-                                LoFiMessageView()
-                                LoFiMessageView()
-                                LoFiMessageView()
-                                LoFiMessageView()
-                                LoFiMessageView()
-								LoFiMessageView()
-								LoFiMessageView()
-								LoFiMessageView()
-								LoFiMessageView()
-								LoFiMessageView()
+								Group {
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+								}
+								Group {
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+									LoFiMessageView()
+								}
 								// A ForEach with a range works initially
 								// but doesn't show anything for subsequent loads
                             }
-                            .onAppear { fetchMoreMessages() }
+                            .onAppear {
+								if fetchMessagesTask == nil { fetchMoreMessages() }
+							}
                             .onDisappear {
                                 if let loadTask = fetchMessagesTask {
                                     loadTask.cancel()
@@ -278,7 +295,7 @@ struct MessagesView: View, Equatable {
             guard channel != nil else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
-            if loadError || fetchMessagesTask != nil { fetchMoreMessages() }
+			fetchMoreMessages()
             loadError = false
             reachedTop = false
             lastSentTyping = Date(timeIntervalSince1970: 0)
