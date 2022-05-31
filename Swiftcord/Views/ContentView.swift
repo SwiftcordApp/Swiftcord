@@ -103,10 +103,18 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
+			.background(
+				List {}
+					.listStyle(.sidebar)
+					.overlay(Rectangle().frame(width: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)).padding(.top, -13), alignment: .trailing)
+			)
             .frame(maxHeight: .infinity, alignment: .top)
             .safeAreaInset(edge: .top) {
-                List {}.listStyle(.sidebar).frame(width: 72, height: 0)
-                    .offset(y: -10)
+                List {}
+					.listStyle(.sidebar)
+					.frame(width: 72, height: 0)
+                    .offset(y: -13)
+					.overlay(Rectangle().frame(height: 1, alignment: .bottom).foregroundColor(Color(nsColor: .separatorColor)), alignment: .top)
             }
 
 			// Using the .equatable() modifier on this View causes a swift-frontend
