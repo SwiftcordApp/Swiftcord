@@ -56,17 +56,17 @@ struct MiniUserProfileView: View {
 			.padding(.top, -46) // 92/2 = 46
 
 			VStack(alignment: .leading, spacing: 8) {
-				HStack(alignment: .center, spacing: 0) {
-					Text(user.username)
-						.font(.title2)
-						.fontWeight(.bold)
-						.lineLimit(1)
-					// Webhooks don't have discriminators
-					if !isWebhook {
-						Text("#\(user.discriminator)")
-							.font(.title2)
-							.opacity(0.7)
+				HStack(alignment: .center, spacing: 6) {
+					Group {
+						Text(user.username).fontWeight(.bold)
+						// Webhooks don't have discriminators
+						+ Text(isWebhook ? "" : "#\(user.discriminator)")
+							.foregroundColor(.primary.opacity(0.7))
+					}.font(.title2).lineLimit(1)
+					if user.bot == true || isWebhook {
+						NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
 					}
+
 					Spacer()
 					if loadError {
 						Image(systemName: "exclamationmark.triangle.fill")

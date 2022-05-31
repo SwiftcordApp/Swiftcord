@@ -37,9 +37,8 @@ struct ReferenceMessageView: View {
 							.font(.system(size: 14))
 							.opacity(0.9)
 
-						if let flags = quotedMsg.author?.public_flags,
-						   quotedMsg.author?.bot == true {
-							NonUserBadge(flags: flags, isWebhook: quotedMsg.webhook_id != nil)
+						if quotedMsg.author?.bot == true || quotedMsg.webhook_id != nil {
+							NonUserBadge(flags: quotedMsg.author?.public_flags, isWebhook: quotedMsg.webhook_id != nil)
 						}
 
 						Text((quotedMsg.content!.isEmpty)

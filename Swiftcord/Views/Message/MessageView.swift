@@ -11,12 +11,12 @@ import CachedAsyncImage
 import DiscordKit
 
 struct NonUserBadge: View {
-	let flags: Int
+	let flags: Int?
 	let isWebhook: Bool
-	
+
 	var body: some View {
 		HStack(spacing: 0) {
-			if flags & 65536 != 0 {
+			if let flags = flags, flags & 65536 != 0 {
 				Image(systemName: "checkmark")
 					.font(.system(size: 8, weight: .heavy))
 					.frame(width: 15)
@@ -78,8 +78,8 @@ struct MessageView: View, Equatable {
                                 Text(message.member?.nick ?? message.author.username)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
-								if message.author.bot ?? false, let flags = message.author.public_flags {
-									NonUserBadge(flags: flags, isWebhook: message.webhook_id != nil)
+								if message.author.bot ?? false || message.webhook_id != nil {
+									NonUserBadge(flags: message.author.public_flags, isWebhook: message.webhook_id != nil)
                                 }
                                 Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))
