@@ -78,6 +78,7 @@ struct MessagesView: View, Equatable {
     @State internal var reachedTop = false
     @State internal var messages: [Message] = []
     @State internal var newMessage = " "
+	@State internal var attachments: [URL] = []
     @State internal var showingInfoBar = false
     @State internal var loadError = false
     @State internal var infoBarData: InfoBarData?
@@ -170,7 +171,7 @@ struct MessagesView: View, Equatable {
 
                 MessageInputView(
 					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
-					message: $newMessage, onSend: sendMessage
+					message: $newMessage, attachments: $attachments, onSend: sendMessage
 				)
                     .onAppear { newMessage = "" }
                     .onChange(of: newMessage) { [newMessage] content in
@@ -233,9 +234,14 @@ struct MessagesView: View, Equatable {
 				}.padding(24)
 			}
 		}
-		.animation(.spring(), value: dropOver)
-		.onDrop(of: ["public.file-url"], isTargeted: $dropOver) { providers -> Bool in
+		.animation(.easeOut(duration: 0.25), value: dropOver)
+		.onDrop(of: [.fileURL], isTargeted: $dropOver) { providers -> Bool in
 			print("dropped: \(providers)")
+			for provider in providers {
+				_ = provider.loadObject(ofClass: URL.self) { itemURL, err in
+					if let itemURL = itemURL { attachments.append(itemURL) }
+				}
+			}
 			return true
 		}
         .onChange(of: ctx.channel, perform: { channel in

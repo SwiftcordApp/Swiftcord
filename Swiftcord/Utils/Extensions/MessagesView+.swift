@@ -50,14 +50,14 @@ extension MessagesView {
 		}
 	}
 
-	internal func sendMessage(content: String, attachments: [URL]) {
+	internal func sendMessage(with message: String, attachments: [URL]) {
 		lastSentTyping = Date(timeIntervalSince1970: 0)
 		newMessage = ""
 		showingInfoBar = false
 		Task {
 			guard (await DiscordAPI.createChannelMsg(
 				message: NewMessage(
-					content: content,
+					content: message,
 					attachments: attachments.isEmpty ? nil : attachments.enumerated()
 						.map { (idx, attachment) in
 							NewAttachment(
@@ -69,14 +69,13 @@ extension MessagesView {
 				attachments: attachments,
 				id: ctx.channel!.id
 			)) != nil else {
-				newMessage = content.trimmingCharacters(in: .newlines) // Message failed to send
 				showingInfoBar = true
 				infoBarData = InfoBarData(
 					message: "Could not send message",
 					buttonLabel: "Try again",
 					color: .red,
 					buttonIcon: "arrow.clockwise",
-					clickHandler: { sendMessage(content: newMessage, attachments: attachments) }
+					clickHandler: { sendMessage(with: message, attachments: attachments) }
 				)
 				return
 			}

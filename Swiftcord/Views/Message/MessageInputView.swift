@@ -53,7 +53,7 @@ struct MessageAttachmentView: View {
 struct MessageInputView: View {
     let placeholder: String
     @Binding var message: String
-    @State private var attachments: [URL] = []
+    @Binding var attachments: [URL]
 	@State private var inhibitingSend = false
 	@State private var showingAttachmentErr = false
 	@State private var attachmentErr = ""
