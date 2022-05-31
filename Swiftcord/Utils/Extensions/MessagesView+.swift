@@ -62,7 +62,7 @@ extension MessagesView {
 						.map { (idx, attachment) in
 							NewAttachment(
 								id: String(idx),
-								filename: try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!
+								filename: (try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name) ?? UUID().uuidString
 							)
 						}
 				),
@@ -90,7 +90,7 @@ extension MessagesView {
 			)
 			return false
 		}
-		guard attachments.count <= 10 else {
+		guard attachments.count < 10 else {
 			newAttachmentErr = NewAttachmentError(
 				title: "Too many uploads!",
 				message: "You can only upload 10 files at a time!"

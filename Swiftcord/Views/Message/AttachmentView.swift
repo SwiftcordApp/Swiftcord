@@ -334,7 +334,6 @@ struct AttachmentView: View {
     // Downloads a file from a URL to another URL, with an optional error returned in closure
     // TODO: There might be a cleaner way to deal with errors
     private func download(url: URL, toFile file: URL, completion: @escaping (Error?) -> Void) {
-
         dataTask = URLSession.shared.downloadTask(with: url) { urlOrNil, responseOrNil, errorOrNil in
             do {
                 // Exit on error

@@ -31,7 +31,8 @@ struct MessageAttachmentView: View {
 							.font(.system(size: 84))
 					}
 					Spacer(minLength: 0)
-					Text(try! attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name!)
+					Text((try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name)
+						 ?? "No Filename")
 						.lineLimit(1)
 						.truncationMode(.middle)
 						.frame(maxWidth: .infinity, alignment: .leading)
@@ -40,8 +41,9 @@ struct MessageAttachmentView: View {
 
 			Button(action: onRemove) {
 				Image(systemName: "trash.square.fill")
-					.foregroundColor(.red)
-					.font(.system(size: 30))
+					.symbolRenderingMode(.palette)
+					.foregroundStyle(.red, Color(.windowBackgroundColor))
+					.font(.system(size: 32))
 			}
 			.help("Remove attachment")
 			.buttonStyle(.plain)
@@ -85,13 +87,15 @@ struct MessageInputView: View {
             HStack(alignment: .center, spacing: 17) {
                 Button {
                     let panel = NSOpenPanel()
-                    panel.allowsMultipleSelection = false
+                    panel.allowsMultipleSelection = true
                     panel.canChooseDirectories = false
                     panel.treatsFilePackagesAsDirectories = true
                     panel.beginSheetModal(for: NSApp.mainWindow!) { num in
                         if num == NSApplication.ModalResponse.OK {
-							if let fileURL = panel.url, preAttach(fileURL) {
-								withAnimation { attachments.append(fileURL) }
+							for fileURL in panel.urls {
+								if preAttach(fileURL) {
+									withAnimation { attachments.append(fileURL) }
+								} else { break }
 							}
                         }
                     }
