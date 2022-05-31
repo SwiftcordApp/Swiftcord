@@ -10,7 +10,31 @@ import SwiftUI
 import CachedAsyncImage
 import DiscordKit
 
-struct MessageView: View {
+struct NonUserBadge: View {
+	let flags: Int
+	let isWebhook: Bool
+	
+	var body: some View {
+		HStack(spacing: 0) {
+			if flags & 65536 != 0 {
+				Image(systemName: "checkmark")
+					.font(.system(size: 8, weight: .heavy))
+					.frame(width: 15)
+					.padding(.leading, -3)
+			}
+			Text(isWebhook
+				? "WEBHOOK"
+				: "BOT"
+			).font(.system(size: 10))
+		}
+		.frame(height: 15)
+		.padding(.horizontal, 4)
+		.background(Color.accentColor)
+		.cornerRadius(4)
+	}
+}
+
+struct MessageView: View, Equatable {
     let message: Message
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
@@ -26,72 +50,11 @@ struct MessageView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
-            if message.message_reference != nil && message.type == .reply {
-                HStack(alignment: .center, spacing: 4) {
-                    RoundedRectangle(cornerRadius: 5)
-                        .trim(from: 0.5, to: 0.75)
-                        .stroke(.gray.opacity(0.4), lineWidth: 2)
-                        .frame(width: 60, height: 20)
-                        .padding(.bottom, -14)
-                        .padding(.trailing, -30)
-                    Group {
-						if let quotedMsg = loadedQuotedMsg ?? quotedMsg, !loadQuotedMsgErr {
-							CachedAsyncImage(url: quotedMsg.author.avatarURL()) { phase in
-								if let image = phase.image {
-									image.resizable().scaledToFill()
-								} else if phase.error != nil {
-									Image("DiscordIcon").frame(width: 12, height: 12)
-								} else { Rectangle().fill(.gray.opacity(0.2)) }
-							}
-							.clipShape(Circle())
-							.frame(width: 16, height: 16)
-							Group {
-								Text(quotedMsg.author.username)
-									.font(.system(size: 14))
-									.opacity(0.9)
-								Text(.init(quotedMsg.content))
-									.font(.system(size: 14))
-									.opacity(0.75)
-									.lineLimit(1)
-							}
-							.onTapGesture { onQuoteClick(quotedMsg.id.description) }
-							.cursor(NSCursor.pointingHand)
-						} else if loadQuotedMsgErr {
-							Image(systemName: "xmark.octagon.fill")
-								.font(.system(size: 12))
-								.frame(width: 16, height: 16)
-							Text("Could not load quoted message")
-								.font(.system(size: 14))
-								.opacity(0.75)
-						} else {
-							Circle()
-								.fill(.gray.opacity(0.2))
-								.frame(width: 16, height: 16)
-								.onAppear { Task {
-									guard message.message_reference!.message_id != nil
-									else {
-										loadQuotedMsgErr = true
-										return
-									}
-
-									guard let message = await DiscordAPI.getChannelMsg(
-										id: message.message_reference!.channel_id ?? message.channel_id,
-										msgID: message.message_reference!.message_id!
-									) else {
-										loadQuotedMsgErr = true
-										return
-									}
-									loadedQuotedMsg = message
-								}}
-							Text("Loading message...")
-								.font(.system(size: 14))
-								.opacity(0.75)
-						}
-                    }
-                    .padding(.bottom, 4)
-                    Spacer()
-                }
-				.padding(.leading, 20)
+            if message.type == .reply {
+				ReferenceMessageView(referencedMsg: message.referenced_message)
+					.onTapGesture { if let referencedID = message.referenced_message?.id {
+						onQuoteClick(referencedID)
+					}}
             }
             HStack(
                 alignment: message.type == .guildMemberJoin || message.type == .userPremiumGuildSub ? .center : .top,
@@ -115,24 +78,8 @@ struct MessageView: View {
                                 Text(message.member?.nick ?? message.author.username)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
-                                if message.author.bot ?? false {
-                                    HStack(spacing: 0) {
-                                        if ((message.author.public_flags ?? 0) & (1 << 16)) != 0 || message.webhook_id != nil {
-                                            Image(systemName: message.webhook_id == nil ? "checkmark" : "link")
-                                                .font(.system(size: 8, weight: .heavy))
-                                                .frame(width: 15)
-                                                .padding(.leading, -3)
-                                        }
-                                        Text(message.webhook_id == nil
-                                            ? "BOT"
-                                            : "WEBHOOK"
-                                        ).font(.system(size: 10))
-                                    }
-                                    .frame(height: 15)
-                                    .padding(.horizontal, 4)
-									.background(Color.accentColor)
-                                    .cornerRadius(4)
-                                    // .offset(y: -2)
+								if message.author.bot ?? false, let flags = message.author.public_flags {
+									NonUserBadge(flags: flags, isWebhook: message.webhook_id != nil)
                                 }
                                 Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))
@@ -243,7 +190,11 @@ struct MessageView: View {
 				}
 			}
         }
-    }
+	}
+
+	static func == (lhs: MessageView, rhs: MessageView) -> Bool {
+		lhs.message == rhs.message
+	}
 }
 
 private extension MessageView {

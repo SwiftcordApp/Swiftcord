@@ -11,9 +11,10 @@ import DiscordKit
 
 struct UserAvatarView: View, Equatable {
     let user: User
-    let guildID: Snowflake
+    let guildID: Snowflake?
     let webhookID: Snowflake?
-    let clickDisabled: Bool
+    var clickDisabled = false
+	var size: CGFloat = 40
     @State private var profile: UserProfile? // Lazy-loaded full user
     @State private var infoPresenting = false
 	@State private var loadFullFailed = false
@@ -22,12 +23,12 @@ struct UserAvatarView: View, Equatable {
 	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
-        let avatarURL = user.avatarURL()
+		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
 
         CachedAsyncImage(url: avatarURL) { image in
             image.resizable().scaledToFill()
         } placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
-        .frame(width: 40, height: 40)
+        .frame(width: size, height: size)
         .clipShape(Circle())
         .onTapGesture {
 			guard !clickDisabled else { return }

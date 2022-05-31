@@ -13,7 +13,7 @@ struct MiniUserProfileView: View {
 	let user: User
 	let profile: UserProfile?
 	let guildRoles: [Role]?
-	let guildID: Snowflake
+	let guildID: Snowflake?
 	let isWebhook: Bool
 	let loadError: Bool
 	let hideNotes: Bool

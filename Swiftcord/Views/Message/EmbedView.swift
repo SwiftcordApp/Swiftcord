@@ -153,7 +153,7 @@ struct EmbedView: View {
 				}
 			}.padding(10)
 		}
-		.overlay(
+		.background(
 			HStack {
 				// Man, what a hack
 				ZStack {

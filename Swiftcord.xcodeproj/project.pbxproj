@@ -63,6 +63,7 @@
 		DA54D5782844DA1400B11857 /* UserSettingsProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */; };
 		DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5792844E41A00B11857 /* ProfileBadges.swift */; };
 		DA54D57C2845C36E00B11857 /* MessagesView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57B2845C36E00B11857 /* MessagesView+.swift */; };
+		DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */; };
 		DA57F44428056718001DC46E /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
@@ -144,6 +145,7 @@
 		DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsProfileView.swift; sourceTree = "<group>"; };
 		DA54D5792844E41A00B11857 /* ProfileBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadges.swift; sourceTree = "<group>"; };
 		DA54D57B2845C36E00B11857 /* MessagesView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesView+.swift"; sourceTree = "<group>"; };
+		DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceMessageView.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
+				DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
@@ -590,6 +593,7 @@
 			files = (
 				DA520ACB27D4A23A009FD740 /* String+.swift in Sources */,
 				DA57F44428056718001DC46E /* ChannelList.swift in Sources */,
+				DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */,
 				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,

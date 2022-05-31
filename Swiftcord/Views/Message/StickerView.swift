@@ -13,7 +13,7 @@ import CachedAsyncImage
 struct StickerLoadingView: View {
     let size: Double
     var body: some View {
-		RoundedRectangle(cornerRadius: 4)
+		RoundedRectangle(cornerRadius: 12)
 			.fill(.gray.opacity(Double.random(in: 0.15...0.3)))
 			.frame(width: size, height: size)
     }
@@ -66,7 +66,7 @@ struct StickerItemView: View {
 								}
 								animation = anim
 							},
-							animationCache: nil
+							animationCache: Lottie.LRUAnimationCache.sharedCache
 						)
 					}
 				} else {
