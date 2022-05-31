@@ -53,11 +53,12 @@ struct MessageAttachmentView: View {
 struct MessageInputView: View {
     let placeholder: String
     @Binding var message: String
-    @State private var attachments: [URL] = []
+    @Binding var attachments: [URL]
 	@State private var inhibitingSend = false
 	@State private var showingAttachmentErr = false
 	@State private var attachmentErr = ""
     let onSend: (String, [URL]) -> Void
+	let preAttach: (URL) -> Bool
 
     private func send() {
         guard message.hasContent() || !attachments.isEmpty else { return }
@@ -72,6 +73,7 @@ struct MessageInputView: View {
                     HStack {
 						ForEach(attachments.indices, id: \.self) { idx in
 							MessageAttachmentView(attachment: attachments[idx]) {
+								guard idx < attachments.count else { return }
 								withAnimation { _ = attachments.remove(at: idx) }
 							}
                         }
@@ -86,26 +88,14 @@ struct MessageInputView: View {
                     panel.allowsMultipleSelection = false
                     panel.canChooseDirectories = false
                     panel.treatsFilePackagesAsDirectories = true
-                    panel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: { num in
+                    panel.beginSheetModal(for: NSApp.mainWindow!) { num in
                         if num == NSApplication.ModalResponse.OK {
-                            guard let size = try? panel.url?.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).fileSize, size < 8*1024*1024 else {
-                                attachmentErr = "That file's too huge! Choose something that's <= 8MiB."
-								showingAttachmentErr = true
-                                return
-                            }
-
-                            guard !attachments.contains(panel.url!) else {
-								attachmentErr = "You've already selected that file"
-								showingAttachmentErr = true
-								return
+							if let fileURL = panel.url, preAttach(fileURL) {
+								withAnimation { attachments.append(fileURL) }
 							}
-                            withAnimation { attachments.append(panel.url!) }
                         }
-                    })
+                    }
                 } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)).opacity(0.75) }
-					.alert(attachmentErr, isPresented: $showingAttachmentErr) {
-						Button("Got It!", role: .cancel) { }
-					}
                     .buttonStyle(.plain)
                     .padding(.leading, 18)
 

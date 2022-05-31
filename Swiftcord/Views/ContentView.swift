@@ -176,7 +176,7 @@ struct ContentView: View {
             }
             _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
-    }
+	}
 
     /*private func addItem() {
         withAnimation {

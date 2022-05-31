@@ -129,7 +129,10 @@ struct AttachmentView: View {
         "application/json": "doc.text",
         // Archives
         "application/gzip": "doc.zipper",
-        "application/zip": "doc.zipper"
+        "application/zip": "doc.zipper",
+		// Videos
+		"video/mp4": "film",
+		"video/quicktime": "film"
     ]
 
 	/// Resizes image dimensions the way the official client does
