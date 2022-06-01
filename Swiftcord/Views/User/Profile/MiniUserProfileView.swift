@@ -24,17 +24,22 @@ struct MiniUserProfileView: View {
 		let avatarURL = user.avatarURL()
 
 		VStack(alignment: .leading, spacing: 0) {
-			if let accentColor = profile?.user.accent_color ?? user.accent_color {
+			if let banner = profile?.user.banner ?? user.banner {
+				CachedAsyncImage(url: banner.bannerURL(of: user.id, size: 600)) { image in
+					image.resizable().scaledToFill()
+				} placeholder: { Rectangle().fill(Color(hex: profile?.user.accent_color ?? 0)) }
+					.frame(width: 300, height: 120)
+					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
+			} else if let accentColor = profile?.user.accent_color {
 				Rectangle().fill(Color(hex: accentColor))
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			} else {
 				CachedAsyncImage(url: avatarURL) { image in
 					image.resizable().scaledToFill()
-				} placeholder: { ProgressView().progressViewStyle(.circular)}
+				} placeholder: { EmptyView() }
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
 					.blur(radius: 4)
-					.clipped()
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
 			HStack(alignment: .bottom, spacing: 4) {
@@ -51,6 +56,13 @@ struct MiniUserProfileView: View {
 					ProfileBadges(user: fullUser)
 						.frame(minHeight: 40, alignment: .topLeading)
 				}
+				Spacer()
+				if loadError {
+					Image(systemName: "exclamationmark.triangle.fill")
+						.font(.system(size: 20))
+						.foregroundColor(.orange)
+						.help("Failed to get full user profile")
+				}
 			}
 			.padding(.leading, 14)
 			.padding(.top, -46) // 92/2 = 46
@@ -64,16 +76,9 @@ struct MiniUserProfileView: View {
 							.foregroundColor(.primary.opacity(0.7))
 					}.font(.title2).lineLimit(1)
 					if user.bot == true || isWebhook {
-						NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
+						NonUserBadge(flags: user.flags, isWebhook: isWebhook)
 					}
-
 					Spacer()
-					if loadError {
-						Image(systemName: "exclamationmark.triangle.fill")
-							.font(.system(size: 20))
-							.foregroundColor(.orange)
-							.help("Failed to get full user profile")
-					}
 				}
 				.padding(.bottom, -2)
 				.padding(.top, -8)
