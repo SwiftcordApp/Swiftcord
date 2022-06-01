@@ -81,7 +81,7 @@ struct MessageView: View, Equatable {
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
 								if message.author.bot ?? false || message.webhook_id != nil {
-									NonUserBadge(flags: message.author.public_flags, isWebhook: message.webhook_id != nil)
+									NonUserBadge(flags: message.author.public_flags?.rawValue, isWebhook: message.webhook_id != nil)
                                 }
                                 Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))
