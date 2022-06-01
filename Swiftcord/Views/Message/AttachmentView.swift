@@ -146,29 +146,16 @@ struct AttachmentView: View {
             return (
                 Int(Double(width)/scale),
                 Int(Double(height)/scale),
-                getURLWithResizedDimens(mediaURL: srcURL, width: width, height: height),
+				srcURL.setSize(width: width, height: height),
                 scale
             )
         }
         return (
 			resizedW,
 			resizedH,
-			getURLWithResizedDimens(mediaURL: srcURL, width: resizedW*2, height: resizedH*2),
+			srcURL.setSize(width: resizedW*2, height: resizedH*2),
 			2
 		)
-    }
-
-    private func getURLWithResizedDimens(mediaURL: URL, width: Int?, height: Int?) -> URL {
-        var oURL = URLComponents(url: mediaURL, resolvingAgainstBaseURL: true)!
-		if let width = width, let height = height {
-			oURL.queryItems = [
-				URLQueryItem(name: "width", value: String(width)),
-				URLQueryItem(name: "height", value: String(height))
-			]
-		} else {
-			oURL.queryItems = []
-		}
-        return oURL.url!
     }
 
     var body: some View {
