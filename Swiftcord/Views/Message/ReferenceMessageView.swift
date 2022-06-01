@@ -38,7 +38,10 @@ struct ReferenceMessageView: View {
 							.opacity(0.9)
 
 						if quotedMsg.author?.bot == true || quotedMsg.webhook_id != nil {
-							NonUserBadge(flags: quotedMsg.author?.public_flags?.rawValue, isWebhook: quotedMsg.webhook_id != nil)
+							NonUserBadge(
+								flags: quotedMsg.author?.flags?.rawValue,
+								isWebhook: quotedMsg.webhook_id != nil
+							)
 						}
 
 						Text((quotedMsg.content!.isEmpty)

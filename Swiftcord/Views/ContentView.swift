@@ -113,6 +113,7 @@ struct ContentView: View {
 							.padding(.top, -13),
 						alignment: .trailing
 					)
+					.overlay(.black.opacity(0.2))
 			)
             .frame(maxHeight: .infinity, alignment: .top)
             .safeAreaInset(edge: .top) {
