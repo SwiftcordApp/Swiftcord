@@ -6,8 +6,7 @@ A completely native Discord client for macOS built 100% in Swift and SwiftUI
 ![Viewing the general-talk channel in the r/MacBookPro server in Swiftcord](README_Resources/heroScreenshot.png)
 
 This project aims to create a fully functional native Discord
-client in Swift for macOS from scratch. Look [below](#screenshots) for
-a bunch of screenshots!
+client in Swift for macOS from scratch.
 
 I'd also recommend checking out [DiscordKit](https://github.com/SwiftcordApp/DiscordKit),
 the Discord API implementation Swiftcord relies on.
@@ -106,11 +105,11 @@ to expand the answer
 
 Implemented most core message-related features from the official
 client, including basic markdown and embeds, stickers (lottie/PNG),
-editing and deleting events. Token retrival from Discord login 
-page is reliable and storing + retrival from keychain works. You can
-now send attachments with your messages too! 
+editing and deleting events. You can now send attachments (both
+from the file picker and by dragging and dropping) with your messages too! 
+DMs now have first-class support!
 
-More advanced features like voice channels, DMs, editing messages etc 
+More advanced features like voice channels & editing messages etc 
 aren't supported yet, refer to the [roadmap](#roadmap) below.
 
 Gateway connection event handling is stable, and reconnection
