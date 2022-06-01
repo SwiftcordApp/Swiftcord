@@ -76,7 +76,7 @@ struct MiniUserProfileView: View {
 							.foregroundColor(.primary.opacity(0.7))
 					}.font(.title2).lineLimit(1)
 					if user.bot == true || isWebhook {
-						NonUserBadge(flags: user.flags, isWebhook: isWebhook)
+						NonUserBadge(flags: user.flags?.rawValue, isWebhook: isWebhook)
 					}
 					Spacer()
 				}

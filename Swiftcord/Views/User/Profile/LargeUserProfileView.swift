@@ -50,7 +50,8 @@ struct LargeUserProfile<Content: View>: View {
                     }
                     .font(.title2)
                     HStack {
-                        ForEach(user.flagsArr, id: \.self) { flag in
+						let flags = User.Flags.allCases.filter { user.flags.contains($0) }
+						ForEach(flags) { flag in
 							if let badge = ProfileBadges.badgeMapping[flag] {
 								Image(badge).frame(width: 22, height: 22)
 							}

@@ -80,8 +80,8 @@ struct MessageView: View, Equatable {
                                 Text(message.member?.nick ?? message.author.username)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
-								if message.author.bot ?? false || message.webhook_id != nil {
-									NonUserBadge(flags: message.author.flags, isWebhook: message.webhook_id != nil)
+							                	if message.author.bot ?? false || message.webhook_id != nil {
+					                  			  NonUserBadge(flags: message.author.flags?.rawValue, isWebhook: message.webhook_id != nil)
                                 }
                                 Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
                                     .font(.system(size: 12))

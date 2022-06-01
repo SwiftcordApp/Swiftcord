@@ -5,32 +5,38 @@
 //  Created by Vincent Kwok on 30/5/22.
 //
 
-import SwiftUI
 import DiscordKit
+import SwiftUI
 
 struct ProfileBadges: View, Equatable {
 	let user: User
 
-	internal static let badgeMapping: [UserFlags: String] = [
+	internal static let badgeMapping: [User.Flags: String] = [
 		.staff: "DiscordStaff",
-		.bugHunterLv1: "BugHunter",
-		.bugHunterLv2: "BugHunter",
-		.certifiedMod: "CertifiedModerator",
-		.earlySupporter: "EarlySupporter",
-		.hypesquadEvents: "HypesquadEvents",
-		.hypesquadBalance: "HypesquadBalance",
-		.hypesquadBravery: "HypesquadBravery",
-		.hypesquadBrilliance: "HypesquadBrilliance",
-		.verifiedDev: "EarlyVerifiedBotDev",
-		.premium: "NitroSubscriber"
+		.bugHunterLevel1: "BugHunter",
+		.bugHunterLevel2: "BugHunter",
+		.certifiedModerator: "CertifiedModerator",
+		.premiumEarlySupporter: "EarlySupporter",
+		.hypesquad: "HypesquadEvents",
+		.hypesquadOnlineHouse3: "HypesquadBalance",
+		.hypesquadOnlineHouse1: "HypesquadBravery",
+		.hypesquadOnlineHouse2: "HypesquadBrilliance",
+		.verifiedDeveloper: "EarlyVerifiedBotDev"
 	]
 
-    var body: some View {
-		if let flags = user.flagsArr {
-			TagCloudView(content: flags.map { flag in
+	var body: some View {
+		if let flags = user.flags {
+			let flagArray = User.Flags.allCases.filter { flags.contains($0) }
+			TagCloudView(content: flagArray.map { flag in
 				Group {
 					if let badge = ProfileBadges.badgeMapping[flag] {
 						Image(badge).frame(width: 22, height: 22)
+							.help(flag.description)
+					}
+
+					if let premiumType = user.premium_type, premiumType != .none {
+						Image("NitroSubscriber").frame(width: 22, height: 22)
+							.help(premiumType.description)
 					}
 				}
 			}).padding(-2)
