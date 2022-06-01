@@ -27,10 +27,10 @@ struct ServerView: View, Equatable {
     @StateObject private var serverCtx = ServerContext()
 
 	private func loadChannels() {
-		guard let channels = serverCtx.guild?.channels
+		guard let channels = serverCtx.guild?.channels?.discordSorted()
 		else { return }
 
-		if let lastChannel = UserDefaults.standard.string(forKey: "guildLastCh.\(serverCtx.guild!.id)"),
+		if let lastChannel = UserDefaults.standard.string(forKey: "lastCh.\(serverCtx.guild!.id)"),
 		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
 			   serverCtx.channel = lastChObj
 			   return
@@ -71,7 +71,7 @@ struct ServerView: View, Equatable {
         NavigationView {
             VStack(spacing: 0) {
 				if let guild = guild {
-					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel, guild: guild)
+					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel)
 						.equatable()
 						.toolbar {
 							ToolbarItem {
@@ -80,6 +80,13 @@ struct ServerView: View, Equatable {
 									.fontWeight(.semibold)
 									.frame(maxWidth: 208) // Largest width before disappearing
 							}
+						}
+						.onChange(of: serverCtx.channel?.id) { newID in
+							guard let newID = newID else { return }
+							UserDefaults.standard.setValue(
+								newID,
+								forKey: "lastCh.\(serverCtx.guild!.id)"
+							)
 						}
 				} else {
 					Text("No server selected")
@@ -99,9 +106,7 @@ struct ServerView: View, Equatable {
             }
 
 			if serverCtx.channel != nil {
-				MessagesView()
-					.equatable()
-					.environmentObject(serverCtx)
+				MessagesView().equatable()
 			} else {
 				VStack(spacing: 24) {
 					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
@@ -120,6 +125,7 @@ You don't have access to any text channels or there are none in this server.
 				.background(.gray.opacity(0.15))
 			}
         }
+		.environmentObject(serverCtx)
         .navigationTitle("")
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {

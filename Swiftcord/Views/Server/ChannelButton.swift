@@ -11,7 +11,6 @@ import CachedAsyncImage
 
 struct ChannelButton: View {
     let channel: Channel
-    let guild: Guild?
     @Binding var selectedCh: Channel?
 
     var body: some View {
@@ -19,7 +18,7 @@ struct ChannelButton: View {
 			DMButton(dm: channel, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 		} else {
-			GuildChButton(channel: channel, guild: guild, selectedCh: $selectedCh)
+			GuildChButton(channel: channel, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 		}
     }
@@ -27,8 +26,9 @@ struct ChannelButton: View {
 
 struct GuildChButton: View {
 	let channel: Channel
-	let guild: Guild?
 	@Binding var selectedCh: Channel?
+
+	@EnvironmentObject var serverCtx: ServerContext
 
 	private let chIcons = [
 		ChannelType.voice: "speaker.wave.2.fill",
@@ -36,11 +36,8 @@ struct GuildChButton: View {
 	]
 
 	var body: some View {
-		Button {
-			selectedCh = channel
-			UserDefaults.standard.setValue(channel.id.description, forKey: "guildLastCh.\(guild!.id.description)")
-		} label: {
-			let image = (guild?.rules_channel_id != nil && guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
+		Button { selectedCh = channel } label: {
+			let image = (serverCtx.guild?.rules_channel_id != nil && serverCtx.guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
 			Label(channel.label() ?? "nil", systemImage: image)
 				.padding(.vertical, 6)
 				.padding(.horizontal, 2)
@@ -57,9 +54,7 @@ struct DMButton: View {
 	@EnvironmentObject var gateway: DiscordGateway
 
 	var body: some View {
-		Button {
-			selectedCh = dm
-		} label: {
+		Button { selectedCh = dm } label: {
 			HStack {
 				if dm.type == .dm,
 				   let avatarURL = gateway.cache.users[dm.recipient_ids![0]]?.avatarURL(size: 64) {

@@ -11,17 +11,20 @@ import DiscordKit
 struct ChannelList: View, Equatable {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
-	let guild: Guild
+
+	@EnvironmentObject var serverCtx: ServerContext
 
 	var body: some View {
 		List {
 			let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category }
 			if !filteredChannels.isEmpty {
-				let sectionHeadline = guild.isDMChannel ? "DIRECT MESSAGES" : "NO CATEGORY"
+				let sectionHeadline = serverCtx.guild?.isDMChannel == true
+					? "DIRECT MESSAGES"
+					: "NO CATEGORY"
 				Section(header: Text(sectionHeadline)) {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels, id: \.id) { channel in
-						ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
+						ChannelButton(channel: channel, selectedCh: $selCh)
 							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
 					}
 				}
@@ -29,13 +32,12 @@ struct ChannelList: View, Equatable {
 
 			let categoryChannels = channels
 				.filter { $0.parent_id == nil && $0.type == .category }
-				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				Section(header: Text(channel.name?.uppercased() ?? "")) {
 					// Channels in this section
 					let channels = channels.filter({ $0.parent_id == channel.id }).discordSorted()
 					ForEach(channels, id: \.id) { channel in
-						ChannelButton(channel: channel, guild: guild, selectedCh: $selCh)
+						ChannelButton(channel: channel, selectedCh: $selCh)
 							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
 					}
 				}
