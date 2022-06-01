@@ -15,8 +15,13 @@ extension ISOTimestamp {
         isoDateFormatter.formatOptions = [
             .withFullDate,
             .withFullTime,
-            .withDashSeparatorInDate]
+            .withDashSeparatorInDate
+		]
 		if hasFractionalSeconds { isoDateFormatter.formatOptions.update(with: .withFractionalSeconds) }
-        return isoDateFormatter.date(from: self)
+		if let date = isoDateFormatter.date(from: self) {
+			return date
+		} else {
+			return hasFractionalSeconds ? nil : self.toDate(hasFractionalSeconds: true)
+		}
     }
 }

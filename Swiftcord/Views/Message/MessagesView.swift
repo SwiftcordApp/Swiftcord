@@ -70,9 +70,28 @@ struct MessagesViewHeader: View {
 				Text("This is the start of the #\(chl?.name ?? "") channel. \(chl?.topic ?? "")")
 					.opacity(0.7)
 			}
-			Divider().padding(.top, 4)
 		}
 		.padding([.top, .leading, .trailing], 16)
+	}
+}
+
+struct DayDividerView: View, Equatable {
+	let date: Date
+
+	var body: some View {
+		ZStack {
+			Divider()
+			Text(date.toDateString(with: .medium))
+				.font(.headline)
+				.opacity(0.7)
+				.padding(.horizontal, 4)
+				.background(.background)
+		}
+		.padding([.top, .horizontal], 16)
+	}
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		return lhs.date.timeIntervalSinceReferenceDate == rhs.date.timeIntervalSinceReferenceDate
 	}
 }
 
@@ -111,22 +130,29 @@ struct MessagesView: View, Equatable {
                         Spacer(minLength: 16 + (showingInfoBar ? 24 : 0) + messageInputHeight)
 
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
-                            MessageView(
-                                message: msg,
-                                shrunk: idx < messages.count - 1 && msg.messageIsShrunk(prev: messages[idx + 1]),
-                                quotedMsg: msg.message_reference != nil
-                                ? messages.first {
-                                    $0.id == msg.message_reference!.message_id
-                                } : nil,
-                                onQuoteClick: { id in
-                                    withAnimation {
-										highlightMsg = id
-										proxy.scrollTo(id, anchor: .center)
-									}
-                                },
-								highlightMsgId: $highlightMsg
-                            )
-                            .flip()
+							VStack(spacing: 0) {
+								if (idx == messages.count - 1 && reachedTop) ||
+								   (idx != messages.count - 1 && msg.timestamp.prefix(10) != messages[idx+1].timestamp.prefix(10)),
+								   let newDate = msg.timestamp.toDate() {
+									DayDividerView(date: newDate)
+								}
+
+								MessageView(
+									message: msg,
+									shrunk: idx < messages.count - 1 && msg.messageIsShrunk(prev: messages[idx + 1]),
+									quotedMsg: msg.message_reference != nil
+									? messages.first {
+										$0.id == msg.message_reference!.message_id
+									} : nil,
+									onQuoteClick: { id in
+										withAnimation {
+											highlightMsg = id
+											proxy.scrollTo(id, anchor: .center)
+										}
+									},
+									highlightMsgId: $highlightMsg
+								)
+							}.flip()
                         }
 
                         if reachedTop { MessagesViewHeader(chl: ctx.channel).flip() } else {
