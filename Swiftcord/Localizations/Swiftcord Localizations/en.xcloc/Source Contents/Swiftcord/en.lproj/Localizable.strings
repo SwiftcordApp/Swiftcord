@@ -1,0 +1,462 @@
+/* No comment provided by engineer. */
+"" = "";
+
+/* No comment provided by engineer. */
+" (edited)" = " (edited)";
+
+/* No comment provided by engineer. */
+" %@ typing..." = " %@ typing...";
+
+/* No comment provided by engineer. */
+" group." = " group.";
+
+/* No comment provided by engineer. */
+"." = ".";
+
+/* No comment provided by engineer. */
+"@%@" = "@%@";
+
+/* No comment provided by engineer. */
+"#%@" = "#%@";
+
+/* No comment provided by engineer. */
+"%@" = "%@";
+
+/* No comment provided by engineer. */
+"%@ • %@" = "%@ • %@";
+
+/* No comment provided by engineer. */
+"%lld Members" = "%lld Members";
+
+/* No comment provided by engineer. */
+"•" = "•";
+
+/* No comment provided by engineer. */
+"$$$ 💸" = "$$$ 💸";
+
+/* No comment provided by engineer. */
+"A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM." = "A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM.";
+
+/* No comment provided by engineer. */
+"About" = "About";
+
+/* No comment provided by engineer. */
+"ABOUT ME" = "ABOUT ME";
+
+/* No comment provided by engineer. */
+"Accessibility" = "Accessibility";
+
+/* No comment provided by engineer. */
+"ACCOUNT REMOVAL" = "ACCOUNT REMOVAL";
+
+/* No comment provided by engineer. */
+"Activity" = "Activity";
+
+/* No comment provided by engineer. */
+"Activity Status" = "Activity Status";
+
+/* No comment provided by engineer. */
+"Add a note to this user (only visible to you)" = "Add a note to this user (only visible to you)";
+
+/* No comment provided by engineer. */
+"Add Reaction" = "Add Reaction";
+
+/* No comment provided by engineer. */
+"Advanced" = "Advanced";
+
+/* No comment provided by engineer. */
+"And finally, thanks to Discord for building such an amazing community and infrastructure!" = "And finally, thanks to Discord for building such an amazing community and infrastructure!";
+
+/* No comment provided by engineer. */
+"Anthony Ingle" = "Anthony Ingle";
+
+/* No comment provided by engineer. */
+"App" = "App";
+
+/* No comment provided by engineer. */
+"Appearance" = "Appearance";
+
+/* No comment provided by engineer. */
+"Append to queue" = "Append to queue";
+
+/* No comment provided by engineer. */
+"Are you sure you want to log out?" = "Are you sure you want to log out?";
+
+/* No comment provided by engineer. */
+"Authorized Apps" = "Authorized Apps";
+
+/* No comment provided by engineer. */
+"Ben Tettmar" = "Ben Tettmar";
+
+/* No comment provided by engineer. */
+"Big thanks to all contributors <3! Contributions are more than welcome :D" = "Big thanks to all contributors <3! Contributions are more than welcome :D";
+
+/* No comment provided by engineer. */
+"Billing" = "Billing";
+
+/* No comment provided by engineer. */
+"BOT" = "BOT";
+
+/* No comment provided by engineer. */
+"Candygoblen123" = "Candygoblen123";
+
+/* No comment provided by engineer. */
+"Change Log" = "Change Log";
+
+/* No comment provided by engineer. */
+"Change Password" = "Change Password";
+
+/* No comment provided by engineer. */
+"Change your password" = "Change your password";
+
+/* No comment provided by engineer. */
+"Check for Updates…" = "Check for Updates…";
+
+/* No comment provided by engineer. */
+"Click to see attachment" = "Click to see attachment";
+
+/* No comment provided by engineer. */
+"Close" = "Close";
+
+/* No comment provided by engineer. */
+"Connections" = "Connections";
+
+/* No comment provided by engineer. */
+"Contributors" = "Contributors";
+
+/* No comment provided by engineer. */
+"Copy ID" = "Copy ID";
+
+/* No comment provided by engineer. */
+"Copy Link" = "Copy Link";
+
+/* No comment provided by engineer. */
+"Create Thread" = "Create Thread";
+
+/* No comment provided by engineer. */
+"Create/Join Server" = "Create/Join Server";
+
+/* No comment provided by engineer. */
+"Credits" = "Credits";
+
+/* No comment provided by engineer. */
+"Cue Discord ping sound" = "Cue Discord ping sound";
+
+/* No comment provided by engineer. */
+"Debug" = "Debug";
+
+/* No comment provided by engineer. */
+"Delete Account" = "Delete Account";
+
+/* No comment provided by engineer. */
+"Delete Message" = "Delete Message";
+
+/* No comment provided by engineer. */
+"Disable Account" = "Disable Account";
+
+/* No comment provided by engineer. */
+"Disabling your account means you can recover it at any time after taking this action." = "Disabling your account means you can recover it at any time after taking this action.";
+
+/* No comment provided by engineer. */
+"Discord Nitro" = "Discord Nitro";
+
+/* No comment provided by engineer. */
+"DMs" = "DMs";
+
+/* No comment provided by engineer. */
+"Don't get nitro, nitro bad" = "Don't get nitro, nitro bad";
+
+/* No comment provided by engineer. */
+"Done" = "Done";
+
+/* No comment provided by engineer. */
+"Download attachment" = "Download attachment";
+
+/* No comment provided by engineer. */
+"Drop file to add attachment" = "Drop file to add attachment";
+
+/* No comment provided by engineer. */
+"Edit" = "Edit";
+
+/* No comment provided by engineer. */
+"EMAIL" = "EMAIL";
+
+/* No comment provided by engineer. */
+"Enter your current password and a new one." = "Enter your current password and a new one.";
+
+/* No comment provided by engineer. */
+"Failed to get full user profile" = "Failed to get full user profile";
+
+/* No comment provided by engineer. */
+"Gateway isn't connected" = "Gateway isn't connected";
+
+/* No comment provided by engineer. */
+"Gift Inventory" = "Gift Inventory";
+
+/* No comment provided by engineer. */
+"Got It!" = "Got It!";
+
+/* No comment provided by engineer. */
+"Head Developer" = "Head Developer";
+
+/* No comment provided by engineer. */
+"Hello, World!" = "Hello, World!";
+
+/* No comment provided by engineer. */
+"Hypesquad" = "Hypesquad";
+
+/* No comment provided by engineer. */
+"Item" = "Item";
+
+/* No comment provided by engineer. */
+"Keybinds" = "Keybinds";
+
+/* No comment provided by engineer. */
+"Language" = "Language";
+
+/* No comment provided by engineer. */
+"Loading Discord login..." = "Loading Discord login...";
+
+/* No comment provided by engineer. */
+"Loading full profile..." = "Loading full profile...";
+
+/* No comment provided by engineer. */
+"LOADING ROLES" = "LOADING ROLES";
+
+/* No comment provided by engineer. */
+"Loading roles..." = "Loading roles...";
+
+/* No comment provided by engineer. */
+"Loading sticker..." = "Loading sticker...";
+
+/* No comment provided by engineer. */
+"Log Out" = "Log Out";
+
+/* No comment provided by engineer. */
+"Manage Server Webhooks" = "Manage Server Webhooks";
+
+/* No comment provided by engineer. */
+"marcprux" = "marcprux";
+
+/* No comment provided by engineer. */
+"Media Center" = "Media Center";
+
+/* No comment provided by engineer. */
+"My Account" = "My Account";
+
+/* No comment provided by engineer. */
+"Navigation" = "Navigation";
+
+/* No comment provided by engineer. */
+"Next Channel" = "Next Channel";
+
+/* No comment provided by engineer. */
+"Next Server" = "Next Server";
+
+/* No comment provided by engineer. */
+"No network connectivity" = "No network connectivity";
+
+/* No comment provided by engineer. */
+"NO ROLES" = "NO ROLES";
+
+/* No comment provided by engineer. */
+"No server selected" = "No server selected";
+
+/* No comment provided by engineer. */
+"NO TEXT CHANNELS" = "NO TEXT CHANNELS";
+
+/* No comment provided by engineer. */
+"Not hype" = "Not hype";
+
+/* No comment provided by engineer. */
+"NOTE" = "NOTE";
+
+/* No comment provided by engineer. */
+"Nothing" = "Nothing";
+
+/* No comment provided by engineer. */
+"Nothing in queue" = "Nothing in queue";
+
+/* No comment provided by engineer. */
+"Notifications" = "Notifications";
+
+/* No comment provided by engineer. */
+"Original message was deleted." = "Original message was deleted.";
+
+/* No comment provided by engineer. */
+"Others" = "Others";
+
+/* No comment provided by engineer. */
+"Password and Authenthication" = "Password and Authenthication";
+
+/* No comment provided by engineer. */
+"PHONE NUMBER" = "PHONE NUMBER";
+
+/* No comment provided by engineer. */
+"Pin Message" = "Pin Message";
+
+/* No comment provided by engineer. */
+"Play now" = "Play now";
+
+/* No comment provided by engineer. */
+"Please sponsor Swiftcord on GitHub! I'll be eternally grateful <3" = "Please sponsor Swiftcord on GitHub! I'll be eternally grateful <3";
+
+/* No comment provided by engineer. */
+"PREVIEW" = "PREVIEW";
+
+/* No comment provided by engineer. */
+"Preview attachment" = "Preview attachment";
+
+/* No comment provided by engineer. */
+"Previous Channel" = "Previous Channel";
+
+/* No comment provided by engineer. */
+"Previous Server" = "Previous Server";
+
+/* No comment provided by engineer. */
+"Privacy & Safety" = "Privacy & Safety";
+
+/* No comment provided by engineer. */
+"Quit" = "Quit";
+
+/* No comment provided by engineer. */
+"Reconnecting..." = "Reconnecting...";
+
+/* No comment provided by engineer. */
+"Remove 2FA" = "Remove 2FA";
+
+/* No comment provided by engineer. */
+"Remove attachment" = "Remove attachment";
+
+/* No comment provided by engineer. */
+"Reply" = "Reply";
+
+/* No comment provided by engineer. */
+"ROLE" = "ROLE";
+
+/* No comment provided by engineer. */
+"ROLES" = "ROLES";
+
+/* No comment provided by engineer. */
+"royal" = "royal";
+
+/* No comment provided by engineer. */
+"selimgr" = "selimgr";
+
+/* No comment provided by engineer. */
+"Server Boost" = "Server Boost";
+
+/* No comment provided by engineer. */
+"Settings can only be modified after logging in and while the gateway is connected." = "Settings can only be modified after logging in and while the gateway is connected.";
+
+/* No comment provided by engineer. */
+"Sorry, aPNG stickers can't be played (yet)" = "Sorry, aPNG stickers can't be played (yet)";
+
+/* No comment provided by engineer. */
+"Sponsoring Swiftcord allows me to continue developing it!" = "Sponsoring Swiftcord allows me to continue developing it!";
+
+/* No comment provided by engineer. */
+"Sponsors" = "Sponsors";
+
+/* No comment provided by engineer. */
+"Sticker Pack" = "Sticker Pack";
+
+/* No comment provided by engineer. */
+"Streamer Mode" = "Streamer Mode";
+
+/* No comment provided by engineer. */
+"Subscriptions" = "Subscriptions";
+
+/* No comment provided by engineer. */
+"Swiftcord" = "Swiftcord";
+
+/* No comment provided by engineer. */
+"Swiftcord is open-source software and built with love. You can find its source code in GitHub at the link below! Contributions and issue reports are welcome ;) Please also give Swiftcord a star, it gives me motivation to continue working on it." = "Swiftcord is open-source software and built with love. You can find its source code in GitHub at the link below! Contributions and issue reports are welcome ;) Please also give Swiftcord a star, it gives me motivation to continue working on it.";
+
+/* No comment provided by engineer. */
+"Swiftcord is powered by DiscordKit, a Discord API implementation in Swift" = "Swiftcord is powered by DiscordKit, a Discord API implementation in Swift";
+
+/* No comment provided by engineer. */
+"Swiftcord on GitHub" = "Swiftcord on GitHub";
+
+/* No comment provided by engineer. */
+"Text & Images" = "Text & Images";
+
+/* No comment provided by engineer. */
+"Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!" = "Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!";
+
+/* No comment provided by engineer. */
+"Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!" = "Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!";
+
+/* No comment provided by engineer. */
+"The 2 biggest pain points" = "The 2 biggest pain points";
+
+/* No comment provided by engineer. */
+"This is the beginning of your direct message history with " = "This is the beginning of your direct message history with ";
+
+/* No comment provided by engineer. */
+"This is the start of the #%@ channel. %@" = "This is the start of the #%@ channel. %@";
+
+/* No comment provided by engineer. */
+"This user is a webhook" = "This user is a webhook";
+
+/* No comment provided by engineer. */
+"TODO" = "TODO";
+
+/* No comment provided by engineer. */
+"Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in." = "Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in.";
+
+/* No comment provided by engineer. */
+"Unimplemented" = "Unimplemented";
+
+/* No comment provided by engineer. */
+"Up Next" = "Up Next";
+
+/* No comment provided by engineer. */
+"User" = "User";
+
+/* No comment provided by engineer. */
+"User Profile" = "User Profile";
+
+/* No comment provided by engineer. */
+"USERNAME" = "USERNAME";
+
+/* No comment provided by engineer. */
+"Value" = "Value";
+
+/* No comment provided by engineer. */
+"Version %@ (Build: %@)" = "Version %@ (Build: %@)";
+
+/* No comment provided by engineer. */
+"View Backup Codes" = "View Backup Codes";
+
+/* No comment provided by engineer. */
+"View Sticker Pack" = "View Sticker Pack";
+
+/* No comment provided by engineer. */
+"Vincent Kwok" = "Vincent Kwok";
+
+/* No comment provided by engineer. */
+"Voice & Video" = "Voice & Video";
+
+/* No comment provided by engineer. */
+"WEBHOOK" = "WEBHOOK";
+
+/* No comment provided by engineer. */
+"Welcome to the beginning of the " = "Welcome to the beginning of the ";
+
+/* No comment provided by engineer. */
+"Welcome, %@, enjoy your stay!" = "Welcome, %@, enjoy your stay!";
+
+/* No comment provided by engineer. */
+"What are you doing with your life?" = "What are you doing with your life?";
+
+/* No comment provided by engineer. */
+"Wumpus is waiting on friends. You don't have to, though!" = "Wumpus is waiting on friends. You don't have to, though!";
+
+/* No comment provided by engineer. */
+"You can use markdown and links if you'd like." = "You can use markdown and links if you'd like.";
+
+/* No comment provided by engineer. */
+"You find yourself in a strange place. You don't have access to any text channels or there are none in this server." = "You find yourself in a strange place. You don't have access to any text channels or there are none in this server.";
+

@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Swiftcord/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Swiftcord</source>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSHumanReadableCopyright" xml:space="preserve">
+        <source>Copyright © 2022 Vincent Kwok.
+All rights reserved.</source>
+        <note>Copyright (human-readable)</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Swiftcord/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
+    </header>
+    <body>
+      <trans-unit id=" %@ typing..." xml:space="preserve">
+        <source> %@ typing...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id=" (edited)" xml:space="preserve">
+        <source> (edited)</source>
+        <target>(已编辑)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id=" group." xml:space="preserve">
+        <source> group.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="#%@" xml:space="preserve">
+        <source>#%@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="$$$ 💸" xml:space="preserve">
+        <source>$$$ 💸</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@" xml:space="preserve">
+        <source>%@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@ • %@" xml:space="preserve">
+        <source>%@ • %@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%lld Members" xml:space="preserve">
+        <source>%lld Members</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="." xml:space="preserve">
+        <source>.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="@%@" xml:space="preserve">
+        <source>@%@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM." xml:space="preserve">
+        <source>A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="ABOUT ME" xml:space="preserve">
+        <source>ABOUT ME</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="ACCOUNT REMOVAL" xml:space="preserve">
+        <source>ACCOUNT REMOVAL</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="About" xml:space="preserve">
+        <source>About</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Accessibility" xml:space="preserve">
+        <source>Accessibility</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Activity" xml:space="preserve">
+        <source>Activity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Activity Status" xml:space="preserve">
+        <source>Activity Status</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add Reaction" xml:space="preserve">
+        <source>Add Reaction</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add a note to this user (only visible to you)" xml:space="preserve">
+        <source>Add a note to this user (only visible to you)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Advanced" xml:space="preserve">
+        <source>Advanced</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="And finally, thanks to Discord for building such an amazing community and infrastructure!" xml:space="preserve">
+        <source>And finally, thanks to Discord for building such an amazing community and infrastructure!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Anthony Ingle" xml:space="preserve">
+        <source>Anthony Ingle</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="App" xml:space="preserve">
+        <source>App</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Appearance" xml:space="preserve">
+        <source>Appearance</source>
+        <target>外观</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Append to queue" xml:space="preserve">
+        <source>Append to queue</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to log out?" xml:space="preserve">
+        <source>Are you sure you want to log out?</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Authorized Apps" xml:space="preserve">
+        <source>Authorized Apps</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="BOT" xml:space="preserve">
+        <source>BOT</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Ben Tettmar" xml:space="preserve">
+        <source>Ben Tettmar</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Big thanks to all contributors &lt;3! Contributions are more than welcome :D" xml:space="preserve">
+        <source>Big thanks to all contributors &lt;3! Contributions are more than welcome :D</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Billing" xml:space="preserve">
+        <source>Billing</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Candygoblen123" xml:space="preserve">
+        <source>Candygoblen123</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Change Log" xml:space="preserve">
+        <source>Change Log</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Change Password" xml:space="preserve">
+        <source>Change Password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Change your password" xml:space="preserve">
+        <source>Change your password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Check for Updates…" xml:space="preserve">
+        <source>Check for Updates…</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Click to see attachment" xml:space="preserve">
+        <source>Click to see attachment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Close" xml:space="preserve">
+        <source>Close</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Connections" xml:space="preserve">
+        <source>Connections</source>
+        <target>连接​​​​​​​​</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Contributors" xml:space="preserve">
+        <source>Contributors</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy ID" xml:space="preserve">
+        <source>Copy ID</source>
+        <target>复制 ID</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Link" xml:space="preserve">
+        <source>Copy Link</source>
+        <target>复制链接</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Create Thread" xml:space="preserve">
+        <source>Create Thread</source>
+        <target>创建子区</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Create/Join Server" xml:space="preserve">
+        <source>Create/Join Server</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Credits" xml:space="preserve">
+        <source>Credits</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cue Discord ping sound" xml:space="preserve">
+        <source>Cue Discord ping sound</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="DMs" xml:space="preserve">
+        <source>DMs</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Debug" xml:space="preserve">
+        <source>Debug</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete Account" xml:space="preserve">
+        <source>Delete Account</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete Message" xml:space="preserve">
+        <source>Delete Message</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Disable Account" xml:space="preserve">
+        <source>Disable Account</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Disabling your account means you can recover it at any time after taking this action." xml:space="preserve">
+        <source>Disabling your account means you can recover it at any time after taking this action.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Discord Nitro" xml:space="preserve">
+        <source>Discord Nitro</source>
+        <target>Nitro</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Don't get nitro, nitro bad" xml:space="preserve">
+        <source>Don't get nitro, nitro bad</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <target>编辑信息</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Download attachment" xml:space="preserve">
+        <source>Download attachment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Drop file to add attachment" xml:space="preserve">
+        <source>Drop file to add attachment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="EMAIL" xml:space="preserve">
+        <source>EMAIL</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit" xml:space="preserve">
+        <source>Edit</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Enter your current password and a new one." xml:space="preserve">
+        <source>Enter your current password and a new one.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Failed to get full user profile" xml:space="preserve">
+        <source>Failed to get full user profile</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gateway isn't connected" xml:space="preserve">
+        <source>Gateway isn't connected</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gift Inventory" xml:space="preserve">
+        <source>Gift Inventory</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Got It!" xml:space="preserve">
+        <source>Got It!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Head Developer" xml:space="preserve">
+        <source>Head Developer</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello, World!" xml:space="preserve">
+        <source>Hello, World!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hypesquad" xml:space="preserve">
+        <source>Hypesquad</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Item" xml:space="preserve">
+        <source>Item</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Keybinds" xml:space="preserve">
+        <source>Keybinds</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="LOADING ROLES" xml:space="preserve">
+        <source>LOADING ROLES</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Language" xml:space="preserve">
+        <source>Language</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Loading Discord login..." xml:space="preserve">
+        <source>Loading Discord login...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Loading full profile..." xml:space="preserve">
+        <source>Loading full profile...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Loading roles..." xml:space="preserve">
+        <source>Loading roles...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Loading sticker..." xml:space="preserve">
+        <source>Loading sticker...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Log Out" xml:space="preserve">
+        <source>Log Out</source>
+        <target>登出</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Manage Server Webhooks" xml:space="preserve">
+        <source>Manage Server Webhooks</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Media Center" xml:space="preserve">
+        <source>Media Center</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="My Account" xml:space="preserve">
+        <source>My Account</source>
+        <target>我的账号</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="NO ROLES" xml:space="preserve">
+        <source>NO ROLES</source>
+        <target>没有身份组</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="NO TEXT CHANNELS" xml:space="preserve">
+        <source>NO TEXT CHANNELS</source>
+        <target>无文字频道</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="NOTE" xml:space="preserve">
+        <source>NOTE</source>
+        <target>备注</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Navigation" xml:space="preserve">
+        <source>Navigation</source>
+        <target>导航</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Next Channel" xml:space="preserve">
+        <source>Next Channel</source>
+        <target>下个起点</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Next Server" xml:space="preserve">
+        <source>Next Server</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No network connectivity" xml:space="preserve">
+        <source>No network connectivity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No server selected" xml:space="preserve">
+        <source>No server selected</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Not hype" xml:space="preserve">
+        <source>Not hype</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Nothing" xml:space="preserve">
+        <source>Nothing</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Nothing in queue" xml:space="preserve">
+        <source>Nothing in queue</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Notifications" xml:space="preserve">
+        <source>Notifications</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Original message was deleted." xml:space="preserve">
+        <source>Original message was deleted.</source>
+        <target>原始消息已被删除。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Others" xml:space="preserve">
+        <source>Others</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="PHONE NUMBER" xml:space="preserve">
+        <source>PHONE NUMBER</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="PREVIEW" xml:space="preserve">
+        <source>PREVIEW</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Password and Authenthication" xml:space="preserve">
+        <source>Password and Authenthication</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pin Message" xml:space="preserve">
+        <source>Pin Message</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Play now" xml:space="preserve">
+        <source>Play now</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please sponsor Swiftcord on GitHub! I'll be eternally grateful &lt;3" xml:space="preserve">
+        <source>Please sponsor Swiftcord on GitHub! I'll be eternally grateful &lt;3</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Preview attachment" xml:space="preserve">
+        <source>Preview attachment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Previous Channel" xml:space="preserve">
+        <source>Previous Channel</source>
+        <target>前个起点</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Previous Server" xml:space="preserve">
+        <source>Previous Server</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Privacy &amp; Safety" xml:space="preserve">
+        <source>Privacy &amp; Safety</source>
+        <target>隐私与安全</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Quit" xml:space="preserve">
+        <source>Quit</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="ROLE" xml:space="preserve">
+        <source>ROLE</source>
+        <target>身份组</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="ROLES" xml:space="preserve">
+        <source>ROLES</source>
+        <target>身份组</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Reconnecting..." xml:space="preserve">
+        <source>Reconnecting...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Remove 2FA" xml:space="preserve">
+        <source>Remove 2FA</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Remove attachment" xml:space="preserve">
+        <source>Remove attachment</source>
+        <target>移除附件</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Reply" xml:space="preserve">
+        <source>Reply</source>
+        <target>回复</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Server Boost" xml:space="preserve">
+        <source>Server Boost</source>
+        <target>服务器助力</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Settings can only be modified after logging in and while the gateway is connected." xml:space="preserve">
+        <source>Settings can only be modified after logging in and while the gateway is connected.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sorry, aPNG stickers can't be played (yet)" xml:space="preserve">
+        <source>Sorry, aPNG stickers can't be played (yet)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sponsoring Swiftcord allows me to continue developing it!" xml:space="preserve">
+        <source>Sponsoring Swiftcord allows me to continue developing it!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sponsors" xml:space="preserve">
+        <source>Sponsors</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sticker Pack" xml:space="preserve">
+        <source>Sticker Pack</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Streamer Mode" xml:space="preserve">
+        <source>Streamer Mode</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Subscriptions" xml:space="preserve">
+        <source>Subscriptions</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Swiftcord" xml:space="preserve">
+        <source>Swiftcord</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Swiftcord is open-source software and built with love. You can find its source code in GitHub at the link below! Contributions and issue reports are welcome ;) Please also give Swiftcord a star, it gives me motivation to continue working on it." xml:space="preserve">
+        <source>Swiftcord is open-source software and built with love. You can find its source code in GitHub at the link below! Contributions and issue reports are welcome ;) Please also give Swiftcord a star, it gives me motivation to continue working on it.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Swiftcord is powered by DiscordKit, a Discord API implementation in Swift" xml:space="preserve">
+        <source>Swiftcord is powered by DiscordKit, a Discord API implementation in Swift</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Swiftcord on GitHub" xml:space="preserve">
+        <source>Swiftcord on GitHub</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="TODO" xml:space="preserve">
+        <source>TODO</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Text &amp; Images" xml:space="preserve">
+        <source>Text &amp; Images</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!" xml:space="preserve">
+        <source>Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!" xml:space="preserve">
+        <source>Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The 2 biggest pain points" xml:space="preserve">
+        <source>The 2 biggest pain points</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is the beginning of your direct message history with " xml:space="preserve">
+        <source>This is the beginning of your direct message history with </source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is the start of the #%@ channel. %@" xml:space="preserve">
+        <source>This is the start of the #%@ channel. %@</source>
+        <target>这是 #%@ 频道的起点。%@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This user is a webhook" xml:space="preserve">
+        <source>This user is a webhook</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in." xml:space="preserve">
+        <source>Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="USERNAME" xml:space="preserve">
+        <source>USERNAME</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unimplemented" xml:space="preserve">
+        <source>Unimplemented</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Up Next" xml:space="preserve">
+        <source>Up Next</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="User" xml:space="preserve">
+        <source>User</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="User Profile" xml:space="preserve">
+        <source>User Profile</source>
+        <target>用户个人资料</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Value" xml:space="preserve">
+        <source>Value</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Version %@ (Build: %@)" xml:space="preserve">
+        <source>Version %@ (Build: %@)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="View Backup Codes" xml:space="preserve">
+        <source>View Backup Codes</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="View Sticker Pack" xml:space="preserve">
+        <source>View Sticker Pack</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vincent Kwok" xml:space="preserve">
+        <source>Vincent Kwok</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Voice &amp; Video" xml:space="preserve">
+        <source>Voice &amp; Video</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="WEBHOOK" xml:space="preserve">
+        <source>WEBHOOK</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Welcome to the beginning of the " xml:space="preserve">
+        <source>Welcome to the beginning of the </source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Welcome, %@, enjoy your stay!" xml:space="preserve">
+        <source>Welcome, %@, enjoy your stay!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="What are you doing with your life?" xml:space="preserve">
+        <source>What are you doing with your life?</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Wumpus is waiting on friends. You don't have to, though!" xml:space="preserve">
+        <source>Wumpus is waiting on friends. You don't have to, though!</source>
+        <target>Wumpus在苦等自己的朋友。不过您不用等哦！</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="You can use markdown and links if you'd like." xml:space="preserve">
+        <source>You can use markdown and links if you'd like.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="You find yourself in a strange place. You don't have access to any text channels or there are none in this server." xml:space="preserve">
+        <source>You find yourself in a strange place. You don't have access to any text channels or there are none in this server.</source>
+        <target>您发现您身处一个奇怪的地方。您没有权限访问任何文字频道，或者此服务器上没有文字频道。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="marcprux" xml:space="preserve">
+        <source>marcprux</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="royal" xml:space="preserve">
+        <source>royal</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="selimgr" xml:space="preserve">
+        <source>selimgr</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="•" xml:space="preserve">
+        <source>•</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
