@@ -9,7 +9,8 @@ import Foundation
 
 extension Date {
 	func isSameDay(as date: Date) -> Bool {
-		let diff = Calendar.current.dateComponents([.day], from: self, to: date)
-		return diff.day == 0
+		let com1 = Calendar.current.dateComponents([.year, .month, .day], from: self)
+		let com2 = Calendar.current.dateComponents([.year, .month, .day], from: date)
+		return com1.day == com2.day && com1.month == com2.month && com1.year == com2.year
 	}
 }
