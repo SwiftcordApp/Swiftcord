@@ -13,6 +13,6 @@ extension Message {
         return prev.author.id == self.author.id
         && (prev.type == .defaultMsg || prev.type == .reply)
         && self.type == .defaultMsg
-        && (((self.timestamp.toDate() ?? Date()) - (prev.timestamp.toDate() ?? Date())) < 400)
+		&& (self.timestamp.timeIntervalSince(prev.timestamp) < 400)
     }
 }
