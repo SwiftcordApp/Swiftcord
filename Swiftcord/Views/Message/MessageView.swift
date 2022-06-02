@@ -85,13 +85,15 @@ struct MessageView: View, Equatable {
 										isWebhook: message.webhook_id != nil
 									)
                                 }
-								HStack {
+								HStack(spacing: 0) {
 									Text(message.timestamp, style: .time)
 									if let edited_timestamp = message.edited_timestamp {
-										Text("• Edited:")
+										Text("message.edited")
 										Text(edited_timestamp, style: .time)
 									}
 								}
+								.font(.system(size: 12))
+								.opacity(0.5)
                             }
                         }
                         // For including additional message components
@@ -111,12 +113,14 @@ struct MessageView: View, Equatable {
                                     ))).font(.system(
                                         size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
                                     )) +
-                                    Text(message.edited_timestamp != nil && shrunk
-                                         ? " (edited)"
-                                         : "")
-                                        .font(.system(size: 8))
-                                        .italic()
-                                        .foregroundColor(Color(NSColor.textColor).opacity(0.4))
+                                    Text(
+										message.edited_timestamp != nil && shrunk
+                                         ? "message.edited.shrunk"
+                                         : ""
+									)
+									.font(.system(size: 8))
+									.italic()
+									.foregroundColor(Color(NSColor.textColor).opacity(0.4))
                                 }.textSelection(.enabled)
                             }
                             if let stickerItems = message.sticker_items {

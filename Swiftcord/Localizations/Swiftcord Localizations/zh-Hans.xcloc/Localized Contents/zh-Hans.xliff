@@ -16,7 +16,7 @@ All rights reserved.</source>
       </trans-unit>
     </body>
   </file>
-  <file original="Swiftcord/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
+  <file original="Swiftcord/en.lproj/Localizable.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
@@ -656,8 +656,17 @@ All rights reserved.</source>
         <source>selimgr</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="user.bio" xml:space="preserve">
+        <source>user.bio</source>
+        <target>自我介绍</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="•" xml:space="preserve">
         <source>•</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="• Edited:" xml:space="preserve">
+        <source>• Edited:</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
     </body>

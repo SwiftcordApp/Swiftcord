@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Date {
 	func isSameDay(as date: Date) -> Bool {
 		let com1 = Calendar.current.dateComponents([.year, .month, .day], from: self)

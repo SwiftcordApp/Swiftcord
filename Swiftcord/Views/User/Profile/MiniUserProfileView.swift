@@ -104,7 +104,7 @@ struct MiniUserProfileView: View {
 					}
 
 					if let bio = profile?.user.bio, !bio.isEmpty {
-						Text("ABOUT ME").font(.headline)
+						Text("user.bio").font(.headline).textCase(.uppercase)
 						Text(bio)
 							.fixedSize(horizontal: false, vertical: true)
 							.padding(.bottom, 8)
@@ -116,12 +116,16 @@ struct MiniUserProfileView: View {
 								profile.guild_member?.roles.contains($0.id) ?? false
 							}
 
-							Text(profile.guild_member == nil ? "LOADING ROLES"
-								 : (roles.isEmpty
-									? "NO ROLES"
-									: (roles.count == 1 ? "ROLE" : "ROLES")
-								   )
-							).font(.headline)
+							Text(
+								profile.guild_member == nil
+								? "user.roles.loading"
+								: (roles.isEmpty
+								   ? "user.roles.none"
+								   : (roles.count == 1 ? "user.roles.one" : "user.roles.many")
+								)
+							)
+							.font(.headline)
+							.textCase(.uppercase)
 							if !roles.isEmpty {
 								TagCloudView(content: roles.map({ role in
 									HStack(spacing: 6) {
@@ -139,7 +143,7 @@ struct MiniUserProfileView: View {
 								})).padding(-2)
 							}
 						} else {
-							ProgressView("Loading roles...")
+							ProgressView("user.roles.loading")
 								.progressViewStyle(.linear)
 								.frame(maxWidth: .infinity)
 								.tint(.blue)
@@ -147,7 +151,7 @@ struct MiniUserProfileView: View {
 					}
 
 					if !hideNotes {
-						Text("NOTE").font(.headline).padding(.top, 8)
+						Text("user.note").font(.headline).padding(.top, 8).textCase(.uppercase)
 						 // Notes are stored locally for now, but eventually will be synced with the Discord API
 						 TextField("Add a note to this user (only visible to you)", text: $note)
 							 .textFieldStyle(.roundedBorder)

@@ -784,9 +784,19 @@ All rights reserved.</target>
         <target>selimgr</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="user.bio" xml:space="preserve">
+        <source>user.bio</source>
+        <target>ABOUT ME</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="•" xml:space="preserve">
         <source>•</source>
         <target>•</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="• Edited:" xml:space="preserve">
+        <source>• Edited:</source>
+        <target>• Edited:</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
     </body>

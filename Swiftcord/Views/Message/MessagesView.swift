@@ -49,27 +49,19 @@ struct MessagesViewHeader: View {
 			} else { Image(systemName: "number").font(.system(size: 60)) }
 
 			Text(chl?.type == .dm || chl?.type == .groupDM
-				 ? chl?.label(gateway.cache.users) ?? ""
-				 : "Welcome to #\(chl?.label() ?? "")!")
+				 ? "\(chl?.label(gateway.cache.users) ?? "")"
+				 : "server.channel.title \(chl?.label() ?? "")")
 				.font(.largeTitle)
 				.fontWeight(.heavy)
 
-			if chl?.type == .dm {
-				Group {
-					Text("This is the beginning of your direct message history with ")
-						+ Text("@\(chl?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
-						+ Text(".")
-				}.opacity(0.7)
-			} else if chl?.type == .groupDM {
-				Group {
-					Text("Welcome to the beginning of the ")
-						+ Text("\(chl?.label(gateway.cache.users) ?? "")").fontWeight(.bold)
-						+ Text(" group.")
-				}.opacity(0.7)
-			} else {
-				Text("This is the start of the #\(chl?.name ?? "") channel. \(chl?.topic ?? "")")
-					.opacity(0.7)
-			}
+			Text(
+				chl?.type == .dm
+				? "dm.header \(chl?.label(gateway.cache.users) ?? "")"
+				: (chl?.type == .groupDM
+				   ? "dm.group.header \(chl?.label(gateway.cache.users) ?? "")"
+				   : "server.channel.header \(chl?.name ?? "") \(chl?.topic ?? "")"
+				  )
+			).opacity(0.7)
 		}
 		.padding([.top, .leading, .trailing], 16)
 	}

@@ -32,6 +32,9 @@
 "•" = "•";
 
 /* No comment provided by engineer. */
+"• Edited:" = "• Edited:";
+
+/* No comment provided by engineer. */
 "$$$ 💸" = "$$$ 💸";
 
 /* No comment provided by engineer. */
@@ -417,6 +420,9 @@
 
 /* No comment provided by engineer. */
 "User Profile" = "User Profile";
+
+/* No comment provided by engineer. */
+"user.bio" = "user.bio";
 
 /* No comment provided by engineer. */
 "USERNAME" = "USERNAME";

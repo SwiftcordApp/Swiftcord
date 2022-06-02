@@ -18,10 +18,12 @@ struct ChannelList: View, Equatable {
 		List {
 			let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category }
 			if !filteredChannels.isEmpty {
-				let sectionHeadline = serverCtx.guild?.isDMChannel == true
-					? "DIRECT MESSAGES"
-					: "NO CATEGORY"
-				Section(header: Text(sectionHeadline)) {
+				Section(
+					header: Text(serverCtx.guild?.isDMChannel == true
+								 ? "dm"
+								 : "server.channel.noCategory"
+								).textCase(.uppercase)
+				) {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels, id: \.id) { channel in
 						ChannelButton(channel: channel, selectedCh: $selCh)
@@ -33,7 +35,7 @@ struct ChannelList: View, Equatable {
 			let categoryChannels = channels
 				.filter { $0.parent_id == nil && $0.type == .category }
 			ForEach(categoryChannels, id: \.id) { channel in
-				Section(header: Text(channel.name?.uppercased() ?? "")) {
+				Section(header: Text(channel.name ?? "").textCase(.uppercase)) {
 					// Channels in this section
 					let channels = channels.filter({ $0.parent_id == channel.id }).discordSorted()
 					ForEach(channels, id: \.id) { channel in

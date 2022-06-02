@@ -1,5 +1,7 @@
-/* No comment provided by engineer. */
-" (edited)" = "(已编辑)";
+/* ====== Message ====== */
+"message.edited.shrunk" = " (已编辑)";
+
+"message.edited" = " • 已编辑: ";
 
 /* No comment provided by engineer. */
 "Appearance" = "外观";
@@ -35,13 +37,7 @@
 "Next Channel" = "下个起点";
 
 /* No comment provided by engineer. */
-"NO ROLES" = "没有身份组";
-
-/* No comment provided by engineer. */
-"NO TEXT CHANNELS" = "无文字频道";
-
-/* No comment provided by engineer. */
-"NOTE" = "备注";
+"user.note" = "备注";
 
 /* No comment provided by engineer. */
 "Original message was deleted." = "原始消息已被删除。";
@@ -58,24 +54,39 @@
 /* No comment provided by engineer. */
 "Reply" = "回复";
 
-/* No comment provided by engineer. */
-"ROLE" = "身份组";
+/* ====== User ====== */
+"user.roles.one" = "身份组";
 
 /* No comment provided by engineer. */
-"ROLES" = "身份组";
+"user.roles.many" = "身份组";
+
+/* No comment provided by engineer. */
+"user.roles.none" = "没有身份组";
+
+"user.roles.loading" = "加载身份组";
+
+"user.bio" = "自我介绍";
 
 /* No comment provided by engineer. */
 "Server Boost" = "服务器助力";
 
 /* No comment provided by engineer. */
-"This is the start of the #%@ channel. %@" = "这是 #%@ 频道的起点。%@";
-
-/* No comment provided by engineer. */
 "User Profile" = "用户个人资料";
 
-/* No comment provided by engineer. */
-"Wumpus is waiting on friends. You don't have to, though!" = "Wumpus在苦等自己的朋友。不过您不用等哦！";
+/* ====== Server ====== */
+"server.noChannels.header" = "无文字频道";
 
-/* No comment provided by engineer. */
-"You find yourself in a strange place. You don't have access to any text channels or there are none in this server." = "您发现您身处一个奇怪的地方。您没有权限访问任何文字频道，或者此服务器上没有文字频道。";
+"server.noChannels.body" = "您发现您身处一个奇怪的地方。您没有权限访问任何文字频道，或者此服务器上没有文字频道。";
 
+"server.channel.header %@ %@" = "这是 #%@ 频道的起点。%@";
+
+"server.channel.title %@" = "欢迎来到 #%@！";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus在苦等自己的朋友。不过您不用等哦！";
+
+"dm" = "私信";
+
+"dm.header %@" = "这是您与 **@%@** 私信记录的开头。";
+
+"dm.group.header %@" = "欢迎来到**%@**组的开头。";

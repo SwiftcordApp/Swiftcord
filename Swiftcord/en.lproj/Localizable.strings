@@ -1,0 +1,37 @@
+/* ====== User ====== */
+"user.bio" = "About Me";
+
+"user.roles.none" = "No Roles";
+
+"user.roles.one" = "Role";
+
+"user.roles.many" = "Roles";
+
+"user.roles.loading" = "Loading roles";
+
+"user.note" = "Note";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (edited)";
+
+"message.edited" = " • Edited: ";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "No Text Channels";
+
+"server.noChannels.body" = "You find yourself in a strange place. You don't have access to any text channels or there are none in this server.";
+
+"server.channel.header %@ %@" = "This is the start of the #%@ channel. %@";
+
+"server.channel.title %@" = "Welcome to #%@!";
+
+"server.channel.noCategory" = "No Category";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus is waiting on friends. You don't have to, though!";
+
+"dm" = "Direct Messages";
+
+"dm.header %@" = "This is the beginning of your direct message history with **@%@**.";
+
+"dm.group.header %@" = "Welcome to the beginning of the **%@** group.";

@@ -111,13 +111,12 @@ struct ServerView: View, Equatable {
 				VStack(spacing: 24) {
 					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
 					if serverCtx.guild?.id == "@me" {
-						Text("Wumpus is waiting on friends. You don't have to, though!").opacity(0.75)
+						Text("dm.noChannels.body").opacity(0.75)
 					} else {
-						Text("NO TEXT CHANNELS").font(.headline)
-						Text("""
-You find yourself in a strange place. \
-You don't have access to any text channels or there are none in this server.
-""").padding(.top, -16).multilineTextAlignment(.center)
+						Text("server.noChannels.header").font(.headline).textCase(.uppercase)
+						Text("server.noChannels.body")
+							.padding(.top, -16)
+							.multilineTextAlignment(.center)
 					}
 				}
 				.padding()
