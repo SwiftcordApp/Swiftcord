@@ -63,12 +63,11 @@ struct MessageView: View, Equatable {
                 spacing: 16
             ) {
                 // Would have loved to use switch-case but fallthrough doesn't work :(
-                let timestring = message.timestamp.toDate()?.toTimeString() ?? ""
                 if message.type == .reply || message.type == .defaultMsg {
                     if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id, clickDisabled: false)
                     } else {
-                        Text(timestring)
+						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
                             .animation(.linear(duration: 0.1), value: hovered)
@@ -86,9 +85,13 @@ struct MessageView: View, Equatable {
 										isWebhook: message.webhook_id != nil
 									)
                                 }
-                                Text(timestring + (message.edited_timestamp != nil ? " • Edited: \(message.edited_timestamp!.toDate()?.toTimeString() ?? "")" : ""))
-                                    .font(.system(size: 12))
-                                    .opacity(0.5)
+								HStack {
+									Text(message.timestamp, style: .time)
+									if let edited_timestamp = message.edited_timestamp {
+										Text("• Edited:")
+										Text(edited_timestamp, style: .time)
+									}
+								}
                             }
                         }
                         // For including additional message components

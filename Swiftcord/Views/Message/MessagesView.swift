@@ -75,23 +75,19 @@ struct MessagesViewHeader: View {
 	}
 }
 
-struct DayDividerView: View, Equatable {
+struct DayDividerView: View {
 	let date: Date
 
 	var body: some View {
 		ZStack {
 			Divider()
-			Text(date.toDateString(with: .medium))
+			Text(date, style: .date)
 				.font(.headline)
 				.opacity(0.7)
 				.padding(.horizontal, 4)
 				.background(.background)
 		}
 		.padding([.top, .horizontal], 16)
-	}
-
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		return lhs.date.timeIntervalSinceReferenceDate == rhs.date.timeIntervalSinceReferenceDate
 	}
 }
 
@@ -132,9 +128,8 @@ struct MessagesView: View, Equatable {
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
 							VStack(spacing: 0) {
 								if (idx == messages.count - 1 && reachedTop) ||
-								   (idx != messages.count - 1 && msg.timestamp.prefix(10) != messages[idx+1].timestamp.prefix(10)),
-								   let newDate = msg.timestamp.toDate() {
-									DayDividerView(date: newDate)
+									(idx != messages.count - 1 && !msg.timestamp.isSameDay(as: messages[idx+1].timestamp)) {
+									DayDividerView(date: msg.timestamp)
 								}
 
 								MessageView(

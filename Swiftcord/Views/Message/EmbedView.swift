@@ -145,7 +145,7 @@ struct EmbedView: View {
 								.font(.system(size: 12, weight: .semibold))
 								.textSelection(.enabled)
 
-							Text(timestamp.toDate(hasFractionalSeconds: false)?.toDateString() ?? "")
+							Text(timestamp, style: .date)
 								.font(.system(size: 12, weight: .semibold))
 								.textSelection(.enabled)
 						}

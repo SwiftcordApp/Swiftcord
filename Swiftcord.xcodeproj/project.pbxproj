@@ -29,7 +29,6 @@
 		DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
 		DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
 		DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
-		DA32EF4627C8AB6200A9ED72 /* ISOTimestamp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4527C8AB6200A9ED72 /* ISOTimestamp+.swift */; };
 		DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* Date+.swift */; };
 		DA32EF4A27C8BE8F00A9ED72 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4927C8BE8F00A9ED72 /* Color+.swift */; };
 		DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
@@ -92,6 +91,7 @@
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3684BB5A283C69C5005045AE /* Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sparkle.swift; sourceTree = "<group>"; };
+		D848802D28485147000D1A77 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -110,7 +110,6 @@
 		DA32EF3327C6861800A9ED72 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
 		DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
-		DA32EF4527C8AB6200A9ED72 /* ISOTimestamp+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISOTimestamp+.swift"; sourceTree = "<group>"; };
 		DA32EF4727C8ABFF00A9ED72 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		DA32EF4927C8BE8F00A9ED72 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
@@ -251,6 +250,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				D848802D28485147000D1A77 /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -366,7 +366,6 @@
 				DAAFB5CB282B879200807B54 /* Double+.swift */,
 				DA2384A027CB9714009E15E0 /* Font+.swift */,
 				DA520ADC27D643CE009FD740 /* Int+.swift */,
-				DA32EF4527C8AB6200A9ED72 /* ISOTimestamp+.swift */,
 				DA28027E28095E3000B14E5C /* Logger+.swift */,
 				E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */,
 				DA520ACA27D4A23A009FD740 /* String+.swift */,
@@ -671,7 +670,6 @@
 				DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */,
 				DA54D5782844DA1400B11857 /* UserSettingsProfileView.swift in Sources */,
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
-				DA32EF4627C8AB6200A9ED72 /* ISOTimestamp+.swift in Sources */,
 				DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

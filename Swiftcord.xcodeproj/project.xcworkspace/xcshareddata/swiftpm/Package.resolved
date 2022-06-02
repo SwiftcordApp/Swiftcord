@@ -1,34 +1,50 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Lottie",
-        "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
-          "version": "3.3.0"
-        }
-      },
-      {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
-        "state": {
-          "branch": "master",
-          "revision": "a81b7367f2c46875f29577e03a60c39cdfad0c8d",
-          "version": null
-        }
-      },
-      {
-        "package": "swiftui-cached-async-image",
-        "repositoryURL": "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
-        "state": {
-          "branch": null,
-          "revision": "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
-          "version": "2.1.0"
-        }
+  "pins" : [
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
+        "version" : "3.3.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift",
+      "state" : {
+        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "286edd1fa22505a9e54d170e9fd07d775ea233f2",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "swift-docc-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-docc-plugin",
+      "state" : {
+        "revision" : "3303b164430d9a7055ba484c8ead67a52f7b74f6",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swiftui-cached-async-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
+      "state" : {
+        "revision" : "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
+        "version" : "2.1.0"
+      }
+    }
+  ],
+  "version" : 2
 }
