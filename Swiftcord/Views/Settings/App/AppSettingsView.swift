@@ -11,39 +11,39 @@ struct AppSettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink("Appearance") {
-                    Text("Don't get nitro, nitro bad")
-                }
-
-                NavigationLink("Accessibility") {
+                NavigationLink("settings.app.appearance") {
                     Text("")
                 }
 
-                NavigationLink("Voice & Video") {
-                    Text("The 2 biggest pain points")
-                }
-
-                NavigationLink("Text & Images") {
+                NavigationLink("settings.app.accessibility") {
                     Text("")
                 }
 
-                NavigationLink("Notifications") {
-                    Text("Cue Discord ping sound")
-                }
-
-                NavigationLink("Keybinds") {
+                NavigationLink("settings.app.voiceVideo") {
                     Text("")
                 }
 
-                NavigationLink("Language") {
+                NavigationLink("settings.app.textImages") {
                     Text("")
                 }
 
-                NavigationLink("Streamer Mode") {
+                NavigationLink("settings.app.notifs") {
                     Text("")
                 }
 
-                NavigationLink("Advanced") {
+                NavigationLink("settings.app.keybinds") {
+                    Text("")
+                }
+
+                NavigationLink("settings.app.lang") {
+                    Text("")
+                }
+
+                NavigationLink("settings.app.streamer") {
+                    Text("")
+                }
+
+                NavigationLink("settings.app.advanced") {
                     Text("")
                 }
             }.listStyle(SidebarListStyle())

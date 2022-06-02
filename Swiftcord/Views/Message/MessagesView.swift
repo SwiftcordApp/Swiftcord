@@ -195,7 +195,12 @@ struct MessagesView: View, Equatable {
                 MessageInfoBarView(isShown: $showingInfoBar, state: $infoBarData)
 
                 MessageInputView(
-					placeholder: "Message \(ctx.channel?.type == .text ? "#" : "")\(ctx.channel?.label(gateway.cache.users) ?? "")",
+					placeholder: ctx.channel?.type == .dm
+					? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+					: (ctx.channel?.type == .groupDM
+					   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+					   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+					  ),
 					message: $newMessage, attachments: $attachments,
 					onSend: sendMessage, preAttach: preAttachChecks
 				)

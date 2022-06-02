@@ -53,7 +53,7 @@ struct MessageAttachmentView: View {
 }
 
 struct MessageInputView: View {
-    let placeholder: String
+    let placeholder: LocalizedStringKey
     @Binding var message: String
     @Binding var attachments: [URL]
 	@State private var inhibitingSend = false

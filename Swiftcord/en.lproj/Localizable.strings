@@ -27,6 +27,8 @@
 
 "server.channel.noCategory" = "No Category";
 
+"server.composeMsg.hint %@" = "Message #%@";
+
 /* ====== DMs ====== */
 "dm.noChannels.body" = "Wumpus is waiting on friends. You don't have to, though!";
 
@@ -35,3 +37,28 @@
 "dm.header %@" = "This is the beginning of your direct message history with **@%@**.";
 
 "dm.group.header %@" = "Welcome to the beginning of the **%@** group.";
+
+"dm.group.composeMsg.hint %@" = "Message %@";
+
+"dm.composeMsg.hint %@" = "Message @%@";
+
+/* ====== Settings ====== */
+"settings.app" = "App";
+
+"settings.app.appearance" = "Appearance";
+
+"settings.app.accessibility" = "Accessibility";
+
+"settings.app.voiceVideo" = "Voice & Video";
+
+"settings.app.textImages" = "Text & Images";
+
+"settings.app.notifs" = "Notifications";
+
+"settings.app.keybinds" = "Keybinds";
+
+"settings.app.lang" = "Language";
+
+"settings.app.streamer" = "Streamer Mode";
+
+"settings.app.advanced" = "Advanced";

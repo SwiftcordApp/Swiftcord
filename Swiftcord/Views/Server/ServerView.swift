@@ -75,7 +75,7 @@ struct ServerView: View, Equatable {
 						.equatable()
 						.toolbar {
 							ToolbarItem {
-								Text(guild.name)
+								Text(guild.name == "DMs" ? "dm" : "\(guild.name)")
 									.font(.title3)
 									.fontWeight(.semibold)
 									.frame(maxWidth: 208) // Largest width before disappearing
@@ -89,7 +89,7 @@ struct ServerView: View, Equatable {
 							)
 						}
 				} else {
-					Text("No server selected")
+					ZStack {}
 						.frame(minWidth: 240, maxHeight: .infinity)
 				}
 

@@ -24,6 +24,7 @@ struct SwiftcordApp: App, Equatable {
 				.overlay(LoadingView())
 				.environmentObject(gateway)
 				.environmentObject(state)
+				//.environment(\.locale, .init(identifier: "zh-Hans"))
 				.environment(\.managedObjectContext, persistenceController.container.viewContext)
 		}
 		.commands {
@@ -40,6 +41,7 @@ struct SwiftcordApp: App, Equatable {
 				.preferredColorScheme(gateway.cache.userSettings?.theme == .light ? .light : .dark)
 				.environmentObject(gateway)
 				.environmentObject(state)
+				//.environment(\.locale, .init(identifier: "zh-Hans"))
 		}
 	}
 

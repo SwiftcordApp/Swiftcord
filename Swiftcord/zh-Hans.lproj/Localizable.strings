@@ -4,9 +4,6 @@
 "message.edited" = " • 已编辑: ";
 
 /* No comment provided by engineer. */
-"Appearance" = "外观";
-
-/* No comment provided by engineer. */
 "Connections" = "连接​​​​​​​​";
 
 /* No comment provided by engineer. */
@@ -82,6 +79,8 @@
 
 "server.channel.title %@" = "欢迎来到 #%@！";
 
+"server.composeMsg.hint %@" = "给 #%@ 发消息";
+
 /* ====== DMs ====== */
 "dm.noChannels.body" = "Wumpus在苦等自己的朋友。不过您不用等哦！";
 
@@ -89,4 +88,29 @@
 
 "dm.header %@" = "这是您与 **@%@** 私信记录的开头。";
 
-"dm.group.header %@" = "欢迎来到**%@**组的开头。";
+"dm.group.header %@" = "欢迎来到 **%@** 组的开头。";
+
+"dm.group.composeMsg.hint %@" = "给 %@ 发消息";
+
+"dm.composeMsg.hint %@" = "消息@%@";
+
+/* ====== Settings ====== */
+"settings.app" = "应用";
+
+"settings.app.appearance" = "外观";
+
+"settings.app.accessibility" = "可访问性";
+
+"settings.app.voiceVideo" = "语音和视频";
+
+"settings.app.textImages" = "文字与图像";
+
+"settings.app.notifs" = "通知";
+
+"settings.app.keybinds" = "快捷键";
+
+"settings.app.lang" = "语言";
+
+"settings.app.streamer" = "主播模式";
+
+"settings.app.advanced" = "高级设置";

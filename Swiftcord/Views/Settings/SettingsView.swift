@@ -35,7 +35,7 @@ private extension SettingsView {
 				}
 
 				AppSettingsView().tabItem {
-					Label("App", systemImage: "macwindow")
+					Label("settings.app", systemImage: "macwindow")
 				}
 
 				ActivitySettingsView().tabItem {
