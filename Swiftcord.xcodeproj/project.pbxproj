@@ -73,6 +73,8 @@
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
+		DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */; };
+		DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA912849F9C500059FD7 /* AppCenterCrashes */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
@@ -177,7 +179,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */,
+				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
+				DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */,
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
 				3684BB59283C696E005045AE /* Sparkle in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
@@ -521,6 +525,8 @@
 				DA974EA12835ED1200013CC2 /* DiscordKit */,
 				DA974EA32835ED1200013CC2 /* DiscordKitCommon */,
 				3684BB58283C696E005045AE /* Sparkle */,
+				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
+				DA97BA912849F9C500059FD7 /* AppCenterCrashes */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -556,6 +562,7 @@
 				DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */,
 				3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */,
+				DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -925,6 +932,14 @@
 				kind = branch;
 			};
 		};
+		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -952,6 +967,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */;
 			productName = DiscordKitCommon;
+		};
+		DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		DA97BA912849F9C500059FD7 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
 		};
 /* End XCSwiftPackageProductDependency section */
 

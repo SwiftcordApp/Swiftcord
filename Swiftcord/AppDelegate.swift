@@ -7,11 +7,24 @@
 
 import Foundation
 import AppKit
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		setupURLCache()
 		clearOldCache()
+
+#if DEBUG
+		AppCenter.logLevel = .debug
+#endif
+
+		// Init AppCenter
+		AppCenter.start(withAppSecret: "{todo: add token}", services: [
+			Analytics.self,
+			Crashes.self
+		])
 	}
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
