@@ -78,7 +78,7 @@ jobs:
         run: |
           appcenter crashes upload-symbols \
             --token "${{ secrets.APPCENTER_API_TOKEN }}" \
-            --app "Swiftcord" \
+            --app "Swiftcord/Swiftcord" \
             --xcarchive "Swiftcord.xcarchive"
 
 
