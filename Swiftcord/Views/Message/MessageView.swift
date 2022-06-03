@@ -49,6 +49,8 @@ struct MessageView: View, Equatable {
 
     @EnvironmentObject var serverCtx: ServerContext
 
+	public static let supportedTypes: [MessageType] = [.defaultMsg, .reply, .guildMemberJoin]
+
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
@@ -137,7 +139,8 @@ struct MessageView: View, Equatable {
                         }
                     }
                 } else if message.type == .guildMemberJoin {
-                    Image(systemName: "person.badge.plus")
+                    Image(systemName: "arrow.right")
+						.foregroundColor(.green)
                         .font(.system(size: 16))
                         .padding([.leading, .trailing], 12)
                     Text("Welcome, \(message.author.username), enjoy your stay!")

@@ -74,7 +74,8 @@ struct DayDividerView: View {
 		ZStack {
 			Divider()
 			Text(date, style: .date)
-				.font(.headline)
+				.font(.system(size: 12))
+				.fontWeight(.medium)
 				.opacity(0.7)
 				.padding(.horizontal, 4)
 				.background(.background)
@@ -120,7 +121,7 @@ struct MessagesView: View, Equatable {
                         ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
 							VStack(spacing: 0) {
 								if (idx == messages.count - 1 && reachedTop) ||
-									(idx != messages.count - 1 && !msg.timestamp.isSameDay(as: messages[idx+1].timestamp)) {
+								   (idx != messages.count - 1 && !msg.timestamp.isSameDay(as: messages[idx+1].timestamp)) {
 									DayDividerView(date: msg.timestamp)
 								}
 
