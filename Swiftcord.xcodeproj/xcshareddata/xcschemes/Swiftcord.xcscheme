@@ -87,6 +87,13 @@
             ReferencedContainer = "container:Swiftcord.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "APPCENTER_APP_SECRET"
+            value = "Enter a valid AppCenter App Secret here and enable this environment variable if you want to test AppCenter"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
