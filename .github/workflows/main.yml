@@ -44,7 +44,7 @@ jobs:
             sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
           
       - name: "Archive"
-        run: xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive COMPILER_INDEX_STORE_ENABLE=NO | xcpretty
+        run: xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" | xcpretty
           
       - name: "Export & Sign Release Build"
         uses: devbotsxyz/xcode-export-archive@main
@@ -73,4 +73,12 @@ jobs:
           name: Swiftcord_Canary # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
           path: Swiftcord*.dmg
+
+      - name: "Upload debugging symbols to App Center"
+        run: |
+          appcenter crashes upload-symbols \
+            --token "${{ secrets.APPCENTER_API_TOKEN }}" \
+            --app "Swiftcord" \
+            --xcarchive "Swiftcord.xcarchive"
+
 
