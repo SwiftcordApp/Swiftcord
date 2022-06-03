@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Export Build Environment to Swift"
-               scriptText = "BUILD_SETTINGS_OUTPUT_PATH=&quot;${SOURCE_ROOT}/${PRODUCT_NAME}/GeneratedBuildSettings.swift&quot;&#10;&#10;pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Ensure that changes to the build settings file do not affect the output build information while we&apos;re building a release build.&#10;git update-index --assume-unchanged &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;&#10;# Generate the output file&#10;&quot;${SOURCE_ROOT}/Scripts/export-build-settings-to-swift.sh&quot;&#10;&#10;popd&#10;">
+               scriptText = "pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Ensure that changes to the build settings file do not affect the output build information while we&apos;re building a release build.&#10;git update-index --assume-unchanged &quot;${BUILD_SETTINGS_SWIFT_SOURCE_PATH}&quot;&#10;&#10;# Generate the output file&#10;&quot;${SOURCE_ROOT}/Scripts/export-build-settings-to-swift.sh&quot;&#10;&#10;popd&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -28,7 +28,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Reset Exported Build Environment"
-               scriptText = "BUILD_SETTINGS_OUTPUT_PATH=&quot;${SOURCE_ROOT}/${PRODUCT_NAME}/GeneratedBuildSettings.swift&quot;&#10;&#10;pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Restore the original build settings output file&#10;git update-index --no-assume-unchanged &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;git checkout &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;&#10;popd&#10;">
+               scriptText = "pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Restore the original build settings output file&#10;git update-index --no-assume-unchanged &quot;${BUILD_SETTINGS_SWIFT_SOURCE_PATH}&quot;&#10;git checkout &quot;${BUILD_SETTINGS_SWIFT_SOURCE_PATH}&quot;&#10;&#10;popd&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -87,13 +87,6 @@
             ReferencedContainer = "container:Swiftcord.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "APPCENTER_APP_SECRET"
-            value = "Enter a valid AppCenter App Secret here and enable this environment variable if you want to test AppCenter"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

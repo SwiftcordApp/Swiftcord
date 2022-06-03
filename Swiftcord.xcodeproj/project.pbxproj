@@ -10,7 +10,7 @@
 		36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
 		3684BB59283C696E005045AE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3684BB58283C696E005045AE /* Sparkle */; };
 		3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684BB5A283C69C5005045AE /* Sparkle.swift */; };
-		900F6D97284A141D000B6D29 /* GeneratedBuildEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6D96284A141D000B6D29 /* GeneratedBuildEnvironment.swift */; };
+		900F6DA1284A1C0C000B6D29 /* GeneratedBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
@@ -95,7 +95,10 @@
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3684BB5A283C69C5005045AE /* Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sparkle.swift; sourceTree = "<group>"; };
-		900F6D96284A141D000B6D29 /* GeneratedBuildEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedBuildEnvironment.swift; sourceTree = "<group>"; };
+		900F6D9D284A1A92000B6D29 /* Project Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Shared.xcconfig"; sourceTree = "<group>"; };
+		900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Debug.xcconfig"; sourceTree = "<group>"; };
+		900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Release.xcconfig"; sourceTree = "<group>"; };
+		900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedBuildSettings.swift; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -194,6 +197,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		900F6D9C284A1A75000B6D29 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				900F6D9D284A1A92000B6D29 /* Project Shared.xcconfig */,
+				900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */,
+				900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		DA23843C27CB9621009E15E0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +291,7 @@
 		DA4A888627C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXGroup;
 			children = (
+				900F6D9C284A1A75000B6D29 /* Configurations */,
 				DA520ABD27D322F0009FD740 /* Resources */,
 				DA4A88E327C3481700720909 /* Views */,
 				DA7720CE283F182700D3C335 /* Commands */,
@@ -286,7 +300,7 @@
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA2802782808337B00B14E5C /* AppDelegate.swift */,
 				DA4A889027C0AF3200720909 /* Persistence.swift */,
-				900F6D96284A141D000B6D29 /* GeneratedBuildEnvironment.swift */,
+				900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
 				DA23843827CB934D009E15E0 /* Info.plist */,
 				DA2ADF2F2847B13F004A35F2 /* Localizable.strings */,
@@ -626,6 +640,7 @@
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
 				E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */,
+				900F6DA1284A1C0C000B6D29 /* GeneratedBuildSettings.swift in Sources */,
 				DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */,
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
 				DA2384A127CB9714009E15E0 /* Font+.swift in Sources */,
@@ -637,7 +652,6 @@
 				DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
-				900F6D97284A141D000B6D29 /* GeneratedBuildEnvironment.swift in Sources */,
 				DA520AD327D4D073009FD740 /* AppSettingsView.swift in Sources */,
 				DA54D5812846495A00B11857 /* ReversingOpacity.swift in Sources */,
 				DA4A889C27C0B23C00720909 /* WebView.swift in Sources */,
@@ -705,6 +719,7 @@
 /* Begin XCBuildConfiguration section */
 		DA4A889627C0AF3200720909 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -767,6 +782,7 @@
 		};
 		DA4A889727C0AF3200720909 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
