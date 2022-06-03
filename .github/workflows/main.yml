@@ -44,6 +44,8 @@ jobs:
             sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
           
       - name: "Archive"
+        env:
+          APPCENTER_APP_SECRET: ${{ secrets.APPCENTER_APP_SECRET }}
         run: xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive COMPILER_INDEX_STORE_ENABLE=NO | xcpretty
           
       - name: "Export & Sign Release Build"
