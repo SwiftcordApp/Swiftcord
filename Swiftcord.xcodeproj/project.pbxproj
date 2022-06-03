@@ -72,6 +72,7 @@
 		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
+		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
@@ -154,6 +155,7 @@
 		DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftcordView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
 		DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoBarView.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				DA4A889B27C0B23C00720909 /* WebView.swift */,
 				DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */,
 				3684BB5A283C69C5005045AE /* Sparkle.swift */,
+				DA97BA8B2849C0FA00059FD7 /* Cache.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				DA57F44428056718001DC46E /* ChannelList.swift in Sources */,
 				DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */,
 				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
+				DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */,
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
 				E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */,

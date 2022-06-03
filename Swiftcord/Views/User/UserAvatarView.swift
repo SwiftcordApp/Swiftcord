@@ -22,6 +22,8 @@ struct UserAvatarView: View, Equatable {
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
 
+	static let profileCache = Cache<Snowflake, UserProfile>()
+
     var body: some View {
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
 
@@ -44,26 +46,32 @@ struct UserAvatarView: View, Equatable {
 				)
 			}
 
+			if let cached = UserAvatarView.profileCache[user.id] { profile = cached }
+
 			infoPresenting.toggle()
 
 			// Get user profile for a fuller User object and roles
-			if profile?.guild_member == nil, webhookID == nil,
-			   guildID != "@me" || profile?.user == nil { Task {
-				guard let loadedProfile = await DiscordAPI.getProfile(
-					user: user.id,
-					guildID: guildID == "@me" ? nil : guildID
-				) else { // Profile is still nil: fetching failed
-					loadFullFailed = true
-					return
+			if profile?.guild_member == nil,
+			   webhookID == nil,
+			   guildID != "@me" || profile?.user == nil {
+				Task {
+					guard let loadedProfile = await DiscordAPI.getProfile(
+						user: user.id,
+						guildID: guildID == "@me" ? nil : guildID
+					) else { // Profile is still nil: fetching failed
+						loadFullFailed = true
+						return
+					}
+					profile = loadedProfile
+					UserAvatarView.profileCache[user.id] = loadedProfile
 				}
-				profile = loadedProfile
-			}}
+			}
         }
         .cursor(NSCursor.pointingHand)
         .popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
             MiniUserProfileView(
 				user: user,
-				profile: profile,
+				profile: $profile,
 				guildRoles: ctx.roles,
 				guildID: guildID,
 				isWebhook: webhookID != nil,

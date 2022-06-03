@@ -11,7 +11,7 @@ import CachedAsyncImage
 
 struct MiniUserProfileView: View {
 	let user: User
-	let profile: UserProfile?
+	@Binding var profile: UserProfile?
 	let guildRoles: [Role]?
 	let guildID: Snowflake?
 	let isWebhook: Bool
