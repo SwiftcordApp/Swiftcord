@@ -3,6 +3,10 @@
 
 "message.edited" = " • 已编辑: ";
 
+"message.gone" = "原始消息已被删除。";
+
+"message.reply.attachment" = "点击查看附件";
+
 /* No comment provided by engineer. */
 "Connections" = "连接​​​​​​​​";
 
@@ -37,7 +41,6 @@
 "user.note" = "备注";
 
 /* No comment provided by engineer. */
-"Original message was deleted." = "原始消息已被删除。";
 
 /* No comment provided by engineer. */
 "Previous Channel" = "前个起点";

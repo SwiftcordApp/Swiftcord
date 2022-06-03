@@ -44,14 +44,15 @@ struct ReferenceMessageView: View {
 							)
 						}
 
-						Text((quotedMsg.content!.isEmpty)
-							 ? "Click to see attachment"
-							 : .init(quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))
-						)
-						.font(quotedMsg.content!.isEmpty
-							  ? .system(size: 14).italic() : .system(size: 14))
-						.opacity(0.75)
-						.lineLimit(1)
+						Text((try? AttributedString(markdown: quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))) ?? "")
+							.font(.system(size: 14))
+							.opacity(0.75)
+						    .lineLimit(1)
+						if quotedMsg.content!.isEmpty {
+							Text("message.reply.attachment")
+							.font(.system(size: 14).italic())
+							.opacity(0.75)
+						}
 
 						if !quotedMsg.attachments!.isEmpty || !quotedMsg.embeds!.isEmpty {
 							Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
@@ -63,7 +64,7 @@ struct ReferenceMessageView: View {
 						.font(.system(size: 16))
 						.frame(width: 16, height: 16)
 
-					Text("Original message was deleted.")
+					Text("message.gone")
 						.italic()
 						.font(.system(size: 14))
 						.opacity(0.75)
