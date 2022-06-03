@@ -74,3 +74,11 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: Swiftcord*.dmg
 
+      - name: "Upload debugging symbols to App Center"
+        run: |
+          appcenter crashes upload-symbols \
+            --token "${{ secrets.APPCENTER_APP_SECRET }}" \
+            --app "Swiftcord" \
+            --xcarchive "Swiftcord.xcarchive"
+
+
