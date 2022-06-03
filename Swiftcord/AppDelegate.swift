@@ -20,11 +20,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		AppCenter.logLevel = .debug
 #endif
 
-		// Init AppCenter
-		AppCenter.start(withAppSecret: "{todo: add token}", services: [
-			Analytics.self,
-			Crashes.self
-		])
+		if BuildSettings.appcenterAppSecret.isEmpty == false {
+			// Start AppCenter if we have a valid app secret
+			AppCenter.start(withAppSecret: BuildSettings.appcenterAppSecret, services: [
+				Analytics.self,
+				Crashes.self
+			])
+		}
 	}
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

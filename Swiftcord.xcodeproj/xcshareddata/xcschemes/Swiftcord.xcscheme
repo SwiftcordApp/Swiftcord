@@ -5,6 +5,42 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Export Build Environment to Swift"
+               scriptText = "BUILD_SETTINGS_OUTPUT_PATH=&quot;${SOURCE_ROOT}/${PRODUCT_NAME}/GeneratedBuildSettings.swift&quot;&#10;&#10;pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Ensure that changes to the build settings file do not affect the output build information while we&apos;re building a release build.&#10;git update-index --assume-unchanged &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;&#10;# Generate the output file&#10;&quot;${SOURCE_ROOT}/Scripts/export-build-settings-to-swift.sh&quot;&#10;&#10;popd&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "DA4A888327C0AF3000720909"
+                     BuildableName = "Swiftcord.app"
+                     BlueprintName = "Swiftcord"
+                     ReferencedContainer = "container:Swiftcord.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Reset Exported Build Environment"
+               scriptText = "BUILD_SETTINGS_OUTPUT_PATH=&quot;${SOURCE_ROOT}/${PRODUCT_NAME}/GeneratedBuildSettings.swift&quot;&#10;&#10;pushd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# Restore the original build settings output file&#10;git update-index --no-assume-unchanged &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;git checkout &quot;${BUILD_SETTINGS_OUTPUT_PATH}&quot;&#10;&#10;popd&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "DA4A888327C0AF3000720909"
+                     BuildableName = "Swiftcord.app"
+                     BlueprintName = "Swiftcord"
+                     ReferencedContainer = "container:Swiftcord.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
