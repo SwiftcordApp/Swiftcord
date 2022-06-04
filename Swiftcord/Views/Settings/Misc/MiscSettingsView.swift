@@ -57,6 +57,10 @@ struct MiscSettingsView: View {
                         TableColumn("Item", value: \.item)
                         TableColumn("Value", value: \.val)
                     }
+					Button("Crash me (Not a joke, this will crash Swiftcord!)") {
+						let one: Int? = nil
+						print(one!)
+					}
                 }
             }.listStyle(SidebarListStyle())
         }
