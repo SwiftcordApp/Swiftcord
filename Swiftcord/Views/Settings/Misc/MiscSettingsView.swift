@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import DiscordKit
 
 struct MiscSettingsView: View {
 	@State private var selectedLink: SidebarLink? = .changelog
+
+	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
         NavigationView {
@@ -25,9 +28,11 @@ struct MiscSettingsView: View {
                     AboutSwiftcordView()
                 }
 
-				NavigationLink("Debug", tag: SidebarLink.debug, selection: $selectedLink) {
-                    DebugSettingsView()
-                }
+				if gateway.cache.userSettings?.developer_mode == true {
+					NavigationLink("Debug", tag: SidebarLink.debug, selection: $selectedLink) {
+						DebugSettingsView()
+					}
+				}
             }.listStyle(SidebarListStyle())
         }
     }
