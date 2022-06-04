@@ -14,7 +14,7 @@ struct AboutSwiftcordView: View {
 				HStack(spacing: 16) {
 					Image(nsImage: NSImage(named: "AppIcon")!).resizable().frame(width: 128, height: 128)
 					VStack(alignment: .leading, spacing: 8) {
-						Text("Swiftcord").font(.largeTitle)
+						Text(appName ?? "").font(.largeTitle)
 						Text("A completely native Discord client for macOS built 100% in Swift and SwiftUI. Light on your CPU and RAM.")
 
 						// IMO its better to just crash if these are missing in the info dict.

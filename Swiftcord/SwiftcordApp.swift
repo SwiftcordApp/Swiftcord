@@ -15,6 +15,9 @@ private enum CachedTheme: Int {
 	case system = 3
 }
 
+// There's probably a better place to put global constants
+let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+
 @main
 struct SwiftcordApp: App, Equatable {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

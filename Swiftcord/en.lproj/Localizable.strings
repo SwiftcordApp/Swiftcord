@@ -47,6 +47,8 @@
 
 "dm.group.composeMsg.hint %@" = "Message %@";
 
+"%lld dm.group.memberCount" = "%lld Members";
+
 "dm.composeMsg.hint %@" = "Message @%@";
 
 /* ====== Settings ====== */

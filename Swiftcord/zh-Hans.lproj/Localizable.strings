@@ -1,3 +1,22 @@
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "你知道吗";
+
+/* ====== User ====== */
+
+"user.roles.one" = "身份组";
+
+/* No comment provided by engineer. */
+"user.roles.many" = "身份组";
+
+/* No comment provided by engineer. */
+"user.roles.none" = "没有身份组";
+
+"user.roles.loading" = "加载身份组";
+
+"user.bio" = "自我介绍";
+
+"user.note" = "备注";
+
 /* ====== Message ====== */
 "message.edited.shrunk" = " (已编辑)";
 
@@ -38,11 +57,6 @@
 "Next Channel" = "下个起点";
 
 /* No comment provided by engineer. */
-"user.note" = "备注";
-
-/* No comment provided by engineer. */
-
-/* No comment provided by engineer. */
 "Previous Channel" = "前个起点";
 
 /* No comment provided by engineer. */
@@ -53,19 +67,6 @@
 
 /* No comment provided by engineer. */
 "Reply" = "回复";
-
-/* ====== User ====== */
-"user.roles.one" = "身份组";
-
-/* No comment provided by engineer. */
-"user.roles.many" = "身份组";
-
-/* No comment provided by engineer. */
-"user.roles.none" = "没有身份组";
-
-"user.roles.loading" = "加载身份组";
-
-"user.bio" = "自我介绍";
 
 /* No comment provided by engineer. */
 "Server Boost" = "服务器助力";
@@ -82,6 +83,8 @@
 
 "server.channel.title %@" = "欢迎来到 #%@！";
 
+"server.channel.noCategory" = "没类别";
+
 "server.composeMsg.hint %@" = "给 #%@ 发消息";
 
 /* ====== DMs ====== */
@@ -94,6 +97,8 @@
 "dm.group.header %@" = "欢迎来到 **%@** 组的开头。";
 
 "dm.group.composeMsg.hint %@" = "给 %@ 发消息";
+
+"%lld dm.group.memberCount" = "成员";
 
 "dm.composeMsg.hint %@" = "消息@%@";
 
