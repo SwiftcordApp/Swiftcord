@@ -66,3 +66,9 @@
 "settings.app.streamer" = "Streamer Mode";
 
 "settings.app.advanced" = "Advanced";
+
+"settings.others.debug.actions" = "Actions";
+
+"settings.others.debug.actions.info" = "Do not use any options here unless you know what you are doing. Some of them might be DaNgErOuS!";
+
+"settings.others.debug.actions.crash" = "Crash Swiftcord (Not a joke)";

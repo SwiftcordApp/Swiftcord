@@ -41,15 +41,19 @@ struct DebugSettingsView: View {
 			Table(debugValues) {
 				TableColumn("Item", value: \.item)
 				TableColumn("Value", value: \.val)
-			}
+			}.frame(height: 150)
 			Divider()
 			ScrollView {
 				VStack(alignment: .leading, spacing: 16) {
-					Text("Actions").font(.largeTitle)
-					Button("Crash Swiftcord") {
+					Text("settings.others.debug.actions").font(.largeTitle)
+					Text("settings.others.debug.actions.info")
+
+					Button("settings.others.debug.actions.crash") {
 						let funny: Int? = nil
 						print(funny!)
 					}
+					.buttonStyle(.borderedProminent)
+					.tint(.red)
 				}
 				.padding()
 				.frame(maxWidth: .infinity, alignment: .leading)
