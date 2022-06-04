@@ -45,9 +45,6 @@
 "Done" = "编辑信息";
 
 /* No comment provided by engineer. */
-"Log Out" = "登出";
-
-/* No comment provided by engineer. */
 "My Account" = "我的账号";
 
 /* No comment provided by engineer. */
@@ -103,6 +100,10 @@
 "dm.composeMsg.hint %@" = "消息@%@";
 
 /* ====== Settings ====== */
+"settings.user.logOut" = "登出";
+
+"settings.user.logOut.confirmation" = "您确定您要退出登录吗？";
+
 "settings.app" = "应用";
 
 "settings.app.appearance" = "外观";

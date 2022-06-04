@@ -102,6 +102,14 @@ struct StickerView: View {
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
 
+	private func openPopoverEvt() {
+		AnalyticsWrapper.event(type: .openPopout, properties: [
+			"type": "Sticker Popout",
+			"sticker_pack_id": fullSticker?.pack_id ?? "",
+			"sticker_id": fullSticker?.id ?? ""
+		])
+	}
+
     var body: some View {
         StickerItemView(sticker: sticker, size: 160, play: $play)
         .popover(isPresented: $infoShow, arrowEdge: .trailing) {
@@ -147,7 +155,10 @@ struct StickerView: View {
         .onTapGesture {
             if fullSticker == nil { Task {
                 fullSticker = await DiscordAPI.getSticker(id: sticker.id)
-            }}
+				openPopoverEvt()
+			}} else {
+				openPopoverEvt()
+			}
             infoShow.toggle()
         }
     }

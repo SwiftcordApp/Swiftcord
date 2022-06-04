@@ -47,7 +47,19 @@ struct ServerView: View, Equatable {
 		serverCtx.roles = []
 		loadChannels()
 		// Sending malformed IDs causes an instant Gateway session termination
-		guard !guild.isDMChannel else { return }
+		guard !guild.isDMChannel else {
+			AnalyticsWrapper.event(type: .DMListViewed, properties: [
+				"channel_id": serverCtx.channel?.id ?? "",
+				"channel_type": serverCtx.channel?.type.rawValue ?? 1
+			])
+			return
+		}
+
+		AnalyticsWrapper.event(type: .guildViewed, properties: [
+			"guild_id": guild.id,
+			"guild_is_vip": guild.premium_tier != PremiumLevel.none,
+			"guild_num_channels": guild.channels?.count ?? 0
+		])
 
 		// Subscribe to typing events
 		gateway.socket.send(

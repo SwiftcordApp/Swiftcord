@@ -49,6 +49,10 @@ struct UserAvatarView: View, Equatable {
 			if let cached = UserAvatarView.profileCache[user.id] { profile = cached }
 
 			infoPresenting.toggle()
+			AnalyticsWrapper.event(type: .openPopout, properties: [
+				"type": "Profile Popout",
+				"other_user_id": user.id
+			])
 
 			// Get user profile for a fuller User object and roles
 			if profile?.guild_member == nil,

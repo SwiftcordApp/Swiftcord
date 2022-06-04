@@ -20,6 +20,7 @@
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
 		DA28027F28095E3100B14E5C /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
 		DA2ADF312847B13F004A35F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2ADF2F2847B13F004A35F2 /* Localizable.strings */; };
+		DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -109,6 +110,7 @@
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
 		DA2ADF302847B13F004A35F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsWrapper.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */,
 				3684BB5A283C69C5005045AE /* Sparkle.swift */,
 				DA97BA8B2849C0FA00059FD7 /* Cache.swift */,
+				DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */,
 				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
 				3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */,
+				DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,

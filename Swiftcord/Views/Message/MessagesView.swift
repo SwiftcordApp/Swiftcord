@@ -278,13 +278,19 @@ struct MessagesView: View, Equatable {
 			return true
 		}
         .onChange(of: ctx.channel, perform: { channel in
-            guard channel != nil else { return }
+            guard let channel = channel else { return }
             messages = []
             // Prevent deadlocked and wrong message situations
 			fetchMoreMessages()
             loadError = false
             reachedTop = false
             lastSentTyping = Date(timeIntervalSince1970: 0)
+
+			AnalyticsWrapper.event(type: .channelOpened, properties: [
+				"channel_id": channel.id,
+				"channel_is_nsfw": String(channel.nsfw ?? false),
+				"channel_type": String(channel.type.rawValue)
+			])
         })
         .onChange(of: state.loadingState) { loadingState in
             if loadingState == .gatewayConn {

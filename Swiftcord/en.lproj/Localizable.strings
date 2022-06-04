@@ -52,6 +52,10 @@
 "dm.composeMsg.hint %@" = "Message @%@";
 
 /* ====== Settings ====== */
+"settings.user.logOut" = "Log Out";
+
+"settings.user.logOut.confirmation" = "Are you sure you want to log out?";
+
 "settings.app" = "App";
 
 "settings.app.appearance" = "Appearance";

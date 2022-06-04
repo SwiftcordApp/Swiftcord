@@ -37,14 +37,18 @@ struct UserSettingsView: View {
                     Text("")
                 }
 
-				NavigationLink("Log Out", tag: SidebarLink.logOut, selection: $selectedLink) {
+				NavigationLink("settings.user.logOut",
+							   tag: SidebarLink.logOut, selection: $selectedLink) {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Log Out").font(.title)
-                        Text("Are you sure you want to log out?")
-                        Button(role: .destructive) {
-                            gateway.logout()
-                        } label: {
-                            Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        Text("settings.user.logOut").font(.title)
+                        Text("settings.user.logOut.confirmation")
+						Text("Note: This will also delete your locally stored preferences")
+							.font(.caption)
+                        Button(role: .destructive) { gateway.logout() } label: {
+                            Label(
+								"settings.user.logOut",
+								systemImage: "rectangle.portrait.and.arrow.right"
+							)
                         }
                         .controlSize(.large)
                         .buttonStyle(.borderedProminent)
@@ -55,18 +59,31 @@ struct UserSettingsView: View {
                     .padding(40)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-            }.listStyle(SidebarListStyle())
-        }
+            }
+			.listStyle(SidebarListStyle())
+			.onAppear {
+				AnalyticsWrapper.event(type: .settingsPaneViewed, properties: [
+					"origin_pane": selectedLink?.rawValue ?? ""
+				])
+			}
+			.onChange(of: selectedLink) { [selectedLink] newSelection in
+				AnalyticsWrapper.event(type: .settingsPaneViewed, properties: [
+					"destination_pane": newSelection?.rawValue ?? "",
+					"origin_pane": selectedLink?.rawValue ?? ""
+				])
+			}
+		}
     }
 }
 
 private extension UserSettingsView {
-	enum SidebarLink {
-		case account
-		case profile
-		case privacy
-		case apps
-		case connections
-		case logOut
+	// Raw values are for analytics events
+	enum SidebarLink: String {
+		case account = "My Account"
+		case profile = "User Profile"
+		case privacy = "Privacy & Safety"
+		case apps = "Authorized Apps"
+		case connections = "Connections"
+		case logOut = "Log Out"
 	}
 }
