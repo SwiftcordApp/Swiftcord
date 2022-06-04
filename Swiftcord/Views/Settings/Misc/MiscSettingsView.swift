@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DiscordKit
+import AppCenterCrashes
 
 struct DebugTableItem: Identifiable {
     let id = UUID()
@@ -58,13 +59,17 @@ struct MiscSettingsView: View {
                         TableColumn("Value", value: \.val)
                     }
 					Button("Crash me (Not a joke, this will crash Swiftcord!)") {
-						let one: Int? = nil
-						print(one!)
+						makeCrash()
 					}
                 }
             }.listStyle(SidebarListStyle())
         }
     }
+
+	func makeCrash() {
+		let one: Int? = nil
+		print(one!)
+	}
 }
 
 private extension MiscSettingsView {
