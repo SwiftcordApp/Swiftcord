@@ -8,6 +8,13 @@
 import DiscordKit
 import SwiftUI
 
+private enum CachedTheme: Int {
+	case none = 0
+	case dark = 1
+	case light = 2
+	case system = 3
+}
+
 @main
 struct SwiftcordApp: App, Equatable {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -17,15 +24,25 @@ struct SwiftcordApp: App, Equatable {
 	@StateObject private var gateway = DiscordGateway()
 	@StateObject private var state = UIState()
 
+	@AppStorage("cachedTheme") private var theme = CachedTheme.none
+
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
-				.preferredColorScheme(gateway.cache.userSettings?.theme == UITheme.light ? .light : .dark)
+				.preferredColorScheme(theme == .dark ? .dark : (theme == .light ? .light : nil))
 				.overlay(LoadingView())
 				.environmentObject(gateway)
 				.environmentObject(state)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				.environment(\.managedObjectContext, persistenceController.container.viewContext)
+				.onAppear {
+					if theme != .system {
+						theme = gateway.cache.userSettings?.theme == .dark ? .dark : .light
+					}
+				}
+				.onChange(of: gateway.cache.userSettings?.theme) { newTheme in
+					if theme != .system { theme = newTheme == .dark ? .dark : .light }
+				}
 		}
 		.commands {
 			CommandGroup(after: .appInfo) {
@@ -38,7 +55,7 @@ struct SwiftcordApp: App, Equatable {
 
 		Settings {
 			SettingsView()
-				.preferredColorScheme(gateway.cache.userSettings?.theme == .light ? .light : .dark)
+				.preferredColorScheme(theme == .dark ? .dark : (theme == .light ? .light : nil))
 				.environmentObject(gateway)
 				.environmentObject(state)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))

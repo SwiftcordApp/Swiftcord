@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
+	
+	@Environment(\.colorScheme) private var colorScheme
 
 	private let loadingStrings: [(LoadingState, String)] = [
         (.initial, "Establishing Gateway connection"),
@@ -59,6 +61,7 @@ struct LoadingView: View {
             )
             .frame(width: 280, height: 150)
             .lottieLoopMode(.loop)
+			.if(colorScheme == .light) { view in view.colorInvert() }
 
 			Text(loadingStrings.first(where: { $0.0 == state.loadingState })?.1 ?? "").font(.title3)
                 .animation(.spring(), value: state.loadingState)
