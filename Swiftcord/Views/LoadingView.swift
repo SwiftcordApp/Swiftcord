@@ -9,14 +9,8 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
-	
-	@Environment(\.colorScheme) private var colorScheme
 
-	private let loadingStrings: [(LoadingState, String)] = [
-        (.initial, "Establishing Gateway connection"),
-        (.gatewayConn, "Fetching latest messages"),
-        (.messageLoad, "Done!")
-    ]
+	@Environment(\.colorScheme) private var colorScheme
 
     private let loadingTips = [
         "You can use Streamer Mode to hide personal details while streaming.",
@@ -51,11 +45,12 @@ struct LoadingView: View {
     @State private var displayedTip = ""
 
     var body: some View {
-		let loadingNum = (loadingStrings.map(\.0).firstIndex(of: state.loadingState) ?? 0)
+		let loading = state.loadingState != .messageLoad
+
         VStack(spacing: 4) {
             LottieView(
                 name: "discord-loading-animation",
-                play: .constant(loadingNum != loadingStrings.count - 1),
+                play: .constant(loading),
                 width: 280,
                 height: 280
             )
@@ -63,12 +58,7 @@ struct LoadingView: View {
             .lottieLoopMode(.loop)
 			.if(colorScheme == .light) { view in view.colorInvert() }
 
-			Text(loadingStrings.first(where: { $0.0 == state.loadingState })?.1 ?? "").font(.title3)
-                .animation(.spring(), value: state.loadingState)
-            ProgressView(value: Double(loadingNum + 1) / Double(loadingStrings.count))
-                .progressViewStyle(.linear)
-                .frame(width: 180)
-				.tint(.blue)
+			Text("loader.tip.header").font(.headline).textCase(.uppercase)
             Text(.init(displayedTip))
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
@@ -79,11 +69,11 @@ struct LoadingView: View {
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .allowsHitTesting(loadingNum != loadingStrings.count - 1)
+        .allowsHitTesting(loading)
         .background(Color(NSColor.windowBackgroundColor))
-		.opacity(loadingNum != loadingStrings.count - 1 ? 1 : 0)
-        .scaleEffect(loadingNum != loadingStrings.count - 1 ? 1 : 2)
-        .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loadingNum != loadingStrings.count - 1)
+		.opacity(loading ? 1 : 0)
+        .scaleEffect(loading ? 1 : 2)
+        .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loading)
     }
 }
 

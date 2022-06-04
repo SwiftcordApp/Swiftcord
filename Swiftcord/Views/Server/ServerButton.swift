@@ -31,12 +31,7 @@ struct ServerButton: View {
 				.animation(capsuleAnimation, value: selected)
 				.animation(capsuleAnimation, value: hovered)
 
-			Button(action: onSelect) {
-				Text(systemIconName == nil && assetIconName == nil
-					 ? name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
-					 : ""
-				)
-			}
+			Button("", action: onSelect)
 			.buttonStyle(
 				ServerButtonStyle(
 					selected: selected,
@@ -59,6 +54,22 @@ struct ServerButton: View {
 		.frame(width: 72, height: 48)
 	}
 }
+
+/*
+ Font size of text in server button for servers without an icon
+ 
+ # of chars	 Font size (px)
+ 1			 18
+ 2			 18
+ 3		 	 16
+ 4			 16
+ 5		 	 14
+ 6			 12
+ 7			 10
+ 8			 10
+ 9			 10
+ 10			 10
+*/
 
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
@@ -91,8 +102,9 @@ struct ServerButtonStyle: ButtonStyle {
                     }
                 }
             } else {
-				configuration.label
-					.font(.system(size: 15))
+				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+				Text(iconName)
+					.font(.system(size: iconName.count < 7 ? CGFloat((10 - iconName.count)*2) : 10))
 					.lineLimit(1)
 			}
         }

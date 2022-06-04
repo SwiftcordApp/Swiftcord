@@ -1,3 +1,6 @@
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Did You Know";
+
 /* ====== User ====== */
 "user.bio" = "About Me";
 

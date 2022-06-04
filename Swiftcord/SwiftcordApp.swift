@@ -35,12 +35,8 @@ struct SwiftcordApp: App, Equatable {
 				.environmentObject(state)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				.environment(\.managedObjectContext, persistenceController.container.viewContext)
-				.onAppear {
-					if theme != .system {
-						theme = gateway.cache.userSettings?.theme == .dark ? .dark : .light
-					}
-				}
 				.onChange(of: gateway.cache.userSettings?.theme) { newTheme in
+					guard let newTheme = newTheme else { return }
 					if theme != .system { theme = newTheme == .dark ? .dark : .light }
 				}
 		}
