@@ -34,6 +34,7 @@ struct ChannelList: View, Equatable {
 
 			let categoryChannels = channels
 				.filter { $0.parent_id == nil && $0.type == .category }
+				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				Section(header: Text(channel.name ?? "").textCase(.uppercase)) {
 					// Channels in this section
