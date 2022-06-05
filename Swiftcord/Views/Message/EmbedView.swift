@@ -57,24 +57,35 @@ struct EmbedView: View {
 						}
 
 						if let authorName = author.name {
-							Text(.init(author.url != nil ? "[\(authorName)](\(author.url ?? ""))"
-									   : authorName))
-								.font(.title3)
-								.underline(true, color: .clear)
-								.textSelection(.enabled)
-								.foregroundColor(.white)
+							if let urlStr = author.url, let url = URL(string: urlStr) {
+								Link(destination: url) {
+									Text(authorName).font(.headline)
+								}.foregroundColor(.primary)
+							} else {
+								Text(authorName)
+									.font(.headline)
+									.textSelection(.enabled)
+							}
 						}
 					}
 				}
 
 				if let title = embed.title {
-					Text(.init(embed.url != nil ? "[\(title)](\(embed.url ?? ""))" : title))
-						 .font(.title3)
-						 .textSelection(.enabled)
+					if let urlStr = embed.url, let url = URL(string: urlStr) {
+						Link(destination: url) {
+							Text(markdown: title)
+								.font(.title3)
+								.multilineTextAlignment(.leading)
+						}
+					} else {
+						Text(markdown: title)
+							.font(.title3)
+							.multilineTextAlignment(.leading)
+					}
 				}
 
 				if let description = embed.description {
-					Text(.init(description))
+					Text(markdown: description)
 						.textSelection(.enabled)
 						.opacity(0.9)
 						.frame(maxWidth: .infinity, alignment: .leading)
@@ -90,7 +101,7 @@ struct EmbedView: View {
 									Text(field.name)
 										.font(.headline)
 										.textSelection(.enabled)
-									Text(.init(field.value)).opacity(0.9)
+									Text(markdown: field.value).opacity(0.9)
 										.textSelection(.enabled)
 										.frame(maxWidth: .infinity, alignment: .leading)
 								}
@@ -155,16 +166,18 @@ struct EmbedView: View {
 		}
 		.background(
 			HStack {
-				// Man, what a hack
-				ZStack {
-					Capsule()
-						.fill(embed.color != nil ? Color(hex: embed.color!) : Color.accentColor)
-						.frame(minWidth: 8, maxWidth: 8, maxHeight: .infinity)
-						.offset(x: 2)
+				if let col = embed.color {
+					// Man, what a hack
+					ZStack {
+						Capsule()
+							.fill(Color(hex: col))
+							.frame(minWidth: 8, maxWidth: 8, maxHeight: .infinity)
+							.offset(x: 2)
+					}
+					.frame(maxWidth: 4, maxHeight: .infinity)
+					.clipped()
+					Spacer()
 				}
-				.frame(maxWidth: 4, maxHeight: .infinity)
-				.clipped()
-				Spacer()
 			}.drawingGroup()
 		)
 		.frame(minWidth: 400, maxWidth: 520, alignment: .leading)

@@ -112,10 +112,10 @@ struct MessageView: View, Equatable {
 								? message.content.replacingOccurrences(of: " ", with: " ")
 								: message.content
                                 Group {
-									Text((try? AttributedString(markdown: msg)) ?? "")
-										.font(.system(
-											size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
-										)) +
+									Text(markdown: msg)
+									.font(.system(
+										size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
+									)) +
                                     Text(
 										message.edited_timestamp != nil && shrunk
                                          ? "message.edited.shrunk"

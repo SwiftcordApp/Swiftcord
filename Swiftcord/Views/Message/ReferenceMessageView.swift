@@ -44,7 +44,7 @@ struct ReferenceMessageView: View {
 							)
 						}
 
-						Text((try? AttributedString(markdown: quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))) ?? "")
+						Text(markdown: quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))
 							.font(.system(size: 14))
 							.opacity(0.75)
 						    .lineLimit(1)
