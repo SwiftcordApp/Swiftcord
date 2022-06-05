@@ -108,6 +108,8 @@
 
 "settings.app.appearance" = "外观";
 
+"settings.app.appearance.theme" = "主题";
+
 "settings.app.accessibility" = "可访问性";
 
 "settings.app.voiceVideo" = "语音和视频";

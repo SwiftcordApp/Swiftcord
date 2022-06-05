@@ -16,20 +16,20 @@ struct MiscSettingsView: View {
     var body: some View {
         NavigationView {
 			List {
-				NavigationLink("Change Log", tag: SidebarLink.changelog, selection: $selectedLink) {
+				NavigationLink("Change Log", tag: .changelog, selection: $selectedLink) {
                     Text("Nothing")
                 }
 
-				NavigationLink("Hypesquad", tag: SidebarLink.hype, selection: $selectedLink) {
+				NavigationLink("Hypesquad", tag: .hype, selection: $selectedLink) {
                     Text("Not hype")
                 }
 
-				NavigationLink("About", tag: SidebarLink.about, selection: $selectedLink) {
+				NavigationLink("About", tag: .about, selection: $selectedLink) {
                     AboutSwiftcordView()
                 }
 
 				if gateway.cache.userSettings?.developer_mode == true {
-					NavigationLink("Debug", tag: SidebarLink.debug, selection: $selectedLink) {
+					NavigationLink("Debug", tag: .debug, selection: $selectedLink) {
 						DebugSettingsView()
 					}
 				}

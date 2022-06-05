@@ -8,45 +8,75 @@
 import SwiftUI
 
 struct AppSettingsView: View {
+	@State private var selectedLink: SidebarLink? = .appearance
+
     var body: some View {
         NavigationView {
             List {
-                NavigationLink("settings.app.appearance") {
+                NavigationLink("settings.app.appearance", tag: .appearance, selection: $selectedLink) {
+					ScrollView { AppSettingsAppearanceView().padding(40) }
+                }
+
+                NavigationLink("settings.app.accessibility",
+							   tag: .accessibility, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.accessibility") {
+                NavigationLink("settings.app.voiceVideo", tag: .voiceVideo, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.voiceVideo") {
+                NavigationLink("settings.app.textImages", tag: .textImages, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.textImages") {
+                NavigationLink("settings.app.notifs", tag: .notifs, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.notifs") {
+                NavigationLink("settings.app.keybinds", tag: .keybinds, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.keybinds") {
+                NavigationLink("settings.app.lang", tag: .lang, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.lang") {
+                NavigationLink("settings.app.streamer", tag: .streamer, selection: $selectedLink) {
                     Text("")
                 }
 
-                NavigationLink("settings.app.streamer") {
+                NavigationLink("settings.app.advanced", tag: .advanced, selection: $selectedLink) {
                     Text("")
                 }
-
-                NavigationLink("settings.app.advanced") {
-                    Text("")
-                }
-            }.listStyle(SidebarListStyle())
+            }
+			.listStyle(SidebarListStyle())
+			.onAppear {
+				AnalyticsWrapper.event(type: .settingsPaneViewed, properties: [
+					"origin_pane": selectedLink?.rawValue ?? ""
+				])
+			}
+			.onChange(of: selectedLink) { [selectedLink] newSelection in
+				AnalyticsWrapper.event(type: .settingsPaneViewed, properties: [
+					"destination_pane": newSelection?.rawValue ?? "",
+					"origin_pane": selectedLink?.rawValue ?? ""
+				])
+			}
         }
     }
+}
+
+private extension AppSettingsView {
+	// Raw values are for analytics events
+	enum SidebarLink: String {
+		case appearance = "Appearance"
+		case accessibility = "Accessibility"
+		case voiceVideo = "Voice & Video"
+		case textImages = "Text & Images"
+		case notifs = "Notifications"
+		case keybinds = "Keybinds"
+		case lang = "Language"
+		case streamer = "Streamer Mode"
+		case advanced = "Advanced"
+	}
 }

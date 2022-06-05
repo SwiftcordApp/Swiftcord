@@ -17,23 +17,23 @@ struct UserSettingsView: View {
     var body: some View {
         NavigationView {
             List {
-				NavigationLink("My Account", tag: SidebarLink.account, selection: $selectedLink) {
+				NavigationLink("My Account", tag: .account, selection: $selectedLink) {
                     ScrollView { UserSettingsAccountView(user: user).padding(40) }
                 }
 
-				NavigationLink("User Profile", tag: SidebarLink.profile, selection: $selectedLink) {
+				NavigationLink("User Profile", tag: .profile, selection: $selectedLink) {
 					ScrollView { UserSettingsProfileView(user: user).padding(40) }
                 }
 
-				NavigationLink("Privacy & Safety", tag: SidebarLink.privacy, selection: $selectedLink) {
+				NavigationLink("Privacy & Safety", tag: .privacy, selection: $selectedLink) {
                     Text("")
                 }
 
-				NavigationLink("Authorized Apps", tag: SidebarLink.apps, selection: $selectedLink) {
+				NavigationLink("Authorized Apps", tag: .apps, selection: $selectedLink) {
                     Text("")
                 }
 
-				NavigationLink("Connections", tag: SidebarLink.connections, selection: $selectedLink) {
+				NavigationLink("Connections", tag: .connections, selection: $selectedLink) {
                     Text("")
                 }
 

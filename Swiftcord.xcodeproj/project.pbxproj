@@ -21,6 +21,7 @@
 		DA28027F28095E3100B14E5C /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
 		DA2ADF312847B13F004A35F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2ADF2F2847B13F004A35F2 /* Localizable.strings */; };
 		DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */; };
+		DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */; };
 		DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
 		DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
 		DA32EF2827C633FE00A9ED72 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
@@ -112,6 +113,7 @@
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
 		DA2ADF302847B13F004A35F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsWrapper.swift; sourceTree = "<group>"; };
+		DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAppearanceView.swift; sourceTree = "<group>"; };
 		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				DA520AD227D4D073009FD740 /* AppSettingsView.swift */,
+				DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				DA520AD127D4CFCF009FD740 /* BillingSettingsView.swift in Sources */,
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
 				E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */,
+				DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */,
 				DAAFB5C5282AB37500807B54 /* MediaControllerView.swift in Sources */,

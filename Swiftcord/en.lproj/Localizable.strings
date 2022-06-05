@@ -60,6 +60,8 @@
 
 "settings.app.appearance" = "Appearance";
 
+"settings.app.appearance.theme" = "Theme";
+
 "settings.app.accessibility" = "Accessibility";
 
 "settings.app.voiceVideo" = "Voice & Video";
