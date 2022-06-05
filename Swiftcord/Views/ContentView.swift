@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 import os
 import DiscordKit
+import DiscordKitCore
 import DiscordKitCommon
 
 struct CustomHorizontalDivider: View {
@@ -129,8 +130,6 @@ struct ContentView: View {
 					)
             }
 
-			// Using the .equatable() modifier on this View causes a swift-frontend
-			// bus error when compiling for release. I have no idea why that happens.
 			ServerView(
 				guild: selectedGuildID == nil
 				? nil

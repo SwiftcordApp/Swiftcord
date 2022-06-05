@@ -8,6 +8,7 @@
 import SwiftUI
 import Lottie
 import DiscordKit
+import DiscordKitCore
 import CachedAsyncImage
 
 struct StickerLoadingView: View {

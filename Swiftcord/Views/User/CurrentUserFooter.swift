@@ -9,6 +9,7 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKit
+import DiscordKitCore
 
 struct CurrentUserFooter: View {
     let user: CurrentUser

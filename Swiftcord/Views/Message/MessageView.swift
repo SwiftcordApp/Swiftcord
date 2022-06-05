@@ -9,6 +9,7 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKit
+import DiscordKitCore
 
 struct NonUserBadge: View {
 	let flags: Int?
@@ -34,7 +35,7 @@ struct NonUserBadge: View {
 	}
 }
 
-struct MessageView: View, Equatable {
+struct MessageView: View {
     let message: Message
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
@@ -214,10 +215,6 @@ struct MessageView: View, Equatable {
 				}
 			}
         }
-	}
-
-	static func == (lhs: MessageView, rhs: MessageView) -> Bool {
-		lhs.message == rhs.message
 	}
 }
 

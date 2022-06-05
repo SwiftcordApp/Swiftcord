@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordKitCore
 import DiscordKit
 
 struct UserAvatarView: View, Equatable {
@@ -22,7 +23,7 @@ struct UserAvatarView: View, Equatable {
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
 
-	static let profileCache = Cache<Snowflake, UserProfile>()
+	static private let profileCache = Cache<Snowflake, UserProfile>()
 
     var body: some View {
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)

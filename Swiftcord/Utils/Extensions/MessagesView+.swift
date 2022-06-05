@@ -7,6 +7,7 @@
 
 import Foundation
 import DiscordKit
+import DiscordKitCore
 
 extension MessagesView {
 	internal func fetchMoreMessages() {

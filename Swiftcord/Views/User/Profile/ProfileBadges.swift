@@ -6,6 +6,7 @@
 //
 
 import DiscordKit
+import DiscordKitCore
 import SwiftUI
 
 struct ProfileBadges: View, Equatable {

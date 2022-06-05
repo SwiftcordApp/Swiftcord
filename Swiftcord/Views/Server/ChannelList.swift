@@ -7,8 +7,9 @@
 
 import SwiftUI
 import DiscordKit
+import DiscordKitCore
 
-struct ChannelList: View, Equatable {
+struct ChannelList: View {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
 
@@ -51,9 +52,5 @@ struct ChannelList: View, Equatable {
 		.frame(minWidth: 240, maxHeight: .infinity)
 		// this overlay applies a border on the bottom edge of the view
 		.overlay(Rectangle().fill(Color(nsColor: .separatorColor)).frame(width: nil, height: 1, alignment: .bottom), alignment: .top)
-	}
-
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.channels == rhs.channels && lhs.selCh == rhs.selCh
 	}
 }

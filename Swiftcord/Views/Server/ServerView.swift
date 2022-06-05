@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordKitCore
 import DiscordKit
 
 class ServerContext: ObservableObject {
@@ -15,7 +16,7 @@ class ServerContext: ObservableObject {
 	@Published public var roles: [Role] = []
 }
 
-struct ServerView: View, Equatable {
+struct ServerView: View {
 	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
@@ -84,7 +85,6 @@ struct ServerView: View, Equatable {
             VStack(spacing: 0) {
 				if let guild = guild {
 					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel)
-						.equatable()
 						.toolbar {
 							ToolbarItem {
 								Text(guild.name == "DMs" ? "dm" : "\(guild.name)")
@@ -118,7 +118,7 @@ struct ServerView: View, Equatable {
             }
 
 			if serverCtx.channel != nil {
-				MessagesView().equatable()
+				MessagesView()
 			} else {
 				VStack(spacing: 24) {
 					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
@@ -207,8 +207,4 @@ struct ServerView: View, Equatable {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
     }
-
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.guild == rhs.guild
-	}
 }

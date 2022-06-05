@@ -6,6 +6,7 @@
 //
 
 import DiscordKit
+import DiscordKitCore
 
 extension Guild {
 	var isDMChannel: Bool { id == "@me" }

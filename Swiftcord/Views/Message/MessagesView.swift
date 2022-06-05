@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DiscordKit
+import DiscordKitCore
 import CachedAsyncImage
 
 extension View {
@@ -84,11 +85,7 @@ struct DayDividerView: View {
 	}
 }
 
-struct MessagesView: View, Equatable {
-	static func == (lhs: MessagesView, rhs: MessagesView) -> Bool {
-		lhs.messages == rhs.messages && lhs.attachments == rhs.attachments
-	}
-
+struct MessagesView: View {
     @State internal var reachedTop = false
     @State internal var messages: [Message] = []
     @State internal var newMessage = " "

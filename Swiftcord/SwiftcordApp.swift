@@ -12,7 +12,7 @@ import SwiftUI
 let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 
 @main
-struct SwiftcordApp: App, Equatable {
+struct SwiftcordApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	let persistenceController = PersistenceController.shared
 	@StateObject var updaterViewModel = UpdaterViewModel()
@@ -52,9 +52,5 @@ struct SwiftcordApp: App, Equatable {
 									  : (selectedTheme == "light" ? .light : nil))
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
-	}
-
-	static func == (lhs: SwiftcordApp, rhs: SwiftcordApp) -> Bool {
-		lhs.gateway == rhs.gateway && lhs.state == rhs.state
 	}
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
-import DiscordKit
+import DiscordKitCore
 
 struct EmbedView: View {
 	let embed: Embed

@@ -9,6 +9,7 @@
 
 import Foundation
 import DiscordKit
+import DiscordKitCore
 
 extension Message {
     mutating func mergeWithPartialMsg(_ partial: PartialMessage) {
