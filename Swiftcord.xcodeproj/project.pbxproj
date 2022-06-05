@@ -101,6 +101,7 @@
 		900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Debug.xcconfig"; sourceTree = "<group>"; };
 		900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Release.xcconfig"; sourceTree = "<group>"; };
 		900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedBuildSettings.swift; sourceTree = "<group>"; };
+		90F77AAA284C87E900166BF3 /* AppCenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -207,6 +208,7 @@
 				900F6D9D284A1A92000B6D29 /* Project Shared.xcconfig */,
 				900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */,
 				900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */,
+				90F77AAA284C87E900166BF3 /* AppCenter.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";

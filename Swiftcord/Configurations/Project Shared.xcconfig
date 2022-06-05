@@ -1,2 +1,3 @@
-APPCENTER_APP_SECRET=
+#include "AppCenter.xcconfig"
+
 BUILD_SETTINGS_SWIFT_SOURCE_PATH=$(SOURCE_ROOT)/$(PRODUCT_NAME)/GeneratedBuildSettings.swift
