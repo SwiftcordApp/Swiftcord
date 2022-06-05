@@ -62,6 +62,7 @@ struct MiniUserProfileView: View {
 						.font(.system(size: 20))
 						.foregroundColor(.orange)
 						.help("Failed to get full user profile")
+						.padding(.trailing, 14)
 				}
 			}
 			.padding(.leading, 14)
