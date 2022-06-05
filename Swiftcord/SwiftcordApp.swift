@@ -8,13 +8,6 @@
 import DiscordKit
 import SwiftUI
 
-private enum CachedTheme: Int {
-	case none = 0
-	case dark = 1
-	case light = 2
-	case system = 3
-}
-
 // There's probably a better place to put global constants
 let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 
@@ -27,21 +20,14 @@ struct SwiftcordApp: App, Equatable {
 	@StateObject private var gateway = DiscordGateway()
 	@StateObject private var state = UIState()
 
-	@AppStorage("cachedTheme") private var theme = CachedTheme.none
-
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
-				.preferredColorScheme(theme == .dark ? .dark : (theme == .light ? .light : nil))
 				.overlay(LoadingView())
 				.environmentObject(gateway)
 				.environmentObject(state)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				.environment(\.managedObjectContext, persistenceController.container.viewContext)
-				.onChange(of: gateway.cache.userSettings?.theme) { newTheme in
-					guard let newTheme = newTheme else { return }
-					if theme != .system { theme = newTheme == .dark ? .dark : .light }
-				}
 		}
 		.commands {
 			CommandGroup(after: .appInfo) {
@@ -54,7 +40,6 @@ struct SwiftcordApp: App, Equatable {
 
 		Settings {
 			SettingsView()
-				.preferredColorScheme(theme == .dark ? .dark : (theme == .light ? .light : nil))
 				.environmentObject(gateway)
 				.environmentObject(state)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
