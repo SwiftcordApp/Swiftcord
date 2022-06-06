@@ -78,6 +78,7 @@
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
 		DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */; };
 		DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA912849F9C500059FD7 /* AppCenterCrashes */; };
+		DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
@@ -169,6 +170,7 @@
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAccessibilityView.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
 		DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoBarView.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			children = (
 				DA520AD227D4D073009FD740 /* AppSettingsView.swift */,
 				DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */,
+				DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */,
 				DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,
+				DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,

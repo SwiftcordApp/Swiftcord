@@ -19,7 +19,7 @@ struct AppSettingsView: View {
 
                 NavigationLink("settings.app.accessibility",
 							   tag: .accessibility, selection: $selectedLink) {
-                    Text("")
+					ScrollView { AppSettingsAccessibilityView().padding(40) }
                 }
 
                 NavigationLink("settings.app.voiceVideo", tag: .voiceVideo, selection: $selectedLink) {

@@ -96,11 +96,13 @@ struct StickerItemView: View {
 
 struct StickerView: View {
     let sticker: StickerItem
-    @State private var play = false
+    @State private var hovered = false
     @State private var infoShow = false
     @State private var error = false
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
+
+	@AppStorage("stickerAlwaysAnim") private var alwaysAnimStickers = true
 
 	private func openPopoverEvt() {
 		AnalyticsWrapper.event(type: .openPopout, properties: [
@@ -111,7 +113,7 @@ struct StickerView: View {
 	}
 
     var body: some View {
-        StickerItemView(sticker: sticker, size: 160, play: $play)
+		StickerItemView(sticker: sticker, size: 160, play: .constant(alwaysAnimStickers || hovered))
         .popover(isPresented: $infoShow, arrowEdge: .trailing) {
             VStack(alignment: .leading, spacing: 14) {
                 if let fullSticker = fullSticker {
@@ -151,7 +153,7 @@ struct StickerView: View {
                 }
             }.padding(14)
         }
-        .onHover { isHovered in play = isHovered }
+        .onHover { hovered = $0 }
         .onTapGesture {
             if fullSticker == nil { Task {
                 fullSticker = await DiscordAPI.getSticker(id: sticker.id)

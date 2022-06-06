@@ -112,6 +112,8 @@
 
 "settings.app.accessibility" = "可访问性";
 
+"settings.app.accessibility.sticker.animInteraction" = "在桌面客户端上，贴纸会在鼠标悬停或聚焦时进入动画状态。在移动客户端上，贴纸会在长按时进入动画状态。";
+
 "settings.app.voiceVideo" = "语音和视频";
 
 "settings.app.textImages" = "文字与图像";

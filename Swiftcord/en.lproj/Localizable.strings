@@ -64,6 +64,8 @@
 
 "settings.app.accessibility" = "Accessibility";
 
+"settings.app.accessibility.sticker.animInteraction" = "On the desktop client, stickers will animate on hover or focus. On mobile clients, stickers will animate on long-press.";
+
 "settings.app.voiceVideo" = "Voice & Video";
 
 "settings.app.textImages" = "Text & Images";
