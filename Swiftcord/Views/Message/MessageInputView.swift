@@ -62,6 +62,8 @@ struct MessageInputView: View {
     let onSend: (String, [URL]) -> Void
 	let preAttach: (URL) -> Bool
 
+	@AppStorage("showSendBtn") private var showSendButton = false
+
     private func send() {
         guard message.hasContent() || !attachments.isEmpty else { return }
         onSend(message, attachments)
@@ -112,12 +114,19 @@ struct MessageInputView: View {
                     .disableAutocorrection(false)
                     .padding([.top, .bottom], 12)
 
-                Button(action: { send() }) {
-					Image(systemName: "arrow.up").font(.system(size: 20)).opacity(0.75)
-                }
-				.keyboardShortcut(.return, modifiers: [])
-                .buttonStyle(.plain)
-                .padding(.trailing, 15)
+				if showSendButton {
+					let canSend = message.hasContent() || !attachments.isEmpty
+					Button(action: { send() }) {
+						Image("SendArrow")
+							.foregroundColor(.accentColor)
+							.font(.system(size: 24))
+					}
+					.keyboardShortcut(.return, modifiers: [])
+					.buttonStyle(.plain)
+					.padding(.trailing, 15)
+					.disabled(!canSend)
+					.animation(.easeOut(duration: 0.2), value: canSend)
+				}
             }
         }
         .frame(minHeight: 40)
