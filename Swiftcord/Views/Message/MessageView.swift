@@ -157,10 +157,8 @@ struct MessageView: View, Equatable {
 		.background(
 			Rectangle()
 				.fill(.blue)
-				.modifier(ReversingOpacity(to: highlightMsgId == message.id ? 0.2 : 0, endDelay: 1) {
-					if highlightMsgId == message.id { highlightMsgId = nil }
-				})
-				.animation(.easeOut(duration: 0.5), value: highlightMsgId == message.id ? 0.2 : 0)
+				.opacity(highlightMsgId == message.id ? 0.2 : 0)
+				.animation(.easeIn(duration: 0.25), value: highlightMsgId == message.id)
 		)
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .onHover { isHovered in hovered = isHovered }

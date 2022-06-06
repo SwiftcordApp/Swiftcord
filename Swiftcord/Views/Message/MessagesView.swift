@@ -133,9 +133,10 @@ struct MessagesView: View, Equatable {
 										$0.id == msg.message_reference!.message_id
 									} : nil,
 									onQuoteClick: { id in
-										withAnimation {
-											highlightMsg = id
-											proxy.scrollTo(id, anchor: .center)
+										withAnimation { proxy.scrollTo(id, anchor: .center) }
+										highlightMsg = id
+										DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+											if highlightMsg == id { highlightMsg = nil }
 										}
 									},
 									highlightMsgId: $highlightMsg
