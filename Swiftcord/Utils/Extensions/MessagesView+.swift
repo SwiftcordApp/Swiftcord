@@ -7,6 +7,7 @@
 
 import Foundation
 import DiscordKit
+import DiscordKitCommon
 import DiscordKitCore
 
 extension MessagesView {
@@ -23,7 +24,7 @@ extension MessagesView {
 		fetchMessagesTask = Task {
 			let lastMsg = messages.isEmpty ? nil : messages[messages.count - 1].id
 
-			guard let newMessages = await DiscordAPI.getChannelMsgs(
+			guard let newMessages = await restAPI.getChannelMsgs(
 				id: channel.id,
 				before: lastMsg
 			) else {
@@ -56,7 +57,7 @@ extension MessagesView {
 		newMessage = ""
 		showingInfoBar = false
 		Task {
-			guard (await DiscordAPI.createChannelMsg(
+			guard (await restAPI.createChannelMsg(
 				message: NewMessage(
 					content: message,
 					attachments: attachments.isEmpty ? nil : attachments.enumerated()

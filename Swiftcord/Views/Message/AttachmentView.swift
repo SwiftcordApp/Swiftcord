@@ -10,8 +10,7 @@ import SwiftUI
 import AVKit
 import CachedAsyncImage
 import QuickLook
-import DiscordKit
-import DiscordKitCore
+import DiscordKitCommon
 
 struct AttachmentError: View {
     let height: Int

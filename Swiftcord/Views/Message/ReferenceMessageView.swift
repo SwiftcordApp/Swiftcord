@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import DiscordKit
 import DiscordKitCore
+import DiscordKitCommon
 import CachedAsyncImage
 
 struct ReferenceMessageView: View {

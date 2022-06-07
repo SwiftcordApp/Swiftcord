@@ -5,7 +5,7 @@
 //  Created by royal on 14/05/2022.
 //
 
-import DiscordKitCore
+import DiscordKitCommon
 
 extension Channel {
 	func label(_ users: [Snowflake: User] = [:]) -> String? {

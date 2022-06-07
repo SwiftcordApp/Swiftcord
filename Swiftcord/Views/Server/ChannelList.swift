@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
+import DiscordKitCommon
 import DiscordKit
-import DiscordKitCore
 
 struct ChannelList: View {
 	let channels: [Channel]

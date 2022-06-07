@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCore
+import DiscordKitCommon
 
 struct UserSettingsView: View {
     let user: CurrentUser

@@ -8,7 +8,7 @@
 
 import SwiftUI
 import CachedAsyncImage
-import DiscordKit
+import DiscordKitCommon
 import DiscordKitCore
 
 struct NonUserBadge: View {
@@ -49,6 +49,7 @@ struct MessageView: View {
     @State private var loadQuotedMsgErr = false
 
     @EnvironmentObject var serverCtx: ServerContext
+	@EnvironmentObject var restAPI: DiscordREST
 
 	public static let supportedTypes: [MessageType] = [.defaultMsg, .reply, .guildMemberJoin]
 
@@ -241,7 +242,7 @@ private extension MessageView {
 
 	func deleteMessage() {
 		Task {
-			await DiscordAPI.deleteMsg(id: message.channel_id, msgID: message.id)
+			await restAPI.deleteMsg(id: message.channel_id, msgID: message.id)
 		}
 	}
 

@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-import DiscordKitCore
 import DiscordKit
+import DiscordKitCommon
+import DiscordKitCore
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel?
@@ -23,6 +24,7 @@ struct ServerView: View {
 
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var audioManager: AudioCenterManager
 
     @StateObject private var serverCtx = ServerContext()
@@ -63,13 +65,13 @@ struct ServerView: View {
 		])
 
 		// Subscribe to typing events
-		gateway.socket.send(
+		gateway.send(
 			op: .subscribeGuildEvents,
 			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
 		// Retrieve guild roles to update context
 		Task {
-			guard let newRoles = await DiscordAPI.getGuildRoles(id: guild.id) else { return }
+			guard let newRoles = await restAPI.getGuildRoles(id: guild.id) else { return }
 			serverCtx.roles = newRoles
 		}
 	}

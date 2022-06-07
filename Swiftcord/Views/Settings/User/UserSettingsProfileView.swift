@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKitCore
+import DiscordKitCommon
 
 struct UserSettingsProfileView: View {
 	let user: CurrentUser

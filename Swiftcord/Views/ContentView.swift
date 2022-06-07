@@ -166,7 +166,7 @@ struct ContentView: View {
             if let token = token {
                 state.attemptLogin = false
                 Keychain.save(key: "authToken", data: token)
-                gateway.connect() // Reconnect to the socket
+				gateway.connect(token: token) // Reconnect to the socket
             }
         })
         .onAppear {
@@ -175,7 +175,7 @@ struct ContentView: View {
             _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
                 state.loadingState = .initial
-                log.debug("User isn't logged in, attempting login")
+                log.debug("Attempting login")
             }
             _ = gateway.onEvent.addHandler { (evt, _) in
                 switch evt {
@@ -183,7 +183,7 @@ struct ContentView: View {
                     state.loadingState = .gatewayConn
                     fallthrough
                 case .resumed:
-                    gateway.socket.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
+                    gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
                         guild_id: nil,
                         channel_id: nil,
                         self_mute: state.selfMute,
@@ -193,7 +193,7 @@ struct ContentView: View {
                 default: break
                 }
             }
-            _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
+			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
 	}
 

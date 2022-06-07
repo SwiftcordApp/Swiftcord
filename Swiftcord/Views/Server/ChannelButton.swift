@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
+import DiscordKitCommon
 import DiscordKit
-import DiscordKitCore
 import CachedAsyncImage
 
 struct ChannelButton: View {

@@ -5,8 +5,7 @@
 //  Created by Vincent Kwok on 30/5/22.
 //
 
-import DiscordKit
-import DiscordKitCore
+import DiscordKitCommon
 import SwiftUI
 
 struct ProfileBadges: View, Equatable {

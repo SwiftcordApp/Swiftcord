@@ -6,6 +6,7 @@
 //
 
 import DiscordKit
+import DiscordKitCore
 import SwiftUI
 
 // There's probably a better place to put global constants
@@ -13,11 +14,13 @@ let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 
 @main
 struct SwiftcordApp: App {
-	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-	let persistenceController = PersistenceController.shared
-	@StateObject var updaterViewModel = UpdaterViewModel()
+	static private let tokenKeychainKey = "authToken"
 
+	// @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+	// let persistenceController = PersistenceController.shared
+	@StateObject var updaterViewModel = UpdaterViewModel()
 	@StateObject private var gateway = DiscordGateway()
+	@StateObject private var restAPI = DiscordREST()
 	@StateObject private var state = UIState()
 
 	@AppStorage("theme") private var selectedTheme = "system"
@@ -28,11 +31,17 @@ struct SwiftcordApp: App {
 				.overlay(LoadingView())
 				.environmentObject(gateway)
 				.environmentObject(state)
+				.environmentObject(restAPI)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
-				.environment(\.managedObjectContext, persistenceController.container.viewContext)
+				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
 				.preferredColorScheme(selectedTheme == "dark"
 									  ? .dark
 									  : (selectedTheme == "light" ? .light : nil))
+				.onAppear {
+					guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else { return }
+					gateway.connect(token: token)
+					restAPI.setToken(token: token)
+				}
 		}
 		.commands {
 			CommandGroup(after: .appInfo) {
