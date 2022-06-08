@@ -34,6 +34,7 @@ struct ContentView: View {
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
 
     private let log = Logger(category: "ContentView")
@@ -166,7 +167,8 @@ struct ContentView: View {
             if let token = token {
                 state.attemptLogin = false
                 Keychain.save(key: "authToken", data: token)
-				gateway.connect(token: token) // Reconnect to the socket
+				gateway.connect(token: token) // Reconnect to the socket with the new token
+				restAPI.setToken(token: token)
             }
         })
         .onAppear {

@@ -38,7 +38,10 @@ struct SwiftcordApp: App {
 									  ? .dark
 									  : (selectedTheme == "light" ? .light : nil))
 				.onAppear {
-					guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else { return }
+					guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
+						state.attemptLogin = true
+						return
+					}
 					gateway.connect(token: token)
 					restAPI.setToken(token: token)
 				}
