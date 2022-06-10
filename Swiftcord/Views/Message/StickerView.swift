@@ -102,7 +102,7 @@ struct StickerView: View {
     @State private var error = false
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
-	
+
 	@EnvironmentObject var restAPI: DiscordREST
 
 	private func openPopoverEvt() {

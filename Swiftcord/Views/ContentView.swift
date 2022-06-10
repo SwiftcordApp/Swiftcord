@@ -166,7 +166,7 @@ struct ContentView: View {
         .onChange(of: loginWVModel.token, perform: { token in
             if let token = token {
                 state.attemptLogin = false
-                Keychain.save(key: "authToken", data: token)
+                Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)
 				gateway.connect(token: token) // Reconnect to the socket with the new token
 				restAPI.setToken(token: token)
             }

@@ -77,11 +77,11 @@ public class Keychain {
 public extension Data {
     init<T>(from value: T) {
         var value = value
-        var d = Data()
+        var tempData = Data()
         withUnsafePointer(to: &value, { (ptr: UnsafePointer<T>) -> Void in
-            d = Data( buffer: UnsafeBufferPointer(start: ptr, count: 1))
+			tempData = Data( buffer: UnsafeBufferPointer(start: ptr, count: 1))
         })
-        self.init(d)
+        self.init(tempData)
     }
 
     func to<T>(type: T.Type) -> T {

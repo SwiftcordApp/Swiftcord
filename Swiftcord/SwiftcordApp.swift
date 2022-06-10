@@ -14,7 +14,7 @@ let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 
 @main
 struct SwiftcordApp: App {
-	static private let tokenKeychainKey = "authToken"
+	static internal let tokenKeychainKey = "authToken"
 
 	// @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	// let persistenceController = PersistenceController.shared
