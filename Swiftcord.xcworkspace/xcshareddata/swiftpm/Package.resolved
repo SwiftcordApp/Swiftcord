@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
-        "branch" : "rearchitect",
-        "revision" : "c0334e29bcf5548dfe54b3d0a7b0df9af27c86eb"
+        "branch" : "main",
+        "revision" : "213e0b8817f56cb7cf7fe03443386c330d59009d"
       }
     },
     {

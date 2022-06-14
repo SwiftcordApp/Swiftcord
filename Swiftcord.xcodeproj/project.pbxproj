@@ -972,7 +972,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = rearchitect;
+				branch = main;
 				kind = branch;
 			};
 		};
