@@ -100,6 +100,20 @@
 "dm.composeMsg.hint %@" = "消息@%@";
 
 /* ====== Settings ====== */
+"settings.showSendBtn" = "显示发送消息按钮";
+
+"settings.animInteraction" = "在桌面客户端上，贴纸会在鼠标悬停或聚焦时进入动画状态。在移动客户端上，贴纸会在长按时进入动画状态。";
+
+"settings.tts.rate" = "文字转语音速度";
+
+"settings.tts.defaultSpeed" = "默认";
+
+"settings.tts.slower" = "更慢";
+
+"settings.tts.faster" = "更快";
+
+////////////////////////////
+
 "settings.user.logOut" = "登出";
 
 "settings.user.logOut.confirmation" = "您确定您要退出登录吗？";
@@ -111,6 +125,10 @@
 "settings.app.appearance.theme" = "主题";
 
 "settings.app.accessibility" = "可访问性";
+
+"settings.app.accessibility.stickers" = "贴纸";
+
+"settings.app.accessibility.chatInput" = "输入消息";
 
 "settings.app.voiceVideo" = "语音和视频";
 

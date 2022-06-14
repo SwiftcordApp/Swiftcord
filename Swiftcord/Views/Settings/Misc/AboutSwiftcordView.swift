@@ -43,20 +43,26 @@ struct AboutSwiftcordView: View {
 							.multilineTextAlignment(.center)
 							.padding(.bottom, 4)
 
-						Link("Anthony Ingle",
-							 destination: URL(string: "https://github.com/ingleanthony")!)
-						Link("Ben Tettmar",
-							 destination: URL(string: "https://github.com/bentettmar")!)
-						Link("royal",
-							 destination: URL(string: "https://github.com/rrroyal")!)
-						Link("Candygoblen123",
-							 destination: URL(string: "https://github.com/Candygoblen123")!)
-						Link("marcprux",
-							 destination: URL(string: "https://github.com/marcprux")!)
-						Link("selimgr",
-							 destination: URL(string: "https://github.com/selimgr")!)
+						Group {
+							Link("Anthony Ingle",
+								destination: URL(string: "https://github.com/ingleanthony")!)
+							Link("Ben Tettmar",
+								destination: URL(string: "https://github.com/bentettmar")!)
+							Link("royal",
+								destination: URL(string: "https://github.com/rrroyal")!)
+							Link("Candygoblen123",
+								destination: URL(string: "https://github.com/Candygoblen123")!)
+							Link("marcprux",
+								destination: URL(string: "https://github.com/marcprux")!)
+							Link("selimgr",
+								destination: URL(string: "https://github.com/selimgr")!)
+							Link("tonyarnold",
+								destination: URL(string: "https://github.com/tonyarnold")!)
+							Link("charxene",
+								destination: URL(string: "https://github.com/charxene")!)
+						}
 
-						Text("Big thanks to all contributors <3! Contributions are more than welcome :D")
+						Text("Big thanks to all contributors <3")
 							.padding(.top, 4)
 							.font(.caption)
 							.multilineTextAlignment(.center)

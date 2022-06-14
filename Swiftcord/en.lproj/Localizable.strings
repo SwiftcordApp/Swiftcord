@@ -52,6 +52,20 @@
 "dm.composeMsg.hint %@" = "Message @%@";
 
 /* ====== Settings ====== */
+"settings.showSendBtn" = "Show Send Message button";
+
+"settings.animInteraction" = "On the desktop client, stickers will animate on hover or focus. On mobile clients, stickers will animate on long-press.";
+
+"settings.tts.rate" = "Text-to-speech Rate";
+
+"settings.tts.defaultSpeed" = "Default";
+
+"settings.tts.slower" = "Slower";
+
+"settings.tts.faster" = "Faster";
+
+////////////////////////////
+
 "settings.user.logOut" = "Log Out";
 
 "settings.user.logOut.confirmation" = "Are you sure you want to log out?";
@@ -63,6 +77,10 @@
 "settings.app.appearance.theme" = "Theme";
 
 "settings.app.accessibility" = "Accessibility";
+
+"settings.app.accessibility.stickers" = "Stickers";
+
+"settings.app.accessibility.chatInput" = "Chat Input";
 
 "settings.app.voiceVideo" = "Voice & Video";
 

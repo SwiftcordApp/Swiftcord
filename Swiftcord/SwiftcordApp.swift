@@ -61,7 +61,7 @@ struct SwiftcordApp: App {
 				.environmentObject(state)
 				.preferredColorScheme(selectedTheme == "dark"
 									  ? .dark
-									  : (selectedTheme == "light" ? .light : nil))
+									  : (selectedTheme == "light" ? .light : .none))
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
 	}
