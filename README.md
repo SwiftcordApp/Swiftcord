@@ -5,6 +5,11 @@ A completely native Discord client for macOS built 100% in Swift and SwiftUI
 
 ![Viewing the general-talk channel in the r/MacBookPro server in Swiftcord](README_Resources/heroScreenshot.png)
 
+![Lines of code](https://img.shields.io/tokei/lines/github/SwiftcordApp/Swiftcord?style=for-the-badge)
+![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=buy%20me%20a%20coffee&logo=buymeacoffee&style=for-the-badge)
+
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch.
 
@@ -14,7 +19,7 @@ the Discord API implementation Swiftcord relies on.
 **If you like this project, please give it a ⭐ star! It helps motivate
 me to continue developing it**
 
-### Join the Swiftcord Discord server [here](https://discord.gg/he7n6MGDXS)!
+**Consider buying me a coffee ☕️ by sponsoring Swiftcord!**
 
 ## Contents
 * [Motivation](#motivation)
@@ -40,12 +45,18 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 ## Releases
 
 ### Nightly Builds (Latest fixes/features, might be unstable)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/SwiftcordApp/Swiftcord/Build%20Canary?style=for-the-badge)
+
 For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 
 ### Alpha (More stable, less updated)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge)
+
 Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
 
 ### Homebrew
+![homebrew cask](https://img.shields.io/homebrew/cask/v/swiftcord?style=for-the-badge)
+
 Swiftcord is also available on homebrew as a cask: `brew install swiftcord`. Versions are
 lock stepped with alpha releases on GitHub releases.
 
