@@ -7,6 +7,8 @@
 
 import SwiftUI
 import DiscordKit
+import DiscordKitCommon
+import DiscordKitCore
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel?
@@ -15,13 +17,14 @@ class ServerContext: ObservableObject {
 	@Published public var roles: [Role] = []
 }
 
-struct ServerView: View, Equatable {
+struct ServerView: View {
 	let guild: Guild?
     @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
 
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var audioManager: AudioCenterManager
 
     @StateObject private var serverCtx = ServerContext()
@@ -62,13 +65,13 @@ struct ServerView: View, Equatable {
 		])
 
 		// Subscribe to typing events
-		gateway.socket.send(
+		gateway.send(
 			op: .subscribeGuildEvents,
 			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
 		// Retrieve guild roles to update context
 		Task {
-			guard let newRoles = await DiscordAPI.getGuildRoles(id: guild.id) else { return }
+			guard let newRoles = await restAPI.getGuildRoles(id: guild.id) else { return }
 			serverCtx.roles = newRoles
 		}
 	}
@@ -84,7 +87,6 @@ struct ServerView: View, Equatable {
             VStack(spacing: 0) {
 				if let guild = guild {
 					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel)
-						.equatable()
 						.toolbar {
 							ToolbarItem {
 								Text(guild.name == "DMs" ? "dm" : "\(guild.name)")
@@ -118,7 +120,7 @@ struct ServerView: View, Equatable {
             }
 
 			if serverCtx.channel != nil {
-				MessagesView().equatable()
+				MessagesView()
 			} else {
 				VStack(spacing: 24) {
 					Image(serverCtx.guild?.id == "@me" ? "NoDMs" : "NoGuildChannels")
@@ -207,8 +209,4 @@ struct ServerView: View, Equatable {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
         }
     }
-
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.guild == rhs.guild
-	}
 }

@@ -5,7 +5,7 @@
 //  Created by royal on 14/05/2022.
 //
 
-import DiscordKit
+import DiscordKitCommon
 
 extension Guild {
 	var isDMChannel: Bool { id == "@me" }

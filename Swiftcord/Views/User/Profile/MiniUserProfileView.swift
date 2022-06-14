@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKit
+import DiscordKitCommon
 import CachedAsyncImage
 
 struct MiniUserProfileView: View {

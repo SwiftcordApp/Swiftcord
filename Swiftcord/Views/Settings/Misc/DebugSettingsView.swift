@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DiscordKit
+import DiscordKitCore
 
 struct DebugTableItem: Identifiable {
 	let id = UUID()

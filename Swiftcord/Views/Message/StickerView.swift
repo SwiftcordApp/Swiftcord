@@ -7,8 +7,9 @@
 
 import SwiftUI
 import Lottie
-import DiscordKit
+import DiscordKitCommon
 import CachedAsyncImage
+import DiscordKitCore
 
 struct StickerLoadingView: View {
     let size: Double
@@ -102,6 +103,8 @@ struct StickerView: View {
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
 
+	@EnvironmentObject var restAPI: DiscordREST
+
 	@AppStorage("stickerAlwaysAnim") private var alwaysAnimStickers = true
 
 	private func openPopoverEvt() {
@@ -156,7 +159,7 @@ struct StickerView: View {
         .onHover { hovered = $0 }
         .onTapGesture {
             if fullSticker == nil { Task {
-                fullSticker = await DiscordAPI.getSticker(id: sticker.id)
+                fullSticker = await restAPI.getSticker(id: sticker.id)
 				openPopoverEvt()
 			}} else {
 				openPopoverEvt()

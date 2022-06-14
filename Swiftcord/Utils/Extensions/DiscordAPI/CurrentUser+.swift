@@ -6,14 +6,14 @@
 //
 
 import Foundation
-import DiscordKit
+import DiscordKitCommon
 
 extension CurrentUser {
 	func avatarURL(size: Int = 160) -> URL {
 		if let avatar = avatar {
-			return URL(string: "\(GatewayConfig.default.cdnURL)avatars/\(self.id)/\(avatar).webp?size=\(size)")!
+			return URL(string: "\(DiscordKitConfig.default.cdnURL)avatars/\(self.id)/\(avatar).webp?size=\(size)")!
 		} else {
-			return URL(string: "\(GatewayConfig.default.cdnURL)embed/avatars/\((Int(self.discriminator) ?? 0) % 5).png")!
+			return URL(string: "\(DiscordKitConfig.default.cdnURL)embed/avatars/\((Int(self.discriminator) ?? 0) % 5).png")!
 		}
 	}
 }

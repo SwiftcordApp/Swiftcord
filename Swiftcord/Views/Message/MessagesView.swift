@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+import DiscordKitCommon
 import DiscordKit
+import DiscordKitCore
 import CachedAsyncImage
 
 extension View {
@@ -84,11 +86,7 @@ struct DayDividerView: View {
 	}
 }
 
-struct MessagesView: View, Equatable {
-	static func == (lhs: MessagesView, rhs: MessagesView) -> Bool {
-		lhs.messages == rhs.messages && lhs.attachments == rhs.attachments
-	}
-
+struct MessagesView: View {
     @State internal var reachedTop = false
     @State internal var messages: [Message] = []
     @State internal var newMessage = " "
@@ -104,6 +102,7 @@ struct MessagesView: View, Equatable {
 	@State private var highlightMsg: Snowflake?
 
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
 
@@ -213,7 +212,7 @@ struct MessagesView: View, Equatable {
                             // Send typing start msg once every 8s while typing
                             lastSentTyping = Date()
                             Task {
-                                _ = await DiscordAPI.typingStart(id: ctx.channel!.id)
+                                _ = await restAPI.typingStart(id: ctx.channel!.id)
                             }
                         }
                     }

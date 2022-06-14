@@ -8,7 +8,8 @@
 
 import SwiftUI
 import CachedAsyncImage
-import DiscordKit
+import DiscordKitCommon
+import DiscordKitCore
 
 struct NonUserBadge: View {
 	let flags: Int?
@@ -34,7 +35,7 @@ struct NonUserBadge: View {
 	}
 }
 
-struct MessageView: View, Equatable {
+struct MessageView: View {
     let message: Message
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
@@ -48,6 +49,7 @@ struct MessageView: View, Equatable {
     @State private var loadQuotedMsgErr = false
 
     @EnvironmentObject var serverCtx: ServerContext
+	@EnvironmentObject var restAPI: DiscordREST
 
 	public static let supportedTypes: [MessageType] = [.defaultMsg, .reply, .guildMemberJoin]
 
@@ -213,10 +215,6 @@ struct MessageView: View, Equatable {
 			}
         }
 	}
-
-	static func == (lhs: MessageView, rhs: MessageView) -> Bool {
-		lhs.message == rhs.message
-	}
 }
 
 private extension MessageView {
@@ -242,7 +240,7 @@ private extension MessageView {
 
 	func deleteMessage() {
 		Task {
-			await DiscordAPI.deleteMsg(id: message.channel_id, msgID: message.id)
+			await restAPI.deleteMsg(id: message.channel_id, msgID: message.id)
 		}
 	}
 

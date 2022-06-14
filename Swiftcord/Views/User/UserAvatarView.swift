@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordKitCommon
+import DiscordKitCore
 import DiscordKit
 
 struct UserAvatarView: View, Equatable {
@@ -21,8 +23,9 @@ struct UserAvatarView: View, Equatable {
 
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
 
-	static let profileCache = Cache<Snowflake, UserProfile>()
+	static private let profileCache = Cache<Snowflake, UserProfile>()
 
     var body: some View {
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
@@ -59,7 +62,7 @@ struct UserAvatarView: View, Equatable {
 			   webhookID == nil,
 			   guildID != "@me" || profile?.user == nil {
 				Task {
-					guard let loadedProfile = await DiscordAPI.getProfile(
+					guard let loadedProfile = await restAPI.getProfile(
 						user: user.id,
 						guildID: guildID == "@me" ? nil : guildID
 					) else { // Profile is still nil: fetching failed

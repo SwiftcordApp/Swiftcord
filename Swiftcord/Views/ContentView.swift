@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 import os
 import DiscordKit
+import DiscordKitCore
 import DiscordKitCommon
 
 struct CustomHorizontalDivider: View {
@@ -33,6 +34,7 @@ struct ContentView: View {
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
 
     private let log = Logger(category: "ContentView")
@@ -129,8 +131,6 @@ struct ContentView: View {
 					)
             }
 
-			// Using the .equatable() modifier on this View causes a swift-frontend
-			// bus error when compiling for release. I have no idea why that happens.
 			ServerView(
 				guild: selectedGuildID == nil
 				? nil
@@ -166,8 +166,9 @@ struct ContentView: View {
         .onChange(of: loginWVModel.token, perform: { token in
             if let token = token {
                 state.attemptLogin = false
-                Keychain.save(key: "authToken", data: token)
-                gateway.connect() // Reconnect to the socket
+                Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)
+				gateway.connect(token: token) // Reconnect to the socket with the new token
+				restAPI.setToken(token: token)
             }
         })
         .onAppear {
@@ -176,7 +177,7 @@ struct ContentView: View {
             _ = gateway.onAuthFailure.addHandler {
                 state.attemptLogin = true
                 state.loadingState = .initial
-                log.debug("User isn't logged in, attempting login")
+                log.debug("Attempting login")
             }
             _ = gateway.onEvent.addHandler { (evt, _) in
                 switch evt {
@@ -184,7 +185,7 @@ struct ContentView: View {
                     state.loadingState = .gatewayConn
                     fallthrough
                 case .resumed:
-                    gateway.socket.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
+                    gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
                         guild_id: nil,
                         channel_id: nil,
                         self_mute: state.selfMute,
@@ -194,7 +195,7 @@ struct ContentView: View {
                 default: break
                 }
             }
-            _ = gateway.socket.onSessionInvalid.addHandler { state.loadingState = .initial }
+			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
 	}
 

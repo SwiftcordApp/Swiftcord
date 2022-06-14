@@ -16,7 +16,7 @@ struct AppSettingsAccessibilityView: View {
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Text("settings.app.accessibility").font(.title)
-			
+
 			Text("settings.app.accessibility.chatInput")
 				.font(.headline)
 				.textCase(.uppercase)
