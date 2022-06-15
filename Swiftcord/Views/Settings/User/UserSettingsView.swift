@@ -15,6 +15,27 @@ struct UserSettingsView: View {
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway
 
+	private let keyPrefixesToRemove = [
+		"lastCh.",
+		"lastSelectedGuild",
+		"showSendBtn",
+		"stickerAlwaysAnim",
+		"theme",
+		"ttsRate"
+	]
+
+	private func logOut() {
+		for key in UserDefaults.standard.dictionaryRepresentation().keys {
+			for toRemove in keyPrefixesToRemove {
+				if key.prefix(toRemove.count) == toRemove {
+					UserDefaults.standard.removeObject(forKey: key)
+					break
+				}
+			}
+		}
+		gateway.logout()
+	}
+
     var body: some View {
         NavigationView {
             List {
@@ -45,7 +66,7 @@ struct UserSettingsView: View {
                         Text("settings.user.logOut.confirmation")
 						Text("Note: This will also delete your locally stored preferences")
 							.font(.caption)
-                        Button(role: .destructive) { gateway.logout() } label: {
+                        Button(role: .destructive) { logOut() } label: {
                             Label(
 								"settings.user.logOut",
 								systemImage: "rectangle.portrait.and.arrow.right"

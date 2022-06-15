@@ -55,6 +55,10 @@ extension MessagesView {
 	internal func sendMessage(with message: String, attachments: [URL]) {
 		lastSentTyping = Date(timeIntervalSince1970: 0)
 		newMessage = ""
+		if #available(macOS 13, *) {
+			// Workaround for some race condition, probably a macOS 13 beta bug
+			DispatchQueue.main.async { newMessage = "" }
+		} else { newMessage = "" }
 		showingInfoBar = false
 		Task {
 			guard (await restAPI.createChannelMsg(
