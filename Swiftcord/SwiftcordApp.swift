@@ -27,25 +27,32 @@ struct SwiftcordApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
-				.overlay(LoadingView())
-				.environmentObject(gateway)
-				.environmentObject(state)
-				.environmentObject(restAPI)
+			if state.attemptLogin {
+				LoginView()
+					.environmentObject(gateway)
+					.environmentObject(state)
+					.environmentObject(restAPI)
+			} else {
+				ContentView()
+					.overlay(LoadingView())
+					.environmentObject(gateway)
+					.environmentObject(state)
+					.environmentObject(restAPI)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
-				.preferredColorScheme(selectedTheme == "dark"
-									  ? .dark
-									  : (selectedTheme == "light" ? .light : nil))
-				.onAppear {
-					guard gateway.socket == nil else { return }
-					guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
-						state.attemptLogin = true
-						return
+					.preferredColorScheme(selectedTheme == "dark"
+										  ? .dark
+										  : (selectedTheme == "light" ? .light : nil))
+					.onAppear {
+						guard gateway.socket == nil else { return }
+						guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
+							state.attemptLogin = true
+							return
+						}
+						gateway.connect(token: token)
+						restAPI.setToken(token: token)
 					}
-					gateway.connect(token: token)
-					restAPI.setToken(token: token)
-				}
+			}
 		}
 		.commands {
 			CommandGroup(after: .appInfo) {

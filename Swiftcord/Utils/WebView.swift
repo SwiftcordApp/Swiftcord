@@ -88,10 +88,8 @@ struct WebView: NSViewRepresentable {
 
         // Also overwrite some styles
         window.onload = () => {
-          // Remove the oversaturated background
-          document.querySelector('#app-mount > div[class^="app-"] > div:first-child > svg').remove();
-          // Remove the fallback Discord logo
-          document.querySelector('#app-mount > div[class^="app-"] > div:first-child > a').remove();
+          // Remove the oversaturated background and fallback Discord logo
+          document.querySelectorAll('#app-mount div[class^="characterBackground-"] > *:not(div)').forEach(e => e.remove());
           // Some things can only be styled thru a style since they are dynamically modified
           const s = document.createElement('style');
           s.innerHTML = `
@@ -103,6 +101,13 @@ struct WebView: NSViewRepresentable {
             form[class*="authBox-"] {
               background-color: rgba(0, 0, 0, .7)!important;
               -webkit-backdrop-filter: blur(24px) saturate(140%);
+              border-radius: 12px;
+            }
+            .theme-dark {
+              --input-background: rgba(0, 0, 0, .25)!important;
+            }
+            div[class^="select-"] > div > div:nth-child(2) {
+              background-color: var(--input-background)!important;
             }
           `;
           document.body.appendChild(s);

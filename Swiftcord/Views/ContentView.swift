@@ -30,7 +30,6 @@ struct ContentView: View {
     @State private var selectedGuildID: Snowflake?
     @State private var loadingGuildID: Snowflake?
 
-    @StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
@@ -144,32 +143,6 @@ struct ContentView: View {
         }
         .onChange(of: state.loadingState, perform: { state in
 			if state == .gatewayConn { loadLastSelectedGuild() }
-        })
-        // Using .constant to prevent dismissing
-        .sheet(isPresented: .constant(state.attemptLogin)) {
-            ZStack(alignment: .topLeading) {
-                WebView()
-                    .environmentObject(loginWVModel)
-                    .frame(width: 831, height: 580)
-                Button("Quit", role: .cancel) { exit(0) }.padding(8)
-
-                if !loginWVModel.didFinishLoading {
-                    ZStack {
-                        ProgressView("Loading Discord login...")
-                            .controlSize(.large)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                    .background(.background)
-                }
-            }
-        }
-        .onChange(of: loginWVModel.token, perform: { token in
-            if let token = token {
-                state.attemptLogin = false
-                Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)
-				gateway.connect(token: token) // Reconnect to the socket with the new token
-				restAPI.setToken(token: token)
-            }
         })
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
