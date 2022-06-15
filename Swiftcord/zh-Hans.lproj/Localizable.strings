@@ -1,3 +1,22 @@
+/* ====== Actions ====== */
+"action.continue" = "继续";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "欢迎使用\n";
+
+"onboarding.subtitle" = "专为macOS打造和设计的Discord客户端";
+
+"onboarding.lightweight.header" = "Efficient - Light on Resources";
+"onboarding.lightweight.body" = "Uses up to 7x less RAM than Discord with low CPU usage";
+
+"onboarding.features.header" = "Well Featured";
+"onboarding.features.body" = "Important core features are implemented, with more in the working";
+
+"onboarding.wip.header" = "Work in Progress";
+"onboarding.wip.body" = "Something's not right? Please create an issue or leave a message in the Discord server";
+
+"onboarding.footer" = "Swiftcord是初期的软件，有限制和错误。它目前并不打算取代官方客户端，但希望有朝一日能够取代。";
+
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "你知道吗";
 

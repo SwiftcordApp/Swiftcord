@@ -19,6 +19,7 @@ struct UserSettingsView: View {
 
 	private let keyPrefixesToRemove = [
 		"lastCh.",
+		"local.",
 		"lastSelectedGuild",
 		"showSendBtn",
 		"stickerAlwaysAnim",

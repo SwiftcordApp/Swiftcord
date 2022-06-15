@@ -1,3 +1,22 @@
+/* ====== Actions ====== */
+"action.continue" = "Continue";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Welcome to\n";
+
+"onboarding.subtitle" = "A Discord client built and designed exclusively for macOS";
+
+"onboarding.lightweight.header" = "Efficient - Light on Resources";
+"onboarding.lightweight.body" = "Uses up to 7x less RAM than Discord with low CPU usage";
+
+"onboarding.features.header" = "Well Featured";
+"onboarding.features.body" = "Important core features are implemented, with more in the working";
+
+"onboarding.wip.header" = "Work in Progress";
+"onboarding.wip.body" = "Something's not right? Please create an issue or leave a message in the Discord server";
+
+"onboarding.footer" = "Swiftcord is alpha software, with limitations and bugs. It currently isn't intended to replace the official client, but hopes to someday.";
+
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Did You Know";
 

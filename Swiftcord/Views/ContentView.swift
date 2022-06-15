@@ -29,12 +29,15 @@ struct ContentView: View {
     @State private var sheetOpen = false
     @State private var selectedGuildID: Snowflake?
     @State private var loadingGuildID: Snowflake?
+	@State private var presentingOnboarding = false
 
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
+
+	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
 
     private let log = Logger(category: "ContentView")
 
@@ -143,6 +146,7 @@ struct ContentView: View {
         }
         .onChange(of: state.loadingState, perform: { state in
 			if state == .gatewayConn { loadLastSelectedGuild() }
+			if state == .messageLoad, !seenOnboarding { presentingOnboarding = true }
         })
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
@@ -170,6 +174,11 @@ struct ContentView: View {
             }
 			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
+		.sheet(isPresented: $presentingOnboarding) {
+			seenOnboarding = true
+		} content: {
+			OnboardingView(presenting: $presentingOnboarding)
+		}
 	}
 
     /*private func addItem() {
@@ -206,6 +215,12 @@ struct ContentView: View {
             }
         }
     }*/
+}
+
+extension ContentView {
+	/*func getReleaseNotes() async -> String {
+		
+	}*/
 }
 
 private let itemFormatter: DateFormatter = {

@@ -87,6 +87,7 @@
 		DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
 		DAAFB5CC282B879200807B54 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
+		DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
 		DAB6C417284B04DB0066E49D /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
@@ -180,7 +181,7 @@
 		DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCenterManager.swift; sourceTree = "<group>"; };
 		DAAFB5C8282B689000807B54 /* discord-loading-animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "discord-loading-animation.json"; sourceTree = "<group>"; };
 		DAAFB5CB282B879200807B54 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
-		DAB5366028599AC900DD9857 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
+		DAB53661285A272D00DD9857 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
@@ -284,7 +285,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DAB5366028599AC900DD9857 /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -359,6 +359,7 @@
 				DA4A88E427C3482A00720909 /* LoginView.swift */,
 				DA2384C527CD1921009E15E0 /* LoadingView.swift */,
 				DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */,
+				DAB53661285A272D00DD9857 /* OnboardingView.swift */,
 				DA4A888927C0AF3000720909 /* ContentView.swift */,
 			);
 			path = Views;
@@ -643,6 +644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */,
 				DA520ACB27D4A23A009FD740 /* String+.swift in Sources */,
 				DA57F44428056718001DC46E /* ChannelList.swift in Sources */,
 				DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */,
