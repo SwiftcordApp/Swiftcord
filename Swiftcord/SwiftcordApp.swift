@@ -59,6 +59,7 @@ struct SwiftcordApp: App {
 		Settings {
 			SettingsView()
 				.environmentObject(gateway)
+				.environmentObject(restAPI)
 				.environmentObject(state)
 				.preferredColorScheme(selectedTheme == "dark"
 									  ? .dark

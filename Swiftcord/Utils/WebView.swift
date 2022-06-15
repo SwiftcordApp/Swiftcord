@@ -96,7 +96,7 @@ struct WebView: NSViewRepresentable {
           const s = document.createElement('style');
           s.innerHTML = `
             #app-mount {
-              background: url(data:image/gif;base64,\(backgroundImageB64 ?? ""));
+              background: url(data:image/png;base64,\(backgroundImageB64 ?? ""));
               background-size: cover;
               background-position: center;
             }

@@ -8,12 +8,14 @@
 import SwiftUI
 import DiscordKit
 import DiscordKitCommon
+import DiscordKitCore
 
 struct UserSettingsView: View {
     let user: CurrentUser
 
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var rest: DiscordREST
 
 	private let keyPrefixesToRemove = [
 		"lastCh.",
@@ -34,6 +36,8 @@ struct UserSettingsView: View {
 			}
 		}
 		gateway.logout()
+		Task { await rest.logOut() }
+		Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
 	}
 
     var body: some View {
