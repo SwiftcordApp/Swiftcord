@@ -38,6 +38,7 @@ struct SwiftcordApp: App {
 									  ? .dark
 									  : (selectedTheme == "light" ? .light : nil))
 				.onAppear {
+					guard gateway.socket == nil else { return }
 					guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
 						state.attemptLogin = true
 						return
