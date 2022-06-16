@@ -1,0 +1,122 @@
+/* ====== Actions ====== */
+"action.continue" = "Fortfahren";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Willkommen zu\n";
+
+"onboarding.subtitle" = "Ein Discord-Client erstellt und designt￼ nur für macOS";
+
+"onboarding.lightweight.header" = "Effizient - Ressourcen schonend";
+"onboarding.lightweight.body" = "Benutzt bis zu 7x weniger RAM als Discord mit weniger CPU Beanspruchung";
+
+"onboarding.features.header" = "Gut vorgestellt";
+"onboarding.features.body" = "Wichtige Kern-Funktionen sind umgesetzt, weitere sind in Arbeit";
+
+"onboarding.wip.header" = "In Arbeit";
+"onboarding.wip.body" = "Etwas ist nicht richtig? Bitte erstelle einen Fehler oder lass eine Nachricht auf unserem Discord-Server";
+
+"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Begrenzungen und Fehlern. Zurzeit ist es kein Ersatzt für den offiziellen Discord-Client, aber irgendwann hoffentlich.";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Wusstest du schon";
+
+/* ====== User ====== */
+"user.bio" = "Über mich";
+
+"user.roles.none" = "Keine Rollen";
+
+"user.roles.one" = "Rolle";
+
+"user.roles.many" = "Rollen";
+
+"user.roles.loading" = "Lade Rollen";
+
+"user.note" = "Notiz";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (bearbeitet)";
+
+"message.edited" = " • Bearbeitet: ";
+
+"message.gone" = "Die Original-Nachricht wurde gelöscht.";
+
+"message.reply.attachment" = "Klicke, um den Anhang zu sehen";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Keine Text Kanäle";
+
+"server.noChannels.body" = "Du bist an einem seltsamen Ort. Du hast entweder keinen Zugriff auf die Text-Kanäle oder es gibt diese auf diesem Server nicht.";
+
+"server.channel.header %@ %@" = "Dies ist der Anfang von dem #%@ Kanal. %@";
+
+"server.channel.title %@" = "Willkommen zu #%@!";
+
+"server.channel.noCategory" = "Keine Kategorie";
+
+"server.composeMsg.hint %@" = "Nachricht #%@";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus wartet auf seine Freunde. Dies musst du aber nicht!";
+
+"dm" = "Private Nachricht";
+
+"dm.header %@" = "Das ist der Anfang des Privat-Nachrichten-Verlaufs **@%@**.";
+
+"dm.group.header %@" = "Willkommen am Anfang der **%@** Gruppe.";
+
+"dm.group.composeMsg.hint %@" = "Nachricht %@";
+
+"%lld dm.group.memberCount" = "%lld Mitglieder";
+
+"dm.composeMsg.hint %@" = "Nachricht @%@";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Zeige den Nachricht senden Knopf";
+
+"settings.animInteraction" = "Auf dem Desktop Client werden Sticker durch den Fokus oder das berühren￼ der Maus animiert. An mobilen Geräten geschieht￼ dies durch gedrückt-halten.";
+
+"settings.tts.rate" = "Text-zu-Sprache Geschwindigkeit";
+
+"settings.tts.defaultSpeed" = "Standard";
+
+"settings.tts.slower" = "Langsamer";
+
+"settings.tts.faster" = "Schneller";
+
+////////////////////////////
+
+"settings.user.logOut" = "Ausloggen";
+
+"settings.user.logOut.confirmation" = "Bist du sicher, dass du dich ausloggen möchtest?";
+
+"settings.app" = "App";
+
+"settings.app.appearance" = "Aussehen";
+
+"settings.app.appearance.theme" = "Thema";
+
+"settings.app.accessibility" = "Barrierefreiheit";
+
+"settings.app.accessibility.stickers" = "Sticker";
+
+"settings.app.accessibility.chatInput" = "Chat Eingang";
+
+"settings.app.voiceVideo" = "Ton & Video";
+
+"settings.app.textImages" = "Text & Bilder";
+
+"settings.app.notifs" = "Benachrichtigungen";
+
+"settings.app.keybinds" = "Tastenkürzel";
+
+"settings.app.lang" = "Sprache";
+
+"settings.app.streamer" = "Streamer Modus";
+
+"settings.app.advanced" = "Fortgeschritten";
+
+"settings.others.debug.actions" = "Aktionen";
+
+"settings.others.debug.actions.info" = "Verwende hier keine Optionen, wenn du nicht weißt, was passiert. Einige könnten GeFäHrLiCh sein!";
+
+"settings.others.debug.actions.crash" = "Lässt Swiftcord abstürzen (Kein Scherz)";

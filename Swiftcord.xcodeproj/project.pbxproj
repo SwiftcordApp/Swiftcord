@@ -189,6 +189,7 @@
 		E7AF1C2A282FA400001F78DF /* Guild+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guild+.swift"; sourceTree = "<group>"; };
 		E7AF1C32282FB02A001F78DF /* UserSettingsAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsAccountView.swift; sourceTree = "<group>"; };
 		E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+.swift"; sourceTree = "<group>"; };
+		F421AC52285BACB200034F59 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -584,6 +585,7 @@
 				en,
 				"zh-Hans",
 				Base,
+				de,
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
@@ -728,6 +730,7 @@
 			children = (
 				DA2ADF302847B13F004A35F2 /* zh-Hans */,
 				DA97BA892848737C00059FD7 /* en */,
+				F421AC52285BACB200034F59 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
