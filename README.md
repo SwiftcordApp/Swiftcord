@@ -64,7 +64,7 @@ lock stepped with alpha releases on GitHub releases.
 
 ### Requirements
 * OS: macOS Monterey and above (>= 12.0)
-* Arch: Apple Silicon or Intel (Most releases are universal bundles)
+* Arch: Apple Silicon or Intel (Most releases are universal bundles) 
 
 > Note: Note: To open Swiftcord, you may need to right-click on the icon > press open. 
 > Some older releases were not signed or notarized with an Apple developer account.
