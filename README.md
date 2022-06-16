@@ -9,6 +9,7 @@ A completely native Discord client for macOS built 100% in Swift and SwiftUI
 ![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=buy%20me%20a%20coffee&logo=buymeacoffee&style=for-the-badge)
+![Weblate project translated](https://img.shields.io/weblate/progress/swiftcord?style=for-the-badge)
 
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch.
@@ -181,6 +182,8 @@ with the appropriate template and fill in the placeholders as
 clearly as you can. Responding promptly to follow-up comments
 is appreciated, as debugging is hard without any further input
 from the OP.
+
+Want to translate Swiftcord into another language? Head on over to our [Weblate.](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
 
 ---
 
