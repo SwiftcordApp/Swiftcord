@@ -7,7 +7,7 @@
 "onboarding.subtitle" = "Ein Discord-Client erstellt und designt￼ nur für macOS";
 
 "onboarding.lightweight.header" = "Effizient - Ressourcen schonend";
-"onboarding.lightweight.body" = "Benutzt bis zu 7x weniger RAM als Discord mit weniger CPU beanspruchung";
+"onboarding.lightweight.body" = "Benutzt bis zu 7x weniger RAM als Discord mit weniger CPU Beanspruchung";
 
 "onboarding.features.header" = "Gut vorgestellt";
 "onboarding.features.body" = "Wichtige Kern-Funktionen sind umgesetzt, weitere sind in Arbeit";
@@ -15,7 +15,7 @@
 "onboarding.wip.header" = "In Arbeit";
 "onboarding.wip.body" = "Etwas ist nicht richtig? Bitte erstelle einen Fehler oder lass eine Nachricht auf unserem Discord-Server";
 
-"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Begrenzungen und Fehlern. Zur Zeit ist es kein Ersatzt für den offiziellen Discord-Client, aber irgendwann hoffentlich.";
+"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Begrenzungen und Fehlern. Zurzeit ist es kein Ersatzt für den offiziellen Discord-Client, aber irgendwann hoffentlich.";
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Wusstest du schon";
@@ -38,14 +38,14 @@
 
 "message.edited" = " • Bearbeitet: ";
 
-"message.gone" = "Die Original Nachricht wurde gelöscht.";
+"message.gone" = "Die Original-Nachricht wurde gelöscht.";
 
 "message.reply.attachment" = "Klicke, um den Anhang zu sehen";
 
 /* ====== Server ====== */
 "server.noChannels.header" = "Keine Text Kanäle";
 
-"server.noChannels.body" = "Du bist am einem Seltsamen Ort. Du hast entweder keinen Zugriff auf die Text-Kanäle oder es gibt diese auf diesem Server nicht.";
+"server.noChannels.body" = "Du bist an einem seltsamen Ort. Du hast entweder keinen Zugriff auf die Text-Kanäle oder es gibt diese auf diesem Server nicht.";
 
 "server.channel.header %@ %@" = "Dies ist der Anfang von dem #%@ Kanal. %@";
 
@@ -56,11 +56,11 @@
 "server.composeMsg.hint %@" = "Nachricht #%@";
 
 /* ====== DMs ====== */
-"dm.noChannels.body" = "Wumpus wartet auf seine Freunde. Dies must du aber nicht!";
+"dm.noChannels.body" = "Wumpus wartet auf seine Freunde. Dies musst du aber nicht!";
 
 "dm" = "Private Nachricht";
 
-"dm.header %@" = "Das ist der Anfang des Privat-Nachriten-Verlaufs **@%@**.";
+"dm.header %@" = "Das ist der Anfang des Privat-Nachrichten-Verlaufs **@%@**.";
 
 "dm.group.header %@" = "Willkommen am Anfang der **%@** Gruppe.";
 
@@ -77,7 +77,7 @@
 
 "settings.tts.rate" = "Text-zu-Sprache Geschwindigkeit";
 
-"settings.tts.defaultSpeed" = "Standart";
+"settings.tts.defaultSpeed" = "Standard";
 
 "settings.tts.slower" = "Langsamer";
 
