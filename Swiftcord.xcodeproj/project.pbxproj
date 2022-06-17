@@ -10,6 +10,7 @@
 		36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
 		3684BB59283C696E005045AE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3684BB58283C696E005045AE /* Sparkle */; };
 		3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684BB5A283C69C5005045AE /* Sparkle.swift */; };
+		36BC29F3285C162500A8B316 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36BC29F2285C162500A8B316 /* Credits.rtf */; };
 		900F6DA1284A1C0C000B6D29 /* GeneratedBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
@@ -101,6 +102,7 @@
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3684BB5A283C69C5005045AE /* Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sparkle.swift; sourceTree = "<group>"; };
+		36BC29F2285C162500A8B316 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		900F6D9D284A1A92000B6D29 /* Project Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Shared.xcconfig"; sourceTree = "<group>"; };
 		900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Debug.xcconfig"; sourceTree = "<group>"; };
 		900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Release.xcconfig"; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		DA520ABD27D322F0009FD740 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36BC29F2285C162500A8B316 /* Credits.rtf */,
 				E7AF1C24282F9F44001F78DF /* Animations */,
 				DA23843C27CB9621009E15E0 /* Fonts */,
 			);
@@ -612,6 +615,7 @@
 				DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */,
 				DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */,
 				DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */,
+				36BC29F3285C162500A8B316 /* Credits.rtf in Resources */,
 				DA2ADF312847B13F004A35F2 /* Localizable.strings in Resources */,
 				DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */,
 				DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */,
@@ -870,13 +874,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Vincent Kwok.\nAll rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -901,13 +905,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Vincent Kwok.\nAll rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
