@@ -86,21 +86,3 @@ struct DMButton: View {
 		}
 	}
 }
-
-struct DiscordChannelButton: ButtonStyle {
-	let isSelected: Bool
-	@State var isHovered: Bool = false
-
-	func makeBody(configuration: Configuration) -> some View {
-		configuration.label
-			.buttonStyle(.borderless)
-			.font(.system(size: 14, weight: isSelected ? .medium : .regular))
-			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
-			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
-			.background(
-				RoundedRectangle(cornerRadius: 4)
-					.fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
-            )
-            .onHover(perform: { isHovered = $0 })
-    }
-}

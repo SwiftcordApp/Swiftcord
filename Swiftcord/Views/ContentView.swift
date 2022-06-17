@@ -30,6 +30,8 @@ struct ContentView: View {
     @State private var selectedGuildID: Snowflake?
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
+	@State private var skipWhatsNew = false
+	@State private var whatsNewMarkdown: String?
 
     @StateObject private var audioManager = AudioCenterManager()
 
@@ -38,6 +40,7 @@ struct ContentView: View {
     @EnvironmentObject var state: UIState
 
 	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
+	@AppStorage("local.previousBuild") private var prevBuild: String?
 
     private let log = Logger(category: "ContentView")
 
@@ -146,7 +149,21 @@ struct ContentView: View {
         }
         .onChange(of: state.loadingState, perform: { state in
 			if state == .gatewayConn { loadLastSelectedGuild() }
-			if state == .messageLoad, !seenOnboarding { presentingOnboarding = true }
+			if state == .messageLoad,
+			   !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+				if !seenOnboarding { presentingOnboarding = true }
+				Task {
+					do {
+						whatsNewMarkdown = try await GitHubAPI
+							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v0.4.1")
+							.body
+					} catch {
+						skipWhatsNew = true
+					}
+					presentingOnboarding = true
+					print(whatsNewMarkdown)
+				}
+			}
         })
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
@@ -176,8 +193,14 @@ struct ContentView: View {
         }
 		.sheet(isPresented: $presentingOnboarding) {
 			seenOnboarding = true
+			prevBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
 		} content: {
-			OnboardingView(presenting: $presentingOnboarding)
+			OnboardingView(
+				skipOnboarding: seenOnboarding,
+				skipWhatsNew: skipWhatsNew,
+				newMarkdown: $whatsNewMarkdown,
+				presenting: $presentingOnboarding
+			)
 		}
 	}
 
@@ -215,12 +238,6 @@ struct ContentView: View {
             }
         }
     }*/
-}
-
-extension ContentView {
-	/*func getReleaseNotes() async -> String {
-		
-	}*/
 }
 
 private let itemFormatter: DateFormatter = {

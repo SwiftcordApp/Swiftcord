@@ -9,12 +9,16 @@ import Foundation
 import SwiftUI
 
 extension Text {
-	init(markdown: String, fallback: AttributedString = "") {
+	init(
+		markdown: String,
+		fallback: AttributedString = "",
+		syntax: AttributedString.MarkdownParsingOptions.InterpretedSyntax = .inlineOnlyPreservingWhitespace
+	) {
 		self.init(
 			(try? AttributedString(
 				markdown: markdown,
 				options: AttributedString.MarkdownParsingOptions(
-					interpretedSyntax: .inlineOnlyPreservingWhitespace
+					interpretedSyntax: syntax
 				)
 			)) ?? fallback
 		)

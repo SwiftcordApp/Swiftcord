@@ -7,10 +7,13 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct OnboardingWelcomeView: View {
 	@Binding var presenting: Bool
+	@Binding var showingNew: Bool
+	let loadingNew: Bool
+	let hasNew: Bool
 
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Group {
 				Text("onboarding.title").font(.largeTitle)
@@ -22,6 +25,7 @@ struct OnboardingView: View {
 			}
 			.padding(.top, 6)
 			.padding(.horizontal, 8)
+			.fixedSize(horizontal: false, vertical: true)
 
 			Divider()
 
@@ -29,21 +33,27 @@ struct OnboardingView: View {
 				Image(systemName: "cpu").foregroundColor(.green).font(.system(size: 32)).frame(width: 32)
 				VStack(alignment: .leading, spacing: 4) {
 					Text("onboarding.lightweight.header").font(.title3)
-					Text("onboarding.lightweight.body").opacity(0.75)
+					Text("onboarding.lightweight.body")
+						.opacity(0.75)
+						.fixedSize(horizontal: false, vertical: true)
 				}
 			}.padding(.leading, 4)
 			HStack(spacing: 16) {
 				Image(systemName: "checkmark.circle").foregroundColor(.orange).font(.system(size: 32)).frame(width: 32)
 				VStack(alignment: .leading, spacing: 4) {
 					Text("onboarding.features.header").font(.title3)
-					Text("onboarding.features.body").opacity(0.75)
+					Text("onboarding.features.body")
+						.opacity(0.75)
+						.fixedSize(horizontal: false, vertical: true)
 				}
 			}.padding(.leading, 4)
 			HStack(spacing: 16) {
 				Image(systemName: "hammer").foregroundColor(.blue).font(.system(size: 32)).frame(width: 32)
 				VStack(alignment: .leading, spacing: 4) {
 					Text("onboarding.wip.header").font(.title3)
-					Text("onboarding.wip.body").opacity(0.75)
+					Text("onboarding.wip.body")
+						.opacity(0.75)
+						.fixedSize(horizontal: false, vertical: true)
 				}
 			}.padding(.leading, 4)
 
@@ -52,24 +62,77 @@ struct OnboardingView: View {
 			Text("onboarding.footer").font(.caption)
 
 			Button {
-				presenting = false
+				if hasNew {
+					withAnimation {
+						showingNew = true
+					}
+				} else {
+					presenting = false
+				}
 			} label: {
-				Text("action.continue")
-					.frame(maxWidth: .infinity)
-					.font(.title3)
-					.padding(10)
-					.background(Color.accentColor)
-					.cornerRadius(4)
+				if loadingNew {
+					ProgressView()
+						.controlSize(.small)
+						.frame(maxWidth: .infinity)
+				} else {
+					Text(hasNew ? "action.continue" : "Done")
+						.frame(maxWidth: .infinity)
+				}
 			}
-			.buttonStyle(.plain)
+			.buttonStyle(FlatButtonStyle())
+			.controlSize(.large)
+			.disabled(loadingNew)
 		}
 		.padding(16)
-		.frame(width: 400, height: 530)
+		.frame(width: 450, height: 550)
+	}
+}
+
+struct OnboardingView: View {
+	let skipOnboarding: Bool
+	let skipWhatsNew: Bool
+	@Binding var newMarkdown: String?
+
+	@State private var showingNew = false
+	@Binding var presenting: Bool
+
+    var body: some View {
+		if let newMarkdown = newMarkdown, showingNew || skipOnboarding {
+			VStack(alignment: .leading, spacing: 0) {
+				Text("What's New").font(.title)
+				Divider().padding(.top, 16)
+				ScrollView {
+					Spacer(minLength: 16)
+					Text(markdown: newMarkdown, syntax: .inlineOnly)
+					Spacer(minLength: 16)
+				}
+				Divider().padding(.bottom, 16)
+				Button {
+					presenting = false
+				} label: {
+					Text("Done").frame(maxWidth: .infinity)
+				}
+				.controlSize(.large)
+				.buttonStyle(FlatButtonStyle())
+			}
+			.padding(16)
+			.frame(width: 450, height: 550)
+			.transition(.backslide)
+		} else {
+			OnboardingWelcomeView(
+				presenting: $presenting,
+				showingNew: $showingNew,
+				loadingNew: newMarkdown == nil && !skipWhatsNew,
+				hasNew: newMarkdown != nil
+			)
+			.transition(.backslide)
+		}
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-		OnboardingView(presenting: .constant(true))
+		// OnboardingView(presenting: .constant(true))
+		EmptyView()
     }
 }
