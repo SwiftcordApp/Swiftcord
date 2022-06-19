@@ -38,7 +38,7 @@ me to continue developing it**
 Swiftcord was created to offer a Discord-like UI and experience while
 having the performance and memory benefits of native apps. The idea started
 brewing when I was tight on RAM, then noticed Discord using 600+MB of RAM.
-I then realized that that was the perfect opportunity to explore SwiftUI,
+I then realized that was the perfect opportunity to explore SwiftUI,
 since it was relatively new to me at that time. Hence, Swiftcord was born!
 
 ---
