@@ -69,7 +69,9 @@ jobs:
             sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
           
       - name: "Archive"
-        run: xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" | xcpretty
+        run: | 
+          xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
+          COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db" | xcpretty
           
       - name: "Export & Sign Release Build"
         uses: devbotsxyz/xcode-export-archive@main
