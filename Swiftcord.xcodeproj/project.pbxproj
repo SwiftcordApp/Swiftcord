@@ -8,6 +8,98 @@
 
 /* Begin PBXBuildFile section */
 		36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
+		3642993E286801C900483D0A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
+		3642993F286801C900483D0A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ACA27D4A23A009FD740 /* String+.swift */; };
+		36429940286801C900483D0A /* ChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44328056718001DC46E /* ChannelList.swift */; };
+		36429941286801C900483D0A /* ReferenceMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */; };
+		36429942286801C900483D0A /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2327C6249000A9ED72 /* MessagesView.swift */; };
+		36429943286801C900483D0A /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
+		36429944286801C900483D0A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
+		36429945286801C900483D0A /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366F285B693700DD9857 /* AnyTransition+.swift */; };
+		36429946286801C900483D0A /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
+		36429947286801C900483D0A /* MergePartialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC227D37873009FD740 /* MergePartialMessage.swift */; };
+		36429948286801C900483D0A /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53664285ACED100DD9857 /* GitHubAPI.swift */; };
+		36429949286801C900483D0A /* NSTextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */; };
+		3642994A286801C900483D0A /* GeneratedBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */; };
+		3642994B286801C900483D0A /* WrapperLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */; };
+		3642994C286801C900483D0A /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
+		3642994D286801C900483D0A /* GitHubStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */; };
+		3642994E286801C900483D0A /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
+		3642994F286801C900483D0A /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
+		36429950286801C900483D0A /* CurrentUserFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */; };
+		36429951286801C900483D0A /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
+		36429952286801C900483D0A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889027C0AF3200720909 /* Persistence.swift */; };
+		36429953286801C900483D0A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
+		36429954286801C900483D0A /* CurrentUser+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5752844B9C500B11857 /* CurrentUser+.swift */; };
+		36429955286801C900483D0A /* DiscordChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */; };
+		36429956286801C900483D0A /* MiscSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD627D4D17A009FD740 /* MiscSettingsView.swift */; };
+		36429957286801C900483D0A /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
+		36429958286801C900483D0A /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD227D4D073009FD740 /* AppSettingsView.swift */; };
+		36429959286801C900483D0A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889B27C0B23C00720909 /* WebView.swift */; };
+		3642995A286801C900483D0A /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */; };
+		3642995B286801C900483D0A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E427C3482A00720909 /* LoginView.swift */; };
+		3642995C286801C900483D0A /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
+		3642995D286801C900483D0A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2527C62E6900A9ED72 /* MessageView.swift */; };
+		3642995E286801C900483D0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
+		3642995F286801C900483D0A /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
+		36429960286801C900483D0A /* CacheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */; };
+		36429961286801C900483D0A /* UserSettingsAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C32282FB02A001F78DF /* UserSettingsAccountView.swift */; };
+		36429962286801C900483D0A /* Bool+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AE127D76BEB009FD740 /* Bool+.swift */; };
+		36429963286801C900483D0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
+		36429964286801C900483D0A /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
+		36429965286801C900483D0A /* LargeUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD827D4E7A3009FD740 /* LargeUserProfileView.swift */; };
+		36429966286801C900483D0A /* ProfileBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5792844E41A00B11857 /* ProfileBadges.swift */; };
+		36429967286801C900483D0A /* FlatButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366A285AD15900DD9857 /* FlatButtonStyle.swift */; };
+		36429968286801C900483D0A /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ACE27D4CE5E009FD740 /* UserSettingsView.swift */; };
+		36429969286801C900483D0A /* AboutSwiftcordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */; };
+		3642996A286801C900483D0A /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
+		3642996B286801C900483D0A /* ActivitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD427D4D120009FD740 /* ActivitySettingsView.swift */; };
+		3642996C286801C900483D0A /* MiniUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5702841D6CF00B11857 /* MiniUserProfileView.swift */; };
+		3642996D286801C900483D0A /* User+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* User+.swift */; };
+		3642996E286801C900483D0A /* BillingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AD027D4CFCF009FD740 /* BillingSettingsView.swift */; };
+		3642996F286801C900483D0A /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
+		36429970286801C900483D0A /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
+		36429971286801C900483D0A /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD30D284CCC9800EBB8D6 /* Text+.swift */; };
+		36429972286801C900483D0A /* AppSettingsAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */; };
+		36429973286801C900483D0A /* MessageInfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */; };
+		36429974286801C900483D0A /* Message+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4F27C8D7E000A9ED72 /* Message+.swift */; };
+		36429975286801C900483D0A /* MediaControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C4282AB37500807B54 /* MediaControllerView.swift */; };
+		36429976286801C900483D0A /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
+		36429977286801C900483D0A /* MessagesView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D57B2845C36E00B11857 /* MessagesView+.swift */; };
+		36429978286801C900483D0A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC827D3A55D009FD740 /* SettingsView.swift */; };
+		36429979286801C900483D0A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */; };
+		3642997A286801C900483D0A /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
+		3642997B286801C900483D0A /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4927C8BE8F00A9ED72 /* Color+.swift */; };
+		3642997C286801C900483D0A /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
+		3642997D286801C900483D0A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
+		3642997F286801C900483D0A /* AnalyticsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */; };
+		36429980286801C900483D0A /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ADC27D643CE009FD740 /* Int+.swift */; };
+		36429981286801C900483D0A /* AppSettingsAccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */; };
+		36429982286801C900483D0A /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
+		36429983286801C900483D0A /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
+		36429984286801C900483D0A /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
+		36429985286801C900483D0A /* ProfileAccentMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D573284497E400B11857 /* ProfileAccentMask.swift */; };
+		36429986286801C900483D0A /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
+		36429987286801C900483D0A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2927C65D2C00A9ED72 /* LottieView.swift */; };
+		36429988286801C900483D0A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* Date+.swift */; };
+		36429989286801C900483D0A /* UserSettingsProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */; };
+		3642998A286801C900483D0A /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A892327C5D6C500720909 /* ServerView.swift */; };
+		3642998B286801C900483D0A /* SwiftcordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* SwiftcordApp.swift */; };
+		3642998D286801C900483D0A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
+		3642998F286801C900483D0A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 36429933286801C900483D0A /* CachedAsyncImage */; };
+		36429991286801C900483D0A /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 36429937286801C900483D0A /* DiscordKitCommon */; };
+		36429993286801C900483D0A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 36429931286801C900483D0A /* Lottie */; };
+		36429994286801C900483D0A /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = 36429935286801C900483D0A /* DiscordKit */; };
+		36429996286801C900483D0A /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
+		36429997286801C900483D0A /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
+		36429998286801C900483D0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */; };
+		36429999286801C900483D0A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36BC29F2285C162500A8B316 /* Credits.rtf */; };
+		3642999A286801C900483D0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2ADF2F2847B13F004A35F2 /* Localizable.strings */; };
+		3642999B286801C900483D0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
+		3642999C286801C900483D0A /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
+		3642999D286801C900483D0A /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
+		364299A62868042F00483D0A /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 364299A52868042F00483D0A /* AppCenterAnalytics */; };
+		364299A82868042F00483D0A /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 364299A72868042F00483D0A /* AppCenterCrashes */; };
 		3684BB59283C696E005045AE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3684BB58283C696E005045AE /* Sparkle */; };
 		3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684BB5A283C69C5005045AE /* Sparkle.swift */; };
 		36BC29F3285C162500A8B316 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36BC29F2285C162500A8B316 /* Credits.rtf */; };
@@ -106,6 +198,8 @@
 /* Begin PBXFileReference section */
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		364299A3286801C900483D0A /* Swiftcord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftcord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		364299AD286804ED00483D0A /* Swiftcord (App Store).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Swiftcord (App Store).plist"; sourceTree = "<group>"; };
 		3684BB5A283C69C5005045AE /* Sparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sparkle.swift; sourceTree = "<group>"; };
 		36BC29F2285C162500A8B316 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		900F6D9D284A1A92000B6D29 /* Project Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Shared.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +299,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3642998C286801C900483D0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3642998D286801C900483D0A /* AVKit.framework in Frameworks */,
+				3642998F286801C900483D0A /* CachedAsyncImage in Frameworks */,
+				364299A62868042F00483D0A /* AppCenterAnalytics in Frameworks */,
+				36429991286801C900483D0A /* DiscordKitCommon in Frameworks */,
+				36429993286801C900483D0A /* Lottie in Frameworks */,
+				36429994286801C900483D0A /* DiscordKit in Frameworks */,
+				364299A82868042F00483D0A /* AppCenterCrashes in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4A888127C0AF3000720909 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				DA4A888427C0AF3000720909 /* Swiftcord.app */,
+				364299A3286801C900483D0A /* Swiftcord.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,6 +440,7 @@
 				900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
 				DA23843827CB934D009E15E0 /* Info.plist */,
+				364299AD286804ED00483D0A /* Swiftcord (App Store).plist */,
 				DA2ADF2F2847B13F004A35F2 /* Localizable.strings */,
 				DA4A888B27C0AF3200720909 /* Assets.xcassets */,
 				DA4A888D27C0AF3200720909 /* Preview Content */,
@@ -569,6 +679,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		36429930286801C900483D0A /* Swiftcord (App Store) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3642999F286801C900483D0A /* Build configuration list for PBXNativeTarget "Swiftcord (App Store)" */;
+			buildPhases = (
+				3642993D286801C900483D0A /* Sources */,
+				3642998C286801C900483D0A /* Frameworks */,
+				36429995286801C900483D0A /* Resources */,
+				3642999E286801C900483D0A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swiftcord (App Store)";
+			packageProductDependencies = (
+				36429931286801C900483D0A /* Lottie */,
+				36429933286801C900483D0A /* CachedAsyncImage */,
+				36429935286801C900483D0A /* DiscordKit */,
+				36429937286801C900483D0A /* DiscordKitCommon */,
+				364299A52868042F00483D0A /* AppCenterAnalytics */,
+				364299A72868042F00483D0A /* AppCenterCrashes */,
+			);
+			productName = "Native Discord";
+			productReference = 364299A3286801C900483D0A /* Swiftcord.app */;
+			productType = "com.apple.product-type.application";
+		};
 		DA4A888327C0AF3000720909 /* Swiftcord */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA4A889827C0AF3200720909 /* Build configuration list for PBXNativeTarget "Swiftcord" */;
@@ -634,11 +770,27 @@
 			projectRoot = "";
 			targets = (
 				DA4A888327C0AF3000720909 /* Swiftcord */,
+				36429930286801C900483D0A /* Swiftcord (App Store) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		36429995286801C900483D0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36429996286801C900483D0A /* discord-loading-animation.json in Resources */,
+				36429997286801C900483D0A /* GintoMedium.otf in Resources */,
+				36429998286801C900483D0A /* Preview Assets.xcassets in Resources */,
+				36429999286801C900483D0A /* Credits.rtf in Resources */,
+				3642999A286801C900483D0A /* Localizable.strings in Resources */,
+				3642999B286801C900483D0A /* Assets.xcassets in Resources */,
+				3642999C286801C900483D0A /* GintoBold.otf in Resources */,
+				3642999D286801C900483D0A /* typing-animation.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4A888227C0AF3000720909 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -674,9 +826,110 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		3642999E286801C900483D0A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3642993D286801C900483D0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3642993E286801C900483D0A /* OnboardingView.swift in Sources */,
+				3642993F286801C900483D0A /* String+.swift in Sources */,
+				36429940286801C900483D0A /* ChannelList.swift in Sources */,
+				36429941286801C900483D0A /* ReferenceMessageView.swift in Sources */,
+				36429942286801C900483D0A /* MessagesView.swift in Sources */,
+				36429943286801C900483D0A /* Cache.swift in Sources */,
+				36429944286801C900483D0A /* Keychain.swift in Sources */,
+				36429945286801C900483D0A /* AnyTransition+.swift in Sources */,
+				36429946286801C900483D0A /* Array.Channel+.swift in Sources */,
+				36429947286801C900483D0A /* MergePartialMessage.swift in Sources */,
+				36429948286801C900483D0A /* GitHubAPI.swift in Sources */,
+				36429949286801C900483D0A /* NSTextView+.swift in Sources */,
+				3642994A286801C900483D0A /* GeneratedBuildSettings.swift in Sources */,
+				3642994B286801C900483D0A /* WrapperLottieView.swift in Sources */,
+				3642994C286801C900483D0A /* AttachmentView.swift in Sources */,
+				3642994D286801C900483D0A /* GitHubStructs.swift in Sources */,
+				3642994E286801C900483D0A /* Font+.swift in Sources */,
+				3642994F286801C900483D0A /* LoFiMessageView.swift in Sources */,
+				36429950286801C900483D0A /* CurrentUserFooter.swift in Sources */,
+				36429951286801C900483D0A /* TagCloudView.swift in Sources */,
+				36429952286801C900483D0A /* Persistence.swift in Sources */,
+				36429953286801C900483D0A /* LoadingView.swift in Sources */,
+				36429954286801C900483D0A /* CurrentUser+.swift in Sources */,
+				36429955286801C900483D0A /* DiscordChannelButton.swift in Sources */,
+				36429956286801C900483D0A /* MiscSettingsView.swift in Sources */,
+				36429957286801C900483D0A /* MessageInputView.swift in Sources */,
+				36429958286801C900483D0A /* AppSettingsView.swift in Sources */,
+				36429959286801C900483D0A /* WebView.swift in Sources */,
+				3642995A286801C900483D0A /* DebugSettingsView.swift in Sources */,
+				3642995B286801C900483D0A /* LoginView.swift in Sources */,
+				3642995C286801C900483D0A /* UIStateEnv.swift in Sources */,
+				3642995D286801C900483D0A /* MessageView.swift in Sources */,
+				3642995E286801C900483D0A /* ContentView.swift in Sources */,
+				3642995F286801C900483D0A /* ChannelButton.swift in Sources */,
+				36429960286801C900483D0A /* CacheModel.xcdatamodeld in Sources */,
+				36429961286801C900483D0A /* UserSettingsAccountView.swift in Sources */,
+				36429962286801C900483D0A /* Bool+.swift in Sources */,
+				36429963286801C900483D0A /* AppDelegate.swift in Sources */,
+				36429964286801C900483D0A /* ServerButton.swift in Sources */,
+				36429965286801C900483D0A /* LargeUserProfileView.swift in Sources */,
+				36429966286801C900483D0A /* ProfileBadges.swift in Sources */,
+				36429967286801C900483D0A /* FlatButtonStyle.swift in Sources */,
+				36429968286801C900483D0A /* UserSettingsView.swift in Sources */,
+				36429969286801C900483D0A /* AboutSwiftcordView.swift in Sources */,
+				3642996A286801C900483D0A /* Guild+.swift in Sources */,
+				3642996B286801C900483D0A /* ActivitySettingsView.swift in Sources */,
+				3642996C286801C900483D0A /* MiniUserProfileView.swift in Sources */,
+				3642996D286801C900483D0A /* User+.swift in Sources */,
+				3642996E286801C900483D0A /* BillingSettingsView.swift in Sources */,
+				3642996F286801C900483D0A /* EmbedView.swift in Sources */,
+				36429970286801C900483D0A /* Channel+.swift in Sources */,
+				36429971286801C900483D0A /* Text+.swift in Sources */,
+				36429972286801C900483D0A /* AppSettingsAppearanceView.swift in Sources */,
+				36429973286801C900483D0A /* MessageInfoBarView.swift in Sources */,
+				36429974286801C900483D0A /* Message+.swift in Sources */,
+				36429975286801C900483D0A /* MediaControllerView.swift in Sources */,
+				36429976286801C900483D0A /* Double+.swift in Sources */,
+				36429977286801C900483D0A /* MessagesView+.swift in Sources */,
+				36429978286801C900483D0A /* SettingsView.swift in Sources */,
+				36429979286801C900483D0A /* UserAvatarView.swift in Sources */,
+				3642997A286801C900483D0A /* View+.swift in Sources */,
+				3642997B286801C900483D0A /* Color+.swift in Sources */,
+				3642997C286801C900483D0A /* NavigationCommands.swift in Sources */,
+				3642997D286801C900483D0A /* CircularProgressView.swift in Sources */,
+				3642997F286801C900483D0A /* AnalyticsWrapper.swift in Sources */,
+				36429980286801C900483D0A /* Int+.swift in Sources */,
+				36429981286801C900483D0A /* AppSettingsAccessibilityView.swift in Sources */,
+				36429982286801C900483D0A /* LottieLoopMode.swift in Sources */,
+				36429983286801C900483D0A /* Logger+.swift in Sources */,
+				36429984286801C900483D0A /* StickerView.swift in Sources */,
+				36429985286801C900483D0A /* ProfileAccentMask.swift in Sources */,
+				36429986286801C900483D0A /* AudioCenterManager.swift in Sources */,
+				36429987286801C900483D0A /* LottieView.swift in Sources */,
+				36429988286801C900483D0A /* Date+.swift in Sources */,
+				36429989286801C900483D0A /* UserSettingsProfileView.swift in Sources */,
+				3642998A286801C900483D0A /* ServerView.swift in Sources */,
+				3642998B286801C900483D0A /* SwiftcordApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4A888027C0AF3000720909 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -778,6 +1031,189 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		364298B82867FF8800483D0A /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = "App Store";
+		};
+		364298B92867FF8800483D0A /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Swiftcord/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = "App Store";
+		};
+		364299A0286801C900483D0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
+				PRODUCT_NAME = Swiftcord;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		364299A1286801C900483D0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
+				PRODUCT_NAME = Swiftcord;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		364299A2286801C900483D0A /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
+				PRODUCT_NAME = Swiftcord;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = "App Store";
+		};
 		DA4A889627C0AF3200720909 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */;
@@ -923,7 +1359,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.4.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -954,7 +1390,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.4.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cryptoalgo.swiftcord;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -964,11 +1400,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3642999F286801C900483D0A /* Build configuration list for PBXNativeTarget "Swiftcord (App Store)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364299A0286801C900483D0A /* Debug */,
+				364299A1286801C900483D0A /* Release */,
+				364299A2286801C900483D0A /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DA4A887F27C0AF3000720909 /* Build configuration list for PBXProject "Swiftcord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4A889627C0AF3200720909 /* Debug */,
 				DA4A889727C0AF3200720909 /* Release */,
+				364298B82867FF8800483D0A /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -978,6 +1425,7 @@
 			buildConfigurations = (
 				DA4A889927C0AF3200720909 /* Debug */,
 				DA4A889A27C0AF3200720909 /* Release */,
+				364298B92867FF8800483D0A /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -985,6 +1433,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		36429932286801C900483D0A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
+		36429934286801C900483D0A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		36429936286801C900483D0A /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
@@ -1028,6 +1500,36 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		36429931286801C900483D0A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36429932286801C900483D0A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		36429933286801C900483D0A /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36429934286801C900483D0A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+		36429935286801C900483D0A /* DiscordKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36429936286801C900483D0A /* XCRemoteSwiftPackageReference "DiscordKit" */;
+			productName = DiscordKit;
+		};
+		36429937286801C900483D0A /* DiscordKitCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36429936286801C900483D0A /* XCRemoteSwiftPackageReference "DiscordKit" */;
+			productName = DiscordKitCommon;
+		};
+		364299A52868042F00483D0A /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		364299A72868042F00483D0A /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
 		3684BB58283C696E005045AE /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */;
