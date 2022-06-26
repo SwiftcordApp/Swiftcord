@@ -4,5 +4,7 @@
 <dict>
 	<key>ATSApplicationFontsPath</key>
 	<string>.</string>
+	key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
