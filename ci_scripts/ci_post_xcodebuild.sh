@@ -7,7 +7,7 @@ tar -xf node-16.tar.gz -C /Users/local/Homebrew/Cellar/node-16/16/ --strip-compo
 /Users/local/Homebrew/Cellar/node-16/16/bin/npm install appcenter-cli
 
 # Upload symbols to App Center
-npm exec appcenter crashes upload-symbols \
+/Users/local/Homebrew/Cellar/node-16/16/bin/npm exec appcenter crashes upload-symbols \
     --token "$APPCENTER_API_TOKEN" \
     --app "Swiftcord/Swiftcord" \
     --xcarchive "$CI_ARCHIVE_PATH"
