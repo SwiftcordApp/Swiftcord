@@ -9,7 +9,7 @@ export PATH="/Users/local/Homebrew/Cellar/node-16/16/bin/:$PATH"
 npm install appcenter-cli
 
 # Upload symbols to App Center
-npm exec appcenter crashes upload-symbols \
+npm exec -- appcenter crashes upload-symbols \
     --token "$APPCENTER_API_TOKEN" \
     --app "Swiftcord/Swiftcord" \
     --xcarchive "$CI_ARCHIVE_PATH"
