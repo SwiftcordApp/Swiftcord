@@ -8,6 +8,7 @@
 import SwiftUI
 import DiscordKit
 import DiscordKitCore
+import Reachability
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
@@ -71,7 +72,8 @@ struct LoadingView: View {
     ]
 
     @State private var displayedTip = ""
-	@State private var showLogoutButton: Bool = false
+	@State private var showLogoutButton = false
+	@State private var showNoInternet = false
 
     var body: some View {
 		let loading = state.loadingState != .messageLoad
@@ -95,18 +97,29 @@ struct LoadingView: View {
 					.frame(maxWidth: 320)
 					.onAppear {
 						displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
-						DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-							withAnimation {
-								showLogoutButton = true
+
+						withAnimation {
+							let connection = try? Reachability(hostname: "https://discord.com/").connection
+							if connection == .unavailable {
+								showNoInternet = true
+							} else {
+								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+									showLogoutButton = true
+								}
 							}
 						}
 					}
 			} else {
 				Text("Please wait warmly...").font(.headline)
 					.onAppear {
-						DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-							withAnimation {
-								showLogoutButton = true
+						withAnimation {
+							let connection = try? Reachability(hostname: "https://discord.com/").connection
+							if connection == .unavailable {
+								showNoInternet = true
+							} else {
+								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+									showLogoutButton = true
+								}
 							}
 						}
 					}
@@ -117,6 +130,16 @@ struct LoadingView: View {
 					logOut()
 					state.attemptLogin = true
 				}.padding()
+			}
+
+			if showNoInternet {
+				if loading {
+					Text("\(Image(systemName: "bolt.horizontal.fill")) No Network Connectivity")
+						.font(.headline)
+						.foregroundColor(.red)
+						.padding(.top)
+					Link("Check Discord Status", destination: URL(string: "https://discordstatus.com")!)
+				}
 			}
         }
         .ignoresSafeArea()
