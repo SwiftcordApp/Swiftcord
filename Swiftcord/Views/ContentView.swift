@@ -161,7 +161,7 @@ struct ContentView: View {
 						skipWhatsNew = true
 					}
 					presentingOnboarding = true
-					print(whatsNewMarkdown)
+					print(whatsNewMarkdown ?? "")
 				}
 			}
         })

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "36429930286801C900483D0A"
-               BuildableName = "Swiftcord (App Store).app"
+               BuildableName = "Swiftcord.app"
                BlueprintName = "Swiftcord (App Store)"
                ReferencedContainer = "container:Swiftcord.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "36429930286801C900483D0A"
-            BuildableName = "Swiftcord (App Store).app"
+            BuildableName = "Swiftcord.app"
             BlueprintName = "Swiftcord (App Store)"
             ReferencedContainer = "container:Swiftcord.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "36429930286801C900483D0A"
-            BuildableName = "Swiftcord (App Store).app"
+            BuildableName = "Swiftcord.app"
             BlueprintName = "Swiftcord (App Store)"
             ReferencedContainer = "container:Swiftcord.xcodeproj">
          </BuildableReference>

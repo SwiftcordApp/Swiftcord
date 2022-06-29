@@ -17,6 +17,12 @@
 
 "onboarding.footer" = "Swiftcord is alpha software, with limitations and bugs. It currently isn't intended to replace the official client, but hopes to someday.";
 
+/* ====== Login ====== */
+"login.token.title" = "Welcome to the secret token login screen!";
+"login.token.input" = "Paste your Discord token here";
+"login.token.back" = "Wait go back";
+"login.token.login" = "Login";
+
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Did You Know";
 
