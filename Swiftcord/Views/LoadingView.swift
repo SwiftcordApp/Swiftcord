@@ -6,9 +6,37 @@
 //
 
 import SwiftUI
+import DiscordKit
+import DiscordKitCore
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
+	@EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var restAPI: DiscordREST
+
+	let keyPrefixesToRemove = [
+		"lastCh.",
+		"local.",
+		"lastSelectedGuild",
+		"showSendBtn",
+		"stickerAlwaysAnim",
+		"theme",
+		"ttsRate"
+	]
+
+	private func logOut() {
+		for key in UserDefaults.standard.dictionaryRepresentation().keys {
+			for toRemove in keyPrefixesToRemove {
+				if key.prefix(toRemove.count) == toRemove {
+					UserDefaults.standard.removeObject(forKey: key)
+					break
+				}
+			}
+		}
+		gateway.logout()
+		Task { await restAPI.logOut() }
+		Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
+	}
 
 	@Environment(\.colorScheme) private var colorScheme
 
@@ -43,6 +71,7 @@ struct LoadingView: View {
     ]
 
     @State private var displayedTip = ""
+	@State private var showLogoutButton: Bool = false
 
     var body: some View {
 		let loading = state.loadingState != .messageLoad
@@ -58,14 +87,37 @@ struct LoadingView: View {
             .lottieLoopMode(.loop)
 			.if(colorScheme == .light) { view in view.colorInvert() }
 
-			Text("loader.tip.header").font(.headline).textCase(.uppercase)
-            Text(.init(displayedTip))
-                .multilineTextAlignment(.center)
-                .padding(.top, 8)
-                .frame(maxWidth: 320)
-                .onAppear {
-                    displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
-                }
+			if Int.random(in: 0..<1000000000) != 0 {
+				Text("loader.tip.header").font(.headline).textCase(.uppercase)
+				Text(.init(displayedTip))
+					.multilineTextAlignment(.center)
+					.padding(.top, 8)
+					.frame(maxWidth: 320)
+					.onAppear {
+						displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
+						DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+							withAnimation {
+								showLogoutButton = true
+							}
+						}
+					}
+			} else {
+				Text("Please wait warmly...").font(.headline)
+					.onAppear {
+						DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+							withAnimation {
+								showLogoutButton = true
+							}
+						}
+					}
+			}
+
+			if showLogoutButton {
+				Button("loader.panic.logout") {
+					logOut()
+					state.attemptLogin = true
+				}.padding()
+			}
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

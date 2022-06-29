@@ -25,6 +25,7 @@
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Did You Know";
+"loader.panic.logout" = "This is taking a while, want to logout?";
 
 /* ====== User ====== */
 "user.bio" = "About Me";
