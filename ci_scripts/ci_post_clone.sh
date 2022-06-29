@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 # Install AppCenter-CLI
 mkdir -p /Users/local/Homebrew/Cellar/node-16/16/
