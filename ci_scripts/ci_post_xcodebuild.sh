@@ -1,4 +1,4 @@
-#!/bin/bash
+!#/bin/bash
 
 npm install appcenter-cli
 
