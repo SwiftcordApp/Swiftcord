@@ -27,7 +27,6 @@ struct ContentView: View {
     private var items: FetchedResults<MessageItem>*/
 
     @State private var sheetOpen = false
-    @State private var selectedGuildID: Snowflake?
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
 	@State private var skipWhatsNew = false
@@ -65,8 +64,8 @@ struct ContentView: View {
 	private func loadLastSelectedGuild() {
 		if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
 		   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
-			selectedGuildID = lGID
-		} else { selectedGuildID = "@me" }
+			state.selectedGuildID = lGID
+		} else { state.selectedGuildID = "@me" }
 	}
 
     var body: some View {
@@ -74,10 +73,10 @@ struct ContentView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: selectedGuildID == "@me",
+						selected: state.selectedGuildID == "@me",
                         name: "Home",
                         assetIconName: "DiscordIcon",
-                        onSelect: { selectedGuildID = "@me" }
+						onSelect: { state.selectedGuildID = "@me" }
                     ).padding(.top, 4)
 
                     CustomHorizontalDivider().frame(width: 32, height: 1)
@@ -90,11 +89,11 @@ struct ContentView: View {
 							.compactMap({ gateway.cache.guilds[$0] })
 					) { guild in
                         ServerButton(
-                            selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
+							selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
                             name: guild.name,
                             serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                             isLoading: loadingGuildID == guild.id,
-                            onSelect: { selectedGuildID = guild.id }
+							onSelect: { state.selectedGuildID = guild.id }
                         )
                     }
 
@@ -137,13 +136,13 @@ struct ContentView: View {
             }
 
 			ServerView(
-				guild: selectedGuildID == nil
+				guild: state.selectedGuildID == nil
 				? nil
-				: (selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[selectedGuildID!])
+				: (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
 			)
         }
         .environmentObject(audioManager)
-        .onChange(of: selectedGuildID) { id in
+		.onChange(of: state.selectedGuildID) { id in
             guard let id = id else { return }
 			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }

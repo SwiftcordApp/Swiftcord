@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DiscordKitCommon
 
 enum LoadingState {
     case initial
@@ -18,4 +19,6 @@ class UIState: ObservableObject {
     @Published var attemptLogin = false
     @Published var selfMute = false
 	@Published var selfDeaf = false
+	@Published var serverCtx = ServerContext()
+	@Published var selectedGuildID: Snowflake?
 }

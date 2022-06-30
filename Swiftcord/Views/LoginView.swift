@@ -49,7 +49,7 @@ struct LoginView: View {
 					}
 				}.padding()
 			}
-			
+
 			Button("Token Login") {
 				tokenCount += 1
 				if tokenCount >= 5 {

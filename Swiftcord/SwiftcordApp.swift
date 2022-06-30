@@ -64,7 +64,7 @@ struct SwiftcordApp: App {
 			#endif
 
 			SidebarCommands()
-			NavigationCommands()
+			NavigationCommands(state: state, gateway: gateway)
 		}
 
 		Settings {

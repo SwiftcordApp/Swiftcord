@@ -27,7 +27,7 @@ struct ServerView: View {
 	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var audioManager: AudioCenterManager
 
-    @StateObject private var serverCtx = ServerContext()
+	@StateObject var serverCtx: ServerContext
 
 	private func loadChannels() {
 		guard let channels = serverCtx.guild?.channels?.discordSorted()
