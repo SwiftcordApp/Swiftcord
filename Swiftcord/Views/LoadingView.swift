@@ -39,6 +39,8 @@ struct LoadingView: View {
 		Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
 	}
 
+	let reach = try? Reachability(hostname: "odin.cs.uga.edu")
+
 	@Environment(\.colorScheme) private var colorScheme
 
     private let loadingTips = [
@@ -78,70 +80,63 @@ struct LoadingView: View {
     var body: some View {
 		let loading = state.loadingState != .messageLoad
 
-        VStack(spacing: 4) {
-            LottieView(
-                name: "discord-loading-animation",
-                play: .constant(loading),
-                width: 280,
-                height: 280
-            )
-            .frame(width: 280, height: 150)
-            .lottieLoopMode(.loop)
-			.if(colorScheme == .light) { view in view.colorInvert() }
+		ZStack {
+			VStack(spacing: 4) {
+				LottieView(
+					name: "discord-loading-animation",
+					play: .constant(loading),
+					width: 280,
+					height: 280
+				)
+				.frame(width: 280, height: 150)
+				.lottieLoopMode(.loop)
+				.if(colorScheme == .light) { view in view.colorInvert() }
 
-			if Int.random(in: 0..<1000000000) != 0 {
-				Text("loader.tip.header").font(.headline).textCase(.uppercase)
-				Text(.init(displayedTip))
-					.multilineTextAlignment(.center)
-					.padding(.top, 8)
-					.frame(maxWidth: 320)
-					.onAppear {
-						displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
-
-						withAnimation {
-							let connection = try? Reachability(hostname: "https://discord.com/").connection
-							if connection == .unavailable {
-								showNoInternet = true
-							} else {
+				if Int.random(in: 0..<1000000000) != 0 {
+					Text("loader.tip.header").font(.headline).textCase(.uppercase)
+					Text(.init(displayedTip))
+						.multilineTextAlignment(.center)
+						.padding(.top, 8)
+						.frame(maxWidth: 320)
+						.onAppear {
+							displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
+							withAnimation {
 								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
 									showLogoutButton = true
 								}
 							}
 						}
-					}
-			} else {
-				Text("Please wait warmly...").font(.headline)
-					.onAppear {
-						withAnimation {
-							let connection = try? Reachability(hostname: "https://discord.com/").connection
-							if connection == .unavailable {
-								showNoInternet = true
-							} else {
+				} else {
+					Text("Please wait warmly...").font(.headline)
+						.onAppear {
+							withAnimation {
 								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
 									showLogoutButton = true
 								}
 							}
 						}
-					}
-			}
-
-			if showLogoutButton {
-				Button("loader.panic.logout") {
-					logOut()
-					state.attemptLogin = true
-				}.padding()
-			}
-
-			if showNoInternet {
-				if loading {
-					Text("\(Image(systemName: "bolt.horizontal.fill")) No Network Connectivity")
-						.font(.headline)
-						.foregroundColor(.red)
-						.padding(.top)
-					Link("Check Discord Status", destination: URL(string: "https://discordstatus.com")!)
 				}
 			}
-        }
+
+			VStack {
+				if showLogoutButton {
+					if !showNoInternet {
+						Button("loader.panic.logout") {
+							logOut()
+							state.attemptLogin = true
+						}.padding()
+					}
+				}
+				if showNoInternet {
+						Text("\(Image(systemName: "bolt.horizontal.fill")) No Network Connectivity")
+							.font(.headline)
+							.foregroundColor(.red)
+						Link("Check Discord Status", destination: URL(string: "https://discordstatus.com")!)
+				}
+			}
+			.frame(maxHeight: .infinity, alignment: .bottom)
+			.padding()
+		}
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(loading)
@@ -149,6 +144,17 @@ struct LoadingView: View {
 		.opacity(loading ? 1 : 0)
         .scaleEffect(loading ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loading)
+		.onAppear {
+			reach?.whenUnreachable = { _ in
+				showNoInternet = true
+			}
+
+			do {
+				try reach?.startNotifier()
+			} catch {
+				print("Unable to start notifier")
+			}
+		}
     }
 }
 

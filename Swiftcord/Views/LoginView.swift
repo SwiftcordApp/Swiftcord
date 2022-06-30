@@ -34,15 +34,6 @@ struct LoginView: View {
 				}
 			}
 
-			Button("Token Login") {
-				tokenCount += 1
-				if tokenCount >= 5 {
-					tokenView = !tokenView
-				}
-			}
-			.keyboardShortcut("t", modifiers: [.command, .shift])
-			.hidden()
-
 			if tokenView {
 				VStack {
 					Text("login.token.title")
@@ -58,6 +49,15 @@ struct LoginView: View {
 					}
 				}.padding()
 			}
+			
+			Button("Token Login") {
+				tokenCount += 1
+				if tokenCount >= 5 {
+					tokenView = !tokenView
+				}
+			}
+			.keyboardShortcut("t", modifiers: [.command, .shift])
+			.hidden()
 		}
 		.frame(minWidth: 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
 		.navigationTitle("Login")
