@@ -13,6 +13,7 @@ struct NavigationCommands: Commands {
 	@ObservedObject var state: UIState
 	@ObservedObject var gateway: DiscordGateway
 	@State var previousServer: Snowflake?
+	@AppStorage("nsfwShown") var nsfwShown: Bool = true
 
 	var body: some Commands {
 		CommandMenu("Navigation") {
@@ -81,14 +82,28 @@ struct NavigationCommands: Commands {
 	}
 
 	func sortChannels(_ channels: [Channel]) -> [Channel] {
-		let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category && $0.type != .voice }
+		var filteredChannels = channels.filter {
+			if !nsfwShown {
+				return $0.parent_id == nil && $0.type != .category && $0.type != .voice && ($0.nsfw == false || $0.nsfw == nil)
+			}
+			return $0.parent_id == nil && $0.type != .category && $0.type != .voice
+
+		}.discordSorted()
+		if !nsfwShown {
+			filteredChannels = filteredChannels.filter({ $0.nsfw == false })
+		}
 		var sortedChannels = filteredChannels
 
 		let categories = channels
 				.filter { $0.parent_id == nil && $0.type == .category }
 				.discordSorted()
 		for category in categories {
-			let categoryChannels = channels.filter({ $0.parent_id == category.id && $0.type != .voice }).discordSorted()
+			let categoryChannels = channels.filter({
+				if !nsfwShown {
+					return $0.parent_id == category.id && $0.type != .category && $0.type != .voice && ($0.nsfw == false || $0.nsfw == nil)
+				}
+				return $0.parent_id == category.id && $0.type != .category && $0.type != .voice
+			}).discordSorted()
 			sortedChannels.append(contentsOf: categoryChannels)
 		}
 
