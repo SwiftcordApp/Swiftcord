@@ -7,12 +7,14 @@
 
 import SwiftUI
 import DiscordKit
+import DiscordKitCommon
 
 struct NavigationCommands: Commands {
 	@ObservedObject var state: UIState
 	@ObservedObject var gateway: DiscordGateway
+	@State var previousServer: Snowflake?
 
-    var body: some Commands {
+	var body: some Commands {
 		CommandMenu("Navigation") {
 			Button("Previous Server") {
 				let guilds = (gateway.cache.guilds.values.filter({
@@ -42,8 +44,7 @@ struct NavigationCommands: Commands {
 
 			Button("Previous Channel") {
 				if let channels = state.serverCtx.guild?.channels {
-					let filteredChannels = channels.filter { $0.type != .category && $0.type != .voice }
-					let sortedChannels = filteredChannels.discordSorted()
+					let sortedChannels = sortChannels(channels)
 
 					guard let previousChannel = sortedChannels.before(state.serverCtx.channel!, loop: true) else { return }
 
@@ -53,8 +54,7 @@ struct NavigationCommands: Commands {
 
 			Button("Next Channel") {
 				if let channels = state.serverCtx.guild?.channels {
-					let filteredChannels = channels.filter { $0.type != .category && $0.type != .voice }
-					let sortedChannels = filteredChannels.discordSorted()
+					let sortedChannels = sortChannels(channels)
 
 					guard let nextChannel = sortedChannels.after(state.serverCtx.channel!, loop: true) else { return }
 
@@ -65,11 +65,33 @@ struct NavigationCommands: Commands {
 			Divider()
 
 			Button("DMs") {
-				state.selectedGuildID = "@me"
+				if state.selectedGuildID != "@me" {
+					previousServer = state.selectedGuildID
+					state.selectedGuildID = "@me"
+				} else {
+					if previousServer != nil {
+						state.selectedGuildID = previousServer
+					}
+				}
 			}.keyboardShortcut(.rightArrow, modifiers: [.command, .option])
 
 //			Button("Create/Join Server") {}
 //				.keyboardShortcut("N", modifiers: [.command, .shift])
 		}
-    }
+	}
+
+	func sortChannels(_ channels: [Channel]) -> [Channel] {
+		let filteredChannels = channels.filter { $0.parent_id == nil && $0.type != .category && $0.type != .voice }
+		var sortedChannels = filteredChannels
+
+		let categories = channels
+				.filter { $0.parent_id == nil && $0.type == .category }
+				.discordSorted()
+		for category in categories {
+			let categoryChannels = channels.filter({ $0.parent_id == category.id && $0.type != .voice }).discordSorted()
+			sortedChannels.append(contentsOf: categoryChannels)
+		}
+
+		return sortedChannels
+	}
 }
