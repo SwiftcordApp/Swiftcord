@@ -73,3 +73,5 @@
 "settings.app.accessibility" = "Accessibilité";
 "settings.app.lang" = "Langue";
 "settings.app.accessibility.stickers" = "Autocollants";
+"server.join.fieldHeader.notFound" = "";
+"server.join.fieldHeader.joinFail" = "";
