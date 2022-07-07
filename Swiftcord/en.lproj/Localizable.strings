@@ -3,19 +3,14 @@
 
 /* ====== Onboarding ====== */
 "onboarding.title" = "Welcome to\n";
-
-"onboarding.subtitle" = "A Discord client built and designed exclusively for macOS";
-
-"onboarding.lightweight.header" = "Efficient - Light on Resources";
-"onboarding.lightweight.body" = "Uses up to 7x less RAM than Discord with low CPU usage";
-
+"onboarding.subtitle" = "A Discord client built and designed for macOS";
+"onboarding.lightweight.header" = "Efficient — Light on Resources";
+"onboarding.lightweight.body" = "Up to 7x less RAM than Discord, with low CPU usage.";
 "onboarding.features.header" = "Well Featured";
-"onboarding.features.body" = "Important core features are implemented, with more in the working";
-
+"onboarding.features.body" = "Important core features are implemented, with more in the works";
 "onboarding.wip.header" = "Work in Progress";
-"onboarding.wip.body" = "Something's not right? Please create an issue or leave a message in the Discord server";
-
-"onboarding.footer" = "Swiftcord is alpha software, with limitations and bugs. It currently isn't intended to replace the official client, but hopes to someday.";
+"onboarding.wip.body" = "Something's wrong? Please create a GitHub issue or leave a message in our Discord server";
+"onboarding.footer" = "Swiftcord is alpha software, with limitations and bugs. Right now it isn't intended to replace the official client, but hopes to someday.";
 
 /* ====== Login ====== */
 "login.token.title" = "Welcome to the secret token login screen!";
@@ -29,109 +24,60 @@
 
 /* ====== User ====== */
 "user.bio" = "About Me";
-
 "user.roles.none" = "No Roles";
-
 "user.roles.one" = "Role";
-
 "user.roles.many" = "Roles";
-
-"user.roles.loading" = "Loading roles";
-
+"user.roles.loading" = "Loading roles…";
 "user.note" = "Note";
 
 /* ====== Message ====== */
 "message.edited.shrunk" = " (edited)";
-
 "message.edited" = " • Edited: ";
-
 "message.gone" = "Original message was deleted.";
-
 "message.reply.attachment" = "Click to see attachment";
 
 /* ====== Server ====== */
 "server.noChannels.header" = "No Text Channels";
-
 "server.noChannels.body" = "You find yourself in a strange place. You don't have access to any text channels or there are none in this server.";
-
 "server.channel.header %@ %@" = "This is the start of the #%@ channel. %@";
-
 "server.channel.title %@" = "Welcome to #%@!";
-
 "server.channel.noCategory" = "No Category";
-
 "server.composeMsg.hint %@" = "Message #%@";
 
 /* ====== DMs ====== */
 "dm.noChannels.body" = "Wumpus is waiting on friends. You don't have to, though!";
-
 "dm" = "Direct Messages";
-
 "dm.header %@" = "This is the beginning of your direct message history with **@%@**.";
-
 "dm.group.header %@" = "Welcome to the beginning of the **%@** group.";
-
 "dm.group.composeMsg.hint %@" = "Message %@";
-
 "%lld dm.group.memberCount" = "%lld Members";
-
 "dm.composeMsg.hint %@" = "Message @%@";
 
 /* ====== Settings ====== */
 "settings.showSendBtn" = "Show Send Message button";
-
 "settings.animInteraction" = "On the desktop client, stickers will animate on hover or focus. On mobile clients, stickers will animate on long-press.";
-
 "settings.tts.rate" = "Text-to-speech Rate";
-
 "settings.tts.defaultSpeed" = "Default";
-
 "settings.tts.slower" = "Slower";
-
 "settings.tts.faster" = "Faster";
 
 ////////////////////////////
 
 "settings.user.logOut" = "Log Out";
-
 "settings.user.logOut.confirmation" = "Are you sure you want to log out?";
-
 "settings.app" = "App";
-
 "settings.app.appearance" = "Appearance";
-
 "settings.app.appearance.theme" = "Theme";
-
 "settings.app.accessibility" = "Accessibility";
-
 "settings.app.accessibility.stickers" = "Stickers";
-
 "settings.app.accessibility.chatInput" = "Chat Input";
-
-"settings.app.voiceVideo" = "Voice & Video";
-
-"settings.app.textImages" = "Text & Images";
-
+"settings.app.voiceVideo" = "Voice and Video";
+"settings.app.textImages" = "Text and Images";
 "settings.app.notifs" = "Notifications";
-
 "settings.app.keybinds" = "Keybinds";
-
 "settings.app.lang" = "Language";
-
 "settings.app.streamer" = "Streamer Mode";
-
 "settings.app.advanced" = "Advanced";
-
-"settings.app.advanced.analytics" = "Usage Matrics";
-
-"settings.app.advanced.analytics.option" = "Send anonymous statistics to AppCenter Analytics to improve Swiftcord";
-
-"settings.app.advanced.analytics.caption" = "Through AppCenter, aggregated (anonymous) usage statistics of Swiftcord (such as rendered language, app version and feature usages) are collected. The matrics obtained will be used to improve Swiftcord's features; we can't trace them back to you.";
-
-"settings.app.advanced.crashes" = "Crash traces will be sent to AppCenter after a crash to help diagnose and prevent future crashes. No logs or identifiable data will be included.";
-
 "settings.others.debug.actions" = "Actions";
-
 "settings.others.debug.actions.info" = "Do not use any options here unless you know what you are doing. Some of them might be DaNgErOuS!";
-
 "settings.others.debug.actions.crash" = "Crash Swiftcord (Not a joke)";

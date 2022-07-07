@@ -1,0 +1,75 @@
+
+
+"onboarding.features.header" = "Rikholdig funksjonalitet";
+"onboarding.wip.header" = "Underveis";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Visste du?";
+
+/* ====== User ====== */
+"user.bio" = "Om meg";
+"user.roles.none" = "Ingen roller";
+"user.roles.one" = "Rolle";
+"user.roles.many" = "Roller";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (redigert)";
+"message.edited" = " • Redigert: ";
+"message.gone" = "Den opprinnelige meldingen ble slettet.";
+"message.reply.attachment" = "Klikk for å se vedlegget";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Ingen tekstkanaler";
+"server.channel.title %@" = "Velkommen til #%@!";
+"server.channel.noCategory" = "Uten kategori";
+"server.composeMsg.hint %@" = "Melding #%@";
+"dm" = "Direktemeldinger";
+"dm.group.header %@" = "Velkommen til begynnelsen av **%@**-gruppen.";
+"%lld dm.group.memberCount" = "%lld medlemmer";
+"dm.composeMsg.hint %@" = "Melding @%@";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Vis knapp for meldingsforsendelse";
+"settings.tts.rate" = "Tekst-til-tale -takt";
+"settings.tts.defaultSpeed" = "Forvalg";
+"settings.tts.slower" = "Tregere";
+"settings.tts.faster" = "Raskere";
+"settings.user.logOut" = "Logg ut";
+"settings.app" = "Program";
+"settings.app.appearance" = "Utseende";
+"settings.app.appearance.theme" = "Drakt";
+"settings.app.accessibility" = "Tilgjengelighet";
+"user.note" = "Notis";
+"server.channel.header %@ %@" = "Dette er starten på #%@-kanalen. %@";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus venter åp venner. Det trenger ikke du å gjøre dog!";
+"user.roles.loading" = "Laster inn roller …";
+"onboarding.lightweight.header" = "Formålstjenlig — lav ressursbruk.";
+"onboarding.lightweight.body" = "Opptil 7x mindre minne i sving enn Discord, og lav prosessorbruk.";
+"onboarding.features.body" = "Viktige kjernefunksjoner, med flere underveis.";
+"onboarding.subtitle" = "En Discord-klient bygd og designet for macOS";
+"settings.app.accessibility.stickers" = "Klistremerker";
+"settings.app.accessibility.chatInput" = "Sludreinndata";
+"settings.app.notifs" = "Merknader";
+"settings.app.lang" = "Språk";
+"settings.app.advanced" = "Avansert";
+"settings.others.debug.actions" = "Handlinger";
+"settings.others.debug.actions.crash" = "Krasj Swiftcord (ikke en vits)";
+"settings.app.keybinds" = "Hurtigtaster";
+"settings.app.streamer" = "Modus for delere";
+"settings.others.debug.actions.info" = "Ikke bruk noe her med mindre du vet hva du gjør. Noen av valgene kan være fArLiGe!";
+"settings.app.voiceVideo" = "Stemme og lyd";
+"settings.app.textImages" = "Tekst og bilder";
+/* ====== Actions ====== */
+"action.continue" = "Fortsett";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Velkommen til\n";
+"onboarding.wip.body" = "Er noe galt? Opprett en feilrapport på GitHub, eller levn en melding i vår Discord-tjener";
+"onboarding.footer" = "Alfa-programvare, med begrensninger og feil. Tar foreløpig kun sikte å erstatte den offisielle klienten.";
+"dm.group.composeMsg.hint %@" = "Melding %@";
+"settings.user.logOut.confirmation" = "Logg ut?";
+"dm.header %@" = "Dette er begynnelsen på din sludringshistorikk med **@%@**.";
+"server.noChannels.body" = "Du befinner deg på et merkelig sted, uten tilgang til tekstkanaler. Enten det, eller så finnes det ikke noen på denne tjeneren.";
+"settings.animInteraction" = "For skrivebordsklienten vil klistremerker animeres når du holder pekeren over dem. På mobilklienten skjer dette ved lang-trykk.";

@@ -1,0 +1,82 @@
+
+
+"onboarding.wip.body" = "Qualcosa non va? Crea un problema su GitHub o lascia un messaggio sul nostro server Discord";
+"onboarding.features.header" = "Ricco di funzionalità";
+/* ====== Actions ====== */
+"action.continue" = "Prosegui";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Benvenuto su\n";
+"onboarding.subtitle" = "Un client Discord costruito e disegnato per macOS";
+"user.roles.one" = "Ruolo";
+"user.roles.many" = "Ruoli";
+"user.roles.loading" = "Caricamento dei ruoli…";
+"user.note" = "Nota";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (modificato)";
+"message.edited" = " • Modificato: ";
+"message.gone" = "Il messaggio originale è stato eliminato.";
+"message.reply.attachment" = "Clicca per vedere l'allegato";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Nessun canale testuale";
+"server.noChannels.body" = "Ti ritrovi in un posto strano. Non hai accesso a nessun canale testuale o non ce ne sono in questo server.";
+"server.channel.header %@ %@" = "Questo è l'inizio del canale #%@. %@";
+"server.channel.title %@" = "Benvenuto su #%@!";
+"server.channel.noCategory" = "Nessuna Categoria";
+"server.composeMsg.hint %@" = "Messaggio #%@";
+"dm" = "Messaggi diretti";
+"dm.header %@" = "Questo è l'inizio della cronologia dei tuoi messaggi con **@%@**.";
+"dm.group.header %@" = "Benvenuto all'inizio del gruppo **%@**.";
+"dm.group.composeMsg.hint %@" = "Messaggio %@";
+"settings.tts.defaultSpeed" = "Predefinita";
+"settings.tts.slower" = "Più lento";
+"settings.tts.faster" = "Più veloce";
+"settings.user.logOut" = "Disconnetti";
+"settings.user.logOut.confirmation" = "Sei sicuro di volerti disconnettere?";
+"settings.app" = "App";
+"settings.app.appearance" = "Aspetto";
+"settings.app.appearance.theme" = "Tema";
+"settings.app.accessibility" = "Accessibilità";
+"settings.app.accessibility.stickers" = "Stickers";
+"settings.app.lang" = "Lingua";
+"settings.app.streamer" = "Modalità Streamer";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus sta aspettando gli amici. Tu non devi però!";
+"settings.animInteraction" = "Sul client desktop, gli sticker si animeranno posizionando il puntatore sopra di essi o premendoli. Sui client mobile, gli sticker si animeranno tenendoli premuti a lungo.";
+"settings.tts.rate" = "Velocità sintesi vocale";
+"settings.app.accessibility.chatInput" = "Ingresso chat";
+"settings.app.keybinds" = "Associazioni tasti";
+"settings.others.debug.actions" = "Azioni";
+"settings.others.debug.actions.info" = "Non usare le opzioni a meno che tu non sappia cosa stai facendo. Alcune di esse possono essere PeRiCoLoSe!";
+"settings.others.debug.actions.crash" = "Fai crashare Swiftcord (Sul serio)";
+"onboarding.lightweight.header" = "Efficiente — Consumo ridotto di Risorse";
+"onboarding.lightweight.body" = "Fino a 7 volte in meno la RAM rispetto a Discord, con un basso consumo di CPU.";
+"onboarding.wip.header" = "In lavorazione";
+"onboarding.features.body" = "Importanti funzionalità di base, altre sono in fase di realizzazione";
+"onboarding.footer" = "Swiftcord è un software in alpha, con limiti e bug. Attualmente non è pensato a rimpiazzare il client ufficiale, ma spera di poterlo fare un giorno.";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Mostra il bottone Manda messaggio";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Sai";
+
+/* ====== User ====== */
+"user.bio" = "Su di me";
+"user.roles.none" = "Nessun ruolo";
+"settings.app.voiceVideo" = "Voce e video";
+"settings.app.notifs" = "Notifiche";
+"%lld dm.group.memberCount" = "%lld Membri";
+"settings.app.textImages" = "Testo e immagini";
+"dm.composeMsg.hint %@" = "Messaggio @%@";
+"settings.app.advanced" = "Avanzate";
+"login.token.back" = "Aspetta, torna indietro";
+"login.token.login" = "Accesso";
+"loader.panic.logout" = "Ci sta mettendo un po', vuoi disconnetterti?";
+
+/* ====== Login ====== */
+"login.token.title" = "Benvenuto nella schermata segreta di accesso con token!";
+"login.token.input" = "Incolla qui il tuo token di Discord";
