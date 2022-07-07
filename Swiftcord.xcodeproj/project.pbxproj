@@ -138,6 +138,7 @@
 		DA32EF5227C8FBB200A9ED72 /* User+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5127C8FBB200A9ED72 /* User+.swift */; };
 		DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */; };
 		DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF6427CB772300A9ED72 /* CacheModel.xcdatamodeld */; };
+		DA4350002876F67F001DEC81 /* AppSettingsAdvancedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */; };
 		DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888727C0AF3000720909 /* SwiftcordApp.swift */; };
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
@@ -902,6 +903,7 @@
 				36429974286801C900483D0A /* Message+.swift in Sources */,
 				36429975286801C900483D0A /* MediaControllerView.swift in Sources */,
 				36429976286801C900483D0A /* Double+.swift in Sources */,
+				DA4350002876F67F001DEC81 /* AppSettingsAdvancedView.swift in Sources */,
 				36429977286801C900483D0A /* MessagesView+.swift in Sources */,
 				36429978286801C900483D0A /* SettingsView.swift in Sources */,
 				36429979286801C900483D0A /* UserAvatarView.swift in Sources */,
@@ -1096,7 +1098,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1111,7 +1113,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
@@ -1129,7 +1131,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1144,7 +1146,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = Swiftcord;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1161,7 +1163,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1176,7 +1178,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = Swiftcord;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1193,7 +1195,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1208,7 +1210,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = Swiftcord;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
@@ -1348,7 +1350,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1363,7 +1365,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1381,7 +1383,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1396,7 +1398,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1492,8 +1494,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 5cc5888a2bd66b7c1575d7c926b12f31d3659fcd;
 			};
 		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
