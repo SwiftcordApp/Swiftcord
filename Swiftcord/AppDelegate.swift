@@ -13,6 +13,7 @@ import AppCenterCrashes
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
+		populateUserDefaults()
 		setupURLCache()
 		clearOldCache()
 
@@ -26,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				Analytics.self,
 				Crashes.self
 			])
+			Analytics.enabled = UserDefaults.standard.bool(forKey: "local.analytics")
 		}
 	}
 
@@ -35,6 +37,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// reopened after all windows are closed
         return true
     }*/
+}
+
+private extension AppDelegate {
+	func populateUserDefaults() {
+		UserDefaults.standard.register(defaults: [
+			"local.analytics": true,
+			"local.seenOnboarding": false
+		])
+	}
 }
 
 private extension AppDelegate {

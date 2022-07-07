@@ -170,6 +170,7 @@
 		DA57F44628065209001DC46E /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57F44528065209001DC46E /* ChannelButton.swift */; };
 		DA585C9927E1F6AC00FA4EE0 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA585C9827E1F6AC00FA4EE0 /* View+.swift */; };
 		DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */; };
+		DA6E89F02876BC7E00BB05E7 /* AppSettingsAdvancedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */; };
 		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
@@ -277,6 +278,7 @@
 		DA57F44528065209001DC46E /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		DA585C9827E1F6AC00FA4EE0 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftcordView.swift; sourceTree = "<group>"; };
+		DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAdvancedView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				DA520AD227D4D073009FD740 /* AppSettingsView.swift */,
 				DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */,
 				DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */,
+				DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */,
 				DAB5366E285AEDF800DD9857 /* GitHubStructs.swift in Sources */,
 				DA2384A127CB9714009E15E0 /* Font+.swift in Sources */,
+				DA6E89F02876BC7E00BB05E7 /* AppSettingsAdvancedView.swift in Sources */,
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
@@ -1089,15 +1093,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1130,6 +1136,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1161,6 +1168,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1192,6 +1200,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Swiftcord/Swiftcord (App Store).plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1336,15 +1345,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1367,15 +1378,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Swiftcord/Swiftcord.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Made with ❤️ from the Swiftcord Contributors";
 				LD_RUNPATH_SEARCH_PATHS = (

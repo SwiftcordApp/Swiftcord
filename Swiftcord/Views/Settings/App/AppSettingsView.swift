@@ -47,7 +47,7 @@ struct AppSettingsView: View {
                 }
 
                 NavigationLink("settings.app.advanced", tag: .advanced, selection: $selectedLink) {
-                    Text("")
+					ScrollView { AppSettingsAdvancedView().padding(40) }
                 }
             }
 			.listStyle(SidebarListStyle())
