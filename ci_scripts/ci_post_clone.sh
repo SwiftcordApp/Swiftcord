@@ -7,4 +7,4 @@ tar -xf node-16.tar.gz -C /Users/local/Homebrew/Cellar/node-16/16/ --strip-compo
 
 brew link node-16
 
-brew install swiftlint
+# brew install swiftlint
