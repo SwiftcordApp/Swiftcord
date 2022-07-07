@@ -53,7 +53,7 @@ struct UserSettingsView: View {
                 }
 
 				NavigationLink("Privacy & Safety", tag: .privacy, selection: $selectedLink) {
-                    Text("")
+					ScrollView { UserSettingsPrivacySafetyView().padding(40) }
                 }
 
 				NavigationLink("Authorized Apps", tag: .apps, selection: $selectedLink) {

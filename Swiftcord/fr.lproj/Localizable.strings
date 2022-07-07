@@ -1,0 +1,75 @@
+
+
+/* ====== Actions ====== */
+"action.continue" = "Continuer";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Bienvenue sur\n";
+"onboarding.subtitle" = "Un client Discord construit et conçu exclusivement pour macOS";
+"onboarding.lightweight.body" = "Utilise jusqu'à 7 fois moins de mémoire vive que Discord, avec une faible utilisation du processeur";
+"onboarding.features.header" = "Riche en fonctionnalités";
+"onboarding.features.body" = "D'importantes fonctionnalités de base sont mises en œuvre, et d'autres sont en préparation";
+"onboarding.lightweight.header" = "Efficace et économe en ressources";
+"onboarding.wip.header" = "Travail en cours";
+"onboarding.footer" = "Swiftcord est un logiciel alpha, avec des limitations et des bogues. Il n’est actuellement pas destiné à remplacer le client officiel, mais espère le faire un jour.";
+"settings.user.logOut" = "Se déconnecter";
+
+/* ====== User ====== */
+"user.bio" = "À propos de moi";
+"user.roles.none" = "Aucun rôle";
+"user.roles.one" = "Rôle";
+"user.roles.many" = "Rôles";
+"user.roles.loading" = "Chargement des rôles";
+"user.note" = "Note";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (modifié)";
+"message.edited" = " • Modifié : ";
+"message.gone" = "Le message original a été supprimé.";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Aucun canal de texte";
+"server.noChannels.body" = "Vous vous trouvez dans un endroit étrange. Vous n’avez pas accès à un canal texte ou il n’y en a pas dans ce serveur.";
+"server.channel.header %@ %@" = "C'est le début du canal #%@. %@";
+"server.channel.title %@" = "Bienvenue à #%@ !";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus attend des amis. Mais pas forcément vous !";
+"dm" = "Messages directs";
+"dm.header %@" = "Ceci est le début de l'historique des messages directs avec **@%@**.";
+"dm.group.header %@" = "Bienvenue au début du groupe **%@**.";
+"dm.group.composeMsg.hint %@" = "Message %@";
+"%lld dm.group.memberCount" = "%lld membres";
+"dm.composeMsg.hint %@" = "Message @%@";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Afficher le bouton Envoyer un message";
+"settings.animInteraction" = "Sur le client de bureau, les autocollants s'animeront au survol ou au focus. Sur les clients mobiles, les autocollants s'animeront en cas de pression longue.";
+"settings.tts.rate" = "Vitesse de la synthèse vocale";
+"settings.tts.defaultSpeed" = "Par défaut";
+"settings.tts.slower" = "Plus lent";
+"settings.tts.faster" = "Plus rapide";
+"settings.user.logOut.confirmation" = "Êtes-vous sûr·e de vouloir vous déconnecter ?";
+"settings.app" = "Appli";
+"settings.app.appearance" = "Apparence";
+"settings.app.appearance.theme" = "Thème";
+"settings.app.accessibility.chatInput" = "Saisie de la discussion";
+"settings.app.voiceVideo" = "Voix et vidéo";
+"settings.app.textImages" = "Texte et images";
+"settings.app.notifs" = "Notifications";
+"settings.app.keybinds" = "Raccourcis clavier";
+"settings.app.streamer" = "Mode streamer";
+"settings.app.advanced" = "Avancé";
+"settings.others.debug.actions" = "Actions";
+"settings.others.debug.actions.info" = "N'utilisez pas ces options si vous ne savez pas ce que vous faites. Certaines d'entre elles peuvent être dangereuses !";
+"settings.others.debug.actions.crash" = "Planter Swiftcord (Pas une blague)";
+"onboarding.wip.body" = "Quelque chose ne va pas ? Veuillez créer un problème sur GitHub ou laisser un message sur notre serveur Discord";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Le saviez-vous";
+"server.channel.noCategory" = "Aucune catégorie";
+"message.reply.attachment" = "Cliquez pour voir la pièce jointe";
+"server.composeMsg.hint %@" = "Message #%@";
+"settings.app.accessibility" = "Accessibilité";
+"settings.app.lang" = "Langue";
+"settings.app.accessibility.stickers" = "Autocollants";

@@ -18,6 +18,8 @@ struct AnalyticsWrapper {
 		case guildViewed = "guild_viewed"
 		case DMListViewed = "dm_list_viewed"
 		case settingsPaneViewed = "settings_pane_viewed"
+		case analyticsEnabled = "analytics_enabled" // Seperate events for easier viewing in AppCenter
+		case analyticsDisabled = "analytics_disabled"
 	}
 
 	static private func getBaseProps() -> [String: Any] {
