@@ -154,7 +154,7 @@ struct ContentView: View {
 				Task {
 					do {
 						whatsNewMarkdown = try await GitHubAPI
-							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v0.4.1")
+							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
 							.body
 					} catch {
 						skipWhatsNew = true
