@@ -23,7 +23,6 @@ the Discord API implementation Swiftcord relies on.
 me to continue developing it**
 
 **Consider buying me a coffee ☕️ by sponsoring Swiftcord!**
-![image](https://user-images.githubusercontent.com/64193267/178003528-eaea4288-ce49-468b-a838-12616441237f.png)
 
 ## Contents
 * [Motivation](#motivation)
