@@ -3,6 +3,18 @@
     <channel>
         <title>Swiftcord</title>
         <item>
+            <title>0.4.2</title>
+            <pubDate>Fri, 08 Jul 2022 14:12:44 +0800</pubDate>
+            <sparkle:version>9</sparkle:version>
+            <sparkle:shortVersionString>0.4.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.2/Swiftcord.0.4.2.dmg" length="7260613" type="application/octet-stream" sparkle:edSignature="yD+vW93/Wz9DRAyETOSGFEjP+vg47vAcNawPBH4QFkOtLNwAng1LSBQixCH4VNIme4A2Dbuwx/KtDJHXk75aDA=="/>
+            <sparkle:deltas>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.2/Swiftcord9-8.delta" sparkle:deltaFrom="8" length="1305078" type="application/octet-stream" sparkle:edSignature="JJAY+KJqWiThLEbZerHT6zDoR83wm8eGB4ODw9pRmrFTDQypWdvnX6OxJFu9LLYm3yYaXdMZCdMja2U4CcxVCw=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.2/Swiftcord9-7.delta" sparkle:deltaFrom="7" length="2635794" type="application/octet-stream" sparkle:edSignature="Uqih7jX1kph1DBtTBgZ7CKOXetEguLoZB4XadqUAnORQuclh0hcM+AvI/cACYM5qhhMJY5INR0ogF03CntxyAQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>0.4.1</title>
             <pubDate>Wed, 08 Jun 2022 10:39:11 +0800</pubDate>
             <sparkle:version>8</sparkle:version>
