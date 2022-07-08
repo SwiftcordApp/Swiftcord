@@ -26,7 +26,7 @@
 "server.composeMsg.hint %@" = "#%@ 에 메시지 보내기";
 "onboarding.wip.header" = "개발 진행중";
 "onboarding.subtitle" = "macOS용으로 제작 및 설계된 Discord 클라이언트";
-"onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 메시지를 남겨주세요.";
+"onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 메시지를 남겨주세요";
 "onboarding.lightweight.body" = "Discord 대비 최대 7배 적은 메모리 사용 및 낮은 CPU 부담.";
 "user.roles.loading" = "역할 로딩중…";
 "settings.app.accessibility.stickers" = "스티커";
