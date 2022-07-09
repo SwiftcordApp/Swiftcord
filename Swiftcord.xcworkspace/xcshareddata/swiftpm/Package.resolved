@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "discordkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftcordApp/DiscordKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5cc5888a2bd66b7c1575d7c926b12f31d3659fcd"
-      }
-    },
-    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
@@ -55,12 +46,39 @@
       }
     },
     {
+      "identity" : "swift-docc-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-docc-plugin",
+      "state" : {
+        "revision" : "3303b164430d9a7055ba484c8ead67a52f7b74f6",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "swiftui-cached-async-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
       "state" : {
         "revision" : "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
         "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "swiftui-wrapping-stack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/diniska/swiftui-wrapping-stack",
+      "state" : {
+        "revision" : "530e1d24155bc272af461da4cc1ed25ecce9e3ab",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "swiftygif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kirualex/SwiftyGif.git",
+      "state" : {
+        "revision" : "db0c122b671bc9760385e0355be00eede3b7bb44",
+        "version" : "5.4.3"
       }
     }
   ],

@@ -110,14 +110,16 @@ struct MessageView: View {
                                         .textSelection(.enabled)
                                  // fix this poor implementation later
                                 }*/
-								let msg = message.content.containsOnlyEmojiAndSpaces
-								? message.content.replacingOccurrences(of: " ", with: " ")
-								: message.content
+								let msg = message.parsedContent
+//								let msg = message.content.containsOnlyEmojiAndSpaces
+//								? message.content.replacingOccurrences(of: " ", with: " ")
+//								: message.content
                                 Group {
-									Text(markdown: msg)
-									.font(.system(
-										size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
-									)) +
+									MessageContentView(content: msg, serverCtx: serverCtx, emoteOnly: message.emojiAndSpacesOnly)
+										//.frame(height: (message.emojiAndSpacesOnly ? 48 : 15) * 2)
+//									.font(.system(
+//										size: message.content.containsOnlyEmojiAndSpaces ? 48 : 15
+//									)) +
                                     Text(
 										message.edited_timestamp != nil && shrunk
                                          ? "message.edited.shrunk"
