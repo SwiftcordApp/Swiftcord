@@ -26,7 +26,7 @@
 "server.composeMsg.hint %@" = "#%@ 에 메시지 보내기";
 "onboarding.wip.header" = "개발 진행중";
 "onboarding.subtitle" = "macOS용으로 제작 및 설계된 Discord 클라이언트";
-"onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 메시지를 남겨주세요.";
+"onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 메시지를 남겨주세요";
 "onboarding.lightweight.body" = "Discord 대비 최대 7배 적은 메모리 사용 및 낮은 CPU 부담.";
 "user.roles.loading" = "역할 로딩중…";
 "settings.app.accessibility.stickers" = "스티커";
@@ -42,7 +42,7 @@
 "settings.app.lang" = "언어";
 "settings.app.streamer" = "스트리머 모드";
 "settings.app.advanced" = "고급";
-"settings.tts.rate" = "텍스트 음성 변환 속도";
+"settings.tts.rate" = "TTS 속도";
 "settings.tts.defaultSpeed" = "기본";
 "settings.tts.slower" = "느리게";
 "settings.tts.faster" = "빠르게";
@@ -53,8 +53,8 @@
 /* ====== Settings ====== */
 "settings.showSendBtn" = "메시지 보내기 버튼 보기";
 "settings.app.appearance.theme" = "테마";
-"settings.others.debug.actions" = "Actions";
-"settings.others.debug.actions.info" = "Do not use any options here unless you know what you are doing. Some of them might be DaNgErOuS!";
+"settings.others.debug.actions" = "액션";
+"settings.others.debug.actions.info" = "당신이 무엇을 하고 있는지 잘 알지 않는 한 어떤 옵션도 사용하지 마십시오. 일부는 위험할 수 있습니다!";
 "dm.header %@" = "**@%@** 님과 나눈 대화의 첫 부분이에요.";
 "dm.group.header %@" = "**%@** 그룹에 들어온 걸 환영해요.";
 "dm.group.composeMsg.hint %@" = "%@ 에 메시지 보내기";
@@ -63,7 +63,7 @@
 "settings.app.accessibility.chatInput" = "채팅 입력";
 "dm" = "다이렉트 메시지";
 "settings.animInteraction" = "스티커는 마우스를 올리거나 활성화된 창에서 움직입니다. 모바일에서는 길게 누르면 움직입니다.";
-"settings.others.debug.actions.crash" = "Crash Swiftcord (Not a joke)";
+"settings.others.debug.actions.crash" = "Swiftcord 충돌";
 "onboarding.features.body" = "핵심 기능이 구현되었으며 더 많은 기능이 제공될 예정입니다";
 
 /* ====== Server ====== */
@@ -73,10 +73,14 @@
 "onboarding.title" = "환영합니다\n";
 "server.channel.title %@" = "#%@ 에 오신 걸 환영합니다!";
 "server.channel.header %@ %@" = "#%@ 채널의 시작이에요. %@";
-"loader.panic.logout" = "시간이 좀 걸리는군요, 로그아웃하시겠습니까?";
+"loader.panic.logout" = "시간이 좀 걸리는군요, 로그아웃 하시겠습니까?";
 "login.token.back" = "뒤로가기";
 "login.token.input" = "Discord 토큰 붙여넣기";
 
 /* ====== Login ====== */
 "login.token.title" = "비밀 토큰 로그인 화면에 오신 것을 환영합니다!";
 "login.token.login" = "로그인";
+"settings.app.advanced.analytics" = "앱 사용 정보";
+"settings.app.advanced.analytics.option" = "SwiftCord를 개선할 수 있도록 AppCenter Analytics로 익명의 사용 정보 보내기";
+"settings.app.advanced.crashes" = "충돌 후, 충돌 보고서가 향후 충돌을 진단하고 방지하기 위해 AppCenter로 전송됩니다. 로그 또는 식별 가능한 데이터가 포함되지 않습니다.";
+"settings.app.advanced.analytics.caption" = "AppCenter를 통해 SwiftCord 익명 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 당신을 역추적 할 수 없습니다.";

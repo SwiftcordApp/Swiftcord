@@ -71,8 +71,8 @@
 "settings.app.accessibility" = "Accessibility";
 "settings.app.accessibility.stickers" = "Stickers";
 "settings.app.accessibility.chatInput" = "Chat Input";
-"settings.app.voiceVideo" = "Voice and Video";
-"settings.app.textImages" = "Text and Images";
+"settings.app.voiceVideo" = "Voice & Video";
+"settings.app.textImages" = "Text & Images";
 "settings.app.notifs" = "Notifications";
 "settings.app.keybinds" = "Keybinds";
 "settings.app.lang" = "Language";

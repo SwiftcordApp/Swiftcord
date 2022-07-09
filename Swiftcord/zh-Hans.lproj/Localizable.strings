@@ -8,9 +8,9 @@
 "onboarding.lightweight.body" = "使用的内存比Discord少7倍，CPU使用率低。";
 "onboarding.features.header" = "功能完善";
 "onboarding.features.body" = "核心功能已经实现，更多的功能正在进行中";
-"onboarding.wip.header" = "Work in Progress";
-"onboarding.wip.body" = "Something's not right? Please create an issue or leave a message in the Discord server";
-"onboarding.footer" = "Swiftcord是初期的软件，有限制和错误。它目前并不打算取代官方客户端，但希望有朝一日能够取代。";
+"onboarding.wip.header" = "正在进行的工作";
+"onboarding.wip.body" = "看到有什么不对吗？请创建一个GitHub问题或在Swiftcord的Discord服务器上留言";
+"onboarding.footer" = "Swiftcord是初期的软件，有限制和错误。它目前并不可以取代官方客户端，但希望有朝一日能够取代。";
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "你知道吗";
@@ -20,7 +20,7 @@
 "user.roles.one" = "身份组";
 "user.roles.many" = "身份组";
 "user.roles.none" = "没有身份组";
-"user.roles.loading" = "加载身份组";
+"user.roles.loading" = "加载身份组…";
 "user.bio" = "自我介绍";
 "user.note" = "备注";
 
@@ -72,3 +72,17 @@
 "settings.app.lang" = "语言";
 "settings.app.streamer" = "主播模式";
 "settings.app.advanced" = "高级设置";
+"settings.app.advanced.analytics" = "使用指标";
+"settings.app.advanced.analytics.option" = "向AppCenter Analytics发送匿名统计数据，将用于改善Swiftcord";
+"settings.app.advanced.analytics.caption" = "通过AppCenter，我们会收集Swiftcord的汇总（匿名）使用统计数据（如渲染语言、应用程序版本和功能使用情况）。获得的数据将用于改进Swiftcord的功能；我们无法追溯到您身上。";
+"settings.app.advanced.crashes" = "崩溃的痕迹将在崩溃后被发送到AppCenter，以帮助诊断和防止未来的崩溃。没有日志或可识别的数据将被包括在内。";
+
+/* ====== Login ====== */
+"login.token.title" = "欢迎到秘密令牌登录界面!";
+"login.token.input" = "输入您的Discord令牌";
+"login.token.back" = "等等，回去";
+"login.token.login" = "登录";
+"loader.panic.logout" = "这比预期的时间要长。您要退出吗？";
+"settings.others.debug.actions" = "调试选项";
+"settings.others.debug.actions.info" = "除非你知道自己在做什么，否则不要使用这里的任何选项。其中一些可能是危险的!";
+"settings.others.debug.actions.crash" = "崩溃Swiftcord（不是开玩笑）";
