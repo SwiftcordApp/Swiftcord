@@ -12,12 +12,6 @@ import DiscordKit
 import DiscordKitCore
 import DiscordKitCommon
 
-struct CustomHorizontalDivider: View {
-    var body: some View {
-        Rectangle().fill(Color(NSColor.separatorColor))
-    }
-}
-
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -26,7 +20,6 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<MessageItem>*/
 
-    @State private var sheetOpen = false
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
 	@State private var skipWhatsNew = false
@@ -79,7 +72,7 @@ struct ContentView: View {
 						onSelect: { state.selectedGuildID = "@me" }
                     ).padding(.top, 4)
 
-                    CustomHorizontalDivider().frame(width: 32, height: 1)
+					HorizontalDividerView().frame(width: 32)
 
 					ForEach(
 						(gateway.cache.guilds.values.filter({

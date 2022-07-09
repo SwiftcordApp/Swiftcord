@@ -245,11 +245,20 @@ private extension MessageView {
 	}
 
 	func copyLink() {
-		print(#function)
+		if let guildID = serverCtx.guild?.id, let channelID = serverCtx.channel?.id {
+			let pasteboard = NSPasteboard.general
+			pasteboard.clearContents()
+			pasteboard.setString(
+				"https://canary.discord.com/channels/\(guildID)/\(channelID)/\(message.id)",
+				forType: .string
+			)
+		}
 	}
 
 	func copyID() {
-		NSPasteboard.general.setString(message.id.description, forType: .string)
+		let pasteboard = NSPasteboard.general
+		pasteboard.clearContents()
+		pasteboard.setString(message.id, forType: .string)
 	}
 }
 
