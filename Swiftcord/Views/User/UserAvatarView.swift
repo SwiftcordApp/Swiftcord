@@ -30,9 +30,13 @@ struct UserAvatarView: View, Equatable {
     var body: some View {
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
 
-        CachedAsyncImage(url: avatarURL) { image in
-            image.resizable().scaledToFill()
-        } placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
+		CachedAsyncImage(url: avatarURL) { phase in
+			if let image = phase.image {
+				image.resizable().scaledToFill().transition(.opacity.animation(.easeInOut(duration: 0.25)))
+			} else {
+				Rectangle().fill(.gray.opacity(0.2))
+			}
+		}
         .frame(width: size, height: size)
         .clipShape(Circle())
         .onTapGesture {
