@@ -12,12 +12,6 @@ import DiscordKit
 import DiscordKitCore
 import DiscordKitCommon
 
-struct CustomHorizontalDivider: View {
-    var body: some View {
-        Rectangle().fill(Color(NSColor.separatorColor))
-    }
-}
-
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -26,9 +20,9 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<MessageItem>*/
 
-    @State private var sheetOpen = false
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
+	@State private var presentingAddServer = false
 	@State private var skipWhatsNew = false
 	@State private var whatsNewMarkdown: String?
 
@@ -79,7 +73,7 @@ struct ContentView: View {
 						onSelect: { state.selectedGuildID = "@me" }
                     ).padding(.top, 4)
 
-                    CustomHorizontalDivider().frame(width: 32, height: 1)
+					HorizontalDividerView().frame(width: 32)
 
 					ForEach(
 						(gateway.cache.guilds.values.filter({
@@ -103,7 +97,7 @@ struct ContentView: View {
                         systemIconName: "plus",
                         bgColor: .green,
                         noIndicator: true,
-                        onSelect: {}
+                        onSelect: { presentingAddServer = true }
 					).padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
@@ -154,7 +148,7 @@ struct ContentView: View {
 				Task {
 					do {
 						whatsNewMarkdown = try await GitHubAPI
-							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v0.4.1")
+							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
 							.body
 					} catch {
 						skipWhatsNew = true
@@ -200,6 +194,9 @@ struct ContentView: View {
 				newMarkdown: $whatsNewMarkdown,
 				presenting: $presentingOnboarding
 			)
+		}
+		.sheet(isPresented: $presentingAddServer) {
+			ServerJoinView(presented: $presentingAddServer)
 		}
 	}
 

@@ -73,14 +73,13 @@ struct DayDividerView: View {
 	let date: Date
 
 	var body: some View {
-		ZStack {
-			Divider()
+		HStack(spacing: 4) {
+			HorizontalDividerView().frame(maxWidth: .infinity)
 			Text(date, style: .date)
 				.font(.system(size: 12))
 				.fontWeight(.medium)
 				.opacity(0.7)
-				.padding(.horizontal, 4)
-				.background(.background)
+			HorizontalDividerView().frame(maxWidth: .infinity)
 		}
 		.padding([.top, .horizontal], 16)
 	}

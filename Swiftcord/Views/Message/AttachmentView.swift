@@ -13,8 +13,8 @@ import QuickLook
 import DiscordKitCommon
 
 struct AttachmentError: View {
+	let width: Int
     let height: Int
-    let width: Int
 
     var body: some View {
         Image(systemName: "exclamationmark.square")
@@ -24,8 +24,8 @@ struct AttachmentError: View {
 }
 
 struct AttachmentLoading: View {
+	let width: Int
     let height: Int
-    let width: Int
 
     var body: some View {
 		Rectangle()
@@ -35,25 +35,61 @@ struct AttachmentLoading: View {
 }
 
 struct AttachmentImage: View {
+	let width: Int
     let height: Int
-    let width: Int
     let scale: Double
     let url: URL
 
     var body: some View {
         CachedAsyncImage(url: url, scale: scale) { phase in
             if let image = phase.image {
-                image.resizable().scaledToFill()
+				image.resizable().scaledToFill().transition(.opacity.animation(.easeInOut(duration: 0.25)))
             } else if phase.error != nil {
-                AttachmentError(height: height, width: width)
+                AttachmentError(width: width, height: height)
             } else {
-                AttachmentLoading(height: height, width: width)
+                AttachmentLoading(width: width, height: height)
             }
         }
 		.cornerRadius(4)
         .frame(idealWidth: CGFloat(width), idealHeight: CGFloat(height))
         .fixedSize()
     }
+}
+
+struct AttachmentVideo: View {
+	let width: Int
+	let height: Int
+	let scale: Double
+	let url: URL
+
+	@State private var player: AVPlayer?
+
+	var body: some View {
+		if let player = player {
+			VideoPlayer(player: player)
+				.frame(width: CGFloat(width), height: CGFloat(height))
+				.cornerRadius(4)
+		} else {
+			ZStack {
+				AttachmentImage(
+					width: width,
+					height: height,
+					scale: scale,
+					url: url.appendingQueryItems(URLQueryItem(name: "format", value: "png"))
+				)
+				Button {
+					player = AVPlayer(url: url) // Don't use resizedURL
+					player?.play()
+				} label: {
+					Image(systemName: "play.fill")
+						.font(.system(size: 28))
+						.frame(width: 56, height: 56)
+						.background(.thickMaterial)
+						.clipShape(Circle())
+				}.buttonStyle(.plain)
+			}
+		}
+	}
 }
 
 struct AudioAttachmentView: View {
@@ -168,13 +204,11 @@ struct AttachmentView: View {
                     let (width, height, resizedURL, scale) = getResizedDimens(width: width, height: height, srcURL: url)
                     switch mime.prefix(5) {
                     case "image":
-                        AttachmentImage(height: height, width: width, scale: scale, url: resizedURL)
+                        AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
                             .onTapGesture { quickLookUrl = url }
                     case "video":
-                        VideoPlayer(player: AVPlayer(url: url)) // Don't use resizedURL
-                            .frame(width: CGFloat(width), height: CGFloat(height))
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                    default: EmptyView()
+						AttachmentVideo(width: width, height: height, scale: scale, url: url)
+                    default: AttachmentError(width: width, height: height)
                     }
                 } else if mime.prefix(5) == "audio" {
                     AudioAttachmentView(attachment: attachment, url: url)
@@ -197,11 +231,11 @@ struct AttachmentView: View {
                             }
                             Spacer()
 
-                            Button(action: {
+                            Button {
                                 if let url = URL(string: attachment.url) {
                                     quickLookUrl = loadFile(from: url)
                                 }
-                            }) {
+							} label: {
                                 Image(systemName: "doc.viewfinder.fill").font(.system(size: 20))
                             }
                             .help("Preview attachment")
@@ -230,142 +264,139 @@ struct AttachmentView: View {
                         }
                     }.frame(width: 400)
                 }
-            } else { AttachmentError(height: 160, width: 160) }
+            } else { AttachmentError(width: 160, height: 160) }
         }
         .quickLookPreview($quickLookUrl)
     }
+}
 
-    // Loads a file into cache and returns its URL
-    private func loadFile(from url: URL) -> URL {
-        // Cached file destination
-        let cachedDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent(getShortDateString(from: Date.now))
+private extension AttachmentView {
+	// Loads a file into cache and returns its URL
+	func loadFile(from url: URL) -> URL {
+		// Cached file destination
+		let cachedDirectory = FileManager.default.temporaryDirectory
+			.appendingPathComponent(getShortDateString(from: Date.now))
 
-        try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
+		try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
 
-        let destinationURL = cachedDirectory
-            .appendingPathComponent(
-            url.lastPathComponent,
-            isDirectory: false
-        )
+		let destinationURL = cachedDirectory.appendingPathComponent(
+			url.lastPathComponent,
+			isDirectory: false
+		)
 
-        // Check if cache file exists
-        if FileManager.default.fileExists(atPath: destinationURL.path) {
-            return destinationURL
-        }
+		// Check if cache file exists
+		if FileManager.default.fileExists(atPath: destinationURL.path) {
+			return destinationURL
+		}
 
-        download(url: url, toFile: destinationURL) { error in
-            if let error = error { print(error) }
-        }
+		download(url: url, toFile: destinationURL) { error in
+			if let error = error { print(error) }
+		}
+		return destinationURL
+	}
 
-        return destinationURL
-    }
+	// Specifically for downloading files to the download's folder
+	func downloadFile(from url: URL) {
+		// Set download state
+		downloadProgress = 0
+		downloadState = .inProgress
 
-    // Specifically for downloading files to the download's folder
-    private func downloadFile(from url: URL) {
-        // Set download state
-        downloadProgress = 0
-        downloadState = .inProgress
+		// Obtain downloads folder
+		// Cached file destination
+		let cachedDirectory = FileManager.default.temporaryDirectory
+			.appendingPathComponent(getShortDateString(from: Date.now))
 
-        // Obtain downloads folder
-        // Cached file destination
-        let cachedDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent(getShortDateString(from: Date.now))
+		try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
 
-        try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
+		let cachedURL = cachedDirectory
+			.appendingPathComponent(
+				url.lastPathComponent,
+				isDirectory: false
+			)
 
-        let cachedURL = cachedDirectory
-            .appendingPathComponent(
-            url.lastPathComponent,
-            isDirectory: false
-        )
+		// Updates the UI with the download's progress
+		observation?.invalidate()
 
-        // Updates the UI with the download's progress
-        observation?.invalidate()
+		// First downloads file to cache location (for faster quick look)
+		// loadFile function is not called because we want to replace the file from source
+		download(url: url, toFile: cachedURL) { fileError in
+			do {
+				if let fileError = fileError { throw fileError }
 
-        // First downloads file to cache location (for faster quick look)
-        // loadFile function is not called because we want to replace the file from source
-        download(url: url, toFile: cachedURL) { fileError in
-            do {
-                if let fileError = fileError { throw fileError }
+				let downloadsDirectory = try
+				FileManager.default.url(for: .downloadsDirectory,
+										in: .userDomainMask,
+										appropriateFor: nil,
+										create: false)
 
-                let downloadsDirectory = try
-                FileManager.default.url(for: .downloadsDirectory,
-                                        in: .userDomainMask,
-                                        appropriateFor: nil,
-                                        create: false)
+				// Append file name to path
+				let destinationURL = downloadsDirectory.appendingPathComponent(url.lastPathComponent)
+				if FileManager.default.fileExists(atPath: destinationURL.path) {
+					try FileManager.default.removeItem(at: destinationURL)
+				}
 
-                // Append file name to path
-                let destinationURL = downloadsDirectory.appendingPathComponent(url.lastPathComponent)
-                if FileManager.default.fileExists(atPath: destinationURL.path) {
-                    try FileManager.default.removeItem(at: destinationURL)
-                }
+				// Copy item from cache to destination
+				try FileManager.default.copyItem(at: cachedURL, to: destinationURL)
 
-                // Copy item from cache to destination
-                try FileManager.default.copyItem(at: cachedURL, to: destinationURL)
+				// Delay setting success state to show the finished progress bar
+				DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
+					downloadState = .success
+					downloadProgress = 0
+				}
+			} catch {
+				print(error.localizedDescription)
+				downloadState = .error
+				downloadProgress = 0
+			}
+		}
+	}
 
-                // Delay setting success state to show the finished progress bar
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
-                    downloadState = .success
-                    downloadProgress = 0
-                }
+	// Downloads a file from a URL to another URL, with an optional error returned in closure
+	// TODO: There might be a cleaner way to deal with errors
+	func download(url: URL, toFile file: URL, completion: @escaping (Error?) -> Void) {
+		dataTask = URLSession.shared.downloadTask(with: url) { urlOrNil, responseOrNil, errorOrNil in
+			do {
+				// Exit on error
+				if let errorOrNil = errorOrNil {
+					throw errorOrNil
+				}
 
-            } catch {
-                print(error.localizedDescription)
-                downloadState = .error
-                downloadProgress = 0
-            }
-        }
-    }
+				if let response = responseOrNil as? HTTPURLResponse {
+					// Exit on bad response
+					if !(200...299).contains(response.statusCode) {
+						print("Bad Response Code: \(response.statusCode)")
+						throw URLError(.badServerResponse)
+					}
+				} else {
+					// Exit on no response
+					throw URLError(.cannotParseResponse)
+				}
 
-    // Downloads a file from a URL to another URL, with an optional error returned in closure
-    // TODO: There might be a cleaner way to deal with errors
-    private func download(url: URL, toFile file: URL, completion: @escaping (Error?) -> Void) {
-        dataTask = URLSession.shared.downloadTask(with: url) { urlOrNil, responseOrNil, errorOrNil in
-            do {
-                // Exit on error
-                if let errorOrNil = errorOrNil {
-                    throw errorOrNil
-                }
+				// File is downloaded to a temporary URL
+				guard let tempURL = urlOrNil else { return }
 
-                if let response = responseOrNil as? HTTPURLResponse {
-                    // Exit on bad response
-                    if !(200...299).contains(response.statusCode) {
-                        print("Bad Response Code: \(response.statusCode)")
-                        throw URLError(.badServerResponse)
+				// If file exists, remove it
+				if FileManager.default.fileExists(atPath: file.path) {
+					try FileManager.default.removeItem(at: file)
+				}
 
-                    }
-                } else {
-                    // Exit on no response
-                    throw URLError(.cannotParseResponse)
-                }
+				// Move item to destination
+				try FileManager.default.moveItem(at: tempURL, to: file)
+				completion(nil)
+			} catch {
+				completion(error)
+			}
+		}
 
-                // File is downloaded to a temporary URL
-                guard let tempURL = urlOrNil else { return }
+		// Keeps track of the progress of the download
+		observation = dataTask?.progress.observe(\.fractionCompleted) { observationProgress, _ in
+			DispatchQueue.main.async {
+				downloadProgress = observationProgress.fractionCompleted
+			}
+		}
 
-                // If file exists, remove it
-                if FileManager.default.fileExists(atPath: file.path) {
-                    try FileManager.default.removeItem(at: file)
-                }
-
-                // Move item to destination
-                try FileManager.default.moveItem(at: tempURL, to: file)
-                completion(nil)
-
-            } catch {
-                completion(error)
-            }
-        }
-
-        // Keeps track of the progress of the download
-        observation = dataTask?.progress.observe(\.fractionCompleted) { observationProgress, _ in
-            DispatchQueue.main.async {
-                downloadProgress = observationProgress.fractionCompleted
-            }
-        }
-
-        dataTask?.resume() // Calls the start of the task
-    }
+		dataTask?.resume() // Calls the start of the task
+	}
 }
 
 struct AttachmentView_Previews: PreviewProvider {

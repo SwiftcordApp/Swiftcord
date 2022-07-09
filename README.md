@@ -1,15 +1,17 @@
-<image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/app-256.png" width="128px" height="128px" align="left" />
+<p align="center"><image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/Picture 1.png" width="196px" height="196px" /></p>
 
-# Swiftcord
-A completely native Discord client for macOS built 100% in Swift and SwiftUI
+<h1 align="center">Swiftcord</h1>
+<p align="center">A completely native Discord client for macOS built 100% in Swift and SwiftUI</p>
 
-![Viewing the general-talk channel in the r/MacBookPro server in Swiftcord](README_Resources/heroScreenshot.png)
+<image src="README_Resources/heroScreenshot.png" width="100%" alt="Viewing the general-talk channel in the r/MacBookPro server in Swiftcord" />
 
 [![Lines of code](https://img.shields.io/tokei/lines/github/SwiftcordApp/Swiftcord?style=for-the-badge)]()
 [![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)](https://discord.gg/he7n6MGDXS)
 [![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)](https://github.com/SwiftcordApp/Swiftcord/stargazers)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=buy%20me%20a%20coffee&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
 [![Weblate project translated](https://img.shields.io/weblate/progress/swiftcord?style=for-the-badge)](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
+
+---
 
 This project aims to create a fully functional native Discord
 client in Swift for macOS from scratch.
@@ -28,7 +30,6 @@ me to continue developing it**
 * [FAQ](#faq)
 * [Current State](#current-state)
 * [Roadmap](#roadmap)
-* [Contributions](#contributions) - Read this before contributing
 * [Copyright Notice](#copyright-notice)
 
 ---
@@ -60,6 +61,10 @@ Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgor
 
 Swiftcord is also available on homebrew as a cask: `brew install swiftcord`. Versions are
 lock stepped with alpha releases on GitHub releases.
+
+### TestFlight
+
+Coming soon!
 
 <!-- todo: Add building from source -->
 
@@ -166,24 +171,6 @@ and they may not necessarily be implemented in sequence.
 * ✅ -> Complete
 * ⏱ -> Implementation in progress
 * ❌ -> Not started
-
----
-
-## Contributions
-
-Thank you for popping by! If you know the Discord API well, 
-have Swift knowledge, and feel like contributing, feel free to
-make a pull request! Any (positive) contribution is welcome,
-no matter how small! You can also join the Swiftcord Discord server
-to discuss improvements and bug fixes!
-
-Found an issue? Ensure it isn't a duplicate, then open a new issue
-with the appropriate template and fill in the placeholders as
-clearly as you can. Responding promptly to follow-up comments
-is appreciated, as debugging is hard without any further input
-from the OP.
-
-Want to translate Swiftcord into another language? Head on over to our [Weblate.](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
 
 ---
 
