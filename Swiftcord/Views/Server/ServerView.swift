@@ -143,10 +143,14 @@ struct ServerView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
                 HStack {
-					Image(
-						systemName: serverCtx.channel?.type == .dm ? "at" :
-							(serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
-					).font(.system(size: 18)).opacity(0.77).frame(width: 24, height: 24)
+					Button {
+						NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+					} label: {
+						Image(systemName: serverCtx.channel?.type == .dm
+							  ? "at"
+							  : (serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
+						).foregroundColor(.primary.opacity(0.8))
+					}
 					Text(serverCtx.channel?.label(gateway.cache.users) ?? "No Channel")
 						.font(.title2)
                 }
