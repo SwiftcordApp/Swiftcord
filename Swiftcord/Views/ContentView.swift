@@ -22,6 +22,7 @@ struct ContentView: View {
 
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
+	@State private var presentingAddServer = false
 	@State private var skipWhatsNew = false
 	@State private var whatsNewMarkdown: String?
 
@@ -96,7 +97,7 @@ struct ContentView: View {
                         systemIconName: "plus",
                         bgColor: .green,
                         noIndicator: true,
-                        onSelect: {}
+                        onSelect: { presentingAddServer = true }
 					).padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
@@ -193,6 +194,9 @@ struct ContentView: View {
 				newMarkdown: $whatsNewMarkdown,
 				presenting: $presentingOnboarding
 			)
+		}
+		.sheet(isPresented: $presentingAddServer) {
+			ServerJoinView(presented: $presentingAddServer)
 		}
 	}
 

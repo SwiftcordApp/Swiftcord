@@ -12,19 +12,24 @@ struct ServerJoinView: View {
 
     var body: some View {
 		VStack(spacing: 32) {
-			Text("Join a Server").font(.title)
+			VStack(spacing: 4) {
+				Text("server.join.title").font(.title)
+				Text("server.join.caption").frame(maxWidth: .infinity, alignment: .center)
+			}
 			HStack {
 				Button(action: { presented = false }) {
-					Text("Close")
+					Text("action.close")
 				}
 				.buttonStyle(.plain)
 				Spacer()
 				Button(action: { presented = false }) {
-					Text("Join Server")
+					Text("server.join.action")
 				}
 				.controlSize(.large)
 				.buttonStyle(.borderedProminent)
 			}
 		}
+		.padding(16)
+		.frame(width: 408)
     }
 }

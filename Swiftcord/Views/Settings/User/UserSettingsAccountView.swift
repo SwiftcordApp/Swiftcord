@@ -24,9 +24,9 @@ struct UserSettingsAccountView: View {
 					.foregroundColor(.accentColor)
 
 				VStack(spacing: 4) {
-					Text("Change your password")
+					Text("settings.user.chPwd.title")
 						.font(.title)
-					Text("Enter your current password and a new one.")
+					Text("settings.user.chPwd.caption")
 						.frame(maxWidth: .infinity, alignment: .center)
 				}
 			}
@@ -39,13 +39,12 @@ struct UserSettingsAccountView: View {
 
 			HStack {
 				Button(action: { changePwSheetShown = false }) {
-					Text("Close")
+					Text("action.close")
 				}
-				.controlSize(.large)
-				.buttonStyle(.bordered)
+				.buttonStyle(.plain)
 				Spacer()
 				Button(action: { changePwSheetShown = false }) {
-					Text("Done")
+					Text("action.done")
 				}
 				.controlSize(.large)
 				.buttonStyle(.borderedProminent)
@@ -61,7 +60,7 @@ struct UserSettingsAccountView: View {
 			LargeUserProfile(user: user) {
 				GroupBox {
 					VStack(alignment: .leading, spacing: 4) {
-						Text("USERNAME").font(.headline).opacity(0.75)
+						Text("Username").textCase(.uppercase).font(.headline).opacity(0.75)
 						Group {
 							Text(user.username) + Text("#" + user.discriminator).foregroundColor(Color(NSColor.textColor).opacity(0.75))
 						}
@@ -70,14 +69,14 @@ struct UserSettingsAccountView: View {
 
 						Divider().padding(.vertical, 10)
 
-						Text("EMAIL").font(.headline).opacity(0.75)
+						Text("settings.user.email").textCase(.uppercase).font(.headline).opacity(0.75)
 						Text(user.email)
 							.font(.system(size: 16))
 							.textSelection(.enabled)
 
 						Divider().padding(.vertical, 10)
 
-						Text("PHONE NUMBER").font(.headline).opacity(0.75)
+						Text("settings.user.phoneNum").textCase(.uppercase).font(.headline).opacity(0.75)
 						Text(user.phone ?? "You haven't added a phone number yet.")
 							.font(.system(size: 16))
 							.textSelection(.enabled)
