@@ -48,6 +48,8 @@
 "server.join.title" = "Join a Server";
 "server.join.action" = "Join Server";
 "server.join.caption" = "Enter an invite below to join an existing server";
+"server.join.fieldHeader" = "Invite Link";
+"server.join.egHeader" = "Invites should look like";
 
 /* ====== DMs ====== */
 "dm.noChannels.body" = "Wumpus is waiting on friends. You don't have to, though!";
