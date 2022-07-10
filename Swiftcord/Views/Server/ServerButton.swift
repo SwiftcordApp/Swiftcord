@@ -94,12 +94,12 @@ struct ServerButtonStyle: ButtonStyle {
             } else if let serverIconURL = serverIconURL {
                 CachedAsyncImage(url: URL(string: serverIconURL)) { phase in
                     if let image = phase.image {
-                        image.resizable().scaledToFill()
+						image.resizable().scaledToFill().transition(.customOpacity)
                     } else if phase.error != nil {
                         configuration.label.font(.system(size: 18))
-                    } else {
-                        ProgressView().progressViewStyle(.circular)
-                    }
+					} else {
+						Image(systemName: "arrow.clockwise").font(.system(size: 24))
+					}
                 }
             } else {
 				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
@@ -112,7 +112,7 @@ struct ServerButtonStyle: ButtonStyle {
 		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
         .background(
             hovered || selected
-			? bgColor ?? Color.accentColor
+			? (serverIconURL != nil ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
             : .gray.opacity(0.25)
         )
         /*.background(LinearGradient(

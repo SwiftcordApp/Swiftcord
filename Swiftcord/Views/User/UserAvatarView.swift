@@ -32,9 +32,9 @@ struct UserAvatarView: View, Equatable {
 
 		CachedAsyncImage(url: avatarURL) { phase in
 			if let image = phase.image {
-				image.resizable().scaledToFill().transition(.opacity.animation(.easeInOut(duration: 0.25)))
+				image.resizable().scaledToFill().transition(.customOpacity)
 			} else {
-				Rectangle().fill(.gray.opacity(0.2))
+				Rectangle().fill(.gray.opacity(0.25)).transition(.customOpacity)
 			}
 		}
         .frame(width: size, height: size)
