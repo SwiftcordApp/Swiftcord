@@ -57,13 +57,8 @@ struct DMButton: View {
 	var body: some View {
 		Button { selectedCh = dm } label: {
 			HStack {
-				if dm.type == .dm,
-				   let avatarURL = gateway.cache.users[dm.recipient_ids![0]]?.avatarURL(size: 64) {
-					CachedAsyncImage(url: avatarURL) { image in
-						image.resizable().scaledToFill()
-					} placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
-					.frame(width: 32, height: 32)
-					.clipShape(Circle())
+				if dm.type == .dm, let user = gateway.cache.users[dm.recipient_ids![0]] {
+					UserAvatarView(user: user, guildID: nil, webhookID: nil, size: 32)
 				} else {
 					Image(systemName: "person.2.fill")
 						.foregroundColor(.white)
