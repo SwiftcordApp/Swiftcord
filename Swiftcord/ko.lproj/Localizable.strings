@@ -84,3 +84,15 @@
 "settings.app.advanced.analytics.option" = "SwiftCord를 개선할 수 있도록 AppCenter Analytics로 익명의 사용 정보 보내기";
 "settings.app.advanced.crashes" = "충돌 후, 충돌 보고서가 향후 충돌을 진단하고 방지하기 위해 AppCenter로 전송됩니다. 로그 또는 식별 가능한 데이터가 포함되지 않습니다.";
 "settings.app.advanced.analytics.caption" = "AppCenter를 통해 SwiftCord 익명 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 당신을 역추적 할 수 없습니다.";
+"action.done" = "완료";
+"action.close" = "종료";
+"server.join.title" = "서버 참가하기";
+"server.join.action" = "서버 참가하기";
+"server.join.caption" = "아래에 있는 초대 코드를 입력하여 서버에 참가하세요";
+"settings.user.username" = "사용자명";
+"settings.user.chPwd.title" = "비밀번호 변경하기";
+"settings.user.chPwd.caption" = "현재 비밀번호와 새 비밀번호를 입력하세요.";
+"settings.user.phoneNum" = "전화번호";
+"settings.user.email" = "이메일";
+"server.join.egHeader" = "예시";
+"server.join.fieldHeader" = "초대 링크";
