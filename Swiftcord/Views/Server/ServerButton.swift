@@ -94,11 +94,9 @@ struct ServerButtonStyle: ButtonStyle {
             } else if let serverIconURL = serverIconURL {
                 CachedAsyncImage(url: URL(string: serverIconURL)) { phase in
                     if let image = phase.image {
-                        image.resizable().scaledToFill()
+						image.resizable().scaledToFill().transition(.customOpacity)
                     } else if phase.error != nil {
                         configuration.label.font(.system(size: 18))
-                    } else {
-                        ProgressView().progressViewStyle(.circular)
                     }
                 }
             } else {

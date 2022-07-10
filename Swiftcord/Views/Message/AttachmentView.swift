@@ -43,11 +43,14 @@ struct AttachmentImage: View {
     var body: some View {
         CachedAsyncImage(url: url, scale: scale) { phase in
             if let image = phase.image {
-				image.resizable().scaledToFill().transition(.opacity.animation(.easeInOut(duration: 0.25)))
+				image
+					.resizable()
+					.scaledToFill()
+					.transition(.customOpacity)
             } else if phase.error != nil {
-                AttachmentError(width: width, height: height)
+                AttachmentError(width: width, height: height).transition(.customOpacity)
             } else {
-                AttachmentLoading(width: width, height: height)
+                AttachmentLoading(width: width, height: height).transition(.customOpacity)
             }
         }
 		.cornerRadius(4)

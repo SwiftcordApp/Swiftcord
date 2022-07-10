@@ -111,23 +111,11 @@ struct EmbedView: View {
 				}
 
 				if let image = embed.image {
-					let width = Double(image.width != nil ? min(384, image.width!) : 384)
+					let width = image.width != nil ? min(384, image.width!) : 384
 					let height = (image.width != nil && image.height != nil)
-						? width / (Double(image.width!) / Double(image.height!))
+						? Int(Double(width) / (Double(image.width!) / Double(image.height!)))
 						: 216
-					CachedAsyncImage(url: URL(string: image.url)!) { phase in
-						if let image = phase.image {
-							image.resizable().scaledToFill()
-						} else if phase.error != nil {
-
-						} else {
-							ProgressView()
-								.progressViewStyle(.circular)
-								.frame(width: width, height: height)
-						}
-					}
-					.frame(width: width, height: height)
-					.cornerRadius(4)
+					AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
 				}
 
 				if let footer = embed.footer {
