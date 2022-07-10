@@ -86,3 +86,17 @@
 "settings.others.debug.actions" = "调试选项";
 "settings.others.debug.actions.info" = "除非你知道自己在做什么，否则不要使用这里的任何选项。其中一些可能是危险的!";
 "settings.others.debug.actions.crash" = "崩溃Swiftcord（不是开玩笑）";
+"action.done" = "完成";
+"action.close" = "关闭";
+"server.join.action" = "加入服务器";
+"server.join.caption" = "在下方输入邀请以加入现有的服务器";
+"server.join.fieldHeader" = "邀请链接";
+"server.join.egHeader" = "邀请的格式应为：";
+"settings.user.username" = "用户名";
+"settings.user.email" = "电子邮件";
+"settings.user.phoneNum" = "手机号码";
+"server.join.title" = "加入服务器";
+"server.join.fieldHeader.notFound" = "邀请链接 _- 邀请无效或已过期。_";
+"server.join.fieldHeader.joinFail" = "邀请链接 _- 无法接受邀请_";
+"settings.user.chPwd.caption" = "输入当前密码和新密码。";
+"settings.user.chPwd.title" = "更新密码";
