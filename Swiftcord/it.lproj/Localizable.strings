@@ -67,10 +67,10 @@
 /* ====== User ====== */
 "user.bio" = "Su di me";
 "user.roles.none" = "Nessun ruolo";
-"settings.app.voiceVideo" = "Voce e video";
+"settings.app.voiceVideo" = "Voce & Video";
 "settings.app.notifs" = "Notifiche";
 "%lld dm.group.memberCount" = "%lld Membri";
-"settings.app.textImages" = "Testo e immagini";
+"settings.app.textImages" = "Testo & Immagini";
 "dm.composeMsg.hint %@" = "Messaggio @%@";
 "settings.app.advanced" = "Avanzate";
 "login.token.back" = "Aspetta, torna indietro";
@@ -80,3 +80,21 @@
 /* ====== Login ====== */
 "login.token.title" = "Benvenuto nella schermata segreta di accesso con token!";
 "login.token.input" = "Incolla qui il tuo token di Discord";
+"action.done" = "Fatto";
+"action.close" = "Chiudi";
+"server.join.action" = "Entra nel Server";
+"server.join.fieldHeader" = "Link d'invito";
+"settings.user.phoneNum" = "Numero di telefono";
+"settings.app.advanced.crashes" = "I resoconti dei crash saranno inviato all'AppCenter dopo un crash per migliorare la diagnostica e prevenire crash futuri. Nessun log o dato identificativo sarà incluso.";
+"settings.app.advanced.analytics.option" = "Invia statistiche anonime all'AppCenter Analytics per migliorare Swiftcord";
+"settings.app.advanced.analytics" = "Metriche d'utilizzo";
+"settings.app.advanced.analytics.caption" = "Tramite AppCenter, un insieme di statistiche (anonime) di Swiftcord (come la lingua scelta, versione dell'app e l'uso di funzionalità) vengono raccolte. Le metriche ottenute saranno usate per migliorare le funzionalità di Swiftcord; non possiamo ricollegarle a te.";
+"settings.user.username" = "Nome utente";
+"settings.user.email" = "Email";
+"server.join.title" = "Entra in un Server";
+"server.join.fieldHeader.joinFail" = "Link d'invito _— Impossibile accettare l'invito_";
+"settings.user.chPwd.caption" = "Inserisci la tua password attuale ed una nuova.";
+"server.join.caption" = "Inserisci un invito in basso per entrare in un server esistente";
+"server.join.fieldHeader.notFound" = "Link d'invito _— L'invito non è valido o è scaduto._";
+"settings.user.chPwd.title" = "Cambia la tua password";
+"server.join.egHeader" = "Gli inviti dovrebbero sembrare come";
