@@ -18,3 +18,83 @@
 /* ====== Login ====== */
 "login.token.title" = "Добро пожаловать в экран входа secret token!";
 "login.token.input" = "Вставьте свой токен Discord сюда";
+"settings.user.chPwd.title" = "Смена пароля";
+"message.reply.attachment" = "Нажмите, чтобы посмотреть вложение";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (изменено)";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Нет текстовых каналов";
+"settings.user.logOut" = "Выход из аккаунта";
+"settings.app.accessibility.stickers" = "Стикеры";
+"user.roles.many" = "Роли";
+"server.channel.noCategory" = "Нет Категории";
+"server.join.title" = "Присоединитесь к серверу";
+"server.join.fieldHeader" = "Ссылка приглашения";
+"settings.user.chPwd.caption" = "Введите ваши текущий и новый пароли.";
+"settings.others.debug.actions.info" = "Не используйте ни одну из этих функций если не знаете что делаете. Некоторые из них могут быть ОпАсНы!";
+"user.roles.none" = "Нет Ролей";
+"user.note" = "Заметка";
+"server.channel.title %@" = "Добро пожаловать в #%@!";
+"%lld dm.group.memberCount" = "%lld Участников";
+"settings.app.accessibility" = "Доступность";
+"onboarding.features.header" = "Множество функций";
+"login.token.back" = "Подождите, верните обратно";
+"login.token.login" = "Войти";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Знали ли вы";
+"message.edited" = " • Изменено: ";
+"message.gone" = "Оригинальное сообщение удалено.";
+"server.composeMsg.hint %@" = "Написать #%@";
+"server.join.action" = "Присоедениться к серверу";
+"server.join.egHeader" = "Приглашения должны выглядеть как";
+"dm.group.header %@" = "Добро пожаловать в начало группы **%@**.";
+"dm.composeMsg.hint %@" = "Написать @%@";
+"settings.animInteraction" = "В ПК клиенте стикеры будут анимироваться при наведении или в фокусе. В мобильных клиентах стикеры будут анимироваться при длительном нажатии.";
+"settings.tts.rate" = "Скорость преобразования текста в речь";
+"settings.tts.defaultSpeed" = "По умолчанию";
+"settings.tts.slower" = "Медленнее";
+"settings.tts.faster" = "Быстрее";
+"settings.user.username" = "Имя пользователя";
+"settings.user.email" = "Электронная почта";
+"settings.user.phoneNum" = "Номер Телефона";
+"settings.user.logOut.confirmation" = "Вы уверены что Вы хотите выйти?";
+"settings.app" = "Приложение";
+"settings.app.appearance" = "Внешний вид";
+"settings.app.appearance.theme" = "Тема";
+"settings.app.accessibility.chatInput" = "Ввод в чат";
+"settings.app.voiceVideo" = "Голос и видео";
+"settings.app.textImages" = "Текст и изображения";
+"settings.app.keybinds" = "Горячие клавиши";
+"settings.app.lang" = "Язык";
+"settings.app.streamer" = "Режим стримера";
+"settings.app.advanced" = "Расширенные";
+"settings.app.advanced.analytics" = "Показатели использования";
+"settings.others.debug.actions" = "Действия";
+"settings.others.debug.actions.crash" = "Крашнуть Swiftcord (Не шутка)";
+"user.roles.loading" = "Загрузка ролей…";
+"server.noChannels.body" = "Вы оказываетесь в странном месте. У вас нет доступа к каким-либо текстовым каналам или их нет на этом сервере.";
+"server.channel.header %@ %@" = "Это начало #%@ channel. %@";
+"server.join.caption" = "Введите приглашение ниже, чтобы присоединиться к существующему серверу";
+"loader.panic.logout" = "Это занимает многовато времени, хотите выйти?";
+
+/* ====== User ====== */
+"user.bio" = "Обо мне";
+"user.roles.one" = "Роль";
+"server.join.fieldHeader.notFound" = "Ссылка приглашения _— Приглашение недействительно или истекло._";
+"dm.header %@" = "Это начало истории ваших личных сообщений с **@%@**.";
+"server.join.fieldHeader.joinFail" = "Ссылка на приглашение — Не удалось принять приглашение";
+"dm.group.composeMsg.hint %@" = "Написать %@";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Вампус ждет друзей. А Вы не должны!";
+"dm" = "Личные Сообщения";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Показывать кнопку отправки сообщения";
+"settings.app.notifs" = "Уведомления";
+"settings.app.advanced.analytics.option" = "Посылать анонимную статистику в AppCenter Analytics, чтобы улучшить Swiftcord";
+"settings.app.advanced.crashes" = "Информация о сбоях будет отправляться в AppCenter, чтобы лучше диагностировать и предотвращать будущие сбои. Ни какой личной информации не будет вложено.";
+"settings.app.advanced.analytics.caption" = "Через AppCenter собирается агрегированная (анонимная) статистика использования Swiftcord (например, выбранные язык, версия приложения и использование функций). Полученная информация будет использована для улучшения Swiftcord; мы не можем отследит Вас по ней.";
