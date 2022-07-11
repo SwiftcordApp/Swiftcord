@@ -290,6 +290,7 @@
 		DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAdvancedView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAccessibilityView.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
@@ -307,6 +308,8 @@
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
 		DACBD12E287BDE9D00CED3EF /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
+		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DACBD15A287C243000CED3EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C28282FA3F7001F78DF /* Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+.swift"; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 		E7AF1C32282FB02A001F78DF /* UserSettingsAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsAccountView.swift; sourceTree = "<group>"; };
 		E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+.swift"; sourceTree = "<group>"; };
 		F421AC52285BACB200034F59 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F421AC52285BACB200034F60 /* nb-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb-NO; path = nb-NO.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F421AC52285BACB200034F62 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -779,6 +784,11 @@
 				"zh-Hans",
 				Base,
 				de,
+				"nb-NO",
+				ru,
+				it,
+				ko,
+				fr,
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
@@ -1042,6 +1052,11 @@
 				DA2ADF302847B13F004A35F2 /* zh-Hans */,
 				DA97BA892848737C00059FD7 /* en */,
 				F421AC52285BACB200034F59 /* de */,
+				DACBD159287C240E00CED3EF /* it */,
+				DACBD15A287C243000CED3EF /* ko */,
+                                DA97BA892848737C00059FD8 /* fr */,
+                                F421AC52285BACB200034F60 /* nb-NO */,
+                                F421AC52285BACB200034F62 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
