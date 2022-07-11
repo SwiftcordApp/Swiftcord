@@ -85,7 +85,7 @@
 "user.roles.one" = "Роль";
 "server.join.fieldHeader.notFound" = "Ссылка приглашения _— Приглашение недействительно или истекло._";
 "dm.header %@" = "Это начало истории ваших личных сообщений с **@%@**.";
-"server.join.fieldHeader.joinFail" = "Ссылка на приглашение — Не удалось принять приглашение";
+"server.join.fieldHeader.joinFail" = "Ссылка на приглашение _— Не удалось принять приглашение_";
 "dm.group.composeMsg.hint %@" = "Написать %@";
 
 /* ====== DMs ====== */
