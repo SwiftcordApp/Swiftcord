@@ -12,12 +12,12 @@ import DiscordKitCommon
 import DiscordKitCore
 
 struct NonUserBadge: View {
-	let flags: Int?
+	let flags: User.Flags?
 	let isWebhook: Bool
 
 	var body: some View {
 		HStack(spacing: 0) {
-			if let flags = flags, flags & 65536 != 0 {
+			if let flags = flags, flags.contains(.verifiedBot) {
 				Image(systemName: "checkmark")
 					.font(.system(size: 8, weight: .heavy))
 					.frame(width: 15)
@@ -84,8 +84,10 @@ struct MessageView: View {
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
 								if message.author.bot ?? false || message.webhook_id != nil {
+									// No idea what's the difference between flags and public_flags,
+									// just try both to see which is present
 									NonUserBadge(
-										flags: message.author.flags?.rawValue,
+										flags: message.author.flags ?? message.author.public_flags,
 										isWebhook: message.webhook_id != nil
 									)
                                 }

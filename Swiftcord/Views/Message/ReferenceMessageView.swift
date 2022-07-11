@@ -40,7 +40,7 @@ struct ReferenceMessageView: View {
 
 						if quotedMsg.author?.bot == true || quotedMsg.webhook_id != nil {
 							NonUserBadge(
-								flags: quotedMsg.author?.flags?.rawValue,
+								flags: quotedMsg.author?.public_flags,
 								isWebhook: quotedMsg.webhook_id != nil
 							)
 						}
