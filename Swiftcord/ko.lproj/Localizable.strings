@@ -96,3 +96,5 @@
 "settings.user.email" = "이메일";
 "server.join.egHeader" = "예시";
 "server.join.fieldHeader" = "초대 링크";
+"server.join.fieldHeader.notFound" = "초대 링크 _— 초대가 유효하지 않거나 만료되었습니다._";
+"server.join.fieldHeader.joinFail" = "초대 링크 _— 초대를 수락할 수 없음_";
