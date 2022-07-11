@@ -49,7 +49,7 @@ extension Color {
 		var b: CGFloat = 0 // swiftlint:disable:this identifier_name
 		var o: CGFloat = 0 // swiftlint:disable:this identifier_name
 
-		NSColor(self).getRed(&r, green: &g, blue: &b, alpha: &o)
+		NSColor(self).usingColorSpace(.sRGB)!.getRed(&r, green: &g, blue: &b, alpha: &o)
 		return (r, g, b, o)
 	}
 
