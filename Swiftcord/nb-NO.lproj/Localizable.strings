@@ -73,3 +73,5 @@
 "dm.header %@" = "Dette er begynnelsen på din sludringshistorikk med **@%@**.";
 "server.noChannels.body" = "Du befinner deg på et merkelig sted, uten tilgang til tekstkanaler. Enten det, eller så finnes det ikke noen på denne tjeneren.";
 "settings.animInteraction" = "For skrivebordsklienten vil klistremerker animeres når du holder pekeren over dem. På mobilklienten skjer dette ved lang-trykk.";
+"server.join.fieldHeader.joinFail" = "";
+"server.join.fieldHeader.notFound" = "";
