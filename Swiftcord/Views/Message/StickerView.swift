@@ -69,14 +69,17 @@ struct StickerItemView: View {
 							},
 							animationCache: Lottie.LRUAnimationCache.sharedCache
 						)
-					}
+					}.transition(.customOpacity)
 				} else {
 					LottieView(
 						animation: animation!,
 						play: $play,
 						width: size,
 						height: size
-					).lottieLoopMode(.loop).frame(width: size, height: size)
+					)
+					.lottieLoopMode(.loop)
+					.frame(width: size, height: size)
+					.transition(.customOpacity)
 				}
 			default:
 				// Well it doesn't animate for some reason

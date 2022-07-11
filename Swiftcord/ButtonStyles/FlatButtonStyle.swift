@@ -8,19 +8,40 @@
 import SwiftUI
 
 struct FlatButtonStyle: ButtonStyle {
+	var prominent = true
+	var outlined = false
+
+	@State private var hovered = false
+
 	@Environment(\.controlSize) private var controlSize: ControlSize
 	@Environment(\.isEnabled) private var enabled: Bool
 
 	func makeBody(configuration: Configuration) -> some View {
-		configuration.label
-			.frame(height: controlSize == .large ? 48 : 32)
-			.font(controlSize == .large ? .title3 : .body)
-			.background(
-				enabled
-					? Color.accentColor.opacity(configuration.isPressed ? 0.7 : 1)
-					: .gray.opacity(0.25)
+		let base: Color = configuration.role == .destructive ? .red : .accentColor
+		let pressedStyles = configuration.isPressed && !outlined
+		let hoverStyles = (hovered && !outlined) || (configuration.isPressed && outlined)
+		let accent = enabled
+			? base.modifyingHSB(
+				1,
+				pressedStyles ? 0.98 : (hoverStyles ? 0.96 : 1),
+				pressedStyles ? 0.67 : (hoverStyles ? 0.76 : 1)
 			)
+			: .gray.opacity(0.25)
+		let background = outlined && !hovered ? .clear : accent
+
+		configuration.label
+			.padding(.horizontal, controlSize == .large ? 20 : 16)
+			.frame(height: controlSize == .large ? 48 : (controlSize == .small ? 32 : 38))
+			.frame(minWidth: controlSize == .small ? 60 : 96)
+			.font(.system(size: controlSize == .large ? 16 : 14, weight: .medium))
+			.background(background)
 			.cornerRadius(4)
-			.animation(.easeOut(duration: 0.17), value: configuration.isPressed)
+			.overlay {
+				RoundedRectangle(cornerRadius: 4)
+					.strokeBorder(outlined ? accent : .clear)
+			}
+			.foregroundColor(background.contrastColor().opacity(enabled ? 1 : 0.5))
+			.animation(.easeOut(duration: 0.17), value: configuration.isPressed ? 1 : (hovered ? 2 : 3))
+			.onHover { over in hovered = over }
 	}
 }

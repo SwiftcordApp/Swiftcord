@@ -17,41 +17,26 @@ struct UserSettingsAccountView: View {
 	@State private var confirmNewPw = ""
 
 	var changePwDialog: some View {
-		VStack(spacing: 32) {
-			VStack(spacing: 6) {
-				Image(systemName: "lock")
-					.font(.system(size: 30))
-					.foregroundColor(.accentColor)
-
-				VStack(spacing: 4) {
-					Text("settings.user.chPwd.title")
-						.font(.title)
-					Text("settings.user.chPwd.caption")
-						.frame(maxWidth: .infinity, alignment: .center)
-				}
+		DialogView(
+			title: "settings.user.chPwd.title",
+			description: "settings.user.chPwd.caption"
+		) {
+			Button(action: { changePwSheetShown = false }) {
+				Text("action.close")
 			}
-
-			VStack(spacing: 16) {
-				PasswordField(placeholder: "Current password", prompt: "Enter your existing password", password: $oldPw)
-				PasswordField(placeholder: "New password", prompt: "Enter a new password", password: $newPw)
-				PasswordField(placeholder: "Confirm new password", prompt: "Confirm your new password", password: $confirmNewPw)
+			.buttonStyle(.plain)
+			Spacer()
+			Button(action: { changePwSheetShown = false }) {
+				Text("action.done")
 			}
-
-			HStack {
-				Button(action: { changePwSheetShown = false }) {
-					Text("action.close")
-				}
-				.buttonStyle(.plain)
-				Spacer()
-				Button(action: { changePwSheetShown = false }) {
-					Text("action.done")
-				}
-				.controlSize(.large)
-				.buttonStyle(.borderedProminent)
-			}
+			.buttonStyle(FlatButtonStyle())
+		} content: {
+			PasswordField(placeholder: "Current password", prompt: "Enter your existing password", password: $oldPw)
+			PasswordField(placeholder: "New password", prompt: "Enter a new password", password: $newPw)
+				.padding(.top, 8)
+			PasswordField(placeholder: "Confirm new password", prompt: "Confirm your new password", password: $confirmNewPw)
+				.padding(.top, 8)
 		}
-		.padding(16)
-		.frame(width: 408)
 	}
 
 	var body: some View {
@@ -91,8 +76,8 @@ struct UserSettingsAccountView: View {
 				Button(action: { changePwSheetShown = true }) {
 					Text("Change Password")
 				}
-				.controlSize(.large)
-				.buttonStyle(.borderedProminent)
+				.buttonStyle(FlatButtonStyle())
+				.controlSize(.small)
 				.sheet(isPresented: $changePwSheetShown, onDismiss: {
 					oldPw = ""
 					newPw = ""
@@ -110,12 +95,13 @@ struct UserSettingsAccountView: View {
 					Button("View Backup Codes") {
 
 					}
-					.controlSize(.large)
-					.buttonStyle(.borderedProminent)
+					.buttonStyle(FlatButtonStyle())
+					.controlSize(.small)
 					Button("Remove 2FA", role: .destructive) {
 
 					}
-					.controlSize(.large)
+					.buttonStyle(FlatButtonStyle(outlined: true))
+					.controlSize(.small)
 				}
 			}
 
@@ -131,13 +117,13 @@ struct UserSettingsAccountView: View {
 					Button("Disable Account", role: .destructive) {
 
 					}
-					.tint(.red)
-					.controlSize(.large)
-					.buttonStyle(.borderedProminent)
+					.buttonStyle(FlatButtonStyle())
+					.controlSize(.small)
 					Button("Delete Account", role: .destructive) {
 
 					}
-					.controlSize(.large)
+					.buttonStyle(FlatButtonStyle(outlined: true))
+					.controlSize(.small)
 				}
 			}
 
@@ -153,14 +139,15 @@ private extension UserSettingsAccountView {
 		@Binding var password: String
 
 		var body: some View {
-			VStack(spacing: 6) {
+			VStack(alignment: .leading, spacing: 8) {
 				Text(placeholder)
 					.font(.headline)
 					.textCase(.uppercase)
-					.opacity(0.75)
-					.frame(maxWidth: .infinity, alignment: .leading)
+					.foregroundColor(.secondary)
 
 				SecureField(placeholder, text: $password, prompt: Text(prompt))
+					.textFieldStyle(.roundedBorder)
+					.controlSize(.large)
 					.textFieldStyle(.roundedBorder)
 			}
 		}

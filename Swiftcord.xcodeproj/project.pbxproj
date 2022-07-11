@@ -197,6 +197,8 @@
 		DAB5366E285AEDF800DD9857 /* GitHubStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */; };
 		DAB53670285B693700DD9857 /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366F285B693700DD9857 /* AnyTransition+.swift */; };
 		DAB6C417284B04DB0066E49D /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */; };
+		DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
+		DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
 		E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
@@ -304,6 +306,7 @@
 		DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStructs.swift; sourceTree = "<group>"; };
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
+		DACBD12E287BDE9D00CED3EF /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
 		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C28282FA3F7001F78DF /* Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+.swift"; sourceTree = "<group>"; };
@@ -596,6 +599,7 @@
 				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */,
+				DACBD12E287BDE9D00CED3EF /* DialogView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -873,6 +877,7 @@
 				3642994F286801C900483D0A /* LoFiMessageView.swift in Sources */,
 				36429950286801C900483D0A /* CurrentUserFooter.swift in Sources */,
 				36429951286801C900483D0A /* TagCloudView.swift in Sources */,
+				DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */,
 				36429952286801C900483D0A /* Persistence.swift in Sources */,
 				36429953286801C900483D0A /* LoadingView.swift in Sources */,
 				36429954286801C900483D0A /* CurrentUser+.swift in Sources */,
@@ -975,6 +980,7 @@
 				DA32EF5927CB5F4F00A9ED72 /* UIStateEnv.swift in Sources */,
 				DA4350042879C38C001DEC81 /* HorizontalDividerView.swift in Sources */,
 				DA32EF2627C62E6900A9ED72 /* MessageView.swift in Sources */,
+				DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */,
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,

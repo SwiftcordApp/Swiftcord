@@ -59,8 +59,8 @@ struct AppSettingsAccessibilityView: View {
 			} label: {
 				Label("Preview", systemImage: "play.fill")
 			}
-			.buttonStyle(.borderedProminent)
-			.controlSize(.large)
+			.buttonStyle(FlatButtonStyle())
+			.controlSize(.small)
 			VStack(alignment: .leading, spacing: 0) {
 				HStack {
 					Text("Slower").font(.subheadline).opacity(0.75)

@@ -77,9 +77,8 @@ struct UserSettingsView: View {
 								systemImage: "rectangle.portrait.and.arrow.right"
 							)
                         }
-                        .controlSize(.large)
-                        .buttonStyle(.borderedProminent)
-                        .tint(.red)
+                        .controlSize(.small)
+                        .buttonStyle(FlatButtonStyle())
 
                         Spacer()
                     }
