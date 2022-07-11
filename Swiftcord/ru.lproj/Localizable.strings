@@ -39,7 +39,7 @@
 "server.channel.title %@" = "Добро пожаловать в #%@!";
 "%lld dm.group.memberCount" = "%lld Участников";
 "settings.app.accessibility" = "Доступность";
-"onboarding.features.header" = "Множество функций";
+"onboarding.features.header" = "Хороший объем функций";
 "login.token.back" = "Подождите, верните обратно";
 "login.token.login" = "Войти";
 
