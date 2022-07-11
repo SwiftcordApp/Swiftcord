@@ -20,6 +20,15 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<MessageItem>*/
 
+	private static var insetOffset: CGFloat {
+		// #available cannot be used in ternary statements (yet)
+		if #available(macOS 13.0, *) { return 0 } else { return -13 }
+	}
+	private static var dividerOffset: CGFloat {
+		// #available cannot be used in ternary statements (yet)
+		if #available(macOS 13.0, *) { return -8 } else { return -13 }
+	}
+
     @State private var loadingGuildID: Snowflake?
 	@State private var presentingOnboarding = false
 	@State private var presentingAddServer = false
@@ -110,7 +119,7 @@ struct ContentView: View {
 						Rectangle()
 							.frame(width: 1, alignment: .bottom)
 							.foregroundColor(Color(nsColor: .separatorColor))
-							.padding(.top, -13),
+							.padding(.top, ContentView.dividerOffset),
 						alignment: .trailing
 					)
 					.overlay(.black.opacity(0.2))
@@ -120,7 +129,8 @@ struct ContentView: View {
                 List {}
 					.listStyle(.sidebar)
 					.frame(width: 72, height: 0)
-                    .offset(y: -13)
+					.frame(maxHeight: 0)
+					.offset(y: ContentView.insetOffset)
 					.overlay(
 						Rectangle()
 							.frame(height: 1, alignment: .bottom)

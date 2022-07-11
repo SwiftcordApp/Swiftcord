@@ -49,12 +49,12 @@ struct DebugSettingsView: View {
 					Text("settings.others.debug.actions").font(.largeTitle)
 					Text("settings.others.debug.actions.info")
 
-					Button("settings.others.debug.actions.crash") {
+					Button("settings.others.debug.actions.crash", role: .destructive) {
 						let funny: Int? = nil
 						print(funny!)
 					}
-					.buttonStyle(.borderedProminent)
-					.tint(.red)
+					.buttonStyle(FlatButtonStyle())
+					.controlSize(.small)
 				}
 				.padding()
 				.frame(maxWidth: .infinity, alignment: .leading)
