@@ -3,6 +3,21 @@
     <channel>
         <title>Swiftcord</title>
         <item>
+            <title>0.4.4</title>
+            <pubDate>Tue, 12 Jul 2022 00:25:38 +0800</pubDate>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>0.4.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.4/Swiftcord.0.4.4.dmg" length="7334108" type="application/octet-stream" sparkle:edSignature="8pTUplm3EO0MbWwGpozg6SP5WTbWzXNwRK1YD/gaFS/U1emqDhRiEnLLTDxN+kNT1QoXeYPWX56Z37ffCkyoAg=="/>
+            <sparkle:fullReleaseNotesLink>https://github.com/SwiftcordApp/Swiftcord/releases</sparkle:fullReleaseNotesLink>
+            <sparkle:deltas>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.4/Swiftcord11-10.delta" sparkle:deltaFrom="10" length="195086" type="application/octet-stream" sparkle:edSignature="eAG3/GAT4z93wm34KKRQrK2NXAZOZ5imRjn2/eGBzOptWkG52tBtYIYGz42AcKSMDorEBeFEmh6SrQr1EG58BA=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.4/Swiftcord11-9.delta" sparkle:deltaFrom="9" length="738526" type="application/octet-stream" sparkle:edSignature="aizYGO+MKlAu6zJEAlB+GgPpKLvtIMzragTIlXzHSA5Sy/zeqCD1CnAkMfVBx9fsfIbZuZE0qQ9vFwtPqJ5FBQ=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.4/Swiftcord11-8.delta" sparkle:deltaFrom="8" length="1436138" type="application/octet-stream" sparkle:edSignature="my5Rq0txM1Qu2dRBITtjNB5B8aMcu2F8hFR/cYPqmCU70xo+5nrWHQbHMDhcodhGt6fqWWS6fKQmqCru6iDXDA=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.4/Swiftcord11-7.delta" sparkle:deltaFrom="7" length="2725730" type="application/octet-stream" sparkle:edSignature="2NaHcJklEvDrk+MYJuKG7rOHX1D4sbgFmEn5UhpSFgnlJgKO8X+HpEqJ2c4lyOTyEaqf7q+rbl+ZuNXAavYbCQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>0.4.3</title>
             <pubDate>Mon, 11 Jul 2022 09:43:38 +0800</pubDate>
             <sparkle:version>10</sparkle:version>
