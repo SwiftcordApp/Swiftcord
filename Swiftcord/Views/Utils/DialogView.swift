@@ -10,6 +10,8 @@ import SwiftUI
 struct DialogView<Content, ActionRowContent>: View where Content: View, ActionRowContent: View {
 	let title: LocalizedStringKey
 	let description: LocalizedStringKey?
+	var analyticsType: String?
+	var analyticsFrom: String?
 
 	@ViewBuilder let actionRowContent: () -> ActionRowContent
 	@ViewBuilder let content: () -> Content
@@ -36,7 +38,15 @@ struct DialogView<Content, ActionRowContent>: View where Content: View, ActionRo
 			.padding(16)
 			.background(.black.opacity(0.1))
 		}
-		.frame(width: 408)
+		.frame(width: 440)
+		.onAppear {
+			if let analyticsType = analyticsType, let analyticsFrom = analyticsFrom {
+				AnalyticsWrapper.event(type: .openModal, properties: [
+					"type": analyticsType,
+					"location": analyticsFrom
+				])
+			}
+		}
     }
 }
 

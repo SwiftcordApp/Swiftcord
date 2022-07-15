@@ -104,7 +104,6 @@
 		364EF77D286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364EF77B286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift */; };
 		366BAA8C286D322600B662EA /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366BAA8B286D322600B662EA /* Array+.swift */; };
 		366BAA8D286D322600B662EA /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366BAA8B286D322600B662EA /* Array+.swift */; };
-		3684BB59283C696E005045AE /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3684BB58283C696E005045AE /* Sparkle */; };
 		3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684BB5A283C69C5005045AE /* Sparkle.swift */; };
 		368B6730287A20F800E37B33 /* ServerJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4350012879BFCA001DEC81 /* ServerJoinView.swift */; };
 		368B6731287A211F00E37B33 /* HorizontalDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */; };
@@ -197,6 +196,7 @@
 		DAB5366E285AEDF800DD9857 /* GitHubStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */; };
 		DAB53670285B693700DD9857 /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366F285B693700DD9857 /* AnyTransition+.swift */; };
 		DAB6C417284B04DB0066E49D /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */; };
+		DABD8BB52880F653008EE28F /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = DABD8BB42880F653008EE28F /* Sparkle */; };
 		DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
@@ -341,11 +341,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */,
+				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
 				DA2384C227CCFAEC009E15E0 /* CachedAsyncImage in Frameworks */,
 				DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */,
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
-				3684BB59283C696E005045AE /* Sparkle in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
 			);
@@ -602,9 +602,9 @@
 			children = (
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
+				DACBD12E287BDE9D00CED3EF /* DialogView.swift */,
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */,
-				DACBD12E287BDE9D00CED3EF /* DialogView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -752,9 +752,9 @@
 				DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */,
 				DA974EA12835ED1200013CC2 /* DiscordKit */,
 				DA974EA32835ED1200013CC2 /* DiscordKitCommon */,
-				3684BB58283C696E005045AE /* Sparkle */,
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
 				DA97BA912849F9C500059FD7 /* AppCenterCrashes */,
+				DABD8BB42880F653008EE28F /* Sparkle */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -1133,7 +1133,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1385,7 +1385,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1418,7 +1418,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = RJNC97Y8QD;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1572,11 +1572,6 @@
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		3684BB58283C696E005045AE /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
 		DA2384C127CCFAEC009E15E0 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA2384C027CCFAEC009E15E0 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
@@ -1606,6 +1601,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
+		};
+		DABD8BB42880F653008EE28F /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 
