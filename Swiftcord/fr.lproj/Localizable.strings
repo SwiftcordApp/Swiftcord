@@ -5,11 +5,11 @@
 
 /* ====== Onboarding ====== */
 "onboarding.title" = "Bienvenue sur\n";
-"onboarding.subtitle" = "Un client Discord construit et conçu exclusivement pour macOS";
+"onboarding.subtitle" = "Un client Discord construit et conçu pour macOS";
 "onboarding.lightweight.body" = "Utilise jusqu'à 7 fois moins de mémoire vive que Discord, avec une faible utilisation du processeur";
 "onboarding.features.header" = "Riche en fonctionnalités";
 "onboarding.features.body" = "D'importantes fonctionnalités de base sont mises en œuvre, et d'autres sont en préparation";
-"onboarding.lightweight.header" = "Efficace et économe en ressources";
+"onboarding.lightweight.header" = "Performant et peu gourmand en ressources";
 "onboarding.wip.header" = "Travail en cours";
 "onboarding.footer" = "Swiftcord est un logiciel alpha, avec des limitations et des bogues. Il n’est actuellement pas destiné à remplacer le client officiel, mais espère le faire un jour.";
 "settings.user.logOut" = "Se déconnecter";

@@ -3,14 +3,14 @@
 
 /* ====== Onboarding ====== */
 "onboarding.title" = "Willkommen zu\n";
-"onboarding.subtitle" = "Ein Discord-Client erstellt und designt nur für macOS";
+"onboarding.subtitle" = "Ein Discord-Client erstellt und designt￼ für macOS";
 "onboarding.lightweight.header" = "Effizient — Ressourcen schonend";
 "onboarding.lightweight.body" = "Benutzt bis zu 7x weniger RAM als Discord mit weniger CPU Beanspruchung.";
 "onboarding.features.header" = "Gut vorgestellt";
 "onboarding.features.body" = "Wichtige Kern-Funktionen sind umgesetzt, weitere sind in Arbeit";
 "onboarding.wip.header" = "In Arbeit";
-"onboarding.wip.body" = "Etwas ist nicht richtig? Bitte erstelle einen Fehler oder lass eine Nachricht auf unserem Discord-Server";
-"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Begrenzungen und Fehlern. Zurzeit ist es kein Ersatzt für den offiziellen Discord-Client, aber irgendwann hoffentlich.";
+"onboarding.wip.body" = "Etwas ist nicht richtig? Bitte erstelle einen GitHub Issue oder schreibe eine Nachricht auf unserem Discord-Server";
+"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Grenzen und Fehlern. Zurzeit ist es kein Ersatz für den offiziellen Discord-Client, aber hoffentlich irgendwann.";
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Wusstest du schon";
