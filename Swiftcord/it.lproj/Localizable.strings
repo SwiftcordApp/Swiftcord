@@ -98,3 +98,4 @@
 "server.join.fieldHeader.notFound" = "Link d'invito _— L'invito non è valido o è scaduto._";
 "settings.user.chPwd.title" = "Cambia la tua password";
 "server.join.egHeader" = "Gli inviti dovrebbero sembrare come";
+"server.join.fieldHeader.invalid" = "Link d'invito _— Si prega di inserire un link d'invito valido o un codice d'invito._";
