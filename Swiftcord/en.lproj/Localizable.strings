@@ -49,6 +49,7 @@
 "server.join.action" = "Join Server";
 "server.join.caption" = "Enter an invite below to join an existing server";
 "server.join.fieldHeader" = "Invite Link";
+"server.join.fieldHeader.invalid" = "Invite Link _— Please enter a valid invite link or invite code._";
 "server.join.fieldHeader.notFound" = "Invite Link _— The invite is invalid or has expired._";
 "server.join.fieldHeader.joinFail" = "Invite Link _— Unable to accept invite_";
 "server.join.egHeader" = "Invites should look like";
