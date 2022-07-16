@@ -197,6 +197,8 @@
 		DAB53670285B693700DD9857 /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5366F285B693700DD9857 /* AnyTransition+.swift */; };
 		DAB6C417284B04DB0066E49D /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */; };
 		DABD8BB52880F653008EE28F /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = DABD8BB42880F653008EE28F /* Sparkle */; };
+		DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */; };
+		DABD8BB82882E9E4008EE28F /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */; };
 		DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
@@ -307,6 +309,7 @@
 		DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStructs.swift; sourceTree = "<group>"; };
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
+		DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		DACBD12E287BDE9D00CED3EF /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DACBD15A287C243000CED3EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -551,6 +554,7 @@
 				DA520AE127D76BEB009FD740 /* Bool+.swift */,
 				DA32EF4927C8BE8F00A9ED72 /* Color+.swift */,
 				DA32EF4727C8ABFF00A9ED72 /* Date+.swift */,
+				DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */,
 				DAAFB5CB282B879200807B54 /* Double+.swift */,
 				DA2384A027CB9714009E15E0 /* Font+.swift */,
 				DA520ADC27D643CE009FD740 /* Int+.swift */,
@@ -844,6 +848,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		36004E1B283D61FE00F0BA73 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -890,6 +895,7 @@
 				DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */,
 				36429952286801C900483D0A /* Persistence.swift in Sources */,
 				36429953286801C900483D0A /* LoadingView.swift in Sources */,
+				DABD8BB82882E9E4008EE28F /* DateFormatter+.swift in Sources */,
 				36429954286801C900483D0A /* CurrentUser+.swift in Sources */,
 				36429955286801C900483D0A /* DiscordChannelButton.swift in Sources */,
 				36429956286801C900483D0A /* MiscSettingsView.swift in Sources */,
@@ -1030,6 +1036,7 @@
 				DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,
 				DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */,
+				DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
 				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,

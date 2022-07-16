@@ -92,7 +92,7 @@ struct MessageView: View {
 									)
                                 }
 								HStack(spacing: 0) {
-									Text(message.timestamp, style: .time)
+									Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
 									if let edited_timestamp = message.edited_timestamp {
 										Text("message.edited")
 										Text(edited_timestamp, style: .time)
