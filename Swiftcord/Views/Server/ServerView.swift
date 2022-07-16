@@ -69,11 +69,13 @@ struct ServerView: View {
 			op: .subscribeGuildEvents,
 			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
 		)
+		serverCtx.roles = guild.roles.compactMap { role in try? role.result.get() }
 		// Retrieve guild roles to update context
-		Task {
+		/*Task {
 			guard let newRoles = await restAPI.getGuildRoles(id: guild.id) else { return }
+			print(newRoles)
 			serverCtx.roles = newRoles
-		}
+		}*/
 	}
 
     private func toggleSidebar() {

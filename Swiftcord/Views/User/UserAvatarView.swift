@@ -11,6 +11,13 @@ import DiscordKitCommon
 import DiscordKitCore
 import DiscordKit
 
+struct ProfileKey: Hashable {
+	let guildID: Snowflake?
+	let userID: Snowflake
+}
+
+private let profileCache = Cache<ProfileKey, UserProfile>()
+
 struct UserAvatarView: View, Equatable {
     let user: User
     let guildID: Snowflake?
@@ -24,8 +31,6 @@ struct UserAvatarView: View, Equatable {
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
-
-	static private let profileCache = Cache<Snowflake, UserProfile>()
 
     var body: some View {
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
@@ -53,7 +58,7 @@ struct UserAvatarView: View, Equatable {
 				)
 			}
 
-			if let cached = UserAvatarView.profileCache[user.id] { profile = cached }
+			if let cached = profileCache[ProfileKey(guildID: guildID, userID: user.id)] { profile = cached }
 
 			infoPresenting.toggle()
 			AnalyticsWrapper.event(type: .openPopout, properties: [
@@ -74,7 +79,7 @@ struct UserAvatarView: View, Equatable {
 						return
 					}
 					profile = loadedProfile
-					UserAvatarView.profileCache[user.id] = loadedProfile
+					profileCache[ProfileKey(guildID: guildID, userID: user.id)] = loadedProfile
 				}
 			}
         }
