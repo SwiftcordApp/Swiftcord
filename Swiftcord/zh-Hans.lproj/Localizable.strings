@@ -100,3 +100,4 @@
 "server.join.fieldHeader.joinFail" = "邀请链接 _- 无法接受邀请_";
 "settings.user.chPwd.caption" = "输入当前密码和新密码。";
 "settings.user.chPwd.title" = "更新密码";
+"server.join.fieldHeader.invalid" = "Invite Link _— 请输入有效的邀请链接或邀请代码。_";
