@@ -20,6 +20,7 @@ body:
     id: version
     attributes:
       label: Version
+      placeholder: x.x.x
     validations:
       required: true
   - type: dropdown
@@ -36,6 +37,8 @@ body:
         - Connection
         - Login
         - Other
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
@@ -47,3 +50,8 @@ body:
     attributes:
       label: Screenshots
       description: If applicable, please add screenshots to help us better understand the bug.
+  - type: textarea
+    id: misc
+    attributes:
+      label: Additional Info
+      description: Is there anything that would aid in debugging this issue? Please enter it here!
