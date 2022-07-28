@@ -10,12 +10,21 @@ body:
   - type: textarea
     id: describe
     attributes:
-      label: Describe the bug
+      label: Describe the Bug
       description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
-      value: "A bug happened!"
     validations:
       required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproducing the Bug
+      description: "If possible, include the steps to reproduce this bug here!"
+      value: |
+        1...
+        2...
+        3...
+        ...
   - type: input
     id: version
     attributes:
@@ -26,7 +35,7 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: "Category"
+      label: Category
       description: "What's the category that most closely fits the bug?"
       options:
         - Message history
@@ -42,7 +51,7 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
+      label: Relevant Log Output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
   - type: textarea
