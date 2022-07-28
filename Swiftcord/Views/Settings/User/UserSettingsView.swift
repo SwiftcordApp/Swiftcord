@@ -71,6 +71,7 @@ struct UserSettingsView: View {
                         Text("settings.user.logOut.confirmation")
 						Text("Note: This will also delete your locally stored preferences")
 							.font(.caption)
+						SwiftyGifView(url: URL(string: "https://c.tenor.com/0KEvxoQb5a4AAAAC/doubt-press-x.gif")!)
                         Button(role: .destructive) { logOut() } label: {
                             Label(
 								"settings.user.logOut",

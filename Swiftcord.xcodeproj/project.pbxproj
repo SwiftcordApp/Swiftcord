@@ -181,6 +181,11 @@
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
 		DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */; };
 		DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA912849F9C500059FD7 /* AppCenterCrashes */; };
+		DAA57E1D28920F1E00C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
+		DAA57E2028920FAD00C9A931 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = DAA57E1F28920FAD00C9A931 /* SwiftyGif */; };
+		DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
+		DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */; };
+		DAA57E2528922C2F00C9A931 /* SwiftyGifNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */; };
 		DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */; };
 		DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */; };
 		DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
@@ -294,6 +299,8 @@
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyGifView.swift; sourceTree = "<group>"; };
+		DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyGifNSView.swift; sourceTree = "<group>"; };
 		DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAccessibilityView.swift; sourceTree = "<group>"; };
 		DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoFiMessageView.swift; sourceTree = "<group>"; };
@@ -351,6 +358,7 @@
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
+				DAA57E2028920FAD00C9A931 /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,9 +609,19 @@
 			path = Commands;
 			sourceTree = "<group>";
 		};
+		DAA57E22289226F500C9A931 /* SwiftyGif */ = {
+			isa = PBXGroup;
+			children = (
+				DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */,
+				DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */,
+			);
+			path = SwiftyGif;
+			sourceTree = "<group>";
+		};
 		DAAFB5BF282A635100807B54 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DAA57E22289226F500C9A931 /* SwiftyGif */,
 				DA32EF2E27C6766200A9ED72 /* Lottie */,
 				DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */,
 				DACBD12E287BDE9D00CED3EF /* DialogView.swift */,
@@ -759,6 +777,7 @@
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
 				DA97BA912849F9C500059FD7 /* AppCenterCrashes */,
 				DABD8BB42880F653008EE28F /* Sparkle */,
+				DAA57E1F28920FAD00C9A931 /* SwiftyGif */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -801,6 +820,7 @@
 				DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */,
 				3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */,
 				DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -894,6 +914,7 @@
 				36429951286801C900483D0A /* TagCloudView.swift in Sources */,
 				DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */,
 				36429952286801C900483D0A /* Persistence.swift in Sources */,
+				DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */,
 				36429953286801C900483D0A /* LoadingView.swift in Sources */,
 				DABD8BB82882E9E4008EE28F /* DateFormatter+.swift in Sources */,
 				36429954286801C900483D0A /* CurrentUser+.swift in Sources */,
@@ -926,6 +947,7 @@
 				3642996E286801C900483D0A /* BillingSettingsView.swift in Sources */,
 				3642996F286801C900483D0A /* EmbedView.swift in Sources */,
 				36429970286801C900483D0A /* Channel+.swift in Sources */,
+				DAA57E2528922C2F00C9A931 /* SwiftyGifNSView.swift in Sources */,
 				36429971286801C900483D0A /* Text+.swift in Sources */,
 				36429972286801C900483D0A /* AppSettingsAppearanceView.swift in Sources */,
 				36429973286801C900483D0A /* MessageInfoBarView.swift in Sources */,
@@ -971,6 +993,7 @@
 				DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */,
 				DAB53670285B693700DD9857 /* AnyTransition+.swift in Sources */,
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
+				DAA57E1D28920F1E00C9A931 /* SwiftyGifView.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
 				DAB53665285ACED100DD9857 /* GitHubAPI.swift in Sources */,
 				E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */,
@@ -1019,6 +1042,7 @@
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
 				E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */,
 				DA2BD30E284CCC9800EBB8D6 /* Text+.swift in Sources */,
+				DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */,
 				DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */,
@@ -1546,6 +1570,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1608,6 +1640,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
+		};
+		DAA57E1F28920FAD00C9A931 /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
 		};
 		DABD8BB42880F653008EE28F /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
