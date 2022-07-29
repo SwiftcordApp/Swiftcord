@@ -19,3 +19,79 @@
 "onboarding.wip.body" = "Bir sorun mu var? Lütfen GitHub'da sorunu bildirin veya Discord sunucumuza bir mesaj bırakın";
 "onboarding.footer" = "Swiftcord, sınırlamaları ve hataları olan bir alfa yazılımıdır. Şu anda resmi istemcinin yerini alması amaçlanmamıştır, ancak bir gün umuyor.";
 "login.token.input" = "Discord tokeninizi buraya yapıştırın";
+"login.token.login" = "Giriş yap";
+"login.token.back" = "Bekle, geri dön";
+"user.note" = "Not";
+"server.noChannels.body" = "Kendinizi garip bir yerde buluyorsunuz. Herhangi bir metin kanalına erişiminiz yok veya bu sunucuda hiç yok.";
+"server.channel.title %@" = "#%@ kanalına hoş geldin!";
+"server.channel.noCategory" = "Kategori Yok";
+"server.join.title" = "Bir Sunucuya Katıl";
+"server.join.fieldHeader" = "Davet Bağlantısı";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus arkadaşlarını bekliyor. Sen beklemek zorunda değilsin!";
+"settings.app.advanced.crashes" = "Çökme raporları gelecekteki çökmeleri teşhis etmeye ve önlemeye yardımcı olmak için bir çökmeden sonra AppCenter'a gönderilecektir. Hiçbir günlük veya tanımlanabilir veri dahil edilmeyecektir.";
+"user.roles.one" = "Rol";
+"loader.panic.logout" = "Bu biraz zaman alıyor, çıkış yapmak ister misin?";
+"server.join.caption" = "Var olan bir sunucuya katılmak için aşağıya bir davetiye gir";
+
+/* ====== User ====== */
+"user.bio" = "Hakkımda";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Biliyor muydun";
+"user.roles.none" = "Rol Yok";
+"user.roles.many" = "Roller";
+"user.roles.loading" = "Roller yükleniyor…";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Metin Kanalı Yok";
+"message.edited" = " • Düzenlendi: ";
+"message.reply.attachment" = "Eki görmek için tıklayın";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (düzenlendi)";
+"message.gone" = "Orijinal mesaj silinmiş.";
+"server.channel.header %@ %@" = "Burası #%@ kanalının başlangıcı. %@";
+"server.join.action" = "Sunucuya Katıl";
+"dm.group.header %@" = "**%@** grubunun başlangıcına hoş geldin.";
+"server.join.fieldHeader.invalid" = "Davet Bağlantısı _— Lütfen geçerli bir davet bağlantısı veya davet kodu girin._";
+"server.join.fieldHeader.notFound" = "Davet Bağlantısı _— Davet geçersiz ya da geçerliliğini yitirmiş._";
+"server.join.fieldHeader.joinFail" = "Davet Bağlantısı _— Davet kabul edilemiyor_";
+"server.join.egHeader" = "Davetler şöyle görünür";
+"dm" = "Direkt Mesajlar";
+"dm.header %@" = "Bu, **@%@** ile direkt mesaj geçmişinin başlangıcıdır.";
+"%lld dm.group.memberCount" = "%lld Üye";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Mesaj Gönder düğmesini göster";
+"settings.tts.rate" = "Metin Okuma Hızı";
+"settings.app.accessibility" = "Erişilebilirlik";
+"settings.app.voiceVideo" = "Ses ve Görüntü";
+"settings.app.keybinds" = "Tuş atamaları";
+"settings.app.advanced" = "Gelişmiş";
+"settings.tts.slower" = "Yavaş";
+"settings.tts.faster" = "Hızlı";
+"settings.app.lang" = "Dil";
+"settings.app.advanced.analytics" = "Kullanım Ayrıntıları";
+"settings.animInteraction" = "Masaüstü istemcisinde çıkartmalar üzerine gelindiğinde veya odaklanıldığında canlandırılır. Mobil istemcilerde çıkartmalar uzun basıldığında canlandırılır.";
+"settings.user.chPwd.caption" = "Mevcut şifreni ve yeni bir şifre gir.";
+"settings.user.email" = "E-posta";
+"settings.user.phoneNum" = "Telefon numarası";
+"settings.tts.defaultSpeed" = "Varsayılan";
+"settings.user.chPwd.title" = "Şifreni değiştir";
+"settings.user.logOut" = "Çıkış yap";
+"settings.app" = "Uygulama";
+"settings.app.streamer" = "Yayıncı Modu";
+"settings.user.username" = "Kullanıcı adı";
+"settings.user.logOut.confirmation" = "Oturumu kapatmak istediğinden emin misin?";
+"settings.app.appearance" = "Görünüm";
+"settings.app.notifs" = "Bildirimler";
+"settings.app.appearance.theme" = "Tema";
+"settings.app.accessibility.stickers" = "Çıkartmalar";
+"settings.app.accessibility.chatInput" = "Sohbet Girişi";
+"settings.app.textImages" = "Metin ve Resimler";
+"settings.app.advanced.analytics.option" = "Swiftcord'un gelişimi için AppCenter Analytics'e anonim istatistikler gönder";
+"settings.app.advanced.analytics.caption" = "AppCenter aracılığıyla Swiftcord'un toplu (anonim) kullanım istatistikleri (işlenen dil, uygulama sürümü ve özellik kullanımları gibi) toplanır. Elde edilen ayrıntılar Swiftcord'un özelliklerini geliştirmek için kullanılacaktır; bunları kullanarak seni bulamayız.";
+"settings.others.debug.actions" = "Eylemler";
+"settings.others.debug.actions.info" = "Ne yaptığını bilmiyorsan buradaki hiçbir seçeneği kullanma. Bazıları TeHLiKeLi olabilir!";
