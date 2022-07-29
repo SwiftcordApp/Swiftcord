@@ -1,0 +1,7 @@
+contact_links:
+  - name: Swiftcord Discord Server
+    url: https://discord.gg/he7n6MGDXS
+    about: Join the Discord server to chat with others, ask questsions or get faster support for your issue!
+  - name: DiscordKit Issues
+    url: https://github.com/SwiftcordApp/DiscordKit/issues
+    about: "If your issue/enhancement is more relevant to DiscordKit, please open it in DiscordKit's issues instead!"
