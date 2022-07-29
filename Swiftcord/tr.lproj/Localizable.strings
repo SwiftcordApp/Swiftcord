@@ -1,1 +1,21 @@
 
+
+"onboarding.wip.header" = "Devam Eden İşler";
+/* ====== Actions ====== */
+"action.continue" = "Devam et";
+"action.done" = "Tamamlandı";
+"action.close" = "Kapat";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Hoş geldiniz\n";
+"onboarding.subtitle" = "macOS için tasarlanmış bir Discord istemcisi";
+"onboarding.lightweight.header" = "Verimli - Kaynak Kullanımı Hafif";
+"onboarding.lightweight.body" = "Düşük işlemci kullanımı ile Discord'a göre 7 kat daha az RAM kullanır.";
+"onboarding.features.header" = "İyi Özellik Taşır";
+"onboarding.features.body" = "Önemli temel özellikler tamamlanmıştır ve daha fazlası için çalışmalar devam etmektedir";
+
+/* ====== Login ====== */
+"login.token.title" = "Gizli token giriş ekranına hoş geldiniz!";
+"onboarding.wip.body" = "Bir sorun mu var? Lütfen GitHub'da sorunu bildirin veya Discord sunucumuza bir mesaj bırakın";
+"onboarding.footer" = "Swiftcord, sınırlamaları ve hataları olan bir alfa yazılımıdır. Şu anda resmi istemcinin yerini alması amaçlanmamıştır, ancak bir gün umuyor.";
+"login.token.input" = "Discord tokeninizi buraya yapıştırın";
