@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SwiftyGifView: NSViewRepresentable {
 	let url: URL
+	var width: Double? = nil, height: Double? = nil
 
 	func makeNSView(context: Context) -> SwiftyGifNSView {
-		return SwiftyGifNSView(url: url)
+		return SwiftyGifNSView(url: url, width: width, height: height)
 	}
 
 	func updateNSView(_ view: SwiftyGifNSView, context: Context) {
