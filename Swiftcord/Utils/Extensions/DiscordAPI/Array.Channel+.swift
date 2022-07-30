@@ -12,7 +12,8 @@ extension Array where Element == Channel {
 		sorted {
 			// This is a DM/Group DM channel
 			if $0.type == .dm || $0.type == .groupDM {
-				return $0.last_message_id ?? $0.id > $1.last_message_id ?? $1.id
+				return UInt64($0.last_message_id ?? $0.id) ?? 0 >
+				       UInt64($1.last_message_id ?? $1.id) ?? 0
 		    }
 
 			if $0.type == .voice, $1.type != .voice { return false }
