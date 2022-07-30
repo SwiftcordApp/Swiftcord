@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SwiftyGifView: NSViewRepresentable {
 	let url: URL
-	var width: Double? = nil, height: Double? = nil
+	var width: Double? = nil, height: Double? = nil, scale: Int? = nil
 
 	func makeNSView(context: Context) -> SwiftyGifNSView {
 		return SwiftyGifNSView(url: url, width: width, height: height)

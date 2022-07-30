@@ -111,9 +111,9 @@ struct EmbedView: View {
 				}
 
 				if let image = embed.image {
-					let width = image.width != nil ? min(384, image.width!) : 384
-					let height = (image.width != nil && image.height != nil)
-						? Int(Double(width) / (Double(image.width!) / Double(image.height!)))
+					let width: Double = image.width != nil ? Double(min(384, image.width!)) : 384.0
+					let height: Double = (image.width != nil && image.height != nil)
+						? Double(width) / (Double(image.width!) / Double(image.height!))
 						: 216
 					AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
 				}
