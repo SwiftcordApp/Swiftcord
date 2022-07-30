@@ -1,0 +1,37 @@
+name: Enhancement/Feature
+description: Feature suggestions, enhancements or suggested improvements :)
+title: "[Enhancement]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: describe
+    attributes:
+      label: Describe Your Request
+      description: Tell us more about your request, suggestion or enhancement :D
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: "What's the category your enhancement/feature falls in?"
+      options:
+        - Message history
+        - Sending messages
+        - Message rendering
+        - Media (images, audio, video etc.)
+        - Settings
+        - Connection
+        - Login
+        - Other
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Other Category
+      description: If you selected `Other` above, please enter a suitable category here
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Add screenshots to explain your enhancement/request/suggestion!
