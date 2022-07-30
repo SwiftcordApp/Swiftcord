@@ -13,30 +13,30 @@ import QuickLook
 import DiscordKitCommon
 
 struct AttachmentError: View {
-	let width: Int
-    let height: Int
+	let width: Double
+    let height: Double
 
     var body: some View {
         Image(systemName: "exclamationmark.square")
-            .font(.system(size: CGFloat(min(width, height) - 10)))
-            .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+            .font(.system(size: min(width, height) - 10))
+            .frame(width: width, height: height, alignment: .center)
     }
 }
 
 struct AttachmentLoading: View {
-	let width: Int
-    let height: Int
+	let width: Double
+    let height: Double
 
     var body: some View {
 		Rectangle()
 			.fill(.gray.opacity(Double.random(in: 0.15...0.3)))
-			.frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+			.frame(width: width, height: height, alignment: .center)
     }
 }
 
 struct AttachmentImage: View {
-	let width: Int
-    let height: Int
+	let width: Double
+    let height: Double
     let scale: Double
     let url: URL
 
@@ -59,9 +59,22 @@ struct AttachmentImage: View {
     }
 }
 
+struct AttachmentGif: View {
+	let width: Double
+	let height: Double
+	let scale: Double
+	let url: URL
+	
+	var body: some View {
+		SwiftyGifView(url: url, width: width, height: height)
+			.frame(width: width, height: height)
+			.cornerRadius(4)
+	}
+}
+
 struct AttachmentVideo: View {
-	let width: Int
-	let height: Int
+	let width: Double
+	let height: Double
 	let scale: Double
 	let url: URL
 
@@ -179,24 +192,24 @@ struct AttachmentView: View {
     ]
 
 	/// Resizes image dimensions the way the official client does
-    private func getResizedDimens(width: Int, height: Int, srcURL: URL) -> (Int, Int, URL, Double) {
+    private func getResizedDimens(width: Double, height: Double, srcURL: URL) -> (Double, Double, URL, Double) {
         let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
-        let resizedH = aspectRatio > 1.3 ? Int(400 / aspectRatio) : 300
-        let resizedW = aspectRatio > 1.3 ? 400 : Int(300 * aspectRatio)
+		let resizedH: Double = aspectRatio > 1.3 ? 400 / aspectRatio : 300
+		let resizedW: Double = aspectRatio > 1.3 ? 400 : 300 * aspectRatio
 		// Check if the resized dimens are larger than the actual dimens
         if width < resizedW*2 && height < resizedH*2 {
             let scale = max(Double(width)/Double(resizedW), 1)
             return (
-                Int(Double(width)/scale),
-                Int(Double(height)/scale),
-				srcURL.setSize(width: width, height: height),
+                Double(width)/scale,
+                Double(height)/scale,
+				srcURL.setSize(width: Int(width), height: Int(height)),
                 scale
             )
         }
         return (
 			resizedW,
 			resizedH,
-			srcURL.setSize(width: resizedW*2, height: resizedH*2),
+			srcURL.setSize(width: Int(resizedW)*2, height: Int(resizedH)*2),
 			2
 		)
     }
@@ -208,15 +221,23 @@ struct AttachmentView: View {
                 let mime = attachment.content_type ?? url.mimeType
                 if let width = attachment.width, let height = attachment.height {
                     // This is an image/video
-                    let (width, height, resizedURL, scale) = getResizedDimens(width: width, height: height, srcURL: url)
-                    switch mime.prefix(5) {
-                    case "image":
-                        AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
-                            .onTapGesture { quickLookUrl = url }
-                    case "video":
-						AttachmentVideo(width: width, height: height, scale: scale, url: url)
-                    default: AttachmentError(width: width, height: height)
-                    }
+					let (width, height, resizedURL, scale) = getResizedDimens(
+						width: Double(width),
+						height: Double(height),
+						srcURL: url
+					)
+					if mime == "image/gif" {
+						AttachmentGif(width: width, height: height, scale: scale, url: url)
+					} else {
+						switch mime.prefix(5) {
+						case "image":
+							AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
+								.onTapGesture { quickLookUrl = url }
+						case "video":
+							AttachmentVideo(width: width, height: height, scale: scale, url: url)
+						default: AttachmentError(width: width, height: height)
+						}
+					}
                 } else if mime.prefix(5) == "audio" {
                     AudioAttachmentView(attachment: attachment, url: url)
                 } else {
