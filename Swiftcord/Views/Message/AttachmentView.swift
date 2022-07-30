@@ -62,9 +62,8 @@ struct AttachmentImage: View {
 struct AttachmentGif: View {
 	let width: Double
 	let height: Double
-	let scale: Double
 	let url: URL
-	
+
 	var body: some View {
 		SwiftyGifView(url: url, width: width, height: height)
 			.frame(width: width, height: height)
@@ -227,7 +226,7 @@ struct AttachmentView: View {
 						srcURL: url
 					)
 					if mime == "image/gif" {
-						AttachmentGif(width: width, height: height, scale: scale, url: url)
+						AttachmentGif(width: width, height: height, url: url)
 					} else {
 						switch mime.prefix(5) {
 						case "image":
