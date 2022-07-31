@@ -91,16 +91,24 @@ struct ServerButtonStyle: ButtonStyle {
             } else if let systemName = systemName {
                 Image(systemName: systemName)
                     .font(.system(size: 24))
-            } else if let serverIconURL = serverIconURL {
-                CachedAsyncImage(url: URL(string: serverIconURL)) { phase in
-                    if let image = phase.image {
-						image.resizable().scaledToFill().transition(.customOpacity)
-                    } else if phase.error != nil {
-                        configuration.label.font(.system(size: 18))
-					} else {
-						Image(systemName: "arrow.clockwise").font(.system(size: 24))
+            } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
+				if iconURL.lastPathComponent.prefix(2) == "a_", hovered {
+					SwiftyGifView(
+						url: iconURL.deletingPathExtension().appendingPathExtension("gif"),
+						width: 48,
+						height: 48
+					)
+				} else {
+					CachedAsyncImage(url: iconURL) { phase in
+						if let image = phase.image {
+							image.resizable().scaledToFill().transition(.customOpacity)
+						} else if phase.error != nil {
+							configuration.label.font(.system(size: 18))
+						} else {
+							Image(systemName: "arrow.clockwise").font(.system(size: 24))
+						}
 					}
-                }
+				}
             } else {
 				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
 				Text(iconName)
