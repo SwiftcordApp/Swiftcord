@@ -23,7 +23,7 @@
 "message.reply.attachment" = "첨부 파일을 보려면 클릭하세요";
 "server.noChannels.body" = "난처한 상황에 처하셨군요. 채팅 채널 사용 권한이 없거나 서버에 채팅 채널이 없네요.";
 "server.channel.noCategory" = "카테고리 없음";
-"server.composeMsg.hint %@" = "#%@ 에 메시지 보내기";
+"server.composeMsg.hint %@" = "#%@에 메시지 보내기";
 "onboarding.wip.header" = "개발 진행중";
 "onboarding.subtitle" = "macOS용으로 제작 및 설계된 Discord 클라이언트";
 "onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 공유해 주세요";
@@ -73,7 +73,7 @@
 "onboarding.title" = "환영합니다\n";
 "server.channel.title %@" = "#%@에 오신 걸 환영합니다!";
 "server.channel.header %@ %@" = "#%@ 채널의 시작이에요. %@";
-"loader.panic.logout" = "시간이 걸리는군요, 로그아웃 하시겠습니까?";
+"loader.panic.logout" = "시간이 걸리는군요, 로그아웃하시겠어요?";
 "login.token.back" = "뒤로가기";
 "login.token.input" = "Discord 토큰 붙여넣기";
 
