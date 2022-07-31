@@ -176,6 +176,8 @@
 		DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */; };
 		DA6E89F02876BC7E00BB05E7 /* AppSettingsAdvancedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */; };
 		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
+		DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
+		DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
@@ -296,6 +298,7 @@
 		DA67491A2833D5A9001F51CC /* AboutSwiftcordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftcordView.swift; sourceTree = "<group>"; };
 		DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAdvancedView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
+		DA7721FC2896BD4D0007BE26 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -574,6 +577,7 @@
 				DA2BD30D284CCC9800EBB8D6 /* Text+.swift */,
 				DAB5366F285B693700DD9857 /* AnyTransition+.swift */,
 				366BAA8B286D322600B662EA /* Array+.swift */,
+				DA7721FC2896BD4D0007BE26 /* URL+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -949,6 +953,7 @@
 				36429970286801C900483D0A /* Channel+.swift in Sources */,
 				DAA57E2528922C2F00C9A931 /* SwiftyGifNSView.swift in Sources */,
 				36429971286801C900483D0A /* Text+.swift in Sources */,
+				DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */,
 				36429972286801C900483D0A /* AppSettingsAppearanceView.swift in Sources */,
 				36429973286801C900483D0A /* MessageInfoBarView.swift in Sources */,
 				36429974286801C900483D0A /* Message+.swift in Sources */,
@@ -1003,6 +1008,7 @@
 				DAB5366E285AEDF800DD9857 /* GitHubStructs.swift in Sources */,
 				DA2384A127CB9714009E15E0 /* Font+.swift in Sources */,
 				DA6E89F02876BC7E00BB05E7 /* AppSettingsAdvancedView.swift in Sources */,
+				DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */,
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
