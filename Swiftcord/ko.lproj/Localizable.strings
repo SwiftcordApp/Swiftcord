@@ -47,7 +47,7 @@
 "settings.tts.slower" = "느리게";
 "settings.tts.faster" = "빠르게";
 "settings.user.logOut" = "로그아웃";
-"settings.user.logOut.confirmation" = "로그아웃 하시겠습니까?";
+"settings.user.logOut.confirmation" = "정말로 로그아웃하시겠어요?";
 "settings.app" = "앱";
 
 /* ====== Settings ====== */
@@ -71,7 +71,7 @@
 
 /* ====== Onboarding ====== */
 "onboarding.title" = "환영합니다\n";
-"server.channel.title %@" = "#%@ 에 오신 걸 환영합니다!";
+"server.channel.title %@" = "#%@에 오신 걸 환영합니다!";
 "server.channel.header %@ %@" = "#%@ 채널의 시작이에요. %@";
 "loader.panic.logout" = "시간이 걸리는군요, 로그아웃 하시겠습니까?";
 "login.token.back" = "뒤로가기";
@@ -81,11 +81,11 @@
 "login.token.title" = "비밀 토큰 로그인 화면에 오신 것을 환영합니다!";
 "login.token.login" = "로그인";
 "settings.app.advanced.analytics" = "앱 사용 정보";
-"settings.app.advanced.analytics.option" = "SwiftCord를 개선하기 위해 AppCenter Analytics로 익명의 사용 정보 보내기";
+"settings.app.advanced.analytics.option" = "SwiftCord를 개선할 수 있도록 AppCenter Analytics로 익명의 사용 정보 보내기";
 "settings.app.advanced.crashes" = "충돌 시 충돌 보고서가 향후 충돌을 진단하고 방지하기 위해 AppCenter로 전송됩니다. 로그 및 식별 가능한 데이터는 포함되지 않습니다.";
-"settings.app.advanced.analytics.caption" = "AppCenter를 통해 SwiftCord 익명 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 역추적할 수 없습니다.";
-"action.done" = "완료";
-"action.close" = "닫기";
+"settings.app.advanced.analytics.caption" = "AppCenter를 통해 익명의 SwiftCord 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 역추적할 수 없습니다.";
+"action.done" = "저장";
+"action.close" = "윈도우 닫기";
 "server.join.title" = "서버 참가하기";
 "server.join.action" = "서버 참가하기";
 "server.join.caption" = "아래에 있는 초대 코드를 입력하여 서버에 참가하세요";
