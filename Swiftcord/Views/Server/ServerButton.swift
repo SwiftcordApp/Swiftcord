@@ -97,7 +97,7 @@ struct ServerButtonStyle: ButtonStyle {
 						url: iconURL.deletingPathExtension().appendingPathExtension("gif"),
 						width: 48,
 						height: 48
-					)
+					).transition(.customOpacity)
 				} else {
 					CachedAsyncImage(url: iconURL) { phase in
 						if let image = phase.image {
