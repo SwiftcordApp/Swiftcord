@@ -72,6 +72,10 @@ struct AttachmentVideo: View {
 			VideoPlayer(player: player)
 				.frame(width: CGFloat(width), height: CGFloat(height))
 				.cornerRadius(4)
+				.onDisappear {
+					player.pause()
+					self.player = nil
+				}
 		} else {
 			ZStack {
 				AttachmentImage(
