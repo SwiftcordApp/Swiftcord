@@ -184,7 +184,6 @@
 		DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */; };
 		DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA912849F9C500059FD7 /* AppCenterCrashes */; };
 		DAA57E1D28920F1E00C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
-		DAA57E2028920FAD00C9A931 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = DAA57E1F28920FAD00C9A931 /* SwiftyGif */; };
 		DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
 		DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */; };
 		DAA57E2528922C2F00C9A931 /* SwiftyGifNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */; };
@@ -209,6 +208,7 @@
 		DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DAE557FB282D00B6001F4EF1 /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
+		DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = DAFD470628996DFC0075D71B /* SwiftyGif */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
 		E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
@@ -324,6 +324,7 @@
 		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DACBD15A287C243000CED3EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
+		DAFD47042897757F0075D71B /* SwiftyGif */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftyGif; path = ../SwiftyGif; sourceTree = "<group>"; };
 		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C28282FA3F7001F78DF /* Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C2A282FA400001F78DF /* Guild+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guild+.swift"; sourceTree = "<group>"; };
@@ -361,7 +362,7 @@
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
 				DA32EF2D27C65E2700A9ED72 /* Lottie in Frameworks */,
 				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
-				DAA57E2028920FAD00C9A931 /* SwiftyGif in Frameworks */,
+				DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +444,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DAFD47042897757F0075D71B /* SwiftyGif */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -781,7 +783,7 @@
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
 				DA97BA912849F9C500059FD7 /* AppCenterCrashes */,
 				DABD8BB42880F653008EE28F /* Sparkle */,
-				DAA57E1F28920FAD00C9A931 /* SwiftyGif */,
+				DAFD470628996DFC0075D71B /* SwiftyGif */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -824,7 +826,7 @@
 				DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */,
 				3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */,
 				DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -1576,9 +1578,9 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+		DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			repositoryURL = "https://github.com/cryptoAlgorithm/SwiftyGif";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -1647,15 +1649,15 @@
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		DAA57E1F28920FAD00C9A931 /* SwiftyGif */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DAA57E1E28920FAD00C9A931 /* XCRemoteSwiftPackageReference "SwiftyGif" */;
-			productName = SwiftyGif;
-		};
 		DABD8BB42880F653008EE28F /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3684BB57283C696E005045AE /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		DAFD470628996DFC0075D71B /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
 		};
 /* End XCSwiftPackageProductDependency section */
 
