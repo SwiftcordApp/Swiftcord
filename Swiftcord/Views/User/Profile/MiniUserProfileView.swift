@@ -25,11 +25,18 @@ struct MiniUserProfileView: View {
 
 		VStack(alignment: .leading, spacing: 0) {
 			if let banner = profile?.user.banner ?? user.banner {
-				CachedAsyncImage(url: banner.bannerURL(of: user.id, size: 600)) { image in
-					image.resizable().scaledToFill()
-				} placeholder: { Rectangle().fill(Color(hex: profile?.user.accent_color ?? 0)) }
-					.frame(width: 300, height: 120)
-					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
+				let url = banner.bannerURL(of: user.id, size: 600)
+				Group {
+					if url.isAnimatable {
+						SwiftyGifView(url: url.modifyingPathExtension("gif"), width: 300, height: 120)
+					} else {
+						CachedAsyncImage(url: url) { image in
+							image.resizable().scaledToFill()
+						} placeholder: { Rectangle().fill(Color(hex: profile?.user.accent_color ?? 0)) }
+					}
+				}
+				.frame(width: 300, height: 120)
+				.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			} else if let accentColor = profile?.user.accent_color {
 				Rectangle().fill(Color(hex: accentColor))
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
@@ -43,10 +50,16 @@ struct MiniUserProfileView: View {
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
 			HStack(alignment: .bottom, spacing: 4) {
-				CachedAsyncImage(url: avatarURL) { image in
-					image.resizable().scaledToFill()
-				} placeholder: {
-					ProgressView().progressViewStyle(.circular)
+				Group {
+					if avatarURL.isAnimatable {
+						SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"), width: 80, height: 80)
+					} else {
+						CachedAsyncImage(url: avatarURL) { image in
+							image.resizable().scaledToFill()
+						} placeholder: {
+							ProgressView().progressViewStyle(.circular)
+						}
+					}
 				}
 				.clipShape(Circle())
 				.frame(width: 80, height: 80)

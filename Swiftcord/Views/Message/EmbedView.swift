@@ -9,7 +9,7 @@ import SwiftUI
 import CachedAsyncImage
 import DiscordKitCommon
 
-struct EmbedView: View {
+struct RichEmbedView: View {
 	let embed: Embed
 
 	private func groupFields(_fields: [EmbedField]) -> [[EmbedField]] {
@@ -111,10 +111,10 @@ struct EmbedView: View {
 				}
 
 				if let image = embed.image {
-					let width = image.width != nil ? min(384, image.width!) : 384
-					let height = (image.width != nil && image.height != nil)
-						? Int(Double(width) / (Double(image.width!) / Double(image.height!)))
-						: 216
+					let width: Double = image.width != nil ? Double(min(384, image.width!)) : 384.0
+					let height: Double = (image.width != nil && image.height != nil)
+					? Double(width) / (Double(image.width!) / Double(image.height!))
+					: 216
 					AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
 				}
 
@@ -169,6 +169,22 @@ struct EmbedView: View {
 			}.drawingGroup()
 		)
 		.frame(minWidth: 400, maxWidth: 520, alignment: .leading)
+		.onAppear {
+			print(embed)
+		}
+	}
+}
+
+struct EmbedView: View {
+	let embed: Embed
+
+	var body: some View {
+		// TODO: Move away from embed.type, might be depreciated soon
+		if embed.type == .gifVid {
+			Text("Rendering GIF-as-a-video isn't supported yet")
+		} else {
+			RichEmbedView(embed: embed)
+		}
 	}
 }
 
