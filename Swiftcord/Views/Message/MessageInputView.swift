@@ -56,13 +56,17 @@ struct MessageInputView: View {
     let placeholder: LocalizedStringKey
     @Binding var message: String
     @Binding var attachments: [URL]
-	@State private var inhibitingSend = false
-	@State private var showingAttachmentErr = false
-	@State private var attachmentErr = ""
     let onSend: (String, [URL]) -> Void
 	let preAttach: (URL) -> Bool
 
+	@State private var inhibitingSend = false
+	@State private var showingAttachmentErr = false
+	@State private var attachmentErr = ""
+	@EnvironmentObject var ctx: ServerContext
+
 	@AppStorage("showSendBtn") private var showSendButton = false
+
+	@FocusState private var messageFieldFocused: Bool
 
     private func send() {
         guard message.hasContent() || !attachments.isEmpty else { return }
@@ -113,6 +117,11 @@ struct MessageInputView: View {
                     .font(.system(size: 16))
                     .disableAutocorrection(false)
                     .padding([.top, .bottom], 12)
+					.padding(.trailing, showSendButton ? 0 : 18)
+					.focused($messageFieldFocused)
+					.onChange(of: ctx.channel) { _ in
+						messageFieldFocused = true
+					}
 
 				if showSendButton {
 					let canSend = message.hasContent() || !attachments.isEmpty
