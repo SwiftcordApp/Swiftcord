@@ -4,160 +4,11 @@
 //
 //  Created by Vincent Kwok on 24/2/22.
 //
-//  Renders one attachment
+//  Renders an attachment
 
 import SwiftUI
-import AVKit
-import CachedAsyncImage
 import QuickLook
 import DiscordKitCommon
-
-struct AttachmentError: View {
-	let width: Double
-    let height: Double
-
-    var body: some View {
-        Image(systemName: "exclamationmark.square")
-            .font(.system(size: min(width, height) - 10))
-            .frame(width: width, height: height, alignment: .center)
-    }
-}
-
-struct AttachmentLoading: View {
-	let width: Double
-    let height: Double
-
-    var body: some View {
-		Rectangle()
-			.fill(.gray.opacity(Double.random(in: 0.15...0.3)))
-			.frame(width: width, height: height, alignment: .center)
-    }
-}
-
-struct AttachmentImage: View {
-	let width: Double
-    let height: Double
-    let scale: Double
-    let url: URL
-
-    var body: some View {
-        CachedAsyncImage(url: url, scale: scale) { phase in
-            if let image = phase.image {
-				image
-					.resizable()
-					.scaledToFill()
-					.transition(.customOpacity)
-            } else if phase.error != nil {
-                AttachmentError(width: width, height: height).transition(.customOpacity)
-            } else {
-                AttachmentLoading(width: width, height: height).transition(.customOpacity)
-            }
-        }
-		.cornerRadius(4)
-        .frame(idealWidth: CGFloat(width), idealHeight: CGFloat(height))
-        .fixedSize()
-    }
-}
-
-struct AttachmentGif: View {
-	let width: Double
-	let height: Double
-	let url: URL
-
-	var body: some View {
-		SwiftyGifView(url: url, width: width, height: height)
-			.frame(width: width, height: height)
-			.cornerRadius(4)
-	}
-}
-
-struct AttachmentVideo: View {
-	let width: Double
-	let height: Double
-	let scale: Double
-	let url: URL
-
-	@State private var player: AVPlayer?
-
-	var body: some View {
-		if let player = player {
-			VideoPlayer(player: player)
-				.frame(width: CGFloat(width), height: CGFloat(height))
-				.cornerRadius(4)
-				.onDisappear {
-					player.pause()
-					self.player = nil
-				}
-		} else {
-			ZStack {
-				AttachmentImage(
-					width: width,
-					height: height,
-					scale: scale,
-					url: url.appendingQueryItems(URLQueryItem(name: "format", value: "png"))
-				)
-				Button {
-					player = AVPlayer(url: url) // Don't use resizedURL
-					player?.play()
-				} label: {
-					Image(systemName: "play.fill")
-						.font(.system(size: 28))
-						.frame(width: 56, height: 56)
-						.background(.thickMaterial)
-						.clipShape(Circle())
-				}.buttonStyle(.plain)
-			}
-		}
-	}
-}
-
-struct AudioAttachmentView: View {
-    let attachment: Attachment
-    let url: URL
-
-    @EnvironmentObject var audioManager: AudioCenterManager
-    @EnvironmentObject var serverCtx: ServerContext
-
-    private func queueSong() {
-        audioManager.append(
-            source: url,
-            filename: attachment.filename,
-            from: "\(serverCtx.guild!.name) > #\(serverCtx.channel?.name ?? "")"
-        )
-    }
-
-    var body: some View {
-        GroupBox {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(attachment.filename)
-                        .font(.system(size: 15))
-                        .fontWeight(.medium)
-                        .truncationMode(.middle)
-                        .lineLimit(1)
-                    Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
-                        .font(.caption)
-                        .opacity(0.5)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                Button { queueSong() } label: {
-                    Image(systemName: "text.append").font(.system(size: 18))
-                }.buttonStyle(.plain).help("Append to queue")
-
-                Button {
-                    queueSong()
-                    audioManager.playQueued(index: 0)
-                } label: {
-                    Image(systemName: "play.fill").font(.system(size: 20)).frame(width: 36, height: 36)
-                }
-                .buttonStyle(.plain)
-                .background(Circle().fill(Color.accentColor))
-                .help("Play now")
-            }.padding(4)
-        }.frame(width: 400)
-    }
-}
 
 struct AttachmentView: View {
     let attachment: Attachment
@@ -190,29 +41,6 @@ struct AttachmentView: View {
 		"video/quicktime": "film"
     ]
 
-	/// Resizes image dimensions the way the official client does
-    private func getResizedDimens(width: Double, height: Double, srcURL: URL) -> (Double, Double, URL, Double) {
-        let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
-		let resizedH: Double = aspectRatio > 1.3 ? 400 / aspectRatio : 300
-		let resizedW: Double = aspectRatio > 1.3 ? 400 : 300 * aspectRatio
-		// Check if the resized dimens are larger than the actual dimens
-        if width < resizedW*2 && height < resizedH*2 {
-            let scale = max(Double(width)/Double(resizedW), 1)
-            return (
-                Double(width)/scale,
-                Double(height)/scale,
-				srcURL.setSize(width: Int(width), height: Int(height)),
-                scale
-            )
-        }
-        return (
-			resizedW,
-			resizedH,
-			srcURL.setSize(width: Int(resizedW)*2, height: Int(resizedH)*2),
-			2
-		)
-    }
-
     var body: some View {
         // Guard doesn't work in views
         ZStack {
@@ -238,7 +66,7 @@ struct AttachmentView: View {
 						}
 					}
                 } else if mime.prefix(5) == "audio" {
-                    AudioAttachmentView(attachment: attachment, url: url)
+                    AttachmentAudio(attachment: attachment, url: url)
                 } else {
                     // Display a generic file
                     GroupBox {
@@ -298,11 +126,47 @@ struct AttachmentView: View {
 }
 
 private extension AttachmentView {
+	/// Resizes image dimensions the way the official client does
+	func getResizedDimens(width: Double, height: Double, srcURL: URL) -> (Double, Double, URL, Double) {
+		let aspectRatio = Double(attachment.width!) / Double(attachment.height!)
+		let resizedH: Double = aspectRatio > 1.3 ? 400 / aspectRatio : 300
+		let resizedW: Double = aspectRatio > 1.3 ? 400 : 300 * aspectRatio
+		// Check if the resized dimens are larger than the actual dimens
+		if width < resizedW*2 && height < resizedH*2 {
+			let scale = max(Double(width)/Double(resizedW), 1)
+			return (
+				Double(width)/scale,
+				Double(height)/scale,
+				srcURL.setSize(width: Int(width), height: Int(height)),
+				scale
+			)
+		}
+		return (
+			resizedW,
+			resizedH,
+			srcURL.setSize(width: Int(resizedW)*2, height: Int(resizedH)*2),
+			2
+		)
+	}
+}
+
+// File download/preview
+private extension AttachmentView {
+	enum DownloadState {
+		case notStarted, inProgress, success, error
+	}
+
+	static let cacheDateFormatter = DateFormatter()
+	static func getShortDateString(from date: Date) -> String {
+		cacheDateFormatter.dateFormat = "MMddyyyy"
+		return cacheDateFormatter.string(from: date)
+	}
+
 	// Loads a file into cache and returns its URL
 	func loadFile(from url: URL) -> URL {
 		// Cached file destination
 		let cachedDirectory = FileManager.default.temporaryDirectory
-			.appendingPathComponent(getShortDateString(from: Date.now))
+			.appendingPathComponent(Self.getShortDateString(from: Date.now))
 
 		try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
 
@@ -331,7 +195,7 @@ private extension AttachmentView {
 		// Obtain downloads folder
 		// Cached file destination
 		let cachedDirectory = FileManager.default.temporaryDirectory
-			.appendingPathComponent(getShortDateString(from: Date.now))
+			.appendingPathComponent(Self.getShortDateString(from: Date.now))
 
 		try? FileManager.default.createDirectory(at: cachedDirectory, withIntermediateDirectories: true)
 
@@ -424,21 +288,4 @@ private extension AttachmentView {
 
 		dataTask?.resume() // Calls the start of the task
 	}
-}
-
-struct AttachmentView_Previews: PreviewProvider {
-    static var previews: some View {
-        // AttachmentView()
-        EmptyView()
-    }
-}
-
-enum DownloadState {
-    case notStarted, inProgress, success, error
-}
-
-func getShortDateString(from date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMddyyyy"
-    return formatter.string(from: date)
 }

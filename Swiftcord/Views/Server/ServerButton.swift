@@ -92,9 +92,9 @@ struct ServerButtonStyle: ButtonStyle {
                 Image(systemName: systemName)
                     .font(.system(size: 24))
             } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
-				if iconURL.lastPathComponent.prefix(2) == "a_", hovered {
+				if iconURL.isAnimatable, hovered {
 					SwiftyGifView(
-						url: iconURL.deletingPathExtension().appendingPathExtension("gif"),
+						url: iconURL.modifyingPathExtension("gif"),
 						width: 48,
 						height: 48
 					).transition(.customOpacity)
