@@ -3,14 +3,14 @@
 
 /* ====== Onboarding ====== */
 "onboarding.title" = "Willkommen zu\n";
-"onboarding.subtitle" = "Ein Discord-Client erstellt und designt￼ für macOS";
+"onboarding.subtitle" = "Ein Discord-Client konzipiert für macOS";
 "onboarding.lightweight.header" = "Effizient — Ressourcen schonend";
-"onboarding.lightweight.body" = "Benutzt bis zu 7x weniger RAM als Discord mit weniger CPU Beanspruchung.";
-"onboarding.features.header" = "Gut vorgestellt";
-"onboarding.features.body" = "Wichtige Kern-Funktionen sind umgesetzt, weitere sind in Arbeit";
+"onboarding.lightweight.body" = "Verbraucht bis zu 7x weniger RAM als Discord mit wenig CPU-Nutzung.";
+"onboarding.features.header" = "Gut ausgestattet";
+"onboarding.features.body" = "Die wichtigsten Funktionen sind bereits vorhanden, weitere sind in Arbeit";
 "onboarding.wip.header" = "In Arbeit";
-"onboarding.wip.body" = "Etwas ist nicht richtig? Bitte erstelle einen GitHub Issue oder schreibe eine Nachricht auf unserem Discord-Server";
-"onboarding.footer" = "Swiftcord ist eine Alpha-Software, mit Grenzen und Fehlern. Zurzeit ist es kein Ersatz für den offiziellen Discord-Client, aber hoffentlich irgendwann.";
+"onboarding.wip.body" = "Hier stimmt etwas nicht? Bitte erstelle ein GitHub Issue oder hinterlass uns eine Nachricht auf unserem Discord-Server";
+"onboarding.footer" = "Swiftcord ist Alpha-Software, mit vielen Einschränkungen und Bugs. Derzeit ist es nicht als Ersatz für den offiziellen Discord-Client vorgesehen, aber hoffentlich ändert sich das irgendwann.";
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Wusstest du schon";
@@ -26,28 +26,28 @@
 /* ====== Message ====== */
 "message.edited.shrunk" = " (bearbeitet)";
 "message.edited" = " • Bearbeitet: ";
-"message.gone" = "Die Original-Nachricht wurde gelöscht.";
+"message.gone" = "Originale Nachricht wurde gelöscht.";
 "message.reply.attachment" = "Klicke, um den Anhang zu sehen";
 
 /* ====== Server ====== */
-"server.noChannels.header" = "Keine Text Kanäle";
-"server.noChannels.body" = "Du bist an einem seltsamen Ort. Du hast entweder keinen Zugriff auf die Text-Kanäle oder es gibt diese auf diesem Server nicht.";
+"server.noChannels.header" = "Keine Textkanäle";
+"server.noChannels.body" = "Du bist an einem seltsamen Ort. Entweder hast du keinen Zugriff auf Textkanäle oder es gibt auf diesem Server keine.";
 "server.channel.header %@ %@" = "Dies ist der Anfang von dem #%@ Kanal. %@";
 "server.channel.title %@" = "Willkommen zu #%@!";
 "server.channel.noCategory" = "Keine Kategorie";
-"server.composeMsg.hint %@" = "Nachricht #%@";
+"server.composeMsg.hint %@" = "Nachricht an #%@";
 
 /* ====== DMs ====== */
-"dm.noChannels.body" = "Wumpus wartet auf seine Freunde. Dies musst du aber nicht!";
-"dm" = "Private Nachricht";
-"dm.header %@" = "Das ist der Anfang des Privat-Nachrichten-Verlaufs **@%@**.";
-"dm.group.header %@" = "Willkommen am Anfang der **%@** Gruppe.";
-"dm.group.composeMsg.hint %@" = "Nachricht %@";
+"dm.noChannels.body" = "Wumpus wartet auf Freunde. Dies musst du aber nicht!";
+"dm" = "Direktnachrichten";
+"dm.header %@" = "Das ist der Anfang deines Direktnachrichtenverlaufs mit **@%@**.";
+"dm.group.header %@" = "Willkommen am Anfang der **%@**-Gruppe.";
+"dm.group.composeMsg.hint %@" = "Nachricht an %@";
 "%lld dm.group.memberCount" = "%lld Mitglieder";
-"dm.composeMsg.hint %@" = "Nachricht @%@";
+"dm.composeMsg.hint %@" = "Nachricht an @%@";
 
 /* ====== Settings ====== */
-"settings.showSendBtn" = "Nachricht senden-Knopf anzeigen";
+"settings.showSendBtn" = "„Nachricht senden“-Knopf anzeigen";
 "settings.animInteraction" = "Auf dem Desktop Client werden Sticker durch den Fokus oder das berühren￼ der Maus animiert. An mobilen Geräten geschieht￼ dies durch gedrückt-halten.";
 "settings.tts.rate" = "Text-zu-Sprache-Geschwindigkeit";
 "settings.tts.defaultSpeed" = "Standard";
@@ -57,20 +57,46 @@
 ////////////////////////////
 
 "settings.user.logOut" = "Abmelden";
-"settings.user.logOut.confirmation" = "Bist du sicher, dass du dich ausloggen möchtest?";
-"settings.app" = "App";
-"settings.app.appearance" = "Aussehen";
+"settings.user.logOut.confirmation" = "Bist du sicher, dass du dich abmelden möchtest?";
+"settings.app" = "Anwendung";
+"settings.app.appearance" = "Erscheinungsbild";
 "settings.app.appearance.theme" = "Farbschema";
 "settings.app.accessibility" = "Barrierefreiheit";
 "settings.app.accessibility.stickers" = "Sticker";
-"settings.app.accessibility.chatInput" = "Chat-Eingang";
-"settings.app.voiceVideo" = "Ton und Video";
-"settings.app.textImages" = "Text und Bilder";
+"settings.app.accessibility.chatInput" = "Chateingabe";
+"settings.app.voiceVideo" = "Sprach- & Videochat";
+"settings.app.textImages" = "Text & Bilder";
 "settings.app.notifs" = "Benachrichtigungen";
 "settings.app.keybinds" = "Tastenkürzel";
 "settings.app.lang" = "Sprache";
 "settings.app.streamer" = "Streamer-Modus";
-"settings.app.advanced" = "Fortgeschritten";
+"settings.app.advanced" = "Erweitert";
 "settings.others.debug.actions" = "Aktionen";
-"settings.others.debug.actions.info" = "Verwende hier keine Optionen, wenn du nicht weißt, was passiert. Einige könnten GeFäHrLiCh sein!";
+"settings.others.debug.actions.info" = "Verwende hier keine Optionen, außer du weißt was du tust. Einige könnten GeFäHrLiCh sein!";
 "settings.others.debug.actions.crash" = "Lässt Swiftcord abstürzen (Kein Scherz)";
+"settings.app.advanced.analytics" = "Nutzungsdaten";
+"server.join.fieldHeader" = "Einladungslink";
+"settings.app.advanced.analytics.option" = "Anonyme Statistiken an AppCenter Analytics senden um Swiftcord zu verbessern";
+
+/* ====== Login ====== */
+"login.token.title" = "Willkommen auf dem Secret Token Anmeldebildschirm!";
+"action.done" = "Fertig";
+"settings.user.chPwd.title" = "Passwort ändern";
+"server.join.title" = "Tritt einem Server bei";
+"login.token.login" = "Anmelden";
+"login.token.input" = "Discord Token hier einfügen";
+"settings.user.email" = "E-Mail";
+"loader.panic.logout" = "Dies dauert ungewöhnlich lange, möchtest du dich abmelden?";
+"settings.user.chPwd.caption" = "Gib dein aktuelles Passwort und ein neues Passwort ein.";
+"action.close" = "Beenden";
+"login.token.back" = "Warte, zurück gehen";
+"server.join.action" = "Server beitreten";
+"server.join.fieldHeader.notFound" = "Einladungslink _— Die Einladung ist ungültig oder abgelaufen._";
+"server.join.caption" = "Gib unten eine Einladung ein, um einem bestehenden Server beizutreten";
+"server.join.fieldHeader.joinFail" = "Einladungslink _— Akzeptieren der Einladung nicht möglich._";
+"settings.user.username" = "Nutzername";
+"server.join.fieldHeader.invalid" = "Einladungslink _— Bitte gib einen gültigen Einladungslink oder Code ein._";
+"server.join.egHeader" = "Einladungen sollten so aussehen";
+"settings.user.phoneNum" = "Telefonnummer";
+"settings.app.advanced.analytics.caption" = "Über AppCenter werden anonyme Nutzungsstatistiken von Swiftcord (wie z.B. Sprache, App Version und die Nutzung von bestimmten Funktionen) gesammelt. Diese Daten werden verwendet, um Swiftcord zu verbessern; wir können diese nicht auf den jeweiligen Nutzer zurückverfolgen.";
+"settings.app.advanced.crashes" = "Absturzprotokolle werden nach einem Absturz an AppCenter gesendet um zukünftige Abstürze zu verhindern und um die Diagnose zu erleichtern. Es werden keine sonstigen Daten gesendet, welche zur Identifizierung des Nutzers führen könnten.";
