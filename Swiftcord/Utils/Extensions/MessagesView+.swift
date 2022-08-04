@@ -34,7 +34,7 @@ extension MessagesView {
 				loadError = true
 				showingInfoBar = true
 				infoBarData = InfoBarData(
-					message: "Messages failed to load",
+					message: "**Messages failed to load**",
 					buttonLabel: "Try again",
 					color: .red,
 					buttonIcon: "arrow.clockwise",
@@ -64,6 +64,7 @@ extension MessagesView {
 			guard (await restAPI.createChannelMsg(
 				message: NewMessage(
 					content: message,
+					// message_reference: referencing,
 					attachments: attachments.isEmpty ? nil : attachments.enumerated()
 						.map { (idx, attachment) in
 							NewAttachment(

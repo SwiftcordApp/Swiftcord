@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct InfoBarData {
-    let message: String
-    let buttonLabel: String
+    let message: LocalizedStringKey
+    let buttonLabel: LocalizedStringKey
     let color: Color
     var buttonIcon: String?
     let clickHandler: () -> Void
@@ -21,13 +21,18 @@ struct MessageInfoBarView: View {
 
     var body: some View {
         HStack {
-            Text(state?.message ?? "''").fontWeight(.medium)
+            Text(state?.message ?? "''")
             Spacer()
-            Button { state!.clickHandler() } label: {
-                if let icon = state?.buttonIcon {
-					Label(state!.buttonLabel, systemImage: icon)
-				} else { Text(state?.buttonLabel ?? "") }
-            }.buttonStyle(.plain)
+			if let label = state?.buttonLabel {
+				Button { state!.clickHandler() } label: {
+					if let icon = state?.buttonIcon {
+						HStack(spacing: 4) {
+							Text(label)
+							Image(systemName: icon)
+						}
+					} else { Text(label) }
+				}.buttonStyle(.plain)
+			}
         }
 		.foregroundColor(.white)
         .frame(height: 24)
