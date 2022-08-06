@@ -1,0 +1,100 @@
+
+
+"settings.tts.faster" = "較快";
+"settings.app.keybinds" = "快捷鍵";
+"dm.group.header %@" = "歡迎來到 **%@** 群組的開頭。";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "顯示傳送訊息按鈕";
+"settings.tts.defaultSpeed" = "預設";
+"settings.app.voiceVideo" = "語音&視訊";
+"settings.tts.rate" = "文字轉語音速度";
+"settings.user.chPwd.title" = "更改密碼";
+"settings.app.appearance" = "外觀";
+"settings.app.textImages" = "文字&圖片";
+"settings.app.advanced.analytics" = "使用計量";
+"settings.user.logOut.confirmation" = "您確定要登出嗎？";
+"settings.app.appearance.theme" = "主題";
+"settings.app.accessibility.chatInput" = "輸入訊息";
+"settings.app.lang" = "語言";
+"settings.app.streamer" = "直播模式";
+"settings.app.advanced" = "進階";
+"settings.app" = "程式";
+"settings.app.accessibility" = "輔助使用";
+"settings.app.advanced.analytics.caption" = "我們將通過Appcenter收集匯總（匿名）的使用統計資料（如渲染語言，應用程式版本和功能的使用狀態）。所獲取的資料將用於提升Swiftcord的功能體驗；我們無法以此資料追蹤到你身上。";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "歡迎使用\n";
+"onboarding.subtitle" = "一個專門為macOS打造和設計的Discord用戶端";
+"onboarding.lightweight.body" = "記憶體使用率較Discord少高達7倍，且CPU使用率亦較低。";
+"onboarding.features.header" = "功能完善";
+"onboarding.wip.header" = "仍在開發途中";
+"onboarding.wip.body" = "看到有什麼不對嗎？請在Github創建一個Issue，或在Swiftcord的Discord伺服器上留言";
+"login.token.back" = "等等，返回";
+"login.token.login" = "登入";
+"onboarding.lightweight.header" = "高效—輕量的系統負荷";
+
+/* ====== Login ====== */
+"login.token.title" = "歡迎來到秘密令牌登入介面！";
+"login.token.input" = "在此輸入你的Discord令牌";
+"loader.panic.logout" = "這比預期使用了更多的時間，需要退出嗎？";
+
+/* ====== User ====== */
+"user.bio" = "關於我";
+"user.roles.loading" = "正在載入身分組…";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (已編輯)";
+"message.edited" = " • 已編輯於 ";
+"message.gone" = "原始訊息已刪除。";
+"message.reply.attachment" = "點擊以檢視附件";
+"server.channel.header %@ %@" = "這是#%@ 頻道的起點。 %@";
+"server.composeMsg.hint %@" = "發送訊息予#%@";
+"server.join.title" = "加入伺服器";
+"server.join.fieldHeader" = "邀請連結";
+"server.join.fieldHeader.invalid" = "邀請連結_— 請輸入有效的邀請連結或邀請代碼。_";
+"server.join.caption" = "於下方輸入邀請以加入現有的伺服器";
+"server.join.fieldHeader.notFound" = "邀請連結_— 邀請失效或已過期。_";
+"server.join.fieldHeader.joinFail" = "邀請連結_— 無法接受邀請_";
+"server.join.egHeader" = "邀請的格式應該為";
+"dm.header %@" = "這是你與 **@%@** 私人訊息記錄的開頭。";
+"%lld dm.group.memberCount" = "%lld 位成員";
+"dm.composeMsg.hint %@" = "傳送訊息至 @%@";
+"dm.group.composeMsg.hint %@" = "向 %@ 傳送訊息";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus在等他的好友，但您不用跟他一樣！";
+"settings.tts.slower" = "較慢";
+"settings.user.chPwd.caption" = "輸入您目前的密碼和新密碼。";
+"settings.user.username" = "使用者名稱";
+"settings.user.email" = "電子郵件";
+"settings.user.phoneNum" = "電話號碼";
+"settings.user.logOut" = "登出";
+"settings.animInteraction" = "在桌面用戶端上，貼圖會在滑鼠停留於上或聚焦時播放動畫。在移動用戶端上，貼圖會在長按時播放動畫。";
+"settings.app.accessibility.stickers" = "貼圖";
+"settings.app.notifs" = "通知";
+"user.note" = "備註";
+"settings.others.debug.actions.crash" = "讓Swiftcord崩潰（不是在開玩笑）";
+"settings.app.advanced.analytics.option" = "向AppCenter Analytics傳送匿名統計資料以提升Swiftcord的體驗";
+"settings.others.debug.actions" = "行動";
+"settings.others.debug.actions.info" = "除非您知道自己在做什麼，否則請不要使用此頁面的任何選項。當中一部分可能十～分～危～險～！";
+/* ====== Actions ====== */
+"action.continue" = "繼續";
+"action.done" = "完成";
+"action.close" = "關閉";
+"onboarding.features.body" = "較重要的核心功能均已實現，其他功能亦正在開發途中";
+"user.roles.one" = "身分組";
+"onboarding.footer" = "Swiftcord仍是一個開發初期的軟件，存在大量的限制和錯誤。雖然目前Swiftcord未能取代Discord官方用戶端，但願有朝一日能夠做到。";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "你知道嗎";
+"user.roles.none" = "沒有身分組";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "無文字頻道";
+"user.roles.many" = "身分組";
+"server.noChannels.body" = "你發現你處身於一個奇怪的地方。你沒有權限訪問任何文字頻道，或此伺服器上沒有任何文字頻道。";
+"server.channel.title %@" = "歡迎來到#%@!";
+"server.channel.noCategory" = "沒有類別";
+"server.join.action" = "加入伺服器";
+"dm" = "私人訊息";
