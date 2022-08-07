@@ -25,6 +25,16 @@ me to continue developing it**
 
 **Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensuring this project has a stable future :)**
 
+## Supporters
+Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
+### Red-hot Supporter 🔥
+It'll be mind-blowing to get red-hot supporters! Be my first red-hot supporter, and get special privileges that only you'll ever have!
+### Amazing Supporter 🤯
+Be my first amazing supporter! Support me on [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)!
+### Extremely Cool Supporter 🧊
+* `selimgr`
+* An extremely generous anonymous supporter
+
 ## Contents
 * [Motivation](#motivation)
 * [Releases](#releases)
