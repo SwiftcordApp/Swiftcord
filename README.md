@@ -30,7 +30,6 @@ me to continue developing it**
 * [Releases](#releases)
 * [FAQ](#faq)
 * [Current State](#current-state)
-* [Roadmap](#roadmap)
 * [Copyright Notice](#copyright-notice)
 
 ---
@@ -90,7 +89,8 @@ to expand the answer
   the Discord ToS. You can read the section in Discord's ToS regarding their software
   <a href="https://discord.com/terms#software-in-discord’s-services">here</a>. 
   However, I <b>cannot guarantee</b> Swiftcord's use of Discord's endpoints won't
-  trip selfbot ban detection. As far as possible, Swiftcord aims to
+  trip selfbot ban detection, and Discord won't change their mind to officially ban
+  3rd-party clients. As far as possible, Swiftcord aims to
   use endpoints as similarly to the official client as possible, and I (the developer)
   have not been banned for using Swiftcord with either my main or alt account.
   <i>
@@ -123,7 +123,8 @@ to expand the answer
 
 Implemented most core message-related features from the official
 client, including basic markdown and embeds, stickers (lottie/PNG),
-and editing and deleting events. You can now send attachments (both
+and editing and deleting events. Animated media, like profile images, server icons
+and profile banners are supported too! You can now send attachments (both
 from the file picker and by dragging and dropping) with your messages too! 
 DMs now have first-class support!
 
@@ -134,44 +135,6 @@ Gateway connection event handling is stable, and reconnection
 is rock solid (as far as I can test). If you encounter a reconnection
 bug (not reconnecting, reconnection loop, etc), please open an issue
 with the relevant logs.
-
----
-
-## Roadmap
-
-I do not have a definite timeline for when a feature would be implemented,
-and they may not necessarily be implemented in sequence. 
-
-- ✅ Gateway/REST API Implementation
-- ✅ Load server list, channels, and message
-- ✅ Basic message, channel, and server rendering
-- ✅ Rich message rendering (stickers, embeds, markdown, media)
-- ✅ Message replies
-- ✅ Load and display full user profile (bio + roles)
-- ✅ Save the last server and last channel viewed in servers (QoL)
-- ✅ Better loading screen
-- ✅ Find and request the most optimized photo size from CDN
-- ⏱ Partial user and app settings
-- ✅ DM and group loading
-- ✅ Display DMs properly in UI
-- ✅ Send DM messages
-- ✅ Send attachments
-- ❌ User roles + overwrites
-- ❌ Message notifications
-- ❌ Full list of users in a server, especially for larger servers (1000+ members)
-- ✅ Ordering of channels, servers, and categories
-- ❌ Threads support
-- ❌ Full user settings
-- ❌ Server creation
-- ❌ Server discovery
-- ❌ Server banner, boost widget, and other misc. boosted features
-- ❌ Voice channels (ambitious)
-- ❌ Video channels (very ambitious)
-
-#### Legend: 
-* ✅ -> Complete
-* ⏱ -> Implementation in progress
-* ❌ -> Not started
 
 ---
 
