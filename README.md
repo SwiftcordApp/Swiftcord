@@ -29,10 +29,13 @@ me to continue developing it**
 Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
 ### Red-hot Supporter 🔥
 It'll be mind-blowing to get red-hot supporters! Be my first red-hot supporter, and get special privileges that only you'll ever have!
+Support me on [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)!
+
 ### Amazing Supporter 🤯
-Be my first amazing supporter! Support me on [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)!
+<img src="https://cxt.sh/assets/img/pfp.png" width=36 height=36 align="left" />**`cxt`** - First amazing supporter!
+
 ### Extremely Cool Supporter 🧊
-* `selimgr`
+* **`selimgr`** - First extremely cool supporter, and the first sponsor!
 * An extremely generous anonymous supporter
 
 ## Contents
