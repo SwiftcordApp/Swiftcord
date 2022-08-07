@@ -8,7 +8,8 @@
 [![Lines of code](https://img.shields.io/tokei/lines/github/SwiftcordApp/Swiftcord?style=for-the-badge)]()
 [![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)](https://discord.gg/he7n6MGDXS)
 [![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)](https://github.com/SwiftcordApp/Swiftcord/stargazers)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=buy%20me%20a%20coffee&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=Sponsor%20Me!&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
+[![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dcryptoalgo%26type%3Dpatrons&style=for-the-badge)](https://www.patreon.com/cryptoAlgo)
 [![Weblate project translated](https://img.shields.io/weblate/progress/swiftcord?style=for-the-badge)](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
 
 ---
@@ -19,10 +20,10 @@ client in Swift for macOS from scratch.
 I'd also recommend checking out [DiscordKit](https://github.com/SwiftcordApp/DiscordKit),
 the Discord API implementation Swiftcord relies on.
 
-**If you like this project, please give it a ⭐ star! It helps motivate
+**If you like this project, please smash the star button and be one of my stargazers 🌟! It helps motivate
 me to continue developing it**
 
-**Consider buying me a coffee ☕️ by sponsoring Swiftcord!**
+**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensuring this project has a stable future :)**
 
 ## Contents
 * [Motivation](#motivation)
