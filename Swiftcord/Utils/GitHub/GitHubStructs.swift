@@ -64,3 +64,26 @@ struct GHRelease: Codable {
 	let body: String
 	let mentions_count: Int
 }
+
+struct GHRepoContributor: Codable {
+	let login: String
+	let id: Int
+	let node_id: String
+	let avatar_url: URL
+	let gravatar_id: String?
+	let url: URL
+	let html_url: URL
+	let followers_url: URL
+	let following_url: String
+	let gists_url: String
+	let starred_url: String
+	let subscriptions_url: URL
+	let organizations_url: URL
+	let repos_url: URL
+	let events_url: String
+	let received_events_url: URL
+	let type: String
+	let site_admin: Bool
+	let contributions: Int /// Number of commits this user has made
+	let email: String?
+}

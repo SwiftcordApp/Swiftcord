@@ -6,8 +6,20 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
+
+private struct MinimalContributor {
+	let username: String
+	let url: URL
+	let avatar: URL
+	let contributions: Int
+}
+
+private let contributorsCache = Cache<String, [MinimalContributor]>()
 
 struct CreditsView: View {
+	@State private var contributors: [MinimalContributor]?
+
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Text("Credits").font(.title)
@@ -24,7 +36,7 @@ struct CreditsView: View {
 					Text("Head Developer").font(.title)
 					Text("I love working on Swiftcord, and developing functional and beautiful native apps!")
 
-					Text("[Vincent Kwok](https://github.com/cryptoAlgorithm)")
+					Text("Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)")
 				}
 				Spacer()
 			}
@@ -65,34 +77,76 @@ struct CreditsView: View {
 					Text("Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!")
 						.padding(.bottom, 4)
 
-					LazyVGrid(columns: [
-						GridItem(.flexible()),
-						GridItem(.flexible()),
-						GridItem(.flexible())
-					]) {
-						Link("Anthony Ingle",
-							 destination: URL(string: "https://github.com/ingleanthony")!)
-						Link("Ben Tettmar",
-							 destination: URL(string: "https://github.com/bentettmar")!)
-						Link("royal",
-							 destination: URL(string: "https://github.com/rrroyal")!)
-						Link("Candygoblen123",
-							 destination: URL(string: "https://github.com/Candygoblen123")!)
-						Link("marcprux",
-							 destination: URL(string: "https://github.com/marcprux")!)
-						Link("selimgr",
-							 destination: URL(string: "https://github.com/selimgr")!)
-						Link("tonyarnold",
-							 destination: URL(string: "https://github.com/tonyarnold")!)
-						Link("charxene",
-							 destination: URL(string: "https://github.com/charxene")!)
+					if let contributors = contributors {
+						LazyVGrid(columns: [
+							GridItem(.flexible()),
+							GridItem(.flexible()),
+							GridItem(.flexible())
+						], spacing: 4) {
+							ForEach(contributors, id: \.username) { contributor in
+								HStack(spacing: 4) {
+									// Top 3 contributors get shown more prominently
+									if contributor.contributions >= contributors[2].contributions {
+										GroupBox {
+											VStack {
+												CachedAsyncImage(url: contributor.avatar) { phase in
+													if let image = phase.image {
+														image
+															.resizable()
+															.scaledToFill()
+															.transition(.customOpacity)
+															.mask(Circle())
+													} else {
+														Rectangle().fill(.gray.opacity(0.25)).transition(.customOpacity)
+													}
+												}
+												.frame(width: 42, height: 42)
+												Link(destination: contributor.url) {
+													Text(verbatim: contributor.username).font(.title3)
+												}
+											}
+											.padding(4)
+											.frame(maxWidth: .infinity)
+										}
+										.padding(.bottom, 4)
+									} else {
+										Link(contributor.username, destination: contributor.url)
+									}
+								}
+							}
+						}
+					} else {
+						ProgressView("Loading contributors...")
+							.progressViewStyle(.circular)
+							.frame(maxWidth: .infinity)
 					}
-					Text("Big thanks to all contributors <3")
+					Text("Note: Also includes some contributors from Weblate")
 						.padding(.top, 4)
 						.font(.caption)
 						.multilineTextAlignment(.center)
 				}
 				Spacer()
+			}
+			.onAppear {
+				if let cached = contributorsCache.value(forKey: "cache") {
+					contributors = cached
+				} else {
+					Task {
+						guard let contribs = try? await GitHubAPI.getRepoContributors(org: "SwiftcordApp", repo: "Swiftcord")
+						else { return }
+						let newMinimalContributors = contribs.map {
+							MinimalContributor(
+								username: $0.login,
+								url: $0.html_url,
+								avatar: $0.avatar_url,
+								contributions: $0.contributions
+							)
+						}
+						// Must save contributors in cache to prevent exceeding GitHub API ratelimit
+						contributorsCache.insert(newMinimalContributors, forKey: "cache")
+						contributors = newMinimalContributors
+					}
+				}
 			}
 			Link(destination: URL(string: "https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation/")!) {
 				Text("Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!").multilineTextAlignment(.leading)
