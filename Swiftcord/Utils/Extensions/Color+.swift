@@ -44,19 +44,16 @@ extension Color {
 
 extension Color {
 	var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
-		var r: CGFloat = 0 // swiftlint:disable:this identifier_name
-		var g: CGFloat = 0 // swiftlint:disable:this identifier_name
-		var b: CGFloat = 0 // swiftlint:disable:this identifier_name
-		var o: CGFloat = 0 // swiftlint:disable:this identifier_name
-
-		NSColor(self).usingColorSpace(.sRGB)!.getRed(&r, green: &g, blue: &b, alpha: &o)
-		return (r, g, b, o)
+		let col = NSColor(self).usingColorSpace(.deviceRGB)!
+		return (col.redComponent, col.greenComponent, col.blueComponent, col.alphaComponent)
 	}
 
 	/// Returns a suitable text color for use on a background
 	func contrastColor(darkCol: Color = .black, lightCol: Color = .white) -> Color {
+		// I'm aware this isn't the "proper" way to find the suitable contrasting foreground color,
+		// but this approach works for all the cases relevant to Swiftcord and isn't too complex.
 		components.opacity < 0.5
 			? .primary
-			: (components.red + components.green + components.blue)/3 > 128 ? darkCol : lightCol
+			: ((components.red + components.green + components.blue)/3 > 0.6 ? darkCol : lightCol)
 	}
 }
