@@ -24,11 +24,11 @@ struct MiscSettingsView: View {
                     Text("Not hype")
                 }
 
-				NavigationLink("About", tag: .about, selection: $selectedLink) {
+				NavigationLink("settings.others.about", tag: .about, selection: $selectedLink) {
                     AboutSwiftcordView()
                 }
 
-				NavigationLink("Credits", tag: .credits, selection: $selectedLink) {
+				NavigationLink("settings.others.credits", tag: .credits, selection: $selectedLink) {
 					ScrollView {
 						CreditsView().padding(40)
 					}
