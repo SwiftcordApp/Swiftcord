@@ -196,6 +196,7 @@
 		DAAFB5C9282B689000807B54 /* discord-loading-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAAFB5C8282B689000807B54 /* discord-loading-animation.json */; };
 		DAAFB5CC282B879200807B54 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
 		DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
+		DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46B28A10BB100645FCD /* BetterImageView.swift */; };
 		DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
 		DAB53665285ACED100DD9857 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53664285ACED100DD9857 /* GitHubAPI.swift */; };
 		DAB53668285AD11000DD9857 /* DiscordChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */; };
@@ -324,6 +325,7 @@
 		DAAFB5C8282B689000807B54 /* discord-loading-animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "discord-loading-animation.json"; sourceTree = "<group>"; };
 		DAAFB5CB282B879200807B54 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		DAB1E46928A0A59500645FCD /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		DAB1E46B28A10BB100645FCD /* BetterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterImageView.swift; sourceTree = "<group>"; };
 		DAB53661285A272D00DD9857 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DAB53664285ACED100DD9857 /* GitHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordChannelButton.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				DACBD12E287BDE9D00CED3EF /* DialogView.swift */,
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */,
+				DAB1E46B28A10BB100645FCD /* BetterImageView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
 				E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */,
 				DA2BD30E284CCC9800EBB8D6 /* Text+.swift in Sources */,
+				DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */,
 				DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */,
 				DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
