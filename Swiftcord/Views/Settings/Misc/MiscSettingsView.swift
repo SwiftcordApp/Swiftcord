@@ -28,6 +28,12 @@ struct MiscSettingsView: View {
                     AboutSwiftcordView()
                 }
 
+				NavigationLink("Credits", tag: .credits, selection: $selectedLink) {
+					ScrollView {
+						CreditsView().padding(40)
+					}
+				}
+
 				if gateway.cache.userSettings?.developer_mode == true {
 					NavigationLink("Debug", tag: .debug, selection: $selectedLink) {
 						DebugSettingsView()
@@ -55,6 +61,7 @@ private extension MiscSettingsView {
 		case changelog = "What's New"
 		case hype = "HypeSquad"
 		case about = "About"
+		case credits = "Credits"
 		case debug = "Debug"
 	}
 }
