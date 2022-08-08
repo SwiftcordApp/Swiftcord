@@ -24,7 +24,7 @@ struct CreditsView: View {
 
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
-			Text("Credits").font(.title)
+			Text("settings.others.credits").font(.title)
 
 			Divider()
 
@@ -35,10 +35,10 @@ struct CreditsView: View {
 					.frame(width: 36)
 
 				VStack(alignment: .leading, spacing: 8) {
-					Text("Head Developer").font(.title)
-					Text("I love working on Swiftcord, and developing functional and beautiful native apps!")
+					Text("settings.others.credits.headDev").font(.title)
+					Text("settings.others.credits.about")
 
-					Text("Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)")
+					Text("settings.others.credits.whoAmI")
 				}
 				Spacer()
 			}
@@ -52,13 +52,12 @@ struct CreditsView: View {
 					.frame(width: 36)
 
 				VStack(alignment: .leading, spacing: 8) {
-					Text("Sponsors").font(.title2)
+					Text("settings.others.credits.sponsor").font(.title2)
 
-					Text("Consider supporting me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensure this project has a stable future :)")
-						.padding(.bottom, 4)
+					Text("settings.others.credits.sponsor.desc").padding(.bottom, 4)
 
 					Group {
-						Text("Red-hot Supporter 🔥").font(.title3).padding(.top, 8)
+						Text("settings.others.credits.sponsor.tier3").font(.title3).padding(.top, 8)
 						VStack(spacing: 8) {
 							Image(systemName: "plus.circle")
 								.font(.system(size: 64))
@@ -69,19 +68,19 @@ struct CreditsView: View {
 									value: addPulseScale
 								)
 								.onAppear { addPulseScale = 1.15 }
-							Text("Become a sponsor").font(.largeTitle)
-							Text("Your name, and an image and bio of your choice could be here! You'll be directly supporting the development of Swiftcord with your sponsorship!").multilineTextAlignment(.center)
+							Text("settings.others.credits.sponsor.engage.header").font(.largeTitle)
+							Text("settings.others.credits.sponsor.engage.body").multilineTextAlignment(.center)
 
 							HStack(spacing: 16) {
 								Button {
 									openURL(URL(string: "https://github.com/sponsors/cryptoAlgorithm")!)
 								} label: {
-									Text("GitHub Sponsors")
+									Text("settings.others.credits.sponsor.gh")
 								}.buttonStyle(FlatButtonStyle(customBase: .white))
 								Button {
 									openURL(URL(string: "https://patreon.com/cryptoAlgo")!)
 								} label: {
-									Text("Patreon")
+									Text("settings.others.credits.sponsor.patreon")
 								}.buttonStyle(FlatButtonStyle(customBase: .white))
 							}.padding(.top, 8)
 						}
@@ -104,7 +103,7 @@ struct CreditsView: View {
 					}
 
 					Group {
-						Text("Amazing Supporter 🤯").font(.title3).padding(.top, 8)
+						Text("settings.others.credits.sponsor.tier2").font(.title3).padding(.top, 8)
 						HStack(spacing: 8) {
 							BetterImageView(url: URL(string: "https://cxt.sh/assets/img/pfp.png"))
 								.frame(width: 36, height: 36)
@@ -114,15 +113,11 @@ struct CreditsView: View {
 					}
 
 					Group {
-						Text("Extremely Cool Supporter 🧊").font(.title3).padding(.top, 8)
+						Text("settings.others.credits.sponsor.tier1").font(.title3).padding(.top, 8)
 
 						Text(verbatim: "selimgr").font(.monospaced(.body)())
-						Text(verbatim: "An extremely generous anonymous supporter")
+						Text("settings.others.credits.contrib.anon")
 					}
-
-					Text("Please sponsor Swiftcord on GitHub! I'll be eternally grateful <3")
-						.padding(.top, 4)
-						.font(.caption)
 				}
 			}
 
@@ -135,9 +130,8 @@ struct CreditsView: View {
 					.frame(width: 36)
 
 				VStack(alignment: .leading, spacing: 8) {
-					Text("Contributors").font(.title2)
-					Text("Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!")
-						.padding(.bottom, 4)
+					Text("settings.others.credits.contrib").font(.title2)
+					Text("settings.others.credits.contrib.desc").padding(.bottom, 4)
 
 					if let contributors = contributors {
 						LazyVGrid(columns: [
@@ -174,16 +168,16 @@ struct CreditsView: View {
 						}.frame(maxWidth: .infinity)
 						if contributors.count > 12 {
 							Link(
-								"+ \(contributors.count - 12) contributors",
+								"\(contributors.count - 12) settings.others.credits.contrib.more",
 								destination: URL(string: "https://github.com/SwiftcordApp/Swiftcord/graphs/contributors")!
 							)
 						}
 					} else {
-						ProgressView("Loading contributors...")
+						ProgressView("settings.others.credits.contrib.loading")
 							.progressViewStyle(.circular)
 							.frame(maxWidth: .infinity)
 					}
-					Text("Note: Also includes some contributors from Weblate")
+					Text("settings.others.credits.contrib.note")
 						.padding(.top, 4)
 						.font(.caption)
 						.multilineTextAlignment(.center)
@@ -211,8 +205,8 @@ struct CreditsView: View {
 					}
 				}
 			}
-			Text("Thanks to iJayTD on Reddit for [recreating the Discord loading animation](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) and agreeing to its use in Swiftcord!").multilineTextAlignment(.leading)
-			Text("And finally, thanks to Discord for building such an amazing community and infrastructure!").font(.subheadline)
+			Text("settings.others.credits.misc.anim").multilineTextAlignment(.leading)
+			Text("settings.others.credits.misc.discord").font(.subheadline)
 		}
     }
 }
