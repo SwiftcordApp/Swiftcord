@@ -28,10 +28,30 @@ struct GitHubAPI {
 			.appendingPathComponent("releases")
 			.appendingPathComponent("tags")
 			.appendingPathComponent(tag)
-		let (data, _) = try await URLSession.shared.data(from: url)
+
+		return try await makeReq(url: url)
+	}
+
+	static func getRepoContributors(
+		org: String,
+		repo: String
+	) async throws -> [GHRepoContributor] {
+		let url = GitHubAPI.baseURL
+			.appendingPathComponent("repos")
+			.appendingPathComponent(org)
+			.appendingPathComponent(repo)
+			.appendingPathComponent("contributors")
+
+		return try await makeReq(url: url)
+	}
+
+	static func makeReq<R: Codable>(url: URL) async throws -> R {
+		var req = URLRequest(url: url)
+		req.setValue("application/vnd.github+json", forHTTPHeaderField: "accept")
+		let (data, _) = try await URLSession.shared.data(for: req)
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
-		return try decoder.decode(GHRelease.self, from: data)
+		return try decoder.decode(R.self, from: data)
 	}
 }

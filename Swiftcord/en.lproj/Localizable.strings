@@ -100,3 +100,31 @@
 "settings.others.debug.actions" = "Actions";
 "settings.others.debug.actions.info" = "Do not use any options here unless you know what you are doing. Some of them might be DaNgErOuS!";
 "settings.others.debug.actions.crash" = "Crash Swiftcord (Not a joke)";
+// About
+"settings.others.about" = "About";
+"settings.others.about.desc" = "Native Discord client built in Swift and SwiftUI";
+"%@ %@ %@ settings.others.about.ver" = "%@ version %@ (Build: %@)";
+"settings.others.about.caption" = "Swiftcord is open-source software and built with <3. You can find its source code at [GitHub](https://github.com/SwiftcordApp/Swiftcord). Contributions and issue reports are welcome too! Please also give Swiftcord a star, it gives me motivation to continue working on it :D";
+"settings.others.about.supportPkg" = "Swiftcord is powered by [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), a WIP Discord API implementation in Swift";
+// Credits
+"settings.others.credits" = "Credits";
+"settings.others.credits.headDev" = "Head Developer";
+"settings.others.credits.about" = "I love working on Swiftcord, and developing functional and beautiful native apps!";
+"settings.others.credits.whoAmI" = "Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
+"settings.others.credits.sponsor.tier1" = "Extremely Cool Supporter 🧊";
+"settings.others.credits.sponsor.tier2" = "Amazing Supporter 🤯";
+"settings.others.credits.sponsor.tier3" = "Red-hot Supporter 🔥";
+"settings.others.credits.sponsor" = "Sponsors";
+"settings.others.credits.sponsor.desc" = "Consider supporting Swiftcord! It would help ensure this project has a stable future, and you'll get special privileges too :D";
+"settings.others.credits.sponsor.gh" = "GitHub Sponsors";
+"settings.others.credits.sponsor.patreon" = "Patreon";
+"settings.others.credits.sponsor.engage.header" = "Support Swiftcord!";
+"settings.others.credits.sponsor.engage.body" = "Your name, and an image and bio of your choice could be here! You'll be directly supporting the development of Swiftcord with your sponsorship. Plus, you'll get special benefits in the Discord server, and higher priority support!";
+"settings.others.credits.contrib" = "Contributors";
+"settings.others.credits.contrib.desc" = "Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!";
+"settings.others.credits.contrib.loading" = "Loading contributors…";
+"settings.others.credits.contrib.anon" = "An extremely generous anonymous supporter";
+"%lld settings.others.credits.contrib.more" = "+ %lld amazing contributors";
+"settings.others.credits.contrib.note" = "Note: Also includes some contributors from Weblate";
+"settings.others.credits.misc.anim" = "Thanks to iJayTD on Reddit for [recreating the Discord loading animation](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) and agreeing to its use in Swiftcord!";
+"settings.others.credits.misc.discord" = "And finally, thanks to Discord for building such an amazing community and infrastructure!";

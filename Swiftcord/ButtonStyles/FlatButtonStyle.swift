@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct FlatButtonStyle: ButtonStyle {
+	// Use vars so not all params have to be supplied all the time
 	var prominent = true
 	var outlined = false
+	var customBase: Color?
 
 	@State private var hovered = false
 
@@ -17,7 +19,7 @@ struct FlatButtonStyle: ButtonStyle {
 	@Environment(\.isEnabled) private var enabled: Bool
 
 	func makeBody(configuration: Configuration) -> some View {
-		let base: Color = configuration.role == .destructive ? .red : .accentColor
+		let base: Color = customBase ?? (configuration.role == .destructive ? .red : .accentColor)
 		let pressedStyles = configuration.isPressed && !outlined
 		let hoverStyles = (hovered && !outlined) || (configuration.isPressed && outlined)
 		let accent = enabled

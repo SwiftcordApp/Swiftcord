@@ -25,6 +25,7 @@ struct AnalyticsWrapper {
 		case inviteOpened = "invite_opened"
 		case networkInviteResolve = "network_action_invite_resolve"
 		case resolveInvite = "resolve_invite"
+		case supporterCTAClick = "supporter_cta_click" // Clicked on supporter CTA
 	}
 
 	static private func getBaseProps() -> [String: Any?] {
