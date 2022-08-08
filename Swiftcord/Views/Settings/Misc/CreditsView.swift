@@ -11,22 +11,65 @@ struct CreditsView: View {
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Text("Credits").font(.title)
-			VStack(alignment: .center, spacing: 2) {
-				Image(systemName: "person.fill").font(.system(size: 24)).foregroundColor(.yellow)
-				Text("Head Developer").font(.title2).padding(.top, 8)
-				Text("Vincent Kwok")
-			}.frame(maxWidth: .infinity)
-			HStack(alignment: .top, spacing: 16) {
-				VStack(alignment: .center, spacing: 2) {
-					Image(systemName: "person.3")
-						.font(.system(size: 24)).foregroundColor(.green)
-					Text("Contributors").font(.title2).padding(.top, 8)
 
-					Text("Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!")
-						.multilineTextAlignment(.center)
+			Divider()
+
+			HStack(spacing: 24) {
+				Image(systemName: "person.fill")
+					.font(.system(size: 36))
+					.foregroundColor(.yellow)
+					.frame(width: 36)
+
+				VStack(alignment: .leading, spacing: 8) {
+					Text("Head Developer").font(.title)
+					Text("I love working on Swiftcord, and developing functional and beautiful native apps!")
+
+					Text("[Vincent Kwok](https://github.com/cryptoAlgorithm)")
+				}
+				Spacer()
+			}
+
+			Divider()
+			
+			HStack(spacing: 24) {
+				Image(systemName: "dollarsign.circle")
+					.font(.system(size: 36))
+					.foregroundColor(.orange)
+					.frame(width: 36)
+
+				VStack(alignment: .leading, spacing: 8) {
+					Text("Sponsors").font(.title2).padding(.top, 8)
+					
+					Text("Sponsoring Swiftcord allows me to continue developing it!")
 						.padding(.bottom, 4)
 
-					Group {
+					Link("selimgr",
+						 destination: URL(string: "https://github.com/selimgr")!)
+
+					Text("Please sponsor Swiftcord on GitHub! I'll be eternally grateful <3")
+						.padding(.top, 4)
+						.font(.caption)
+				}
+			}
+
+			Divider()
+
+			HStack(spacing: 24) {
+				Image(systemName: "person.3")
+					.font(.system(size: 24)) // This icon is bigger, make its font size smaller so its width remains the same
+					.foregroundColor(.green)
+					.frame(width: 36)
+
+				VStack(alignment: .leading, spacing: 8) {
+					Text("Contributors").font(.title2)
+					Text("Thanks to all those who made valuable contributions! Swiftcord wouldn't be where it is without your contributions!")
+						.padding(.bottom, 4)
+
+					LazyVGrid(columns: [
+						GridItem(.flexible()),
+						GridItem(.flexible()),
+						GridItem(.flexible())
+					]) {
 						Link("Anthony Ingle",
 							 destination: URL(string: "https://github.com/ingleanthony")!)
 						Link("Ben Tettmar",
@@ -44,28 +87,12 @@ struct CreditsView: View {
 						Link("charxene",
 							 destination: URL(string: "https://github.com/charxene")!)
 					}
-
 					Text("Big thanks to all contributors <3")
 						.padding(.top, 4)
 						.font(.caption)
 						.multilineTextAlignment(.center)
-				}.frame(maxWidth: .infinity)
-				VStack(alignment: .center, spacing: 2) {
-					Image(systemName: "dollarsign.circle")
-						.font(.system(size: 24)).foregroundColor(.orange)
-					Text("Sponsors").font(.title2).padding(.top, 8)
-
-					Text("Sponsoring Swiftcord allows me to continue developing it!")
-						.multilineTextAlignment(.center)
-						.padding(.bottom, 4)
-
-					Link("selimgr",
-						 destination: URL(string: "https://github.com/selimgr")!)
-
-					Text("Please sponsor Swiftcord on GitHub! I'll be eternally grateful <3")
-						.padding(.top, 4)
-						.font(.caption)
-				}.frame(maxWidth: .infinity)
+				}
+				Spacer()
 			}
 			Link(destination: URL(string: "https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation/")!) {
 				Text("Thanks to iJayTD on Reddit for recreating the Discord loading animation and agreeing to its use in Swiftcord!").multilineTextAlignment(.leading)
