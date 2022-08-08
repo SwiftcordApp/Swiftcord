@@ -83,7 +83,7 @@ struct CreditsView: View {
 							GridItem(.flexible()),
 							GridItem(.flexible())
 						], spacing: 4) {
-							ForEach(contributors, id: \.username) { contributor in
+							ForEach(contributors.prefix(12), id: \.username) { contributor in
 								HStack(spacing: 4) {
 									// Top 3 contributors get shown more prominently
 									if contributor.contributions >= contributors[2].contributions {
@@ -114,6 +114,12 @@ struct CreditsView: View {
 									}
 								}
 							}
+						}
+						if contributors.count > 12 {
+							Link(
+								"+ \(contributors.count - 12) contributors",
+								destination: URL(string: "https://github.com/SwiftcordApp/Swiftcord/graphs/contributors")!
+							)
 						}
 					} else {
 						ProgressView("Loading contributors...")
