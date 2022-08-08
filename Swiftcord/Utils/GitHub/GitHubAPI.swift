@@ -31,7 +31,7 @@ struct GitHubAPI {
 
 		return try await makeReq(url: url)
 	}
-	
+
 	static func getRepoContributors(
 		org: String,
 		repo: String
