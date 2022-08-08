@@ -13,7 +13,7 @@ struct AboutSwiftcordView: View {
 			VStack(spacing: 8) {
 				Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 128, height: 128)
 				Text(appName ?? "").font(.largeTitle)
-				Text("Native Discord client built 100% in SwiftUI")
+				Text("Native Discord client built in Swift and SwiftUI")
 
 				// IMO its better to just crash if these are missing in the info dict.
 				// If they are nil there are bigger problems than the app crashing.
@@ -33,6 +33,7 @@ struct AboutSwiftcordView: View {
 				.multilineTextAlignment(.center)
 				Text("Swiftcord is powered by [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), a WIP Discord API implementation in Swift")
 			}
+			Spacer()
 		}.padding(40)
 	}
 }
