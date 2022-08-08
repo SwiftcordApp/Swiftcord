@@ -334,7 +334,6 @@
 		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DACBD15A287C243000CED3EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAE557FA282D00B6001F4EF1 /* typing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "typing-animation.json"; sourceTree = "<group>"; };
-		DAFD47042897757F0075D71B /* SwiftyGif */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftyGif; path = ../SwiftyGif; sourceTree = "<group>"; };
 		DAFD470C289A1F9F0075D71B /* AttachmentImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentImage.swift; sourceTree = "<group>"; };
 		DAFD470F289A1FEB0075D71B /* AttachmentAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentAudio.swift; sourceTree = "<group>"; };
 		DAFD4712289A202F0075D71B /* AttachmentProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentProgress.swift; sourceTree = "<group>"; };
@@ -459,7 +458,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DAFD47042897757F0075D71B /* SwiftyGif */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
