@@ -1,12 +1,30 @@
 {
   "pins" : [
     {
+      "identity" : "appcenter-sdk-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/microsoft/appcenter-sdk-apple",
+      "state" : {
+        "revision" : "b2dc99cfedead0bad4e6573d86c5228c89cff332",
+        "version" : "4.4.3"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
         "revision" : "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
         "version" : "3.3.0"
+      }
+    },
+    {
+      "identity" : "plcrashreporter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/microsoft/PLCrashReporter.git",
+      "state" : {
+        "revision" : "81cdec2b3827feb03286cb297f4c501a8eb98df1",
+        "version" : "1.10.2"
       }
     },
     {
@@ -41,8 +59,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
       "state" : {
-        "revision" : "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
-        "version" : "2.1.0"
+        "branch" : "main",
+        "revision" : "f94be38411297c71aa8df69c6875127e6d8d7a92"
+      }
+    },
+    {
+      "identity" : "swiftygif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cryptoAlgorithm/SwiftyGif",
+      "state" : {
+        "branch" : "master",
+        "revision" : "4c271659307fc780728b3448419bc67678756cb0"
       }
     }
   ],
