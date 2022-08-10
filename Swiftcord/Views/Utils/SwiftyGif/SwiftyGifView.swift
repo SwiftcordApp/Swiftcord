@@ -9,13 +9,19 @@ import SwiftUI
 
 struct SwiftyGifView: NSViewRepresentable {
 	let url: URL
+	var animating = true
+	var resetWhenNotAnimating = false
 
 	func makeNSView(context: Context) -> SwiftyGifNSView {
-		return SwiftyGifNSView(url: url)
+		let view = SwiftyGifNSView(url: url)
+		view.isAnimating = animating
+		if !animating { view.currentFrame = 0 }
+		return view
 	}
 
 	func updateNSView(_ view: SwiftyGifNSView, context: Context) {
-		// view.setGifFromURL(url)
+		view.isAnimating = animating
+		if resetWhenNotAnimating, !animating { view.currentFrame = 0 }
 	}
 }
 

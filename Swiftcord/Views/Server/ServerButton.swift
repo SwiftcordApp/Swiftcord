@@ -92,19 +92,15 @@ struct ServerButtonStyle: ButtonStyle {
                 Image(systemName: systemName)
                     .font(.system(size: 24))
             } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
-				if iconURL.isAnimatable, hovered {
+				if iconURL.isAnimatable {
 					SwiftyGifView(
-						url: iconURL.modifyingPathExtension("gif")
+						url: iconURL.modifyingPathExtension("gif"),
+						animating: hovered,
+						resetWhenNotAnimating: true
 					).transition(.customOpacity)
 				} else {
-					CachedAsyncImage(url: iconURL) { phase in
-						if let image = phase.image {
-							image.resizable().scaledToFill().transition(.customOpacity)
-						} else if phase.error != nil {
-							configuration.label.font(.system(size: 18))
-						} else {
-							Image(systemName: "arrow.clockwise").font(.system(size: 24))
-						}
+					BetterImageView(url: iconURL) {
+						configuration.label.font(.system(size: 18))
 					}
 				}
             } else {
