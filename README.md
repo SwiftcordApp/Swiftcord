@@ -1,7 +1,7 @@
 <p align="center"><image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/Picture 1.png" width="196px" height="196px" /></p>
 
 <h1 align="center">Swiftcord</h1>
-<p align="center">A completely native Discord client for macOS built 100% in Swift and SwiftUI</p>
+<p align="center">Native Discord client for macOS built in Swift and SwiftUI</p>
 
 <image src="README_Resources/heroScreenshot.png" width="100%" alt="Viewing the general-talk channel in the r/MacBookPro server in Swiftcord" />
 
@@ -23,7 +23,7 @@ the Discord API implementation Swiftcord relies on.
 **If you like this project, please smash the star button and be one of my stargazers 🌟! It helps motivate
 me to continue developing it**
 
-**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensuring this project has a stable future :)**
+**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensure this project has a stable future :)**
 
 ## Supporters
 Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
@@ -97,15 +97,9 @@ to expand the answer
 
 <details>
   <summary><b>Will I get banned for using Swiftcord/Is using Swiftcord illegal?</b></summary>
-  Using Swiftcord <i>isn't illegal</i>. Contrary to what many people say
-  on various platforms, 3rd party clients (i.e. Swiftcord) <b>aren't against</b>
-  the Discord ToS. You can read the section in Discord's ToS regarding their software
-  <a href="https://discord.com/terms#software-in-discord’s-services">here</a>. 
-  However, I <b>cannot guarantee</b> Swiftcord's use of Discord's endpoints won't
-  trip selfbot ban detection, and Discord won't change their mind to officially ban
-  3rd-party clients. As far as possible, Swiftcord aims to
-  use endpoints as similarly to the official client as possible, and I (the developer)
-  have not been banned for using Swiftcord with either my main or alt account.
+    Nobody really knows what Discord's official stance on unofficial clients is. 
+    However, hundreds of people and I have been using Swiftcord for quite a while, 
+    and nobody has been banned to date.
   <i>
     I do not take any responsibility for account bans due to the use of Swiftcord,
     whether direct or indirect, although there's a very low possibility of that occurring. 
@@ -123,7 +117,7 @@ to expand the answer
 </details>
 <details>
   <summary><b>Swiftcord just crashed!</b></summary>
-  Although I'm aiming for 0 crashes (which is made easy by Swift),
+  Although I'm aiming for 0 crashes (which is made easier by Swift),
   sometimes the unexpected happens xD. If you experience a crash, please
   open an issue with appropriate information like the line the error
   occurs on, relevant logs, and what you were doing that might have caused
