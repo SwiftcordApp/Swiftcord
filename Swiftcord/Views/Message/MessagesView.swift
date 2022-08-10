@@ -208,7 +208,7 @@ struct MessagesView: View {
 					preAttach: preAttachChecks
 				)
 				.onAppear { viewModel.newMessage = "" }
-				.onChange(of: viewModel.newMessage) { [newMessage = viewModel.newMessage] content in
+				.onChange(of: viewModel.newMessage) { content in
 					if content.count > viewModel.newMessage.count,
 					   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
 						// Send typing start msg once every 8s while typing

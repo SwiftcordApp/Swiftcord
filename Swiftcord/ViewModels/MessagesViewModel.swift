@@ -9,6 +9,7 @@ import SwiftUI
 import DiscordKitCommon
 
 extension MessagesView {
+	// TODO: Make this ViewModel follow best practices and actually function as a ViewModel
 	@MainActor class ViewModel: ObservableObject {
 		@Published var reachedTop = false
 		@Published var messages: [Message] = []
@@ -24,7 +25,5 @@ extension MessagesView {
 		@Published var messageInputHeight = 0.0
 		@Published var dropOver = false
 		@Published var highlightMsg: Snowflake?
-		
-		
 	}
 }
