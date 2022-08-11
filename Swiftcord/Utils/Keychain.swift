@@ -10,37 +10,32 @@ import Foundation
 import Security
 
 public class Keychain {
-    static let tag = Bundle.main.bundleIdentifier!.data(using: .utf8)!
+    private static let tag = Bundle.main.bundleIdentifier!.data(using: .utf8)!
 
 	@discardableResult
-    public class func save(key: String, data: String) -> OSStatus {
-        return save(key: key, data: data.data(using: .utf8)!)
+	fileprivate class func _save(key: String, data: Data) -> OSStatus {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "\(Bundle.main.bundleIdentifier!).\(key)",
+            kSecAttrApplicationTag: tag,
+            kSecValueData: data
+        ] as CFDictionary
+
+        SecItemDelete(query)
+
+        return SecItemAdd(query, nil)
     }
 
 	@discardableResult
-	public class func save(key: String, data: Data) -> OSStatus {
+	fileprivate class func _remove(key: String) -> OSStatus {
         let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
-            kSecAttrAccount as String: "\(Bundle.main.bundleIdentifier!).\(key)",
-            kSecAttrApplicationTag as String: tag,
-            kSecValueData as String: data
-        ] as [String: Any]
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "\(Bundle.main.bundleIdentifier!).\(key)",
+            kSecAttrApplicationTag: tag,
+            kSecMatchLimit: kSecMatchLimitOne
+        ] as CFDictionary
 
-        SecItemDelete(query as CFDictionary)
-
-        return SecItemAdd(query as CFDictionary, nil)
-    }
-
-	@discardableResult
-	public class func remove(key: String) -> OSStatus {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
-            kSecAttrAccount as String: "\(Bundle.main.bundleIdentifier!).\(key)",
-            kSecAttrApplicationTag as String: tag,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ] as [String: Any]
-
-        return SecItemDelete(query as CFDictionary)
+        return SecItemDelete(query)
     }
 
 	public class func load(key: String) -> String? {
@@ -50,28 +45,41 @@ public class Keychain {
 
 	public class func loadData(key: String) -> Data? {
         let query = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: "\(Bundle.main.bundleIdentifier!).\(key)",
-            kSecReturnData as String: kCFBooleanTrue!,
-            kSecAttrApplicationTag as String: tag,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ] as [String: Any]
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "\(Bundle.main.bundleIdentifier!).\(key)",
+            kSecReturnData: true,
+            kSecAttrApplicationTag: tag,
+            kSecMatchLimit: kSecMatchLimitOne
+        ] as CFDictionary
 
         var dataTypeRef: AnyObject?
 
-        let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        let status: OSStatus = SecItemCopyMatching(query, &dataTypeRef)
 
         guard status == noErr else { return nil }
         return dataTypeRef as? Data
     }
 
-	public class func createUniqueID() -> String {
+	private class func createUniqueID() -> String {
         let uuid: CFUUID = CFUUIDCreate(nil)
         let cfStr: CFString = CFUUIDCreateString(nil, uuid)
 
         let swiftString: String = cfStr as String
         return swiftString
     }
+}
+
+// Publically exposed methods
+public extension Keychain {
+	class func save(key: String, data: String) {
+		save(key: key, data: data.data(using: .utf8)!)
+	}
+	static func save(key: String, data: Data, canSync: Bool = true) {
+		DispatchQueue.global(qos: .utility).async { _save(key: key, data: data) }
+	}
+	static func remove(key: String) {
+		DispatchQueue.global(qos: .utility).async { _remove(key: key) }
+	}
 }
 
 public extension Data {
