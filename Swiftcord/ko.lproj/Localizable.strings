@@ -3,7 +3,7 @@
 "onboarding.footer" = "Swiftcord는 버그나 제한 사항이 있는 알파 버전입니다. 현재 공식 클라이언트를 완전히 대체하지 않습니다.";
 /* ====== Actions ====== */
 "action.continue" = "계속";
-"onboarding.lightweight.header" = "전력 효율성 - 가벼움";
+"onboarding.lightweight.header" = "전력 효율성 — 가벼움";
 "onboarding.features.header" = "풍부한 기능";
 
 /* ====== Loading Cover ====== */
@@ -25,9 +25,9 @@
 "server.channel.noCategory" = "카테고리 없음";
 "server.composeMsg.hint %@" = "#%@에 메시지 보내기";
 "onboarding.wip.header" = "개발 진행중";
-"onboarding.subtitle" = "macOS용으로 제작 및 설계된 Discord 클라이언트";
+"onboarding.subtitle" = "macOS 전용으로 제작 및 설계된 Discord 클라이언트";
 "onboarding.wip.body" = "뭔가 잘못되었나요? Github에 이슈를 생성하거나 Discord 서버에 공유해 주세요";
-"onboarding.lightweight.body" = "Discord 대비 최대 7배 적은 메모리 점유, 낮은 CPU 부담.";
+"onboarding.lightweight.body" = "Discord 대비 낮은 CPU 부담, 최대 7배 적은 메모리 사용.";
 "user.roles.loading" = "역할 로딩중…";
 "settings.app.accessibility.stickers" = "스티커";
 
@@ -73,7 +73,7 @@
 "onboarding.title" = "환영합니다\n";
 "server.channel.title %@" = "#%@에 오신 걸 환영합니다!";
 "server.channel.header %@ %@" = "#%@ 채널의 시작이에요. %@";
-"loader.panic.logout" = "시간이 걸리는군요, 로그아웃하시겠어요?";
+"loader.panic.logout" = "시간이 좀 걸리네요, 로그아웃하시겠어요?";
 "login.token.back" = "뒤로가기";
 "login.token.input" = "Discord 토큰 붙여넣기";
 
@@ -85,7 +85,7 @@
 "settings.app.advanced.crashes" = "충돌 시 충돌 보고서가 향후 충돌을 진단하고 방지하기 위해 AppCenter로 전송됩니다. 로그 및 식별 가능한 데이터는 포함되지 않습니다.";
 "settings.app.advanced.analytics.caption" = "AppCenter를 통해 익명의 SwiftCord 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 역추적할 수 없습니다.";
 "action.done" = "저장";
-"action.close" = "윈도우 닫기";
+"action.close" = "닫기";
 "server.join.title" = "서버 참가하기";
 "server.join.action" = "서버 참가하기";
 "server.join.caption" = "아래에 있는 초대 코드를 입력하여 서버에 참가하세요";
