@@ -28,7 +28,7 @@ struct MiniUserProfileView: View {
 				let url = banner.bannerURL(of: user.id, size: 600)
 				Group {
 					if url.isAnimatable {
-						SwiftyGifView(url: url.modifyingPathExtension("gif"), width: 300, height: 120)
+						SwiftyGifView(url: url.modifyingPathExtension("gif"))
 					} else {
 						CachedAsyncImage(url: url) { image in
 							image.resizable().scaledToFill()
@@ -52,7 +52,7 @@ struct MiniUserProfileView: View {
 			HStack(alignment: .bottom, spacing: 4) {
 				Group {
 					if avatarURL.isAnimatable {
-						SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"), width: 80, height: 80)
+						SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"))
 					} else {
 						CachedAsyncImage(url: avatarURL) { image in
 							image.resizable().scaledToFill()

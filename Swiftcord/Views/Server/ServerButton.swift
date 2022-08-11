@@ -94,9 +94,7 @@ struct ServerButtonStyle: ButtonStyle {
             } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
 				if iconURL.isAnimatable, hovered {
 					SwiftyGifView(
-						url: iconURL.modifyingPathExtension("gif"),
-						width: 48,
-						height: 48
+						url: iconURL.modifyingPathExtension("gif")
 					).transition(.customOpacity)
 				} else {
 					CachedAsyncImage(url: iconURL) { phase in

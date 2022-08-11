@@ -44,7 +44,7 @@ struct CreditsView: View {
 			}
 
 			Divider()
-			
+
 			HStack(alignment: .top, spacing: 24) {
 				Image(systemName: "dollarsign.circle")
 					.font(.system(size: 36))
