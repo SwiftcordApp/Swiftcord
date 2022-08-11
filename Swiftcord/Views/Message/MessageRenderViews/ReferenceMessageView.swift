@@ -10,6 +10,7 @@ import DiscordKitCore
 import DiscordKitCommon
 import CachedAsyncImage
 
+/// For rendering replies
 struct ReferenceMessageView: View {
 	let referencedMsg: PartialMessage?
 
@@ -38,25 +39,27 @@ struct ReferenceMessageView: View {
 							.font(.system(size: 14))
 							.opacity(0.9)
 
-						if quotedMsg.author?.bot == true || quotedMsg.webhook_id != nil {
-							NonUserBadge(
-								flags: quotedMsg.author?.public_flags,
-								isWebhook: quotedMsg.webhook_id != nil
-							)
-						}
+						if MessageView.defaultTypes.contains(quotedMsg.type ?? .defaultMsg) {
+							if quotedMsg.author?.bot == true || quotedMsg.webhook_id != nil {
+								NonUserBadge(
+									flags: quotedMsg.author?.public_flags,
+									isWebhook: quotedMsg.webhook_id != nil
+								)
+							}
 
-						Text(markdown: quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))
-							.font(.system(size: 14))
-							.opacity(0.75)
-						    .lineLimit(1)
-						if quotedMsg.content!.isEmpty {
-							Text("message.reply.attachment")
-							.font(.system(size: 14).italic())
-							.opacity(0.75)
-						}
+							Text(markdown: quotedMsg.content!.replacingOccurrences(of: "\n", with: " "))
+								.font(.system(size: 14))
+								.opacity(0.75)
+								.lineLimit(1)
+							if quotedMsg.content!.isEmpty {
+								Text("message.reply.attachment")
+									.font(.system(size: 14).italic())
+									.opacity(0.75)
+							}
 
-						if !quotedMsg.attachments!.isEmpty || !quotedMsg.embeds!.isEmpty {
-							Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
+							if !quotedMsg.attachments!.isEmpty || !quotedMsg.embeds!.isEmpty {
+								Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
+							}
 						}
 					}
 					.cursor(NSCursor.pointingHand)

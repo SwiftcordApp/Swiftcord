@@ -195,9 +195,8 @@
 		DAAFB5CC282B879200807B54 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5CB282B879200807B54 /* Double+.swift */; };
 		DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46B28A10BB100645FCD /* BetterImageView.swift */; };
-		DAB1E46F28A202B900645FCD /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DAB1E46E28A202B900645FCD /* CachedAsyncImage */; };
-		DAB1E47228A202CB00645FCD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAB1E47128A202CB00645FCD /* Lottie */; };
-		DAB1E47628A2189700645FCD /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E47528A2189700645FCD /* MessagesViewModel.swift */; };
+		DAB1E47A28A4C00200645FCD /* ActionMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E47928A4C00200645FCD /* ActionMessageView.swift */; };
+		DAB1E47D28A4C22E00645FCD /* DefaultMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E47C28A4C22E00645FCD /* DefaultMessageView.swift */; };
 		DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
 		DAB53665285ACED100DD9857 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53664285ACED100DD9857 /* GitHubAPI.swift */; };
 		DAB53668285AD11000DD9857 /* DiscordChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */; };
@@ -327,8 +326,8 @@
 		DAAFB5CB282B879200807B54 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		DAB1E46928A0A59500645FCD /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		DAB1E46B28A10BB100645FCD /* BetterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterImageView.swift; sourceTree = "<group>"; };
-		DAB1E47328A20D3800645FCD /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
-		DAB1E47528A2189700645FCD /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		DAB1E47928A4C00200645FCD /* ActionMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMessageView.swift; sourceTree = "<group>"; };
+		DAB1E47C28A4C22E00645FCD /* DefaultMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMessageView.swift; sourceTree = "<group>"; };
 		DAB53661285A272D00DD9857 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DAB53664285ACED100DD9857 /* GitHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordChannelButton.swift; sourceTree = "<group>"; };
@@ -414,9 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				DAFD470B289A1F870075D71B /* Attachment */,
-				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
-				DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */,
-				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
+				DAB1E47B28A4C1D300645FCD /* MessageRenderViews */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
@@ -666,6 +663,18 @@
 				DAB1E47528A2189700645FCD /* MessagesViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DAB1E47B28A4C1D300645FCD /* MessageRenderViews */ = {
+			isa = PBXGroup;
+			children = (
+				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
+				DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */,
+				DAB1E47928A4C00200645FCD /* ActionMessageView.swift */,
+				DAB1E47C28A4C22E00645FCD /* DefaultMessageView.swift */,
+				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
+			);
+			path = MessageRenderViews;
 			sourceTree = "<group>";
 		};
 		DAB53663285ACEBB00DD9857 /* GitHub */ = {
@@ -1089,6 +1098,7 @@
 				DA520AD927D4E7A4009FD740 /* LargeUserProfileView.swift in Sources */,
 				DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */,
 				DAB5366B285AD15900DD9857 /* FlatButtonStyle.swift in Sources */,
+				DAB1E47A28A4C00200645FCD /* ActionMessageView.swift in Sources */,
 				DA520ACF27D4CE5E009FD740 /* UserSettingsView.swift in Sources */,
 				364EF77C286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */,
 				DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */,
@@ -1122,6 +1132,7 @@
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,
 				DAFD4719289A21E80075D71B /* AttachmentVideo.swift in Sources */,
 				DAFD470D289A1F9F0075D71B /* AttachmentImage.swift in Sources */,
+				DAB1E47D28A4C22E00645FCD /* DefaultMessageView.swift in Sources */,
 				DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */,
 				DAFD4713289A202F0075D71B /* AttachmentProgress.swift in Sources */,
 				DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */,

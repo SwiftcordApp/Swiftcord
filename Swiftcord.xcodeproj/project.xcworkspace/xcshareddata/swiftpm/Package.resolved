@@ -10,6 +10,14 @@
       }
     },
     {
+      "identity" : "discordkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftcordApp/DiscordKit",
+      "state" : {
+        "revision" : "f38c9228615275bb20051a0a7bff356e97f45620"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
@@ -50,8 +58,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
       "state" : {
-        "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
-        "version" : "2.1.1"
+        "branch" : "main",
+        "revision" : "f94be38411297c71aa8df69c6875127e6d8d7a92"
       }
     },
     {
