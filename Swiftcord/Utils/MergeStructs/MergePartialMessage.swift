@@ -11,7 +11,7 @@ import Foundation
 import DiscordKitCommon
 
 extension Message {
-    mutating func mergeWithPartialMsg(_ partial: PartialMessage) {
+	func mergeWithPartialMsg(_ partial: PartialMessage) {
         author = partial.author ?? author
         member = partial.member ?? member
         content = partial.content ?? content
