@@ -58,7 +58,9 @@ struct DMButton: View {
 		Button { selectedCh = dm } label: {
 			HStack {
 				if dm.type == .dm, let user = gateway.cache.users[dm.recipient_ids![0]] {
-					UserAvatarView(user: user, guildID: nil, webhookID: nil, size: 32)
+					BetterImageView(url: user.avatarURL(size: 64))
+						.frame(width: 32, height: 32)
+						.clipShape(Circle())
 				} else {
 					Image(systemName: "person.2.fill")
 						.foregroundColor(.white)

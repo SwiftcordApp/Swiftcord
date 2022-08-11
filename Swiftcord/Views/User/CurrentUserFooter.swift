@@ -15,16 +15,11 @@ struct CurrentUserFooter: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            ZStack {
-                let avatarURL = user.avatarURL()
-                CachedAsyncImage(url: avatarURL) { image in
-                    image.resizable().scaledToFill()
-                } placeholder: {
-                    ProgressView().progressViewStyle(.circular)
-                }
-                .frame(width: 32, height: 32)
-                .clipShape(Circle())
-            }.padding(.leading, 8)
+			BetterImageView(url: user.avatarURL())
+				.frame(width: 32, height: 32)
+				.clipShape(Circle())
+				.padding(.leading, 8)
+
             VStack(alignment: .leading, spacing: 0) {
                 Text(user.username).font(.headline)
                 Text("#" + user.discriminator).font(.system(size: 12)).opacity(0.75)
@@ -49,7 +44,7 @@ struct CurrentUserFooter: View {
 			}
         }
         .frame(height: 52)
-        .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+		.background(Color(nsColor: .controlBackgroundColor).opacity(0.5))
     }
 }
 

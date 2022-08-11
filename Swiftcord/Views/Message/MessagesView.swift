@@ -25,6 +25,22 @@ struct NewAttachmentError: Identifiable {
 	let message: String
 }
 
+struct HeaderChannelIcon: View {
+	let iconName: String
+	let background: Color
+	let iconSize: CGFloat
+	let size: CGFloat
+
+	var body: some View {
+		Image(systemName: iconName)
+			.font(.system(size: iconSize))
+			.foregroundColor(.white)
+			.frame(width: size, height: size)
+			.background(background)
+			.clipShape(Circle())
+	}
+}
+
 struct MessagesViewHeader: View {
 	let chl: Channel?
 
@@ -35,20 +51,25 @@ struct MessagesViewHeader: View {
 			if chl?.type == .dm {
 				if let rID = chl?.recipient_ids?[0],
 				   let url = gateway.cache.users[rID]?.avatarURL(size: 160) {
-					CachedAsyncImage(url: url) { image in
-						image.resizable().scaledToFill()
-					} placeholder: { Rectangle().fill(.gray.opacity(0.2)) }
+					BetterImageView(url: url)
 						.frame(width: 80, height: 80)
 						.clipShape(Circle())
 				}
 			} else if chl?.type == .groupDM {
-				Image(systemName: "person.2.fill")
-					.font(.system(size: 30))
-					.foregroundColor(.white)
-					.frame(width: 80, height: 80)
-					.background(.red)
-					.clipShape(Circle())
-			} else { Image(systemName: "number").font(.system(size: 60)) }
+				HeaderChannelIcon(
+					iconName: "person.2.fill",
+					background: .red,
+					iconSize: 30,
+					size: 80
+				)
+			} else {
+				HeaderChannelIcon(
+					iconName: "number",
+					background: .init(nsColor: .unemphasizedSelectedContentBackgroundColor),
+					iconSize: 44,
+					size: 68
+				)
+			}
 
 			Text(chl?.type == .dm || chl?.type == .groupDM
 				 ? "\(chl?.label(gateway.cache.users) ?? "")"
