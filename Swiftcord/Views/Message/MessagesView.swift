@@ -356,9 +356,7 @@ struct MessagesView: View {
                 case .messageUpdate:
                     guard let newMsg = d as? PartialMessage else { break }
 					if let updatedIdx = messages.firstIndex(where: { $0.id == newMsg.id }) {
-                        var updatedMsg = messages[updatedIdx]
-                        updatedMsg.mergeWithPartialMsg(newMsg)
-                        messages[updatedIdx] = updatedMsg
+						messages[updatedIdx] = messages[updatedIdx].mergingWithPartialMsg(newMsg)
                     }
                 case .messageDelete:
                     guard let deletedMsg = d as? MessageDelete else { break }
