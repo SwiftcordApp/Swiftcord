@@ -14,8 +14,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
-        "branch" : "main",
-        "revision" : "f38c9228615275bb20051a0a7bff356e97f45620"
+        "revision" : "5a1cf337615a73855ce20420a76b45c39dcaec63"
       }
     },
     {
@@ -59,8 +58,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
       "state" : {
-        "revision" : "eeb1565d780d1b75d045e21b5ca2a1e3650b0fc2",
-        "version" : "2.1.0"
+        "branch" : "main",
+        "revision" : "f94be38411297c71aa8df69c6875127e6d8d7a92"
       }
     },
     {

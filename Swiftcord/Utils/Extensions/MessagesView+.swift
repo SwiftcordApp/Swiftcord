@@ -59,9 +59,9 @@ internal extension MessagesView {
 
 		// Create message reference if neccessary
 		var reference: MessageReference? {
-			if let replyingID = viewModel.replyingID {
-				viewModel.replyingID = nil // Make sure to clear that
-				return MessageReference(message_id: replyingID, guild_id: ctx.guild?.id)
+			if let replying = viewModel.replying {
+				viewModel.replying = nil // Make sure to clear that
+				return MessageReference(message_id: replying.messageID, guild_id: replying.guildID)
 			} else { return nil }
 		}
 

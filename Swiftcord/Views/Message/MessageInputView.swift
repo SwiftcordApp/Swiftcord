@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordKitCommon
 
 struct MessageAttachmentView: View {
     let attachment: URL
@@ -56,6 +57,7 @@ struct MessageInputView: View {
     let placeholder: LocalizedStringKey
     @Binding var message: String
     @Binding var attachments: [URL]
+	@Binding var replying: MessagesView.ViewModel.ReplyRef?
     let onSend: (String, [URL]) -> Void
 	let preAttach: (URL) -> Bool
 
@@ -76,6 +78,11 @@ struct MessageInputView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+			if replying != nil {
+				MessageInputReplyView(replying: $replying)
+				Divider()
+			}
+
             if !attachments.isEmpty {
                 ScrollView([.horizontal]) {
                     HStack {
@@ -139,13 +146,12 @@ struct MessageInputView: View {
             }
         }
         .frame(minHeight: 40)
-		.background(RoundedRectangle(cornerRadius: 7, style: .continuous)
-			.fill(.regularMaterial)
-			.overlay(
-				RoundedRectangle(cornerRadius: 7, style: .continuous)
-					.stroke(Color(nsColor: .separatorColor), lineWidth: 1)
-			)
+		.background(.regularMaterial)
+		.overlay(
+			RoundedRectangle(cornerRadius: 7)
+				.strokeBorder(Color(nsColor: .separatorColor), lineWidth: 1)
 		)
+		.cornerRadius(7)
         .padding(.horizontal, 16)
         .offset(y: -24)
     }

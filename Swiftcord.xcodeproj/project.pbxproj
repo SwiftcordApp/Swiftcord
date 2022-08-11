@@ -202,6 +202,7 @@
 		DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */; };
 		DAB1E48928A50D3600645FCD /* ActionMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48628A50D3600645FCD /* ActionMessageView.swift */; };
 		DAB1E48A28A50D3600645FCD /* ActionMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48628A50D3600645FCD /* ActionMessageView.swift */; };
+		DAB1E48C28A510DC00645FCD /* MessageInputReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48B28A510DC00645FCD /* MessageInputReplyView.swift */; };
 		DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
 		DAB53665285ACED100DD9857 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53664285ACED100DD9857 /* GitHubAPI.swift */; };
 		DAB53668285AD11000DD9857 /* DiscordChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */; };
@@ -331,10 +332,10 @@
 		DAAFB5CB282B879200807B54 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		DAB1E46928A0A59500645FCD /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		DAB1E46B28A10BB100645FCD /* BetterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterImageView.swift; sourceTree = "<group>"; };
-		DAB1E47328A20D3800645FCD /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DAB1E47528A2189700645FCD /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultMessageView.swift; sourceTree = "<group>"; };
 		DAB1E48628A50D3600645FCD /* ActionMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionMessageView.swift; sourceTree = "<group>"; };
+		DAB1E48B28A510DC00645FCD /* MessageInputReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputReplyView.swift; sourceTree = "<group>"; };
 		DAB53661285A272D00DD9857 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DAB53664285ACED100DD9857 /* GitHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordChannelButton.swift; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 				DAB1E47B28A4C1D300645FCD /* MessageRenderViews */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				DAB1E48B28A510DC00645FCD /* MessageInputReplyView.swift */,
 				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
 				DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */,
@@ -469,7 +471,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DAB1E47328A20D3800645FCD /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -1136,6 +1137,7 @@
 				DA32EF4A27C8BE8F00A9ED72 /* Color+.swift in Sources */,
 				DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */,
 				DAAFB5BC282A570D00807B54 /* CircularProgressView.swift in Sources */,
+				DAB1E48C28A510DC00645FCD /* MessageInputReplyView.swift in Sources */,
 				3684BB5B283C69C5005045AE /* Sparkle.swift in Sources */,
 				DA2BD30A284B87AC00EBB8D6 /* AnalyticsWrapper.swift in Sources */,
 				DA520ADD27D643CE009FD740 /* Int+.swift in Sources */,

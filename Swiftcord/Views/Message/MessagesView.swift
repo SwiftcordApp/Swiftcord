@@ -111,7 +111,7 @@ struct MessagesView: View {
 	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
-	
+
 	@StateObject var viewModel = ViewModel()
 
     // Gateway
@@ -146,20 +146,7 @@ struct MessagesView: View {
 											if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
 										}
 									},
-									onReply: {
-										viewModel.infoBarData = InfoBarData(
-											message: "Replying to **\(msg.author.username)**",
-											buttonLabel: "Cancel",
-											color: .init(nsColor: .unemphasizedSelectedContentBackgroundColor),
-											buttonIcon: "x.circle.fill",
-											clickHandler: {
-												viewModel.replyingID = nil
-												viewModel.showingInfoBar = false
-											}
-										)
-										viewModel.showingInfoBar = true
-										viewModel.replyingID = msg.id
-									},
+									replying: $viewModel.replying,
 									highlightMsgId: $viewModel.highlightMsg
 								)
 							}.flip()
@@ -224,7 +211,7 @@ struct MessagesView: View {
 					   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
 					   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
 					  ),
-					message: $viewModel.newMessage, attachments: $viewModel.attachments,
+					message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
 					onSend: sendMessage,
 					preAttach: preAttachChecks
 				)
