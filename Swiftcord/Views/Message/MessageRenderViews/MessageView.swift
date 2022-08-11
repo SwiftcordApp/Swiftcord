@@ -183,6 +183,7 @@ private extension MessageView {
 				messageID: message.id,
 				guildID: serverCtx.guild!.id,
 				ping: true,
+				authorID: message.author.id,
 				authorUsername: message.author.username
 			)
 		}

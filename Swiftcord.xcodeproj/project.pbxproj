@@ -1631,7 +1631,7 @@
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
 				kind = revision;
-				revision = 5a1cf337615a73855ce20420a76b45c39dcaec63;
+				revision = 612eef2808f9fd885cdc65fa3f31f4e2a26537e4;
 			};
 		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {

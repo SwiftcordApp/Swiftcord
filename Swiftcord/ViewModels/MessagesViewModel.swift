@@ -15,7 +15,8 @@ extension MessagesView {
 		struct ReplyRef {
 			let messageID: Snowflake
 			let guildID: Snowflake
-			let ping: Bool // Currently unused
+			let ping: Bool
+			let authorID: Snowflake
 			let authorUsername: String
 		}
 

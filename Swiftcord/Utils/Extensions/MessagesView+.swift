@@ -64,6 +64,11 @@ internal extension MessagesView {
 				return MessageReference(message_id: replying.messageID, guild_id: replying.guildID)
 			} else { return nil }
 		}
+		var allowedMentions: AllowedMentions? {
+			if let replying = viewModel.replying {
+				return AllowedMentions(parse: [.user, .role, .everyone], replied_user: replying.ping)
+			} else { return nil }
+		}
 
 		if #available(macOS 13, *) {
 			// Workaround for some race condition, probably a macOS 13 beta bug
@@ -74,6 +79,7 @@ internal extension MessagesView {
 			guard (await restAPI.createChannelMsg(
 				message: NewMessage(
 					content: message,
+					allowed_mentions: allowedMentions,
 					message_reference: reference,
 					attachments: attachments.isEmpty ? nil : attachments.enumerated()
 						.map { (idx, attachment) in
