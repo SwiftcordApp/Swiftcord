@@ -11,6 +11,7 @@ import DiscordKitCommon
 /// Action messages: e.g. member leave, join etc.
 struct ActionMessageView: View {
 	let message: Message
+	let mini: Bool
 
 	private struct ActionMessageData {
 		let message: LocalizedStringKey
@@ -76,13 +77,17 @@ struct ActionMessageView: View {
 	var body: some View {
 		Image(systemName: data.icon)
 			.foregroundColor(data.color)
-			.font(.system(size: 16))
-			.padding([.leading, .trailing], 12)
+			.font(.system(size: mini ? 12 : 16, weight: .medium))
+			.padding([.leading, .trailing], mini ? 0 : 12)
 		Group {
-			Text(data.message).font(.system(size: 14))
-			+ Text(" ").font(.system(size: 14))
-			+ Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
-				.font(.system(size: 12))
+			if mini {
+				Text(data.message).font(.system(size: 14))
+			} else {
+				Text(data.message).font(.system(size: 14))
+				+ Text(" ").font(.system(size: 14))
+				+ Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
+					.font(.system(size: 12))
+			}
 		}.opacity(0.75)
 	}
 }

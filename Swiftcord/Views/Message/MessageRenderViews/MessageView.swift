@@ -106,7 +106,7 @@ struct MessageView: View {
 						DefaultMessageView(message: message, shrunk: shrunk)
                     }
 				} else {
-					ActionMessageView(message: message)
+					ActionMessageView(message: message, mini: false)
 				}
                 Spacer()
             }
