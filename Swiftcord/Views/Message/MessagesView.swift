@@ -120,6 +120,7 @@ struct MessagesView: View {
 	@State private var messageInputHeight = 0.0
 	@State private var dropOver = false
 	@State private var highlightMsg: Snowflake?
+	@State private var replyingID: Snowflake?
 
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
@@ -157,6 +158,20 @@ struct MessagesView: View {
 										DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 											if highlightMsg == id { highlightMsg = nil }
 										}
+									},
+									onReply: {
+										infoBarData = InfoBarData(
+											message: "Replying to **\(msg.author.username)**",
+											buttonLabel: "Cancel",
+											color: .init(nsColor: .unemphasizedSelectedContentBackgroundColor),
+											buttonIcon: "x.circle.fill",
+											clickHandler: {
+												replyingID = nil
+												showingInfoBar = false
+											}
+										)
+										showingInfoBar = true
+										replyingID = msg.id
 									},
 									highlightMsgId: $highlightMsg
 								)

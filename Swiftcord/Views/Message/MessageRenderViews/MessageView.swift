@@ -40,7 +40,8 @@ struct MessageView: View {
     let shrunk: Bool
     let lineSpacing = 4 as CGFloat
     let quotedMsg: Message?
-    let onQuoteClick: (String) -> Void
+    let onQuoteClick: (Snowflake) -> Void
+	let onReply: () -> Void
 
 	@Binding var highlightMsgId: Snowflake?
 
@@ -123,7 +124,9 @@ struct MessageView: View {
         .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .onHover { isHovered in hovered = isHovered }
         .contextMenu {
-			Button(action: reply) {
+			Button {
+				onReply()
+			} label: {
                 // Using Label(_:systemImage:) doesn't show image on macOS
                 Image(systemName: "arrowshape.turn.up.left.fill")
                 Text("Reply")
@@ -176,10 +179,6 @@ struct MessageView: View {
 }
 
 private extension MessageView {
-	func reply() {
-		print(#function)
-	}
-
 	func addReaction() {
 		print(#function)
 	}
