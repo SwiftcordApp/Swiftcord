@@ -11,7 +11,7 @@ import SwiftyGif
 final class SwiftyGifNSView: NSView {
 	fileprivate var _animate = true
 
-	let imageView: NSImageView
+	private let imageView: NSImageView
 
 	var isAnimating: Bool {
 		get { _animate }

@@ -128,8 +128,8 @@ struct ServerButtonStyle: ButtonStyle {
 		.mask {
 			RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
 		}
-		.offset(y: configuration.isPressed ? 2 : 0)
-        .animation(.interpolatingSpring(stiffness: 500, damping: 25), value: configuration.isPressed)
+		.offset(y: configuration.isPressed ? 1 : 0)
+		.animation(.none, value: configuration.isPressed)
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }
         .cursor(NSCursor.pointingHand)
