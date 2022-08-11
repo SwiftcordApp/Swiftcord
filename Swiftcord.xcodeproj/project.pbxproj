@@ -1626,8 +1626,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 5a1cf337615a73855ce20420a76b45c39dcaec63;
 			};
 		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {

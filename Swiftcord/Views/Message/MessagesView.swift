@@ -284,7 +284,7 @@ struct MessagesView: View {
 					}
             }
         }
-        .frame(minWidth: 525)
+		.frame(minWidth: 525, minHeight: 500)
 		.blur(radius: dropOver ? 24 : 0)
 		.overlay {
 			if dropOver {
