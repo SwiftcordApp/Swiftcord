@@ -59,8 +59,8 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 
 ## Releases
 
-### Nightly Builds (Latest fixes/features, might be unstable)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/SwiftcordApp/Swiftcord/Build%20Canary?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
+### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
+[![Nightly build action status](https://img.shields.io/github/workflow/status/SwiftcordApp/Swiftcord/Build%20Nightly?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 
 For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 

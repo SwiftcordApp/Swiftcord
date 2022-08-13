@@ -1,9 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Build Canary
+name: Build Nightly
 
 # Controls when the workflow will run
 on:
+  pull_request: # Run for pull requests as well
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
    branches: [ main ]
@@ -14,16 +13,31 @@ on:
 jobs:
   build_nightly_release:
     runs-on: macos-12
+    timeout-minutes: 30 # If a build exceeds 30 mins, it probably isn't ever going to complete
     
     steps:
-      - name: "Checkout Project"
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       
-      - name: "Select Xcode 13.3.1"
-        uses: devbotsxyz/xcode-select@main
+      - name: "Select Xcode 14.0"
+        run: sudo xcode-select -s /Applications/Xcode_14.0.app
+        
+      ### Caching
+      - uses: actions/cache@v2
+        name: "Cache Derived Data"
         with:
-          version: "13.4.1"
+          path: |
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
+          key: ${{ runner.os }}-derivedData-cache-${{ hashFiles(
+              'Swiftcord.xcworkspace/xcshareddata/swiftpm/Package.resolved',
+              'Swiftcord.xcodeproj/xcshareddata/swiftpm/Package.resolved'
+            ) }} # The xcworkspace will be removed soon
+          restore-keys: |
+            ${{ runner.os }}-derivedData-cache
+      - name: Avoid inode changes for DerivedData
+        run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
       
+      ### Certs
       - name: "Import Certificate: Development"
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.DEVELOPMENT_CERTIFICATE_DATA }}
@@ -68,9 +82,9 @@ jobs:
             TEAMID=`awk -F '=' '/DEVELOPMENT_TEAM/ {print $2; exit}' Swiftcord.xcodeproj/project.pbxproj`
             sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
           
-      - name: "Archive"
+      - name: "Create Release Build Archive"
         run: | 
-          xcodebuild -workspace Swiftcord.xcworkspace -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
+          xcodebuild -project Swiftcord.xcodeproj -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
           COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db" | xcpretty
           
       - name: "Export & Sign Release Build"
@@ -78,12 +92,9 @@ jobs:
         with:
           workspace: Swiftcord.xcworkspace
           scheme: Swiftcord
-          
-      - name: Install create-dmg
-        run: npm install --global create-dmg
         
-      - name: Make Release Dmg
-        run: create-dmg Export/Swiftcord.app
+      - name: Create Release DMG
+        run: npm install --global create-dmg && create-dmg Export/Swiftcord.app
       
       - name: "Notarize Release Build"
         run: |
