@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordKit
 import DiscordKitCommon
 import DiscordKitCore
 
@@ -51,6 +52,7 @@ struct MessageView: View {
 
     @EnvironmentObject var serverCtx: ServerContext
 	@EnvironmentObject var restAPI: DiscordREST
+    @EnvironmentObject var gateway: DiscordGateway
 
 	// Messages that can be rendered as "default" messages
 	static let defaultTypes: [MessageType] = [.defaultMsg, .reply]
@@ -150,9 +152,11 @@ struct MessageView: View {
             Divider()
 
 			Group {
-				Button(action: editMessage) {
-					Image(systemName: "pencil")
-					Text("Edit")
+				if message.author.id == gateway.cache.user?.id {
+					Button(action: editMessage) {
+						Image(systemName: "pencil")
+						Text("Edit")
+					}
 				}
 				Button(role: .destructive, action: deleteMessage) {
 					Image(systemName: "xmark.bin.fill")
