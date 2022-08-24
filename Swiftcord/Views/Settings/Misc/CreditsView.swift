@@ -21,6 +21,8 @@ struct CreditsView: View {
 	@State private var contributors: [MinimalContributor]?
 	@State private var addPulseScale = 1.0
 	@Environment(\.openURL) var openURL
+	
+	
 
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
@@ -57,7 +59,6 @@ struct CreditsView: View {
 					Text("settings.others.credits.sponsor.desc").padding(.bottom, 4)
 
 					Group {
-						Text("settings.others.credits.sponsor.tier3").font(.title3).padding(.top, 8)
 						VStack(spacing: 8) {
 							Image(systemName: "plus.circle")
 								.font(.system(size: 64))
@@ -102,6 +103,44 @@ struct CreditsView: View {
 							)
 						)
 						.cornerRadius(7)
+					}
+
+					Group {
+						Text("settings.others.credits.sponsor.tier3").font(.title3).padding(.top, 8)
+						LazyVGrid(columns: [
+							GridItem(.flexible()),
+							GridItem(.flexible())
+						], spacing: 4) {
+							GroupBox {
+								HStack(alignment: .top, spacing: 8) {
+									BetterImageView(url: URL(string: "https://cdn.discordapp.com/avatars/164066880250839040/454495419ffe4dfeb7ea91f82eecfe47.png"))
+										.frame(width: 128, height: 128)
+									VStack(alignment: .leading) {
+										Text(verbatim: "kallisti").font(.title)
+										Text("[midnight.town](https://midnight.town)")
+										Spacer()
+										Text("First red-hot supporter!").font(.italic(.body)())
+									}.padding(8)
+									Spacer()
+								}
+								.frame(maxWidth: .infinity)
+								.padding(-4)
+							}
+							GroupBox {
+								HStack(spacing: 12) {
+									Image(systemName: "plus.app")
+										.font(.system(size: 64))
+										.foregroundColor(.orange)
+									VStack(alignment: .leading, spacing: 8) {
+										Text("Become a Sponsor").font(.title)
+										Text("Find out how you can [support Swiftcord](https://github.com/sponsors/cryptoAlgorithm)!")
+										Spacer()
+									}
+									Spacer()
+								}
+								.padding(4)
+							}
+						}
 					}
 
 					Group {
