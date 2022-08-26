@@ -9,7 +9,7 @@ import Foundation
 import AppKit
 import AppCenter
 import AppCenterAnalytics
-import AppCenterCrashes
+import Sentry
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
@@ -24,10 +24,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if BuildSettings.appcenterAppSecret.isEmpty == false {
 			// Start AppCenter if we have a valid app secret
 			AppCenter.start(withAppSecret: BuildSettings.appcenterAppSecret, services: [
-				Analytics.self,
-				Crashes.self
+				Analytics.self
 			])
 			Analytics.enabled = UserDefaults.standard.bool(forKey: "local.analytics")
+		}
+
+		SentrySDK.start { options in
+			options.dsn = "https://e7d39f98a63347c18b9f71d3aee6a4d3@o1377212.ingest.sentry.io/6687560"
+#if DEBUG
+			options.debug = true // Enabled debug when first installing is always helpful
+			options.tracesSampleRate = 1.0
+#else
+			options.tracesSampleRate = 0.3
+#endif
+			options.enableAppHangTracking = true
 		}
 	}
 

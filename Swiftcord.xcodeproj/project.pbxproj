@@ -99,7 +99,6 @@
 		3642999C286801C900483D0A /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
 		3642999D286801C900483D0A /* typing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DAE557FA282D00B6001F4EF1 /* typing-animation.json */; };
 		364299A62868042F00483D0A /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 364299A52868042F00483D0A /* AppCenterAnalytics */; };
-		364299A82868042F00483D0A /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 364299A72868042F00483D0A /* AppCenterCrashes */; };
 		364EF77C286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364EF77B286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift */; };
 		364EF77D286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364EF77B286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift */; };
 		366BAA8C286D322600B662EA /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366BAA8B286D322600B662EA /* Array+.swift */; };
@@ -180,7 +179,9 @@
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
 		DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */; };
-		DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DA97BA912849F9C500059FD7 /* AppCenterCrashes */; };
+		DAA0A57128B90C7B007D8351 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = DAA0A57028B90C7B007D8351 /* SwiftyGif */; };
+		DAA0A57428B90DD7007D8351 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = DAA0A57328B90DD7007D8351 /* Sentry */; };
+		DAA0A57628B90DE6007D8351 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = DAA0A57528B90DE6007D8351 /* Sentry */; };
 		DAA57E1D28920F1E00C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
 		DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E1C28920F1E00C9A931 /* SwiftyGifView.swift */; };
 		DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA57E232892270800C9A931 /* SwiftyGifNSView.swift */; };
@@ -371,10 +372,11 @@
 				3642998D286801C900483D0A /* AVKit.framework in Frameworks */,
 				3642998F286801C900483D0A /* CachedAsyncImage in Frameworks */,
 				364299A62868042F00483D0A /* AppCenterAnalytics in Frameworks */,
+				DAA0A57628B90DE6007D8351 /* Sentry in Frameworks */,
 				36429991286801C900483D0A /* DiscordKitCommon in Frameworks */,
 				36429993286801C900483D0A /* Lottie in Frameworks */,
+				DAA0A57128B90C7B007D8351 /* SwiftyGif in Frameworks */,
 				36429994286801C900483D0A /* DiscordKit in Frameworks */,
-				364299A82868042F00483D0A /* AppCenterCrashes in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,10 +386,10 @@
 			files = (
 				36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */,
 				DAB1E46F28A202B900645FCD /* CachedAsyncImage in Frameworks */,
+				DAA0A57428B90DD7007D8351 /* Sentry in Frameworks */,
 				DAB1E47228A202CB00645FCD /* Lottie in Frameworks */,
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
-				DA97BA922849F9C500059FD7 /* AppCenterCrashes in Frameworks */,
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
 				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
 				DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */,
@@ -817,7 +819,8 @@
 				36429935286801C900483D0A /* DiscordKit */,
 				36429937286801C900483D0A /* DiscordKitCommon */,
 				364299A52868042F00483D0A /* AppCenterAnalytics */,
-				364299A72868042F00483D0A /* AppCenterCrashes */,
+				DAA0A57028B90C7B007D8351 /* SwiftyGif */,
+				DAA0A57528B90DE6007D8351 /* Sentry */,
 			);
 			productName = "Native Discord";
 			productReference = 364299A3286801C900483D0A /* Swiftcord.app */;
@@ -831,6 +834,7 @@
 				DA4A888127C0AF3000720909 /* Frameworks */,
 				DA4A888227C0AF3000720909 /* Resources */,
 				36004E1B283D61FE00F0BA73 /* ShellScript */,
+				DAA0A57728B912AE007D8351 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -841,11 +845,11 @@
 				DA974EA12835ED1200013CC2 /* DiscordKit */,
 				DA974EA32835ED1200013CC2 /* DiscordKitCommon */,
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
-				DA97BA912849F9C500059FD7 /* AppCenterCrashes */,
 				DABD8BB42880F653008EE28F /* Sparkle */,
 				DAFD470628996DFC0075D71B /* SwiftyGif */,
 				DAB1E46E28A202B900645FCD /* CachedAsyncImage */,
 				DAB1E47128A202CB00645FCD /* Lottie */,
+				DAA0A57328B90DD7007D8351 /* Sentry */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -889,6 +893,7 @@
 				DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 				DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -951,6 +956,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		DAA0A57728B912AE007D8351 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n    if which sentry-cli >/dev/null; then\n    export SENTRY_ORG=swiftcordapp\n    export SENTRY_PROJECT=swiftcord\n    export SENTRY_AUTH_TOKEN=\"${SENTRY_API_TOKEN}\"\n    ERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n    if [ ! $? -eq 0 ]; then\n    echo \"error: sentry-cli - $ERROR\"\n    fi\n    else\n    echo \"error: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1642,6 +1666,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
@@ -1694,11 +1726,6 @@
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
 		};
-		364299A72868042F00483D0A /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
 		DA974EA12835ED1200013CC2 /* DiscordKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */;
@@ -1714,10 +1741,20 @@
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
 		};
-		DA97BA912849F9C500059FD7 /* AppCenterCrashes */ = {
+		DAA0A57028B90C7B007D8351 /* SwiftyGif */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
+			package = DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
+		};
+		DAA0A57328B90DD7007D8351 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		DAA0A57528B90DE6007D8351 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 		DAB1E46E28A202B900645FCD /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
