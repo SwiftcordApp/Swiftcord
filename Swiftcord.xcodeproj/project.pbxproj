@@ -834,6 +834,7 @@
 				DA4A888127C0AF3000720909 /* Frameworks */,
 				DA4A888227C0AF3000720909 /* Resources */,
 				36004E1B283D61FE00F0BA73 /* ShellScript */,
+				DAA0A57728B912AE007D8351 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -955,6 +956,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		DAA0A57728B912AE007D8351 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n    if which sentry-cli >/dev/null; then\n    export SENTRY_ORG=swiftcordapp\n    export SENTRY_PROJECT=swiftcord\n    export SENTRY_AUTH_TOKEN=YOUR_AUTH_TOKEN\n    ERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n    if [ ! $? -eq 0 ]; then\n    echo \"error: sentry-cli - $ERROR\"\n    fi\n    else\n    echo \"error: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
