@@ -28,11 +28,32 @@ me to continue developing it**
 ## Supporters
 Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
 ### Red-hot Supporter 🔥
-It'll be mind-blowing to get red-hot supporters! Be my first red-hot supporter, and get special privileges that only you'll ever have!
-Support me on [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)!
+<table>
+  <tr>
+    <td>
+      <img src="https://cdn.discordapp.com/avatars/164066880250839040/454495419ffe4dfeb7ea91f82eecfe47.png" width=100 height=100/>
+    </td>
+    <td>
+      <strong>kallisti</strong>
+      <br>
+      <a href="https://midnight.town">midnight.town</a>
+      <br><br>
+      <i>First red-hot supporter!</i>
+    </td>
+  </tr>
+</table>
 
 ### Amazing Supporter 🤯
-<img src="https://cxt.sh/assets/img/pfp.png" width=36 height=36 align="left" />**`cxt`** - First amazing supporter!
+<table>
+  <tr>
+    <td>
+      <img src="https://cxt.sh/assets/img/pfp.png" width=36 height=36/>
+    </td>
+    <td>
+      <code><strong>cxt</strong></code> - First amazing supporter!
+    </td>
+  </tr>
+</table>
 
 ### Extremely Cool Supporter 🧊
 * **`selimgr`** - First extremely cool supporter, and the first sponsor!
