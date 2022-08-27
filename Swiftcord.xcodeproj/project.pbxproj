@@ -1695,7 +1695,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cryptoAlgorithm/SwiftyGif";
 			requirement = {
-				branch = master;
+				branch = "fix-timer-crash";
 				kind = branch;
 			};
 		};

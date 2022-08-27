@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cryptoAlgorithm/SwiftyGif",
       "state" : {
-        "branch" : "master",
-        "revision" : "4c271659307fc780728b3448419bc67678756cb0"
+        "branch" : "fix-timer-crash",
+        "revision" : "32a6bd02c9c44c8cdd4e98f46037678ee1abecbb"
       }
     }
   ],
