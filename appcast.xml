@@ -3,6 +3,22 @@
     <channel>
         <title>Swiftcord</title>
         <item>
+            <title>0.4.6</title>
+            <pubDate>Sat, 27 Aug 2022 10:44:44 +0800</pubDate>
+            <sparkle:version>13</sparkle:version>
+            <sparkle:shortVersionString>0.4.6</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord.0.4.6.dmg" length="8239814" type="application/octet-stream" sparkle:edSignature="uENih0sDLWXs15Gh64f5rOtk2+kGxyj2xGZnMVOnpIehdIRKw1eSlkafDnltZE0lShfZnXulDbtoqf06aD+uAg=="/>
+            <sparkle:fullReleaseNotesLink>https://github.com/SwiftcordApp/Swiftcord/releases</sparkle:fullReleaseNotesLink>
+            <sparkle:deltas>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord13-12.delta" sparkle:deltaFrom="12" length="2274386" type="application/octet-stream" sparkle:edSignature="9AizowhuIQkK/f4R7AmWdW9eM/KekWfcKC5aXRtPUNg8k1J6VEUcgq6EZXfa7jhS5ZzPBFmI9cTFLcegSITCCw=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord13-11.delta" sparkle:deltaFrom="11" length="2344614" type="application/octet-stream" sparkle:edSignature="8e0Yr2iIC79QsNSftka7CGq4yMRRA2OJVm6mCUdtygeE6onmMpTh3L4kNmMEtaV4a2V9S46Cyof5Iu/6bLxhCw=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord13-10.delta" sparkle:deltaFrom="10" length="2344186" type="application/octet-stream" sparkle:edSignature="IZrvN6PloCLNeRME5NEMx1bfMKh21+70z5pLdNb2Imuf0l/UYiH1Dr/iEw1ClS3l8Z/B1mr9SJ+4c8dNIUQKAg=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord13-9.delta" sparkle:deltaFrom="9" length="2378258" type="application/octet-stream" sparkle:edSignature="qYm8BcrTHzTvZn1/fpleC8bJnfGhVBq+zM5E11bwC60DVp5oYutHdcDQN658w+j0nvAFPCsxSEY5N9NTTdR7AA=="/>
+                <enclosure url="https://github.com/SwiftcordApp/Swiftcord/releases/download/v0.4.6/Swiftcord13-8.delta" sparkle:deltaFrom="8" length="2770202" type="application/octet-stream" sparkle:edSignature="txMtq7kLMElP1hpcwg7jY00vwdRzs/yuF5ZFfp3ZOLeVgOHwzHTz5hQ1A9xzUCCF0toqWJwc1my7oZl6YWnfCg=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>0.4.5</title>
             <pubDate>Sat, 06 Aug 2022 05:21:20 +0800</pubDate>
             <sparkle:version>12</sparkle:version>
