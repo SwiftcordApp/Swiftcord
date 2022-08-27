@@ -1,8 +1,9 @@
 name: Post-release
 
 on:
-  release:
-    types: [published]
+  # Temporarily disabled while I sort out release duplication issues
+  #release:
+  #  types: [published]
   # Can be manually dispatched too
   workflow_dispatch:
 
