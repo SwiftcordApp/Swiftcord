@@ -175,6 +175,7 @@
 		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
 		DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
+		DA91016C28BF8F1F00DD076B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
@@ -992,6 +993,7 @@
 				DAFD471A289A21E80075D71B /* AttachmentVideo.swift in Sources */,
 				36429942286801C900483D0A /* MessagesView.swift in Sources */,
 				36429943286801C900483D0A /* Cache.swift in Sources */,
+				DA91016C28BF8F1F00DD076B /* CreditsView.swift in Sources */,
 				36429944286801C900483D0A /* Keychain.swift in Sources */,
 				36429945286801C900483D0A /* AnyTransition+.swift in Sources */,
 				36429946286801C900483D0A /* Array.Channel+.swift in Sources */,

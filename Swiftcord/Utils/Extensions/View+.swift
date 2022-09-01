@@ -8,19 +8,6 @@
 import Foundation
 import SwiftUI
 
-extension View {
-    /// https://stackoverflow.com/a/61985678/3393964
-    public func cursor(_ cursor: NSCursor) -> some View {
-        self.onHover { inside in
-            if inside {
-                cursor.push()
-            } else {
-                NSCursor.pop()
-            }
-        }
-    }
-}
-
 // From: https://www.avanderlee.com/swiftui/conditional-view-modifier/
 extension View {
 	/// Applies the given transform if the given condition evaluates to `true`.

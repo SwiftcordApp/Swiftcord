@@ -77,7 +77,6 @@ struct UserAvatarView: View {
 					}
 				}
 			}
-			.cursor(NSCursor.pointingHand)
 			.popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
 				MiniUserProfileView(
 					user: user,

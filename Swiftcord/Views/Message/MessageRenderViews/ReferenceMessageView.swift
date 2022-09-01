@@ -61,7 +61,7 @@ struct ReferenceMessageView: View {
 							if !quotedMsg.attachments.isEmpty || !quotedMsg.embeds.isEmpty {
 								Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
 							}
-						}.cursor(NSCursor.pointingHand)
+						}
 					} else {
 						HStack(spacing: 4) {
 							ActionMessageView(message: quotedMsg, mini: true)
