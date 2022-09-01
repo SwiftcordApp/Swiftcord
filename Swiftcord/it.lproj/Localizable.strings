@@ -99,3 +99,14 @@
 "settings.user.chPwd.title" = "Cambia la tua password";
 "server.join.egHeader" = "Gli inviti dovrebbero sembrare come";
 "server.join.fieldHeader.invalid" = "Link d'invito _— Si prega di inserire un link d'invito valido o un codice d'invito._";
+// About
+"settings.others.about" = "Info";
+"settings.others.about.desc" = "Client Discord nativo fatto in Swift e SwiftUI";
+"%@ %@ %@ settings.others.about.ver" = "%@ versione %@ (Build: %@)";
+"settings.others.about.supportPkg" = "Swiftcord è basato su [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), un'implementazione in sviluppo delle API di Discord in Swift";
+// Credits
+"settings.others.credits" = "Crediti";
+"settings.others.credits.headDev" = "Sviluppatore capo";
+"settings.others.credits.about" = "Amo lavorare su Swiftcord, e sviluppare magnifiche e funzionali applicazioni native!";
+"settings.others.credits.whoAmI" = "Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
+"settings.others.about.caption" = "Swiftcord è un software open-source e fatto con il <3. Puoi trovare il suo codice sorgente su [GitHub](https://github.com/SwiftcordApp/Swiftcord). Contributi e segnalazione di problemi sono pure benvenute! Per favore lascia una stella a Swiftcord, mi dà motivazione per continuare a lavorarci su :D";
