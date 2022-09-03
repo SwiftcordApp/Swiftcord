@@ -13,9 +13,23 @@ import DiscordKitCommon
 struct CurrentUserFooter: View {
     let user: CurrentUser
 
-	@State private var userPopoverPresented = false
-	@State private var switcherPresented = false
-	@State private var loginPresented = false
+	@State var userPopoverPresented = false
+	@State var switcherPresented = false
+	@State var loginPresented = false
+
+	@AppStorage("accountsMeta") var accountMeta = Data()
+	@State var accounts: [AccountMeta] = []
+
+	private func parseAccounts() {
+		guard let dec = try? JSONDecoder().decode([AccountMeta].self, from: accountMeta) else {
+			accounts = [.init(user: user)]
+			return
+		}
+		accounts = dec
+		if !accounts.contains(where: { $0.id == user.id }) {
+			accounts.insert(.init(user: user), at: 0)
+		}
+	}
 
     var body: some View {
 		Button {
@@ -54,6 +68,8 @@ struct CurrentUserFooter: View {
 			.background(Color(nsColor: .controlBackgroundColor).opacity(0.5))
 		}
 		.buttonStyle(.plain)
+		.onAppear { parseAccounts() }
+		.onChange(of: accountMeta) { _ in parseAccounts() }
 		.popover(isPresented: $userPopoverPresented) {
 			MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
 				connected_accounts: [],
@@ -64,27 +80,11 @@ struct CurrentUserFooter: View {
 					switcherPresented = true
 				} label: {
 					Label("Switch Accounts", systemImage: "arrow.left.arrow.right").frame(maxWidth: .infinity)
-				}.buttonStyle(FlatButtonStyle(prominent: false, outlined: true))
+				}.buttonStyle(FlatButtonStyle(outlined: true))
 			}
 		}
 		.sheet(isPresented: $switcherPresented) {
-			DialogView(title: "Manage Accounts", description: "Switch accounts, sign in, sign out, go wild.") {
-				Button { switcherPresented = false } label: {
-					Text("action.close")
-				}
-				.buttonStyle(.plain)
-				Spacer()
-				Button {
-					switcherPresented = false
-					loginPresented = true
-				} label: {
-					Text("Add an account")
-				}
-				.buttonStyle(FlatButtonStyle(prominent: false))
-				.controlSize(.small)
-			} content: {
-				Text("Lmao")
-			}
+			accountSwitcher()
 		}
 		.sheet(isPresented: $loginPresented) {
 			ZStack(alignment: .topTrailing) {
