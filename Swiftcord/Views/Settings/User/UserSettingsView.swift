@@ -21,10 +21,6 @@ struct UserSettingsView: View {
 		"lastCh.",
 		"local.",
 		"lastSelectedGuild",
-		"showSendBtn",
-		"stickerAlwaysAnim",
-		"theme",
-		"ttsRate"
 	]
 
 	private func logOut() {

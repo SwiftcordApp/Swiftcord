@@ -260,7 +260,7 @@ struct MessagesView: View {
             }
         }
 		.frame(minWidth: 525, minHeight: 500)
-		.blur(radius: viewModel.dropOver ? 24 : 0)
+		.blur(radius: viewModel.dropOver ? 8 : 0)
 		.overlay {
 			if viewModel.dropOver {
 				ZStack {

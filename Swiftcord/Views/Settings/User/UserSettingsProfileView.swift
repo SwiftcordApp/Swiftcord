@@ -18,8 +18,6 @@ struct UserSettingsProfileView: View {
 		VStack(alignment: .leading, spacing: 16) {
 			Text("User Profile").font(.title)
 
-			Divider()
-
 			HStack(alignment: .top) {
 				VStack(alignment: .leading) {
 					Text("ABOUT ME").font(.headline)
