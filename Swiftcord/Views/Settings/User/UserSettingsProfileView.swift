@@ -51,10 +51,7 @@ struct UserSettingsProfileView: View {
 					.onAppear {
 						profile = UserProfile(
 							connected_accounts: [],
-							guild_member: nil,
-							premium_guild_since: nil,
-							premium_since: nil,
-							mutual_guilds: nil, user: User(from: user)
+							user: User(from: user)
 						)
 					}
 				}

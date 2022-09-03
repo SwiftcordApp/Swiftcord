@@ -68,7 +68,7 @@ struct MiniUserProfileView: View {
 				.padding(6)
 
 				if let fullUser = profile?.user {
-					ProfileBadges(user: fullUser)
+					ProfileBadges(user: fullUser, premiumType: profile?.premium_type)
 						.frame(minHeight: 40, alignment: .topTrailing)
 				}
 				Spacer()
