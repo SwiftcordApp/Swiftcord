@@ -20,6 +20,8 @@ struct MiniUserProfileView: View {
 
 	@State private var note = ""
 
+	@Environment(\.colorScheme) var colorScheme
+
     var body: some View {
 		let avatarURL = user.avatarURL()
 
@@ -67,7 +69,7 @@ struct MiniUserProfileView: View {
 
 				if let fullUser = profile?.user {
 					ProfileBadges(user: fullUser)
-						.frame(minHeight: 40, alignment: .topLeading)
+						.frame(minHeight: 40, alignment: .topTrailing)
 				}
 				Spacer()
 				if loadError {
@@ -80,8 +82,9 @@ struct MiniUserProfileView: View {
 			}
 			.padding(.leading, 14)
 			.padding(.top, -46) // 92/2 = 46
+			.padding(.bottom, -8)
 
-			VStack(alignment: .leading, spacing: 8) {
+			VStack(alignment: .leading, spacing: 6) {
 				HStack(alignment: .center, spacing: 6) {
 					Group {
 						Text(user.username).fontWeight(.bold)
@@ -95,7 +98,6 @@ struct MiniUserProfileView: View {
 					Spacer()
 				}
 				.padding(.bottom, -2)
-				.padding(.top, -8)
 
 				Divider().padding(.vertical, 8)
 
@@ -119,7 +121,7 @@ struct MiniUserProfileView: View {
 
 					if let bio = profile?.user.bio, !bio.isEmpty {
 						Text("user.bio").font(.headline).textCase(.uppercase)
-						Text(bio)
+						Text(markdown: bio)
 							.fixedSize(horizontal: false, vertical: true)
 							.padding(.bottom, 8)
 					}
@@ -182,6 +184,11 @@ struct MiniUserProfileView: View {
 					}
 				}
 			}
+			.padding(12)
+			.background(
+				RoundedRectangle(cornerRadius: 4, style: .continuous)
+					.fill(colorScheme == .dark ? .black.opacity(0.45) : .white.opacity(0.45))
+			)
 			.padding(14)
 		}
 		.frame(width: 300)

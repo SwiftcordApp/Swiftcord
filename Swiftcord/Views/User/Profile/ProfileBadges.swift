@@ -33,11 +33,6 @@ struct ProfileBadges: View, Equatable {
 						Image(badge).frame(width: 22, height: 22)
 							.help(flag.description)
 					}
-
-					if let premiumType = user.premium_type, premiumType != .none {
-						Image("NitroSubscriber").frame(width: 22, height: 22)
-							.help(premiumType.description)
-					}
 				}
 			}).padding(-2)
 		}
