@@ -15,6 +15,8 @@ struct LoginView: View {
 	@State var tokenCount = 0
 	@State var tokenString: String = ""
 
+	var shrink = false
+
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
 	@EnvironmentObject var state: UIState
@@ -22,7 +24,7 @@ struct LoginView: View {
     var body: some View {
 		ZStack {
 			if !tokenView {
-				WebView()
+				WebView(shrink: shrink)
 					.environmentObject(loginWVModel)
 
 				if !loginWVModel.didFinishLoading {
@@ -59,8 +61,7 @@ struct LoginView: View {
 			.keyboardShortcut("t", modifiers: [.command, .shift])
 			.hidden()
 		}
-		.frame(minWidth: 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
-		.navigationTitle("Login")
+		.frame(minWidth: shrink ? 450 : 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
 		.onChange(of: loginWVModel.token) { token in
 			if let token = token {
 				Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)

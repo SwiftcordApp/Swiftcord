@@ -27,6 +27,7 @@ struct UserAvatarView: View {
     @State private var profile: UserProfile? // Lazy-loaded full user
     @State private var infoPresenting = false
 	@State private var loadFullFailed = false
+	@State private var note = ""
 
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
@@ -82,11 +83,63 @@ struct UserAvatarView: View {
 					user: user,
 					profile: $profile,
 					guildRoles: ctx.roles,
-					guildID: guildID,
 					isWebhook: webhookID != nil,
-					loadError: loadFullFailed,
-					hideNotes: false
-				)
+					loadError: loadFullFailed
+				) {
+					if let profile = profile, guildID != "@me" {
+						if let guildRoles = ctx.roles {
+							let roles = guildRoles.filter {
+								profile.guild_member?.roles.contains($0.id) ?? false
+							}
+
+							Text(
+								profile.guild_member == nil
+								? "user.roles.loading"
+								: (roles.isEmpty
+								   ? "user.roles.none"
+								   : (roles.count == 1 ? "user.roles.one" : "user.roles.many")
+								  )
+							)
+							.font(.headline)
+							.textCase(.uppercase)
+							if !roles.isEmpty {
+								TagCloudView(content: roles.map({ role in
+									HStack(spacing: 6) {
+										Circle()
+											.fill(Color(hex: role.color))
+											.frame(width: 14, height: 14)
+											.padding(.leading, 6)
+										Text(role.name)
+											.font(.system(size: 12))
+											.padding(.trailing, 8)
+									}
+									.frame(height: 24)
+									.background(.gray.opacity(0.2))
+									.cornerRadius(7)
+								})).padding(-2)
+							}
+						} else {
+							ProgressView("user.roles.loading")
+								.progressViewStyle(.linear)
+								.frame(maxWidth: .infinity)
+								.tint(.blue)
+						}
+					}
+					Text("user.note").font(.headline).textCase(.uppercase)
+					// Notes are stored locally for now, but eventually will be synced with the Discord API
+					TextField("Add a note to this user (only visible to you)", text: $note)
+						.textFieldStyle(.roundedBorder)
+						.onChange(of: note) { _ in
+							if note.isEmpty {
+								UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")
+							} else {
+								UserDefaults.standard.set(note, forKey: "notes.\(user.id)")
+							}
+						}
+						.onAppear {
+							note = UserDefaults.standard.string(forKey: "notes.\(user.id)") ?? ""
+						}
+				}
 			}
 	}
 }

@@ -23,6 +23,7 @@ class WebViewModel: ObservableObject {
 }
 
 struct WebView: NSViewRepresentable {
+	let shrink: Bool
     public typealias NSViewType = WKWebView
     @EnvironmentObject var viewModel: WebViewModel
 
@@ -98,10 +99,14 @@ struct WebView: NSViewRepresentable {
               background-size: cover;
               background-position: center;
             }
+            form[class*="authBox-"]::before {
+              content: unset;
+            }
             form[class*="authBox-"] {
               background-color: rgba(0, 0, 0, .7)!important;
               -webkit-backdrop-filter: blur(24px) saturate(140%);
-              border-radius: 12px;
+              border-radius: \(shrink ? 0 : 12)px;
+              \(shrink ? "padding: 1rem;" : "")
             }
             .theme-dark {
               --input-background: rgba(0, 0, 0, .25)!important;

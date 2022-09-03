@@ -35,6 +35,7 @@ struct SwiftcordApp: App {
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
+					.navigationTitle("Login")
 			} else {
 				ContentView()
 					.overlay(LoadingView())
