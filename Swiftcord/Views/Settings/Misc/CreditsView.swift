@@ -21,8 +21,6 @@ struct CreditsView: View {
 	@State private var contributors: [MinimalContributor]?
 	@State private var addPulseScale = 1.0
 	@Environment(\.openURL) var openURL
-	
-	
 
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {

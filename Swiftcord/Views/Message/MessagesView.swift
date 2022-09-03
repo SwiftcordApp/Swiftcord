@@ -128,7 +128,7 @@ struct MessagesView: View {
 						ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
 							VStack(spacing: 0) {
 								if (idx == viewModel.messages.count - 1 && viewModel.reachedTop) ||
-									(idx != viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+									(idx < viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
 									DayDividerView(date: msg.timestamp)
 								}
 
