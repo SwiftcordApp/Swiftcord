@@ -15,19 +15,9 @@ struct LoadingView: View {
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
 
-	let keyPrefixesToRemove = [
-		"lastCh.",
-		"local.",
-		"lastSelectedGuild",
-		"showSendBtn",
-		"stickerAlwaysAnim",
-		"theme",
-		"ttsRate"
-	]
-
 	private func logOut() {
 		for key in UserDefaults.standard.dictionaryRepresentation().keys {
-			for toRemove in keyPrefixesToRemove {
+			for toRemove in UserSettingsView.keyPrefixesToRemove {
 				if key.prefix(toRemove.count) == toRemove {
 					UserDefaults.standard.removeObject(forKey: key)
 					break
@@ -92,30 +82,22 @@ struct LoadingView: View {
 				.lottieLoopMode(.loop)
 				.if(colorScheme == .light) { view in view.colorInvert() }
 
-				if Int.random(in: 0..<1000000000) != 0 {
-					Text("loader.tip.header").font(.headline).textCase(.uppercase)
-					Text(.init(displayedTip))
-						.multilineTextAlignment(.center)
-						.padding(.top, 8)
-						.frame(maxWidth: 320)
-						.onAppear {
-							displayedTip = loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
-							withAnimation {
-								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-									showLogoutButton = true
-								}
+				let chance = Int.random(in: 0..<1000000000) == 0
+				Text("loader.tip.header").font(.headline).textCase(.uppercase)
+				Text(.init(displayedTip))
+					.multilineTextAlignment(.center)
+					.padding(.top, 8)
+					.frame(maxWidth: 320)
+					.onAppear {
+						displayedTip = chance
+							? "Please wait warmly..."
+							: loadingTips.randomElement()! // Will never be nil because loadingTips can never be empty
+						withAnimation {
+							DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+								showLogoutButton = true
 							}
 						}
-				} else {
-					Text("Please wait warmly...").font(.headline)
-						.onAppear {
-							withAnimation {
-								DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-									showLogoutButton = true
-								}
-							}
-						}
-				}
+					}
 			}
 
 			VStack {

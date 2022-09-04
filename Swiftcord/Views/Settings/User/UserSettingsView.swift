@@ -17,15 +17,15 @@ struct UserSettingsView: View {
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var rest: DiscordREST
 
-	private let keyPrefixesToRemove = [
+	static let keyPrefixesToRemove = [
 		"lastCh.",
 		"local.",
-		"lastSelectedGuild",
+		"lastSelectedGuild"
 	]
 
 	private func logOut() {
 		for key in UserDefaults.standard.dictionaryRepresentation().keys {
-			for toRemove in keyPrefixesToRemove {
+			for toRemove in UserSettingsView.keyPrefixesToRemove {
 				if key.prefix(toRemove.count) == toRemove {
 					UserDefaults.standard.removeObject(forKey: key)
 					break
