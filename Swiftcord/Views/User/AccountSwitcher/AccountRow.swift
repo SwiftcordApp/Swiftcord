@@ -79,7 +79,8 @@ struct AccountRow: View {
 					}
 				}
 			} label: {
-				Label("settings.user.logOut", systemImage: "rectangle.portrait.and.arrow.right")
+				Image(systemName: "rectangle.portrait.and.arrow.right")
+				Text("settings.user.logOut")
 			}
 		}
 	}
