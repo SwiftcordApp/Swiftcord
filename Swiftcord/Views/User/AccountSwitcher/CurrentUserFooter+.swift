@@ -21,7 +21,7 @@ extension CurrentUserFooter {
 			} label: {
 				Text("Add an account")
 			}
-			.buttonStyle(FlatButtonStyle(prominent: false))
+			.buttonStyle(FlatButtonStyle())
 			.controlSize(.small)
 		} content: {
 			GroupBox {
@@ -29,10 +29,9 @@ extension CurrentUserFooter {
 					LazyVStack(spacing: 0) {
 						ForEach(switcher.accounts, id: \.id) { account in
 							AccountRow(
-								avatarURL: user.avatarURL(size: 80),
-								username: user.username,
-								discriminator: user.discriminator,
-								isCurrent: account.id == user.id
+								meta: account,
+								isCurrent: account.id == user.id,
+								switcherPresented: $switcherPresented
 							)
 							if account != switcher.accounts.last {
 								Divider().padding(.horizontal, 16)

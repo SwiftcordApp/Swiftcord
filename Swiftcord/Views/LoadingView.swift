@@ -137,6 +137,16 @@ struct LoadingView: View {
 				print("Unable to start notifier")
 			}
 		}
+		.onChange(of: state.loadingState) { newState in
+			if newState == .initial {
+				showLogoutButton = false // Reset logout timeout for future loads
+				withAnimation {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+						showLogoutButton = true
+					}
+				}
+			}
+		}
     }
 }
 

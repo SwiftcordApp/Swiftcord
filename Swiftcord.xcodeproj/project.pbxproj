@@ -331,6 +331,7 @@
 		DA91017228C38EA300DD076B /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
 		DA91017528C3989E00DD076B /* AccountMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMeta.swift; sourceTree = "<group>"; };
 		DA91017828C4726300DD076B /* AccountSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitcher.swift; sourceTree = "<group>"; };
+		DA91017D28C4A45200DD076B /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -487,6 +488,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DA91017D28C4A45200DD076B /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,

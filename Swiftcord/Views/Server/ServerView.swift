@@ -30,6 +30,7 @@ struct ServerView: View {
 	@StateObject var serverCtx: ServerContext
 
 	private func loadChannels() {
+		guard state.loadingState != .initial else { return } // Ensure gateway is connected before loading anything
 		guard let channels = serverCtx.guild?.channels?.discordSorted()
 		else { return }
 

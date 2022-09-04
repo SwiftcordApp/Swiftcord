@@ -20,6 +20,7 @@ struct LoginView: View {
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
 	@EnvironmentObject var state: UIState
+	@EnvironmentObject var acctManager: AccountSwitcher
 
     var body: some View {
 		ZStack {
@@ -34,9 +35,7 @@ struct LoginView: View {
 							.frame(maxWidth: .infinity, maxHeight: .infinity)
 					}.background(.background)
 				}
-			}
-
-			if tokenView {
+			} else {
 				VStack {
 					Text("login.token.title")
 						.font(.title)
@@ -64,7 +63,11 @@ struct LoginView: View {
 		.frame(minWidth: shrink ? 450 : 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
 		.onChange(of: loginWVModel.token) { token in
 			if let token = token {
-				Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)
+				acctManager.setPendingToken(token: token)
+				if state.loadingState == .messageLoad { // Switch account
+					gateway.socket?.close(code: .normalClosure)
+					state.loadingState = .initial
+				}
 				gateway.connect(token: token) // Reconnect to the socket with the new token
 				restAPI.setToken(token: token)
 				state.attemptLogin = false
