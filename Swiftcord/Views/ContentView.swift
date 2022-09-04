@@ -40,6 +40,7 @@ struct ContentView: View {
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
+	@EnvironmentObject var accountsManager: AccountSwitcher
 
 	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
 	@AppStorage("local.previousBuild") private var prevBuild: String?
@@ -180,6 +181,7 @@ struct ContentView: View {
                 switch evt {
                 case .ready:
                     state.loadingState = .gatewayConn
+					accountsManager.onSignedIn(with: gateway.cache.user!)
                     fallthrough
                 case .resumed:
                     gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(

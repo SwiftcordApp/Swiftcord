@@ -99,10 +99,10 @@ struct WebView: NSViewRepresentable {
               background-size: cover;
               background-position: center;
             }
-            form[class*="authBox-"]::before {
+            form[class*="authBox-"]::before, section[class*="authBox-"]::before {
               content: unset;
             }
-            form[class*="authBox-"] {
+            form[class*="authBox-"], section[class*="authBox-"]  {
               background-color: rgba(0, 0, 0, .7)!important;
               -webkit-backdrop-filter: blur(24px) saturate(140%);
               border-radius: \(shrink ? 0 : 12)px;

@@ -17,19 +17,7 @@ struct CurrentUserFooter: View {
 	@State var switcherPresented = false
 	@State var loginPresented = false
 
-	@AppStorage("accountsMeta") var accountMeta = Data()
-	@State var accounts: [AccountMeta] = []
-
-	private func parseAccounts() {
-		guard let dec = try? JSONDecoder().decode([AccountMeta].self, from: accountMeta) else {
-			accounts = [.init(user: user)]
-			return
-		}
-		accounts = dec
-		if !accounts.contains(where: { $0.id == user.id }) {
-			accounts.insert(.init(user: user), at: 0)
-		}
-	}
+	@EnvironmentObject var switcher: AccountSwitcher
 
     var body: some View {
 		Button {
@@ -68,8 +56,8 @@ struct CurrentUserFooter: View {
 			.background(Color(nsColor: .controlBackgroundColor).opacity(0.5))
 		}
 		.buttonStyle(.plain)
-		.onAppear { parseAccounts() }
-		.onChange(of: accountMeta) { _ in parseAccounts() }
+		// .onAppear { parseAccounts() }
+		// .onChange(of: accountMeta) { _ in parseAccounts() }
 		.popover(isPresented: $userPopoverPresented) {
 			MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
 				connected_accounts: [],

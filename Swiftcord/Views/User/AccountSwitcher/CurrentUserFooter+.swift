@@ -27,14 +27,14 @@ extension CurrentUserFooter {
 			GroupBox {
 				ScrollView {
 					LazyVStack(spacing: 0) {
-						ForEach(accounts, id: \.id) { account in
+						ForEach(switcher.accounts, id: \.id) { account in
 							AccountRow(
 								avatarURL: user.avatarURL(size: 80),
 								username: user.username,
 								discriminator: user.discriminator,
 								isCurrent: account.id == user.id
 							)
-							if account != accounts.last {
+							if account != switcher.accounts.last {
 								Divider().padding(.horizontal, 16)
 							}
 						}

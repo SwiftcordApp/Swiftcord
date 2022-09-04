@@ -25,6 +25,7 @@ struct SwiftcordApp: App {
 	@StateObject private var gateway = DiscordGateway()
 	@StateObject private var restAPI = DiscordREST()
 	@StateObject private var state = UIState()
+	@StateObject private var acctManager = AccountSwitcher()
 
 	@AppStorage("theme") private var selectedTheme = "system"
 
@@ -35,6 +36,7 @@ struct SwiftcordApp: App {
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
+					.environmentObject(acctManager)
 					.navigationTitle("Login")
 			} else {
 				ContentView()
@@ -42,6 +44,7 @@ struct SwiftcordApp: App {
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
+					.environmentObject(acctManager)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
 					.preferredColorScheme(selectedTheme == "dark"
