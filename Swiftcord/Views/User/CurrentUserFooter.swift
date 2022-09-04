@@ -56,8 +56,6 @@ struct CurrentUserFooter: View {
 			.background(Color(nsColor: .controlBackgroundColor).opacity(0.5))
 		}
 		.buttonStyle(.plain)
-		// .onAppear { parseAccounts() }
-		// .onChange(of: accountMeta) { _ in parseAccounts() }
 		.popover(isPresented: $userPopoverPresented) {
 			MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
 				connected_accounts: [],

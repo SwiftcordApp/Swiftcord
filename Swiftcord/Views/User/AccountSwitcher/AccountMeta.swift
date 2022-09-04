@@ -28,7 +28,7 @@ struct AccountMeta: Codable, Equatable {
 		avatar = user.avatarURL(size: 80)
 	}
 
-	private enum CodingKeys : String, CodingKey {
+	private enum CodingKeys: String, CodingKey {
 		case discrim = "d", name = "n", avatar = "a", id = "i"
 	}
 

@@ -52,7 +52,7 @@ struct SwiftcordApp: App {
 										  : (selectedTheme == "light" ? .light : nil))
 					.onAppear {
 						guard gateway.socket == nil else { return }
-						guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
+						guard let token = acctManager.getActiveToken() else {
 							state.attemptLogin = true
 							return
 						}
