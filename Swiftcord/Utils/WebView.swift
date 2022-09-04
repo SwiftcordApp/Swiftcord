@@ -24,6 +24,8 @@ class WebViewModel: ObservableObject {
 
 struct WebView: NSViewRepresentable {
 	let shrink: Bool
+	let shrunkShowingQR: Bool
+
     public typealias NSViewType = WKWebView
     @EnvironmentObject var viewModel: WebViewModel
 
@@ -114,6 +116,17 @@ struct WebView: NSViewRepresentable {
             div[class^="select-"] > div > div:nth-child(2) {
               background-color: var(--input-background)!important;
             }
+
+            .qr-only div[class*="centeringWrapper-"]>div {
+              flex-direction: column;
+            }
+            .qr-only div[class*="mainLoginContainer-"]>div:nth-child(2) {
+              display: none;
+            }
+            .qr-only div[class*="qrLogin-"] {
+              display: block!important;
+              margin-top: 24px;
+            }
           `;
           document.body.appendChild(s);
         }
@@ -128,7 +141,14 @@ struct WebView: NSViewRepresentable {
         return webView
     }
 
-    public func updateNSView(_ nsView: WKWebView, context: NSViewRepresentableContext<WebView>) { }
+    public func updateNSView(_ nsView: WKWebView, context: NSViewRepresentableContext<WebView>) {
+		print("update nsview")
+		print(shrunkShowingQR)
+		nsView.evaluateJavaScript(shrunkShowingQR
+								  ? "document.body.classList.add('qr-only')"
+								  : "document.body.classList.remove('qr-only')"
+		)
+	}
 
     public func makeCoordinator() -> Coordinator {
         return Coordinator(viewModel)

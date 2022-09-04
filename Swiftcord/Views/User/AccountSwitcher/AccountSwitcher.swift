@@ -5,8 +5,9 @@
 //  Created by Vincent Kwok on 4/9/22.
 //
 
-import Foundation
+import SwiftUI
 import DiscordKitCommon
+import DiscordKitCore
 import os
 
 class AccountSwitcher: NSObject, ObservableObject {
@@ -15,6 +16,11 @@ class AccountSwitcher: NSObject, ObservableObject {
 	static let META_KEY = "accountsMeta"
 	static let ACTIVE_KEY = "activeAcct"
 	static let log = Logger(category: "AccountSwitcher")
+
+	static let keyPrefixesToRemove = [
+		"lastCh.",
+		"lastSelectedGuild"
+	]
 
 	private var pendingToken: String?
 
@@ -33,6 +39,42 @@ class AccountSwitcher: NSObject, ObservableObject {
 
 	func saveToken(for id: Snowflake, token: String) {
 		Keychain.save(key: "\(SwiftcordApp.tokenKeychainKey).\(id)", data: token)
+	}
+	func getToken(for id: Snowflake) -> String? {
+		Keychain.load(key: "\(SwiftcordApp.tokenKeychainKey).\(id)")
+	}
+
+	// Static to allow using elsewhere
+	static func clearAccountSpecificPrefKeys() {
+		for key in UserDefaults.standard.dictionaryRepresentation().keys {
+			for toRemove in keyPrefixesToRemove {
+				if key.prefix(toRemove.count) == toRemove {
+					UserDefaults.standard.removeObject(forKey: key)
+					break
+				}
+			}
+		}
+	}
+	func logOut(id: Snowflake) async {
+		guard let token = getToken(for: id) else { return }
+		await DiscordREST(token: token).logOut()
+		Keychain.remove(key: "\(SwiftcordApp.tokenKeychainKey).\(id)")
+
+		DispatchQueue.main.async { [weak self] in
+			withAnimation {
+				self?.accounts.removeAll { $0.id == id }
+				self?.writeAccounts()
+			}
+		}
+		// Actions to take if the account being logged out is the current one
+		if UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY) == id {
+			AccountSwitcher.clearAccountSpecificPrefKeys()
+			if let firstID = accounts.first?.id {
+				setActiveAccount(id: firstID)
+			} else {
+				UserDefaults.standard.removeObject(forKey: AccountSwitcher.ACTIVE_KEY)
+			}
+		}
 	}
 
 	func setPendingToken(token: String) {
@@ -54,7 +96,7 @@ class AccountSwitcher: NSObject, ObservableObject {
 		guard let activeID = storedActiveID != nil && accounts.contains(where: { $0.id == storedActiveID })
 			? storedActiveID
 			: accounts.first?.id else { return nil } // Account not signed in
-		guard let token = Keychain.load(key: "\(SwiftcordApp.tokenKeychainKey).\(activeID)") else {
+		guard let token = getToken(for: activeID) else {
 			// Something is wrong too
 			AccountSwitcher.log.error("Account meta exists for account ID \(activeID), but token was not found in keychain!")
 			accounts.removeAll { acct in acct.id == activeID }
@@ -71,12 +113,14 @@ class AccountSwitcher: NSObject, ObservableObject {
 			AccountSwitcher.log.info("Migrated old token to new keychain key format")
 		}
 
+		var inconsistency = false
+
 		// If there's a token pending to be saved, save it under the current user ID
 		if let newToken = pendingToken {
 			saveToken(for: user.id, token: newToken)
+			inconsistency = true
 		}
 
-		var inconsistency = false
 		// Ensure the current account exists, if not add it
 		if !accounts.contains(where: { $0.id == user.id }) {
 			accounts.insert(.init(user: user), at: 0)

@@ -16,6 +16,8 @@ struct LoginView: View {
 	@State var tokenString: String = ""
 
 	var shrink = false
+	var showQR = false
+	var onLoggedIn: (() -> Void)?
 
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
@@ -25,7 +27,7 @@ struct LoginView: View {
     var body: some View {
 		ZStack {
 			if !tokenView {
-				WebView(shrink: shrink)
+				WebView(shrink: shrink, shrunkShowingQR: showQR)
 					.environmentObject(loginWVModel)
 
 				if !loginWVModel.didFinishLoading {
@@ -65,12 +67,13 @@ struct LoginView: View {
 			if let token = token {
 				acctManager.setPendingToken(token: token)
 				if state.loadingState == .messageLoad { // Switch account
-					gateway.socket?.close(code: .normalClosure)
+					gateway.disconnect()
 					state.loadingState = .initial
 				}
 				gateway.connect(token: token) // Reconnect to the socket with the new token
 				restAPI.setToken(token: token)
 				state.attemptLogin = false
+				if let onLoggedIn = onLoggedIn { onLoggedIn() }
 			}
 		}
     }

@@ -24,6 +24,19 @@ struct AccountRow: View {
 
 	static let log = Logger(category: "AccountRow")
 
+	private func switchAccount() {
+		switcher.setActiveAccount(id: meta.id)
+		guard let newToken = switcher.getActiveToken() else {
+			AccountRow.log.error("No active token associated with account. This should never happen!")
+			return
+		}
+		state.loadingState = .initial
+		gateway.disconnect()
+		restAPI.setToken(token: newToken)
+		gateway.connect(token: newToken)
+		switcherPresented = false
+	}
+
 	var body: some View {
 		HStack(spacing: 8) {
 			BetterImageView(url: meta.avatar)
@@ -42,16 +55,7 @@ struct AccountRow: View {
 
 			if !isCurrent {
 				Button {
-					switcher.setActiveAccount(id: meta.id)
-					guard let newToken = switcher.getActiveToken() else {
-						AccountRow.log.error("No active token associated with account. This should never happen!")
-						return
-					}
-					state.loadingState = .initial
-					gateway.disconnect()
-					restAPI.setToken(token: newToken)
-					gateway.connect(token: newToken)
-					switcherPresented = false
+					switchAccount()
 				} label: {
 					Text("Switch")
 				}
@@ -61,5 +65,21 @@ struct AccountRow: View {
 		}
 		.padding(.vertical, 12)
 		.padding(.horizontal, 16)
+		.contentShape(Rectangle())
+		.contextMenu {
+			Button {
+				Task {
+					await switcher.logOut(id: meta.id)
+					if switcher.accounts.isEmpty {
+						gateway.disconnect()
+						state.attemptLogin = true
+					} else if isCurrent {
+						switchAccount() // Switch to the next available account
+					}
+				}
+			} label: {
+				Label("settings.user.logOut", systemImage: "rectangle.portrait.and.arrow.right")
+			}
+		}
 	}
 }

@@ -16,17 +16,10 @@ struct LoadingView: View {
 	@EnvironmentObject var restAPI: DiscordREST
 
 	private func logOut() {
-		for key in UserDefaults.standard.dictionaryRepresentation().keys {
-			for toRemove in UserSettingsView.keyPrefixesToRemove {
-				if key.prefix(toRemove.count) == toRemove {
-					UserDefaults.standard.removeObject(forKey: key)
-					break
-				}
-			}
-		}
-		gateway.logout()
+		AccountSwitcher.clearAccountSpecificPrefKeys()
+		gateway.disconnect()
+		state.attemptLogin = true
 		Task { await restAPI.logOut() }
-		Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
 	}
 
 	let reach = try? Reachability(hostname: "odin.cs.uga.edu")

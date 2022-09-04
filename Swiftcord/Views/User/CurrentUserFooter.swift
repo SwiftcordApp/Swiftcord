@@ -16,6 +16,8 @@ struct CurrentUserFooter: View {
 	@State var userPopoverPresented = false
 	@State var switcherPresented = false
 	@State var loginPresented = false
+	@State var showQR = false
+	@State var switcherHelpPresented = false
 
 	@EnvironmentObject var switcher: AccountSwitcher
 
@@ -61,7 +63,7 @@ struct CurrentUserFooter: View {
 				connected_accounts: [],
 				user: User(from: user)
 			))) {
-				Divider()
+				if !(user.bio?.isEmpty ?? true) { Divider() }
 				Button {
 					switcherPresented = true
 				} label: {
@@ -74,18 +76,27 @@ struct CurrentUserFooter: View {
 		}
 		.sheet(isPresented: $loginPresented) {
 			ZStack(alignment: .topTrailing) {
-				LoginView(shrink: true)
-					.frame(width: 450, height: 600)
-				Button {
+				LoginView(shrink: true, showQR: showQR) { // Log in callback
 					loginPresented = false
-				} label: {
-					Image(systemName: "xmark")
-						.contentShape(Circle())
-						.font(.system(size: 24, weight: .bold))
-						.opacity(0.75)
 				}
-				.buttonStyle(.plain)
-				.padding(16)
+				.frame(width: 450, height: 600)
+
+				VStack(spacing: 16) {
+					Button { loginPresented = false } label: {
+						Image(systemName: "xmark")
+							.contentShape(Circle())
+							.font(.system(size: 24, weight: .bold))
+							.opacity(0.75)
+					}
+					.buttonStyle(.plain)
+					Button { showQR.toggle() } label: {
+						Image(systemName: "qrcode")
+							.contentShape(Rectangle())
+							.font(.system(size: 24, weight: .bold))
+							.opacity(0.75)
+					}
+					.buttonStyle(.plain)
+				}.padding(16)
 			}
 		}
     }

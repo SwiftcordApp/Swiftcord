@@ -32,7 +32,7 @@ struct SwiftcordApp: App {
 	var body: some Scene {
 		WindowGroup {
 			if state.attemptLogin {
-				LoginView()
+				LoginView() // Doesn't matter if login view is big enough
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
@@ -77,6 +77,7 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(restAPI)
 				.environmentObject(state)
+				.environmentObject(acctManager)
 				.preferredColorScheme(selectedTheme == "dark"
 									  ? .dark
 									  : (selectedTheme == "light" ? .light : .none))
