@@ -32,6 +32,7 @@ class AccountSwitcher: NSObject, ObservableObject {
 			return
 		}
 		accounts = dec
+		print(accounts)
 	}
 	func writeAccounts() {
 		UserDefaults.standard.setValue(try? JSONEncoder().encode(accounts), forKey: AccountSwitcher.META_KEY)
@@ -64,15 +65,16 @@ class AccountSwitcher: NSObject, ObservableObject {
 			withAnimation {
 				self?.accounts.removeAll { $0.id == id }
 				self?.writeAccounts()
-			}
-		}
-		// Actions to take if the account being logged out is the current one
-		if UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY) == id {
-			AccountSwitcher.clearAccountSpecificPrefKeys()
-			if let firstID = accounts.first?.id {
-				setActiveAccount(id: firstID)
-			} else {
-				UserDefaults.standard.removeObject(forKey: AccountSwitcher.ACTIVE_KEY)
+
+				// Actions to take if the account being logged out is the current one
+				if UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY) == id {
+					AccountSwitcher.clearAccountSpecificPrefKeys()
+					if let firstID = self?.accounts.first?.id {
+						self?.setActiveAccount(id: firstID)
+					} else {
+						UserDefaults.standard.removeObject(forKey: AccountSwitcher.ACTIVE_KEY)
+					}
+				}
 			}
 		}
 	}
@@ -117,6 +119,7 @@ class AccountSwitcher: NSObject, ObservableObject {
 
 		// If there's a token pending to be saved, save it under the current user ID
 		if let newToken = pendingToken {
+			pendingToken = nil
 			saveToken(for: user.id, token: newToken)
 			inconsistency = true
 		}
@@ -142,6 +145,10 @@ class AccountSwitcher: NSObject, ObservableObject {
 			AccountSwitcher.log.warning("Fixing account meta inconsistencies")
 			writeAccounts()
 		}
+
+		// Move the current active account to the top
+		// Remove current active account and reinsert it at the top
+		accounts.insert(accounts.remove(at: accounts.firstIndex(where: { $0.id == user.id }) ?? 0), at: 0)
 	}
 
 	override init() {

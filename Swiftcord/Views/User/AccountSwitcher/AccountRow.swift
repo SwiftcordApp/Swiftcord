@@ -73,6 +73,7 @@ struct AccountRow: View {
 					if switcher.accounts.isEmpty {
 						gateway.disconnect()
 						state.attemptLogin = true
+						state.loadingState = .initial
 					} else if isCurrent {
 						switchAccount() // Switch to the next available account
 					}
