@@ -101,3 +101,31 @@
 "settings.user.chPwd.caption" = "输入当前密码和新密码。";
 "settings.user.chPwd.title" = "更新密码";
 "server.join.fieldHeader.invalid" = "Invite Link _— 请输入有效的邀请链接或邀请代码。_";
+"settings.others.credits.misc.discord" = "";
+"settings.others.credits.sponsor" = "";
+// About
+"settings.others.about" = "";
+"settings.others.credits.sponsor.engage.header" = "";
+"settings.others.credits.misc.anim" = "";
+"settings.others.credits.contrib.anon" = "";
+"settings.others.about.caption" = "";
+"settings.others.credits.sponsor.engage.body" = "";
+"settings.others.credits.contrib.note" = "";
+"%@ %@ %@ settings.others.about.ver" = "";
+"settings.others.credits.sponsor.tier3" = "";
+"settings.others.credits.sponsor.gh" = "";
+// Credits
+"settings.others.credits" = "";
+"settings.others.credits.sponsor.tier2" = "";
+"settings.others.credits.about" = "";
+"settings.others.about.supportPkg" = "";
+"settings.others.credits.headDev" = "";
+"settings.others.credits.sponsor.patreon" = "";
+"settings.others.credits.contrib" = "";
+"settings.others.credits.contrib.desc" = "";
+"settings.others.credits.sponsor.tier1" = "";
+"settings.others.credits.whoAmI" = "";
+"settings.others.credits.sponsor.desc" = "";
+"settings.others.credits.contrib.loading" = "";
+"settings.others.about.desc" = "";
+"%lld settings.others.credits.contrib.more" = "";
