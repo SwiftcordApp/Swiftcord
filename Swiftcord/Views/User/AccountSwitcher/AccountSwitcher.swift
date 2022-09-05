@@ -130,6 +130,16 @@ class AccountSwitcher: NSObject, ObservableObject {
 			accounts.insert(.init(user: user), at: 0)
 			inconsistency = true
 		}
+		let curUserIdx = accounts.firstIndex { $0.id == user.id }! // There will always be an entry for the current user
+		// Ensure meta for current user is updated
+		if accounts[curUserIdx].name != user.username ||
+		    accounts[curUserIdx].discrim != user.discriminator ||
+			accounts[curUserIdx].avatar != user.avatarURL(size: 80) {
+			AccountSwitcher.log.info("User meta for current user is outdated, it will be updated")
+			accounts[curUserIdx] = AccountMeta(user: user)
+			inconsistency = true
+		}
+
 		// Check for duplicates and remove them if any
 		var accountIDs: [Snowflake] = []
 		for (idx, account) in accounts.enumerated() {

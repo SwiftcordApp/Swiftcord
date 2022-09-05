@@ -180,11 +180,11 @@ struct ContentView: View {
                 switch evt {
                 case .ready:
                     state.loadingState = .gatewayConn
-					guard let p = data as? ReadyEvt else {
+					guard let payload = data as? ReadyEvt else {
 						log.critical("Could not cast data to ready event! This should never happen!")
 						return
 					}
-					accountsManager.onSignedIn(with: p.user)
+					accountsManager.onSignedIn(with: payload.user)
                     fallthrough
                 case .resumed:
                     gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
