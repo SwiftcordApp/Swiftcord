@@ -98,3 +98,32 @@
 "server.channel.noCategory" = "沒有類別";
 "server.join.action" = "加入伺服器";
 "dm" = "私人訊息";
+"settings.others.about.supportPkg" = "";
+"settings.others.credits.sponsor.tier2" = "";
+"settings.others.credits.misc.discord" = "";
+"settings.app.advanced.crashes" = "";
+"settings.others.credits.contrib.desc" = "";
+"settings.others.credits.sponsor" = "";
+"settings.others.credits.headDev" = "";
+"settings.others.credits.sponsor.engage.body" = "";
+"%@ %@ %@ settings.others.about.ver" = "";
+"settings.others.about.desc" = "";
+// About
+"settings.others.about" = "";
+"settings.others.credits.sponsor.tier1" = "";
+"settings.others.credits.sponsor.tier3" = "";
+"%lld settings.others.credits.contrib.more" = "";
+"settings.others.credits.misc.anim" = "";
+"settings.others.credits.sponsor.patreon" = "";
+"settings.others.credits.contrib.loading" = "";
+"settings.others.about.caption" = "";
+"settings.others.credits.whoAmI" = "";
+"settings.others.credits.sponsor.gh" = "";
+"settings.others.credits.sponsor.desc" = "";
+"settings.others.credits.contrib.note" = "";
+"settings.others.credits.about" = "";
+"settings.others.credits.contrib.anon" = "";
+// Credits
+"settings.others.credits" = "";
+"settings.others.credits.sponsor.engage.header" = "";
+"settings.others.credits.contrib" = "";
