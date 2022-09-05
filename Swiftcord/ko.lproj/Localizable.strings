@@ -82,7 +82,7 @@
 "login.token.login" = "로그인";
 "settings.app.advanced.analytics" = "앱 사용 정보";
 "settings.app.advanced.analytics.option" = "SwiftCord를 개선할 수 있도록 AppCenter Analytics로 익명의 사용 정보 보내기";
-"settings.app.advanced.crashes" = "충돌 시 충돌 보고서가 향후 충돌을 진단하고 방지하기 위해 AppCenter로 전송됩니다. 로그 및 식별 가능한 데이터는 포함되지 않습니다.";
+"settings.app.advanced.crashes" = "앱 충돌 발생 시, 향후 충돌을 진단하고 방지하기 위해 리포트가 Sentry로 전송됩니다. 개인 정보 또는 식별 가능한 데이터는 기기를 떠나지 않을 것입니다.";
 "settings.app.advanced.analytics.caption" = "AppCenter를 통해 익명의 SwiftCord 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 역추적할 수 없습니다.";
 "action.done" = "저장";
 "action.close" = "닫기";
@@ -115,7 +115,7 @@
 "settings.others.about.desc" = "Swift 및 SwiftUI로 만든 네이티브 Discord 클라이언트";
 "%@ %@ %@ settings.others.about.ver" = "%@ 버전 %@ (빌드: %@)";
 // Credits
-"settings.others.credits" = "크레딧";
+"settings.others.credits" = "고마운 분들";
 "settings.others.credits.headDev" = "개발자";
 "settings.others.credits.whoAmI" = "Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
 "settings.others.credits.sponsor.tier3" = "핫한 서포터 🔥";
