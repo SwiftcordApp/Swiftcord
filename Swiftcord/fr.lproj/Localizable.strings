@@ -75,3 +75,55 @@
 "settings.app.accessibility.stickers" = "Autocollants";
 "server.join.fieldHeader.notFound" = "";
 "server.join.fieldHeader.joinFail" = "";
+"settings.others.credits.misc.discord" = "";
+"settings.user.email" = "";
+"settings.user.username" = "";
+"%@ %@ %@ settings.others.about.ver" = "";
+"settings.user.phoneNum" = "";
+"server.join.title" = "";
+"settings.app.advanced.crashes" = "";
+"login.token.login" = "";
+"settings.others.about.caption" = "";
+"settings.others.credits.sponsor.desc" = "";
+"settings.others.credits.sponsor.engage.header" = "";
+"settings.others.credits.whoAmI" = "";
+"settings.user.chPwd.title" = "";
+"%lld settings.others.credits.contrib.more" = "";
+"settings.others.credits.headDev" = "";
+"settings.others.credits.contrib.desc" = "";
+"settings.others.credits.sponsor.tier1" = "";
+"settings.others.about.supportPkg" = "";
+"loader.panic.logout" = "";
+"settings.others.credits.sponsor.tier2" = "";
+"settings.others.credits.contrib.anon" = "";
+"settings.app.advanced.analytics.option" = "";
+"settings.others.credits.contrib" = "";
+"settings.user.chPwd.caption" = "";
+"settings.others.credits.misc.anim" = "";
+"settings.others.credits.sponsor" = "";
+"login.token.input" = "";
+"settings.app.advanced.analytics" = "";
+"action.done" = "";
+"server.join.caption" = "";
+"login.token.back" = "";
+"server.join.fieldHeader" = "";
+"settings.app.advanced.analytics.caption" = "";
+"settings.others.credits.sponsor.patreon" = "";
+"settings.others.credits.contrib.note" = "";
+"server.join.action" = "";
+"action.close" = "";
+"server.join.fieldHeader.invalid" = "";
+"settings.others.credits.contrib.loading" = "";
+"settings.others.credits.about" = "";
+"server.join.egHeader" = "";
+"settings.others.credits.sponsor.gh" = "";
+
+/* ====== Login ====== */
+"login.token.title" = "";
+"settings.others.credits.sponsor.engage.body" = "";
+// About
+"settings.others.about" = "";
+"settings.others.about.desc" = "";
+// Credits
+"settings.others.credits" = "";
+"settings.others.credits.sponsor.tier3" = "";
