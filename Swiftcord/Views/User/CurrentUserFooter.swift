@@ -24,6 +24,10 @@ struct CurrentUserFooter: View {
     var body: some View {
 		Button {
 			userPopoverPresented = true
+			AnalyticsWrapper.event(type: .openPopout, properties: [
+				"type": "User Status Menu",
+				"other_user_id": user.id
+			])
 		} label: {
 			HStack(spacing: 8) {
 				BetterImageView(url: user.avatarURL())
@@ -66,6 +70,7 @@ struct CurrentUserFooter: View {
 				if !(user.bio?.isEmpty ?? true) { Divider() }
 				Button {
 					switcherPresented = true
+					AnalyticsWrapper.event(type: .impressionAccountSwitcher)
 				} label: {
 					Label("Switch Accounts", systemImage: "arrow.left.arrow.right").frame(maxWidth: .infinity)
 				}.buttonStyle(FlatButtonStyle(outlined: true))
@@ -90,12 +95,13 @@ struct CurrentUserFooter: View {
 					}
 					.buttonStyle(.plain)
 					Button { showQR.toggle() } label: {
-						Image(systemName: "qrcode")
+						Image(systemName: showQR ? "keyboard" : "qrcode")
 							.contentShape(Rectangle())
-							.font(.system(size: 24, weight: .bold))
+							.font(.system(size: 24, weight: .medium))
 							.opacity(0.75)
 					}
 					.buttonStyle(.plain)
+					.frame(width: 24)
 				}.padding(16)
 			}
 		}

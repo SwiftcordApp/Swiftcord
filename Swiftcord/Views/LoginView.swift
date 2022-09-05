@@ -63,6 +63,9 @@ struct LoginView: View {
 			.hidden()
 		}
 		.frame(minWidth: shrink ? 450 : 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
+		.onAppear {
+			AnalyticsWrapper.event(type: .impressionLogin)
+		}
 		.onChange(of: loginWVModel.token) { token in
 			if let token = token {
 				acctManager.setPendingToken(token: token)

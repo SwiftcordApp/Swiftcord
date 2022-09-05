@@ -85,6 +85,7 @@ class AccountSwitcher: NSObject, ObservableObject {
 	func setActiveAccount(id: Snowflake) {
 		// ID is always assumed to be correct
 		UserDefaults.standard.set(id, forKey: AccountSwitcher.ACTIVE_KEY)
+		AccountSwitcher.clearAccountSpecificPrefKeys() // Clear account specific UserDefault keys
 	}
 
 	// Multiple sanity checks ensure account meta is valid, if not, repair is attempted
