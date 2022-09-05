@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordKit
 import DiscordKitCommon
 import CachedAsyncImage
 
@@ -19,6 +20,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 
 	@State private var note = ""
 
+	@EnvironmentObject var gateway: DiscordGateway
 	@Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -51,20 +53,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
 			HStack(alignment: .bottom, spacing: 4) {
-				Group {
-					if avatarURL.isAnimatable {
-						SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"))
-					} else {
-						CachedAsyncImage(url: avatarURL) { image in
-							image.resizable().scaledToFill()
-						} placeholder: {
-							ProgressView().progressViewStyle(.circular)
-						}
-					}
-				}
-				.clipShape(Circle())
-				.frame(width: 80, height: 80)
-				.padding(6)
+				AvatarWithPresence(avatarURL: avatarURL, mini: false)
 
 				if let fullUser = profile?.user {
 					ProfileBadges(user: fullUser, premiumType: profile?.premium_type)
@@ -122,6 +111,9 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						Text(markdown: bio)
 							.fixedSize(horizontal: false, vertical: true)
 					}
+					
+					Text("Presence state:")
+					Text(gateway.presences[user.id]?.status.rawValue ?? "loading")
 
 					contentSlot.padding(.top, 6)
 				}

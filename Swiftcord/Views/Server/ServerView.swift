@@ -66,10 +66,7 @@ struct ServerView: View {
 		])
 
 		// Subscribe to typing events
-		gateway.send(
-			op: .subscribeGuildEvents,
-			data: SubscribeGuildEvts(guild_id: guild.id, typing: true)
-		)
+		gateway.subscribeGuildEvents(id: guild.id)
 		serverCtx.roles = guild.roles.compactMap { role in try? role.result.get() }
 		// Retrieve guild roles to update context
 		/*Task {

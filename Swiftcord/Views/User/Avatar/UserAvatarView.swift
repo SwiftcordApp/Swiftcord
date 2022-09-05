@@ -22,7 +22,6 @@ struct UserAvatarView: View {
     let user: User
     let guildID: Snowflake?
     let webhookID: Snowflake?
-    var clickDisabled = false
 	var size: CGFloat = 40
     @State private var profile: UserProfile? // Lazy-loaded full user
     @State private var infoPresenting = false
@@ -40,8 +39,6 @@ struct UserAvatarView: View {
 			.frame(width: size, height: size)
 			.clipShape(Circle())
 			.onTapGesture {
-				guard !clickDisabled else { return }
-
 				if user.id == gateway.cache.user?.id, profile == nil {
 					profile = UserProfile(
 						connected_accounts: [],
@@ -60,6 +57,10 @@ struct UserAvatarView: View {
 					"type": "Profile Popout",
 					"other_user_id": user.id
 				])
+
+				if let guildID = guildID, guildID != "@me" {
+					gateway.requestPresence(id: guildID, memberID: user.id)
+				}
 
 				// Get user profile for a fuller User object and roles
 				if profile?.guild_member == nil,
