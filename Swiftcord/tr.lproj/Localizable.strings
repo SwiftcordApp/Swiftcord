@@ -95,3 +95,35 @@
 "settings.app.advanced.analytics.caption" = "AppCenter aracılığıyla Swiftcord'un toplu (anonim) kullanım istatistikleri (işlenen dil, uygulama sürümü ve özellik kullanımları gibi) toplanır. Elde edilen ayrıntılar Swiftcord'un özelliklerini geliştirmek için kullanılacaktır; bunları kullanarak seni bulamayız.";
 "settings.others.debug.actions" = "Eylemler";
 "settings.others.debug.actions.info" = "Ne yaptığını bilmiyorsan buradaki hiçbir seçeneği kullanma. Bazıları TeHLiKeLi olabilir!";
+"settings.others.credits.sponsor.patreon" = "";
+"server.composeMsg.hint %@" = "";
+"dm.group.composeMsg.hint %@" = "";
+"dm.composeMsg.hint %@" = "";
+"settings.others.debug.actions.crash" = "";
+"settings.others.credits.misc.anim" = "";
+"settings.others.about.caption" = "";
+"settings.others.credits.sponsor.tier1" = "";
+"settings.others.credits.contrib.loading" = "";
+"settings.others.credits.sponsor.engage.body" = "";
+"settings.others.credits.sponsor.tier3" = "";
+"settings.others.credits.headDev" = "";
+"settings.others.credits.sponsor.tier2" = "";
+// About
+"settings.others.about" = "";
+"settings.others.credits.contrib.anon" = "";
+"%@ %@ %@ settings.others.about.ver" = "";
+"settings.others.about.supportPkg" = "";
+"settings.others.credits.contrib.desc" = "";
+"settings.others.credits.sponsor.desc" = "";
+"settings.others.credits.misc.discord" = "";
+"settings.others.credits.contrib" = "";
+"%lld settings.others.credits.contrib.more" = "";
+"settings.others.credits.about" = "";
+"settings.others.credits.sponsor.engage.header" = "";
+"settings.others.credits.whoAmI" = "";
+"settings.others.credits.contrib.note" = "";
+"settings.others.about.desc" = "";
+"settings.others.credits.sponsor" = "";
+"settings.others.credits.sponsor.gh" = "";
+// Credits
+"settings.others.credits" = "";
