@@ -142,8 +142,6 @@ struct WebView: NSViewRepresentable {
     }
 
     public func updateNSView(_ nsView: WKWebView, context: NSViewRepresentableContext<WebView>) {
-		print("update nsview")
-		print(shrunkShowingQR)
 		nsView.evaluateJavaScript(shrunkShowingQR
 								  ? "document.body.classList.add('qr-only')"
 								  : "document.body.classList.remove('qr-only')"
