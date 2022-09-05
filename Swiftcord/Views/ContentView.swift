@@ -165,7 +165,6 @@ struct ContentView: View {
 						skipWhatsNew = true
 					}
 					presentingOnboarding = true
-					print(whatsNewMarkdown ?? "")
 				}
 			}
         })
@@ -177,11 +176,15 @@ struct ContentView: View {
                 state.loadingState = .initial
                 log.debug("Attempting login")
             }
-            _ = gateway.onEvent.addHandler { (evt, _) in
+            _ = gateway.onEvent.addHandler { (evt, data) in
                 switch evt {
                 case .ready:
                     state.loadingState = .gatewayConn
-					accountsManager.onSignedIn(with: gateway.cache.user!)
+					guard let p = data as? ReadyEvt else {
+						log.critical("Could not cast data to ready event! This should never happen!")
+						return
+					}
+					accountsManager.onSignedIn(with: p.user)
                     fallthrough
                 case .resumed:
                     gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
