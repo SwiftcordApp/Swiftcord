@@ -25,22 +25,26 @@ struct SwiftcordApp: App {
 	@StateObject private var gateway = DiscordGateway()
 	@StateObject private var restAPI = DiscordREST()
 	@StateObject private var state = UIState()
+	@StateObject private var acctManager = AccountSwitcher()
 
 	@AppStorage("theme") private var selectedTheme = "system"
 
 	var body: some Scene {
 		WindowGroup {
 			if state.attemptLogin {
-				LoginView()
+				LoginView() // Doesn't matter if login view is big enough
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
+					.environmentObject(acctManager)
+					.navigationTitle("Login")
 			} else {
 				ContentView()
 					.overlay(LoadingView())
 					.environmentObject(gateway)
 					.environmentObject(state)
 					.environmentObject(restAPI)
+					.environmentObject(acctManager)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
 					.preferredColorScheme(selectedTheme == "dark"
@@ -48,7 +52,7 @@ struct SwiftcordApp: App {
 										  : (selectedTheme == "light" ? .light : nil))
 					.onAppear {
 						guard gateway.socket == nil else { return }
-						guard let token = Keychain.load(key: SwiftcordApp.tokenKeychainKey) else {
+						guard let token = acctManager.getActiveToken() else {
 							state.attemptLogin = true
 							return
 						}
@@ -73,6 +77,7 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(restAPI)
 				.environmentObject(state)
+				.environmentObject(acctManager)
 				.preferredColorScheme(selectedTheme == "dark"
 									  ? .dark
 									  : (selectedTheme == "light" ? .light : .none))

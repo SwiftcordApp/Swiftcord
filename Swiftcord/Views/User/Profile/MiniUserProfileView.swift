@@ -9,14 +9,13 @@ import SwiftUI
 import DiscordKitCommon
 import CachedAsyncImage
 
-struct MiniUserProfileView: View {
+struct MiniUserProfileView<RichContentSlot: View>: View {
 	let user: User
 	@Binding var profile: UserProfile?
-	let guildRoles: [Role]?
-	let guildID: Snowflake?
-	let isWebhook: Bool
-	let loadError: Bool
-	let hideNotes: Bool
+	var guildRoles: [Role]?
+	var isWebhook: Bool = false
+	var loadError: Bool = false
+	@ViewBuilder var contentSlot: RichContentSlot
 
 	@State private var note = ""
 
@@ -97,9 +96,8 @@ struct MiniUserProfileView: View {
 					}
 					Spacer()
 				}
-				.padding(.bottom, -2)
 
-				Divider().padding(.vertical, 8)
+				Divider().padding(.vertical, 6)
 
 				if isWebhook {
 					Text("This user is a webhook")
@@ -123,65 +121,9 @@ struct MiniUserProfileView: View {
 						Text("user.bio").font(.headline).textCase(.uppercase)
 						Text(markdown: bio)
 							.fixedSize(horizontal: false, vertical: true)
-							.padding(.bottom, 8)
 					}
 
-					if let profile = profile, guildID != "@me" {
-						if let guildRoles = guildRoles {
-							let roles = guildRoles.filter {
-								profile.guild_member?.roles.contains($0.id) ?? false
-							}
-
-							Text(
-								profile.guild_member == nil
-								? "user.roles.loading"
-								: (roles.isEmpty
-								   ? "user.roles.none"
-								   : (roles.count == 1 ? "user.roles.one" : "user.roles.many")
-								)
-							)
-							.font(.headline)
-							.textCase(.uppercase)
-							if !roles.isEmpty {
-								TagCloudView(content: roles.map({ role in
-									HStack(spacing: 6) {
-										Circle()
-											.fill(Color(hex: role.color))
-											.frame(width: 14, height: 14)
-											.padding(.leading, 6)
-										Text(role.name)
-											.font(.system(size: 12))
-											.padding(.trailing, 8)
-									}
-									.frame(height: 24)
-									.background(Color.gray.opacity(0.2))
-									.cornerRadius(7)
-								})).padding(-2)
-							}
-						} else {
-							ProgressView("user.roles.loading")
-								.progressViewStyle(.linear)
-								.frame(maxWidth: .infinity)
-								.tint(.blue)
-						}
-					}
-
-					if !hideNotes {
-						Text("user.note").font(.headline).padding(.top, 8).textCase(.uppercase)
-						 // Notes are stored locally for now, but eventually will be synced with the Discord API
-						 TextField("Add a note to this user (only visible to you)", text: $note)
-							 .textFieldStyle(.roundedBorder)
-							 .onChange(of: note) { _ in
-								 if note.isEmpty {
-									 UserDefaults.standard.removeObject(forKey: "notes.\(user.id)")
-								 } else {
-									 UserDefaults.standard.set(note, forKey: "notes.\(user.id)")
-								 }
-							 }
-							 .onAppear {
-								 note = UserDefaults.standard.string(forKey: "notes.\(user.id)") ?? ""
-							 }
-					}
+					contentSlot.padding(.top, 6)
 				}
 			}
 			.padding(12)

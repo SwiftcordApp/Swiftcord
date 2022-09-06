@@ -15,14 +15,19 @@ struct LoginView: View {
 	@State var tokenCount = 0
 	@State var tokenString: String = ""
 
+	var shrink = false
+	var showQR = false
+	var onLoggedIn: (() -> Void)?
+
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
 	@EnvironmentObject var state: UIState
+	@EnvironmentObject var acctManager: AccountSwitcher
 
     var body: some View {
 		ZStack {
 			if !tokenView {
-				WebView()
+				WebView(shrink: shrink, shrunkShowingQR: showQR)
 					.environmentObject(loginWVModel)
 
 				if !loginWVModel.didFinishLoading {
@@ -32,9 +37,7 @@ struct LoginView: View {
 							.frame(maxWidth: .infinity, maxHeight: .infinity)
 					}.background(.background)
 				}
-			}
-
-			if tokenView {
+			} else {
 				VStack {
 					Text("login.token.title")
 						.font(.title)
@@ -59,14 +62,21 @@ struct LoginView: View {
 			.keyboardShortcut("t", modifiers: [.command, .shift])
 			.hidden()
 		}
-		.frame(minWidth: 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
-		.navigationTitle("Login")
+		.frame(minWidth: shrink ? 450 : 850, idealWidth: 950, minHeight: 500, idealHeight: 620)
+		.onAppear {
+			AnalyticsWrapper.event(type: .impressionLogin)
+		}
 		.onChange(of: loginWVModel.token) { token in
 			if let token = token {
-				Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: token)
+				acctManager.setPendingToken(token: token)
+				if state.loadingState == .messageLoad { // Switch account
+					gateway.disconnect()
+					state.loadingState = .initial
+				}
 				gateway.connect(token: token) // Reconnect to the socket with the new token
 				restAPI.setToken(token: token)
 				state.attemptLogin = false
+				if let onLoggedIn = onLoggedIn { onLoggedIn() }
 			}
 		}
     }

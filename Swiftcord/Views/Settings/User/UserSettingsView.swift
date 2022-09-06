@@ -16,26 +16,7 @@ struct UserSettingsView: View {
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var rest: DiscordREST
-
-	private let keyPrefixesToRemove = [
-		"lastCh.",
-		"local.",
-		"lastSelectedGuild",
-	]
-
-	private func logOut() {
-		for key in UserDefaults.standard.dictionaryRepresentation().keys {
-			for toRemove in keyPrefixesToRemove {
-				if key.prefix(toRemove.count) == toRemove {
-					UserDefaults.standard.removeObject(forKey: key)
-					break
-				}
-			}
-		}
-		gateway.logout()
-		Task { await rest.logOut() }
-		Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
-	}
+	@EnvironmentObject var acctManager: AccountSwitcher
 
     var body: some View {
         NavigationView {
@@ -64,17 +45,7 @@ struct UserSettingsView: View {
 							   tag: SidebarLink.logOut, selection: $selectedLink) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("settings.user.logOut").font(.title)
-                        Text("settings.user.logOut.confirmation")
-						Text("Note: This will also delete your locally stored preferences")
-							.font(.caption)
-                        Button(role: .destructive) { logOut() } label: {
-                            Label(
-								"settings.user.logOut",
-								systemImage: "rectangle.portrait.and.arrow.right"
-							)
-                        }
-                        .controlSize(.small)
-                        .buttonStyle(FlatButtonStyle())
+                        Text("Use the account switcher (found by clicking on your profile at the bottom of the channel list) to log out, switch or add accounts!")
 
                         Spacer()
                     }

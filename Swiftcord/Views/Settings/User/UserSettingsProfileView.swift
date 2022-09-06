@@ -20,7 +20,7 @@ struct UserSettingsProfileView: View {
 
 			HStack(alignment: .top) {
 				VStack(alignment: .leading) {
-					Text("ABOUT ME").font(.headline)
+					Text("About Me").textCase(.uppercase).font(.headline)
 					Text("You can use markdown and links if you'd like.").opacity(0.75)
 					GroupBox {
 						ScrollView {
@@ -33,16 +33,13 @@ struct UserSettingsProfileView: View {
 				}.frame(maxWidth: .infinity, alignment: .leading)
 
 				VStack(alignment: .leading) {
-					Text("PREVIEW").font(.headline)
+					Text("Preview").textCase(.uppercase).font(.headline)
 					MiniUserProfileView(
 						user: User(from: user),
-						profile: $profile,
-						guildRoles: nil,
-						guildID: "@me",
-						isWebhook: false,
-						loadError: false,
-						hideNotes: true
-					)
+						profile: $profile
+					) {
+						Text("Customising my profile").font(.headline).textCase(.uppercase)
+					}
 					.background(Color(NSColor.controlBackgroundColor))
 					.cornerRadius(8)
 					.shadow(color: .black.opacity(0.24), radius: 16, x: 0, y: 8)

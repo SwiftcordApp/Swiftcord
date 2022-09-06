@@ -40,6 +40,7 @@ struct ContentView: View {
     @EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
+	@EnvironmentObject var accountsManager: AccountSwitcher
 
 	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
 	@AppStorage("local.previousBuild") private var prevBuild: String?
@@ -193,7 +194,6 @@ struct ContentView: View {
 						skipWhatsNew = true
 					}
 					presentingOnboarding = true
-					print(whatsNewMarkdown ?? "")
 				}
 			}
         })
@@ -205,10 +205,15 @@ struct ContentView: View {
                 state.loadingState = .initial
                 log.debug("Attempting login")
             }
-            _ = gateway.onEvent.addHandler { (evt, _) in
+            _ = gateway.onEvent.addHandler { (evt, data) in
                 switch evt {
                 case .ready:
                     state.loadingState = .gatewayConn
+					guard let payload = data as? ReadyEvt else {
+						log.critical("Could not cast data to ready event! This should never happen!")
+						return
+					}
+					accountsManager.onSignedIn(with: payload.user)
                     fallthrough
                 case .resumed:
                     gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(

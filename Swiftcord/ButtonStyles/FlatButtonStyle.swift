@@ -19,15 +19,15 @@ struct FlatButtonStyle: ButtonStyle {
 	@Environment(\.isEnabled) private var enabled: Bool
 
 	func makeBody(configuration: Configuration) -> some View {
-		let base: Color = customBase ?? (configuration.role == .destructive ? .red : .accentColor)
+		let base: Color = customBase ?? (configuration.role == .destructive ? .red : (prominent ? .accentColor : .init(nsColor: .controlColor)))
 		let pressedStyles = configuration.isPressed && !outlined
 		let hoverStyles = (hovered && !outlined) || (configuration.isPressed && outlined)
 		let accent = enabled
-			? base.modifyingHSB(
+			? (base.modifyingHSB(
 				1,
 				pressedStyles ? 0.98 : (hoverStyles ? 0.96 : 1),
 				pressedStyles ? 0.67 : (hoverStyles ? 0.76 : 1)
-			)
+			))
 			: .gray.opacity(0.25)
 		let background = outlined && !hovered ? .clear : accent
 

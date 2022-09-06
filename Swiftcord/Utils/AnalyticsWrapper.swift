@@ -26,6 +26,8 @@ struct AnalyticsWrapper {
 		case networkInviteResolve = "network_action_invite_resolve"
 		case resolveInvite = "resolve_invite"
 		case supporterCTAClick = "supporter_cta_click" // Clicked on supporter CTA
+		case impressionLogin = "impression_user_login"
+		case impressionAccountSwitcher = "impression_multi_account_switch_landing"
 	}
 
 	static private func getBaseProps() -> [String: Any?] {
@@ -38,7 +40,7 @@ struct AnalyticsWrapper {
 
 	static private let log = Logger(category: "AnalyticsWrapper")
 
-	static func event(type: EventType, properties: [String: Any?]) {
+	static func event(type: EventType, properties: [String: Any?] = [:]) {
 		let combinedProps = getBaseProps().merging(properties) { $1 }
 
 		let typedProps = EventProperties()

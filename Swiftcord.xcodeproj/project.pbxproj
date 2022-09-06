@@ -178,6 +178,14 @@
 		DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA91016C28BF8F1F00DD076B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
+		DA91017028C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
+		DA91017128C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
+		DA91017328C38EA300DD076B /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017228C38EA300DD076B /* AccountRow.swift */; };
+		DA91017428C38EA300DD076B /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017228C38EA300DD076B /* AccountRow.swift */; };
+		DA91017628C3989E00DD076B /* AccountMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017528C3989E00DD076B /* AccountMeta.swift */; };
+		DA91017728C3989E00DD076B /* AccountMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017528C3989E00DD076B /* AccountMeta.swift */; };
+		DA91017928C4726300DD076B /* AccountSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017828C4726300DD076B /* AccountSwitcher.swift */; };
+		DA91017A28C4726300DD076B /* AccountSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91017828C4726300DD076B /* AccountSwitcher.swift */; };
 		DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA12835ED1200013CC2 /* DiscordKit */; };
 		DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DA974EA32835ED1200013CC2 /* DiscordKitCommon */; };
 		DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97BA8B2849C0FA00059FD7 /* Cache.swift */; };
@@ -322,6 +330,10 @@
 		DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAdvancedView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA7721FC2896BD4D0007BE26 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUserFooter+.swift"; sourceTree = "<group>"; };
+		DA91017228C38EA300DD076B /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
+		DA91017528C3989E00DD076B /* AccountMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMeta.swift; sourceTree = "<group>"; };
+		DA91017828C4726300DD076B /* AccountSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitcher.swift; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -441,6 +453,7 @@
 		DA2384BD27CCB0FD009E15E0 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				DA91016E28C38D4900DD076B /* AccountSwitcher */,
 				DA54D572284497CC00B11857 /* Profile */,
 				DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */,
 				DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */,
@@ -647,6 +660,17 @@
 				DA7720CF283F184100D3C335 /* NavigationCommands.swift */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		DA91016E28C38D4900DD076B /* AccountSwitcher */ = {
+			isa = PBXGroup;
+			children = (
+				DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */,
+				DA91017228C38EA300DD076B /* AccountRow.swift */,
+				DA91017528C3989E00DD076B /* AccountMeta.swift */,
+				DA91017828C4726300DD076B /* AccountSwitcher.swift */,
+			);
+			path = AccountSwitcher;
 			sourceTree = "<group>";
 		};
 		DAA57E22289226F500C9A931 /* SwiftyGif */ = {
@@ -990,6 +1014,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */,
+				DA91017728C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */,
 				3642993E286801C900483D0A /* OnboardingView.swift in Sources */,
 				3642993F286801C900483D0A /* String+.swift in Sources */,
@@ -1018,6 +1043,7 @@
 				DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */,
 				36429952286801C900483D0A /* Persistence.swift in Sources */,
 				DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */,
+				DA91017128C38E0400DD076B /* CurrentUserFooter+.swift in Sources */,
 				36429953286801C900483D0A /* LoadingView.swift in Sources */,
 				DABD8BB82882E9E4008EE28F /* DateFormatter+.swift in Sources */,
 				36429954286801C900483D0A /* CurrentUser+.swift in Sources */,
@@ -1034,6 +1060,7 @@
 				3642995F286801C900483D0A /* ChannelButton.swift in Sources */,
 				36429960286801C900483D0A /* CacheModel.xcdatamodeld in Sources */,
 				36429961286801C900483D0A /* UserSettingsAccountView.swift in Sources */,
+				DA91017428C38EA300DD076B /* AccountRow.swift in Sources */,
 				36429962286801C900483D0A /* Bool+.swift in Sources */,
 				DAFD4711289A1FEB0075D71B /* AttachmentAudio.swift in Sources */,
 				36429963286801C900483D0A /* AppDelegate.swift in Sources */,
@@ -1082,6 +1109,7 @@
 				36429987286801C900483D0A /* LottieView.swift in Sources */,
 				36429988286801C900483D0A /* Date+.swift in Sources */,
 				36429989286801C900483D0A /* UserSettingsProfileView.swift in Sources */,
+				DA91017A28C4726300DD076B /* AccountSwitcher.swift in Sources */,
 				3642998A286801C900483D0A /* ServerView.swift in Sources */,
 				3642998B286801C900483D0A /* SwiftcordApp.swift in Sources */,
 				368B6730287A20F800E37B33 /* ServerJoinView.swift in Sources */,
@@ -1103,6 +1131,7 @@
 				DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */,
 				DAB53670285B693700DD9857 /* AnyTransition+.swift in Sources */,
 				E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */,
+				DA91017328C38EA300DD076B /* AccountRow.swift in Sources */,
 				DAA57E1D28920F1E00C9A931 /* SwiftyGifView.swift in Sources */,
 				DA520AC327D37873009FD740 /* MergePartialMessage.swift in Sources */,
 				DAB53665285ACED100DD9857 /* GitHubAPI.swift in Sources */,
@@ -1120,6 +1149,7 @@
 				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */,
+				DA91017028C38E0400DD076B /* CurrentUserFooter+.swift in Sources */,
 				DAB53668285AD11000DD9857 /* DiscordChannelButton.swift in Sources */,
 				DA520AD727D4D17A009FD740 /* MiscSettingsView.swift in Sources */,
 				DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */,
@@ -1154,6 +1184,7 @@
 				DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */,
 				E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */,
 				DA2BD30E284CCC9800EBB8D6 /* Text+.swift in Sources */,
+				DA91017928C4726300DD076B /* AccountSwitcher.swift in Sources */,
 				DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */,
 				DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */,
 				9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */,
@@ -1179,6 +1210,7 @@
 				DAB1E48728A50D3600645FCD /* DefaultMessageView.swift in Sources */,
 				DAAA22AF284DC0D700C1975E /* AppSettingsAccessibilityView.swift in Sources */,
 				DAFD4713289A202F0075D71B /* AttachmentProgress.swift in Sources */,
+				DA91017628C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DAFD4710289A1FEB0075D71B /* AttachmentAudio.swift in Sources */,
