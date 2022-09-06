@@ -56,7 +56,8 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 			HStack(alignment: .bottom, spacing: 4) {
 				AvatarWithPresence(
 					avatarURL: avatarURL,
-					presence: presence?.status ?? .offline
+					presence: presence?.status ?? .offline,
+					animate: true
 				)
 				.padding(6)
 

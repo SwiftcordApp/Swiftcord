@@ -60,7 +60,8 @@ struct DMButton: View {
 				if dm.type == .dm, let user = gateway.cache.users[dm.recipient_ids![0]] {
 					AvatarWithPresence(
 						avatarURL: user.avatarURL(size: 64),
-						presence: gateway.presences[user.id]?.status ?? .offline
+						presence: gateway.presences[user.id]?.status ?? .offline,
+						animate: false
 					).controlSize(.small)
 				} else {
 					Image(systemName: "person.2.fill")

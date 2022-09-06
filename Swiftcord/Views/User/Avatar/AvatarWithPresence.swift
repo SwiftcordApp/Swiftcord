@@ -11,6 +11,7 @@ import DiscordKitCommon
 struct AvatarWithPresence: View {
 	let avatarURL: URL
 	let presence: PresenceStatus
+	let animate: Bool
 
 	@Environment(\.controlSize) private var controlSize: ControlSize
 
@@ -23,7 +24,7 @@ struct AvatarWithPresence: View {
 
 		ZStack(alignment: .topLeading) {
 			Group {
-				if avatarURL.isAnimatable {
+				if animate, avatarURL.isAnimatable {
 					SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"))
 				} else {
 					BetterImageView(url: avatarURL)
