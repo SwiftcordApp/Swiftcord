@@ -171,7 +171,7 @@ struct MiniServerThumb: View {
                         .frame(width: 16, height: 16)
                         .cornerRadius(8)
                 } else {
-                    BetterImageView(url: iconURL)
+                    BetterImageView(url: iconURL, imageModifier: { $0.antialiased(true) })
                         .frame(width: 16, height: 16)
                         .cornerRadius(8)
                 }
