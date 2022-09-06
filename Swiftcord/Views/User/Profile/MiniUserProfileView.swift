@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordKit
 import DiscordKitCommon
 import CachedAsyncImage
 
@@ -19,10 +20,12 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 
 	@State private var note = ""
 
+	@EnvironmentObject var gateway: DiscordGateway
 	@Environment(\.colorScheme) var colorScheme
 
     var body: some View {
 		let avatarURL = user.avatarURL()
+		let presence = gateway.presences[user.id]
 
 		VStack(alignment: .leading, spacing: 0) {
 			if let banner = profile?.user.banner ?? user.banner {
@@ -51,19 +54,10 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
 			}
 			HStack(alignment: .bottom, spacing: 4) {
-				Group {
-					if avatarURL.isAnimatable {
-						SwiftyGifView(url: avatarURL.modifyingPathExtension("gif"))
-					} else {
-						CachedAsyncImage(url: avatarURL) { image in
-							image.resizable().scaledToFill()
-						} placeholder: {
-							ProgressView().progressViewStyle(.circular)
-						}
-					}
-				}
-				.clipShape(Circle())
-				.frame(width: 80, height: 80)
+				AvatarWithPresence(
+					avatarURL: avatarURL,
+					presence: presence?.status ?? .offline
+				)
 				.padding(6)
 
 				if let fullUser = profile?.user {
@@ -95,6 +89,13 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
 					}
 					Spacer()
+				}
+
+				// Custom status
+				if let status = presence?.activities.first(where: { $0.type == .custom })?.state {
+					Text(status)
+						.fixedSize(horizontal: false, vertical: true)
+						.padding(.top, 6)
 				}
 
 				Divider().padding(.vertical, 6)

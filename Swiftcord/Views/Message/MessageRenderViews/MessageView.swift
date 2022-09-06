@@ -73,7 +73,7 @@ struct MessageView: View {
             ) {
                 if MessageView.defaultTypes.contains(message.type) {
                     if !shrunk {
-                        UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id, clickDisabled: false)
+                        UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
                     } else {
 						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))

@@ -15,7 +15,7 @@
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
         "branch" : "main",
-        "revision" : "7e30c37b0b02001196909c6f9d64aa3e13169ce6"
+        "revision" : "e3fe7843c89e4d5f067cec4c4edd8e85585ffcf6"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
-        "version" : "3.3.0"
+        "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
+        "version" : "3.4.3"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "5bc31fd9bb476539387de7c6ff32acfaf2407157",
-        "version" : "7.23.0"
+        "revision" : "129432a53a031ea4bf214eba6c1c857eccb11407",
+        "version" : "7.24.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
-        "revision" : "286edd1fa22505a9e54d170e9fd07d775ea233f2",
-        "version" : "2.1.0"
+        "revision" : "8e27997de02457a0c4690ffcfb8ac9c8e1066883",
+        "version" : "2.2.2"
       }
     },
     {
