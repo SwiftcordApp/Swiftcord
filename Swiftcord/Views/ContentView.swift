@@ -70,6 +70,32 @@ struct ContentView: View {
 			state.selectedGuildID = lGID
 		} else { state.selectedGuildID = "@me" }
 	}
+	
+    private var serverListItems: [ServerListItem] {
+        let unsortedGuilds = gateway.cache.guilds.values.filter({ guild in
+            !(gateway.cache.userSettings?.guild_folders?.contains(where: { folder in
+                folder.guild_ids.contains(guild.id)
+            }) ?? false)
+        })
+            .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! })
+            .map({ ServerListItem.guild($0) })
+        return unsortedGuilds + (gateway.cache.userSettings?.guild_folders ?? []).compactMap { folder -> ServerListItem? in
+            if folder.guild_ids.count > 1 {
+                let guilds = folder.guild_ids.compactMap {
+                    gateway.cache.guilds[$0]
+                }
+                let name = folder.name ?? String(guilds.map { $0.name }.joined(separator: ", "))
+                return .guildFolder(ServerFolder.GuildFolder(
+                    name: name, guilds: guilds, color: folder.color.flatMap { Color(hex: $0) } ?? Color.accentColor
+                ))
+            } else {
+                guard let guild = gateway.cache.guilds[folder.guild_ids.first ?? ""] else {
+                    return nil
+                }
+                return .guild(guild)
+            }
+        }
+    }
 
     var body: some View {
         HStack(spacing: 0) {
@@ -83,21 +109,24 @@ struct ContentView: View {
                     ).padding(.top, 4)
 
 					HorizontalDividerView().frame(width: 32)
-
-					ForEach(
-						(gateway.cache.guilds.values.filter({
-							!(gateway.cache.userSettings?.guild_positions ?? []).contains($0.id)
-						}).sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
-						+ (gateway.cache.userSettings?.guild_positions ?? [])
-							.compactMap({ gateway.cache.guilds[$0] })
-					) { guild in
-                        ServerButton(
-							selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
-                            name: guild.name,
-                            serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                            isLoading: loadingGuildID == guild.id,
-							onSelect: { state.selectedGuildID = guild.id }
-                        )
+                    
+                    ForEach(self.serverListItems) { item in
+                        switch item {
+                        case .guild(let guild):
+                            ServerButton(
+                                selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
+                                name: guild.name,
+                                serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                                isLoading: loadingGuildID == guild.id,
+                                onSelect: { state.selectedGuildID = guild.id }
+                            )
+                        case .guildFolder(let folder):
+                            ServerFolder(
+                                folder: folder,
+                                selectedGuildID: $state.selectedGuildID,
+                                loadingGuildID: loadingGuildID
+                            )
+                        }
                     }
 
                     ServerButton(
@@ -209,6 +238,19 @@ struct ContentView: View {
 			ServerJoinView(presented: $presentingAddServer)
 		}
 	}
+    
+    private enum ServerListItem: Identifiable {
+        case guild(Guild), guildFolder(ServerFolder.GuildFolder)
+        
+        var id: String {
+            switch self {
+            case .guild(let guild):
+                return guild.id
+            case .guildFolder(let folder):
+                return folder.id
+            }
+        }
+    }
 
     /*private func addItem() {
         withAnimation {

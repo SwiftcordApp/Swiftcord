@@ -108,6 +108,8 @@
 		368B6731287A211F00E37B33 /* HorizontalDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */; };
 		36BC29F3285C162500A8B316 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36BC29F2285C162500A8B316 /* Credits.rtf */; };
 		900F6DA1284A1C0C000B6D29 /* GeneratedBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */; };
+		9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
+		9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
@@ -250,6 +252,7 @@
 		900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Release.xcconfig"; sourceTree = "<group>"; };
 		900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedBuildSettings.swift; sourceTree = "<group>"; };
 		90F77AAA284C87E900166BF3 /* AppCenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
+		9FCE7B1C28C7140100213A3F /* ServerFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFolder.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA03DA3E284F1E9200257790 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
@@ -622,6 +625,7 @@
 				DA4350012879BFCA001DEC81 /* ServerJoinView.swift */,
 				DA57F44328056718001DC46E /* ChannelList.swift */,
 				DA57F44528065209001DC46E /* ChannelButton.swift */,
+				9FCE7B1C28C7140100213A3F /* ServerFolder.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -985,6 +989,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */,
 				DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */,
 				3642993E286801C900483D0A /* OnboardingView.swift in Sources */,
 				3642993F286801C900483D0A /* String+.swift in Sources */,
@@ -1151,6 +1156,7 @@
 				DA2BD30E284CCC9800EBB8D6 /* Text+.swift in Sources */,
 				DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */,
 				DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */,
+				9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */,
 				DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */,
