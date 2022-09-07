@@ -73,6 +73,7 @@ struct AvatarWithPresence: View {
 					.blendMode(.destinationOut)
 			}
 			.offset(x: punchOffset-punchSize/2, y: punchOffset-punchSize/2)
+			.help(presence.toLocalizedString())
 		}
 		.compositingGroup()
 	}

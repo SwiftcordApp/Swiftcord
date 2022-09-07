@@ -116,6 +116,8 @@
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
 		DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
+		DA264C1528C8852900FBB4B5 /* FlatMenuStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */; };
+		DA264C1728C89FE300FBB4B5 /* PresenceStatus+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
 		DA28027F28095E3100B14E5C /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
 		DA2ADF312847B13F004A35F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2ADF2F2847B13F004A35F2 /* Localizable.strings */; };
@@ -270,6 +272,8 @@
 		DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoMedium.otf; sourceTree = "<group>"; };
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatMenuStyle.swift; sourceTree = "<group>"; };
+		DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresenceStatus+.swift"; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
 		DA2ADF302847B13F004A35F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -464,6 +468,14 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		DA264C1328C8851600FBB4B5 /* MenuStyles */ = {
+			isa = PBXGroup;
+			children = (
+				DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */,
+			);
+			path = MenuStyles;
+			sourceTree = "<group>";
+		};
 		DA32EF2E27C6766200A9ED72 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +530,7 @@
 				DA520ABD27D322F0009FD740 /* Resources */,
 				DAB1E47428A2187000645FCD /* ViewModels */,
 				DA4A88E327C3481700720909 /* Views */,
+				DA264C1328C8851600FBB4B5 /* MenuStyles */,
 				DAB53666285AD0F100DD9857 /* ButtonStyles */,
 				DA7720CE283F182700D3C335 /* Commands */,
 				DA4A88DC27C3272500720909 /* Utils */,
@@ -629,6 +642,7 @@
 				DAB5366F285B693700DD9857 /* AnyTransition+.swift */,
 				366BAA8B286D322600B662EA /* Array+.swift */,
 				DA7721FC2896BD4D0007BE26 /* URL+.swift */,
+				DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1139,6 +1153,7 @@
 				DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */,
 				DAB1E48928A50D3600645FCD /* ActionMessageView.swift in Sources */,
 				DA54D57F28460F3A00B11857 /* ReferenceMessageView.swift in Sources */,
+				DA264C1728C89FE300FBB4B5 /* PresenceStatus+.swift in Sources */,
 				DA32EF2427C6249000A9ED72 /* MessagesView.swift in Sources */,
 				DA97BA8C2849C0FA00059FD7 /* Cache.swift in Sources */,
 				DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */,
@@ -1238,6 +1253,7 @@
 				DAFD4716289A208F0075D71B /* AttachmentGif.swift in Sources */,
 				DA4A892427C5D6C500720909 /* ServerView.swift in Sources */,
 				DA4A888827C0AF3000720909 /* SwiftcordApp.swift in Sources */,
+				DA264C1528C8852900FBB4B5 /* FlatMenuStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

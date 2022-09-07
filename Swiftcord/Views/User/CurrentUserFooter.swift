@@ -24,6 +24,8 @@ struct CurrentUserFooter: View {
 	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
+		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
+
 		Button {
 			userPopoverPresented = true
 			AnalyticsWrapper.event(type: .openPopout, properties: [
@@ -34,7 +36,7 @@ struct CurrentUserFooter: View {
 			HStack(spacing: 8) {
 				AvatarWithPresence(
 					avatarURL: user.avatarURL(),
-					presence: gateway.presences[user.id]?.status ?? .offline,
+					presence: curUserPresence,
 					animate: false
 				)
 				.controlSize(.small)
@@ -72,13 +74,62 @@ struct CurrentUserFooter: View {
 				connected_accounts: [],
 				user: User(from: user)
 			))) {
-				if !(user.bio?.isEmpty ?? true) { Divider() }
-				Button {
-					switcherPresented = true
-					AnalyticsWrapper.event(type: .impressionAccountSwitcher)
-				} label: {
-					Label("Switch Accounts", systemImage: "arrow.left.arrow.right").frame(maxWidth: .infinity)
-				}.buttonStyle(FlatButtonStyle(outlined: true))
+				VStack(spacing: 4) {
+					if !(user.bio?.isEmpty ?? true) { Divider() }
+
+					// Set presence
+					Menu {
+						Button {
+							
+						} label: {
+							// Not possible to set custom image size and color
+							Image(systemName: "circle.fill")
+							Text("user.presence.online")
+						}
+						Divider()
+						Button {
+							
+						} label: {
+							Image(systemName: "moon.fill")
+							Text("user.presence.idle")
+						}
+						Button {
+							
+						} label: {
+							Image(systemName: "minus.circle")
+							Text("user.presence.dnd")
+						}
+						Button {
+							
+						} label: {
+							Image(systemName: "circle")
+							Text("user.presence.invisible")
+						}
+					} label: {
+						
+						Text(curUserPresence.toLocalizedString())
+					}
+					.controlSize(.large)
+					Button {
+					} label: {
+						Label("Set Custom Status", systemImage: "face.smiling")
+							.frame(maxWidth: .infinity, alignment: .leading)
+					}
+					.buttonStyle(FlatButtonStyle(outlined: true, text: true))
+					.controlSize(.small)
+
+					Divider()
+
+					Button {
+						switcherPresented = true
+						AnalyticsWrapper.event(type: .impressionAccountSwitcher)
+					} label: {
+						Label("Switch Accounts", systemImage: "arrow.left.arrow.right")
+							.frame(maxWidth: .infinity, alignment: .leading)
+					}
+					.buttonStyle(FlatButtonStyle(outlined: true, text: true))
+					.controlSize(.small)
+				}
 			}
 		}
 		.sheet(isPresented: $switcherPresented) {

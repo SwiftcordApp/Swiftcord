@@ -11,6 +11,8 @@ struct FlatButtonStyle: ButtonStyle {
 	// Use vars so not all params have to be supplied all the time
 	var prominent = true
 	var outlined = false
+	var text = false
+
 	var customBase: Color?
 
 	@State private var hovered = false
@@ -32,7 +34,7 @@ struct FlatButtonStyle: ButtonStyle {
 		let background = outlined && !hovered ? .clear : accent
 
 		configuration.label
-			.padding(.horizontal, controlSize == .large ? 20 : 16)
+			.padding(.horizontal, controlSize == .large ? 20 : text ? 8 : 16)
 			.frame(height: controlSize == .large ? 48 : (controlSize == .small ? 32 : 38))
 			.frame(minWidth: controlSize == .small ? 60 : 96)
 			.font(.system(size: controlSize == .large ? 16 : 14, weight: .medium))
@@ -40,7 +42,7 @@ struct FlatButtonStyle: ButtonStyle {
 			.cornerRadius(4)
 			.overlay {
 				RoundedRectangle(cornerRadius: 4)
-					.strokeBorder(outlined ? accent : .clear)
+					.strokeBorder(outlined && !text ? accent : .clear)
 			}
 			.foregroundColor(background.contrastColor().opacity(enabled ? 1 : 0.5))
 			.animation(.easeOut(duration: 0.17), value: configuration.isPressed ? 1 : (hovered ? 2 : 3))

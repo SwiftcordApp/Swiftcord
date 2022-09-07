@@ -31,6 +31,12 @@
 "user.roles.many" = "Roles";
 "user.roles.loading" = "Loading roles…";
 "user.note" = "Note";
+// Presences
+"user.presence.online" = "Online";
+"user.presence.idle" = "Idle";
+"user.presence.dnd" = "Do Not Disturb";
+"user.presence.offline" = "Offline";
+"user.presence.invisible" = "Invisible";
 
 /* ====== Message ====== */
 "message.edited.shrunk" = " (edited)";

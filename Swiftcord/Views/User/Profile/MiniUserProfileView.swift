@@ -58,10 +58,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 					avatarURL: avatarURL,
 					presence: presence?.status ?? .offline,
 					animate: true
-				).onAppear {
-					print(presence?.status)
-					print(user.id)
-				}
+				)
 				.padding(6)
 
 				if let fullUser = profile?.user {
