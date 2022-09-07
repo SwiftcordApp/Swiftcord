@@ -15,6 +15,7 @@ extension PresenceStatus {
 		case .idle: return "user.presence.idle"
 		case .dnd: return "user.presence.dnd"
 		case .offline: return "user.presence.offline"
+		case .invisible: return "user.presence.invisible"
 		}
 	}
 }

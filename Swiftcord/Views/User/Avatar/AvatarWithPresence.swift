@@ -44,11 +44,13 @@ struct AvatarWithPresence: View {
 				ZStack(alignment: .topLeading) {
 					// Main background
 					Circle()
-						.strokeBorder(.gray, lineWidth: presence == .offline ? presenceSize*0.25 : 0)
+						.strokeBorder(.gray, lineWidth:
+										presence == .offline || presence == .invisible ? presenceSize*0.25 : 0
+						)
 						.background(Circle()
-							.fill(presence == .offline ? .clear :
+							.fill(presence == .online ? .green :
 								  presence == .dnd ? .red :
-								  presence == .idle ? .orange : .green
+								  presence == .idle ? .orange : .clear
 							)
 						)
 						.frame(width: presenceSize, height: presenceSize)
@@ -72,8 +74,9 @@ struct AvatarWithPresence: View {
 					.animation(.default, value: presence == .dnd)
 					.blendMode(.destinationOut)
 			}
-			.offset(x: punchOffset-punchSize/2, y: punchOffset-punchSize/2)
+			.contentShape(Circle())
 			.help(presence.toLocalizedString())
+			.offset(x: punchOffset-punchSize/2, y: punchOffset-punchSize/2)
 		}
 		.compositingGroup()
 	}

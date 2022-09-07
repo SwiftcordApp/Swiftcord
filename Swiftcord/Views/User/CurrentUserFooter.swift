@@ -106,8 +106,7 @@ struct CurrentUserFooter: View {
 							Text("user.presence.invisible")
 						}
 					} label: {
-						
-						Text(curUserPresence.toLocalizedString())
+						Label(curUserPresence.toLocalizedString(), systemImage: "circle")
 					}
 					.controlSize(.large)
 					Button {
