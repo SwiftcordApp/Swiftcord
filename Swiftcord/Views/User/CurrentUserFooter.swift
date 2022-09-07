@@ -9,6 +9,7 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKitCommon
+import DiscordKit
 
 struct CurrentUserFooter: View {
     let user: CurrentUser
@@ -20,6 +21,7 @@ struct CurrentUserFooter: View {
 	@State var switcherHelpPresented = false
 
 	@EnvironmentObject var switcher: AccountSwitcher
+	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
 		Button {
@@ -30,10 +32,13 @@ struct CurrentUserFooter: View {
 			])
 		} label: {
 			HStack(spacing: 8) {
-				BetterImageView(url: user.avatarURL())
-					.frame(width: 32, height: 32)
-					.clipShape(Circle())
-					.padding(.leading, 8)
+				AvatarWithPresence(
+					avatarURL: user.avatarURL(),
+					presence: gateway.presences[user.id]?.status ?? .offline,
+					animate: false
+				)
+				.controlSize(.small)
+				.padding(.leading, 8)
 
 				VStack(alignment: .leading, spacing: 0) {
 					Text(user.username).font(.headline)

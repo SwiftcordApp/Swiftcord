@@ -32,7 +32,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		SentrySDK.start { options in
 			options.dsn = "https://e7d39f98a63347c18b9f71d3aee6a4d3@o1377212.ingest.sentry.io/6687560"
 #if DEBUG
-			options.debug = true // Enabled debug when first installing is always helpful
 			options.tracesSampleRate = 1.0
 #else
 			options.tracesSampleRate = 0.3
