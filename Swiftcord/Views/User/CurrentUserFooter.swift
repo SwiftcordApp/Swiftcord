@@ -26,6 +26,13 @@ struct CurrentUserFooter: View {
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var rest: DiscordREST
 
+	private static let presenceIconMapping: [PresenceStatus : String] = [
+		.online: "circle.fill",
+		.idle: "moon.fill",
+		.dnd: "minus.circle",
+		.invisible: "circle"
+	]
+
 	private func updatePresence(with presence: PresenceStatus) {
 		gateway.send(
 			op: .presenceUpdate,
@@ -100,30 +107,33 @@ struct CurrentUserFooter: View {
 							updatePresence(with: .online)
 						} label: {
 							// Not possible to set custom image size and color
-							Image(systemName: "circle.fill")
+							Image(systemName: Self.presenceIconMapping[.online]!)
 							Text("user.presence.online")
 						}
 						Divider()
 						Button {
 							updatePresence(with: .idle)
 						} label: {
-							Image(systemName: "moon.fill")
+							Image(systemName: Self.presenceIconMapping[.idle]!)
 							Text("user.presence.idle")
 						}
 						Button {
 							updatePresence(with: .dnd)
 						} label: {
-							Image(systemName: "minus.circle")
+							Image(systemName: Self.presenceIconMapping[.dnd]!)
 							Text("user.presence.dnd")
 						}
 						Button {
 							updatePresence(with: .invisible)
 						} label: {
-							Image(systemName: "circle")
+							Image(systemName: Self.presenceIconMapping[.invisible]!)
 							Text("user.presence.invisible")
 						}
 					} label: {
-						Label(curUserPresence.toLocalizedString(), systemImage: "circle")
+						Label(
+							curUserPresence.toLocalizedString(),
+							systemImage: Self.presenceIconMapping[curUserPresence] ?? "circle"
+						)
 					}
 					.controlSize(.large)
 					Button {
@@ -153,6 +163,7 @@ struct CurrentUserFooter: View {
 			accountSwitcher()
 		}
 		.sheet(isPresented: $customStatusPresented) {
+			CustomStatusDialog(username: user.username, presented: $customStatusPresented)
 		}
 		.sheet(isPresented: $loginPresented) {
 			ZStack(alignment: .topTrailing) {

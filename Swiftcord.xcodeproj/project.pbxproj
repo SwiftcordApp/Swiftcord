@@ -118,6 +118,7 @@
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		DA264C1528C8852900FBB4B5 /* FlatMenuStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */; };
 		DA264C1728C89FE300FBB4B5 /* PresenceStatus+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */; };
+		DA264C1A28C8E27E00FBB4B5 /* CustomStatusDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */; };
 		DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2802782808337B00B14E5C /* AppDelegate.swift */; };
 		DA28027F28095E3100B14E5C /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
 		DA2ADF312847B13F004A35F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2ADF2F2847B13F004A35F2 /* Localizable.strings */; };
@@ -274,6 +275,8 @@
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatMenuStyle.swift; sourceTree = "<group>"; };
 		DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresenceStatus+.swift"; sourceTree = "<group>"; };
+		DA264C1828C8B3C500FBB4B5 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
+		DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatusDialog.swift; sourceTree = "<group>"; };
 		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
 		DA2ADF302847B13F004A35F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -464,6 +467,7 @@
 				DA91018028C5F81000DD076B /* Avatar */,
 				DA54D572284497CC00B11857 /* Profile */,
 				DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */,
+				DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -505,6 +509,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DA264C1828C8B3C500FBB4B5 /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -1203,6 +1208,7 @@
 				364EF77C286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */,
 				DA67491B2833D5A9001F51CC /* AboutSwiftcordView.swift in Sources */,
 				E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */,
+				DA264C1A28C8E27E00FBB4B5 /* CustomStatusDialog.swift in Sources */,
 				DA520AD527D4D120009FD740 /* ActivitySettingsView.swift in Sources */,
 				DA54D5712841D6CF00B11857 /* MiniUserProfileView.swift in Sources */,
 				DAB1E47628A2189700645FCD /* MessagesViewModel.swift in Sources */,
