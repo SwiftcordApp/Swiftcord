@@ -9,11 +9,13 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKitCommon
+import DiscordKitCore
 import DiscordKit
 
 struct CurrentUserFooter: View {
     let user: CurrentUser
 
+	@State var customStatusPresented = false
 	@State var userPopoverPresented = false
 	@State var switcherPresented = false
 	@State var loginPresented = false
@@ -22,6 +24,21 @@ struct CurrentUserFooter: View {
 
 	@EnvironmentObject var switcher: AccountSwitcher
 	@EnvironmentObject var gateway: DiscordGateway
+	@EnvironmentObject var rest: DiscordREST
+
+	private func updatePresence(with presence: PresenceStatus) {
+		gateway.send(
+			op: .presenceUpdate,
+			data: GatewayPresenceUpdate(since: 0, activities: [], status: presence, afk: false)
+		)
+		Task {
+			await rest.updateSettingsProto(proto: try! Discord_UserSettings.with {
+				$0.status = StatusSettings.with {
+					$0.status = .init(stringLiteral: presence.rawValue)
+				}
+			}.serializedData())
+		}
+	}
 
     var body: some View {
 		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
@@ -80,7 +97,7 @@ struct CurrentUserFooter: View {
 					// Set presence
 					Menu {
 						Button {
-							
+							updatePresence(with: .online)
 						} label: {
 							// Not possible to set custom image size and color
 							Image(systemName: "circle.fill")
@@ -88,19 +105,19 @@ struct CurrentUserFooter: View {
 						}
 						Divider()
 						Button {
-							
+							updatePresence(with: .idle)
 						} label: {
 							Image(systemName: "moon.fill")
 							Text("user.presence.idle")
 						}
 						Button {
-							
+							updatePresence(with: .dnd)
 						} label: {
 							Image(systemName: "minus.circle")
 							Text("user.presence.dnd")
 						}
 						Button {
-							
+							updatePresence(with: .invisible)
 						} label: {
 							Image(systemName: "circle")
 							Text("user.presence.invisible")
@@ -110,6 +127,7 @@ struct CurrentUserFooter: View {
 					}
 					.controlSize(.large)
 					Button {
+						customStatusPresented = true
 					} label: {
 						Label("Set Custom Status", systemImage: "face.smiling")
 							.frame(maxWidth: .infinity, alignment: .leading)
@@ -133,6 +151,8 @@ struct CurrentUserFooter: View {
 		}
 		.sheet(isPresented: $switcherPresented) {
 			accountSwitcher()
+		}
+		.sheet(isPresented: $customStatusPresented) {
 		}
 		.sheet(isPresented: $loginPresented) {
 			ZStack(alignment: .topTrailing) {
@@ -160,11 +180,5 @@ struct CurrentUserFooter: View {
 				}.padding(16)
 			}
 		}
-    }
-}
-
-struct CurrentUserFooter_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
     }
 }
