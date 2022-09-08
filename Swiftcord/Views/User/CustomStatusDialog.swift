@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomStatusDialog: View {
 	let username: String
 	@Binding var presented: Bool
+	let setCustomStatus: (String) -> Void
 
 	@State private var status = ""
 
@@ -20,6 +21,7 @@ struct CustomStatusDialog: View {
 			}.buttonStyle(.plain)
 			Spacer()
 			Button("Save") {
+				setCustomStatus(status)
 				presented = false
 			}
 			.buttonStyle(FlatButtonStyle())

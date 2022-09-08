@@ -26,22 +26,33 @@ struct CurrentUserFooter: View {
 	@EnvironmentObject var gateway: DiscordGateway
 	@EnvironmentObject var rest: DiscordREST
 
-	private static let presenceIconMapping: [PresenceStatus : String] = [
+	private static let presenceIconMapping: [PresenceStatus: String] = [
 		.online: "circle.fill",
 		.idle: "moon.fill",
 		.dnd: "minus.circle",
 		.invisible: "circle"
 	]
 
-	private func updatePresence(with presence: PresenceStatus) {
+	private func updatePresence(with presence: PresenceStatus, customStatus: String? = nil, clearCustomStatus: Bool = false) {
+		var activities: [ActivityOutgoing] = gateway.presences[user.id]?.activities.compactMap {
+			(clearCustomStatus || customStatus != nil) && $0.type == .custom ? nil : ActivityOutgoing(from: $0)
+		} ?? []
+		if let customStatus = customStatus {
+			activities.append(ActivityOutgoing(name: "Custom Status", type: .custom, state: customStatus))
+		}
 		gateway.send(
 			op: .presenceUpdate,
-			data: GatewayPresenceUpdate(since: 0, activities: [], status: presence, afk: false)
+			data: GatewayPresenceUpdate(since: 0, activities: activities, status: presence, afk: false)
 		)
 		Task {
 			await rest.updateSettingsProto(proto: try! Discord_UserSettings.with {
-				$0.status = StatusSettings.with {
+				$0.status = .with {
 					$0.status = .init(stringLiteral: presence.rawValue)
+					if let customStatus = activities.first(where: { $0.type == .custom }) {
+						$0.customStatus = .with {
+							$0.text = customStatus.state ?? ""
+						}
+					}
 				}
 			}.serializedData())
 		}
@@ -49,6 +60,7 @@ struct CurrentUserFooter: View {
 
     var body: some View {
 		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
+		let customStatus = gateway.presences[user.id]?.activities.first(where: { $0.type == .custom })
 
 		Button {
 			userPopoverPresented = true
@@ -68,7 +80,13 @@ struct CurrentUserFooter: View {
 
 				VStack(alignment: .leading, spacing: 0) {
 					Text(user.username).font(.headline)
-					Text("#" + user.discriminator).font(.system(size: 12)).opacity(0.75)
+					Group {
+						if let customStatus = customStatus {
+							Text(customStatus.state ?? "")
+						} else {
+							Text("#" + user.discriminator)
+						}
+					}.font(.system(size: 12)).opacity(0.75)
 				}
 				Spacer()
 
@@ -139,8 +157,22 @@ struct CurrentUserFooter: View {
 					Button {
 						customStatusPresented = true
 					} label: {
-						Label("Set Custom Status", systemImage: "face.smiling")
-							.frame(maxWidth: .infinity, alignment: .leading)
+						if customStatus != nil {
+							HStack {
+								Text("Edit Custom Status")
+								Spacer()
+								Button {
+									updatePresence(with: curUserPresence, clearCustomStatus: true)
+								} label: {
+									Image(systemName: "xmark.circle.fill").font(.system(size: 18))
+								}
+								.buttonStyle(.plain)
+								.help("Clear Custom Status")
+							}
+						} else {
+							Label("Set Custom Status", systemImage: "face.smiling")
+								.frame(maxWidth: .infinity, alignment: .leading)
+						}
 					}
 					.buttonStyle(FlatButtonStyle(outlined: true, text: true))
 					.controlSize(.small)
@@ -163,7 +195,9 @@ struct CurrentUserFooter: View {
 			accountSwitcher()
 		}
 		.sheet(isPresented: $customStatusPresented) {
-			CustomStatusDialog(username: user.username, presented: $customStatusPresented)
+			CustomStatusDialog(username: user.username, presented: $customStatusPresented) { status in
+				updatePresence(with: curUserPresence, customStatus: status)
+			}
 		}
 		.sheet(isPresented: $loginPresented) {
 			ZStack(alignment: .topTrailing) {
