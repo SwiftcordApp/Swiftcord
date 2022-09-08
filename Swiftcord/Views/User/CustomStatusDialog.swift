@@ -25,6 +25,7 @@ struct CustomStatusDialog: View {
 				presented = false
 			}
 			.buttonStyle(FlatButtonStyle())
+			.disabled(status.isEmpty)
 		} content: {
 			Text("What's cookin', \(username)?").textCase(.uppercase).font(.headline)
 			TextField("Support has arrived!", text: $status)

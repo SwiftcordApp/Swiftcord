@@ -11,6 +11,7 @@ import CachedAsyncImage
 import DiscordKitCommon
 import DiscordKitCore
 import DiscordKit
+import os
 
 struct CurrentUserFooter: View {
     let user: CurrentUser
@@ -21,6 +22,7 @@ struct CurrentUserFooter: View {
 	@State var loginPresented = false
 	@State var showQR = false
 	@State var switcherHelpPresented = false
+	@State var settingPresence = false
 
 	@EnvironmentObject var switcher: AccountSwitcher
 	@EnvironmentObject var gateway: DiscordGateway
@@ -33,19 +35,28 @@ struct CurrentUserFooter: View {
 		.invisible: "circle"
 	]
 
+	private static let log = Logger(category: "CurrentUserFooter")
+
 	private func updatePresence(with presence: PresenceStatus, customStatus: String? = nil, clearCustomStatus: Bool = false) {
+		// Populate activities
 		var activities: [ActivityOutgoing] = gateway.presences[user.id]?.activities.compactMap {
 			(clearCustomStatus || customStatus != nil) && $0.type == .custom ? nil : ActivityOutgoing(from: $0)
 		} ?? []
 		if let customStatus = customStatus {
 			activities.append(ActivityOutgoing(name: "Custom Status", type: .custom, state: customStatus))
 		}
+
+		let oldPresence = gateway.presences[user.id]
+		// Preemptively update presence
+		gateway.presences[user.id] = Presence(userID: user.id, status: presence, clientStatus: PresenceClientStatus(desktop: presence), activities: gateway.presences[user.id]?.activities ?? [])
+		settingPresence = true
+
 		gateway.send(
 			op: .presenceUpdate,
 			data: GatewayPresenceUpdate(since: 0, activities: activities, status: presence, afk: false)
 		)
 		Task {
-			await rest.updateSettingsProto(proto: try! Discord_UserSettings.with {
+			guard let serialized = (try? Discord_UserSettings.with {
 				$0.status = .with {
 					$0.status = .init(stringLiteral: presence.rawValue)
 					if let customStatus = activities.first(where: { $0.type == .custom }) {
@@ -54,7 +65,19 @@ struct CurrentUserFooter: View {
 						}
 					}
 				}
-			}.serializedData())
+			}.serializedData()) else {
+				Self.log.error("Failed to serialize user proto update! Something's very wrong!")
+				return
+			}
+			guard await rest.updateSettingsProto(proto: serialized) else {
+				// Failed to update presence!
+				// Possibly rate-limited
+				Self.log.warning("Failed to patch user settings proto with new presence, possibly rate-limited")
+				settingPresence = false
+				gateway.presences[user.id] = oldPresence // Revert presence, it did not get set successfully
+				return
+			}
+			settingPresence = false
 		}
 	}
 
@@ -154,6 +177,7 @@ struct CurrentUserFooter: View {
 						)
 					}
 					.controlSize(.large)
+					.disabled(settingPresence)
 					Button {
 						customStatusPresented = true
 					} label: {
@@ -176,6 +200,7 @@ struct CurrentUserFooter: View {
 					}
 					.buttonStyle(FlatButtonStyle(outlined: true, text: true))
 					.controlSize(.small)
+					.disabled(settingPresence)
 
 					Divider()
 
