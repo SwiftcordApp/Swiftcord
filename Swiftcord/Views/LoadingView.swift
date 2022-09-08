@@ -22,8 +22,6 @@ struct LoadingView: View {
 		Task { await restAPI.logOut() }
 	}
 
-	let reach = try? Reachability(hostname: "odin.cs.uga.edu")
-
 	@Environment(\.colorScheme) private var colorScheme
 
     private let loadingTips = [
@@ -58,7 +56,6 @@ struct LoadingView: View {
 
     @State private var displayedTip = ""
 	@State private var showLogoutButton = false
-	@State private var showNoInternet = false
 
     var body: some View {
 		let loading = state.loadingState != .messageLoad
@@ -94,19 +91,17 @@ struct LoadingView: View {
 			}
 
 			VStack {
-				if showLogoutButton {
-					if !showNoInternet {
-						Button("loader.panic.logout") {
-							logOut()
-							state.attemptLogin = true
-						}.padding()
-					}
+				if showLogoutButton, gateway.reachable {
+					Button("loader.panic.logout") {
+						logOut()
+						state.attemptLogin = true
+					}.padding()
 				}
-				if showNoInternet {
-						Text("\(Image(systemName: "bolt.horizontal.fill")) No Network Connectivity")
-							.font(.headline)
-							.foregroundColor(.red)
-						Link("Check Discord Status", destination: URL(string: "https://discordstatus.com")!)
+				if !gateway.reachable {
+					Text("\(Image(systemName: "bolt.horizontal.fill")) No Network Connectivity")
+						.font(.headline)
+						.foregroundColor(.red)
+					Link("Check Discord Status", destination: URL(string: "https://discordstatus.com")!)
 				}
 			}
 			.frame(maxHeight: .infinity, alignment: .bottom)
@@ -119,17 +114,6 @@ struct LoadingView: View {
 		.opacity(loading ? 1 : 0)
         .scaleEffect(loading ? 1 : 2)
         .animation(.interpolatingSpring(stiffness: 200, damping: 120), value: loading)
-		.onAppear {
-			reach?.whenUnreachable = { _ in
-				showNoInternet = true
-			}
-
-			do {
-				try reach?.startNotifier()
-			} catch {
-				print("Unable to start notifier")
-			}
-		}
 		.onChange(of: state.loadingState) { newState in
 			if newState == .initial {
 				showLogoutButton = false // Reset logout timeout for future loads
