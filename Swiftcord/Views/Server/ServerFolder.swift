@@ -12,7 +12,7 @@ import DiscordKitCommon
 struct ServerFolder: View {
     let folder: GuildFolder
     @State private var hovered = false
-    @State var open = true
+    @State var open = false
     @Binding var selectedGuildID: Snowflake?
     @State var loadingGuildID: Snowflake?
 
@@ -54,7 +54,16 @@ struct ServerFolder: View {
                     .mask(backgroundCapsuleMaskView)
 
                 VStack {
-                    Button("", action: { self.open.toggle() })
+                    Button("") {
+                        open.toggle()
+                        if open {
+                            UserDefaults.standard.setValue(true, forKey: "folders.\(folder.id).open")
+                        } else {
+                            UserDefaults.standard.removeObject(forKey: "folders.\(folder.id).open")
+                        }
+                    }.onAppear {
+                        open = UserDefaults.standard.bool(forKey: "folders.\(folder.id).open")
+                    }
                     .buttonStyle(
                         // Server folder open/close toggle
                         ServerFolderButtonStyle(
