@@ -655,10 +655,10 @@
 			children = (
 				DA4A892327C5D6C500720909 /* ServerView.swift */,
 				DA4A891327C49B1000720909 /* ServerButton.swift */,
+				9FCE7B1C28C7140100213A3F /* ServerFolder.swift */,
 				DA4350012879BFCA001DEC81 /* ServerJoinView.swift */,
 				DA57F44328056718001DC46E /* ChannelList.swift */,
 				DA57F44528065209001DC46E /* ChannelButton.swift */,
-				9FCE7B1C28C7140100213A3F /* ServerFolder.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";

@@ -74,7 +74,9 @@ struct ServerFolder: View {
                         )
                     )
                     .popover(isPresented: $hovered, attachmentAnchor: .point(.trailing), arrowEdge: .trailing) {
-                        Text(folder.name).padding(8)
+                        Text(folder.name)
+                            .font(.title3)
+                            .padding(10)
                             // Prevent popover from blocking clicks to other views
                             .interactiveDismissDisabled()
                     }
