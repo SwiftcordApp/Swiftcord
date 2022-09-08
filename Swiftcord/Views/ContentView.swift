@@ -73,15 +73,15 @@ struct ContentView: View {
 	}
 
     private var serverListItems: [ServerListItem] {
-        let unsortedGuilds = gateway.cache.guilds.values.filter({ guild in
-            !(gateway.cache.userSettings?.guild_folders?.contains(where: { folder in
+        let unsortedGuilds = gateway.cache.guilds.values.filter { guild in
+            !gateway.guildFolders.contains { folder in
                 folder.guild_ids.contains(guild.id)
-            }) ?? false)
-        })
-            .sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! })
+			}
+        }
+			.sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! })
             .map({ ServerListItem.guild($0) })
-        return unsortedGuilds + (gateway.cache.userSettings?.guild_folders ?? []).compactMap { folder -> ServerListItem? in
-            if folder.guild_ids.count > 1 {
+        return unsortedGuilds + gateway.guildFolders.compactMap { folder -> ServerListItem? in
+            if folder.id != nil {
                 let guilds = folder.guild_ids.compactMap {
                     gateway.cache.guilds[$0]
                 }

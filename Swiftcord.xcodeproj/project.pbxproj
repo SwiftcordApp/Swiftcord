@@ -212,7 +212,6 @@
 		DAB0E31D28C60D24003B693B /* AvatarWithPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB0E31B28C60D24003B693B /* AvatarWithPresence.swift */; };
 		DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46B28A10BB100645FCD /* BetterImageView.swift */; };
-		DAB1E46F28A202B900645FCD /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DAB1E46E28A202B900645FCD /* CachedAsyncImage */; };
 		DAB1E47228A202CB00645FCD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAB1E47128A202CB00645FCD /* Lottie */; };
 		DAB1E47628A2189700645FCD /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E47528A2189700645FCD /* MessagesViewModel.swift */; };
 		DAB1E48728A50D3600645FCD /* DefaultMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */; };
@@ -244,6 +243,7 @@
 		DAFD4717289A208F0075D71B /* AttachmentGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFD4715289A208F0075D71B /* AttachmentGif.swift */; };
 		DAFD4719289A21E80075D71B /* AttachmentVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFD4718289A21E80075D71B /* AttachmentVideo.swift */; };
 		DAFD471A289A21E80075D71B /* AttachmentVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFD4718289A21E80075D71B /* AttachmentVideo.swift */; };
+		DAFF8A7828C9DF6F0016AE8C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = DAFF8A7728C9DF6F0016AE8C /* CachedAsyncImage */; };
 		E7AF1C27282FA3ED001F78DF /* Array.Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */; };
 		E7AF1C29282FA3F7001F78DF /* Channel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C28282FA3F7001F78DF /* Channel+.swift */; };
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
@@ -410,9 +410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */,
-				DAB1E46F28A202B900645FCD /* CachedAsyncImage in Frameworks */,
 				DAA0A57428B90DD7007D8351 /* Sentry in Frameworks */,
 				DAB1E47228A202CB00645FCD /* Lottie in Frameworks */,
+				DAFF8A7828C9DF6F0016AE8C /* CachedAsyncImage in Frameworks */,
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
@@ -905,9 +905,9 @@
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
 				DABD8BB42880F653008EE28F /* Sparkle */,
 				DAFD470628996DFC0075D71B /* SwiftyGif */,
-				DAB1E46E28A202B900645FCD /* CachedAsyncImage */,
 				DAB1E47128A202CB00645FCD /* Lottie */,
 				DAA0A57328B90DD7007D8351 /* Sentry */,
+				DAFF8A7728C9DF6F0016AE8C /* CachedAsyncImage */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -1831,11 +1831,6 @@
 			package = DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
 		};
-		DAB1E46E28A202B900645FCD /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
-		};
 		DAB1E47128A202CB00645FCD /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */;
@@ -1850,6 +1845,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
 			productName = SwiftyGif;
+		};
+		DAFF8A7728C9DF6F0016AE8C /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
