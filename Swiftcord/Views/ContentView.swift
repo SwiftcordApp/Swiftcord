@@ -70,7 +70,7 @@ struct ContentView: View {
 			state.selectedGuildID = lGID
 		} else { state.selectedGuildID = "@me" }
 	}
-	
+
     private var serverListItems: [ServerListItem] {
         let unsortedGuilds = gateway.cache.guilds.values.filter({ guild in
             !(gateway.cache.userSettings?.guild_folders?.contains(where: { folder in
@@ -109,7 +109,7 @@ struct ContentView: View {
                     ).padding(.top, 4)
 
 					HorizontalDividerView().frame(width: 32)
-                    
+
                     ForEach(self.serverListItems) { item in
                         switch item {
                         case .guild(let guild):
@@ -238,10 +238,10 @@ struct ContentView: View {
 			ServerJoinView(presented: $presentingAddServer)
 		}
 	}
-    
+
     private enum ServerListItem: Identifiable {
         case guild(Guild), guildFolder(ServerFolder.GuildFolder)
-        
+
         var id: String {
             switch self {
             case .guild(let guild):

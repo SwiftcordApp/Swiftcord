@@ -15,7 +15,7 @@ struct ServerFolder: View {
     @State var open = true
     @Binding var selectedGuildID: Snowflake?
     @State var loadingGuildID: Snowflake?
-    
+
     // This creates an inverse mask of the folder open/close button,
     // so the background capsule isn't visible behind the button
     var backgroundCapsuleMaskView: some View {
@@ -29,7 +29,7 @@ struct ServerFolder: View {
         .compositingGroup()
         .luminanceToAlpha()
     }
-    
+
     var folderIndicator: some View {
         HStack(alignment: .center) {
             Capsule()
@@ -40,19 +40,19 @@ struct ServerFolder: View {
         }
         .frame(height: 48)
     }
-    
+
     var body: some View {
         HStack(alignment: .top) {
             folderIndicator
             Spacer()
-            
+
             ZStack {
                 // Background tint behind servers in folder
                 Capsule()
                     .fill(.gray.opacity(0.15))
                     .frame(width: 48)
                     .mask(backgroundCapsuleMaskView)
-                
+
                 VStack {
                     Button("", action: { self.open.toggle() })
                     .buttonStyle(
@@ -88,19 +88,19 @@ struct ServerFolder: View {
             }
             .frame(width: 48)
             .padding(.trailing, 8)
-            
+
             Spacer()
         }
         .frame(width: 72)
     }
-    
+
     static let capsuleAnimation = Animation.interpolatingSpring(stiffness: 500, damping: 30)
-    
+
     struct GuildFolder: Identifiable {
         let name: String
         let guilds: [Guild]
         let color: Color
-        
+
         var id: Snowflake {
             self.guilds.first?.id ?? ""
         }
@@ -124,14 +124,16 @@ struct ServerFolderButtonStyle: ButtonStyle {
                     .foregroundColor(color)
                     .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .bottom)))
             } else {
-                VStack(spacing: 4) {
-                    HStack(spacing: 4) {
-                        MiniServerThumb(guild: filledGuilds[0])
-                        MiniServerThumb(guild: filledGuilds[1])
-                    }
-                    HStack(spacing: 4) {
-                        MiniServerThumb(guild: filledGuilds[2])
-                        MiniServerThumb(guild: filledGuilds[3])
+                LazyVGrid(columns: [
+                    GridItem(.fixed(16), spacing: 4),
+                    GridItem(.fixed(16), spacing: 4)
+                ], spacing: 4) {
+                    ForEach(filledGuilds, id: \.?.id) { guild in
+                        if let guild = guild {
+                            MiniServerThumb(guild: guild, animate: hovered)
+                        } else {
+                            Circle().fill(.clear)
+                        }
                     }
                 }
                 .foregroundColor(hovered ? .white : Color(nsColor: .labelColor))
@@ -157,38 +159,34 @@ struct ServerFolderButtonStyle: ButtonStyle {
 }
 
 struct MiniServerThumb: View {
-    let guild: Guild?
-    
+    let guild: Guild
+    let animate: Bool
+
     var body: some View {
-        if let guild = guild {
-            if let serverIconPath = guild.icon, let iconURL = URL(string: "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
-                if iconURL.isAnimatable {
-                    SwiftyGifView(
-                        url: iconURL.modifyingPathExtension("gif"),
-                        resetWhenNotAnimating: true
-                    )
-                        .transition(.customOpacity)
-                        .frame(width: 16, height: 16)
-                        .cornerRadius(8)
-                } else {
-                    BetterImageView(url: iconURL, imageModifier: { $0.antialiased(true) })
-                        .frame(width: 16, height: 16)
-                        .cornerRadius(8)
-                }
-            } else {
-                let iconName = guild.name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
-                Text(iconName)
-                    .font(.system(size: iconName.count < 7 ? CGFloat((6 - iconName.count)*2) : 10))
-                    .foregroundColor(.white)
-                    .lineLimit(1)
+        if let serverIconPath = guild.icon, let iconURL = URL(string: "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
+            if iconURL.isAnimatable {
+                SwiftyGifView(
+                    url: iconURL.modifyingPathExtension("gif"),
+                    animating: animate,
+                    resetWhenNotAnimating: true
+                )
+                    .transition(.customOpacity)
                     .frame(width: 16, height: 16)
-                    .background(.gray.opacity(0.15))
+                    .cornerRadius(8)
+            } else {
+                BetterImageView(url: iconURL, imageModifier: { $0.antialiased(true) })
+                    .frame(width: 16, height: 16)
                     .cornerRadius(8)
             }
         } else {
-            Rectangle()
-                .opacity(0)
+            let iconName = guild.name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+            Text(iconName)
+                .font(.system(size: iconName.count < 7 ? CGFloat((6 - iconName.count)*2) : 10))
+                .foregroundColor(.white)
+                .lineLimit(1)
                 .frame(width: 16, height: 16)
+                .background(.gray.opacity(0.15))
+                .cornerRadius(8)
         }
     }
 }

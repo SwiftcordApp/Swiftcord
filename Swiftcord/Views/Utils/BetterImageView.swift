@@ -13,7 +13,7 @@ struct BetterImageView<ErrorContent: View>: View {
     let url: URL?
     let imageModifier: (Image) -> Image
     @ViewBuilder let customErrorView: () -> ErrorContent
-    
+
     var body: some View {
         CachedAsyncImage(url: url) { phase in
             if let image = phase.image {
