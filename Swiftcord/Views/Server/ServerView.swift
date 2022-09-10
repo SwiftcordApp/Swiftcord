@@ -86,7 +86,7 @@ struct ServerView: View {
         NavigationView {
             VStack(spacing: 0) {
 				if let guild = guild {
-					ChannelList(channels: guild.channels!, selCh: $serverCtx.channel)
+					ChannelList(channels: guild.name == "DMs" ? gateway.cache.dms : guild.channels!, selCh: $serverCtx.channel)
 						.toolbar {
 							ToolbarItem {
 								Text(guild.name == "DMs" ? "dm" : "\(guild.name)")
