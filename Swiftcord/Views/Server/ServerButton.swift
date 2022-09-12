@@ -106,8 +106,10 @@ struct ServerButtonStyle: ButtonStyle {
             } else {
 				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
 				Text(iconName)
-					.font(.system(size: iconName.count < 7 ? CGFloat((10 - iconName.count)*2) : 10))
+					.font(.system(size: 18))
 					.lineLimit(1)
+					.minimumScaleFactor(0.5)
+					.padding(5)
 			}
         }
         .frame(width: 48, height: 48)

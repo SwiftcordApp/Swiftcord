@@ -192,9 +192,10 @@ struct MiniServerThumb: View {
         } else {
             let iconName = guild.name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
             Text(iconName)
-                .font(.system(size: iconName.count < 7 ? CGFloat((6 - iconName.count)*2) : 10))
-                .foregroundColor(.white)
+                .font(.system(size: 8))
                 .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .foregroundColor(.white)
                 .frame(width: 16, height: 16)
                 .background(.gray.opacity(0.15))
                 .cornerRadius(8)
