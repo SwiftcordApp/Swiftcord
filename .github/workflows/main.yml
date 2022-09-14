@@ -91,7 +91,7 @@ jobs:
       - name: "Create Release Build Archive"
         run: |
           xcodebuild -project Swiftcord.xcodeproj -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
-          COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" SENTRY_API_TOKEN="${{ secrets.SENTRY_API_TOKEN }}" "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db" | xcpretty
+          COMPILER_INDEX_STORE_ENABLE=NO APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" SENTRY_API_TOKEN="${{ secrets.SENTRY_API_TOKEN }}" "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db"
 
       - name: "Export & Sign Release Build"
         uses: devbotsxyz/xcode-export-archive@main
