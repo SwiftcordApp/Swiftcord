@@ -3,8 +3,8 @@ name: Build Nightly
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-   branches: [ main ]
+  #push:
+  # branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,20 +25,20 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_14.0.app
 
       ### Caching
-      #- uses: actions/cache@v2
-      #  name: "Cache Derived Data"
-      #  with:
-      #    path: |
-      #      ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
-      #      ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
-      #    key: ${{ runner.os }}-derivedData-cache-${{ hashFiles(
-      #        'Swiftcord.xcworkspace/xcshareddata/swiftpm/Package.resolved',
-      #        'Swiftcord.xcodeproj/xcshareddata/swiftpm/Package.resolved'
-      #      ) }} # The xcworkspace will be removed soon
-      #    restore-keys: |
-      #      ${{ runner.os }}-derivedData-cache
-      #- name: Avoid inode changes for DerivedData
-      #  run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
+      - uses: actions/cache@v2
+        name: "Cache Derived Data"
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
+          key: ${{ runner.os }}-derivedData-cache-${{ hashFiles(
+              'Swiftcord.xcworkspace/xcshareddata/swiftpm/Package.resolved',
+              'Swiftcord.xcodeproj/xcshareddata/swiftpm/Package.resolved'
+            ) }} # The xcworkspace will be removed soon
+          restore-keys: |
+            ${{ runner.os }}-derivedData-cache
+      - name: Avoid inode changes for DerivedData
+        run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
 
       - name: Install sentry-cli
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
