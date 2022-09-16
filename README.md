@@ -23,7 +23,7 @@ the Discord API implementation Swiftcord relies on.
 **If you like this project, please smash the star button and be one of my stargazers 🌟! It helps motivate
 me to continue developing it**
 
-**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensure this project has a stable future :)**
+**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensure this project has a stable future, and you'll get access to releases 2 weeks before everyone else!**
 
 ## Supporters
 Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
