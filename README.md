@@ -131,9 +131,8 @@ to expand the answer
   <summary><b>Feature <i>x</i> is missing! When will <i>y</i> be implemented?</b></summary>
   Swiftcord currently is in the alpha stage, and hasn't achieved feature
   parity with the official Discord client yet (it's quite far behind). 
-  Many features are on the <a href="#roadmap">roadmap</a>, but I do not
-  currently have a timeline for them. Development is progressing at a 
-  fast pace, but sometimes bugs may take an unexpectedly long time to fix.
+  Many features are planned, but I do not currently have a timeline for them. 
+  Development is progressing at a fast pace, but sometimes bugs may take an unexpectedly long time to fix.
   I appreciate contributions, bug reports, and suggestions :)
 </details>
 <details>
@@ -156,8 +155,8 @@ and profile banners are supported too! You can now send attachments (both
 from the file picker and by dragging and dropping) with your messages too! 
 DMs now have first-class support!
 
-More advanced features like voice channels & editing messages etc 
-aren't supported yet, refer to the [roadmap](#roadmap) below.
+More advanced features like voice channels, editing messages, etc.
+aren't supported yet.
 
 Gateway connection event handling is stable, and reconnection
 is rock solid (as far as I can test). If you encounter a reconnection
