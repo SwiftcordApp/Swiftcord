@@ -28,7 +28,9 @@ me to continue developing it**
 ## Supporters
 Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
 ### Red-hot Supporter 🔥
-<table>
+**Be a red-hot supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
+have the skills or time required!** 
+<!--<table>
   <tr>
     <td>
       <img src="https://cdn.discordapp.com/avatars/164066880250839040/454495419ffe4dfeb7ea91f82eecfe47.png" width=100 height=100/>
@@ -41,10 +43,10 @@ Huge thanks to all my supporters! I'm extremely grateful to every single one of 
       <i>First red-hot supporter!</i>
     </td>
   </tr>
-</table>
+</table>-->
 
-### Amazing Supporter 🤯
-<table>
+<!--### Amazing Supporter 🤯-->
+<!--<table>
   <tr>
     <td>
       <img src="https://cxt.sh/assets/img/pfp.png" width=36 height=36/>
@@ -53,10 +55,11 @@ Huge thanks to all my supporters! I'm extremely grateful to every single one of 
       <code><strong>cxt</strong></code> - First amazing supporter!
     </td>
   </tr>
-</table>
+</table>-->
 
 ### Extremely Cool Supporter 🧊
 * **`selimgr`** - First extremely cool supporter, and the first sponsor!
+* **`MrDirectory`**
 * An extremely generous anonymous supporter
 
 ## Contents
