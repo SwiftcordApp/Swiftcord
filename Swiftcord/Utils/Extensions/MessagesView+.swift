@@ -70,10 +70,9 @@ internal extension MessagesView {
 			} else { return nil }
 		}
 
-		if #available(macOS 13, *) {
-			// Workaround for some race condition, probably a macOS 13 beta bug
-			DispatchQueue.main.async { viewModel.newMessage = "" }
-		} else { viewModel.newMessage = "" }
+		// Workaround for some race condition, no idea why clearing the message immediately doesn't
+		// successfully clear it
+		DispatchQueue.main.async { viewModel.newMessage = "" }
 
 		Task {
 			guard (await restAPI.createChannelMsg(
