@@ -68,7 +68,6 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			writeTokenCache()
 			return
 		}
-		print(loadedTokens)
 		tokens = loadedTokens
 	}
 
@@ -155,8 +154,6 @@ public class AccountSwitcher: NSObject, ObservableObject {
 		// Ensure the current account exists, if not add it
 		if !accounts.contains(where: { $0.id == user.id }) {
 			accounts.insert(.init(user: user), at: 0)
-			print("insert this account")
-			print(accounts)
 			inconsistency = true
 		}
 
