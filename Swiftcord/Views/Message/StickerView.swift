@@ -138,8 +138,8 @@ struct StickerView: View {
                             Label("View Sticker Pack", systemImage: "square.on.square")
                                 .frame(maxWidth: .infinity)
                         }
-                        .controlSize(.large)
-                        .buttonStyle(.borderedProminent)
+						.buttonStyle(FlatButtonStyle())
+						.controlSize(.small)
                         .sheet(isPresented: $packPresenting, content: {
                             VStack {
                                 Text("Sticker Pack").font(.title)

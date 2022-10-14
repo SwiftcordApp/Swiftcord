@@ -109,8 +109,8 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						Label("Manage Server Webhooks", systemImage: "link")
 							.frame(maxWidth: .infinity)
 					}
-					.buttonStyle(.borderedProminent)
-					.controlSize(.large)
+					.buttonStyle(FlatButtonStyle())
+					.controlSize(.small)
 				} else {
 					if profile == nil, !loadError {
 						ProgressView("Loading full profile...")

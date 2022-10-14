@@ -115,6 +115,7 @@ struct ServerView: View {
 						.frame(maxWidth: .infinity)
 						.padding(.vertical, 4)
 						.background(gateway.reachable ? .orange : .red)
+						.animation(.easeIn, value: gateway.reachable)
                 }
 				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
