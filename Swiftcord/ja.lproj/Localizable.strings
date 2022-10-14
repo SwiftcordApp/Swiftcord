@@ -1,0 +1,133 @@
+
+
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "ウンパスは友達を待っています。 ただし、その必要はありません！";
+"settings.tts.slower" = "遅い";
+"settings.tts.rate" = "テキスト読み上げ率";
+"settings.animInteraction" = "デスクトップ クライアントでは、ホバーまたはフォーカス時にステッカーがアニメーション化されます。 モバイル クライアントでは、長押しでステッカーがアニメーション化されます。";
+"settings.user.chPwd.title" = "パスワードの変更";
+"settings.user.phoneNum" = "電話番号";
+"settings.app.accessibility.stickers" = "バッジ";
+"settings.others.credits.about" = "Swiftcord での作業と、機能的で美しいネイティブ アプリの開発が大好きです！";
+"settings.tts.defaultSpeed" = "デフォルト";
+"settings.user.chPwd.caption" = "現在のパスワードと新しいパスワードを入力。";
+"settings.user.logOut.confirmation" = "ログアウトしてもよろしいですか？";
+"settings.app.voiceVideo" = "音声と動画";
+"settings.app.advanced" = "詳細";
+"settings.app.streamer" = "ストリーマーモード";
+"settings.app.advanced.analytics.caption" = "AppCenter を通じて、Swiftcord の集約された (匿名の) 使用統計 (レンダリングされた言語、アプリのバージョン、機能の使用など) が収集されます。 得られた行列は、Swiftcord の機能を改善するために使用されます。 それらをあなたにさかのぼることはできません。";
+"%@ %@ %@ settings.others.about.ver" = "%@ バージョン %@ (Build: %@)";
+"settings.app.advanced.crashes" = "クラッシュ トレースと以前のイベントは、クラッシュ後に Sentry に送信され、将来のクラッシュの診断と防止に役立ちます。 個人データや個人を特定できるデータがデバイスから流出することはありません。";
+"settings.others.about.caption" = "Swiftcord はオープンソース ソフトウェアであり、<3 で構築されています。 ソース コードは [GitHub](https://github.com/SwiftcordApp/Swiftcord) にあります。 寄稿や問題報告も大歓迎です！ また、Swiftcord に星を付けていただけると嬉しいです！これは、作業を続けるモチベーションになります :D";
+"settings.others.credits.sponsor.tier3" = "灼熱のサポーター🔥";
+"settings.others.credits.sponsor" = "スポンサー";
+"settings.others.about.supportPkg" = "Swiftcord は、Swift の WIP Discord API 実装である [DiscordKit](https://github.com/SwiftcordApp/DiscordKit) を利用しています";
+"settings.others.credits.headDev" = "主任開発者";
+"settings.others.credits.sponsor.gh" = "Githubのスポンサー";
+"settings.others.credits.sponsor.tier2" = "素晴らしいサポーター🤯";
+"settings.others.credits.sponsor.desc" = "Swiftcord のサポートを検討してください。 これは、このプロジェクトの将来が安定することを保証するのに役立ち、特別な特権も得られます :D";
+"settings.others.credits.sponsor.engage.body" = "あなたの名前、そしてあなたが選んだ画像と略歴がここにあるかもしれません! スポンサーシップによって、Swiftcord の開発を直接サポートすることになります。 さらに、Discord サーバーでの特別な特典と優先度の高いサポートを利用できます!";
+"settings.others.credits.contrib" = "寄稿者";
+"settings.others.credits.contrib.loading" = "寄稿者を読み込んでいます…";
+"settings.others.credits.contrib.desc" = "貴重な貢献をしてくれたすべての人に感謝します！ Swiftcord は、皆さんの貢献なくしては存在しません!";
+"settings.others.credits.misc.anim" = "[Discord の読み込みアニメーションを再現](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) し、Swiftcord での使用に同意してくれた Reddit の iJayTD に感謝します!";
+"dm.header %@" = "これは、**@%@** とのダイレクト メッセージ履歴の始まりです。";
+"action.done" = "完了";
+"action.close" = "閉じる";
+"onboarding.subtitle" = "macOS用にビルドおよび設計されたDiscordクライアント";
+"onboarding.lightweight.header" = "効率的 — リソースを節約";
+"onboarding.features.header" = "注目度の高い";
+"onboarding.features.body" = "重要で基本的な機能が実装されており、さらに多くの機能が開発中です";
+"onboarding.wip.header" = "進行中の作業";
+"login.token.input" = "Discord トークンをここに貼り付けてください";
+"login.token.back" = "戻るまで待ちます";
+"login.token.login" = "ログイン";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "あなたは知っていましたか？";
+"user.roles.none" = "ロールなし";
+"user.roles.one" = "ロール";
+"user.roles.many" = "ロール";
+"user.roles.loading" = "ロールを読み込み中…";
+"user.note" = "ノート";
+
+/* ====== User ====== */
+"user.bio" = "自己紹介";
+"user.presence.dnd" = "邪魔しないでください";
+"user.presence.offline" = "オフライン";
+"user.presence.invisible" = "見えない";
+"message.edited" = " ・編集済み： ";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "テキストチャンネルがありません";
+"server.channel.header %@ %@" = "ここが#%@ channel. %@の会話の始まり";
+"server.channel.title %@" = "#%@へようこそ！";
+"server.channel.noCategory" = "カテゴリーなし";
+"server.composeMsg.hint %@" = "メッセージ #%@";
+"server.join.title" = "サーバーに参加";
+"server.join.caption" = "以下に招待コードを入力して、サーバーに参加します";
+"server.join.fieldHeader" = "無効なリンク";
+"server.join.fieldHeader.joinFail" = "無効なリンク_招待を承認できません_";
+"server.join.egHeader" = "招待リンクは次のようになります";
+"dm" = "ダイレクトメッセージ";
+"dm.group.header %@" = "**%@**へようこそ。";
+"dm.group.composeMsg.hint %@" = "メッセージ %@";
+"%lld dm.group.memberCount" = "%lld メンバー";
+"dm.composeMsg.hint %@" = "メッセージ @%@";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "メッセージ送信ボタンを表示";
+"settings.tts.faster" = "速い";
+"settings.user.username" = "ユーザーの名前";
+"settings.user.email" = "メールアドレス";
+"settings.user.logOut" = "ログアウト";
+"settings.app" = "アプリ";
+"settings.app.appearance" = "見た目";
+"settings.app.appearance.theme" = "テーマ";
+"settings.app.accessibility" = "アクセシビリティ";
+"settings.app.accessibility.chatInput" = "チャットの入力";
+"settings.app.textImages" = "文字と写真";
+"settings.app.notifs" = "通知";
+"settings.app.keybinds" = "ショートカット";
+"settings.app.lang" = "言語";
+"settings.app.advanced.analytics" = "使用状況の指標";
+"settings.app.advanced.analytics.option" = "統計を AppCenter Analytics に送信して (匿名)Swiftcord を改善する";
+"settings.others.debug.actions" = "アクション";
+"settings.others.debug.actions.info" = "何をしているのかわからない場合は、ここでオプションを使用しないでください。 それらのいくつかは危険かもしれません！";
+"settings.others.debug.actions.crash" = "Swiftcordをクラッシュさせる(嘘ではありません)";
+// About
+"settings.others.about" = "Swiftcordについて";
+"settings.others.about.desc" = "Swift および SwiftUI で作られたmacOSネイティブの Discord クライアント";
+// Credits
+"settings.others.credits" = "クレジット";
+"settings.others.credits.sponsor.patreon" = "パトロン";
+"settings.others.credits.sponsor.engage.header" = "Swiftcordをサポート！";
+"settings.others.credits.contrib.anon" = "非常に寛大な匿名のサポーター";
+"%lld settings.others.credits.contrib.more" = "+ %lld 素晴らしい貢献者";
+"settings.others.credits.contrib.note" = "注: Weblate からの寄稿者も含まれています";
+"settings.others.credits.misc.discord" = "そして最後に、このような素晴らしいコミュニティとインフラストラクチャを構築してくれた Discord に感謝します!";
+/* ====== Actions ====== */
+"action.continue" = "続ける";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "へようこそ！\n";
+"onboarding.lightweight.body" = "CPU 使用率が低く、RAM が Discord の最大 7 分の 1 です。";
+"onboarding.wip.body" = "何か問題がありますか？ GitHub の問題を作成するか、Discord サーバーで問題を報告してください";
+"onboarding.footer" = "Swiftcord はアルファ版ソフトウェアであり、制限やバグがあります。 現時点では、公式クライアントを置き換える予定はありませんが、いつかは置き換えられることを望んでいます。";
+
+/* ====== Login ====== */
+"login.token.title" = "シークレットトークンのログイン画面へようこそ！";
+"loader.panic.logout" = "時間がかかっていますか？ログアウトを希望しますか？";
+// Presences
+"user.presence.online" = "オンライン";
+"message.gone" = "元のメッセージは、削除されました。";
+"message.reply.attachment" = "クリックして添付ファイルを表示";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (編集済み)";
+"server.noChannels.body" = "テキスト チャンネルへのアクセス権がないか、このサーバーに存在しません。";
+"server.join.fieldHeader.notFound" = "無効なリンク_招待が無効であるか、有効期限が切れています。_";
+"settings.others.credits.sponsor.tier1" = "とても素晴らしいサポーター🧊";
+"server.join.action" = "サーバーに参加";
+"server.join.fieldHeader.invalid" = "無効なリンク_有効な招待リンクまたは招待コードを入力してください。_";

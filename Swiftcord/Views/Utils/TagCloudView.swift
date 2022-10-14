@@ -44,6 +44,8 @@ struct TagCloudView<C: View>: View {
                         } else {
                             width -= dimen.width
                         }
+						print("WIDTH IS")
+						print(width)
                         return result
                     }
                     .alignmentGuide(.top) { _ in

@@ -369,6 +369,10 @@
 		DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStructs.swift; sourceTree = "<group>"; };
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
+		DAB7792E28F9175600A17F54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB7792F28F9176400A17F54 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB7793028F9177B00A17F54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DAB7793128F9179400A17F54 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		DACBD12E287BDE9D00CED3EF /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -942,6 +946,10 @@
 				it,
 				ko,
 				fr,
+				ja,
+				he,
+				"zh-Hant",
+				tr,
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
@@ -1275,6 +1283,10 @@
 				DA97BA892848737C00059FD8 /* fr */,
 				F421AC52285BACB200034F60 /* nb-NO */,
 				F421AC52285BACB200034F62 /* ru */,
+				DAB7792E28F9175600A17F54 /* ja */,
+				DAB7792F28F9176400A17F54 /* he */,
+				DAB7793028F9177B00A17F54 /* zh-Hant */,
+				DAB7793128F9179400A17F54 /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

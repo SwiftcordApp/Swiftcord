@@ -73,3 +73,57 @@
 "dm.header %@" = "Dette er begynnelsen på din sludringshistorikk med **@%@**.";
 "server.noChannels.body" = "Du befinner deg på et merkelig sted, uten tilgang til tekstkanaler. Enten det, eller så finnes det ikke noen på denne tjeneren.";
 "settings.animInteraction" = "For skrivebordsklienten vil klistremerker animeres når du holder pekeren over dem. På mobilklienten skjer dette ved lang-trykk.";
+"server.join.fieldHeader.joinFail" = "";
+"server.join.fieldHeader.notFound" = "";
+"server.join.title" = "";
+"server.join.action" = "";
+"server.join.fieldHeader" = "";
+"settings.user.chPwd.title" = "";
+"login.token.login" = "";
+"%lld settings.others.credits.contrib.more" = "";
+"settings.user.phoneNum" = "";
+"action.done" = "";
+"server.join.caption" = "";
+"settings.others.credits.contrib.loading" = "";
+"settings.app.advanced.analytics.option" = "";
+"settings.others.credits.contrib.note" = "";
+"settings.user.username" = "";
+"settings.others.credits.sponsor.engage.header" = "";
+"settings.app.advanced.analytics.caption" = "";
+"settings.others.credits.sponsor.tier2" = "";
+"settings.user.email" = "";
+"settings.others.credits.whoAmI" = "";
+"settings.others.credits.sponsor.engage.body" = "";
+"%@ %@ %@ settings.others.about.ver" = "";
+"settings.others.credits.headDev" = "";
+"server.join.egHeader" = "";
+"settings.others.credits.sponsor.desc" = "";
+"settings.others.about.supportPkg" = "";
+"settings.others.credits.contrib.desc" = "";
+"settings.app.advanced.analytics" = "";
+// Credits
+"settings.others.credits" = "";
+"settings.user.chPwd.caption" = "";
+"settings.others.about.caption" = "";
+
+/* ====== Login ====== */
+"login.token.title" = "";
+"settings.others.credits.about" = "";
+"settings.others.credits.misc.anim" = "";
+"settings.others.credits.contrib.anon" = "";
+"settings.others.credits.sponsor.tier3" = "";
+"server.join.fieldHeader.invalid" = "";
+"loader.panic.logout" = "";
+"settings.others.credits.sponsor.tier1" = "";
+"settings.others.credits.misc.discord" = "";
+"action.close" = "";
+"login.token.back" = "";
+"settings.app.advanced.crashes" = "";
+"login.token.input" = "";
+"settings.others.credits.contrib" = "";
+"settings.others.credits.sponsor.gh" = "";
+"settings.others.credits.sponsor.patreon" = "";
+// About
+"settings.others.about" = "";
+"settings.others.credits.sponsor" = "";
+"settings.others.about.desc" = "";

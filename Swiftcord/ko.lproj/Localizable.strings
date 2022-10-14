@@ -127,3 +127,9 @@
 "settings.others.credits.misc.anim" = "[Discord 로딩 애니메이션을 재현](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation)하고 Swiftcord에서의 사용에 동의해주신 Reddit의 iJayTD님께 감사드립니다!";
 "settings.others.credits.sponsor.desc" = "Swiftcord 지원을 고려해 주세요! 이 프로젝트의 안정적인 미래를 보장하는 데 도움이 될 것이며, 특별한 혜택도 받을 수 있습니다 :D";
 "settings.others.about.caption" = "Swiftcord는 사랑을 담아 제작된 오픈 소스 소프트웨어입니다. 소스 코드는 [GitHub](https://github.com/SwiftcordApp/Swiftcord)에서 확인하실 수 있습니다. 기여 및 이슈 제보도 환영합니다! 또한 Swiftcord에 별을 주세요, 계속 작업할 수 있는 동기 부여가 됩니다 :D";
+// Presences
+"user.presence.online" = "온라인";
+"user.presence.idle" = "자리 비움";
+"user.presence.dnd" = "다른 용무 중";
+"user.presence.invisible" = "오프라인 표시";
+"user.presence.offline" = "오프라인";

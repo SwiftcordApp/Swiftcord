@@ -1,0 +1,14 @@
+
+
+"onboarding.lightweight.body" = "עד פי 7x פחות RAM מאשר Discord, עם שימוש נמוך במעבד.";
+"onboarding.subtitle" = "תוכנת דיסקורד שנבנה ותוכנתה במיוחד עבור MacOS";
+"onboarding.features.header" = "הרבה פיצ'רים";
+"onboarding.features.body" = "תכונות ליבה חשובות מיושמות, ועוד נערכות";
+/* ====== Actions ====== */
+"action.continue" = "המשך";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "ברוכים הביים ל\n";
+"action.done" = "בוצע";
+"action.close" = "סגור";
+"onboarding.lightweight.header" = "יעיל - פחות מעמיס על המחשב.";

@@ -39,7 +39,7 @@
 "settings.app.appearance" = "Aspetto";
 "settings.app.appearance.theme" = "Tema";
 "settings.app.accessibility" = "Accessibilità";
-"settings.app.accessibility.stickers" = "Stickers";
+"settings.app.accessibility.stickers" = "Sticker";
 "settings.app.lang" = "Lingua";
 "settings.app.streamer" = "Modalità Streamer";
 
@@ -127,3 +127,9 @@
 "settings.others.credits.sponsor.tier3" = "Sostenitori Red-hot 🔥";
 "settings.others.credits.contrib.loading" = "Caricando i contributori…";
 "settings.others.credits.contrib.anon" = "Un estremamente generoso e anonimo sostenitore";
+// Presences
+"user.presence.online" = "In linea";
+"user.presence.idle" = "Assente";
+"user.presence.dnd" = "Non disturbare";
+"user.presence.offline" = "Disconnesso";
+"user.presence.invisible" = "Invisibile";

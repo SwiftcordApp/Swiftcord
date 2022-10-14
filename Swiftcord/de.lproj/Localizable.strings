@@ -126,3 +126,5 @@
 "settings.others.credits.sponsor.tier3" = "\"Red-hot Supporter 🔥\"";
 "settings.others.credits.sponsor.tier1" = "\"Extremely Cool Supporter 🧊\"";
 "settings.others.credits.sponsor" = "Sponsoren";
+// Credits
+"settings.others.credits" = "";
