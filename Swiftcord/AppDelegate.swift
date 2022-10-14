@@ -38,6 +38,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 #endif
 			options.enableAppHangTracking = true
 		}
+
+		// Disable tabbing (fixes #114)
+		NSWindow.allowsAutomaticWindowTabbing = false
 	}
 
     /*func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

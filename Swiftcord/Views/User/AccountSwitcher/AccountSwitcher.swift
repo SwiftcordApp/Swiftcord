@@ -10,7 +10,7 @@ import DiscordKitCommon
 import DiscordKitCore
 import os
 
-class AccountSwitcher: NSObject, ObservableObject {
+public class AccountSwitcher: NSObject, ObservableObject {
 	@Published var accounts: [AccountMeta] = []
 
 	static let META_KEY = "accountsMeta"
@@ -22,7 +22,10 @@ class AccountSwitcher: NSObject, ObservableObject {
 		"lastSelectedGuild"
 	]
 
+	/// The token pending to be persisted in token storage
 	private var pendingToken: String?
+	/// A cache for storing decoded tokens from UserDefaults
+	private var tokens: [String: String] = [:]
 
 	func loadAccounts() {
 		guard let dec = try? JSONDecoder().decode(
@@ -32,17 +35,41 @@ class AccountSwitcher: NSObject, ObservableObject {
 			return
 		}
 		accounts = dec
-		print(accounts)
 	}
 	func writeAccounts() {
 		UserDefaults.standard.setValue(try? JSONEncoder().encode(accounts), forKey: AccountSwitcher.META_KEY)
 	}
 
 	func saveToken(for id: Snowflake, token: String) {
-		Keychain.save(key: "\(SwiftcordApp.tokenKeychainKey).\(id)", data: token)
+		tokens[id] = token
+		// Keychain.save(key: "\(SwiftcordApp.tokenKeychainKey).\(id)", data: token)
+		writeTokenCache()
 	}
-	func getToken(for id: Snowflake) -> String? {
-		Keychain.load(key: "\(SwiftcordApp.tokenKeychainKey).\(id)")
+	func getToken(for id: Snowflake) -> String? { tokens[id] }
+	func removeToken(for id: Snowflake) {
+		tokens.removeValue(forKey: id)
+		writeTokenCache()
+	}
+	func writeTokenCache() {
+		guard let encodedTokens = try? JSONEncoder().encode(tokens) else {
+			Self.log.error("Failed to encode token cache to write to keychain!")
+			return
+		}
+		Keychain.save(key: SwiftcordApp.tokenKeychainKey, data: encodedTokens)
+	}
+	func populateTokenCache() {
+		tokens = [:]
+		guard let encoded = Keychain.loadData(key: SwiftcordApp.tokenKeychainKey) else {
+			Self.log.warning("Token data doesn't exist in keychain")
+			return
+		}
+		guard let loadedTokens = try? JSONDecoder().decode([String: String].self, from: encoded) else {
+			Self.log.warning("Failed to decode tokens, might be corrupted. Resetting token storage...")
+			writeTokenCache()
+			return
+		}
+		print(loadedTokens)
+		tokens = loadedTokens
 	}
 
 	// Static to allow using elsewhere
@@ -91,7 +118,7 @@ class AccountSwitcher: NSObject, ObservableObject {
 	// Multiple sanity checks ensure account meta is valid, if not, repair is attempted
 	func getActiveToken() -> String? {
 		// If a token is found in the old keychain key, return that to allow logging in
-		if let oldToken = Keychain.load(key: SwiftcordApp.tokenKeychainKey) {
+		if let oldToken = Keychain.load(key: SwiftcordApp.legacyTokenKeychainKey) {
 			AccountSwitcher.log.info("Found token in old key! Logging in with this token...")
 			return oldToken
 		}
@@ -110,10 +137,10 @@ class AccountSwitcher: NSObject, ObservableObject {
 
 	func onSignedIn(with user: CurrentUser) {
 		// Migrate from old keychain key to new keys
-		if let oldToken = Keychain.load(key: SwiftcordApp.tokenKeychainKey) {
-			Keychain.remove(key: SwiftcordApp.tokenKeychainKey)
+		if let oldToken = Keychain.load(key: SwiftcordApp.legacyTokenKeychainKey) {
+			Keychain.remove(key: SwiftcordApp.legacyTokenKeychainKey)
 			saveToken(for: user.id, token: oldToken)
-			AccountSwitcher.log.info("Migrated old token to new keychain key format")
+			AccountSwitcher.log.info("Migrated old token to new storage")
 		}
 
 		var inconsistency = false
@@ -128,12 +155,15 @@ class AccountSwitcher: NSObject, ObservableObject {
 		// Ensure the current account exists, if not add it
 		if !accounts.contains(where: { $0.id == user.id }) {
 			accounts.insert(.init(user: user), at: 0)
+			print("insert this account")
+			print(accounts)
 			inconsistency = true
 		}
+
 		let curUserIdx = accounts.firstIndex { $0.id == user.id }! // There will always be an entry for the current user
 		// Ensure meta for current user is updated
 		if accounts[curUserIdx].name != user.username ||
-		    accounts[curUserIdx].discrim != user.discriminator ||
+			accounts[curUserIdx].discrim != user.discriminator ||
 			accounts[curUserIdx].avatar != user.avatarURL(size: 80) {
 			AccountSwitcher.log.info("User meta for current user is outdated, it will be updated")
 			accounts[curUserIdx] = AccountMeta(user: user)
@@ -144,7 +174,11 @@ class AccountSwitcher: NSObject, ObservableObject {
 		var accountIDs: [Snowflake] = []
 		for (idx, account) in accounts.enumerated() {
 			if accountIDs.contains(account.id) ||
-			    Keychain.load(key: "\(SwiftcordApp.tokenKeychainKey).\(account.id)") == nil {
+				getToken(for: account.id) == nil {
+				guard idx != curUserIdx else {
+					Self.log.error("Attempting to remove the current user's meta!")
+					break
+				}
 				// Invalid account
 				accounts.remove(at: idx)
 				inconsistency = true
@@ -159,11 +193,16 @@ class AccountSwitcher: NSObject, ObservableObject {
 
 		// Move the current active account to the top
 		// Remove current active account and reinsert it at the top
+		guard !accounts.isEmpty else {
+			AccountSwitcher.log.warning("Accounts empty! This should never happen!")
+			return
+		}
 		accounts.insert(accounts.remove(at: accounts.firstIndex(where: { $0.id == user.id }) ?? 0), at: 0)
 	}
 
 	override init() {
 		super.init()
 		loadAccounts()
+		populateTokenCache()
 	}
 }
