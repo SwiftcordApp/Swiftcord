@@ -27,6 +27,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 	/// A cache for storing decoded tokens from UserDefaults
 	private var tokens: [String: String] = [:]
 
+	// MARK: - Account metadata methods
 	func loadAccounts() {
 		guard let dec = try? JSONDecoder().decode(
 			[AccountMeta].self,
@@ -39,7 +40,11 @@ public class AccountSwitcher: NSObject, ObservableObject {
 	func writeAccounts() {
 		UserDefaults.standard.setValue(try? JSONEncoder().encode(accounts), forKey: AccountSwitcher.META_KEY)
 	}
+	func removeAccount(for id: Snowflake) {
+		accounts.removeAll(identifiedBy: id)
+	}
 
+	// MARK: - Secure token storage methods
 	func saveToken(for id: Snowflake, token: String) {
 		tokens[id] = token
 		// Keychain.save(key: "\(SwiftcordApp.tokenKeychainKey).\(id)", data: token)
@@ -84,34 +89,45 @@ public class AccountSwitcher: NSObject, ObservableObject {
 	}
 	func logOut(id: Snowflake) async {
 		guard let token = getToken(for: id) else { return }
-		await DiscordREST(token: token).logOut()
-		Keychain.remove(key: "\(SwiftcordApp.tokenKeychainKey).\(id)")
+		removeToken(for: id)
 
 		DispatchQueue.main.async { [weak self] in
 			withAnimation {
-				self?.accounts.removeAll { $0.id == id }
+				self?.removeAccount(for: id)
 				self?.writeAccounts()
 
 				// Actions to take if the account being logged out is the current one
 				if UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY) == id {
-					AccountSwitcher.clearAccountSpecificPrefKeys()
-					if let firstID = self?.accounts.first?.id {
-						self?.setActiveAccount(id: firstID)
-					} else {
-						UserDefaults.standard.removeObject(forKey: AccountSwitcher.ACTIVE_KEY)
-					}
+					self?.setActiveAccount(id: self?.accounts.first?.id)
 				}
 			}
 		}
+
+		await DiscordREST(token: token).logOut()
+	}
+	/// Mark the current user as invalid - i.e. remove it from the token store and acc
+	///
+	/// The next account (if present) will automatically become "active" after invalidating the current one.
+	/// > Note: The user will not be signed out from the Discord API
+	func invalidate() {
+		guard let id = getActiveID() else { return }
+		removeToken(for: id)
+		removeAccount(for: id)
+		print("has accounts? \(!accounts.isEmpty)")
+		setActiveAccount(id: accounts.first?.id)
 	}
 
 	func setPendingToken(token: String) {
 		pendingToken = token
 	}
-	func setActiveAccount(id: Snowflake) {
-		// ID is always assumed to be correct
-		UserDefaults.standard.set(id, forKey: AccountSwitcher.ACTIVE_KEY)
+	func setActiveAccount(id: Snowflake?) {
 		AccountSwitcher.clearAccountSpecificPrefKeys() // Clear account specific UserDefault keys
+		if let id = id {
+			// ID is always assumed to be correct
+			UserDefaults.standard.set(id, forKey: AccountSwitcher.ACTIVE_KEY)
+		} else {
+			UserDefaults.standard.removeObject(forKey: AccountSwitcher.ACTIVE_KEY)
+		}
 	}
 
 	// Multiple sanity checks ensure account meta is valid, if not, repair is attempted
@@ -121,7 +137,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			AccountSwitcher.log.info("Found token in old key! Logging in with this token...")
 			return oldToken
 		}
-		let storedActiveID = UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY)
+		let storedActiveID = getActiveID()
 		guard let activeID = storedActiveID != nil && accounts.contains(where: { $0.id == storedActiveID })
 			? storedActiveID
 			: accounts.first?.id else { return nil } // Account not signed in
@@ -133,6 +149,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 		}
 		return token
 	}
+	func getActiveID() -> String? { UserDefaults.standard.string(forKey: AccountSwitcher.ACTIVE_KEY) }
 
 	func onSignedIn(with user: CurrentUser) {
 		// Migrate from old keychain key to new keys

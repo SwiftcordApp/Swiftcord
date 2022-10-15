@@ -8,7 +8,7 @@
 import Foundation
 import DiscordKitCommon
 
-struct AccountMeta: Codable, Equatable {
+struct AccountMeta: Codable, Equatable, Identifiable {
 	let id: Snowflake
 	let discrim: String
 	let name: String

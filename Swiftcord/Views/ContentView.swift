@@ -200,11 +200,6 @@ struct ContentView: View {
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
 
-            _ = gateway.onAuthFailure.addHandler {
-                state.attemptLogin = true
-                state.loadingState = .initial
-                log.debug("Attempting login")
-            }
             _ = gateway.onEvent.addHandler { (evt, data) in
                 switch evt {
                 case .ready:
