@@ -29,15 +29,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			Analytics.enabled = UserDefaults.standard.bool(forKey: "local.analytics")
 		}
 
+#if !DEBUG
 		SentrySDK.start { options in
 			options.dsn = "https://e7d39f98a63347c18b9f71d3aee6a4d3@o1377212.ingest.sentry.io/6687560"
-#if DEBUG
-			options.tracesSampleRate = 1.0
-#else
-			options.tracesSampleRate = 0.3
-#endif
+			options.tracesSampleRate = 0.5
 			options.enableAppHangTracking = true
 		}
+#endif
 
 		// Disable tabbing (fixes #114)
 		NSWindow.allowsAutomaticWindowTabbing = false
