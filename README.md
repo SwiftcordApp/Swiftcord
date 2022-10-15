@@ -1,11 +1,12 @@
 <p align="center"><image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/Picture 1.png" width="196px" height="196px" /></p>
 
-<h1 align="center">Swiftcord</h1>
+<h1 align="center">Swiftcord • <img src="https://tokei.rs/b1/github/SwiftcordApp/Swiftcord" /></h1> 
+
+
 <p align="center">Native Discord client for macOS built in Swift and SwiftUI</p>
 
 <image src="README_Resources/heroScreenshot.png" width="100%" alt="Viewing the general-talk channel in the r/MacBookPro server in Swiftcord" />
 
-[![Lines of code](https://img.shields.io/tokei/lines/github/SwiftcordApp/Swiftcord?style=for-the-badge)]()
 [![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)](https://discord.gg/he7n6MGDXS)
 [![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)](https://github.com/SwiftcordApp/Swiftcord/stargazers)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=Sponsor%20Me!&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
