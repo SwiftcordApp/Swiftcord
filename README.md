@@ -84,6 +84,9 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 
 ## Releases
 
+You'll need **macOS Monterey and above (>= 12.0)** to run Swiftcord. Releases from the channels below
+are universal bundles, and run natively on both Apple Silicon and Intel.
+
 ### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
 [![Nightly build action status](https://img.shields.io/github/workflow/status/SwiftcordApp/Swiftcord/Build%20Nightly?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 
@@ -105,13 +108,6 @@ lock stepped with alpha releases on GitHub releases.
 Coming soon!
 
 <!-- todo: Add building from source -->
-
-### Requirements
-* OS: macOS Monterey and above (>= 12.0)
-* Arch: Apple Silicon or Intel (Most releases are universal bundles) 
-
-> Note: Note: To open Swiftcord, you may need to right-click on the icon > press open. 
-> Some older releases were not signed or notarized with an Apple developer account.
 
 ---
 
