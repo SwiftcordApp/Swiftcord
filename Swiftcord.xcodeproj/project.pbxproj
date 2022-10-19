@@ -342,6 +342,8 @@
 		DA91017228C38EA300DD076B /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
 		DA91017528C3989E00DD076B /* AccountMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMeta.swift; sourceTree = "<group>"; };
 		DA91017828C4726300DD076B /* AccountSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitcher.swift; sourceTree = "<group>"; };
+		DA934DFF28FFCF4C00B2CEF3 /* Protos.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Protos.xcframework; path = ../DiscordKit/Sources/DiscordKit/protos/Protos.xcframework; sourceTree = "<group>"; };
+		DA934E0028FFCF4C00B2CEF3 /* SwiftProtobuf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftProtobuf.xcframework; path = ../DiscordKit/Sources/DiscordKit/protos/SwiftProtobuf.xcframework; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA892848737C00059FD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA97BA8B2849C0FA00059FD7 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStructs.swift; sourceTree = "<group>"; };
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
+		DAB7792D28F9135200A17F54 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DAB7792E28F9175600A17F54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB7792F28F9176400A17F54 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB7793028F9177B00A17F54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -512,6 +515,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				DAB7792D28F9135200A17F54 /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -783,6 +787,8 @@
 		E7938D3D28329BFF00B8DC94 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA934DFF28FFCF4C00B2CEF3 /* Protos.xcframework */,
+				DA934E0028FFCF4C00B2CEF3 /* SwiftProtobuf.xcframework */,
 				36367144283C19E500A5CBE6 /* AVKit.framework */,
 			);
 			name = Frameworks;
