@@ -1046,7 +1046,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n    if which sentry-cli >/dev/null; then\n        export SENTRY_ORG=swiftcordapp\n        export SENTRY_PROJECT=swiftcord\n        export SENTRY_AUTH_TOKEN=\"${SENTRY_API_TOKEN}\"\n        sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\"\n        fi\n    else\n        echo \"error: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\n    fi\nfi\n";
+			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n    if which sentry-cli >/dev/null; then\n        export SENTRY_ORG=swiftcordapp\n        export SENTRY_PROJECT=swiftcord\n        export SENTRY_AUTH_TOKEN=\"${SENTRY_API_TOKEN}\"\n        export SENTRY_LOG_LEVEL=debug\n        sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\"\n        fi\n    else\n        echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\n        exit 0\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
