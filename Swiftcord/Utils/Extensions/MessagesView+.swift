@@ -61,7 +61,7 @@ internal extension MessagesView {
 		var reference: MessageReference? {
 			if let replying = viewModel.replying {
 				viewModel.replying = nil // Make sure to clear that
-				return MessageReference(message_id: replying.messageID, guild_id: replying.guildID)
+				return MessageReference(message_id: replying.messageID, guild_id: replying.guildID.isDM ? nil : replying.guildID)
 			} else { return nil }
 		}
 		var allowedMentions: AllowedMentions? {
