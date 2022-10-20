@@ -1,11 +1,10 @@
 <p align="center"><image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/Picture 1.png" width="196px" height="196px" /></p>
 
-<h1 align="center">Swiftcord • <img src="https://tokei.rs/b1/github/SwiftcordApp/Swiftcord" /></h1> 
+<h1 align="center">Swiftcord • <img src="https://hitsofcode.com/github/SwiftcordApp/Swiftcord?branch=main" /></h1>
+<p align="center">Native Discord client for macOS built in Swift</p>
 
-
-<p align="center">Native Discord client for macOS built in Swift and SwiftUI</p>
-
-<image src="README_Resources/heroScreenshot.png" width="100%" alt="Viewing the general-talk channel in the r/MacBookPro server in Swiftcord" />
+[![](https://github.com/SwiftcordApp/.github/blob/main/res/hero.webp?raw=true)](https://github.com/SwiftcordApp/.github/blob/main/res/swiftcord-promo.mov?raw=true)
+###### This image doesn't animate properly in Safari, unfortunately. Click on it to view the original video.
 
 [![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)](https://discord.gg/he7n6MGDXS)
 [![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)](https://github.com/SwiftcordApp/Swiftcord/stargazers)
@@ -15,33 +14,31 @@
 
 ---
 
-This project aims to create a fully functional native Discord
-client in Swift for macOS from scratch.
+Swiftcord is beautiful, follows design principals of the official client and most importantly, its fast!
 
-I'd also recommend checking out [DiscordKit](https://github.com/SwiftcordApp/DiscordKit),
-the Discord API implementation Swiftcord relies on.
+Powered by [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), a Swift Discord implementation built
+from the ground up.
 
-**If you like this project, please smash the star button and be one of my stargazers 🌟! It helps motivate
-me to continue developing it**
-
-**Consider supporting me and Swiftcord's development by sponsoring me through [GitHub Sponsors](https://github.com/sponsors/cryptoAlgorithm) or [Patreon](https://patreon.com/cryptoAlgo)! It would help ensure this project has a stable future, and you'll get access to releases 2 weeks before everyone else!**
+**If you like this project, please smash the star button and be one of my stargazers 🌟! It motivates
+me to continue investing time into Swiftcord.**
 
 ## Supporters
-Huge thanks to all my supporters! I'm extremely grateful to every single one of them <3
+Supporters get feature releases 2 weeks before they are made public! 
+Huge thanks to all my supporters, I'm extremely grateful to every single one of them <3
 ### Red-hot Supporter 🔥
 **Be a red-hot supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
 have the skills or time required!** 
 <!--<table>
   <tr>
     <td>
-      <img src="https://cdn.discordapp.com/avatars/164066880250839040/454495419ffe4dfeb7ea91f82eecfe47.png" width=100 height=100/>
+      <img src="" width=100 height=100/>
     </td>
     <td>
-      <strong>kallisti</strong>
+      <strong></strong>
       <br>
-      <a href="https://midnight.town">midnight.town</a>
+      <a href=""></a>
       <br><br>
-      <i>First red-hot supporter!</i>
+      <i></i>
     </td>
   </tr>
 </table>-->
@@ -50,10 +47,10 @@ have the skills or time required!**
 <!--<table>
   <tr>
     <td>
-      <img src="https://cxt.sh/assets/img/pfp.png" width=36 height=36/>
+      <img src="" width=36 height=36/>
     </td>
     <td>
-      <code><strong>cxt</strong></code> - First amazing supporter!
+      <code><strong></strong></code> - First amazing supporter!
     </td>
   </tr>
 </table>-->
@@ -67,7 +64,7 @@ have the skills or time required!**
 * [Motivation](#motivation)
 * [Releases](#releases)
 * [FAQ](#faq)
-* [Current State](#current-state)
+* [Roadmap](#roadmap)
 * [Copyright Notice](#copyright-notice)
 
 ---
@@ -84,8 +81,9 @@ since it was relatively new to me at that time. Hence, Swiftcord was born!
 
 ## Releases
 
-You'll need **macOS Monterey and above (>= 12.0)** to run Swiftcord. Releases from the channels below
-are universal bundles, and run natively on both Apple Silicon and Intel.
+You'll need **macOS Monterey and above (>= 12.0)** to run Swiftcord.
+Releases from the channels below are universal bundles, and run natively on
+both Apple Silicon and Intel.
 
 ### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
 [![Nightly build action status](https://img.shields.io/github/workflow/status/SwiftcordApp/Swiftcord/Build%20Nightly?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
@@ -146,28 +144,15 @@ to expand the answer
 
 ---
 
-## Current State
-
-Implemented most core message-related features from the official
-client, including basic markdown and embeds, stickers (lottie/PNG),
-and editing and deleting events. Animated media, like profile images, server icons
-and profile banners are supported too! You can now send attachments (both
-from the file picker and by dragging and dropping) with your messages too! 
-DMs now have first-class support!
-
-More advanced features like voice channels, editing messages, etc.
-aren't supported yet.
-
-Gateway connection event handling is stable, and reconnection
-is rock solid (as far as I can test). If you encounter a reconnection
-bug (not reconnecting, reconnection loop, etc), please open an issue
-with the relevant logs.
+## Roadmap
+Take a look at Swiftcord's [GitHub Projects board](https://github.com/orgs/SwiftcordApp/projects/1)
+to get a rough idea of what's brewing!
 
 ---
 
 ## Copyright Notice
 
-Copyright (c) 2022 Vincent Kwok
+Copyright (c) 2022 Vincent Kwok & Swiftcord Contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
