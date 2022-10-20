@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "discordkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftcordApp/DiscordKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ee56c44c6eff91afeb4ededc9249fab0b3a6bd3c"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
@@ -52,15 +61,6 @@
       "state" : {
         "revision" : "8e27997de02457a0c4690ffcfb8ac9c8e1066883",
         "version" : "2.2.2"
-      }
-    },
-    {
-      "identity" : "swift-docc-plugin",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-docc-plugin",
-      "state" : {
-        "revision" : "3303b164430d9a7055ba484c8ead67a52f7b74f6",
-        "version" : "1.0.0"
       }
     },
     {

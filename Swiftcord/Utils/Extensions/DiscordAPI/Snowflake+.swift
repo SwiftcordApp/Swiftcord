@@ -10,6 +10,6 @@ import DiscordKitCommon
 
 extension Snowflake {
 	static let DM_GUILD = "@me"
-	
+
 	var isDM: Bool { self == Self.DM_GUILD }
 }

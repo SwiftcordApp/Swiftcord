@@ -370,7 +370,6 @@
 		DAB5366D285AEDF800DD9857 /* GitHubStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStructs.swift; sourceTree = "<group>"; };
 		DAB5366F285B693700DD9857 /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		DAB6C416284B04DB0066E49D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
-		DAB7792D28F9135200A17F54 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DAB7792E28F9175600A17F54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB7792F28F9176400A17F54 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB7793028F9177B00A17F54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -515,7 +514,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				DAB7792D28F9135200A17F54 /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -930,7 +928,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					DA4A888327C0AF3000720909 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -1336,6 +1334,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1402,6 +1401,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 15;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1434,6 +1434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 15;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1466,6 +1467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 15;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = RJNC97Y8QD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1525,6 +1527,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1589,6 +1592,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1750,8 +1754,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				kind = revision;
-				revision = 2c245c13fa46015c577f85b67a5daa67a5a9d28a;
+				branch = main;
+				kind = branch;
 			};
 		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
