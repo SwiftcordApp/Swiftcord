@@ -60,26 +60,27 @@ struct MessageView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             // This message is a reply!
-            if message.type == .reply {
+            /*if message.type == .reply {
 				ReferenceMessageView(referencedMsg: message.referenced_message).onTapGesture {
 					if let referencedID = message.referenced_message?.id {
 						onQuoteClick(referencedID)
 					}
 				}
-            }
+            }*/
             HStack(
 				alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
                 spacing: 16
             ) {
                 if MessageView.defaultTypes.contains(message.type) {
-                    /*if !shrunk {
+                    if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
+							.equatable()
                     } else {
 						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
                             .opacity(hovered ? 0.5 : 0)
-                    }*/
+                    }
                     VStack(alignment: .leading, spacing: lineSpacing) {
                         if !shrunk {
                             HStack(spacing: 6) {
