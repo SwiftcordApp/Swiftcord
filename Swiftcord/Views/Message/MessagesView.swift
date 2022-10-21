@@ -122,34 +122,17 @@ struct MessagesView: View {
 	private var historyNSTable: NSTableView?
 
 	private var loadingSkeleton: some View {
-		VStack(alignment: .leading, spacing: 16) {
-			// TODO: Use a loop to create this
-			Group {
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-			}
-			Group {
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-				LoFiMessageView()
-			}
-			// A ForEach with a range works initially
-			// but doesn't show anything for subsequent loads
+		Group {
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
+			LoFiMessageView()
 		}
 	}
 
@@ -169,7 +152,7 @@ struct MessagesView: View {
 						$0.id == msg.message_reference!.message_id
 					} : nil,
 					onQuoteClick: { id in
-						//withAnimation { proxy.scrollTo(id, anchor: .center) }
+						// withAnimation { proxy.scrollTo(id, anchor: .center) }
 						viewModel.highlightMsg = id
 						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 							if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
@@ -179,101 +162,106 @@ struct MessagesView: View {
 					highlightMsgId: $viewModel.highlightMsg
 				)
 			}
-			.listRowInsets(EdgeInsets(top: 0, leading: -6, bottom: 0, trailing: -6))
+			.listRowInsets(EdgeInsets())
 		}
 		.fixedSize(horizontal: false, vertical: true)
+	}
+	private var historyList: some View {
+		ScrollViewReader { proxy in
+			List {
+				if viewModel.reachedTop {
+					MessagesViewHeader(chl: ctx.channel)
+				} else {
+					loadingSkeleton
+						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+						.onDisappear {
+							if let loadTask = viewModel.fetchMessagesTask {
+								loadTask.cancel()
+								viewModel.fetchMessagesTask = nil
+							}
+						}
+						.frame(maxWidth: .infinity, alignment: .center)
+				}
+
+				history
+				Spacer(minLength: (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
+			}
+			.introspectTableView { tableView in
+				tableView.backgroundColor = .clear
+				tableView.enclosingScrollView?.drawsBackground = false
+				tableView.style = .fullWidth
+				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+			}
+			.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
+			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
+			.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
+			.frame(maxHeight: .infinity)
+		}
+	}
+
+	private var inputContainer: some View {
+		ZStack(alignment: .topLeading) {
+			MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
+
+			MessageInputView(
+				placeholder: ctx.channel?.type == .dm
+				? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				: (ctx.channel?.type == .groupDM
+				   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				  ),
+				message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
+				onSend: sendMessage,
+				preAttach: preAttachChecks
+			)
+			.onAppear { viewModel.newMessage = "" }
+			.onChange(of: viewModel.newMessage) { content in
+				if content.count > viewModel.newMessage.count,
+				   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
+					// Send typing start msg once every 8s while typing
+					viewModel.lastSentTyping = Date()
+					Task {
+						_ = await restAPI.typingStart(id: ctx.channel!.id)
+					}
+				}
+			}
+			.overlay {
+				let typingMembers = ctx.channel == nil
+				? []
+				: ctx.typingStarted[ctx.channel!.id]?
+					.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+
+				if !typingMembers.isEmpty {
+					HStack {
+						// The dimensions are quite arbitrary
+						LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+							.lottieLoopMode(.loop)
+							.frame(width: 32, height: 24)
+						Group {
+							Text(typingMembers.count <= 2
+								 ? typingMembers.joined(separator: " and ")
+								 : "Several people"
+							).fontWeight(.semibold)
+							+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
+						}.padding(.leading, -4)
+					}
+					.padding(.horizontal, 16)
+					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+				}
+			}
+		}.overlay {
+			GeometryReader { geomatry in
+				ZStack {}
+					.onAppear { viewModel.messageInputHeight = geomatry.size.height}
+					.onChange(of: geomatry.size.height) { viewModel.messageInputHeight = $0 }
+			}
+		}
 	}
 
     var body: some View {
 		ZStack(alignment: .bottom) {
-			ScrollViewReader { proxy in
-				// This whole view is flipped, so everything in it needs to be flipped as well
-				List {
-					if viewModel.reachedTop {
-						MessagesViewHeader(chl: ctx.channel)
-					} else {
-						loadingSkeleton
-							.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-							.onDisappear {
-								if let loadTask = viewModel.fetchMessagesTask {
-									loadTask.cancel()
-									viewModel.fetchMessagesTask = nil
-								}
-							}
-							.frame(maxWidth: .infinity, alignment: .center)
-					}
-
-					history
-					Spacer(minLength: (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
-				}
-				.introspectTableView { tableView in
-					tableView.backgroundColor = .clear
-					tableView.enclosingScrollView!.drawsBackground = false
-					tableView.style = .fullWidth
-				}
-				.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
-				.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
-				.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
-				.frame(maxHeight: .infinity)
-			}
-
-            ZStack(alignment: .topLeading) {
-				MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
-
-                MessageInputView(
-					placeholder: ctx.channel?.type == .dm
-					? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					: (ctx.channel?.type == .groupDM
-					   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					  ),
-					message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
-					onSend: sendMessage,
-					preAttach: preAttachChecks
-				)
-				.onAppear { viewModel.newMessage = "" }
-				.onChange(of: viewModel.newMessage) { content in
-					if content.count > viewModel.newMessage.count,
-					   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
-						// Send typing start msg once every 8s while typing
-						viewModel.lastSentTyping = Date()
-						Task {
-							_ = await restAPI.typingStart(id: ctx.channel!.id)
-						}
-					}
-				}
-				.overlay {
-					let typingMembers = ctx.channel == nil
-					? []
-					: ctx.typingStarted[ctx.channel!.id]?
-						.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
-
-					if !typingMembers.isEmpty {
-						HStack {
-							// The dimensions are quite arbitrary
-							LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
-								.lottieLoopMode(.loop)
-								.frame(width: 32, height: 24)
-							Group {
-								Text(typingMembers.count <= 2
-									 ? typingMembers.joined(separator: " and ")
-									 : "Several people"
-								).fontWeight(.semibold)
-								+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
-							}.padding(.leading, -4)
-						}
-						.padding(.horizontal, 16)
-						.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-					}
-				}
-				.background {
-					GeometryReader { geomatry in
-						ZStack {}
-							.onAppear { viewModel.messageInputHeight = geomatry.size.height }
-							.onChange(of: geomatry.size.height) { viewModel.messageInputHeight = $0 }
-					}
-				}
-            }
+			historyList
+			inputContainer
         }
 		.frame(minWidth: 525, minHeight: 500)
 		.blur(radius: viewModel.dropOver ? 8 : 0)
