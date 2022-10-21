@@ -22,7 +22,7 @@ internal extension MessagesView {
 		viewModel.loadError = false
 
 		viewModel.fetchMessagesTask = Task {
-			let lastMsg = viewModel.messages.isEmpty ? nil : viewModel.messages[viewModel.messages.count - 1].id
+			let lastMsg = viewModel.messages.isEmpty ? nil : viewModel.messages[0].id
 
 			guard let newMessages = await restAPI.getChannelMsgs(
 				id: channel.id,
@@ -47,7 +47,7 @@ internal extension MessagesView {
 			try Task.checkCancellation()
 
 			viewModel.reachedTop = newMessages.count < 50
-			viewModel.messages.append(contentsOf: newMessages)
+			viewModel.messages.insert(contentsOf: newMessages.reversed(), at: 0)
 			viewModel.fetchMessagesTask = nil
 		}
 	}

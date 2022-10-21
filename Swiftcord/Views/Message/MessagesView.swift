@@ -10,6 +10,7 @@ import DiscordKitCommon
 import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
+import Introspect
 
 extension View {
     public func flip() -> some View {
@@ -117,89 +118,104 @@ struct MessagesView: View {
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
 
+	// Underlying NSTableView of message history List
+	private var historyNSTable: NSTableView?
+
+	private var loadingSkeleton: some View {
+		VStack(alignment: .leading, spacing: 16) {
+			// TODO: Use a loop to create this
+			Group {
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+			}
+			Group {
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+				LoFiMessageView()
+			}
+			// A ForEach with a range works initially
+			// but doesn't show anything for subsequent loads
+		}
+	}
+
+	private var history: some View {
+		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
+			VStack(spacing: 0) {
+				if (idx == viewModel.messages.count - 1 && viewModel.reachedTop) ||
+					(idx < viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+					DayDividerView(date: msg.timestamp)
+				}
+
+				MessageView(
+					message: msg,
+					shrunk: idx > 0 && msg.messageIsShrunk(prev: viewModel.messages[idx - 1]),
+					quotedMsg: msg.message_reference != nil
+					? viewModel.messages.first {
+						$0.id == msg.message_reference!.message_id
+					} : nil,
+					onQuoteClick: { id in
+						//withAnimation { proxy.scrollTo(id, anchor: .center) }
+						viewModel.highlightMsg = id
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+							if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
+						}
+					},
+					replying: $viewModel.replying,
+					highlightMsgId: $viewModel.highlightMsg
+				)
+			}
+			.listRowInsets(EdgeInsets(top: 0, leading: -6, bottom: 0, trailing: -6))
+		}
+		.fixedSize(horizontal: false, vertical: true)
+	}
+
     var body: some View {
 		ZStack(alignment: .bottom) {
-            ScrollView(.vertical) {
-                ScrollViewReader { proxy in
-                    // This whole view is flipped, so everything in it needs to be flipped as well
-                    LazyVStack(alignment: .leading, spacing: 0) {
-						Spacer(minLength: 16 + (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
-
-						ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-							VStack(spacing: 0) {
-								if (idx == viewModel.messages.count - 1 && viewModel.reachedTop) ||
-									(idx < viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
-									DayDividerView(date: msg.timestamp)
-								}
-
-								MessageView(
-									message: msg,
-									shrunk: idx < viewModel.messages.count - 1 && msg.messageIsShrunk(prev: viewModel.messages[idx + 1]),
-									quotedMsg: msg.message_reference != nil
-									? viewModel.messages.first {
-										$0.id == msg.message_reference!.message_id
-									} : nil,
-									onQuoteClick: { id in
-										withAnimation { proxy.scrollTo(id, anchor: .center) }
-										viewModel.highlightMsg = id
-										DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-											if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
-										}
-									},
-									replying: $viewModel.replying,
-									highlightMsgId: $viewModel.highlightMsg
-								)
-							}.flip()
-                        }
-
-						if viewModel.reachedTop { MessagesViewHeader(chl: ctx.channel).flip() } else {
-                            VStack(alignment: .leading, spacing: 16) {
-                                // TODO: Use a loop to create this
-								Group {
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-								}
-								Group {
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-								}
-								// A ForEach with a range works initially
-								// but doesn't show anything for subsequent loads
-                            }
-                            .onAppear {
-								if viewModel.fetchMessagesTask == nil { fetchMoreMessages() }
-							}
-                            .onDisappear {
+			ScrollViewReader { proxy in
+				// This whole view is flipped, so everything in it needs to be flipped as well
+				List {
+					if viewModel.reachedTop {
+						MessagesViewHeader(chl: ctx.channel)
+					} else {
+						loadingSkeleton
+							.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+							.onDisappear {
 								if let loadTask = viewModel.fetchMessagesTask {
-                                    loadTask.cancel()
+									loadTask.cancel()
 									viewModel.fetchMessagesTask = nil
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .flip()
-                        }
-                    }
-                }
-            }
-            .flip()
-			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
-            .frame(maxHeight: .infinity)
+								}
+							}
+							.frame(maxWidth: .infinity, alignment: .center)
+					}
+
+					history
+					Spacer(minLength: (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
+				}
+				.introspectTableView { tableView in
+					tableView.backgroundColor = .clear
+					tableView.enclosingScrollView!.drawsBackground = false
+					tableView.style = .fullWidth
+				}
+				.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
+				.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
+				.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
+				.frame(maxHeight: .infinity)
+			}
 
             ZStack(alignment: .topLeading) {
 				MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
