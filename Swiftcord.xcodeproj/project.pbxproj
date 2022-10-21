@@ -180,6 +180,7 @@
 		DA7720D0283F184100D3C335 /* NavigationCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7720CF283F184100D3C335 /* NavigationCommands.swift */; };
 		DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
+		DA8AEA6829029747007BAAEA /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DA8AEA6729029747007BAAEA /* Introspect */; };
 		DA91016C28BF8F1F00DD076B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DA91017028C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
 		DA91017128C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
@@ -422,6 +423,7 @@
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
 				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
+				DA8AEA6829029747007BAAEA /* Introspect in Frameworks */,
 				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
 				DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */,
 			);
@@ -915,6 +917,7 @@
 				DAB1E47128A202CB00645FCD /* Lottie */,
 				DAA0A57328B90DD7007D8351 /* Sentry */,
 				DAFF8A7728C9DF6F0016AE8C /* CachedAsyncImage */,
+				DA8AEA6729029747007BAAEA /* Introspect */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -963,6 +966,7 @@
 				DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -1750,6 +1754,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
@@ -1825,6 +1837,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
+		};
+		DA8AEA6729029747007BAAEA /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		DA974EA12835ED1200013CC2 /* DiscordKit */ = {
 			isa = XCSwiftPackageProductDependency;

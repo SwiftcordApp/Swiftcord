@@ -72,14 +72,14 @@ struct MessageView: View {
                 spacing: 16
             ) {
                 if MessageView.defaultTypes.contains(message.type) {
-                    if !shrunk {
+                    /*if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
                     } else {
 						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
                             .opacity(hovered ? 0.5 : 0)
-                    }
+                    }*/
                     VStack(alignment: .leading, spacing: lineSpacing) {
                         if !shrunk {
                             HStack(spacing: 6) {

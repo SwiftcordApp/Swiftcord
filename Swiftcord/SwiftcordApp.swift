@@ -94,6 +94,8 @@ struct SwiftcordApp: App {
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
 		}
+		.windowStyle(.hiddenTitleBar)
+		.windowToolbarStyle(.unified)
 
 		Settings {
 			SettingsView()
