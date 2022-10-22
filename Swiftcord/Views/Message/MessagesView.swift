@@ -121,18 +121,14 @@ struct MessagesView: View {
 	private var historyNSTable: NSTableView?
 
 	private var loadingSkeleton: some View {
-		Group {
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-			LoFiMessageView()
-		}.flip()
+		VStack(spacing: 4) {
+			ForEach(0..<10) { _ in
+				LoFiMessageView()
+			}
+		}
+		.fixedSize(horizontal: false, vertical: true)
+		.flip()
+		.drawingGroup()
 	}
 
 	private var history: some View {
@@ -186,12 +182,15 @@ struct MessagesView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .center)
 				}
+
+				// Gotta un-hardcode this
+				Spacer(minLength: 52) // Ensure content doesn't go behind toolbar when scrolled to the top
 			}
 			.introspectTableView { tableView in
 				tableView.backgroundColor = .clear
 				tableView.enclosingScrollView?.drawsBackground = false
 				tableView.style = .fullWidth
-				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 52, right: 6)
 				tableView.enclosingScrollView?.rotate(byDegrees: 180)
 			}
 			.scaleEffect(x: -1, y: 1, anchor: .center)
