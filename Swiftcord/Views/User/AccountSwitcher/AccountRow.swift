@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DiscordKitCore
 import DiscordKit
 import DiscordKitCommon
 import os
@@ -18,7 +17,6 @@ struct AccountRow: View {
 	@Binding var switcherPresented: Bool
 
 	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
 	@EnvironmentObject var state: UIState
 	@EnvironmentObject var switcher: AccountSwitcher
 

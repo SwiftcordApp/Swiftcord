@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DiscordKitCore
 
 struct ServerJoinView: View {
 	@Binding var presented: Bool
@@ -14,8 +13,6 @@ struct ServerJoinView: View {
 	@State private var invite = ""
 	@State private var loading = false
 	@State private var error: LocalizedStringKey?
-
-	@EnvironmentObject var rest: DiscordREST
 
 	private func join() async {
 		guard !invite.isEmpty else {
@@ -25,7 +22,7 @@ struct ServerJoinView: View {
 
 		let id = invite.split(separator: "/").last!
 		AnalyticsWrapper.event(type: .inviteOpened, properties: ["invite_code": id])
-		let resolvedInvite = await rest.resolveInvite(inviteID: String(id), inputValue: invite)
+		let resolvedInvite = await restAPI.resolveInvite(inviteID: String(id), inputValue: invite)
 		AnalyticsWrapper.event(type: .networkInviteResolve, properties: [
 			"code": id,
 			"input_value": invite,

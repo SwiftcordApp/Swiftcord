@@ -7,13 +7,11 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCore
 import Reachability
 
 struct LoadingView: View {
     @EnvironmentObject var state: UIState
 	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
 
 	private func logOut() {
 		AccountSwitcher.clearAccountSpecificPrefKeys()

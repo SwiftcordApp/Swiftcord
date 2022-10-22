@@ -7,7 +7,6 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCore
 
 struct LoginView: View {
 	@StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
@@ -20,7 +19,6 @@ struct LoginView: View {
 	var onLoggedIn: (() -> Void)?
 
 	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
 	@EnvironmentObject var state: UIState
 	@EnvironmentObject var acctManager: AccountSwitcher
 

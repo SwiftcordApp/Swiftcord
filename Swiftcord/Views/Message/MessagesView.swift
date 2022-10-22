@@ -109,7 +109,6 @@ struct DayDividerView: View {
 
 struct MessagesView: View {
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
 
@@ -133,7 +132,7 @@ struct MessagesView: View {
 			LoFiMessageView()
 			LoFiMessageView()
 			LoFiMessageView()
-		}
+		}.flip()
 	}
 
 	private var history: some View {
@@ -175,7 +174,7 @@ struct MessagesView: View {
 				history
 
 				if viewModel.reachedTop {
-					MessagesViewHeader(chl: ctx.channel)
+					MessagesViewHeader(chl: ctx.channel).flip()
 				} else {
 					loadingSkeleton
 						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
