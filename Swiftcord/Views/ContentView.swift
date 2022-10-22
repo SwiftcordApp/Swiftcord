@@ -38,7 +38,6 @@ struct ContentView: View {
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
 	@EnvironmentObject var accountsManager: AccountSwitcher
 

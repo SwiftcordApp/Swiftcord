@@ -30,7 +30,6 @@ struct UserAvatarView: View, Equatable {
 
 	//@EnvironmentObject var ctx: ServerContext
 	//@EnvironmentObject var gateway: DiscordGateway
-	//@EnvironmentObject var restAPI: DiscordREST
 
     var body: some View {
 		let _ = print("render!")

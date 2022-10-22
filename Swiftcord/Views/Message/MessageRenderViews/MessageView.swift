@@ -10,7 +10,6 @@ import SwiftUI
 import CachedAsyncImage
 import DiscordKit
 import DiscordKitCommon
-import DiscordKitCore
 
 struct NonUserBadge: View {
 	let flags: User.Flags?
@@ -51,7 +50,6 @@ struct MessageView: View {
     @State private var loadQuotedMsgErr = false
 
     @EnvironmentObject var serverCtx: ServerContext
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var gateway: DiscordGateway
 
 	// Messages that can be rendered as "default" messages

@@ -106,8 +106,6 @@ struct StickerView: View {
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
 
-	@EnvironmentObject var restAPI: DiscordREST
-
 	@AppStorage("stickerAlwaysAnim") private var alwaysAnimStickers = true
 
 	private func openPopoverEvt() {

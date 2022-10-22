@@ -8,7 +8,6 @@
 import SwiftUI
 import DiscordKit
 import DiscordKitCommon
-import DiscordKitCore
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel?
@@ -24,7 +23,6 @@ struct ServerView: View {
 
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var audioManager: AudioCenterManager
 
 	@StateObject var serverCtx: ServerContext
