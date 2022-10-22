@@ -146,7 +146,7 @@ struct MessagesView: View {
 
 				MessageView(
 					message: msg,
-					shrunk: idx > 0 && msg.messageIsShrunk(prev: viewModel.messages[idx - 1]),
+					shrunk: idx < viewModel.messages.count-1 && msg.messageIsShrunk(prev: viewModel.messages[idx+1]),
 					quotedMsg: msg.message_reference != nil
 					? viewModel.messages.first {
 						$0.id == msg.message_reference!.message_id
@@ -165,10 +165,15 @@ struct MessagesView: View {
 			.listRowInsets(EdgeInsets())
 		}
 		.fixedSize(horizontal: false, vertical: true)
+		.flip()
 	}
 	private var historyList: some View {
 		ScrollViewReader { proxy in
 			List {
+				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0)
+
+				history
+
 				if viewModel.reachedTop {
 					MessagesViewHeader(chl: ctx.channel)
 				} else {
@@ -182,16 +187,15 @@ struct MessagesView: View {
 						}
 						.frame(maxWidth: .infinity, alignment: .center)
 				}
-
-				history
-				Spacer(minLength: (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
 			}
 			.introspectTableView { tableView in
 				tableView.backgroundColor = .clear
 				tableView.enclosingScrollView?.drawsBackground = false
 				tableView.style = .fullWidth
 				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+				tableView.enclosingScrollView?.rotate(byDegrees: 180)
 			}
+			.scaleEffect(x: -1, y: 1, anchor: .center)
 			.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
 			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
 			.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
@@ -248,12 +252,6 @@ struct MessagesView: View {
 					.padding(.horizontal, 16)
 					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 				}
-			}
-		}.overlay {
-			GeometryReader { geomatry in
-				ZStack {}
-					.onAppear { viewModel.messageInputHeight = geomatry.size.height}
-					.onChange(of: geomatry.size.height) { viewModel.messageInputHeight = $0 }
 			}
 		}
 	}
