@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import DiscordKit
 import DiscordKitCommon
 
 /// Action messages: e.g. member leave, join etc.
 struct ActionMessageView: View {
+	@EnvironmentObject var gateway: DiscordGateway // This is used to get the user for the call messages
 	let message: Message
 	let mini: Bool
 
@@ -65,6 +67,49 @@ struct ActionMessageView: View {
 				icon: "rhombus.fill",
 				color: .purple
 			)
+		case .call:
+			if let user = gateway.cache.user {
+				let isFromSelf = message.author.id == user.id
+				if(message.call?.participants.count == 1 && !isFromSelf) { // Missed call
+					return ActionMessageData(
+						message: "You missed a call from **\(message.author.username)**.",
+						icon: "phone.fill",
+						color: .gray
+					)
+				} else { // Active, missed call from self or non missed call.
+					let isActive = message.call?.ended_timestamp == nil
+					let difference = message.call?.ended_timestamp?.timeIntervalSince(message.timestamp) ?? 0
+					var lasted = ""
+					if(!isActive){
+						if (difference < 60) { // Less than a minute
+							lasted = "a few seconds"
+						} else {
+							let minutes = round(difference / 60)
+							if (minutes < 3) { // less than 3 minutes
+								lasted = "a few minutes"
+							} else if (minutes < 60) { // less than 1 hour
+								lasted = "\(String(format: "%.0f", minutes)) minutes"
+							} else if(minutes < 120) { // less than 2 hours
+								lasted = "an hour"
+							} else {
+								lasted = "\(String(format: "%.0f", round(minutes/60))) hours"
+							}
+						}
+					}
+				
+					return ActionMessageData(
+						message: "**\(message.author.username)** started a call\(!isActive ? " that lasted \(String(describing: lasted))" : "").",
+						icon: "phone.fill",
+						color: .green
+					)
+				}
+			} else {
+				return ActionMessageData(
+					message: "An error ocurred when rendering this message!",
+					icon: "exclamationmark.circle",
+					color: .red
+				)
+			}
 		default:
 			return ActionMessageData(
 				message: "Oops, rendering `\(String(describing: message.type))` messages aren't supported yet :(",
