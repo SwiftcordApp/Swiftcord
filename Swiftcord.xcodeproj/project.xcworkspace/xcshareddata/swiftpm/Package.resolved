@@ -92,7 +92,7 @@
     {
       "identity" : "swiftygif",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/cryptoAlgorithm/SwiftyGif",
+      "location" : "https://github.com/cryptoAlgorithm/SwiftyGif.git",
       "state" : {
         "branch" : "fix-timer-crash",
         "revision" : "32a6bd02c9c44c8cdd4e98f46037678ee1abecbb"
