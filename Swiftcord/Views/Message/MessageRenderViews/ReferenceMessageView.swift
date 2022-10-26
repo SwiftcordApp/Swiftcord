@@ -22,8 +22,8 @@ struct ReferenceMessageView: View {
 				.trim(from: 0.5, to: 0.75)
 				.stroke(.gray.opacity(0.4), lineWidth: 2)
 				.frame(width: 60, height: 20)
-				.padding(.top, 9)
-				.padding(.bottom, -14)
+				.padding(.top, 8)
+				.padding(.bottom, -12)
 				.padding(.trailing, -30)
 
 			Group {
