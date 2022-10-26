@@ -230,6 +230,7 @@
 		DABD8BB52880F653008EE28F /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = DABD8BB42880F653008EE28F /* Sparkle */; };
 		DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */; };
 		DABD8BB82882E9E4008EE28F /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */; };
+		DAC2657829090C090099C225 /* HelperInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2657729090C090099C225 /* HelperInstances.swift */; };
 		DAC437792900F3FD00D3A894 /* Snowflake+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC437782900F3FD00D3A894 /* Snowflake+.swift */; };
 		DACBD12F287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
 		DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBD12E287BDE9D00CED3EF /* DialogView.swift */; };
@@ -376,6 +377,7 @@
 		DAB7793028F9177B00A17F54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DAB7793128F9179400A17F54 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DABD8BB62882E9E0008EE28F /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
+		DAC2657729090C090099C225 /* HelperInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperInstances.swift; sourceTree = "<group>"; };
 		DAC437782900F3FD00D3A894 /* Snowflake+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snowflake+.swift"; sourceTree = "<group>"; };
 		DACBD12E287BDE9D00CED3EF /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		DACBD159287C240E00CED3EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				3684BB5A283C69C5005045AE /* Sparkle.swift */,
 				DA97BA8B2849C0FA00059FD7 /* Cache.swift */,
 				DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */,
+				DAC2657729090C090099C225 /* HelperInstances.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 				DAC437792900F3FD00D3A894 /* Snowflake+.swift in Sources */,
 				DA520AD927D4E7A4009FD740 /* LargeUserProfileView.swift in Sources */,
 				DA54D57A2844E41A00B11857 /* ProfileBadges.swift in Sources */,
+				DAC2657829090C090099C225 /* HelperInstances.swift in Sources */,
 				DAB5366B285AD15900DD9857 /* FlatButtonStyle.swift in Sources */,
 				DA520ACF27D4CE5E009FD740 /* UserSettingsView.swift in Sources */,
 				364EF77C286F9CA000B01637 /* UserSettingsPrivacySafetyView.swift in Sources */,
