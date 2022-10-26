@@ -54,9 +54,9 @@
 
 /* ====== User ====== */
 "user.bio" = "自己紹介";
-"user.presence.dnd" = "邪魔しないでください";
+"user.presence.dnd" = "取り込み中";
 "user.presence.offline" = "オフライン";
-"user.presence.invisible" = "見えない";
+"user.presence.invisible" = "オンラインを隠す";
 "message.edited" = " ・編集済み： ";
 
 /* ====== Server ====== */
@@ -131,3 +131,4 @@
 "settings.others.credits.sponsor.tier1" = "とても素晴らしいサポーター🧊";
 "server.join.action" = "サーバーに参加";
 "server.join.fieldHeader.invalid" = "無効なリンク_有効な招待リンクまたは招待コードを入力してください。_";
+"user.presence.idle" = "退席中";
