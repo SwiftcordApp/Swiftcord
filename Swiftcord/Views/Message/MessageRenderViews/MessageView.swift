@@ -56,15 +56,15 @@ struct MessageView: View {
 	static let defaultTypes: [MessageType] = [.defaultMsg, .reply]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 6) {
             // This message is a reply!
-            /*if message.type == .reply {
+            if message.type == .reply {
 				ReferenceMessageView(referencedMsg: message.referenced_message).onTapGesture {
 					if let referencedID = message.referenced_message?.id {
 						onQuoteClick(referencedID)
 					}
 				}
-            }*/
+            }
             HStack(
 				alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
                 spacing: 16
@@ -232,9 +232,8 @@ private extension MessageView {
 	}
 }
 
-struct MessageView_Previews: PreviewProvider {
+/*struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("TODO")
-        // MessageView()
+        //MessageView()
     }
-}
+}*/

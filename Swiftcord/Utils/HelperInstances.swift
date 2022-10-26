@@ -15,7 +15,7 @@ struct HelperInstances {
 		formatter.unitsStyle = .full
 		formatter.includesApproximationPhrase = true
 		formatter.allowedUnits = [.hour, .minute, .second]
-		
+
 		/* Legacy code - more accurate but doesn't localise well
 		if difference < 60 { // Less than a minute
 		    lasted = "a few seconds"
@@ -32,7 +32,7 @@ struct HelperInstances {
 			}
 		}
 		*/
-		
+
 		return formatter
 	}()
 }

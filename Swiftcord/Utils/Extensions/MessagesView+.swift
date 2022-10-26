@@ -22,7 +22,7 @@ internal extension MessagesView {
 		viewModel.loadError = false
 
 		viewModel.fetchMessagesTask = Task {
-			let lastMsg = viewModel.messages.last?.id
+			let lastMsg = viewModel.messages.first?.id
 
 			guard let newMessages = await restAPI.getChannelMsgs(
 				id: channel.id,
@@ -47,8 +47,13 @@ internal extension MessagesView {
 			try Task.checkCancellation()
 
 			viewModel.reachedTop = newMessages.count < 50
-			viewModel.messages += newMessages
+			viewModel.messages = newMessages.reversed() + viewModel.messages
 			viewModel.fetchMessagesTask = nil
+			if let lastMsg = lastMsg {
+				DispatchQueue.main.async { Self.scrollPublisher.send(lastMsg) }
+			} else if let firstID = newMessages.first?.id {
+				DispatchQueue.main.async { Self.scrollPublisher.send(firstID) }
+			}
 		}
 	}
 

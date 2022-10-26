@@ -11,6 +11,7 @@ import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
 import Introspect
+import Combine
 
 extension View {
     public func flip() -> some View {
@@ -116,32 +117,31 @@ struct MessagesView: View {
 
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
+	@State private var scrollSinkCancellable: AnyCancellable?
 
-	// Underlying NSTableView of message history List
-	private var historyNSTable: NSTableView?
+	static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
 
 	private var loadingSkeleton: some View {
-		VStack(spacing: 4) {
+		VStack(spacing: 16) {
 			ForEach(0..<10) { _ in
 				LoFiMessageView()
 			}
 		}
 		.fixedSize(horizontal: false, vertical: true)
-		.flip()
 		.drawingGroup()
 	}
 
 	private var history: some View {
 		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
 			VStack(spacing: 0) {
-				if (idx == viewModel.messages.count - 1 && viewModel.reachedTop) ||
-					(idx < viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+				if (idx == 0 && viewModel.reachedTop) ||
+					(idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
 					DayDividerView(date: msg.timestamp)
 				}
 
 				MessageView(
 					message: msg,
-					shrunk: idx < viewModel.messages.count-1 && msg.messageIsShrunk(prev: viewModel.messages[idx+1]),
+					shrunk: idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1]),
 					quotedMsg: msg.message_reference != nil
 					? viewModel.messages.first {
 						$0.id == msg.message_reference!.message_id
@@ -160,17 +160,15 @@ struct MessagesView: View {
 			.listRowInsets(EdgeInsets())
 		}
 		.fixedSize(horizontal: false, vertical: true)
-		.flip()
+		// .flip()
 	}
 	private var historyList: some View {
 		ScrollViewReader { proxy in
 			List {
 				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0)
 
-				history
-
 				if viewModel.reachedTop {
-					MessagesViewHeader(chl: ctx.channel).flip()
+					MessagesViewHeader(chl: ctx.channel) // .flip()
 				} else {
 					loadingSkeleton
 						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
@@ -183,6 +181,8 @@ struct MessagesView: View {
 						.frame(maxWidth: .infinity, alignment: .center)
 				}
 
+				history
+
 				// Gotta un-hardcode this
 				Spacer(minLength: 52) // Ensure content doesn't go behind toolbar when scrolled to the top
 			}
@@ -191,9 +191,16 @@ struct MessagesView: View {
 				tableView.enclosingScrollView?.drawsBackground = false
 				tableView.style = .fullWidth
 				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 52, right: 6)
-				tableView.enclosingScrollView?.rotate(byDegrees: 180)
+				// tableView.enclosingScrollView?.rotate(byDegrees: 180)
+				print("introspecting")
+				scrollSinkCancellable?.cancel()
+				scrollSinkCancellable = Self.scrollPublisher.sink { id in
+					guard let msgIdx = viewModel.messages.firstIndex(identifiedBy: id) else { return }
+					tableView.scrollRowToVisible(msgIdx+3)
+					print("scroll to idx \(msgIdx + 2)")
+				}
 			}
-			.scaleEffect(x: -1, y: 1, anchor: .center)
+			// .scaleEffect(x: -1, y: 1, anchor: .center)
 			.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
 			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
 			.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
@@ -318,12 +325,12 @@ struct MessagesView: View {
 			fetchMoreMessages()
 
 			// swiftlint:disable identifier_name
-            evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
+            /*evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
                     if msg.channel_id == ctx.channel?.id {
-						withAnimation { viewModel.messages.insert(msg, at: 0) }
+						withAnimation { viewModel.messages.append(msg) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
@@ -349,7 +356,7 @@ struct MessagesView: View {
                     }
                 default: break
                 }
-            })
+            })*/
         }
 		.alert(item: $viewModel.newAttachmentErr) { err in
 			Alert(
