@@ -9,7 +9,7 @@ import SwiftUI
 import DiscordKit
 
 struct LoginView: View {
-	@StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://canary.discord.com/login")
+	@StateObject var loginWVModel: WebViewModel = WebViewModel(link: "https://discord.com/login")
 	@State var tokenView: Bool = false
 	@State var tokenCount = 0
 	@State var tokenString: String = ""
