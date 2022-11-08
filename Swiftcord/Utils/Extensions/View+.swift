@@ -23,3 +23,9 @@ extension View {
 		}
 	}
 }
+
+extension View {
+	@ViewBuilder func zeroRowInsets() -> some View {
+		self.listRowInsets(.init())
+	}
+}

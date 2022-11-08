@@ -122,27 +122,22 @@ struct MessagesView: View {
 	static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
 
 	private var loadingSkeleton: some View {
-		VStack(spacing: 16) {
-			ForEach(0..<10) { _ in
-				LoFiMessageView()
-			}
+		ForEach(0..<10) { _ in
+			LoFiMessageView().listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
 		}
 		.fixedSize(horizontal: false, vertical: true)
-		.drawingGroup()
 	}
 
 	private var history: some View {
 		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
 			if (idx == 0 && viewModel.reachedTop) ||
-				(idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
+			   (idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
 				DayDividerView(date: msg.timestamp)
-					.listRowInsets(.init())
 			}
 
 			let shrunk = idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
 			if !shrunk {
 				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
-					.listRowInsets(.init())
 			}
 
 			MessageView(
@@ -162,18 +157,17 @@ struct MessagesView: View {
 				replying: $viewModel.replying,
 				highlightMsgId: $viewModel.highlightMsg
 			)
-			.listRowInsets(.init())
 		}
+		.zeroRowInsets()
 		.fixedSize(horizontal: false, vertical: true)
-		// .flip()
 	}
 	private var historyList: some View {
 		ScrollViewReader { proxy in
 			List {
-				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0)
+				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0).zeroRowInsets()
 
 				if viewModel.reachedTop {
-					MessagesViewHeader(chl: ctx.channel) // .flip()
+					MessagesViewHeader(chl: ctx.channel).zeroRowInsets() // .flip()
 				} else {
 					loadingSkeleton
 						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
@@ -189,7 +183,7 @@ struct MessagesView: View {
 				history
 
 				// Gotta un-hardcode this
-				Spacer(minLength: 52) // Ensure content doesn't go behind toolbar when scrolled to the top
+				Spacer(minLength: 52).zeroRowInsets() // Ensure content doesn't go behind toolbar when scrolled to the top
 			}
 			.introspectTableView { tableView in
 				tableView.backgroundColor = .clear
