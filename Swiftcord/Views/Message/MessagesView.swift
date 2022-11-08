@@ -133,31 +133,36 @@ struct MessagesView: View {
 
 	private var history: some View {
 		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-			VStack(spacing: 0) {
-				if (idx == 0 && viewModel.reachedTop) ||
-					(idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
-					DayDividerView(date: msg.timestamp)
-				}
-
-				MessageView(
-					message: msg,
-					shrunk: idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1]),
-					quotedMsg: msg.message_reference != nil
-					? viewModel.messages.first {
-						$0.id == msg.message_reference!.message_id
-					} : nil,
-					onQuoteClick: { id in
-						// withAnimation { proxy.scrollTo(id, anchor: .center) }
-						viewModel.highlightMsg = id
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-							if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
-						}
-					},
-					replying: $viewModel.replying,
-					highlightMsgId: $viewModel.highlightMsg
-				)
+			if (idx == 0 && viewModel.reachedTop) ||
+				(idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
+				DayDividerView(date: msg.timestamp)
+					.listRowInsets(.init())
 			}
-			.listRowInsets(EdgeInsets())
+
+			let shrunk = idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
+			if !shrunk {
+				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+					.listRowInsets(.init())
+			}
+
+			MessageView(
+				message: msg,
+				shrunk: shrunk,
+				quotedMsg: msg.message_reference != nil
+				? viewModel.messages.first {
+					$0.id == msg.message_reference!.message_id
+				} : nil,
+				onQuoteClick: { id in
+					// withAnimation { proxy.scrollTo(id, anchor: .center) }
+					viewModel.highlightMsg = id
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+						if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
+					}
+				},
+				replying: $viewModel.replying,
+				highlightMsgId: $viewModel.highlightMsg
+			)
+			.listRowInsets(.init())
 		}
 		.fixedSize(horizontal: false, vertical: true)
 		// .flip()
@@ -195,9 +200,10 @@ struct MessagesView: View {
 				print("introspecting")
 				scrollSinkCancellable?.cancel()
 				scrollSinkCancellable = Self.scrollPublisher.sink { id in
-					guard let msgIdx = viewModel.messages.firstIndex(identifiedBy: id) else { return }
-					tableView.scrollRowToVisible(msgIdx+3)
-					print("scroll to idx \(msgIdx + 2)")
+					//guard let msgIdx = viewModel.messages.firstIndex(identifiedBy: id) else { return }
+					//tableView.scrollRowToVisible(msgIdx+3)
+					tableView.scrollRowToVisible(tableView.numberOfRows-1)
+					//print("scroll to idx \(msgIdx + 2)")
 				}
 			}
 			// .scaleEffect(x: -1, y: 1, anchor: .center)
