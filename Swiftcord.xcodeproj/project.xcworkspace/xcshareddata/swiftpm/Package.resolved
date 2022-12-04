@@ -12,9 +12,9 @@
     {
       "identity" : "discordkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftcordApp/DiscordKit",
+      "location" : "https://github.com/PiemanAU/DiscordKit",
       "state" : {
-        "revision" : "c904221d392283052dc9d98decc9bc51504ac846"
+        "revision" : "dcd55bb32bca5fec6f2504d91b529ed3e57450ee"
       }
     },
     {
@@ -67,8 +67,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
-        "version" : "1.20.2"
+        "revision" : "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
+        "version" : "1.20.3"
       }
     },
     {
