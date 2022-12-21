@@ -10,6 +10,8 @@ import DiscordKitCommon
 import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
+import Introspect
+import Combine
 
 extension View {
     public func flip() -> some View {
@@ -108,7 +110,6 @@ struct DayDividerView: View {
 
 struct MessagesView: View {
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
 
@@ -116,148 +117,154 @@ struct MessagesView: View {
 
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
+	@State private var scrollSinkCancellable: AnyCancellable?
+
+	static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
+
+	private var loadingSkeleton: some View {
+		ForEach(0..<10) { _ in
+			LoFiMessageView().listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+		}
+		.fixedSize(horizontal: false, vertical: true)
+	}
+
+	private var history: some View {
+		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
+			if (idx == 0 && viewModel.reachedTop) ||
+			   (idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
+				DayDividerView(date: msg.timestamp)
+			}
+
+			let shrunk = idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
+			if !shrunk {
+				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+			}
+
+			MessageView(
+				message: msg,
+				shrunk: shrunk,
+				quotedMsg: msg.message_reference != nil
+				? viewModel.messages.first {
+					$0.id == msg.message_reference!.message_id
+				} : nil,
+				onQuoteClick: { id in
+					// withAnimation { proxy.scrollTo(id, anchor: .center) }
+					viewModel.highlightMsg = id
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+						if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
+					}
+				},
+				replying: $viewModel.replying,
+				highlightMsgId: $viewModel.highlightMsg
+			)
+		}
+		.zeroRowInsets()
+		.fixedSize(horizontal: false, vertical: true)
+	}
+	private var historyList: some View {
+		ScrollViewReader { proxy in
+			List {
+				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0).zeroRowInsets()
+
+				if viewModel.reachedTop {
+					MessagesViewHeader(chl: ctx.channel).zeroRowInsets() // .flip()
+				} else {
+					loadingSkeleton
+						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+						.onDisappear {
+							if let loadTask = viewModel.fetchMessagesTask {
+								loadTask.cancel()
+								viewModel.fetchMessagesTask = nil
+							}
+						}
+						.frame(maxWidth: .infinity, alignment: .center)
+				}
+
+				history
+
+				// Gotta un-hardcode this
+				Spacer(minLength: 52).zeroRowInsets() // Ensure content doesn't go behind toolbar when scrolled to the top
+			}
+			.introspectTableView { tableView in
+				tableView.backgroundColor = .clear
+				tableView.enclosingScrollView?.drawsBackground = false
+				tableView.style = .fullWidth
+				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 52, right: 6)
+				// tableView.enclosingScrollView?.rotate(byDegrees: 180)
+				print("introspecting")
+				scrollSinkCancellable?.cancel()
+				scrollSinkCancellable = Self.scrollPublisher.sink { id in
+					//guard let msgIdx = viewModel.messages.firstIndex(identifiedBy: id) else { return }
+					//tableView.scrollRowToVisible(msgIdx+3)
+					tableView.scrollRowToVisible(tableView.numberOfRows-1)
+					//print("scroll to idx \(msgIdx + 2)")
+				}
+			}
+			// .scaleEffect(x: -1, y: 1, anchor: .center)
+			.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
+			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
+			.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
+			.frame(maxHeight: .infinity)
+		}
+	}
+
+	private var inputContainer: some View {
+		ZStack(alignment: .topLeading) {
+			MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
+
+			MessageInputView(
+				placeholder: ctx.channel?.type == .dm
+				? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				: (ctx.channel?.type == .groupDM
+				   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+				  ),
+				message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
+				onSend: sendMessage,
+				preAttach: preAttachChecks
+			)
+			.onAppear { viewModel.newMessage = "" }
+			.onChange(of: viewModel.newMessage) { content in
+				if content.count > viewModel.newMessage.count,
+				   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
+					// Send typing start msg once every 8s while typing
+					viewModel.lastSentTyping = Date()
+					Task {
+						_ = await restAPI.typingStart(id: ctx.channel!.id)
+					}
+				}
+			}
+			.overlay {
+				let typingMembers = ctx.channel == nil
+				? []
+				: ctx.typingStarted[ctx.channel!.id]?
+					.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+
+				if !typingMembers.isEmpty {
+					HStack {
+						// The dimensions are quite arbitrary
+						LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+							.lottieLoopMode(.loop)
+							.frame(width: 32, height: 24)
+						Group {
+							Text(typingMembers.count <= 2
+								 ? typingMembers.joined(separator: " and ")
+								 : "Several people"
+							).fontWeight(.semibold)
+							+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
+						}.padding(.leading, -4)
+					}
+					.padding(.horizontal, 16)
+					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+				}
+			}
+		}
+	}
 
     var body: some View {
 		ZStack(alignment: .bottom) {
-            ScrollView(.vertical) {
-                ScrollViewReader { proxy in
-                    // This whole view is flipped, so everything in it needs to be flipped as well
-                    LazyVStack(alignment: .leading, spacing: 0) {
-						Spacer(minLength: 16 + (viewModel.showingInfoBar ? 24 : 0) + viewModel.messageInputHeight)
-
-						ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-							VStack(spacing: 0) {
-								if (idx == viewModel.messages.count - 1 && viewModel.reachedTop) ||
-									(idx < viewModel.messages.count - 1 && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
-									DayDividerView(date: msg.timestamp)
-								}
-
-								MessageView(
-									message: msg,
-									shrunk: idx < viewModel.messages.count - 1 && msg.messageIsShrunk(prev: viewModel.messages[idx + 1]),
-									quotedMsg: msg.message_reference != nil
-									? viewModel.messages.first {
-										$0.id == msg.message_reference!.message_id
-									} : nil,
-									onQuoteClick: { id in
-										withAnimation { proxy.scrollTo(id, anchor: .center) }
-										viewModel.highlightMsg = id
-										DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-											if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
-										}
-									},
-									replying: $viewModel.replying,
-									highlightMsgId: $viewModel.highlightMsg
-								)
-							}.flip()
-                        }
-
-						if viewModel.reachedTop { MessagesViewHeader(chl: ctx.channel).flip() } else {
-                            VStack(alignment: .leading, spacing: 16) {
-                                // TODO: Use a loop to create this
-								Group {
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-								}
-								Group {
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-									LoFiMessageView()
-								}
-								// A ForEach with a range works initially
-								// but doesn't show anything for subsequent loads
-                            }
-                            .onAppear {
-								if viewModel.fetchMessagesTask == nil { fetchMoreMessages() }
-							}
-                            .onDisappear {
-								if let loadTask = viewModel.fetchMessagesTask {
-                                    loadTask.cancel()
-									viewModel.fetchMessagesTask = nil
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .flip()
-                        }
-                    }
-                }
-            }
-            .flip()
-			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
-            .frame(maxHeight: .infinity)
-
-            ZStack(alignment: .topLeading) {
-				MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
-
-                MessageInputView(
-					placeholder: ctx.channel?.type == .dm
-					? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					: (ctx.channel?.type == .groupDM
-					   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-					  ),
-					message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
-					onSend: sendMessage,
-					preAttach: preAttachChecks
-				)
-				.onAppear { viewModel.newMessage = "" }
-				.onChange(of: viewModel.newMessage) { content in
-					if content.count > viewModel.newMessage.count,
-					   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
-						// Send typing start msg once every 8s while typing
-						viewModel.lastSentTyping = Date()
-						Task {
-							_ = await restAPI.typingStart(id: ctx.channel!.id)
-						}
-					}
-				}
-				.overlay {
-					let typingMembers = ctx.channel == nil
-					? []
-					: ctx.typingStarted[ctx.channel!.id]?
-						.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
-
-					if !typingMembers.isEmpty {
-						HStack {
-							// The dimensions are quite arbitrary
-							LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
-								.lottieLoopMode(.loop)
-								.frame(width: 32, height: 24)
-							Group {
-								Text(typingMembers.count <= 2
-									 ? typingMembers.joined(separator: " and ")
-									 : "Several people"
-								).fontWeight(.semibold)
-								+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
-							}.padding(.leading, -4)
-						}
-						.padding(.horizontal, 16)
-						.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-					}
-				}
-				.background {
-					GeometryReader { geomatry in
-						ZStack {}
-							.onAppear { viewModel.messageInputHeight = geomatry.size.height }
-							.onChange(of: geomatry.size.height) { viewModel.messageInputHeight = $0 }
-					}
-				}
-            }
+			historyList
+			inputContainer
         }
 		.frame(minWidth: 525, minHeight: 500)
 		.blur(radius: viewModel.dropOver ? 8 : 0)
@@ -318,12 +325,12 @@ struct MessagesView: View {
 			fetchMoreMessages()
 
 			// swiftlint:disable identifier_name
-            evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
+            /*evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
                 switch evt {
                 case .messageCreate:
                     guard let msg = d as? Message else { break }
                     if msg.channel_id == ctx.channel?.id {
-						withAnimation { viewModel.messages.insert(msg, at: 0) }
+						withAnimation { viewModel.messages.append(msg) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
@@ -349,7 +356,7 @@ struct MessagesView: View {
                     }
                 default: break
                 }
-            })
+            })*/
         }
 		.alert(item: $viewModel.newAttachmentErr) { err in
 			Alert(

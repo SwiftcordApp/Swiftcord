@@ -18,28 +18,28 @@ struct ProfileKey: Hashable {
 
 private let profileCache = Cache<ProfileKey, UserProfile>()
 
-struct UserAvatarView: View {
+struct UserAvatarView: View, Equatable {
     let user: User
     let guildID: Snowflake?
     let webhookID: Snowflake?
 	var size: CGFloat = 40
-    @State private var profile: UserProfile? // Lazy-loaded full user
+    /*@State private var profile: UserProfile? // Lazy-loaded full user
     @State private var infoPresenting = false
 	@State private var loadFullFailed = false
-	@State private var note = ""
+	@State private var note = ""*/
 
-	@EnvironmentObject var ctx: ServerContext
-	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
+	//@EnvironmentObject var ctx: ServerContext
+	//@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
+		let _ = print("render!")
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
 
 		BetterImageView(url: avatarURL)
 			.frame(width: size, height: size)
 			.clipShape(Circle())
 			.onTapGesture {
-				if user.id == gateway.cache.user?.id, profile == nil {
+				/*if user.id == gateway.cache.user?.id, profile == nil {
 					profile = UserProfile(
 						connected_accounts: [],
 						guild_member: nil,
@@ -77,9 +77,9 @@ struct UserAvatarView: View {
 						profile = loadedProfile
 						profileCache[ProfileKey(guildID: guildID, userID: user.id)] = loadedProfile
 					}
-				}
+				}*/
 			}
-			.popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
+			/*.popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
 				MiniUserProfileView(
 					user: user,
 					profile: $profile,
@@ -141,6 +141,10 @@ struct UserAvatarView: View {
 							note = UserDefaults.standard.string(forKey: "notes.\(user.id)") ?? ""
 						}
 				}
-			}
+			}*/
+	}
+
+	static func == (lhs: UserAvatarView, rhs: UserAvatarView) -> Bool {
+		return lhs.user.id == rhs.user.id
 	}
 }

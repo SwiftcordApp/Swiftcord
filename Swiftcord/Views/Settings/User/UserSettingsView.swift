@@ -8,14 +8,12 @@
 import SwiftUI
 import DiscordKit
 import DiscordKitCommon
-import DiscordKitCore
 
 struct UserSettingsView: View {
     let user: CurrentUser
 
 	@State private var selectedLink: SidebarLink? = .account
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var rest: DiscordREST
 	@EnvironmentObject var acctManager: AccountSwitcher
 
     var body: some View {

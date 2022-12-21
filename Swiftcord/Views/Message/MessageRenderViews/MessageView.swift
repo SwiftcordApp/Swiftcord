@@ -10,7 +10,6 @@ import SwiftUI
 import CachedAsyncImage
 import DiscordKit
 import DiscordKitCommon
-import DiscordKitCore
 
 struct NonUserBadge: View {
 	let flags: User.Flags?
@@ -39,7 +38,6 @@ struct NonUserBadge: View {
 struct MessageView: View {
     let message: Message
     let shrunk: Bool
-    let lineSpacing = 4 as CGFloat
     let quotedMsg: Message?
     let onQuoteClick: (Snowflake) -> Void
 
@@ -51,14 +49,16 @@ struct MessageView: View {
     @State private var loadQuotedMsgErr = false
 
     @EnvironmentObject var serverCtx: ServerContext
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var gateway: DiscordGateway
+
+	// The spacing between lines of text, used to compute padding and line height
+	static let lineSpacing: CGFloat = 4
 
 	// Messages that can be rendered as "default" messages
 	static let defaultTypes: [MessageType] = [.defaultMsg, .reply]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 6) {
             // This message is a reply!
             if message.type == .reply {
 				ReferenceMessageView(referencedMsg: message.referenced_message).onTapGesture {
@@ -74,13 +74,14 @@ struct MessageView: View {
                 if MessageView.defaultTypes.contains(message.type) {
                     if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
+							.equatable()
                     } else {
 						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
                             .frame(width: 40, height: 22, alignment: .center)
                             .opacity(hovered ? 0.5 : 0)
                     }
-                    VStack(alignment: .leading, spacing: lineSpacing) {
+					VStack(alignment: .leading, spacing: Self.lineSpacing) {
                         if !shrunk {
                             HStack(spacing: 6) {
                                 Text(message.member?.nick ?? message.author.username)
@@ -115,7 +116,7 @@ struct MessageView: View {
         }
         .padding(.leading, 16)
         .padding(.trailing, 48)
-        .padding(.vertical, lineSpacing / 2)
+		.padding(.vertical, Self.lineSpacing / 2)
         .background(hovered ? .gray.opacity(0.07) : .clear)
 		.background(
 			Rectangle()
@@ -123,7 +124,6 @@ struct MessageView: View {
 				.opacity(highlightMsgId == message.id ? 0.2 : 0)
 				.animation(.easeIn(duration: 0.25), value: highlightMsgId == message.id)
 		)
-        .padding(.top, shrunk ? 0 : 16 - lineSpacing / 2)
         .onHover { isHovered in hovered = isHovered }
         .contextMenu {
 			Button(action: reply) {
@@ -233,9 +233,8 @@ private extension MessageView {
 	}
 }
 
-struct MessageView_Previews: PreviewProvider {
+/*struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("TODO")
-        // MessageView()
+        //MessageView()
     }
-}
+}*/

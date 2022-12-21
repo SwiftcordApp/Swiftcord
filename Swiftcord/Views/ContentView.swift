@@ -38,7 +38,6 @@ struct ContentView: View {
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
 	@EnvironmentObject var accountsManager: AccountSwitcher
 
@@ -107,7 +106,7 @@ struct ContentView: View {
                         name: "Home",
                         assetIconName: "DiscordIcon",
 						onSelect: { state.selectedGuildID = "@me" }
-                    ).padding(.top, 4)
+                    ).padding(.top, 8)
 
 					HorizontalDividerView().frame(width: 32)
 
@@ -142,32 +141,8 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-			.background(
-				List {}
-					.listStyle(.sidebar)
-					.overlay(
-						Rectangle()
-							.frame(width: 1, alignment: .bottom)
-							.foregroundColor(Color(nsColor: .separatorColor))
-							.padding(.top, ContentView.dividerOffset),
-						alignment: .trailing
-					)
-					.overlay(.black.opacity(0.2))
-			)
+			.background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
             .frame(maxHeight: .infinity, alignment: .top)
-            .safeAreaInset(edge: .top) {
-                List {}
-					.listStyle(.sidebar)
-					.frame(width: 72, height: 0)
-					.frame(maxHeight: 0)
-					.offset(y: ContentView.insetOffset)
-					.overlay(
-						Rectangle()
-							.frame(height: 1, alignment: .bottom)
-							.foregroundColor(Color(nsColor: .separatorColor)),
-						alignment: .top
-					)
-            }
 
 			ServerView(
 				guild: state.selectedGuildID == nil
@@ -175,6 +150,14 @@ struct ContentView: View {
 				: (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
 			)
         }
+		// Blur the area behind the toolbar so the content doesn't show thru
+		.safeAreaInset(edge: .top) {
+			VStack {
+				Divider().frame(maxWidth: .infinity)
+			}
+			.frame(maxWidth: .infinity)
+			.background(.ultraThinMaterial)
+		}
         .environmentObject(audioManager)
 		.onChange(of: state.selectedGuildID) { id in
             guard let id = id else { return }
