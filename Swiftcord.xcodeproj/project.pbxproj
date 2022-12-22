@@ -428,9 +428,7 @@
 				DAFF8A7828C9DF6F0016AE8C /* CachedAsyncImage in Frameworks */,
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
-				DA974EA42835ED1200013CC2 /* DiscordKitCommon in Frameworks */,
 				DA8AEA6829029747007BAAEA /* Introspect in Frameworks */,
-				DA974EA22835ED1200013CC2 /* DiscordKit in Frameworks */,
 				DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1379,7 +1377,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = 38W5VCQWH4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1637,7 +1635,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = 38W5VCQWH4;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1671,7 +1669,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = 38W5VCQWH4;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1776,14 +1774,6 @@
 				minimumVersion = 0.1.4;
 			};
 		};
-		DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple";
@@ -1871,16 +1861,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		DA974EA12835ED1200013CC2 /* DiscordKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */;
-			productName = DiscordKit;
-		};
-		DA974EA32835ED1200013CC2 /* DiscordKitCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA974EA02835ED1200013CC2 /* XCRemoteSwiftPackageReference "DiscordKit" */;
-			productName = DiscordKitCommon;
 		};
 		DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

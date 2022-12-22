@@ -14,8 +14,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/PiemanAU/DiscordKit",
       "state" : {
-        "branch" : "main",
-        "revision" : "545c984ec187bd30e98e4819d8d72698bfc790a2"
+        "revision" : "dcd55bb32bca5fec6f2504d91b529ed3e57450ee"
       }
     },
     {
