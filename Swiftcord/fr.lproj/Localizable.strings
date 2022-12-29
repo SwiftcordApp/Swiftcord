@@ -11,15 +11,15 @@
 "onboarding.features.body" = "D'importantes fonctionnalités de base sont mises en œuvre, et d'autres sont en préparation";
 "onboarding.lightweight.header" = "Performant et peu gourmand en ressources";
 "onboarding.wip.header" = "Travail en cours";
-"onboarding.footer" = "Swiftcord est un logiciel en phase alpha, avec des limitations et des bogues. Il n’est actuellement pas destiné à remplacer le client officiel, mais nous espérons que cela sera le cas un jour.";
+"onboarding.footer" = "Swiftcord est un logiciel en phase alpha, avec des limitations et des bugs. Il n’est actuellement pas destiné à remplacer le client officiel, mais nous espérons que cela sera le cas un jour.";
 "settings.user.logOut" = "Se déconnecter";
 
 /* ====== User ====== */
 "user.bio" = "À propos de moi";
-"user.roles.none" = "Aucun rôle";
+"user.roles.none" = "Aucun rôles";
 "user.roles.one" = "Rôle";
 "user.roles.many" = "Rôles";
-"user.roles.loading" = "Chargement des rôles en cours…";
+"user.roles.loading" = "Chargement des rôles…";
 "user.note" = "Note";
 
 /* ====== Message ====== */
@@ -28,14 +28,14 @@
 "message.gone" = "Le message original a été supprimé.";
 
 /* ====== Server ====== */
-"server.noChannels.header" = "Aucun canal de texte";
-"server.noChannels.body" = "Vous vous trouvez dans un endroit étrange. Vous n’avez accès à aucun canal textuel, ou peut-être qu'il n’y en a aucun dans ce serveur.";
-"server.channel.header %@ %@" = "C'est le début du canal #%@. %@";
-"server.channel.title %@" = "Bienvenue à #%@ !";
+"server.noChannels.header" = "Aucun salons textuels";
+"server.noChannels.body" = "Vous vous trouvez dans un endroit étrange. Vous n’avez accès à aucun salons textuels ou peut-être qu'il n’y en a aucun dans ce serveur.";
+"server.channel.header %@ %@" = "C'est le début du salon #%@. %@";
+"server.channel.title %@" = "Bienvenue dans #%@ !";
 
 /* ====== DMs ====== */
-"dm.noChannels.body" = "Wumpus attend des amis. Vous n'êtes pas obligé, cependant !";
-"dm" = "Messages directs";
+"dm.noChannels.body" = "Wumpus attend des amis. Cependant, vous n'êtes pas obligé !";
+"dm" = "Messages privés";
 "dm.header %@" = "Ceci est le début de l'historique de tes conversations privées avec **@%@**.";
 "dm.group.header %@" = "Bienvenue au début du groupe privé **%@**.";
 "dm.group.composeMsg.hint %@" = "Envoyer un message à %@";
@@ -44,7 +44,7 @@
 
 /* ====== Settings ====== */
 "settings.showSendBtn" = "Afficher le bouton Envoyer un message";
-"settings.animInteraction" = "Sur le client de bureau, les autocollants s'animeront au survol ou au focus. Sur les clients mobiles, les autocollants s'animeront en cas de pression longue.";
+"settings.animInteraction" = "Sur ordinateurs, les autocollants s'animeront en passant la souris dessus ou en les sélectionnant. Sur téléphone, les autocollants s'animeront en cas de pression longue.";
 "settings.tts.rate" = "Vitesse de la synthèse vocale";
 "settings.tts.defaultSpeed" = "Par défaut";
 "settings.tts.slower" = "Plus lent";
@@ -61,15 +61,15 @@
 "settings.app.streamer" = "Mode streamer";
 "settings.app.advanced" = "Avancé";
 "settings.others.debug.actions" = "Actions";
-"settings.others.debug.actions.info" = "N'utilisez pas ces options si vous ne savez pas ce que vous faites. Certaines d'entre elles peuvent être dangereuses !";
-"settings.others.debug.actions.crash" = "Faire planter Swiftcord (ce n'est pas une blague)";
+"settings.others.debug.actions.info" = "N'utilisez pas ces options si vous ne savez pas ce que vous faites. Certaines d'entre elles peuvent être DaNgErEuSeS !";
+"settings.others.debug.actions.crash" = "Faire planter Swiftcord (sans déconner)";
 "onboarding.wip.body" = "Il y a un problème ? Veuillez créer une issue sur GitHub ou laissez-nous un message sur notre serveur Discord";
 
 /* ====== Loading Cover ====== */
 "loader.tip.header" = "Le saviez-vous";
 "server.channel.noCategory" = "Aucune catégorie";
 "message.reply.attachment" = "Cliquez pour voir la pièce jointe";
-"server.composeMsg.hint %@" = "Message #%@";
+"server.composeMsg.hint %@" = "Envoyer un message dans #%@";
 "settings.app.accessibility" = "Accessibilité";
 "settings.app.lang" = "Langue";
 "settings.app.accessibility.stickers" = "Autocollants";
@@ -78,13 +78,13 @@
 "settings.others.credits.misc.discord" = "Et finalement, merci à Discord pour la création d'une communauté et d'une infrastructure si incroyable !";
 "settings.user.email" = "E-mail";
 "settings.user.username" = "Nom d'utilisateur";
-"%@ %@ %@ settings.others.about.ver" = "%@ version %@ (Modèle : %@)";
+"%@ %@ %@ settings.others.about.ver" = "%@ version %@ (Build : %@)";
 "settings.user.phoneNum" = "Numéro de téléphone";
 "server.join.title" = "Rejoindre un serveur";
 "settings.app.advanced.crashes" = "Les traces du plantage et tous événements précédents ce dernier seront envoyées à Sentry après le plantage afin d'aider le diagnostic et éviter des plantages au futur. Aucunes informations privées ou identifiables ne nous seront communiqués.";
 "login.token.login" = "Connexion";
-"settings.others.about.caption" = "Swiftcord est un programme open-source créée avec <3. Tu peux trouver son code source ici [GitHub](https://github.com/SwiftcordApp/Swiftcord). Les contributions et rapports d'erreurs ou de problèmes sont appréciées aussi ! Donne une étoile à Swiftcord sur GitHub s'il te plaît, cela me donne de la motivation pour continuer à travailler dessus :D";
-"settings.others.credits.sponsor.desc" = "Veuillez considérer le support de Swiftcord ! Cela contribuera au futur stable de ce projet et de plus, vous recevrez des privilèges spéciaux :D";
+"settings.others.about.caption" = "Swiftcord est un programme open-source créée avec le <3. Tu peux trouver son code source ici [GitHub](https://github.com/SwiftcordApp/Swiftcord). Les contributions et rapports d'erreurs ou de problèmes sont appréciées aussi ! Donne une étoile à Swiftcord sur GitHub s'il te plaît, cela me donne de la motivation pour continuer à travailler dessus :D";
+"settings.others.credits.sponsor.desc" = "Considérez d'aider Swiftcord ! Cela contribuera au futur stable de ce projet et de plus, vous recevrez des privilèges spéciaux :D";
 "settings.others.credits.sponsor.engage.header" = "Supportez Swiftcord !";
 "settings.others.credits.whoAmI" = "Vincent Kwok_Alias_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
 "settings.user.chPwd.title" = "Changez votre mot de passe";
@@ -94,42 +94,42 @@
 "settings.others.credits.sponsor.tier1" = "Supporter super cool 🧊";
 "settings.others.about.supportPkg" = "Swiftcord est alimenté par [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), une implémentation en cours de travaux de l'API Discord en Swift";
 "loader.panic.logout" = "Cela prend beaucoup de temps, voulez-vous vous déconnecter ?";
-"settings.others.credits.sponsor.tier2" = "Supporteur étonnant 🤯";
+"settings.others.credits.sponsor.tier2" = "Supporter étonnant 🤯";
 "settings.others.credits.contrib.anon" = "Un supporter anonyme extrêmement généreux";
 "settings.app.advanced.analytics.option" = "Envoyez des statistiques anonymes à AppCenter Analytics afin d'améliorer Swiftcord";
 "settings.others.credits.contrib" = "Contributeurs";
 "settings.user.chPwd.caption" = "Entrez votre mot de passe existant ainsi qu'un nouveau mot de passe.";
-"settings.others.credits.misc.anim" = "Merci à iJayTD sur Reddit pour avoir [recrée l'animation de chargement de Discord](https ://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) et d'avoir accepté son usage dans Swiftcord !";
-"settings.others.credits.sponsor" = "Patrons";
-"login.token.input" = "Collez votre code Discord ici";
+"settings.others.credits.misc.anim" = "Merci à iJayTD sur Reddit pour avoir [recrée l'animation de chargement de Discord](https ://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) et d'avoir accepté son utilisation dans Swiftcord !";
+"settings.others.credits.sponsor" = "Sponsors";
+"login.token.input" = "Collez votre token Discord ici";
 "settings.app.advanced.analytics" = "Métriques d'utilisation";
-"action.done" = "complet";
+"action.done" = "Terminé";
 "server.join.caption" = "Entrez une invitation ci-dessous pour rejoindre un serveur existant";
-"login.token.back" = "Attends, reviens";
+"login.token.back" = "Attends, retourne en arrière";
 "server.join.fieldHeader" = "Lien d'invitation";
-"settings.app.advanced.analytics.caption" = "À travers AppCenter, des statistiques d'usage agrégées (anonyme) de Swiftcord (tel que le langage de rendu, la version du logiciel et les fonctionnalités utilisées) sont collectés. Les métriques obtenus seront utilisées afin d'améliorer les fonctionnalités de Swiftcord ; nous ne pouvons pas remonter jusqu'à vous avec ces dernières.";
+"settings.app.advanced.analytics.caption" = "À travers AppCenter, des statistiques d'usage agrégées (anonyme) de Swiftcord (tel que le rendu de la langue, la version du logiciel et les fonctionnalités utilisées) sont collectés. Les métriques obtenus seront utilisées afin d'améliorer les fonctionnalités de Swiftcord ; nous ne pouvons pas remonter jusqu'à vous avec ces dernières.";
 "settings.others.credits.sponsor.patreon" = "Patreon";
 "settings.others.credits.contrib.note" = "Note : Comprend aussi certains contributeurs de Weblate";
 "server.join.action" = "Rejoindre le serveur";
-"action.close" = "Ferme";
+"action.close" = "Fermer";
 "server.join.fieldHeader.invalid" = "lien d'invitation _— Veuillez entrer un lien ou un code d'invitation valide._";
-"settings.others.credits.contrib.loading" = "Chargement des contributeurs en cours…";
+"settings.others.credits.contrib.loading" = "Chargement des contributeurs…";
 "settings.others.credits.about" = "J'adore travailler sur Swiftcord, ainsi que développer des applications natives fonctionnelles et très belles !";
 "server.join.egHeader" = "Les invitations devraient ressembler à";
-"settings.others.credits.sponsor.gh" = "Patrons de GitHub";
+"settings.others.credits.sponsor.gh" = "Sponsors GitHub";
 
 /* ====== Login ====== */
-"login.token.title" = "Bienvenue sur la page de connexion avec le jeton secret !";
+"login.token.title" = "Bienvenue sur la page de connexion avec le token secret !";
 "settings.others.credits.sponsor.engage.body" = "Votre nom, une image ainsi qu'une biographie de votre choix pourrait être ici ! Vous supporterez directement le développement de Swiftcord. Aussi, vous recevrez des avantages spéciaux dans le serveur Discord, ainsi que de l'aide prioritaire !";
 // About
-"settings.others.about" = "À Propos";
+"settings.others.about" = "À propos";
 "settings.others.about.desc" = "Client Discord natif créé en Swift et SwiftUI";
 // Credits
 "settings.others.credits" = "Crédits";
-"settings.others.credits.sponsor.tier3" = "Supporteur passionné 🔥";
+"settings.others.credits.sponsor.tier3" = "Supporter passionné 🔥";
 // Presences
 "user.presence.online" = "Connecté";
 "user.presence.idle" = "Inactif";
-"user.presence.dnd" = "Ne Pas Déranger";
+"user.presence.dnd" = "Ne pas déranger";
 "user.presence.offline" = "Déconnecté";
 "user.presence.invisible" = "Invisible";

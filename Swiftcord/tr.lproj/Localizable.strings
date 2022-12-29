@@ -127,3 +127,9 @@
 "settings.others.credits.sponsor.gh" = "";
 // Credits
 "settings.others.credits" = "";
+// Presences
+"user.presence.online" = "Çevrimiçi";
+"user.presence.idle" = "Boşta";
+"user.presence.dnd" = "Rahatsız Etmeyin";
+"user.presence.offline" = "Çevrimdışı";
+"user.presence.invisible" = "Görünmez";
