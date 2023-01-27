@@ -12,9 +12,9 @@
     {
       "identity" : "discordkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/PiemanAU/DiscordKit",
+      "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
-        "revision" : "dcd55bb32bca5fec6f2504d91b529ed3e57450ee"
+        "revision" : "b141678cc571d971a83b9acdabb3f8f3cfcf34f6"
       }
     },
     {
