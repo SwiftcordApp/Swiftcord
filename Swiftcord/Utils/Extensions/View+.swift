@@ -23,3 +23,17 @@ extension View {
 		}
 	}
 }
+
+struct PointableModifier: ViewModifier {
+	@Environment(\.isEnabled) var isEnabled
+
+	func body(content: Content) -> some View {
+		content.onHover { $0 && isEnabled ? NSCursor.pointingHand.push() : NSCursor.pop() }
+	}
+}
+
+extension View {
+	func pointable() -> some View {
+		self.modifier(PointableModifier())
+	}
+}
