@@ -117,28 +117,23 @@ struct MessagesView: View {
 
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
-	@State private var scrollSinkCancellable: AnyCancellable?
+	// @State private var scrollSinkCancellable: AnyCancellable?
 
-	static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
+	// static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
 
 	private var loadingSkeleton: some View {
-		ForEach(0..<10) { _ in
-			LoFiMessageView().listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+		VStack(spacing: 0) {
+			ForEach(0..<10) { _ in
+				LoFiMessageView().padding(.vertical, 8)
+			}
 		}
 		.fixedSize(horizontal: false, vertical: true)
 	}
 
 	private var history: some View {
 		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-			if (idx == 0 && viewModel.reachedTop) ||
-			   (idx != 0 && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp)) {
-				DayDividerView(date: msg.timestamp)
-			}
-
-			let shrunk = idx != 0 && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
-			if !shrunk {
-				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
-			}
+			let isLastItem = idx == viewModel.messages.count-1
+			let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
 
 			MessageView(
 				message: msg,
@@ -157,55 +152,50 @@ struct MessagesView: View {
 				replying: $viewModel.replying,
 				highlightMsgId: $viewModel.highlightMsg
 			)
+
+			if !shrunk {
+				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+			}
+
+			if (!isLastItem && viewModel.reachedTop) ||
+				(!isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+				DayDividerView(date: msg.timestamp)
+			}
 		}
+		.flip()
 		.zeroRowInsets()
 		.fixedSize(horizontal: false, vertical: true)
 	}
 	private var historyList: some View {
-		ScrollViewReader { proxy in
-			List {
-				Spacer(minLength: viewModel.showingInfoBar ? 24 : 0).zeroRowInsets()
+		ScrollView {
+			ScrollViewReader { proxy in
+				LazyVStack(alignment: .leading, spacing: 0) {
+					// Gotta un-hardcode this
+					Spacer(minLength: viewModel.showingInfoBar ? 24 : 0)
 
-				if viewModel.reachedTop {
-					MessagesViewHeader(chl: ctx.channel).zeroRowInsets() // .flip()
-				} else {
-					loadingSkeleton
-						.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-						.onDisappear {
-							if let loadTask = viewModel.fetchMessagesTask {
-								loadTask.cancel()
-								viewModel.fetchMessagesTask = nil
+					history
+
+					if viewModel.reachedTop {
+						MessagesViewHeader(chl: ctx.channel).flip()
+					} else {
+						loadingSkeleton
+							.flip()
+							.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+							.onDisappear {
+								if let loadTask = viewModel.fetchMessagesTask {
+									loadTask.cancel()
+									viewModel.fetchMessagesTask = nil
+								}
 							}
-						}
-						.frame(maxWidth: .infinity, alignment: .center)
-				}
+					}
 
-				history
-
-				// Gotta un-hardcode this
-				Spacer(minLength: 52).zeroRowInsets() // Ensure content doesn't go behind toolbar when scrolled to the top
-			}
-			.introspectTableView { tableView in
-				tableView.backgroundColor = .clear
-				tableView.enclosingScrollView?.drawsBackground = false
-				tableView.style = .fullWidth
-				tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 52, right: 6)
-				// tableView.enclosingScrollView?.rotate(byDegrees: 180)
-				print("introspecting")
-				scrollSinkCancellable?.cancel()
-				scrollSinkCancellable = Self.scrollPublisher.sink { id in
-					//guard let msgIdx = viewModel.messages.firstIndex(identifiedBy: id) else { return }
-					//tableView.scrollRowToVisible(msgIdx+3)
-					tableView.scrollRowToVisible(tableView.numberOfRows-1)
-					//print("scroll to idx \(msgIdx + 2)")
+					// Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
 				}
+				.padding(.top, 80) // Typing bar + border radius = 24 + 7 = 31
+				.frame(maxHeight: .infinity)
 			}
-			// .scaleEffect(x: -1, y: 1, anchor: .center)
-			.environment(\.defaultMinListRowHeight, 1) // Should be 0 but SwiftUI complains 0 is negative
-			.padding(.bottom, 31) // Typing bar + border radius = 24 + 7 = 31
-			.padding(.horizontal, -6) // Hacky solution to get rid of horizontal spacing beside List
-			.frame(maxHeight: .infinity)
 		}
+		.flip()
 	}
 
 	private var inputContainer: some View {
@@ -318,7 +308,7 @@ struct MessagesView: View {
         }
         .onDisappear {
             // Remove gateway event handler to prevent memory leaks
-            guard let handlerID = evtID else { return}
+            guard let handlerID = evtID else { return }
             _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
