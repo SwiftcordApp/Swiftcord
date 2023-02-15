@@ -28,8 +28,8 @@ struct UserAvatarView: View, Equatable {
 	@State private var loadFullFailed = false
 	@State private var note = ""*/
 
-	//@EnvironmentObject var ctx: ServerContext
-	//@EnvironmentObject var gateway: DiscordGateway
+	// @EnvironmentObject var ctx: ServerContext
+	// @EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
 		let _ = print("render!")

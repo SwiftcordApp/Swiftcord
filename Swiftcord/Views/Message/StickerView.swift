@@ -35,7 +35,7 @@ struct StickerItemView: View {
     let sticker: StickerItem
     let size: Double // Width and height of sticker
     @State private var error = false
-    @State private var animation: Lottie.Animation?
+	@State private var animation: Lottie.LottieAnimation?
     @Binding var play: Bool
 
     var body: some View {
@@ -58,7 +58,7 @@ struct StickerItemView: View {
 			case .lottie:
 				if animation == nil {
 					StickerLoadingView(size: size).onAppear {
-						Lottie.Animation.loadedFrom(
+						Lottie.LottieAnimation.loadedFrom(
 							url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
 							closure: { anim in
 								guard let anim = anim else {

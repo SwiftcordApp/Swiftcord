@@ -13,7 +13,7 @@ public struct LottieView: NSViewRepresentable {
     public typealias NSViewType = WrapperAnimationView
 
     /// The animation
-    let animation: Lottie.Animation?
+	let animation: Lottie.LottieAnimation?
     let width: Double
     let height: Double
 
@@ -25,7 +25,7 @@ public struct LottieView: NSViewRepresentable {
     /// You can set this property using `lottieLoopMode` method on `View`
     @Environment(\.lottieLoopMode) var loopMode: LottieLoopMode
 
-    public init(animation: Lottie.Animation, play: Binding<Bool>, width: Double, height: Double) {
+	public init(animation: Lottie.LottieAnimation, play: Binding<Bool>, width: Double, height: Double) {
         self.animation = animation
         self._play = play
         self.width = width
