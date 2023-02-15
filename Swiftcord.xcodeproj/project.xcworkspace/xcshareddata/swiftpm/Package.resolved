@@ -14,7 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
-        "revision" : "b141678cc571d971a83b9acdabb3f8f3cfcf34f6"
+        "branch" : "bot-support",
+        "revision" : "c2031865397532d07b63eae3d6301fd2a9cf4061"
       }
     },
     {
@@ -60,6 +61,15 @@
       "state" : {
         "revision" : "dda155c7d3ef38c53d29f8584cb2aad2a1a54dba",
         "version" : "2.3.2"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
+        "version" : "1.5.2"
       }
     },
     {

@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
 import DiscordKitCore
+import DiscordKit
 import os
 
 public class AccountSwitcher: NSObject, ObservableObject {
@@ -103,7 +103,9 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			}
 		}
 
-		await DiscordREST(token: token).logOut()
+		let tempAPI = DiscordREST()
+		tempAPI.setToken(token: token)
+		try? await tempAPI.logOut()
 	}
 	/// Mark the current user as invalid - i.e. remove it from the token store and acc
 	///

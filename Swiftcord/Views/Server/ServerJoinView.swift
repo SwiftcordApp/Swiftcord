@@ -22,7 +22,7 @@ struct ServerJoinView: View {
 
 		let id = invite.split(separator: "/").last!
 		AnalyticsWrapper.event(type: .inviteOpened, properties: ["invite_code": id])
-		let resolvedInvite = await restAPI.resolveInvite(inviteID: String(id), inputValue: invite)
+		let resolvedInvite = try? await restAPI.resolveInvite(inviteID: String(id), inputValue: invite)
 		AnalyticsWrapper.event(type: .networkInviteResolve, properties: [
 			"code": id,
 			"input_value": invite,

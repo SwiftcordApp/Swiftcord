@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
 import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
@@ -219,7 +218,7 @@ struct MessagesView: View {
 					// Send typing start msg once every 8s while typing
 					viewModel.lastSentTyping = Date()
 					Task {
-						_ = await restAPI.typingStart(id: ctx.channel!.id)
+						_ = await try? restAPI.typingStart(id: ctx.channel!.id)
 					}
 				}
 			}

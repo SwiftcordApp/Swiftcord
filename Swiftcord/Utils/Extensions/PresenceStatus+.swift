@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
+import DiscordKitCore
 
 extension PresenceStatus {
 	func toLocalizedString() -> LocalizedStringKey {

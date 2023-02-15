@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordKitCommon
+import DiscordKitCore
 
 struct AccountMeta: Codable, Equatable, Identifiable {
 	let id: Snowflake

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Introspect
-import DiscordKitCommon
+import DiscordKitCore
 import DiscordKit
 
 /// Renders the channel list on the sidebar

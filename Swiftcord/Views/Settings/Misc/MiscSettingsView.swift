@@ -34,11 +34,11 @@ struct MiscSettingsView: View {
 					}
 				}
 
-				if gateway.cache.userSettings?.developer_mode == true {
+				/* if gateway.cache.userSettings?.developer_mode == true {
 					NavigationLink("Debug", tag: .debug, selection: $selectedLink) {
 						DebugSettingsView()
 					}
-				}
+				} */
             }
 			.listStyle(SidebarListStyle())
 			.onAppear {

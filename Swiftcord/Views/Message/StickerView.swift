@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Lottie
-import DiscordKitCommon
 import CachedAsyncImage
 import DiscordKitCore
 
@@ -45,7 +44,7 @@ struct StickerItemView: View {
 			switch sticker.format_type {
 			case .png:
 				// Literally a walk in the park compared to lottie
-				AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
+				AsyncImage(url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
 					switch phase {
 					case .empty: StickerLoadingView(size: size)
 					case .success(let image): image.resizable().scaledToFill()
@@ -59,7 +58,7 @@ struct StickerItemView: View {
 				if animation == nil {
 					StickerLoadingView(size: size).onAppear {
 						Lottie.LottieAnimation.loadedFrom(
-							url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
+							url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).json")!,
 							closure: { anim in
 								guard let anim = anim else {
 									error = true
@@ -83,7 +82,7 @@ struct StickerItemView: View {
 				}
 			default:
 				// Well it doesn't animate for some reason
-				CachedAsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+				CachedAsyncImage(url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
 					switch phase {
 					case .empty: StickerLoadingView(size: size)
 					case .success(let image): image.resizable().scaledToFill()
@@ -160,7 +159,7 @@ struct StickerView: View {
         .onHover { hovered = $0 }
         .onTapGesture {
             if fullSticker == nil { Task {
-                fullSticker = await restAPI.getSticker(id: sticker.id)
+                fullSticker = try? await restAPI.getSticker(id: sticker.id)
 				openPopoverEvt()
 			}} else {
 				openPopoverEvt()
