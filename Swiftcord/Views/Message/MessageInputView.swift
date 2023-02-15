@@ -45,6 +45,7 @@ struct MessageAttachmentView: View {
 					.symbolRenderingMode(.palette)
 					.foregroundStyle(.red, Color(.windowBackgroundColor))
 					.font(.system(size: 32))
+					.pointable()
 			}
 			.help("Remove attachment")
 			.buttonStyle(.plain)
@@ -84,7 +85,7 @@ struct MessageInputView: View {
 			}
 
             if !attachments.isEmpty {
-                ScrollView([.horizontal]) {
+                ScrollView(.horizontal) {
                     HStack {
 						ForEach(attachments.indices, id: \.self) { idx in
 							MessageAttachmentView(attachment: attachments[idx]) {
@@ -92,12 +93,14 @@ struct MessageInputView: View {
 								withAnimation { _ = attachments.remove(at: idx) }
 							}
                         }
-                    }.padding(16)
-                }.fixedSize(horizontal: false, vertical: true)
+                    }
+					.padding(16)
+                }
+				.fixedSize(horizontal: false, vertical: true)
                 Divider()
             }
 
-            HStack(alignment: .center, spacing: 17) {
+			HStack(alignment: .top, spacing: 16) {
                 Button {
                     let panel = NSOpenPanel()
                     panel.allowsMultipleSelection = true
@@ -112,23 +115,15 @@ struct MessageInputView: View {
 							}
                         }
                     }
-                } label: { Image(systemName: "plus.circle.fill").font(.system(size: 20)).opacity(0.75) }
+                } label: {
+					Image(systemName: "plus.circle.fill")
+						.font(.system(size: 20))
+						.opacity(0.75)
+						.pointable()
+				}
                     .buttonStyle(.plain)
-                    .padding(.leading, 18)
 
-				TextField(placeholder, text: $message) { send() }
-					.textFieldStyle(.plain)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
-                    .lineSpacing(4)
-                    .font(.system(size: 16))
-                    .disableAutocorrection(false)
-                    .padding([.top, .bottom], 12)
-					.padding(.trailing, showSendButton ? 0 : 18)
-					.focused($messageFieldFocused)
-					.onChange(of: ctx.channel) { _ in
-						messageFieldFocused = true
-					}
+				textBox
 
 				if showSendButton {
 					let canSend = message.hasContent() || !attachments.isEmpty
@@ -136,14 +131,17 @@ struct MessageInputView: View {
 						Image("SendArrow")
 							.foregroundColor(.accentColor)
 							.font(.system(size: 24))
+							.pointable()
 					}
 					.keyboardShortcut(.return, modifiers: [])
 					.buttonStyle(.plain)
-					.padding(.trailing, 15)
 					.disabled(!canSend)
 					.animation(.easeOut(duration: 0.2), value: canSend)
 				}
             }
+			.padding(.vertical, 12)
+			.padding(.horizontal, 16)
+			.animation(.easeInOut(duration: 0.3), value: showSendButton)
         }
         .frame(minHeight: 40)
 		.background(.regularMaterial)
@@ -155,6 +153,79 @@ struct MessageInputView: View {
         .padding(.horizontal, 16)
         .offset(y: -24)
     }
+}
+
+extension MessageInputView {
+	@ViewBuilder
+	var textBox: some View {
+			Group {
+				if #available(macOS 13, *) {
+					TextField(placeholder, text: $message, axis: .vertical)
+						.onSubmit(send)
+						.font(.system(size: 16, weight: .regular))
+				} else {
+					TextEditor(
+						text: .init(
+							get: { message },
+							set: { newValue in
+								var modifiableValue = newValue
+								var returnIndex = modifiableValue.firstIndex(where: { $0.isReturn })
+
+								while let index = returnIndex {
+									// Check if previous value or next value is a new line character. If so, do not
+									// remove the return key since it might be needed.
+									var shouldRemove = true
+
+									let previousIndex = index > modifiableValue.startIndex ? modifiableValue.index(before: index) : nil
+									let nextIndex = index < modifiableValue.endIndex ? modifiableValue.index(after: index) : nil
+
+									if let previousIndex, previousIndex >= modifiableValue.startIndex, modifiableValue[previousIndex].isNewline {
+										shouldRemove = false
+									}
+
+									if let nextIndex, nextIndex < modifiableValue.endIndex, modifiableValue[nextIndex].isNewline {
+										shouldRemove = false
+									}
+
+									if shouldRemove {
+										modifiableValue.remove(at: index)
+									}
+
+									returnIndex = modifiableValue.indices.filter({ $0 > index })
+										.first(where: { modifiableValue[$0].isReturn })
+								}
+								message = modifiableValue
+							}
+						)
+					)
+					.onKeyDown { key in
+						switch key {
+						case .return:
+							send()
+						}
+					}
+					.background(
+						Text(placeholder)
+							.frame(maxWidth: .infinity, alignment: .leading)
+							.padding(.leading, 5)
+							.foregroundColor(Color(.placeholderTextColor))
+							.opacity(message.count == 0 ? 1.0 : 0)
+							.allowsHitTesting(false)
+					)
+					.font(.system(size: 16, weight: .light))
+				}
+			}
+			.textFieldStyle(.plain)
+			.fixedSize(horizontal: false, vertical: true)
+			.frame(maxWidth: .infinity)
+			.lineSpacing(4)
+			.disableAutocorrection(false)
+			.focused($messageFieldFocused)
+			.onChange(of: ctx.channel) { _ in
+				messageFieldFocused = true
+			}
+			.offset(y: 2)
+	}
 }
 
 struct MessageInputView_Previews: PreviewProvider {
