@@ -20,7 +20,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: "Select Xcode 14.0"
+      - name: "Select Xcode 14.2"
         run: sudo xcode-select -s /Applications/Xcode_14.2.app
 
       ### Caching
@@ -31,9 +31,8 @@ jobs:
             ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
             ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
           key: ${{ runner.os }}-derivedData-cache-${{ hashFiles(
-              'Swiftcord.xcworkspace/xcshareddata/swiftpm/Package.resolved',
               'Swiftcord.xcodeproj/xcshareddata/swiftpm/Package.resolved'
-            ) }} # The xcworkspace will be removed soon
+            ) }}
           restore-keys: |
             ${{ runner.os }}-derivedData-cache
       - name: Avoid inode changes for DerivedData
@@ -92,7 +91,7 @@ jobs:
           xcodebuild -project Swiftcord.xcodeproj -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
           COMPILER_INDEX_STORE_ENABLE=NO \
           APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" SENTRY_API_TOKEN="${{ secrets.SENTRY_API_TOKEN }}" \
-          "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db" | xcpretty
+          "OTHER_CODE_SIGN_FLAGS=--keychain $RUNNER_TEMP/app-signing.keychain-db"
 
       - name: "Export & Sign Release Build"
         uses: devbotsxyz/xcode-export-archive@main
