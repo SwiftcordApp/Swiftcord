@@ -21,7 +21,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: "Select Xcode 14.0"
-        run: sudo xcode-select -s /Applications/Xcode_14.0.app
+        run: sudo xcode-select -s /Applications/Xcode_14.2.app
 
       ### Caching
       - uses: actions/cache@v2
