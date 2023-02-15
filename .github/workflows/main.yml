@@ -1,11 +1,15 @@
-name: Build Nightly
+name: Build Swiftcord Nightly
 
 on:
   push:
   workflow_dispatch:
 
+concurrency:
+  group: ref-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build_nightly_release:
+  build-nightly:
     runs-on: macos-12
     timeout-minutes: 30 # If a build exceeds 30 mins, it probably isn't ever going to complete
 
@@ -21,30 +25,28 @@ jobs:
       ##########################
       ## Select Xcode
       ##########################
-      - name: "Select Xcode 14.2"
+      - name: Select Xcode 14.2
         run: sudo xcode-select -s /Applications/Xcode_14.2.app
 
       ##########################
       ## Caching
       ##########################
       # DerivedData
-      - uses: actions/cache@v2
-        name: "Cache Derived Data"
+      - uses: actions/cache@v3
+        name: Cache Derived Data
         with:
           path: |
             ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
             ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
-          key: ${{ runner.os }}-derivedData-cache-${{ hashFiles(
-              'Swiftcord.xcodeproj/xcshareddata/swiftpm/Package.resolved'
-            ) }}
+          key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-derivedData-cache
+            ${{ runner.os }}-derivedData-cache-
       - name: Avoid inode changes for DerivedData
         run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
 
       # SPM Packages
-      - uses: actions/cache@v2
-        name: "Cache SPM Packages"
+      - uses: actions/cache@v3
+        name: Cache SPM Packages
         with:
           path: /Users/runner/Library/Developer/Xcode/DerivedData/**/SourcePackages/checkouts
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
@@ -105,7 +107,7 @@ jobs:
       ##########################
       ## Sign
       ##########################
-      - name: "Export & Sign Release Build"
+      - name: Export & Sign Release Build
         uses: devbotsxyz/xcode-export-archive@main
         with:
           project: Swiftcord.xcodeproj
@@ -120,19 +122,19 @@ jobs:
       ##########################
       ## Notarize & Staple
       ##########################
-      - name: "Notarize Release Build"
+      - name: Notarize Release Build
         run: |
             xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
             xcrun notarytool submit Swiftcord*.dmg --keychain-profile "AC_PASSWORD" --wait
 
-      - name: "Staple Release Build"
+      - name: Staple Release Build
         run: xcrun stapler staple Swiftcord*.dmg
 
       ##########################
       ## Upload DMG to build artifacts
       ##########################
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3
         with:
           name: swiftcord-canary
           path: Swiftcord*.dmg
