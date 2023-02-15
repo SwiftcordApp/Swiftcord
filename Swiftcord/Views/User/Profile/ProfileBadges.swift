@@ -22,7 +22,8 @@ struct ProfileBadges: View, Equatable {
 		.hypesquadOnlineHouse3: "HypesquadBalance",
 		.hypesquadOnlineHouse1: "HypesquadBravery",
 		.hypesquadOnlineHouse2: "HypesquadBrilliance",
-		.verifiedDeveloper: "EarlyVerifiedBotDev"
+		.verifiedDeveloper: "EarlyVerifiedBotDev",
+		.activeDeveloper: "ActiveDeveloper"
 	]
 
 	var isPremium: Bool {

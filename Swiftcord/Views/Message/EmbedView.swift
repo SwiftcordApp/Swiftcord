@@ -170,7 +170,7 @@ struct RichEmbedView: View {
 		)
 		.frame(minWidth: 400, maxWidth: 520, alignment: .leading)
 		.onAppear {
-			print(embed)
+			// print(embed)
 		}
 	}
 }
@@ -190,6 +190,6 @@ struct EmbedView: View {
 
 struct EmbedView_Previews: PreviewProvider {
 	static var previews: some View {
-		EmptyView()
+		Text("test")
 	}
 }

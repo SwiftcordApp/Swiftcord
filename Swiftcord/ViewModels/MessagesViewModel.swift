@@ -31,7 +31,6 @@ extension MessagesView {
 		@Published var lastSentTyping = Date(timeIntervalSince1970: 0)
 		@Published var newAttachmentErr: NewAttachmentError?
 		@Published var replying: ReplyRef?
-		@Published var messageInputHeight = 0.0
 		@Published var dropOver = false
 		@Published var highlightMsg: Snowflake?
 	}

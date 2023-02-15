@@ -22,7 +22,7 @@ internal extension MessagesView {
 		viewModel.loadError = false
 
 		viewModel.fetchMessagesTask = Task {
-			let lastMsg = viewModel.messages.isEmpty ? nil : viewModel.messages[viewModel.messages.count - 1].id
+			let lastMsg = viewModel.messages.last?.id
 
 			guard let newMessages = await restAPI.getChannelMsgs(
 				id: channel.id,

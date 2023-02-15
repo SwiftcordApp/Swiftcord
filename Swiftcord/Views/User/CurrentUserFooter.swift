@@ -9,7 +9,6 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKitCommon
-import DiscordKitCore
 import DiscordKit
 import os
 
@@ -26,7 +25,6 @@ struct CurrentUserFooter: View {
 
 	@EnvironmentObject var switcher: AccountSwitcher
 	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var rest: DiscordREST
 
 	private static let presenceIconMapping: [PresenceStatus: String] = [
 		.online: "circle.fill",
@@ -69,7 +67,7 @@ struct CurrentUserFooter: View {
 				Self.log.error("Failed to serialize user proto update! Something's very wrong!")
 				return
 			}
-			guard await rest.updateSettingsProto(proto: serialized) else {
+			guard await restAPI.updateSettingsProto(proto: serialized) else {
 				// Failed to update presence!
 				// Possibly rate-limited
 				Self.log.warning("Failed to patch user settings proto with new presence, possibly rate-limited")

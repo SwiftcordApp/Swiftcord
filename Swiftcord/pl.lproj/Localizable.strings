@@ -1,0 +1,68 @@
+
+
+"user.roles.loading" = "Ładowanie ról";
+"user.presence.idle" = "Zaraz wracam";
+/* ====== Actions ====== */
+"action.continue" = "Kontynuuj";
+"action.done" = "Gotowe";
+"action.close" = "Zamknij";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Witaj w aplikacji\n";
+"onboarding.subtitle" = "Będącej klientem Discorda zbudowanym specjalnie dla systemu MacOS";
+"onboarding.lightweight.header" = "Wygodnym i lekkim";
+"onboarding.lightweight.body" = "Zużywającym nawet 7 razy mniej pamięci RAM.";
+"onboarding.features.header" = "Wielofunkcyjnym";
+"onboarding.features.body" = "Najważniejsze funkcje są już zaimplementowane, a nad innymi ciągle pracujemy";
+"onboarding.wip.header" = "Praca w toku";
+"onboarding.wip.body" = "Coś poszło nie tak. Proszę stworzyć nowy Issue w serwisie Github lub skontaktować się z nami na naszym serwerze Discord";
+"onboarding.footer" = "Swiftcord jest wciąż w fazie alpha z ograniczeniami i błędami. Na chwilę obecną nie zaleca się używania go zamiast oficjalnego klienta, ale mamy nadzieję że to się w krótce zmieni";
+
+/* ====== Login ====== */
+"login.token.title" = "Witaj na ekranie logowania sekretnym tokenem!";
+"login.token.input" = "Wklej tutaj swój token Discord";
+"login.token.back" = "Poczekaj wróć";
+"login.token.login" = "Logowanie";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Czy wiedziałeś?";
+"loader.panic.logout" = "To trwa zbyt długo. Czy chcesz się wylogować?";
+"server.composeMsg.hint %@" = "Wiadomość #%@";
+"server.join.title" = "Dołącz do serwera";
+"server.join.action" = "Dołącz do serwera";
+"server.join.caption" = "Wprowadź link zapraszający aby dołączyć do istniejącego serwera";
+"server.join.fieldHeader" = "Link zapraszający";
+"server.join.fieldHeader.invalid" = "Link zapraszający _— Proszę wprowadzić poprawny link lub kod zapraszający";
+"server.join.fieldHeader.notFound" = "Link zapraszający _— Zaproszenie jest nie poprawne lub wygasło";
+"server.join.fieldHeader.joinFail" = "Link zapraszający _— Nie można zaakceptować zaproszenia";
+"server.join.egHeader" = "Zaproszenia powinny wyglądać w następujący sposób";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus czeka na przyjaciół, ale ty nie musisz!";
+"dm" = "Wiadomości prywatne";
+"dm.header %@" = "To jest początek twojej konwersacji z **@%@**";
+"user.roles.none" = "Brak ról";
+"user.roles.many" = "Role";
+
+/* ====== User ====== */
+"user.bio" = "O mnie";
+"user.roles.one" = "Rola";
+"user.presence.dnd" = "Nie przeszkadzać";
+"message.gone" = "Oryginalna wiadomość została usunięta";
+"server.channel.noCategory" = "Brak kategorii";
+"user.note" = "Uwaga";
+// Presences
+"user.presence.online" = "Online";
+"user.presence.offline" = "Offline";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " Edytowano";
+"message.edited" = " Edytowano ";
+"user.presence.invisible" = "Niewidoczny";
+"message.reply.attachment" = "Kliknij aby zobaczyć załącznik";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Brak kanałów tekstowych";
+"server.noChannels.body" = "Znajdujesz się w dziwnym miejscu. Nie masz dostępu do żadnych kanałów tekstowych albo ten serwer takowych nie posiada.";
+"server.channel.header %@ %@" = "To jest początek kanału #%@ %@";
+"server.channel.title %@" = "Witaj na #%@!";

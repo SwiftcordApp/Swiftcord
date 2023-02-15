@@ -5,11 +5,11 @@
 "onboarding.title" = "Willkommen zu\n";
 "onboarding.subtitle" = "Ein Discord-Client konzipiert für macOS";
 "onboarding.lightweight.header" = "Effizient — Ressourcen schonend";
-"onboarding.lightweight.body" = "Verbraucht bis zu 7x weniger RAM als Discord mit wenig CPU-Nutzung.";
+"onboarding.lightweight.body" = "Verbraucht bis zu 7x weniger RAM als Discord bei wenig CPU-Last.";
 "onboarding.features.header" = "Gut ausgestattet";
 "onboarding.features.body" = "Die wichtigsten Funktionen sind bereits vorhanden, weitere sind in Arbeit";
 "onboarding.wip.header" = "In Arbeit";
-"onboarding.wip.body" = "Hier stimmt etwas nicht? Bitte erstelle ein GitHub Issue oder hinterlass uns eine Nachricht auf unserem Discord-Server";
+"onboarding.wip.body" = "Hier stimmt etwas nicht? Bitte erstelle ein GitHub Issue oder hinterlasse eine Nachricht auf dem Discord-Server";
 "onboarding.footer" = "Swiftcord ist Alpha-Software, mit vielen Einschränkungen und Bugs. Derzeit ist es nicht als Ersatz für den offiziellen Discord-Client vorgesehen, aber hoffentlich ändert sich das irgendwann.";
 
 /* ====== Loading Cover ====== */
@@ -84,12 +84,12 @@
 "settings.user.chPwd.title" = "Passwort ändern";
 "server.join.title" = "Tritt einem Server bei";
 "login.token.login" = "Anmelden";
-"login.token.input" = "Discord Token hier einfügen";
+"login.token.input" = "Discord-Token hier einfügen";
 "settings.user.email" = "E-Mail";
-"loader.panic.logout" = "Dies dauert ungewöhnlich lange, möchtest du dich abmelden?";
+"loader.panic.logout" = "Das dauert ungewöhnlich lange, willst du dich abmelden?";
 "settings.user.chPwd.caption" = "Gib dein aktuelles Passwort und ein neues Passwort ein.";
 "action.close" = "Beenden";
-"login.token.back" = "Warte, zurück gehen";
+"login.token.back" = "Warte, geh zurück";
 "server.join.action" = "Server beitreten";
 "server.join.fieldHeader.notFound" = "Einladungslink _— Die Einladung ist ungültig oder abgelaufen._";
 "server.join.caption" = "Gib unten eine Einladung ein, um einem bestehenden Server beizutreten";
@@ -99,7 +99,7 @@
 "server.join.egHeader" = "Einladungen sollten so aussehen";
 "settings.user.phoneNum" = "Telefonnummer";
 "settings.app.advanced.analytics.caption" = "Über AppCenter werden anonyme Nutzungsstatistiken von Swiftcord (wie z.B. Sprache, App Version und die Nutzung von bestimmten Funktionen) gesammelt. Diese Daten werden verwendet, um Swiftcord zu verbessern; wir können diese nicht auf den jeweiligen Nutzer zurückverfolgen.";
-"settings.app.advanced.crashes" = "Absturzprotokolle werden nach einem Absturz an AppCenter gesendet um zukünftige Abstürze zu verhindern und um die Diagnose zu erleichtern. Es werden keine sonstigen Daten gesendet, welche zur Identifizierung des Nutzers führen könnten.";
+"settings.app.advanced.crashes" = "Absturzprotokolle und frühere Events werden nach einem Absturz an Sentry gesendet, um die Diagnose zu erleichtern und Abstürze zu verhindern. Es werden keine Daten jemals das Gerät verlassen, die privat sind und/oder Dich identifizieren können.";
 // About
 "settings.others.about" = "Über";
 "settings.others.about.desc" = "Nativer Discord-Client, gebaut mit Swift und SwiftUI";
@@ -120,11 +120,17 @@
 "settings.others.credits.misc.discord" = "Und zum Schluss: Vielen Dank an Discord, dafür dass ihr so eine tolle Community und Infrastruktur aufgebaut habt!";
 "settings.others.credits.headDev" = "Hauptentwickler";
 "settings.others.credits.about" = "Ich liebe die Arbeit an Swiftcord, und an schönen nativen Anwendungen!";
-"settings.others.credits.whoAmI" = "Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
+"settings.others.credits.whoAmI" = "Vincent Kwok - [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
 "settings.others.credits.sponsor.engage.body" = "Dein Name, ein Bild und eine Bio deiner Wahl könnten hier stehen! Mit deiner Sponsorship unterstützt du direkt die Entwicklung von Swiftcord. Außerdem bekommst du besondere Rechte auf dem Discord Server und Support mit höherer Priorität!";
 "settings.others.credits.sponsor.tier2" = "\"Amazing Supporter 🤯\"";
 "settings.others.credits.sponsor.tier3" = "\"Red-hot Supporter 🔥\"";
 "settings.others.credits.sponsor.tier1" = "\"Extremely Cool Supporter 🧊\"";
 "settings.others.credits.sponsor" = "Sponsoren";
 // Credits
-"settings.others.credits" = "";
+"settings.others.credits" = "Impressum";
+"user.presence.idle" = "Abwesend";
+// Presences
+"user.presence.online" = "Online";
+"user.presence.dnd" = "Nicht stören";
+"user.presence.offline" = "Offline";
+"user.presence.invisible" = "Unsichtbar";

@@ -40,8 +40,8 @@ struct GuildChButton: View {
 		Button { selectedCh = channel } label: {
 			let image = (serverCtx.guild?.rules_channel_id != nil && serverCtx.guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
 			Label(channel.label() ?? "nil", systemImage: image)
-				.padding(.vertical, 6)
-				.padding(.horizontal, 2)
+				.padding(.vertical, 5)
+				.padding(.horizontal, 4)
 				.frame(maxWidth: .infinity, alignment: .leading)
 		}
 	}

@@ -2,7 +2,7 @@
 
 "onboarding.footer" = "Swiftcord는 버그나 제한 사항이 있는 알파 버전입니다. 현재 공식 클라이언트를 완전히 대체하지 않습니다.";
 /* ====== Actions ====== */
-"action.continue" = "계속";
+"action.continue" = "계속하기";
 "onboarding.lightweight.header" = "전력 효율성 — 가벼움";
 "onboarding.features.header" = "풍부한 기능";
 
@@ -62,9 +62,9 @@
 "dm.composeMsg.hint %@" = "@%@ 에 메시지 보내기";
 "settings.app.accessibility.chatInput" = "채팅 입력";
 "dm" = "다이렉트 메시지";
-"settings.animInteraction" = "스티커는 마우스를 올리거나 활성화된 창에서 움직입니다. 모바일에서는 길게 누르면 움직입니다.";
+"settings.animInteraction" = "PC에서는 스티커 위에 마우스를 올리거나 확대하면 움직이고, 모바일에서는 길게 누르면 움직여요.";
 "settings.others.debug.actions.crash" = "Swiftcord 충돌";
-"onboarding.features.body" = "핵심 기능이 구현되었으며, 더 많은 기능이 제공될 예정입니다";
+"onboarding.features.body" = "핵심 기능이 구현되었으며, 더 많은 작업이 진행 중입니다";
 
 /* ====== Server ====== */
 "server.noChannels.header" = "채팅 채널 없음";
@@ -83,7 +83,7 @@
 "settings.app.advanced.analytics" = "앱 사용 정보";
 "settings.app.advanced.analytics.option" = "SwiftCord를 개선할 수 있도록 AppCenter Analytics로 익명의 사용 정보 보내기";
 "settings.app.advanced.crashes" = "앱 충돌 발생 시, 향후 충돌을 진단하고 방지하기 위해 리포트가 Sentry로 전송됩니다. 개인 정보 또는 식별 가능한 데이터는 기기를 떠나지 않을 것입니다.";
-"settings.app.advanced.analytics.caption" = "AppCenter를 통해 익명의 SwiftCord 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 역추적할 수 없습니다.";
+"settings.app.advanced.analytics.caption" = "AppCenter를 통해 익명의 SwiftCord 사용 정보(예 : 언어, 앱 버전, 특정 기능 사용량)가 수집됩니다. 얻은 정보는 SwiftCord를 개선하는 데 사용되며, 사용자를 추적하지 않습니다.";
 "action.done" = "저장";
 "action.close" = "닫기";
 "server.join.title" = "서버 참가하기";
@@ -99,34 +99,34 @@
 "server.join.fieldHeader.notFound" = "초대 링크 _— 초대가 유효하지 않거나 만료되었습니다._";
 "server.join.fieldHeader.joinFail" = "초대 링크 _— 초대를 수락할 수 없음_";
 "server.join.fieldHeader.invalid" = "초대 링크 _— 유효한 초대 링크 또는 초대 코드를 입력하십시오._";
-"settings.others.credits.about" = "저는 Swiftcord나 실용적이고 아름다운 네이티브 앱 개발을 좋아합니다!";
+"settings.others.credits.about" = "저는 Swiftcord 같은 실용적이고 아름다운 네이티브 앱 개발을 좋아합니다!";
 "settings.others.credits.sponsor" = "후원자";
-"settings.others.credits.sponsor.tier2" = "끝내주는 서포터 🤯";
-"settings.others.credits.sponsor.gh" = "GitHub 후원자";
+"settings.others.credits.sponsor.tier2" = "끝내주는 후원자 🤯";
+"settings.others.credits.sponsor.gh" = "GitHub Sponsors";
 "settings.others.credits.sponsor.patreon" = "Patreon";
-"settings.others.credits.sponsor.engage.header" = "Swiftcord 지원하기!";
-"settings.others.credits.sponsor.engage.body" = "당신의 이름, 당신이 선택한 이미지와 소개가 여기 있을 수 있습니다! 후원을 통해 Swiftcord의 개발을 직접적으로 지원하게 됩니다. 또한 Discord 서버에서 특별한 혜택과 우선적인 지원을 받을 수 있습니다!";
+"settings.others.credits.sponsor.engage.header" = "Swiftcord 후원하기!";
+"settings.others.credits.sponsor.engage.body" = "당신의 이름, 선택한 이미지와 소개가 여기 있을 수 있습니다! 후원을 통해 Swiftcord의 개발을 직접적으로 지원하게 됩니다. 또한 Discord 서버에서 특별한 혜택과 우선적인 지원을 받을 수 있습니다!";
 "settings.others.credits.contrib" = "기여자";
 "settings.others.credits.contrib.desc" = "소중한 기여를 해주신 모든 분들께 감사드립니다! 당신의 기여가 없었다면 지금의 Swiftcord는 없었을 거예요!";
 "settings.others.credits.contrib.loading" = "기여자 로드 중…";
-"settings.others.credits.contrib.anon" = "인심 좋은 익명의 서포터";
+"settings.others.credits.contrib.anon" = "인심 좋은 익명의 후원자";
 // About
 "settings.others.about" = "소개";
-"settings.others.about.desc" = "Swift 및 SwiftUI로 만든 네이티브 Discord 클라이언트";
+"settings.others.about.desc" = "Swift 및 SwiftUI로 작성된 네이티브 Discord 클라이언트";
 "%@ %@ %@ settings.others.about.ver" = "%@ 버전 %@ (빌드: %@)";
 // Credits
 "settings.others.credits" = "고마운 분들";
-"settings.others.credits.headDev" = "개발자";
-"settings.others.credits.whoAmI" = "Vincent Kwok _AKA_ [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
-"settings.others.credits.sponsor.tier3" = "핫한 서포터 🔥";
+"settings.others.credits.headDev" = "수석 개발자";
+"settings.others.credits.whoAmI" = "Vincent Kwok - [cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
+"settings.others.credits.sponsor.tier3" = "핫한 후원자 🔥";
 "%lld settings.others.credits.contrib.more" = "+ %lld명의 기여자";
 "settings.others.credits.contrib.note" = "참고: Weblate의 일부 기여자도 포함됩니다";
-"settings.others.credits.misc.discord" = "마지막으로 이러한 놀라운 커뮤니티와 인프라를 구축한 Discord에 감사드립니다!";
-"settings.others.credits.sponsor.tier1" = "멋진 서포터 🧊";
-"settings.others.about.supportPkg" = "Swiftcord는 Swift의 WIP Discord API 구현인 [DiscordKit](https://github.com/SwiftcordApp/DiscordKit)에 의해 구동됩니다";
-"settings.others.credits.misc.anim" = "[Discord 로딩 애니메이션을 재현](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation)하고 Swiftcord에서의 사용에 동의해주신 Reddit의 iJayTD님께 감사드립니다!";
-"settings.others.credits.sponsor.desc" = "Swiftcord 지원을 고려해 주세요! 이 프로젝트의 안정적인 미래를 보장하는 데 도움이 될 것이며, 특별한 혜택도 받을 수 있습니다 :D";
-"settings.others.about.caption" = "Swiftcord는 사랑을 담아 제작된 오픈 소스 소프트웨어입니다. 소스 코드는 [GitHub](https://github.com/SwiftcordApp/Swiftcord)에서 확인하실 수 있습니다. 기여 및 이슈 제보도 환영합니다! 또한 Swiftcord에 별을 주세요, 계속 작업할 수 있는 동기 부여가 됩니다 :D";
+"settings.others.credits.misc.discord" = "마지막으로, 이러한 놀라운 커뮤니티와 인프라를 구축한 Discord에 감사드립니다!";
+"settings.others.credits.sponsor.tier1" = "멋진 후원자 🧊";
+"settings.others.about.supportPkg" = "Swiftcord는 Swift로 작성된 Discord API, [DiscordKit(WIP)](https://github.com/SwiftcordApp/DiscordKit)에 의해 구동됩니다";
+"settings.others.credits.misc.anim" = "[Discord 로딩 애니메이션을 재현](https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation)하고 사용을 허락해주신 Reddit의 iJayTD님께 감사드립니다!";
+"settings.others.credits.sponsor.desc" = "Swiftcord 후원을 고려해 주세요! 프로젝트의 안정적인 미래를 보장하는 데 도움이 될 것이며, 특별한 혜택도 받을 수 있습니다 :D";
+"settings.others.about.caption" = "Swiftcord는 사랑을 담아 제작된 오픈 소스 소프트웨어입니다. 소스 코드는 [GitHub](https://github.com/SwiftcordApp/Swiftcord)에서 확인하실 수 있습니다. 기여 및 이슈 제보도 환영합니다! Swiftcord에 별을 주세요, 계속 작업할 수 있는 동기 부여가 됩니다 :D";
 // Presences
 "user.presence.online" = "온라인";
 "user.presence.idle" = "자리 비움";
