@@ -35,6 +35,7 @@ struct PointableModifier: ViewModifier {
 extension View {
 	func pointable() -> some View {
 		self.modifier(PointableModifier())
+	}
 
 	@ViewBuilder func zeroRowInsets() -> some View {
 		self.listRowInsets(.init())

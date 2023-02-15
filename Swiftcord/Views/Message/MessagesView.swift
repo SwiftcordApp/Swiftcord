@@ -115,6 +115,8 @@ struct MessagesView: View {
 
 	@StateObject var viewModel = ViewModel()
 
+	@State private var messageInputHeight: CGFloat = 0
+
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
 	// @State private var scrollSinkCancellable: AnyCancellable?
@@ -170,9 +172,6 @@ struct MessagesView: View {
 		ScrollView {
 			ScrollViewReader { proxy in
 				LazyVStack(alignment: .leading, spacing: 0) {
-					// Gotta un-hardcode this
-					Spacer(minLength: viewModel.showingInfoBar ? 24 : 0)
-
 					history
 
 					if viewModel.reachedTop {
@@ -191,7 +190,7 @@ struct MessagesView: View {
 
 					// Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
 				}
-				.padding(.top, 80) // Typing bar + border radius = 24 + 7 = 31
+				.padding(.top, 48 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
 				.frame(maxHeight: .infinity)
 			}
 		}
@@ -246,6 +245,18 @@ struct MessagesView: View {
 					}
 					.padding(.horizontal, 16)
 					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+				}
+			}
+			.overlay {
+				// Size bottom padding according to size of text field
+				GeometryReader { geometry in
+					ZStack {
+						EmptyView()
+					}.onAppear {
+						messageInputHeight = geometry.size.height
+					}.onChange(of: geometry.size.height) { height in
+						messageInputHeight = height
+					}
 				}
 			}
 		}

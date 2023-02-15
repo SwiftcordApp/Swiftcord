@@ -6,7 +6,7 @@
       "location" : "https://github.com/microsoft/appcenter-sdk-apple",
       "state" : {
         "branch" : "develop",
-        "revision" : "10e77836399ed6f3d075e03b77ae8b43dc4ee63e"
+        "revision" : "2214f9ee2476f28af64cb38359defe59e85197a1"
       }
     },
     {
@@ -22,8 +22,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
-        "version" : "3.4.3"
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
       }
     },
     {
@@ -49,8 +49,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "4a60ff4287d4c6ac64085ad48606ef5ecaec9817",
-        "version" : "7.24.1"
+        "revision" : "cf43eac1aa12017868c257ad3854ad87a5de0758",
+        "version" : "7.31.5"
       }
     },
     {
@@ -58,8 +58,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
-        "revision" : "8e27997de02457a0c4690ffcfb8ac9c8e1066883",
-        "version" : "2.2.2"
+        "revision" : "dda155c7d3ef38c53d29f8584cb2aad2a1a54dba",
+        "version" : "2.3.2"
       }
     },
     {
@@ -85,8 +85,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
-        "version" : "0.1.4"
+        "revision" : "fc40fb11d4922d6e936a3d2abaa54bcab4fc877e",
+        "version" : "0.2.0"
       }
     },
     {
