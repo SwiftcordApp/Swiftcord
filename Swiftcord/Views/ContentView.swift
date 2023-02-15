@@ -10,7 +10,6 @@ import CoreData
 import os
 import DiscordKit
 import DiscordKitCore
-import DiscordKitCommon
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -116,7 +115,7 @@ struct ContentView: View {
                             ServerButton(
                                 selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                                 isLoading: loadingGuildID == guild.id,
                                 onSelect: { state.selectedGuildID = guild.id }
                             )
@@ -183,18 +182,14 @@ struct ContentView: View {
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
 
-            _ = gateway.onEvent.addHandler { (evt, data) in
+            _ = gateway.onEvent.addHandler { evt in
                 switch evt {
-                case .ready:
+				case .userReady(let payload):
                     state.loadingState = .gatewayConn
-					guard let payload = data as? ReadyEvt else {
-						log.critical("Could not cast data to ready event! This should never happen!")
-						return
-					}
 					accountsManager.onSignedIn(with: payload.user)
                     fallthrough
-                case .resumed:
-                    gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
+				case .resumed:
+                    gateway.send(.voiceStateUpdate, data: GatewayVoiceStateUpdate(
                         guild_id: nil,
                         channel_id: nil,
                         self_mute: state.selfMute,

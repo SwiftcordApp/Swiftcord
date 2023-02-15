@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordKitCommon
+import DiscordKitCore
 
 extension Message {
     func messageIsShrunk(prev: Message) -> Bool {

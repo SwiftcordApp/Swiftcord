@@ -7,7 +7,6 @@
 
 import SwiftUI
 import DiscordKitCore
-import DiscordKitCommon
 import CachedAsyncImage
 
 /// For rendering replies

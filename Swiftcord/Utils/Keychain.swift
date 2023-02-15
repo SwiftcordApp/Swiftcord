@@ -1,6 +1,6 @@
 //
 //  Keychain.swift
-//  DiscordKitCommon
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //

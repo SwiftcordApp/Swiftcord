@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 struct NavigationCommands: Commands {
 	@ObservedObject var state: UIState
@@ -17,7 +17,7 @@ struct NavigationCommands: Commands {
 
 	var body: some Commands {
 		CommandMenu("Navigation") {
-			Button("Previous Server") {
+			/*Button("Previous Server") {
 				let guilds = (gateway.cache.guilds.values.filter({
 					!(gateway.cache.userSettings?.guild_positions ?? []).contains($0.id)
 				}).sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
@@ -39,7 +39,7 @@ struct NavigationCommands: Commands {
 				guard let nextGuild = guilds.after(state.serverCtx.guild!, loop: true) else { return }
 
 				state.selectedGuildID = nextGuild.id
-			}.keyboardShortcut(.downArrow, modifiers: [.command, .option])
+			}.keyboardShortcut(.downArrow, modifiers: [.command, .option])*/
 
 			Divider()
 

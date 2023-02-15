@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 struct SettingsView: View {
     @EnvironmentObject var gateway: DiscordGateway

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordKitCommon
+import DiscordKitCore
 
 extension Snowflake {
 	static let DM_GUILD = "@me"

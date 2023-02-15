@@ -7,7 +7,6 @@
 
 import Foundation
 import DiscordKit
-import DiscordKitCommon
 import DiscordKitCore
 
 internal extension MessagesView {
@@ -24,7 +23,7 @@ internal extension MessagesView {
 		viewModel.fetchMessagesTask = Task {
 			let lastMsg = viewModel.messages.last?.id
 
-			guard let newMessages = await restAPI.getChannelMsgs(
+			guard let newMessages = try? await restAPI.getChannelMsgs(
 				id: channel.id,
 				before: lastMsg
 			) else {
@@ -75,22 +74,24 @@ internal extension MessagesView {
 		DispatchQueue.main.async { viewModel.newMessage = "" }
 
 		Task {
-			guard (await restAPI.createChannelMsg(
-				message: NewMessage(
-					content: message,
-					allowed_mentions: allowedMentions,
-					message_reference: reference,
-					attachments: attachments.isEmpty ? nil : attachments.enumerated()
-						.map { (idx, attachment) in
-							NewAttachment(
-								id: String(idx),
-								filename: (try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name) ?? UUID().uuidString
-							)
-						}
-				),
-				attachments: attachments,
-				id: ctx.channel!.id
-			)) != nil else {
+			do {
+				_ = try await restAPI.createChannelMsg(
+					message: NewMessage(
+						content: message,
+						allowed_mentions: allowedMentions,
+						message_reference: reference,
+						attachments: attachments.isEmpty ? nil : attachments.enumerated()
+							.map { (idx, attachment) in
+								NewAttachment(
+									id: String(idx),
+									filename: (try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name) ?? UUID().uuidString
+								)
+							}
+					),
+					attachments: attachments,
+					id: ctx.channel!.id
+				)
+			} catch {
 				viewModel.showingInfoBar = true
 				viewModel.infoBarData = InfoBarData(
 					message: "Could not send message",
@@ -99,7 +100,6 @@ internal extension MessagesView {
 					buttonIcon: "arrow.clockwise",
 					clickHandler: { sendMessage(with: message, attachments: attachments) }
 				)
-				return
 			}
 		}
 	}

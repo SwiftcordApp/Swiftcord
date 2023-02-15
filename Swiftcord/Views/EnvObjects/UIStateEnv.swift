@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DiscordKitCommon
+import DiscordKitCore
 
 enum LoadingState {
     case initial

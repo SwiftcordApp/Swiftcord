@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 /// Action messages: e.g. member leave, join etc.
 struct ActionMessageView: View {

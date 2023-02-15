@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 import CachedAsyncImage
 
 struct MiniUserProfileView<RichContentSlot: View>: View {

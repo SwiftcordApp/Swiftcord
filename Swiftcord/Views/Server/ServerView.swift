@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel?
@@ -171,7 +171,9 @@ struct ServerView: View {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
 			// swiftlint:disable identifier_name
-            evtID = gateway.onEvent.addHandler { (evt, d) in
+			gateway.onEvent.addHandler { data in
+			}
+            /*evtID = gateway.onEvent.addHandler { evt in
                 switch evt {
                 /*case .channelUpdate:
                     guard let updatedCh = d as? Channel else { break }
@@ -184,10 +186,8 @@ struct ServerView: View {
                     }
                     // For some reason, updating one element doesnt update the UI
                     // loadChannels()*/
-                case .typingStart:
-                    guard let typingData = d as? TypingStart,
-                          typingData.user_id != gateway.cache.user!.id
-                    else { break }
+				case .typingStart(let typingData):
+                    guard typingData.user_id != gateway.cache.user!.id else { break }
 
 					// Remove existing typing items, if present (prevent duplicates)
 					serverCtx.typingStarted[typingData.channel_id]?.removeAll {
@@ -206,7 +206,7 @@ struct ServerView: View {
                     }
                 default: break
                 }
-            }
+            }*/
         }
         .onDisappear {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }

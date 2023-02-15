@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 struct MessageInputReplyView: View {
 	@Binding var replying: MessagesView.ViewModel.ReplyRef?

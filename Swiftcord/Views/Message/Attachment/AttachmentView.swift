@@ -8,7 +8,7 @@
 
 import SwiftUI
 import QuickLook
-import DiscordKitCommon
+import DiscordKitCore
 
 struct AttachmentView: View {
     let attachment: Attachment

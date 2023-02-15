@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
+import DiscordKitCore
 
 extension MessagesView {
 	// TODO: Make this ViewModel follow best practices and actually function as a ViewModel

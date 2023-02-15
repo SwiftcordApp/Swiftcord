@@ -9,7 +9,7 @@
 import SwiftUI
 import CachedAsyncImage
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 struct NonUserBadge: View {
 	let flags: User.Flags?
@@ -211,7 +211,7 @@ private extension MessageView {
 
 	func deleteMessage() {
 		Task {
-			await restAPI.deleteMsg(id: message.channel_id, msgID: message.id)
+			try? await restAPI.deleteMsg(id: message.channel_id, msgID: message.id)
 		}
 	}
 

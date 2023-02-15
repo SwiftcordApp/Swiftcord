@@ -17,7 +17,7 @@ struct LoadingView: View {
 		AccountSwitcher.clearAccountSpecificPrefKeys()
 		gateway.disconnect()
 		state.attemptLogin = true
-		Task { await restAPI.logOut() }
+		Task { try? await restAPI.logOut() }
 	}
 
 	@Environment(\.colorScheme) private var colorScheme
