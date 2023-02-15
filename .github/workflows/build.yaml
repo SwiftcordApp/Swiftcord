@@ -1,0 +1,148 @@
+name: Build Swiftcord Nightly
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: ref-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-nightly:
+    runs-on: macos-12
+    timeout-minutes: 30 # If a build exceeds 30 mins, it probably isn't ever going to complete
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Setup SSH identities for init-ing submodules during build
+      # Disabled as we don't use submodules anymore
+      # - uses: webfactory/ssh-agent@v0.5.4
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      ##########################
+      ## Select Xcode
+      ##########################
+      - name: Select Xcode 14.2
+        run: sudo xcode-select -s /Applications/Xcode_14.2.app
+
+      ##########################
+      ## Caching
+      ##########################
+      # DerivedData
+      - uses: actions/cache@v3
+        name: Cache Derived Data
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/Build
+            ~/Library/Developer/Xcode/DerivedData/Swiftcord-*/SourcePackages
+          key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-derivedData-cache-
+      - name: Avoid inode changes for DerivedData
+        run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
+
+      # SPM Packages
+      - uses: actions/cache@v3
+        name: Cache SPM Packages
+        with:
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/**/SourcePackages/checkouts
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      ##########################
+      ## Install Sentry CLI to upload symbols
+      ##########################
+      - name: Install sentry-cli
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.12.0" bash
+
+      ##########################
+      ## Import Dev & Dist Certificates
+      ##########################
+      - name: Import Certificates
+        env:
+          DEV_CERTIFICATE_BASE64: ${{ secrets.DEVELOPMENT_CERTIFICATE_DATA }}
+          DEV_P12_PASSWORD: ${{ secrets.DEVELOPMENT_CERTIFICATE_PASSPHRASE }}
+          DIST_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_DATA }}
+          DIST_P12_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSPHRASE }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # Create variables
+          DEV_CERT_PATH=$RUNNER_TEMP/dev_certificate.p12
+          DIST_CERT_PATH=$RUNNER_TEMP/dist_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # Create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 1800 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # Import dev certificate to keychain
+          echo -n "$DEV_CERTIFICATE_BASE64" | base64 --decode --output $DEV_CERT_PATH
+          security import $DEV_CERT_PATH -P "$DEV_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          # Import distribution cert to keychain
+          echo -n "$DIST_CERTIFICATE_BASE64" | base64 --decode --output $DIST_CERT_PATH
+          security import $DIST_CERT_PATH -P "$DIST_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+      - name: "Update Xcode Team ID"
+        run: |
+            TEAMID=`awk -F '=' '/DEVELOPMENT_TEAM/ {print $2; exit}' Swiftcord.xcodeproj/project.pbxproj`
+            sed -i '' "s/$TEAMID/ RJNC97Y8QD;/g" Swiftcord.xcodeproj/project.pbxproj
+
+      ##########################
+      ## Build
+      ##########################
+      - name: Build with xcodebuild
+        run: |
+          xcodebuild -project Swiftcord.xcodeproj -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
+          COMPILER_INDEX_STORE_ENABLE=NO \
+          APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" SENTRY_API_TOKEN="${{ secrets.SENTRY_API_TOKEN }}" \
+          OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db"
+
+      ##########################
+      ## Sign
+      ##########################
+      - name: Export & Sign Release Build
+        uses: devbotsxyz/xcode-export-archive@main
+        with:
+          project: Swiftcord.xcodeproj
+          scheme: Swiftcord
+
+      ##########################
+      ## Create DMG
+      ##########################
+      - name: Create Release DMG
+        run: npm i -g create-dmg && create-dmg Export/Swiftcord.app
+
+      ##########################
+      ## Notarize & Staple
+      ##########################
+      - name: Notarize Release Build
+        run: |
+            xcrun notarytool store-credentials "AC_PASSWORD" --apple-id ${{ secrets.APPSTOREONNECT_USERNAME }} --team-id RJNC97Y8QD --password ${{ secrets.APPSTORECONNECT_PASSWORD }}
+            xcrun notarytool submit Swiftcord*.dmg --keychain-profile "AC_PASSWORD" --wait
+
+      - name: Staple Release Build
+        run: xcrun stapler staple Swiftcord*.dmg
+
+      ##########################
+      ## Upload DMG to build artifacts
+      ##########################
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: swiftcord-canary
+          path: Swiftcord*.dmg
+
+      ##########################
+      ## Remove Secrets Keychain
+      ##########################
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
