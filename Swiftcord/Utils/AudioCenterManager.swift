@@ -123,8 +123,8 @@ class AudioCenterManager: ObservableObject {
             }
         }
 
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(playerDidFinishPlaying),
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(playerDidFinishPlaying),
             name: .AVPlayerItemDidPlayToEndTime,
             object: player.currentItem
         )

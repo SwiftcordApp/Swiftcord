@@ -131,13 +131,13 @@ struct StickerView: View {
                     }
 
                     if fullSticker.pack_id != nil {
-                        Button(action: { packPresenting = true }) {
+						Button { packPresenting = true } label: {
                             Label("View Sticker Pack", systemImage: "square.on.square")
                                 .frame(maxWidth: .infinity)
                         }
 						.buttonStyle(FlatButtonStyle())
 						.controlSize(.small)
-                        .sheet(isPresented: $packPresenting, content: {
+                        .sheet(isPresented: $packPresenting) {
                             VStack {
                                 Text("Sticker Pack").font(.title)
                                 Text("Unimplemented").font(.footnote)
@@ -145,7 +145,7 @@ struct StickerView: View {
                                     Text("Close")
                                 }
                             }.padding(14)
-                        })
+                        }
                     }
                 } else {
                     Text("Loading sticker...").font(.headline)

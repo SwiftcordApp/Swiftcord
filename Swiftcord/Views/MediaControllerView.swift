@@ -26,10 +26,8 @@ struct MediaControllerView: View {
                  : audioManager.queue[0].from)
                 .font(.subheadline).opacity(0.77)
 
-            Slider(
-                value: $progress,
-                in: 0...audioManager.duration
-            ) { } onEditingChanged: { editing in
+            Slider(value: $progress, in: 0...audioManager.duration) {
+            } onEditingChanged: { editing in
                 isSeeking = editing
                 if !editing { audioManager.seekTo(seconds: progress) }
             }.padding(.top, 4).disabled(audioManager.isStopped)
@@ -92,11 +90,11 @@ struct MediaControllerView: View {
             .padding(.bottom, -12)
             .frame(maxHeight: 180)
         }
-        .onAppear(perform: { progress = audioManager.progress })
-        .onChange(of: audioManager.progress, perform: { prog in
+        .onAppear { progress = audioManager.progress }
+        .onChange(of: audioManager.progress) { prog in
             guard !isSeeking else { return }
             progress = prog
-        })
+        }
         .frame(width: 300)
         .padding(12)
     }

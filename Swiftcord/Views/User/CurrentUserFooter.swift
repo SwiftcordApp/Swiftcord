@@ -79,7 +79,7 @@ struct CurrentUserFooter: View {
 
     var body: some View {
 		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
-		let customStatus = gateway.presences[user.id]?.activities.first(where: { $0.type == .custom })
+		let customStatus = gateway.presences[user.id]?.activities.first { $0.type == .custom }
 
 		Button {
 			userPopoverPresented = true

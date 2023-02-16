@@ -10,7 +10,7 @@ import AppKit
 extension NSTextView {
 
 	/// Sets NSTextView background to clear, allowing setting background of TextEditor.
-	open override var frame: CGRect {
+	override open var frame: CGRect {
 		didSet {
 			backgroundColor = .clear
 			drawsBackground = true
@@ -18,7 +18,7 @@ extension NSTextView {
 	}
 
 	/// Gets rid of over-the-top focus indicator.
-	open override var focusRingType: NSFocusRingType {
+	override open var focusRingType: NSFocusRingType {
 		get { .none }
 		set { }
 	}

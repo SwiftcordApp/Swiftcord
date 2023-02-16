@@ -17,8 +17,7 @@ struct AppSettingsView: View {
 					ScrollView { AppSettingsAppearanceView().padding(40) }
                 }
 
-                NavigationLink("settings.app.accessibility",
-							   tag: .accessibility, selection: $selectedLink) {
+                NavigationLink("settings.app.accessibility", tag: .accessibility, selection: $selectedLink) {
 					ScrollView { AppSettingsAccessibilityView().padding(40) }
                 }
 

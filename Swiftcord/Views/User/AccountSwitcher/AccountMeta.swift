@@ -32,7 +32,5 @@ struct AccountMeta: Codable, Equatable, Identifiable {
 		case discrim = "d", name = "n", avatar = "a", id = "i"
 	}
 
-	static func == (lhs: AccountMeta, rhs: AccountMeta) -> Bool {
-		return lhs.id == rhs.id
-	}
+	static func == (lhs: AccountMeta, rhs: AccountMeta) -> Bool { lhs.id == rhs.id }
 }

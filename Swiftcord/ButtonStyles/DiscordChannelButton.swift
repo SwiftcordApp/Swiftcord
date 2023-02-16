@@ -17,10 +17,10 @@ struct DiscordChannelButton: ButtonStyle {
 			.font(.system(size: 14, weight: isSelected ? .medium : .regular))
 			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
-			.background(
+			.background {
 				RoundedRectangle(cornerRadius: 5)
 					.fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
-			)
-			.onHover(perform: { isHovered = $0 })
+			}
+			.onHover { isHovered = $0 }
 	}
 }

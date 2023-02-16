@@ -41,3 +41,17 @@ extension View {
 		self.listRowInsets(.init())
 	}
 }
+
+extension View {
+	func heightReader(_ binding: Binding<CGFloat>) -> some View {
+		self.overlay {
+			GeometryReader { geometry -> Color in
+				let rect = geometry.frame(in: .local)
+				DispatchQueue.main.async {
+					binding.wrappedValue = rect.size.height
+				}
+				return .clear
+			}
+		}
+	}
+}

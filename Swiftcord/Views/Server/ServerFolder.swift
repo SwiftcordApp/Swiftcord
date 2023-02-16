@@ -86,11 +86,11 @@ struct ServerFolder: View {
                                 selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 name: guild.name,
                                 serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                                isLoading: loadingGuildID == guild.id,
-                                onSelect: { selectedGuildID = guild.id }
-                            )
-                            // Prevent server buttons from "fading in" during transition
-                            .transition(.identity)
+                                isLoading: loadingGuildID == guild.id
+                            ) {
+                                selectedGuildID = guild.id
+                            }
+                            .transition(.identity) // Prevent server buttons from "fading in" during transition
                         }
                     }
                 }
@@ -184,12 +184,12 @@ struct MiniServerThumb: View {
                     .frame(width: 16, height: 16)
                     .cornerRadius(8)
             } else {
-                BetterImageView(url: iconURL, imageModifier: { $0.antialiased(true) })
+                BetterImageView(url: iconURL) { image in image.antialiased(true) }
                     .frame(width: 16, height: 16)
                     .cornerRadius(8)
             }
         } else {
-            let iconName = guild.name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+            let iconName = guild.name.split(separator: " ").map { $0.prefix(1) }.joined(separator: "")
             Text(iconName)
                 .font(.system(size: 8))
                 .lineLimit(1)

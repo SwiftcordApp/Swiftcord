@@ -213,7 +213,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			AccountSwitcher.log.warning("Accounts empty! This should never happen!")
 			return
 		}
-		accounts.insert(accounts.remove(at: accounts.firstIndex(where: { $0.id == user.id }) ?? 0), at: 0)
+		accounts.insert(accounts.remove(at: accounts.firstIndex { $0.id == user.id } ?? 0), at: 0)
 	}
 
 	override init() {

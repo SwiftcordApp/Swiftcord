@@ -31,7 +31,7 @@ struct UserAvatarView: View, Equatable {
 	// @EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
-		let _ = print("render!")
+		// _ = print("render!")
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
 
 		BetterImageView(url: avatarURL)
@@ -144,6 +144,6 @@ struct UserAvatarView: View, Equatable {
 	}
 
 	static func == (lhs: UserAvatarView, rhs: UserAvatarView) -> Bool {
-		return lhs.user.id == rhs.user.id
+		lhs.user.id == rhs.user.id
 	}
 }
