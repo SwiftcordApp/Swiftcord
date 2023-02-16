@@ -32,8 +32,7 @@ struct MessageAttachmentView: View {
 							.font(.system(size: 84))
 					}
 					Spacer(minLength: 0)
-					Text((try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name)
-						 ?? "No Filename")
+					Text((try? attachment.resourceValues(forKeys: [URLResourceKey.nameKey]).name) ?? "No Filename")
 						.lineLimit(1)
 						.truncationMode(.middle)
 						.frame(maxWidth: .infinity, alignment: .leading)

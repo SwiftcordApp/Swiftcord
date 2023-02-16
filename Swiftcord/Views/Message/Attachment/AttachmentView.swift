@@ -102,9 +102,9 @@ struct AttachmentView: View {
                                         downloadFile(from: url)
                                     }
                                 }) {
-                                    Image(systemName:
-                                            downloadState == .error ?  "exclamationmark.circle" :
-                                            downloadState == .success ? "checkmark.circle" : "arrow.down.circle"
+                                    Image(systemName: downloadState == .error
+                                        ? "exclamationmark.circle" : downloadState == .success
+                                        ? "checkmark.circle" : "arrow.down.circle"
                                     )
                                     .font(.system(size: 20))
                                 }

@@ -21,10 +21,13 @@ struct MediaControllerView: View {
 
             Text(audioManager.isStopped ? "Nothing's Playing" : audioManager.queue[0].filename.replacingOccurrences(of: "_", with: " "))
                 .font(.headline)
-            Text(audioManager.isStopped
-                 ? "Select an audio file in a channel to play it!"
-                 : audioManager.queue[0].from)
-                .font(.subheadline).opacity(0.77)
+            Text(
+                audioManager.isStopped
+                ? "Select an audio file in a channel to play it!"
+                : audioManager.queue[0].from
+            )
+            .font(.subheadline)
+            .opacity(0.77)
 
             Slider(value: $progress, in: 0...audioManager.duration) {
             } onEditingChanged: { editing in

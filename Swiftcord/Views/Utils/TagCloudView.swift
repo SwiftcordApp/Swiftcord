@@ -11,9 +11,8 @@ import SwiftUI
 struct TagCloudView<C: View>: View {
     let content: [C]
 
-    @State private var totalHeight
-          = CGFloat.zero       // << variant for ScrollView/List
-    //    = CGFloat.infinity   // << variant for VStack
+    @State private var totalHeight = CGFloat.zero      // << variant for ScrollView/List
+								// = CGFloat.infinity  // << variant for VStack
 
     var body: some View {
         VStack {

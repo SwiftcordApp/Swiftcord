@@ -103,10 +103,10 @@ struct ServerJoinView: View {
 
             Text("server.join.egHeader").textCase(.uppercase).font(.headline).opacity(0.75)
             Text(verbatim: """
-     hTKzmak
-     https://discord.gg/hTKzmak
-     https://discord.gg/cool-people
-     """
+                hTKzmak
+                https://discord.gg/hTKzmak
+                https://discord.gg/cool-people
+                """
             )
         }
     }

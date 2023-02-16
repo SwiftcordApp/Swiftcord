@@ -95,8 +95,8 @@ struct NavigationCommands: Commands {
 		var sortedChannels = filteredChannels
 
 		let categories = channels
-				.filter { $0.parent_id == nil && $0.type == .category }
-				.discordSorted()
+			.filter { $0.parent_id == nil && $0.type == .category }
+			.discordSorted()
 		for category in categories {
 			let categoryChannels = channels
 				.filter {

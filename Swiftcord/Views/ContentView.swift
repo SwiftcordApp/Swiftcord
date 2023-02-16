@@ -15,37 +15,37 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     /*@FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<MessageItem>*/
+     sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
+     animation: .default)
+     private var items: FetchedResults<MessageItem>*/
 
-	private static var insetOffset: CGFloat {
-		// #available cannot be used in ternary statements (yet)
-		if #available(macOS 13.0, *) { return 0 } else { return -13 }
-	}
-	private static var dividerOffset: CGFloat {
-		// #available cannot be used in ternary statements (yet)
-		if #available(macOS 13.0, *) { return -8 } else { return -13 }
-	}
+    private static var insetOffset: CGFloat {
+        // #available cannot be used in ternary statements (yet)
+        if #available(macOS 13.0, *) { return 0 } else { return -13 }
+    }
+    private static var dividerOffset: CGFloat {
+        // #available cannot be used in ternary statements (yet)
+        if #available(macOS 13.0, *) { return -8 } else { return -13 }
+    }
 
     @State private var loadingGuildID: Snowflake?
-	@State private var presentingOnboarding = false
-	@State private var presentingAddServer = false
-	@State private var skipWhatsNew = false
-	@State private var whatsNewMarkdown: String?
+    @State private var presentingOnboarding = false
+    @State private var presentingAddServer = false
+    @State private var skipWhatsNew = false
+    @State private var whatsNewMarkdown: String?
 
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
-	@EnvironmentObject var accountsManager: AccountSwitcher
+    @EnvironmentObject var accountsManager: AccountSwitcher
 
-	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
-	@AppStorage("local.previousBuild") private var prevBuild: String?
+    @AppStorage("local.seenOnboarding") private var seenOnboarding = false
+    @AppStorage("local.previousBuild") private var prevBuild: String?
 
     private let log = Logger(category: "ContentView")
 
-	private func makeDMGuild() -> Guild {
+    private func makeDMGuild() -> Guild {
         Guild(
             id: "@me",
             name: "DMs",
@@ -63,20 +63,22 @@ struct ContentView: View {
             nsfw_level: .default,
             premium_progress_bar_enabled: false
         )
-	}
+    }
 
-	private func loadLastSelectedGuild() {
-		if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
-		   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
-			state.selectedGuildID = lGID
-		} else { state.selectedGuildID = "@me" }
-	}
+    private func loadLastSelectedGuild() {
+        if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
+            gateway.cache.guilds[lGID] != nil || lGID == "@me" {
+            state.selectedGuildID = lGID
+        } else {
+            state.selectedGuildID = "@me"
+        }
+    }
 
     private var serverListItems: [ServerListItem] {
         let unsortedGuilds = gateway.cache.guilds.values.filter { guild in
             !gateway.guildFolders.contains { folder in
                 folder.guild_ids.contains(guild.id)
-			}
+            }
         }
         .sorted { lhs, rhs in lhs.joined_at! > rhs.joined_at! }
         .map { ServerListItem.guild($0) }
@@ -110,7 +112,7 @@ struct ContentView: View {
                         state.selectedGuildID = "@me"
                     }.padding(.top, 8)
 
-					HorizontalDividerView().frame(width: 32)
+                    HorizontalDividerView().frame(width: 32)
 
                     ForEach(self.serverListItems) { item in
                         switch item {
@@ -144,55 +146,55 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-			.background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
+            .background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
             .frame(maxHeight: .infinity, alignment: .top)
 
-			ServerView(
-				guild: state.selectedGuildID == nil
-				? nil
-				: (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
-			)
+            ServerView(
+                guild: state.selectedGuildID == nil
+                ? nil
+                : (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
+            )
         }
-		// Blur the area behind the toolbar so the content doesn't show thru
-		.safeAreaInset(edge: .top) {
-			VStack {
-				Divider().frame(maxWidth: .infinity)
-			}
-			.frame(maxWidth: .infinity)
-			.background(.ultraThinMaterial)
-		}
+        // Blur the area behind the toolbar so the content doesn't show thru
+        .safeAreaInset(edge: .top) {
+            VStack {
+                Divider().frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.ultraThinMaterial)
+        }
         .environmentObject(audioManager)
-		.onChange(of: state.selectedGuildID) { id in
+        .onChange(of: state.selectedGuildID) { id in
             guard let id = id else { return }
-			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
+            UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
         .onChange(of: state.loadingState) { state in
-			if state == .gatewayConn { loadLastSelectedGuild() }
-			if state == .messageLoad,
-			   !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-				if !seenOnboarding { presentingOnboarding = true }
-				Task {
-					do {
-						whatsNewMarkdown = try await GitHubAPI
-							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
-							.body
-					} catch {
-						skipWhatsNew = true
-					}
-					presentingOnboarding = true
-				}
-			}
+            if state == .gatewayConn { loadLastSelectedGuild() }
+            if state == .messageLoad,
+               !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String { // swiftlint:disable:this indentation_width
+                if !seenOnboarding { presentingOnboarding = true }
+                Task {
+                    do {
+                        whatsNewMarkdown = try await GitHubAPI
+                            .getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
+                            .body
+                    } catch {
+                        skipWhatsNew = true
+                    }
+                    presentingOnboarding = true
+                }
+            }
         }
         .onAppear {
-			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
+            if state.loadingState == .messageLoad { loadLastSelectedGuild() }
 
             _ = gateway.onEvent.addHandler { evt in
-				switch evt {
-				case .userReady(let payload):
+                switch evt {
+                case .userReady(let payload):
                     state.loadingState = .gatewayConn
-					accountsManager.onSignedIn(with: payload.user)
+                    accountsManager.onSignedIn(with: payload.user)
                     fallthrough
-				case .resumed:
+                case .resumed:
                     gateway.send(.voiceStateUpdate, data: GatewayVoiceStateUpdate(
                         guild_id: nil,
                         channel_id: nil,
@@ -200,26 +202,26 @@ struct ContentView: View {
                         self_deaf: state.selfDeaf,
                         self_video: false
                     ))
-				default: break
+                default: break
                 }
             }
-			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
+            _ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
-		.sheet(isPresented: $presentingOnboarding) {
-			seenOnboarding = true
-			prevBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-		} content: {
-			OnboardingView(
-				skipOnboarding: seenOnboarding,
-				skipWhatsNew: skipWhatsNew,
-				newMarkdown: $whatsNewMarkdown,
-				presenting: $presentingOnboarding
-			)
-		}
-		.sheet(isPresented: $presentingAddServer) {
-			ServerJoinView(presented: $presentingAddServer)
-		}
-	}
+        .sheet(isPresented: $presentingOnboarding) {
+            seenOnboarding = true
+            prevBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        } content: {
+            OnboardingView(
+                skipOnboarding: seenOnboarding,
+                skipWhatsNew: skipWhatsNew,
+                newMarkdown: $whatsNewMarkdown,
+                presenting: $presentingOnboarding
+            )
+        }
+        .sheet(isPresented: $presentingAddServer) {
+            ServerJoinView(presented: $presentingAddServer)
+        }
+    }
 
     private enum ServerListItem: Identifiable {
         case guild(Guild), guildFolder(ServerFolder.GuildFolder)
