@@ -39,8 +39,7 @@ struct UserSettingsView: View {
                     Text("")
                 }
 
-                NavigationLink("settings.user.logOut",
-                               tag: SidebarLink.logOut, selection: $selectedLink) {
+                NavigationLink("settings.user.logOut", tag: SidebarLink.logOut, selection: $selectedLink) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("settings.user.logOut").font(.title)
                         Text("Use the account switcher (found by clicking on your profile at the bottom of the channel list) to log out, switch or add accounts!")

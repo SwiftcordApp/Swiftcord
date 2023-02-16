@@ -51,9 +51,11 @@ struct SwiftcordApp: App {
 					.environmentObject(acctManager)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
-					.preferredColorScheme(selectedTheme == "dark"
-										  ? .dark
-										  : (selectedTheme == "light" ? .light : nil))
+					.preferredColorScheme(
+						selectedTheme == "dark"
+						? .dark
+						: (selectedTheme == "light" ? .light : nil)
+					)
 					.onAppear {
 						guard gateway.socket == nil else { return }
 						guard let token = acctManager.getActiveToken() else {
@@ -102,9 +104,11 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(state)
 				.environmentObject(acctManager)
-				.preferredColorScheme(selectedTheme == "dark"
-									  ? .dark
-									  : (selectedTheme == "light" ? .light : .none))
+				.preferredColorScheme(
+					selectedTheme == "dark"
+					? .dark
+					: (selectedTheme == "light" ? .light : .none)
+				)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
 	}

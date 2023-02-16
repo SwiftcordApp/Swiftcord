@@ -282,14 +282,14 @@
 		DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatMenuStyle.swift; sourceTree = "<group>"; };
 		DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresenceStatus+.swift"; sourceTree = "<group>"; };
 		DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatusDialog.swift; sourceTree = "<group>"; };
-		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA2802782808337B00B14E5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA28027E28095E3000B14E5C /* Logger+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+.swift"; sourceTree = "<group>"; };
 		DA296D94299DC218000A810E /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DA2ADF302847B13F004A35F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA2BD309284B87AC00EBB8D6 /* AnalyticsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsWrapper.swift; sourceTree = "<group>"; };
 		DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAppearanceView.swift; sourceTree = "<group>"; };
 		DA2BD30D284CCC9800EBB8D6 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
-		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		DA32EF2327C6249000A9ED72 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA32EF2527C62E6900A9ED72 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA32EF2727C633FE00A9ED72 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		DA32EF2927C65D2C00A9ED72 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -314,11 +314,11 @@
 		DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA4A889027C0AF3200720909 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DA4A889527C0AF3200720909 /* Swiftcord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swiftcord.entitlements; sourceTree = "<group>"; };
-		DA4A889B27C0B23C00720909 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		DA4A889B27C0B23C00720909 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA4A88E427C3482A00720909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DA4A891327C49B1000720909 /* ServerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerButton.swift; sourceTree = "<group>"; };
 		DA4A891727C4B0DF00720909 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		DA4A892327C5D6C500720909 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		DA520AC227D37873009FD740 /* MergePartialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergePartialMessage.swift; sourceTree = "<group>"; };
 		DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserFooter.swift; sourceTree = "<group>"; };
 		DA520AC827D3A55D009FD740 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 		DA54D573284497E400B11857 /* ProfileAccentMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccentMask.swift; sourceTree = "<group>"; };
 		DA54D5752844B9C500B11857 /* CurrentUser+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUser+.swift"; sourceTree = "<group>"; };
 		DA54D5772844DA1400B11857 /* UserSettingsProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsProfileView.swift; sourceTree = "<group>"; };
-		DA54D5792844E41A00B11857 /* ProfileBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadges.swift; sourceTree = "<group>"; };
+		DA54D5792844E41A00B11857 /* ProfileBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadges.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA54D57B2845C36E00B11857 /* MessagesView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesView+.swift"; sourceTree = "<group>"; };
 		DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceMessageView.swift; sourceTree = "<group>"; };
 		DA57F44328056718001DC46E /* ChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelList.swift; sourceTree = "<group>"; };
@@ -392,7 +392,7 @@
 		DAFD4712289A202F0075D71B /* AttachmentProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentProgress.swift; sourceTree = "<group>"; };
 		DAFD4715289A208F0075D71B /* AttachmentGif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentGif.swift; sourceTree = "<group>"; };
 		DAFD4718289A21E80075D71B /* AttachmentVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentVideo.swift; sourceTree = "<group>"; };
-		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; };
+		E7AF1C26282FA3ED001F78DF /* Array.Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array.Channel+.swift"; sourceTree = "<group>"; usesTabs = 0; };
 		E7AF1C28282FA3F7001F78DF /* Channel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+.swift"; sourceTree = "<group>"; };
 		E7AF1C2A282FA400001F78DF /* Guild+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guild+.swift"; sourceTree = "<group>"; };
 		E7AF1C32282FB02A001F78DF /* UserSettingsAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsAccountView.swift; sourceTree = "<group>"; usesTabs = 0; };

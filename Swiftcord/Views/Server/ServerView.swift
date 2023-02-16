@@ -33,9 +33,9 @@ struct ServerView: View {
 		else { return }
 
 		if let lastChannel = UserDefaults.standard.string(forKey: "lastCh.\(serverCtx.guild!.id)"),
-		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
-			   serverCtx.channel = lastChObj
-			   return
+           let lastChObj = channels.first(where: { $0.id == lastChannel }) { // swiftlint:disable:this indentation_width
+            serverCtx.channel = lastChObj
+            return
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
@@ -106,14 +106,16 @@ struct ServerView: View {
 				}
 
                 if !gateway.connected || !gateway.reachable {
-					Label(gateway.reachable
-						  ? "Reconnecting..."
-						  : "No network connectivity",
-						  systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
-						.frame(maxWidth: .infinity)
-						.padding(.vertical, 4)
-						.background(gateway.reachable ? .orange : .red)
-						.animation(.easeIn, value: gateway.reachable)
+                    Label(
+                        gateway.reachable
+                        ? "Reconnecting..."
+                        : "No network connectivity",
+                        systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill"
+                    )
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 4)
+                    .background(gateway.reachable ? .orange : .red)
+                    .animation(.easeIn, value: gateway.reachable)
                 }
 				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
@@ -145,9 +147,10 @@ struct ServerView: View {
 					Button {
 						NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
 					} label: {
-						Image(systemName: serverCtx.channel?.type == .dm
-							  ? "at"
-							  : (serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
+                        Image(
+                            systemName: serverCtx.channel?.type == .dm
+                            ? "at"
+                            : (serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
 						).foregroundColor(.primary.opacity(0.8))
 					}
 					Text(serverCtx.channel?.label(gateway.cache.users) ?? "No Channel")

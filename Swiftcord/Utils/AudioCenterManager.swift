@@ -35,8 +35,10 @@ class AudioCenterManager: ObservableObject {
 
     public func append(source: URL, filename: String, from: String, at index: Int? = nil) {
         let playerItem = AVPlayerItem(url: source)
-        player.insert(playerItem,
-                      after: queue.isEmpty ? nil : queue[index ?? (queue.count - 1)].playerItem)
+        player.insert(
+            playerItem,
+            after: queue.isEmpty ? nil : queue[index ?? (queue.count - 1)].playerItem
+        )
         queue.insert(AudioCenterItems(
             playerItem: playerItem,
             filename: filename,

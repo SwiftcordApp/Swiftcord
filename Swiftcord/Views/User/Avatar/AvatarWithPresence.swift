@@ -44,23 +44,22 @@ struct AvatarWithPresence: View {
 				ZStack(alignment: .topLeading) {
 					// Main background
 					Circle()
-						.strokeBorder(.gray, lineWidth:
-										presence == .offline || presence == .invisible ? presenceSize*0.25 : 0
-						)
-						.background(Circle()
-							.fill(presence == .online ? .green :
-								  presence == .dnd ? .red :
-								  presence == .idle ? .orange : .clear
-							)
-						)
+						.strokeBorder(.gray, lineWidth: presence == .offline || presence == .invisible ? presenceSize*0.25 : 0)
+                        .background(Circle().fill(
+                            presence == .online ? .green :
+                            presence == .dnd ? .red :
+                            presence == .idle ? .orange : .clear
+                        ))
 						.frame(width: presenceSize, height: presenceSize)
 						.animation(.default, value: presence)
 					// Idle cutout
 					// r = 0.375, cx = 0.25, cy = 0.25
 					Circle()
 						.fill(.white)
-                        .frame(width: presence == .idle ? presenceSize*0.75 : 0,
-                               height: presence == .idle ? presenceSize*0.75 : 0)
+                        .frame(
+                            width: presence == .idle ? presenceSize*0.75 : 0,
+                            height: presence == .idle ? presenceSize*0.75 : 0
+                        )
 						.offset(x: presenceSize * -0.125, y: presenceSize * -0.125) // 0.25 - 0.375
 						.animation(.easeOut, value: presence == .idle)
 						.blendMode(.destinationOut)

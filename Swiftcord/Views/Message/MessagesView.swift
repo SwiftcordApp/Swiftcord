@@ -14,97 +14,98 @@ import Combine
 
 extension View {
     public func flip() -> some View {
-		self
-			.rotationEffect(.radians(.pi))
+        self
+            .rotationEffect(.radians(.pi))
             .scaleEffect(x: -1, y: 1, anchor: .center)
     }
 }
 
 struct NewAttachmentError: Identifiable {
-	var id: String { title + message }
-	let title: String
-	let message: String
+    var id: String { title + message }
+    let title: String
+    let message: String
 }
 
 struct HeaderChannelIcon: View {
-	let iconName: String
-	let background: Color
-	let iconSize: CGFloat
-	let size: CGFloat
+    let iconName: String
+    let background: Color
+    let iconSize: CGFloat
+    let size: CGFloat
 
-	var body: some View {
-		Image(systemName: iconName)
-			.font(.system(size: iconSize))
-			.foregroundColor(.white)
-			.frame(width: size, height: size)
-			.background(background)
-			.clipShape(Circle())
-	}
+    var body: some View {
+        Image(systemName: iconName)
+            .font(.system(size: iconSize))
+            .foregroundColor(.white)
+            .frame(width: size, height: size)
+            .background(background)
+            .clipShape(Circle())
+    }
 }
 
 struct MessagesViewHeader: View {
-	let chl: Channel?
+    let chl: Channel?
 
-	@EnvironmentObject var gateway: DiscordGateway
+    @EnvironmentObject var gateway: DiscordGateway
 
-	var body: some View {
-		VStack(alignment: .leading, spacing: 8) {
-			if chl?.type == .dm {
-				if let rID = chl?.recipient_ids?[0],
-				   let url = gateway.cache.users[rID]?.avatarURL(size: 160) {
-					BetterImageView(url: url)
-						.frame(width: 80, height: 80)
-						.clipShape(Circle())
-				}
-			} else if chl?.type == .groupDM {
-				HeaderChannelIcon(
-					iconName: "person.2.fill",
-					background: .red,
-					iconSize: 30,
-					size: 80
-				)
-			} else {
-				HeaderChannelIcon(
-					iconName: "number",
-					background: .init(nsColor: .unemphasizedSelectedContentBackgroundColor),
-					iconSize: 44,
-					size: 68
-				)
-			}
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if chl?.type == .dm {
+                if let rID = chl?.recipient_ids?[0],
+                   let url = gateway.cache.users[rID]?.avatarURL(size: 160) { // swiftlint:disable:this indentation_width
+                    BetterImageView(url: url)
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                }
+            } else if chl?.type == .groupDM {
+                HeaderChannelIcon(
+                    iconName: "person.2.fill",
+                    background: .red,
+                    iconSize: 30,
+                    size: 80
+                )
+            } else {
+                HeaderChannelIcon(
+                    iconName: "number",
+                    background: .init(nsColor: .unemphasizedSelectedContentBackgroundColor),
+                    iconSize: 44,
+                    size: 68
+                )
+            }
 
-			Text(chl?.type == .dm || chl?.type == .groupDM
-				 ? "\(chl?.label(gateway.cache.users) ?? "")"
-				 : "server.channel.title \(chl?.label() ?? "")")
-				.font(.largeTitle)
-				.fontWeight(.heavy)
+            Text(
+                chl?.type == .dm || chl?.type == .groupDM
+                ? "\(chl?.label(gateway.cache.users) ?? "")"
+                : "server.channel.title \(chl?.label() ?? "")"
+            )
+            .font(.largeTitle)
+            .fontWeight(.heavy)
 
-			Text(
-				chl?.type == .dm
-				? "dm.header \(chl?.label(gateway.cache.users) ?? "")"
-				: (chl?.type == .groupDM
-				   ? "dm.group.header \(chl?.label(gateway.cache.users) ?? "")"
-				   : "server.channel.header \(chl?.name ?? "") \(chl?.topic ?? "")"
-				  )
-			).opacity(0.7)
-		}
-		.padding([.top, .horizontal], 16)
-	}
+            Text(
+                chl?.type == .dm
+                ? "dm.header \(chl?.label(gateway.cache.users) ?? "")"
+                : chl?.type == .groupDM
+                ? "dm.group.header \(chl?.label(gateway.cache.users) ?? "")"
+                : "server.channel.header \(chl?.name ?? "") \(chl?.topic ?? "")"
+            ).opacity(0.7)
+        }
+        .padding([.top, .horizontal], 16)
+    }
 }
 
 struct DayDividerView: View {
-	let date: Date
+    let date: Date
 
-	var body: some View {
-		HStack(spacing: 4) {
-			HorizontalDividerView().frame(maxWidth: .infinity)
-			Text(date, style: .date)
-				.font(.system(size: 12))
-				.fontWeight(.medium)
-				.opacity(0.7)
-			HorizontalDividerView().frame(maxWidth: .infinity)
-		}
-		.padding([.top, .horizontal], 16)
-	}
+    var body: some View {
+        HStack(spacing: 4) {
+            HorizontalDividerView().frame(maxWidth: .infinity)
+            Text(date, style: .date)
+                .font(.system(size: 12))
+                .fontWeight(.medium)
+                .opacity(0.7)
+            HorizontalDividerView().frame(maxWidth: .infinity)
+        }
+        .padding([.top, .horizontal], 16)
+    }
 }
 
 struct MessagesView: View {
@@ -112,223 +113,201 @@ struct MessagesView: View {
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
 
-	@StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()
 
-	@State private var messageInputHeight: CGFloat = 0
+    @State private var messageInputHeight: CGFloat = 0
 
     // Gateway
     @State private var evtID: EventDispatch.HandlerIdentifier?
-	// @State private var scrollSinkCancellable: AnyCancellable?
+    // @State private var scrollSinkCancellable: AnyCancellable?
 
-	// static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
+    // static let scrollPublisher = PassthroughSubject<Snowflake, Never>()
 
-	private var loadingSkeleton: some View {
-		VStack(spacing: 0) {
-			ForEach(0..<10) { _ in
-				LoFiMessageView().padding(.vertical, 8)
-			}
-		}
-		.fixedSize(horizontal: false, vertical: true)
-	}
+    private var loadingSkeleton: some View {
+        VStack(spacing: 0) {
+            ForEach(0..<10) { _ in
+                LoFiMessageView().padding(.vertical, 8)
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
 
-	private var history: some View {
-		ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-			let isLastItem = idx == viewModel.messages.count-1
-			let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
+    private var history: some View {
+        ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
+            let isLastItem = idx == viewModel.messages.count-1
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
 
-			MessageView(
-				message: msg,
-				shrunk: shrunk,
-				quotedMsg: msg.message_reference != nil
-				? viewModel.messages.first {
-					$0.id == msg.message_reference!.message_id
-				} : nil,
-				onQuoteClick: { id in
-					// withAnimation { proxy.scrollTo(id, anchor: .center) }
-					viewModel.highlightMsg = id
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-						if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
-					}
-				},
-				replying: $viewModel.replying,
-				highlightMsgId: $viewModel.highlightMsg
-			)
+            MessageView(
+                message: msg,
+                shrunk: shrunk,
+                quotedMsg: msg.message_reference != nil
+                ? viewModel.messages.first {
+                    $0.id == msg.message_reference!.message_id
+                } : nil,
+                onQuoteClick: { id in
+                    // withAnimation { proxy.scrollTo(id, anchor: .center) }
+                    viewModel.highlightMsg = id
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
+                    }
+                },
+                replying: $viewModel.replying,
+                highlightMsgId: $viewModel.highlightMsg
+            )
 
-			if !shrunk {
-				Spacer(minLength: 16 - MessageView.lineSpacing / 2)
-			}
+            if !shrunk {
+                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+            }
 
-			if (!isLastItem && viewModel.reachedTop) ||
-				(!isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
-				DayDividerView(date: msg.timestamp)
-			}
-		}
-		.flip()
-		.zeroRowInsets()
-		.fixedSize(horizontal: false, vertical: true)
-	}
-	private var historyList: some View {
-		ScrollView {
-			ScrollViewReader { proxy in
-				LazyVStack(alignment: .leading, spacing: 0) {
-					history
+            if (!isLastItem && viewModel.reachedTop) ||
+                (!isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+                DayDividerView(date: msg.timestamp)
+            }
+        }
+        .flip()
+        .zeroRowInsets()
+        .fixedSize(horizontal: false, vertical: true)
+    }
+    private var historyList: some View {
+        ScrollView {
+            ScrollViewReader { proxy in
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    history
 
-					if viewModel.reachedTop {
-						MessagesViewHeader(chl: ctx.channel).flip()
-					} else {
-						loadingSkeleton
-							.flip()
-							.onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-							.onDisappear {
-								if let loadTask = viewModel.fetchMessagesTask {
-									loadTask.cancel()
-									viewModel.fetchMessagesTask = nil
-								}
-							}
-					}
+                    if viewModel.reachedTop {
+                        MessagesViewHeader(chl: ctx.channel).flip()
+                    } else {
+                        loadingSkeleton
+                            .flip()
+                            .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+                            .onDisappear {
+                                if let loadTask = viewModel.fetchMessagesTask {
+                                    loadTask.cancel()
+                                    viewModel.fetchMessagesTask = nil
+                                }
+                            }
+                    }
 
-					// Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
-				}
-				.padding(.top, 24 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
-				.frame(maxHeight: .infinity)
-			}
-		}
-		.flip()
-		.padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
-	}
+                    // Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                }
+                .padding(.top, 24 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
+                .frame(maxHeight: .infinity)
+            }
+        }
+        .flip()
+        .padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
+    }
 
-	private var inputContainer: some View {
-		ZStack(alignment: .topLeading) {
-			MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
+    private var inputContainer: some View {
+        ZStack(alignment: .topLeading) {
+            MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
 
-			MessageInputView(
-				placeholder: ctx.channel?.type == .dm
-				? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-				: (ctx.channel?.type == .groupDM
-				   ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-				   : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-				  ),
-				message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
-				onSend: sendMessage,
-				preAttach: preAttachChecks
-			)
-			.onAppear { viewModel.newMessage = "" }
-			.onChange(of: viewModel.newMessage) { content in
-				if content.count > viewModel.newMessage.count,
-				   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 {
-					// Send typing start msg once every 8s while typing
-					viewModel.lastSentTyping = Date()
-					Task {
-						_ = try? await restAPI.typingStart(id: ctx.channel!.id)
-					}
-				}
-			}
-			.overlay {
-				let typingMembers = ctx.channel == nil
-				? []
-				: ctx.typingStarted[ctx.channel!.id]?
-					.map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+            MessageInputView(
+                placeholder: ctx.channel?.type == .dm
+                ? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+                : (ctx.channel?.type == .groupDM
+                    ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+                    : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
+                ),
+                message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
+                onSend: sendMessage,
+                preAttach: preAttachChecks
+            )
+            .onAppear { viewModel.newMessage = "" }
+            .onChange(of: viewModel.newMessage) { content in
+                if content.count > viewModel.newMessage.count,
+                   Date().timeIntervalSince(viewModel.lastSentTyping) > 8 { // swiftlint:disable:this indentation_width
+                    // Send typing start msg once every 8s while typing
+                    viewModel.lastSentTyping = Date()
+                    Task {
+                        _ = try? await restAPI.typingStart(id: ctx.channel!.id)
+                    }
+                }
+            }
+            .overlay {
+                let typingMembers = ctx.channel == nil
+                ? []
+                : ctx.typingStarted[ctx.channel!.id]?
+                    .map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
 
-				if !typingMembers.isEmpty {
-					HStack {
-						// The dimensions are quite arbitrary
-						LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
-							.lottieLoopMode(.loop)
-							.frame(width: 32, height: 24)
-						Group {
-							Text(typingMembers.count <= 2
-								 ? typingMembers.joined(separator: " and ")
-								 : "Several people"
-							).fontWeight(.semibold)
-							+ Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
-						}.padding(.leading, -4)
-					}
-					.padding(.horizontal, 16)
-					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-				}
-			}
-			.heightReader($messageInputHeight)
-			/*.overlay {
-				// Size bottom padding according to size of text field
-				GeometryReader { geometry in
-					ZStack {
-						EmptyView()
-					}.onAppear {
-						messageInputHeight = geometry.size.height
-					}.onChange(of: geometry.size.height) { height in
-						messageInputHeight = height
-					}
-				}
-			}*/
-		}
-	}
+                if !typingMembers.isEmpty {
+                    HStack {
+                        // The dimensions are quite arbitrary
+                        LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+                            .lottieLoopMode(.loop)
+                            .frame(width: 32, height: 24)
+                        Group {
+                            Text(
+                                typingMembers.count <= 2
+                                ? typingMembers.joined(separator: " and ")
+                                : "Several people"
+                            ).fontWeight(.semibold)
+                            + Text(" \(typingMembers.count == 1 ? "is" : "are") typing...")
+                        }.padding(.leading, -4)
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                }
+            }
+            .heightReader($messageInputHeight)
+        }
+    }
 
     var body: some View {
-		ZStack(alignment: .bottom) {
-			historyList
-			inputContainer
+        ZStack(alignment: .bottom) {
+            historyList
+            inputContainer
         }
-		.frame(minWidth: 525, minHeight: 500)
-		// .blur(radius: viewModel.dropOver ? 8 : 0)
-		.overlay {
-			if viewModel.dropOver {
-				ZStack {
-					VStack(spacing: 24) {
-						Image(systemName: "paperclip")
-							.font(.system(size: 64))
-							.foregroundColor(.accentColor)
-						Text("Drop file to add attachment").font(.largeTitle)
-					}
-					Rectangle()
-						.stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, dash: [25, 20]))
-						.opacity(0.75)
-				}
-				.padding(24)
-				.background(.thickMaterial)
-			}
-		}
-		.animation(.easeOut(duration: 0.2), value: viewModel.dropOver)
-		.onDrop(of: [.fileURL], isTargeted: $viewModel.dropOver) { providers -> Bool in
-			print("Drop: \(providers)")
-			for provider in providers {
-				/*if provider.canLoadObject(ofClass: NSImage.self) { // This is an image
-					print("can load image")
-					if #available(macOS 13.0, *) {
-						provider.loadObject(ofClass: NSImage.self) { image, err in
-							print("image: \(image)")
-						}
-					} else {
-						// Fallback on earlier versions
-					}
-				} else {*/
-					_ = provider.loadObject(ofClass: URL.self) { itemURL, err in
-						if let itemURL = itemURL, preAttachChecks(for: itemURL) {
-							viewModel.attachments.append(itemURL)
-						}
-					}
-				// }
-			}
-			return true
-		}
+        .frame(minWidth: 525, minHeight: 500)
+        // .blur(radius: viewModel.dropOver ? 8 : 0)
+        .overlay {
+            if viewModel.dropOver {
+                ZStack {
+                    VStack(spacing: 24) {
+                        Image(systemName: "paperclip")
+                            .font(.system(size: 64))
+                            .foregroundColor(.accentColor)
+                        Text("Drop file to add attachment").font(.largeTitle)
+                    }
+                    Rectangle()
+                        .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, dash: [25, 20]))
+                        .opacity(0.75)
+                }
+                .padding(24)
+                .background(.thickMaterial)
+            }
+        }
+        .animation(.easeOut(duration: 0.2), value: viewModel.dropOver)
+        .onDrop(of: [.fileURL], isTargeted: $viewModel.dropOver) { providers -> Bool in
+            print("Drop: \(providers)")
+            for provider in providers {
+                _ = provider.loadObject(ofClass: URL.self) { itemURL, err in
+                    if let itemURL = itemURL, preAttachChecks(for: itemURL) {
+                        viewModel.attachments.append(itemURL)
+                    }
+                }
+            }
+            return true
+        }
         .onChange(of: ctx.channel) { channel in
             guard let channel = channel else { return }
-			viewModel.messages = []
+            viewModel.messages = []
             // Prevent deadlocked and wrong message situations
-			fetchMoreMessages()
-			viewModel.loadError = false
-			viewModel.reachedTop = false
-			viewModel.lastSentTyping = Date(timeIntervalSince1970: 0)
+            fetchMoreMessages()
+            viewModel.loadError = false
+            viewModel.reachedTop = false
+            viewModel.lastSentTyping = Date(timeIntervalSince1970: 0)
 
-			AnalyticsWrapper.event(type: .channelOpened, properties: [
-				"channel_id": channel.id,
-				"channel_is_nsfw": String(channel.nsfw ?? false),
-				"channel_type": String(channel.type.rawValue)
-			])
+            AnalyticsWrapper.event(type: .channelOpened, properties: [
+                "channel_id": channel.id,
+                "channel_is_nsfw": String(channel.nsfw ?? false),
+                "channel_type": String(channel.type.rawValue)
+            ])
         }
         .onChange(of: state.loadingState) { loadingState in
             if loadingState == .gatewayConn {
-				guard viewModel.fetchMessagesTask == nil else { return }
-				viewModel.messages = []
+                guard viewModel.fetchMessagesTask == nil else { return }
+                viewModel.messages = []
                 fetchMoreMessages()
             }
         }
@@ -338,43 +317,43 @@ struct MessagesView: View {
             _ = gateway.onEvent.removeHandler(handler: handlerID)
         }
         .onAppear {
-			fetchMoreMessages()
+            fetchMoreMessages()
 
             evtID = gateway.onEvent.addHandler { evt in
-				switch evt {
-				case .messageCreate(let msg):
+                switch evt {
+                case .messageCreate(let msg):
                     if msg.channel_id == ctx.channel?.id {
-						withAnimation { viewModel.messages.append(msg) }
+                        withAnimation { viewModel.messages.append(msg) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
                     ctx.typingStarted[msg.channel_id]?.removeAll { $0.user_id == msg.author.id }
-				case .messageUpdate(let newMsg):
-					if let updatedIdx = viewModel.messages.firstIndex(where: { $0.id == newMsg.id }) {
-						viewModel.messages[updatedIdx] = viewModel.messages[updatedIdx].mergingWithPartialMsg(newMsg)
+                case .messageUpdate(let newMsg):
+                    if let updatedIdx = viewModel.messages.firstIndex(where: { $0.id == newMsg.id }) {
+                        viewModel.messages[updatedIdx] = viewModel.messages[updatedIdx].mergingWithPartialMsg(newMsg)
                     }
-				case .messageDelete(let delMsg):
+                case .messageDelete(let delMsg):
                     guard delMsg.channel_id == ctx.channel?.id else { break }
-					if let delIdx = viewModel.messages.firstIndex(where: { $0.id == delMsg.id }) {
-						withAnimation { _ = viewModel.messages.remove(at: delIdx) }
+                    if let delIdx = viewModel.messages.firstIndex(where: { $0.id == delMsg.id }) {
+                        withAnimation { _ = viewModel.messages.remove(at: delIdx) }
                     }
-				case .messageDeleteBulk(let delMsgs):
+                case .messageDeleteBulk(let delMsgs):
                     guard delMsgs.channel_id == ctx.channel?.id else { break }
                     for msgID in delMsgs.id {
-						if let delIdx = viewModel.messages.firstIndex(where: { $0.id == msgID }) {
-							withAnimation { _ = viewModel.messages.remove(at: delIdx) }
+                        if let delIdx = viewModel.messages.firstIndex(where: { $0.id == msgID }) {
+                            withAnimation { _ = viewModel.messages.remove(at: delIdx) }
                         }
                     }
-				default: break
+                default: break
                 }
             }
         }
-		.alert(item: $viewModel.newAttachmentErr) { err in
-			Alert(
-				title: Text(err.title),
-				message: Text(err.message),
-				dismissButton: .cancel(Text("Got It!"))
-			)
-		}
+        .alert(item: $viewModel.newAttachmentErr) { err in
+            Alert(
+                title: Text(err.title),
+                message: Text(err.message),
+                dismissButton: .cancel(Text("Got It!"))
+            )
+        }
     }
 }

@@ -7,7 +7,7 @@ opt_in_rules:
   - redundant_nil_coalescing
   - prefer_self_type_over_type_of_self
   - implicit_return
-#  - indentation_width
+  - indentation_width
 
 disabled_rules:
   - line_length
@@ -16,9 +16,18 @@ disabled_rules:
   - large_tuple
   - todo # This is silly - todos are there for a reason
 
-# Rule configs
+#######################
+## Rule configs
+#######################
+
 force_cast: warning
 force_try: warning
+
+indentation_width:
+  include_compiler_directives: false
+  include_comments: false
+  # Note: Rule is disabled for some wrapped if conditions because they look
+  # significantly better at the same level of the parent condition
 
 nesting:
   type_level:
