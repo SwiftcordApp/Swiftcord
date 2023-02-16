@@ -149,7 +149,7 @@ struct WebView: NSViewRepresentable {
 	}
 
     public func makeCoordinator() -> Coordinator {
-        return Coordinator(viewModel)
+		Coordinator(viewModel)
     }
 
     // Handles the event that's sent from injected JavaScript once the token is available

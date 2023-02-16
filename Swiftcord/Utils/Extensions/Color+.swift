@@ -10,7 +10,8 @@ import SwiftUI
 // Create color with hex int
 extension Color {
     init(hex: Int, alpha: Double = 1) {
-        self.init(.sRGB,
+        self.init(
+            .sRGB,
             red: Double((hex >> 16) & 0xff) / 255,
             green: Double((hex >> 08) & 0xff) / 255,
             blue: Double((hex >> 00) & 0xff) / 255,
@@ -21,10 +22,10 @@ extension Color {
 
 extension Color {
 	func modifyingSaturation(_ adjustment: CGFloat) -> Color {
-		return modifyingHSB(1, adjustment, 1)
+        modifyingHSB(1, adjustment, 1)
 	}
 	func modifyingBrightness(_ adjustment: CGFloat) -> Color {
-		return modifyingHSB(1, 1, adjustment)
+        modifyingHSB(1, 1, adjustment)
 	}
 
 	func modifyingHSB(_ hueAdj: CGFloat, _ saturationAdj: CGFloat, _ brightnessAdj: CGFloat) -> Color {

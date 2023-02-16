@@ -68,7 +68,7 @@ struct MessageView: View {
 				}
             }
             HStack(
-				alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
+                alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
                 spacing: 16
             ) {
                 if MessageView.defaultTypes.contains(message.type) {

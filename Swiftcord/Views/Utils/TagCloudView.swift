@@ -54,7 +54,8 @@ struct TagCloudView<C: View>: View {
                         return result
                     }
             }
-        }.background(viewHeightReader($totalHeight))
+		}
+		.heightReader($totalHeight)
     }
 
     private func item(for text: String) -> some View {
@@ -64,15 +65,5 @@ struct TagCloudView<C: View>: View {
             .background(Color.blue)
             .foregroundColor(Color.white)
             .cornerRadius(5)
-    }
-
-    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
-        return GeometryReader { geometry -> Color in
-            let rect = geometry.frame(in: .local)
-            DispatchQueue.main.async {
-                binding.wrappedValue = rect.size.height
-            }
-            return .clear
-        }
     }
 }

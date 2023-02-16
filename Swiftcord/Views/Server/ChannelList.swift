@@ -45,12 +45,12 @@ struct ChannelList: View {
 				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				// Channels in this section
-				let channels = channels.filter({
+				let channels = channels.filter {
 					if !nsfwShown {
 						return $0.parent_id == channel.id && ($0.nsfw == false || $0.nsfw == nil)
 					}
 					return $0.parent_id == channel.id
-				}).discordSorted()
+				}.discordSorted()
 				if !channels.isEmpty {
 					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
 						ForEach(channels, id: \.id) { channel in

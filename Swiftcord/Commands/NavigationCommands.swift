@@ -90,7 +90,7 @@ struct NavigationCommands: Commands {
 
 		}.discordSorted()
 		if !nsfwShown {
-			filteredChannels = filteredChannels.filter({ $0.nsfw == false })
+			filteredChannels = filteredChannels.filter { $0.nsfw == false }
 		}
 		var sortedChannels = filteredChannels
 
@@ -98,12 +98,11 @@ struct NavigationCommands: Commands {
 				.filter { $0.parent_id == nil && $0.type == .category }
 				.discordSorted()
 		for category in categories {
-			let categoryChannels = channels.filter({
-				if !nsfwShown {
-					return $0.parent_id == category.id && $0.type != .category && $0.type != .voice && ($0.nsfw == false || $0.nsfw == nil)
+			let categoryChannels = channels
+				.filter {
+					$0.parent_id == category.id && $0.type != .category && $0.type != .voice && (nsfwShown || $0.nsfw == false || $0.nsfw == nil)
 				}
-				return $0.parent_id == category.id && $0.type != .category && $0.type != .voice
-			}).discordSorted()
+				.discordSorted()
 			sortedChannels.append(contentsOf: categoryChannels)
 		}
 

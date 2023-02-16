@@ -46,21 +46,23 @@ struct ContentView: View {
     private let log = Logger(category: "ContentView")
 
 	private func makeDMGuild() -> Guild {
-		return Guild(id: "@me",
-					 name: "DMs",
-					 owner_id: "",
-					 afk_timeout: 0,
-					 verification_level: .none,
-					 default_message_notifications: .all,
-					 explicit_content_filter: .disabled,
-					 roles: [], emojis: [], features: [],
-					 mfa_level: .none,
-					 system_channel_flags: 0,
-					 channels: gateway.cache.dms,
-					 premium_tier: .none,
-					 preferred_locale: .englishUS,
-					 nsfw_level: .default,
-					 premium_progress_bar_enabled: false)
+        Guild(
+            id: "@me",
+            name: "DMs",
+            owner_id: "",
+            afk_timeout: 0,
+            verification_level: .none,
+            default_message_notifications: .all,
+            explicit_content_filter: .disabled,
+            roles: [], emojis: [], features: [],
+            mfa_level: .none,
+            system_channel_flags: 0,
+            channels: gateway.cache.dms,
+            premium_tier: .none,
+            preferred_locale: .englishUS,
+            nsfw_level: .default,
+            premium_progress_bar_enabled: false
+        )
 	}
 
 	private func loadLastSelectedGuild() {
@@ -76,8 +78,8 @@ struct ContentView: View {
                 folder.guild_ids.contains(guild.id)
 			}
         }
-			.sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! })
-            .map({ ServerListItem.guild($0) })
+        .sorted { lhs, rhs in lhs.joined_at! > rhs.joined_at! }
+        .map { ServerListItem.guild($0) }
         return unsortedGuilds + gateway.guildFolders.compactMap { folder -> ServerListItem? in
             if folder.id != nil {
                 let guilds = folder.guild_ids.compactMap {
@@ -101,11 +103,12 @@ struct ContentView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-						selected: state.selectedGuildID == "@me",
+                        selected: state.selectedGuildID == "@me",
                         name: "Home",
-                        assetIconName: "DiscordIcon",
-						onSelect: { state.selectedGuildID = "@me" }
-                    ).padding(.top, 8)
+                        assetIconName: "DiscordIcon"
+                    ) {
+                        state.selectedGuildID = "@me"
+                    }.padding(.top, 8)
 
 					HorizontalDividerView().frame(width: 32)
 
@@ -133,9 +136,10 @@ struct ContentView: View {
                         name: "Add a Server",
                         systemIconName: "plus",
                         bgColor: .green,
-                        noIndicator: true,
-                        onSelect: { presentingAddServer = true }
-					).padding(.bottom, 4)
+                        noIndicator: true
+                    ) {
+                        presentingAddServer = true
+                    }.padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
                 .frame(width: 72)
@@ -162,7 +166,7 @@ struct ContentView: View {
             guard let id = id else { return }
 			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
-        .onChange(of: state.loadingState, perform: { state in
+        .onChange(of: state.loadingState) { state in
 			if state == .gatewayConn { loadLastSelectedGuild() }
 			if state == .messageLoad,
 			   !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
@@ -178,12 +182,12 @@ struct ContentView: View {
 					presentingOnboarding = true
 				}
 			}
-        })
+        }
         .onAppear {
 			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
 
             _ = gateway.onEvent.addHandler { evt in
-                switch evt {
+				switch evt {
 				case .userReady(let payload):
                     state.loadingState = .gatewayConn
 					accountsManager.onSignedIn(with: payload.user)
@@ -196,7 +200,7 @@ struct ContentView: View {
                         self_deaf: state.selfDeaf,
                         self_video: false
                     ))
-                default: break
+				default: break
                 }
             }
 			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }

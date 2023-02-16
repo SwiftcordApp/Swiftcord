@@ -52,21 +52,21 @@ struct DialogView<Content, ActionRowContent>: View where Content: View, ActionRo
 
 struct DialogView_Previews: PreviewProvider {
 	static var previews: some View {
-		DialogView(
-			title: "Test Dialog",
-			description: "Hello"
-		) {
-			Button {
-			} label: {
-				Text("Nope")
-			}.buttonStyle(.plain)
-			Spacer()
-			Button {
-			} label: {
-				Text("Haha")
-			}.buttonStyle(FlatButtonStyle())
-		} content: {
-			Text("Look at me go!")
-		}
+        DialogView(
+            title: "Test Dialog",
+            description: "Hello"
+        ) { // swiftlint:disable:this vertical_parameter_alignment_on_call
+            Button {
+            } label: {
+                Text("Nope")
+            }.buttonStyle(.plain)
+            Spacer()
+            Button {
+            } label: {
+                Text("Haha")
+            }.buttonStyle(FlatButtonStyle())
+        } content: {
+            Text("Look at me go!")
+        }
 	}
 }

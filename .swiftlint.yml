@@ -1,12 +1,28 @@
+opt_in_rules:
+  - toggle_bool
+  - modifier_order
+  - yoda_condition
+  - trailing_closure
+  - vertical_parameter_alignment_on_call
+  - redundant_nil_coalescing
+  - prefer_self_type_over_type_of_self
+  - implicit_return
+#  - indentation_width
+
 disabled_rules:
   - line_length
   - unused_closure_parameter
   - multiple_closures_with_trailing_closure
   - large_tuple
-opt_in_rules:
+  - todo # This is silly - todos are there for a reason
 
+# Rule configs
 force_cast: warning
 force_try: warning
+
+nesting:
+  type_level:
+    warning: 4
 
 identifier_name:
   min_length:

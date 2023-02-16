@@ -9,7 +9,7 @@ import Foundation
 
 /// Static instances of some helper classes such as date formatters
 struct HelperInstances {
-	static private(set) var intervalFormatter = {
+	private(set) static var intervalFormatter = {
 		let formatter = DateComponentsFormatter()
 		formatter.maximumUnitCount = 1
 		formatter.unitsStyle = .full

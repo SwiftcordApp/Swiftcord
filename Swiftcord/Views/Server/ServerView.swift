@@ -170,10 +170,7 @@ struct ServerView: View {
         .onAppear {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
-			// swiftlint:disable identifier_name
-			gateway.onEvent.addHandler { data in
-			}
-            /*evtID = gateway.onEvent.addHandler { evt in
+            /* evtID = gateway.onEvent.addHandler { evt in
                 switch evt {
                 /*case .channelUpdate:
                     guard let updatedCh = d as? Channel else { break }
@@ -206,7 +203,7 @@ struct ServerView: View {
                     }
                 default: break
                 }
-            }*/
+            } */
         }
         .onDisappear {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }

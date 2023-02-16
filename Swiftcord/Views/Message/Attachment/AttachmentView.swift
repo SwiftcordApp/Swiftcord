@@ -215,10 +215,12 @@ private extension AttachmentView {
 				if let fileError = fileError { throw fileError }
 
 				let downloadsDirectory = try
-				FileManager.default.url(for: .downloadsDirectory,
-										in: .userDomainMask,
-										appropriateFor: nil,
-										create: false)
+				FileManager.default.url(
+                    for: .downloadsDirectory,
+                    in: .userDomainMask,
+                    appropriateFor: nil,
+                    create: false
+                )
 
 				// Append file name to path
 				let destinationURL = downloadsDirectory.appendingPathComponent(url.lastPathComponent)

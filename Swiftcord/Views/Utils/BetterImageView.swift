@@ -32,9 +32,9 @@ struct BetterImageView<ErrorContent: View>: View {
 
 extension BetterImageView where ErrorContent == EmptyView {
     init(url: URL?, imageModifier: @escaping (Image) -> Image = { $0 }) {
-        self.init(url: url, imageModifier: imageModifier, customErrorView: {
+        self.init(url: url, imageModifier: imageModifier) {
             EmptyView()
-        })
+        }
     }
 }
 

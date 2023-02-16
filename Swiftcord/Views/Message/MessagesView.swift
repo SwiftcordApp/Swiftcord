@@ -14,8 +14,8 @@ import Combine
 
 extension View {
     public func flip() -> some View {
-        return self
-            .rotationEffect(.radians(.pi))
+		self
+			.rotationEffect(.radians(.pi))
             .scaleEffect(x: -1, y: 1, anchor: .center)
     }
 }
@@ -87,7 +87,7 @@ struct MessagesViewHeader: View {
 				  )
 			).opacity(0.7)
 		}
-		.padding([.top, .leading, .trailing], 16)
+		.padding([.top, .horizontal], 16)
 	}
 }
 
@@ -189,11 +189,12 @@ struct MessagesView: View {
 
 					// Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
 				}
-				.padding(.top, 48 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
+				.padding(.top, 24 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
 				.frame(maxHeight: .infinity)
 			}
 		}
 		.flip()
+		.padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
 	}
 
 	private var inputContainer: some View {
@@ -218,7 +219,7 @@ struct MessagesView: View {
 					// Send typing start msg once every 8s while typing
 					viewModel.lastSentTyping = Date()
 					Task {
-						_ = await try? restAPI.typingStart(id: ctx.channel!.id)
+						_ = try? await restAPI.typingStart(id: ctx.channel!.id)
 					}
 				}
 			}
@@ -246,7 +247,8 @@ struct MessagesView: View {
 					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 				}
 			}
-			.overlay {
+			.heightReader($messageInputHeight)
+			/*.overlay {
 				// Size bottom padding according to size of text field
 				GeometryReader { geometry in
 					ZStack {
@@ -257,7 +259,7 @@ struct MessagesView: View {
 						messageInputHeight = height
 					}
 				}
-			}
+			}*/
 		}
 	}
 
@@ -267,7 +269,7 @@ struct MessagesView: View {
 			inputContainer
         }
 		.frame(minWidth: 525, minHeight: 500)
-		.blur(radius: viewModel.dropOver ? 8 : 0)
+		// .blur(radius: viewModel.dropOver ? 8 : 0)
 		.overlay {
 			if viewModel.dropOver {
 				ZStack {
@@ -280,21 +282,35 @@ struct MessagesView: View {
 					Rectangle()
 						.stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, dash: [25, 20]))
 						.opacity(0.75)
-				}.padding(24)
+				}
+				.padding(24)
+				.background(.thickMaterial)
 			}
 		}
-		.animation(.easeOut(duration: 0.25), value: viewModel.dropOver)
+		.animation(.easeOut(duration: 0.2), value: viewModel.dropOver)
 		.onDrop(of: [.fileURL], isTargeted: $viewModel.dropOver) { providers -> Bool in
+			print("Drop: \(providers)")
 			for provider in providers {
-				_ = provider.loadObject(ofClass: URL.self) { itemURL, err in
-					if let itemURL = itemURL, preAttachChecks(for: itemURL) {
-						viewModel.attachments.append(itemURL)
+				/*if provider.canLoadObject(ofClass: NSImage.self) { // This is an image
+					print("can load image")
+					if #available(macOS 13.0, *) {
+						provider.loadObject(ofClass: NSImage.self) { image, err in
+							print("image: \(image)")
+						}
+					} else {
+						// Fallback on earlier versions
 					}
-				}
+				} else {*/
+					_ = provider.loadObject(ofClass: URL.self) { itemURL, err in
+						if let itemURL = itemURL, preAttachChecks(for: itemURL) {
+							viewModel.attachments.append(itemURL)
+						}
+					}
+				// }
 			}
 			return true
 		}
-        .onChange(of: ctx.channel, perform: { channel in
+        .onChange(of: ctx.channel) { channel in
             guard let channel = channel else { return }
 			viewModel.messages = []
             // Prevent deadlocked and wrong message situations
@@ -308,7 +324,7 @@ struct MessagesView: View {
 				"channel_is_nsfw": String(channel.nsfw ?? false),
 				"channel_type": String(channel.type.rawValue)
 			])
-        })
+        }
         .onChange(of: state.loadingState) { loadingState in
             if loadingState == .gatewayConn {
 				guard viewModel.fetchMessagesTask == nil else { return }
@@ -324,39 +340,34 @@ struct MessagesView: View {
         .onAppear {
 			fetchMoreMessages()
 
-			// swiftlint:disable identifier_name
-            /*evtID = gateway.onEvent.addHandler(handler: { (evt, d) in
-                switch evt {
-                case .messageCreate:
-                    guard let msg = d as? Message else { break }
+            evtID = gateway.onEvent.addHandler { evt in
+				switch evt {
+				case .messageCreate(let msg):
                     if msg.channel_id == ctx.channel?.id {
 						withAnimation { viewModel.messages.append(msg) }
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status when user sent a message
                     ctx.typingStarted[msg.channel_id]?.removeAll { $0.user_id == msg.author.id }
-                case .messageUpdate:
-                    guard let newMsg = d as? PartialMessage else { break }
+				case .messageUpdate(let newMsg):
 					if let updatedIdx = viewModel.messages.firstIndex(where: { $0.id == newMsg.id }) {
 						viewModel.messages[updatedIdx] = viewModel.messages[updatedIdx].mergingWithPartialMsg(newMsg)
                     }
-                case .messageDelete:
-                    guard let deletedMsg = d as? MessageDelete else { break }
-                    guard deletedMsg.channel_id == ctx.channel?.id else { break }
-					if let delIdx = viewModel.messages.firstIndex(where: { $0.id == deletedMsg.id }) {
+				case .messageDelete(let delMsg):
+                    guard delMsg.channel_id == ctx.channel?.id else { break }
+					if let delIdx = viewModel.messages.firstIndex(where: { $0.id == delMsg.id }) {
 						withAnimation { _ = viewModel.messages.remove(at: delIdx) }
                     }
-                case .messageDeleteBulk:
-                    guard let deletedMsgs = d as? MessageDeleteBulk else { break }
-                    guard deletedMsgs.channel_id == ctx.channel?.id else { break }
-                    for msgID in deletedMsgs.id {
+				case .messageDeleteBulk(let delMsgs):
+                    guard delMsgs.channel_id == ctx.channel?.id else { break }
+                    for msgID in delMsgs.id {
 						if let delIdx = viewModel.messages.firstIndex(where: { $0.id == msgID }) {
 							withAnimation { _ = viewModel.messages.remove(at: delIdx) }
                         }
                     }
-                default: break
+				default: break
                 }
-            })*/
+            }
         }
 		.alert(item: $viewModel.newAttachmentErr) { err in
 			Alert(

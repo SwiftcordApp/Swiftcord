@@ -158,73 +158,74 @@ struct MessageInputView: View {
 extension MessageInputView {
 	@ViewBuilder
 	var textBox: some View {
-			Group {
-				if #available(macOS 13, *) {
-					TextField(placeholder, text: $message, axis: .vertical)
-						.onSubmit(send)
-						.font(.system(size: 16, weight: .regular))
-				} else {
-					TextEditor(
-						text: .init(
-							get: { message },
-							set: { newValue in
-								var modifiableValue = newValue
-								var returnIndex = modifiableValue.firstIndex(where: { $0.isReturn })
+		Group {
+			if #available(macOS 13, *) {
+				TextField(placeholder, text: $message, axis: .vertical)
+					.onSubmit(send)
+					.font(.system(size: 16, weight: .regular))
+			} else {
+				TextEditor(
+					text: .init(
+						get: { message },
+						set: { newValue in
+							var modifiableValue = newValue
+							var returnIndex = modifiableValue.firstIndex { $0.isReturn }
 
-								while let index = returnIndex {
-									// Check if previous value or next value is a new line character. If so, do not
-									// remove the return key since it might be needed.
-									var shouldRemove = true
+							while let index = returnIndex {
+								// Check if previous value or next value is a new line character. If so, do not
+								// remove the return key since it might be needed.
+								var shouldRemove = true
 
-									let previousIndex = index > modifiableValue.startIndex ? modifiableValue.index(before: index) : nil
-									let nextIndex = index < modifiableValue.endIndex ? modifiableValue.index(after: index) : nil
+								let previousIndex = index > modifiableValue.startIndex ? modifiableValue.index(before: index) : nil
+								let nextIndex = index < modifiableValue.endIndex ? modifiableValue.index(after: index) : nil
 
-									if let previousIndex, previousIndex >= modifiableValue.startIndex, modifiableValue[previousIndex].isNewline {
-										shouldRemove = false
-									}
-
-									if let nextIndex, nextIndex < modifiableValue.endIndex, modifiableValue[nextIndex].isNewline {
-										shouldRemove = false
-									}
-
-									if shouldRemove {
-										modifiableValue.remove(at: index)
-									}
-
-									returnIndex = modifiableValue.indices.filter({ $0 > index })
-										.first(where: { modifiableValue[$0].isReturn })
+								if let previousIndex, previousIndex >= modifiableValue.startIndex, modifiableValue[previousIndex].isNewline {
+									shouldRemove = false
 								}
-								message = modifiableValue
+
+								if let nextIndex, nextIndex < modifiableValue.endIndex, modifiableValue[nextIndex].isNewline {
+									shouldRemove = false
+								}
+
+								if shouldRemove {
+									modifiableValue.remove(at: index)
+								}
+
+								returnIndex = modifiableValue.indices
+									.filter { $0 > index }
+									.first { modifiableValue[$0].isReturn }
 							}
-						)
-					)
-					.onKeyDown { key in
-						switch key {
-						case .return:
-							send()
+							message = modifiableValue
 						}
-					}
-					.background(
-						Text(placeholder)
-							.frame(maxWidth: .infinity, alignment: .leading)
-							.padding(.leading, 5)
-							.foregroundColor(Color(.placeholderTextColor))
-							.opacity(message.count == 0 ? 1.0 : 0)
-							.allowsHitTesting(false)
 					)
-					.font(.system(size: 16, weight: .light))
+				)
+				.onKeyDown { key in
+					switch key {
+					case .return:
+						send()
+					}
 				}
+				.background(
+					Text(placeholder)
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.padding(.leading, 5)
+						.foregroundColor(Color(.placeholderTextColor))
+						.opacity(message.count == 0 ? 1.0 : 0)
+						.allowsHitTesting(false)
+				)
+				.font(.system(size: 16, weight: .light))
 			}
-			.textFieldStyle(.plain)
-			.fixedSize(horizontal: false, vertical: true)
-			.frame(maxWidth: .infinity)
-			.lineSpacing(4)
-			.disableAutocorrection(false)
-			.focused($messageFieldFocused)
-			.onChange(of: ctx.channel) { _ in
-				messageFieldFocused = true
-			}
-			.offset(y: 2)
+		}
+		.textFieldStyle(.plain)
+		.fixedSize(horizontal: false, vertical: true)
+		.frame(maxWidth: .infinity)
+		.lineSpacing(4)
+		.disableAutocorrection(false)
+		.focused($messageFieldFocused)
+		.onChange(of: ctx.channel) { _ in
+			messageFieldFocused = true
+		}
+		.offset(y: 2)
 	}
 }
 

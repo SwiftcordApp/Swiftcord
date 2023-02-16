@@ -36,9 +36,8 @@ internal extension MessagesView {
 					message: "**Messages failed to load**",
 					buttonLabel: "Try again",
 					color: .red,
-					buttonIcon: "arrow.clockwise",
-					clickHandler: { fetchMoreMessages() }
-				)
+					buttonIcon: "arrow.clockwise"
+				) { fetchMoreMessages() }
 				state.loadingState = .messageLoad
 				return
 			}

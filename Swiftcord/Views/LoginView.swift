@@ -42,7 +42,7 @@ struct LoginView: View {
 					SecureField("login.token.input", text: $tokenString)
 					HStack {
 						Button("login.token.back") {
-							tokenView = !tokenView
+							tokenView.toggle()
 						}
 						Button("login.token.login") {
 							loginWVModel.token = tokenString
@@ -54,7 +54,7 @@ struct LoginView: View {
 			Button("Token Login") {
 				tokenCount += 1
 				if tokenCount >= 5 {
-					tokenView = !tokenView
+					tokenView.toggle()
 				}
 			}
 			.keyboardShortcut("t", modifiers: [.command, .shift])
