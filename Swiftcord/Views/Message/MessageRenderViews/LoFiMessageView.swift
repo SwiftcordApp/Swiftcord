@@ -32,8 +32,7 @@ struct LoFiMessageView: View {
                 }
             }
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 48)
+        .padding(.trailing, 32)
     }
 }
 

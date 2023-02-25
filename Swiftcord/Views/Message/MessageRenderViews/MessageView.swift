@@ -114,10 +114,8 @@ struct MessageView: View {
                 Spacer()
             }
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 48)
+        .padding(.trailing, 32)
 		.padding(.vertical, Self.lineSpacing / 2)
-        .background(hovered ? .gray.opacity(0.07) : .clear)
 		.background(
 			Rectangle()
 				.fill(.blue)

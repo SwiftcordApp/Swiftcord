@@ -88,7 +88,7 @@ struct MessagesViewHeader: View {
                 : "server.channel.header \(chl?.name ?? "") \(chl?.topic ?? "")"
             ).opacity(0.7)
         }
-        .padding([.top, .horizontal], 16)
+        .padding(.top, 16)
     }
 }
 
@@ -104,7 +104,7 @@ struct DayDividerView: View {
                 .opacity(0.7)
             HorizontalDividerView().frame(maxWidth: .infinity)
         }
-        .padding([.top, .horizontal], 16)
+        .padding(.top, 16)
     }
 }
 
@@ -159,43 +159,50 @@ struct MessagesView: View {
                 Spacer(minLength: 16 - MessageView.lineSpacing / 2)
             }
 
-            if (!isLastItem && viewModel.reachedTop) ||
+            /*if (!isLastItem && viewModel.reachedTop) ||
                 (!isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
                 DayDividerView(date: msg.timestamp)
-            }
+            }*/
         }
         .flip()
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
     private var historyList: some View {
-        ScrollView {
-            ScrollViewReader { proxy in
-                LazyVStack(alignment: .leading, spacing: 0) {
-                    history
+        ScrollViewReader { proxy in
+            List {
+                // Spacer(minLength: messageInputHeight + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
 
-                    if viewModel.reachedTop {
-                        MessagesViewHeader(chl: ctx.channel).flip()
-                    } else {
-                        loadingSkeleton
-                            .flip()
-                            .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-                            .onDisappear {
-                                if let loadTask = viewModel.fetchMessagesTask {
-                                    loadTask.cancel()
-                                    viewModel.fetchMessagesTask = nil
-                                }
+                history
+
+                if viewModel.reachedTop {
+                    MessagesViewHeader(chl: ctx.channel).flip()
+                } else {
+                    loadingSkeleton
+                        .flip()
+                        .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+                        .onDisappear {
+                            if let loadTask = viewModel.fetchMessagesTask {
+                                loadTask.cancel()
+                                viewModel.fetchMessagesTask = nil
                             }
-                    }
-
-                    // Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                        }
                 }
-                .padding(.top, 24 + messageInputHeight + (viewModel.showingInfoBar ? 24 : 0))
-                .frame(maxHeight: .infinity)
+
+                Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
             }
+            .zeroRowInsets()
+            .introspectTableView { tableView in
+                tableView.backgroundColor = .clear
+                tableView.enclosingScrollView!.drawsBackground = false
+                tableView.enclosingScrollView!.rotate(byDegrees: 180)
+            }
+            .scaleEffect(x: -1, y: 1, anchor: .center)
+            .background(.clear)
+            .frame(maxHeight: .infinity)
+            .padding(.bottom, 24) // Ensure List doesn't go below text input field
         }
-        .flip()
-        .padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
+        // .padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
     }
 
     private var inputContainer: some View {

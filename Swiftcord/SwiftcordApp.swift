@@ -57,6 +57,9 @@ struct SwiftcordApp: App {
 						: (selectedTheme == "light" ? .light : nil)
 					)
 					.onAppear {
+						// Fix list assertion errors
+						UserDefaults.standard.set(false, forKey: "NSWindowAssertWhenDisplayCycleLimitReached")
+
 						guard gateway.socket == nil else { return }
 						guard let token = acctManager.getActiveToken() else {
 							state.attemptLogin = true

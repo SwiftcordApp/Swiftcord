@@ -58,8 +58,11 @@ struct AttachmentView: View {
 					} else {
 						switch mime.prefix(5) {
 						case "image":
-							AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
-								.onTapGesture { quickLookUrl = url }
+                            Button {
+                                quickLookUrl = url
+                            } label: {
+                                //AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
+                            }.buttonStyle(.borderless)
 						case "video":
 							AttachmentVideo(width: width, height: height, scale: scale, url: url)
 						default: AttachmentError(width: width, height: height)
