@@ -65,7 +65,7 @@ struct ChannelList: View {
 		.listStyle(.sidebar)
 		.frame(minWidth: 240, maxHeight: .infinity)
 		.introspectTableView { tableView in
-			tableView.enclosingScrollView?.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+			tableView.enclosingScrollView!.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
 		}
 		.environment(\.defaultMinListRowHeight, 1)
 	}

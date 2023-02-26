@@ -11,10 +11,14 @@ struct DiscordChannelButton: ButtonStyle {
 	let isSelected: Bool
 	@State var isHovered: Bool = false
 
+	@Environment(\.controlSize) var size: ControlSize
+
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.buttonStyle(.borderless)
-			.font(.system(size: 14, weight: isSelected ? .medium : .regular))
+			.frame(height: size == .large ? 42 : 32)
+			.padding(.horizontal, 2)
+			.font(.system(size: 15))
 			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.background {

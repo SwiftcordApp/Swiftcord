@@ -18,6 +18,7 @@ struct ChannelButton: View {
 		if channel.type == .dm || channel.type == .groupDM {
 			DMButton(dm: channel, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
+				.controlSize(.large)
 		} else {
 			GuildChButton(channel: channel, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
@@ -81,7 +82,6 @@ struct DMButton: View {
 				Spacer()
 			}
 			.padding(.horizontal, 6)
-			.padding(.vertical, 5)
 		}
 	}
 }

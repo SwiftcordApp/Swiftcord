@@ -15,7 +15,7 @@ struct AttachmentGif: View {
 	var body: some View {
 		SwiftyGifView(url: url)
 			.frame(width: width, height: height)
-			.cornerRadius(4)
+			.cornerRadius(8)
 	}
 }
 
