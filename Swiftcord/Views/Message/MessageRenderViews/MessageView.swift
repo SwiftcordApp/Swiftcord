@@ -41,7 +41,7 @@ struct MessageView: View {
     let quotedMsg: Message?
     let onQuoteClick: (Snowflake) -> Void
 
-	@Binding var replying: MessagesView.ViewModel.ReplyRef?
+	@Binding var replying: MessagesViewModel.ReplyRef?
 	@Binding var highlightMsgId: Snowflake?
 
     @State private var hovered = false

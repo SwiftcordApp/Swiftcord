@@ -113,7 +113,7 @@ struct MessagesView: View {
     @EnvironmentObject var state: UIState
     @EnvironmentObject var ctx: ServerContext
 
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = MessagesViewModel()
 
     @State private var messageInputHeight: CGFloat = 0
 
@@ -335,27 +335,20 @@ struct MessagesView: View {
                 switch evt {
                 case .messageCreate(let msg):
                     if msg.channel_id == ctx.channel?.id {
-                        withAnimation { viewModel.messages.append(msg) }
+                        viewModel.addMessage(msg)
                     }
                     guard msg.webhook_id == nil else { break }
-                    // Remove typing status when user sent a message
+                    // Remove typing status after user sent a message
                     ctx.typingStarted[msg.channel_id]?.removeAll { $0.user_id == msg.author.id }
                 case .messageUpdate(let newMsg):
-                    if let updatedIdx = viewModel.messages.firstIndex(where: { $0.id == newMsg.id }) {
-                        viewModel.messages[updatedIdx] = viewModel.messages[updatedIdx].mergingWithPartialMsg(newMsg)
-                    }
+                    guard newMsg.channel_id == ctx.channel?.id else { break }
+                    viewModel.updateMessage(newMsg)
                 case .messageDelete(let delMsg):
                     guard delMsg.channel_id == ctx.channel?.id else { break }
-                    if let delIdx = viewModel.messages.firstIndex(where: { $0.id == delMsg.id }) {
-                        withAnimation { _ = viewModel.messages.remove(at: delIdx) }
-                    }
+                    viewModel.deleteMessage(delMsg)
                 case .messageDeleteBulk(let delMsgs):
                     guard delMsgs.channel_id == ctx.channel?.id else { break }
-                    for msgID in delMsgs.id {
-                        if let delIdx = viewModel.messages.firstIndex(where: { $0.id == msgID }) {
-                            withAnimation { _ = viewModel.messages.remove(at: delIdx) }
-                        }
-                    }
+                    viewModel.deleteMessageBulk(delMsgs)
                 default: break
                 }
             }

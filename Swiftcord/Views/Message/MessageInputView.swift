@@ -57,7 +57,7 @@ struct MessageInputView: View {
     let placeholder: LocalizedStringKey
     @Binding var message: String
     @Binding var attachments: [URL]
-	@Binding var replying: MessagesView.ViewModel.ReplyRef?
+	@Binding var replying: MessagesViewModel.ReplyRef?
     let onSend: (String, [URL]) -> Void
 	let preAttach: (URL) -> Bool
 

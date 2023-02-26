@@ -10,7 +10,7 @@ import DiscordKit
 import DiscordKitCore
 
 struct MessageInputReplyView: View {
-	@Binding var replying: MessagesView.ViewModel.ReplyRef?
+	@Binding var replying: MessagesViewModel.ReplyRef?
 
 	@EnvironmentObject var gateway: DiscordGateway
 
@@ -24,7 +24,7 @@ struct MessageInputReplyView: View {
 				if replyingRef.authorID != gateway.cache.user?.id {
 					Button {
 						withAnimation {
-							replying = MessagesView.ViewModel.ReplyRef(
+							replying = .init(
 								messageID: replyingRef.messageID,
 								guildID: replyingRef.guildID,
 								ping: !replyingRef.ping,
