@@ -61,7 +61,7 @@ struct AttachmentView: View {
                             Button {
                                 quickLookUrl = url
                             } label: {
-                                //AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
+                                AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
                             }.buttonStyle(.borderless)
 						case "video":
 							AttachmentVideo(width: width, height: height, scale: scale, url: url)
