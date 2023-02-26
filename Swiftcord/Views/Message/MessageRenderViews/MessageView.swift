@@ -23,10 +23,9 @@ struct NonUserBadge: View {
 					.frame(width: 15)
 					.padding(.leading, -3)
 			}
-			Text(isWebhook
-				? "WEBHOOK"
-				: "BOT"
-			).font(.system(size: 10))
+			Text(isWebhook ? "Webhook" : "Bot")
+                .font(.system(size: 10))
+                .textCase(.uppercase)
 		}
 		.frame(height: 15)
 		.padding(.horizontal, 4)

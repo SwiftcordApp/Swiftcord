@@ -33,7 +33,7 @@ struct ReferenceMessageView: View {
 							guildID: serverCtx.guild?.id,
 							webhookID: quotedMsg.webhook_id,
 							size: 16
-						)
+						).equatable()
 
 						Group {
 							Text(quotedMsg.author.username)

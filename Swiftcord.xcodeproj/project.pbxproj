@@ -304,7 +304,6 @@
 		DA32EF5127C8FBB200A9ED72 /* User+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+.swift"; sourceTree = "<group>"; };
 		DA32EF5827CB5F4F00A9ED72 /* UIStateEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStateEnv.swift; sourceTree = "<group>"; };
 		DA32EF6527CB772300A9ED72 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
-		DA334E9D29A6FEFA00211746 /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		DA4350012879BFCA001DEC81 /* ServerJoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerJoinView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDividerView.swift; sourceTree = "<group>"; };
 		DA4A888427C0AF3000720909 /* Swiftcord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftcord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -523,7 +522,6 @@
 			isa = PBXGroup;
 			children = (
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
-				DA334E9D29A6FEFA00211746 /* DiscordKit */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
 				DA4A888527C0AF3000720909 /* Products */,
