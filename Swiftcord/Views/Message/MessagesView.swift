@@ -132,37 +132,41 @@ struct MessagesView: View {
         .fixedSize(horizontal: false, vertical: true)
     }
 
+    @_transparent @_optimize(speed) @ViewBuilder
+    func cell(for msg: Message, shrunk: Bool) -> some View {
+        MessageView(
+            message: msg,
+            shrunk: shrunk,
+            quotedMsg: msg.message_reference != nil
+            ? viewModel.messages.first {
+                $0.id == msg.message_reference!.message_id
+            } : nil,
+            onQuoteClick: { id in
+                // withAnimation { proxy.scrollTo(id, anchor: .center) }
+                viewModel.highlightMsg = id
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
+                }
+            },
+            replying: $viewModel.replying,
+            highlightMsgId: $viewModel.highlightMsg
+        )
+    }
+
     private var history: some View {
         ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
             let isLastItem = idx == viewModel.messages.count-1
             let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
 
-            MessageView(
-                message: msg,
-                shrunk: shrunk,
-                quotedMsg: msg.message_reference != nil
-                ? viewModel.messages.first {
-                    $0.id == msg.message_reference!.message_id
-                } : nil,
-                onQuoteClick: { id in
-                    // withAnimation { proxy.scrollTo(id, anchor: .center) }
-                    viewModel.highlightMsg = id
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
-                    }
-                },
-                replying: $viewModel.replying,
-                highlightMsgId: $viewModel.highlightMsg
-            )
+            cell(for: msg, shrunk: shrunk)
 
             if !shrunk {
                 Spacer(minLength: 16 - MessageView.lineSpacing / 2)
             }
 
-            /*if (!isLastItem && viewModel.reachedTop) ||
-                (!isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp)) {
+            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp) {
                 DayDividerView(date: msg.timestamp)
-            }*/
+            }
         }
         .flip()
         .zeroRowInsets()
