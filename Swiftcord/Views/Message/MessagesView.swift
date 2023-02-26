@@ -1,5 +1,5 @@
 //
-//  MessageView.swift
+//  MessagesView.swift
 //  Swiftcord
 //
 //  Created by Vincent Kwok on 23/2/22.
@@ -152,6 +152,7 @@ struct MessagesView: View {
             highlightMsgId: $viewModel.highlightMsg
         )
         .equatable()
+        .listRowBackground(msg.mentions(gateway.cache.user?.id) ? Color.orange.opacity(0.1) : .clear)
     }
 
     private var history: some View {

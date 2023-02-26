@@ -36,8 +36,7 @@ struct NonUserBadge: View {
 
 struct MessageView: View, Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.message.attachments == rhs.message.attachments
-        && lhs.message.content == rhs.message.content
+        lhs.message == rhs.message
         // && lhs.message.embeds == rhs.message.embeds
     }
 

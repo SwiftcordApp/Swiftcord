@@ -95,28 +95,27 @@ struct UserAvatarView: View, Equatable {
 						Text(
 							profile.guild_member == nil
 							? "user.roles.loading"
-							: (roles.isEmpty
-							   ? "user.roles.none"
-							   : (roles.count == 1 ? "user.roles.one" : "user.roles.many")
-							  )
+							: (roles.isEmpty ? "user.roles.none" : (roles.count == 1 ? "user.roles.one" : "user.roles.many"))
 						)
 						.font(.headline)
 						.textCase(.uppercase)
 						if !roles.isEmpty {
-							TagCloudView(content: roles.map({ role in
-								HStack(spacing: 6) {
-									Circle()
-										.fill(Color(hex: role.color))
-										.frame(width: 14, height: 14)
-										.padding(.leading, 6)
-									Text(role.name)
-										.font(.system(size: 12))
-										.padding(.trailing, 8)
+							TagCloudView(
+								content: roles.map { role in
+									HStack(spacing: 6) {
+										Circle()
+											.fill(Color(hex: role.color))
+											.frame(width: 14, height: 14)
+											.padding(.leading, 6)
+										Text(role.name)
+											.font(.system(size: 12))
+											.padding(.trailing, 8)
+									}
+									.frame(height: 24)
+									.background(.gray.opacity(0.2))
+									.cornerRadius(7)
 								}
-								.frame(height: 24)
-								.background(.gray.opacity(0.2))
-								.cornerRadius(7)
-							})).padding(-2)
+							).padding(-2)
 						}
 					} else {
 						ProgressView("user.roles.loading")
