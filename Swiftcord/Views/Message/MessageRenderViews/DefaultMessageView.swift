@@ -17,8 +17,8 @@ struct DefaultMessageView: View {
 		VStack(alignment: .leading, spacing: 4) {
 			if !message.content.isEmpty {
 				let msg = message.content.containsOnlyEmojiAndSpaces
-				? message.content.replacingOccurrences(of: " ", with: " ")
-				: message.content
+					? message.content.replacingOccurrences(of: " ", with: " ")
+					: message.content
 				let backticksRanges = msg.ranges(of: "```")
 				Group {
 					if backticksRanges.count >= 2 {
@@ -26,15 +26,26 @@ struct DefaultMessageView: View {
 						let end = backticksRanges[backticksRanges.count-1].lowerBound
 						let before = String(msg[msg.startIndex..<start])
 							.replacingOccurrences(of: "```", with: "")
-						let code = String(msg[start..<end]).trimmingCharacters(in: .whitespacesAndNewlines)
 						let after = String(msg[end..<msg.endIndex])
 							.replacingOccurrences(of: "```", with: "")
 						Text(markdown: before)
-						Text(markdown: code)
-							.padding()
-							.background(Color.black.opacity(0.3))
-							.foregroundColor(.white)
-							.cornerRadius(10)
+						ForEach(backticksRanges.indices, id: \.self) { i in
+							if i % 2 == 1 { // odd indices represent code sections
+								let start = backticksRanges[i-1].upperBound
+								let end = backticksRanges[i].lowerBound
+								let code = String(msg[start..<end]).trimmingCharacters(in: .whitespacesAndNewlines)
+								Text(code)
+									.padding()
+									.background(Color.black.opacity(0.3))
+									.foregroundColor(.white)
+									.cornerRadius(10)
+							} else { // even indices represent non-code sections
+								let start = i == 0 ? msg.startIndex : backticksRanges[i-1].upperBound
+								let end = i == backticksRanges.count-1 ? msg.endIndex : backticksRanges[i].lowerBound
+								let nonCode = String(msg[start..<end])
+								Text(markdown: nonCode)
+							}
+						}
 						Text(markdown: after)
 					} else {
 						Text(markdown: msg)
@@ -44,6 +55,7 @@ struct DefaultMessageView: View {
 				.lineSpacing(3)
 				.textSelection(.enabled)
 			}
+
 			
 			if let stickerItems = message.sticker_items {
 				ForEach(stickerItems) { sticker in
