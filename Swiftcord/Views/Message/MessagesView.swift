@@ -175,14 +175,15 @@ struct MessagesView: View {
     private var historyList: some View {
         ScrollViewReader { proxy in
             List {
-                // Spacer(minLength: messageInputHeight + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                Spacer(minLength: max(messageInputHeight-44-7, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
 
                 history
 
                 if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).flip()
+                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().flip()
                 } else {
                     loadingSkeleton
+                        .zeroRowInsets()
                         .flip()
                         .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
                         .onDisappear {
@@ -193,18 +194,18 @@ struct MessagesView: View {
                         }
                 }
 
-                Spacer(minLength: 52) // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
             }
-            .zeroRowInsets()
             .introspectTableView { tableView in
                 tableView.backgroundColor = .clear
                 tableView.enclosingScrollView!.drawsBackground = false
                 tableView.enclosingScrollView!.rotate(byDegrees: 180)
             }
+            .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .scaleEffect(x: -1, y: 1, anchor: .center)
             .background(.clear)
             .frame(maxHeight: .infinity)
-            .padding(.bottom, 24) // Ensure List doesn't go below text input field
+            .padding(.bottom, 24 + 7) // Ensure List doesn't go below text input field (and its border radius)
         }
         // .padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
     }
