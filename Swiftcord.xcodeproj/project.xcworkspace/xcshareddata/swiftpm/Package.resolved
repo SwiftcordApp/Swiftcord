@@ -15,7 +15,7 @@
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
         "branch" : "devel",
-        "revision" : "8e44824422213fcbb439f4a25a258c015e54bca0"
+        "revision" : "87309321abf1f525f239f7cfec6f55ed7620eaaa"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "4a60ff4287d4c6ac64085ad48606ef5ecaec9817",
-        "version" : "7.24.1"
+        "revision" : "cf43eac1aa12017868c257ad3854ad87a5de0758",
+        "version" : "7.31.5"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
-        "revision" : "8e27997de02457a0c4690ffcfb8ac9c8e1066883",
-        "version" : "2.2.2"
+        "revision" : "dda155c7d3ef38c53d29f8584cb2aad2a1a54dba",
+        "version" : "2.3.2"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
-        "version" : "1.20.2"
+        "revision" : "0af9125c4eae12a4973fb66574c53a54962a9e1e",
+        "version" : "1.21.0"
       }
     },
     {
