@@ -247,7 +247,8 @@ struct MessagesView: View {
                 if !typingMembers.isEmpty {
                     HStack {
                         // The dimensions are quite arbitrary
-                        LottieView(name: "typing-animation", play: .constant(true), width: 100, height: 80)
+                        // FIXME: The animation broke, will have to fix it
+                        LottieView(name: "typing-animatiokn", play: .constant(true), width: 160, height: 160)
                             .lottieLoopMode(.loop)
                             .frame(width: 32, height: 24)
                         Group {
