@@ -173,26 +173,25 @@ struct ServerView: View {
         .onAppear {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
-            /* evtID = gateway.onEvent.addHandler { evt in
+            evtID = gateway.onEvent.addHandler { evt in
                 switch evt {
-                /*case .channelUpdate:
-                    guard let updatedCh = d as? Channel else { break }
-                    if let chPos = channels.firstIndex(where: { ch in ch == updatedCh }) {
+                /*case .channelUpdate(let updatedCh):
+                   if let chPos = channels.firstIndex(where: { ch in ch == updatedCh }) {
                         // Crappy workaround for channel list to update
                         var chs = channels
                         chs[chPos] = updatedCh
                         channels = []
                         channels = chs
-                    }
+                    }*/
                     // For some reason, updating one element doesnt update the UI
                     // loadChannels()*/
-				case .typingStart(let typingData):
+                case .typingStart(let typingData):
                     guard typingData.user_id != gateway.cache.user!.id else { break }
 
-					// Remove existing typing items, if present (prevent duplicates)
-					serverCtx.typingStarted[typingData.channel_id]?.removeAll {
-						$0.user_id == typingData.user_id
-					}
+                    // Remove existing typing items, if present (prevent duplicates)
+                    serverCtx.typingStarted[typingData.channel_id]?.removeAll {
+                        $0.user_id == typingData.user_id
+                    }
 
                     if serverCtx.typingStarted[typingData.channel_id] == nil {
                         serverCtx.typingStarted[typingData.channel_id] = []
@@ -206,7 +205,7 @@ struct ServerView: View {
                     }
                 default: break
                 }
-            } */
+            }
         }
         .onDisappear {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }
