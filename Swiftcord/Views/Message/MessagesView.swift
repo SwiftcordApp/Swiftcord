@@ -202,6 +202,7 @@ struct MessagesView: View {
                 tableView.backgroundColor = .clear
                 tableView.enclosingScrollView!.drawsBackground = false
                 tableView.enclosingScrollView!.rotate(byDegrees: 180)
+                tableView.enclosingScrollView!.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .scaleEffect(x: -1, y: 1, anchor: .center)
@@ -209,7 +210,6 @@ struct MessagesView: View {
             .frame(maxHeight: .infinity)
             .padding(.bottom, 24 + 7) // Ensure List doesn't go below text input field (and its border radius)
         }
-        // .padding(.bottom, 24) // Ensure ScrollView doesn't go below text input field
     }
 
     private var inputContainer: some View {
