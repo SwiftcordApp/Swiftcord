@@ -66,7 +66,7 @@ struct StickerItemView: View {
 								}
 								animation = anim
 							},
-							animationCache: Lottie.LRUAnimationCache.sharedCache
+							animationCache: Lottie.DefaultAnimationCache.sharedCache
 						)
 					}.transition(.customOpacity)
 				} else {

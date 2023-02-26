@@ -10,7 +10,7 @@ import Lottie
 
 // Needed to have proper size with `frame` modifier
 public final class WrapperAnimationView: NSView {
-	let animationView: LottieAnimationView!
+	let animationView: Lottie.LottieAnimationView!
     let width: Double!
     let height: Double!
 

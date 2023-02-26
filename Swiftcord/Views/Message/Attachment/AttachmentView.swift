@@ -76,8 +76,8 @@ struct AttachmentView: View {
                         }
                     }) {
                         Image(systemName: downloadState == .error
-                              ? "exclamationmark.circle" : downloadState == .success
-                              ? "checkmark.circle" : "arrow.down.circle"
+                            ? "exclamationmark.circle" : downloadState == .success
+                            ? "checkmark.circle" : "arrow.down.circle"
                         )
                         .font(.system(size: 20))
                     }

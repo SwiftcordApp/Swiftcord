@@ -113,6 +113,7 @@
 		9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
+		DA12FB7C29AB84F500EDBBEE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DA12FB7B29AB84F500EDBBEE /* Lottie */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
@@ -215,7 +216,6 @@
 		DAB0E31D28C60D24003B693B /* AvatarWithPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB0E31B28C60D24003B693B /* AvatarWithPresence.swift */; };
 		DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46B28A10BB100645FCD /* BetterImageView.swift */; };
-		DAB1E47228A202CB00645FCD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAB1E47128A202CB00645FCD /* Lottie */; };
 		DAB1E47628A2189700645FCD /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E47528A2189700645FCD /* MessagesViewModel.swift */; };
 		DAB1E48728A50D3600645FCD /* DefaultMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */; };
 		DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */; };
@@ -426,8 +426,8 @@
 				DAA0A57428B90DD7007D8351 /* Sentry in Frameworks */,
 				DA296D90299CF2AC000A810E /* DiscordKit in Frameworks */,
 				DA296D92299CF2AC000A810E /* DiscordKitCore in Frameworks */,
-				DAB1E47228A202CB00645FCD /* Lottie in Frameworks */,
 				DAFF8A7828C9DF6F0016AE8C /* CachedAsyncImage in Frameworks */,
+				DA12FB7C29AB84F500EDBBEE /* Lottie in Frameworks */,
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
 				DA8AEA6829029747007BAAEA /* Introspect in Frameworks */,
@@ -921,12 +921,12 @@
 				DA97BA8F2849F9C500059FD7 /* AppCenterAnalytics */,
 				DABD8BB42880F653008EE28F /* Sparkle */,
 				DAFD470628996DFC0075D71B /* SwiftyGif */,
-				DAB1E47128A202CB00645FCD /* Lottie */,
 				DAA0A57328B90DD7007D8351 /* Sentry */,
 				DAFF8A7728C9DF6F0016AE8C /* CachedAsyncImage */,
 				DA8AEA6729029747007BAAEA /* Introspect */,
 				DA296D8F299CF2AC000A810E /* DiscordKit */,
 				DA296D91299CF2AC000A810E /* DiscordKitCore */,
+				DA12FB7B29AB84F500EDBBEE /* Lottie */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -972,10 +972,10 @@
 				DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 				DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				DA63C8D029834E4C00B34D60 /* XCRemoteSwiftPackageReference "DiscordKit" */,
+				DA12FB7A29AB84F500EDBBEE /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -1398,7 +1398,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
@@ -1656,7 +1656,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1690,7 +1690,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1766,6 +1766,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		DA12FB7A29AB84F500EDBBEE /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		DA63C8D029834E4C00B34D60 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
@@ -1779,7 +1787,7 @@
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
+				minimumVersion = 0.2.0;
 			};
 		};
 		DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
@@ -1804,14 +1812,6 @@
 			requirement = {
 				branch = main;
 				kind = branch;
-			};
-		};
-		DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
 			};
 		};
 		DAFD470528996DFC0075D71B /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
@@ -1850,6 +1850,11 @@
 			package = DA97BA8E2849F9C500059FD7 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
 		};
+		DA12FB7B29AB84F500EDBBEE /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA12FB7A29AB84F500EDBBEE /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		DA296D8F299CF2AC000A810E /* DiscordKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA63C8D029834E4C00B34D60 /* XCRemoteSwiftPackageReference "DiscordKit" */;
@@ -1884,11 +1889,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DAA0A57228B90DD7007D8351 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
-		};
-		DAB1E47128A202CB00645FCD /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DAB1E47028A202CB00645FCD /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		DABD8BB42880F653008EE28F /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
