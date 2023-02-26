@@ -151,6 +151,7 @@ struct MessagesView: View {
             replying: $viewModel.replying,
             highlightMsgId: $viewModel.highlightMsg
         )
+        .equatable()
     }
 
     private var history: some View {

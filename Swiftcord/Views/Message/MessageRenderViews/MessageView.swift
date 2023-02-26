@@ -34,7 +34,13 @@ struct NonUserBadge: View {
 	}
 }
 
-struct MessageView: View {
+struct MessageView: View, Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.message.attachments == rhs.message.attachments
+        && lhs.message.content == rhs.message.content
+        // && lhs.message.embeds == rhs.message.embeds
+    }
+
     let message: Message
     let shrunk: Bool
     let quotedMsg: Message?
