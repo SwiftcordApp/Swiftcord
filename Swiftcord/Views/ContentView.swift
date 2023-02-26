@@ -110,7 +110,7 @@ struct ContentView: View {
                         assetIconName: "DiscordIcon"
                     ) {
                         state.selectedGuildID = "@me"
-                    }.padding(.top, 8)
+                    }.padding(.top, 4)
 
                     HorizontalDividerView().frame(width: 32)
 
