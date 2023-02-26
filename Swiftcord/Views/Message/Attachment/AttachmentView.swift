@@ -41,6 +41,58 @@ struct AttachmentView: View {
 		"video/quicktime": "film"
     ]
 
+    var fileAttachment: some View {
+        GroupBox {
+            HStack(alignment: .center, spacing: 4) {
+                Image(systemName: Self.mimeFileMapping[attachment.content_type ?? ""] ?? "doc")
+                    .font(.system(size: 36))
+                    .opacity(0.8)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(attachment.filename)
+                        .font(.system(size: 15))
+                        .fontWeight(.medium)
+                        .lineLimit(1)
+                    // .fixedSize(horizontal: false, vertical: true)
+                    Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
+                        .font(.caption)
+                        .opacity(0.5)
+                }
+                Spacer()
+
+                Button {
+                    if let url = URL(string: attachment.url) {
+                        quickLookUrl = loadFile(from: url)
+                    }
+                } label: {
+                    Image(systemName: "doc.viewfinder.fill").font(.system(size: 20))
+                }
+                .help("Preview attachment")
+                .buttonStyle(.plain)
+
+                ZStack {
+                    Button(action: {
+                        if let url = URL(string: attachment.url) {
+                            downloadFile(from: url)
+                        }
+                    }) {
+                        Image(systemName: downloadState == .error
+                              ? "exclamationmark.circle" : downloadState == .success
+                              ? "checkmark.circle" : "arrow.down.circle"
+                        )
+                        .font(.system(size: 20))
+                    }
+                    .help("Download attachment")
+                    .buttonStyle(.plain)
+
+                    CircularProgressView(lineWidth: 4, progress: $downloadProgress)
+                        .frame(width: 24, height: 24)
+                        .opacity(downloadState == .inProgress ? 1 : 0)
+                }
+                .padding(.trailing, 4)
+            }
+        }.frame(width: 400)
+    }
+
     var body: some View {
         // Guard doesn't work in views
         ZStack {
@@ -61,10 +113,16 @@ struct AttachmentView: View {
                             Button {
                                 quickLookUrl = url
                             } label: {
-                                AttachmentImage(width: width, height: height, scale: scale, url: resizedURL)
+                                AttachmentImage(
+                                    width: width, height: height, scale: scale,
+                                    url: resizedURL
+                                )
                             }.buttonStyle(.borderless)
 						case "video":
-							AttachmentVideo(width: width, height: height, scale: scale, url: url)
+							AttachmentVideo(
+                                width: width, height: height, scale: scale,
+                                url: url, thumbnailURL: resizedURL.appendingQueryItems(URLQueryItem(name: "format", value: "png"))
+                            )
 						default: AttachmentError(width: width, height: height)
 						}
 					}
@@ -72,55 +130,7 @@ struct AttachmentView: View {
                     AttachmentAudio(attachment: attachment, url: url)
                 } else {
                     // Display a generic file
-                    GroupBox {
-                        HStack(alignment: .center, spacing: 4) {
-                            Image(systemName: AttachmentView.mimeFileMapping[attachment.content_type ?? ""] ?? "doc")
-                                .font(.system(size: 36))
-                                .opacity(0.8)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(attachment.filename)
-                                    .font(.system(size: 15))
-                                    .fontWeight(.medium)
-                                    .lineLimit(1)
-                                // .fixedSize(horizontal: false, vertical: true)
-                                Text("\(attachment.size.humanReadableFileSize()) • \(attachment.filename.fileExtension.uppercased())")
-                                    .font(.caption)
-                                    .opacity(0.5)
-                            }
-                            Spacer()
-
-                            Button {
-                                if let url = URL(string: attachment.url) {
-                                    quickLookUrl = loadFile(from: url)
-                                }
-							} label: {
-                                Image(systemName: "doc.viewfinder.fill").font(.system(size: 20))
-                            }
-                            .help("Preview attachment")
-                            .buttonStyle(.plain)
-
-                            ZStack {
-                                Button(action: {
-                                    if let url = URL(string: attachment.url) {
-                                        downloadFile(from: url)
-                                    }
-                                }) {
-                                    Image(systemName: downloadState == .error
-                                        ? "exclamationmark.circle" : downloadState == .success
-                                        ? "checkmark.circle" : "arrow.down.circle"
-                                    )
-                                    .font(.system(size: 20))
-                                }
-                                .help("Download attachment")
-                                .buttonStyle(.plain)
-
-                                CircularProgressView(lineWidth: 4, progress: $downloadProgress)
-                                    .frame(width: 24, height: 24)
-                                    .opacity(downloadState == .inProgress ? 1 : 0)
-                            }
-                            .padding(.trailing, 4)
-                        }
-                    }.frame(width: 400)
+                    fileAttachment
                 }
             } else { AttachmentError(width: 160, height: 160) }
         }
