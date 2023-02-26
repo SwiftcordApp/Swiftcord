@@ -19,6 +19,8 @@ struct ChannelList: View {
 
 	var body: some View {
 		List {
+			Spacer(minLength: 52 - 16 + 4) // 52 (header) - 16 (unremovable section top padding) + 4 (spacing)
+
 			let filteredChannels = channels.filter {
 				if !nsfwShown {
 					return $0.parent_id == nil && $0.type != .category && ($0.nsfw == false || $0.nsfw == nil)
@@ -61,11 +63,14 @@ struct ChannelList: View {
 				}
 			}
 		}
+		.environment(\.defaultMinListRowHeight, 1)
 		.padding(.horizontal, -6)
 		.listStyle(.sidebar)
 		.frame(minWidth: 240, maxHeight: .infinity)
 		.introspectTableView { tableView in
 			tableView.enclosingScrollView!.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+			tableView.enclosingScrollView!.automaticallyAdjustsContentInsets = false
+			tableView.enclosingScrollView!.contentInsets = .init()
 		}
 		.environment(\.defaultMinListRowHeight, 1)
 	}
