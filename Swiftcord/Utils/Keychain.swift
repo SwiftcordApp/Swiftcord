@@ -1,6 +1,6 @@
 //
 //  Keychain.swift
-//  DiscordKitCommon
+//  Swiftcord
 //
 //  Created by Vincent Kwok on 21/2/22.
 //
@@ -86,13 +86,13 @@ public extension Data {
     init<T>(from value: T) {
         var value = value
         var tempData = Data()
-        withUnsafePointer(to: &value, { (ptr: UnsafePointer<T>) -> Void in
+        withUnsafePointer(to: &value) { (ptr: UnsafePointer<T>) -> Void in
 			tempData = Data( buffer: UnsafeBufferPointer(start: ptr, count: 1))
-        })
+        }
         self.init(tempData)
     }
 
     func to<T>(type: T.Type) -> T {
-        return self.withUnsafeBytes { $0.load(as: T.self) }
+		self.withUnsafeBytes { $0.load(as: T.self) }
     }
 }

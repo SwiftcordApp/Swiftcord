@@ -1,0 +1,135 @@
+
+
+"action.done" = "Gereed";
+"action.close" = "Dicht";
+
+/* ====== Onboarding ====== */
+"onboarding.title" = "Welkom bij\n";
+"onboarding.subtitle" = "Een Discord client gemaakt en ontworpen voor macOS";
+"onboarding.lightweight.header" = "Efficiënt - Gebruikt niet veel Bronnen";
+"onboarding.features.header" = "Goed Aanbevolen";
+"onboarding.wip.header" = "Werk is not niet klaar";
+"onboarding.footer" = "Swiftcord is een alpha software, met nog problemen en bugs. Voor nu het is nog geen goeie verandering voor de officiele client, we hopen voor wat dagen.";
+
+/* ====== Login ====== */
+"login.token.title" = "Welkom bij de geheime token login scherm!";
+"login.token.back" = "Wacht ga terug";
+"user.roles.many" = "Rollen";
+"user.roles.loading" = "Laden roles…";
+"user.note" = "Notitie";
+// Presences
+"user.presence.online" = "Online";
+"user.presence.idle" = "inactief";
+"user.presence.dnd" = "Niet Storen";
+"user.presence.offline" = "Offline";
+"message.edited" = " Bewerkt ";
+"message.gone" = "Orginele bericht was verwijderd.";
+"message.reply.attachment" = "Klick om bijlages te zien";
+
+/* ====== Server ====== */
+"server.noChannels.header" = "Geen Tekst Kanalen";
+"server.channel.header %@ %@" = "Dit is the begin van de #%@ kanaal. %@";
+"server.channel.title %@" = "Welkom bij #%@!";
+"server.channel.noCategory" = "Geen Categorie";
+"server.composeMsg.hint %@" = "Bericht #%@";
+"server.join.title" = "deelneem een Server";
+"server.join.fieldHeader" = "Visite Link";
+"server.join.fieldHeader.invalid" = "Visite Link_— Zet alstublieft een bestaande Visite link of een Visite code._";
+"server.join.fieldHeader.notFound" = "Visite Link_— Deze Visite Link Klopt niet._";
+"server.join.fieldHeader.joinFail" = "Visite Link_— Niet mogelijk om deze Visite te accepteren_";
+"server.join.egHeader" = "Visites zou lijken als";
+"dm" = "Direkte Berichten";
+"dm.group.header %@" = "Welkom bij de begin van de **%@** groep.";
+"dm.group.composeMsg.hint %@" = "Bericht %@";
+"%lld dm.group.memberCount" = "%ld Leden";
+"dm.composeMsg.hint %@" = "Bericht @%@";
+"settings.animInteraction" = "Op de bureaublad client, stickers gaat animeren als je met je muis aanraking komt met de sticket. Op mobiel clients, stickers gaan animeren bij lange gedrukt inhouden.";
+"settings.tts.defaultSpeed" = "Standaard";
+"settings.tts.rate" = "Tekst-naar-spraak Tarief";
+"settings.app.appearance" = "Uiterlijk";
+"settings.app.appearance.theme" = "Thema";
+"settings.app.accessibility" = "Toegankelijkheid";
+"settings.app.accessibility.chatInput" = "Chat-Invoer";
+"settings.app.textImages" = "Tekst & afbeeldingen";
+"settings.app.keybinds" = "Sneltoetsen";
+"settings.app.advanced" = "Geavanceerd";
+"settings.app.advanced.analytics" = "Gebruiksstatistieken";
+"settings.others.debug.actions" = "Acties";
+"settings.others.debug.actions.info" = "Doe niks hier behalve als je weet wat je doet. het is GeVaArLiJk!";
+"settings.others.debug.actions.crash" = "Crash Swiftcord(Green grap)";
+// About
+"settings.others.about" = "Over";
+"settings.others.about.desc" = "Oorspronkelijke Discord client gemaakt in Swift en SwiftUI";
+"%@ %@ %@ settings.others.about.ver" = "%@ Versie %@ (Bouw: %@)";
+"settings.others.credits.about" = "Ik vind het leuk om bij Swiftcord te werken, en om te ontwikkelen functionaliteit en mooie oorspronkelijke apps!";
+"settings.others.credits.whoAmI" = "Vincent Kwok_AKA_[cryptoAlgorithm](https://github.com/cryptoAlgorithm)";
+"settings.others.credits.sponsor.tier1" = "Echt een Coole Supporter🧊";
+"settings.others.credits.sponsor.tier2" = "Geweldige Supporter 🤯";
+"settings.others.credits.sponsor.tier3" = "Rood-Heet Supporter🔥";
+"settings.others.credits.sponsor" = "Sponsers";
+// Credits
+"settings.others.credits" = "Credits";
+"settings.others.credits.sponsor.desc" = "Overweeg om Swiftcord te steunen! Het zou ervoor zorgen dat dit project een stabiele toekomst heeft, en je krijgt ook speciale privileges :D";
+"settings.others.credits.sponsor.gh" = "GitHub Sponsers";
+"settings.others.credits.sponsor.patreon" = "Patreon";
+"settings.others.credits.sponsor.engage.header" = "Help Swiftcord!";
+"settings.others.credits.contrib.desc" = "Dank aan allen die waardevolle bijdragen hebben geleverd! Swiftcord zou niet zijn waar het is zonder uw bijdragen!";
+"settings.others.credits.contrib.loading" = "Laden bijdragers…";
+"settings.others.credits.contrib.anon" = "Een buitengewoon gulle anonieme supporter";
+"%lld settings.others.credits.contrib.more" = "+ %lld geweldige bijdragers";
+"settings.others.credits.contrib.note" = "Notitie: Ook bedoelen we sommige bijdragers van Weblate";
+"settings.others.credits.misc.discord" = "En eindelijk, dank naar Discord voor het bouwen een geweldige gemeenschap en infrastructuur!";
+"onboarding.features.body" = "Belangrijk kern functies zijn geïmplementeerd, met weer dan het werkt";
+"user.presence.invisible" = "Onzichtbaar";
+/* ====== Actions ====== */
+"action.continue" = "Ga verder";
+"onboarding.lightweight.body" = "Over naar 7x gebruikt niet veel RAM dan Discord, met laag CPU gebruik.";
+"onboarding.wip.body" = "Klopt er iets niet? Maak een Github probleem of laat een bericht in onze Discord server alstublieft";
+"login.token.login" = "Log weer in";
+"login.token.input" = "Plak hier je Discord token alstublieft";
+"loader.panic.logout" = "Dit duurt lang, wil je uitloggen?";
+"user.roles.none" = "Geen Rollen";
+"user.roles.one" = "Rol";
+"server.noChannels.body" = "Je bent op een rare plek. Je hebt geen toegang naar elke Tekst kanalen of er zijn geen Tekst Kanalen in deze server.";
+
+/* ====== Loading Cover ====== */
+"loader.tip.header" = "Wist je dat";
+
+/* ====== User ====== */
+"user.bio" = "Over Mij";
+
+/* ====== Message ====== */
+"message.edited.shrunk" = " (bewerkt)";
+"server.join.action" = "Ga in de Server";
+"server.join.caption" = "Zet een visite link beneden om in te gaan in een bestaande server";
+
+/* ====== DMs ====== */
+"dm.noChannels.body" = "Wumpus zit te wachten. Je woeft het niet verplicht te doen!";
+"settings.tts.faster" = "Sneller";
+"settings.tts.slower" = "Langzamer";
+"settings.user.chPwd.caption" = "Zet hier je huidige wachtwoord en de nieuwe wachtwoord.";
+"dm.header %@" = "Dit is the begin van de legendarische gesprek met **@%@%%.";
+"settings.user.username" = "Bijnaam";
+
+/* ====== Settings ====== */
+"settings.showSendBtn" = "Laat Verstuur Bericht Zien";
+"settings.user.chPwd.title" = "Verander je wachtwoord";
+"settings.user.phoneNum" = "Telefoonnummer";
+"settings.user.logOut" = "Uitloggen";
+"settings.user.logOut.confirmation" = "Weet je zeker je wilt uitloggen?";
+"settings.app.accessibility.stickers" = "Stickersm";
+"settings.app.advanced.analytics.option" = "stuur anoniem statistiek naar de AppCenter Analytics om Swiftcord te verbeteren";
+"settings.app.advanced.crashes" = "Crashsporen en eerdere gebeurtenissen worden na een crash naar Sentry verzonden om toekomstige crashes te diagnosticeren en te voorkomen. Er zullen geen persoonlijke of identificeerbare gegevens uw apparaat verlaten.";
+"settings.user.email" = "Email-Adres";
+"settings.app" = "Applicatie";
+"settings.app.voiceVideo" = "Spraak & Video";
+"settings.app.lang" = "Taal";
+"settings.others.about.supportPkg" = "Swiftcord is aangedreven bij [DiscordKit](https://github.com/SwiftcordApp/DiscordKit) een WIP Discord API implementatie in Swift";
+"settings.app.notifs" = "Notificaties";
+"settings.app.streamer" = "Streamermodus";
+"settings.app.advanced.analytics.caption" = "Via AppCenter worden geaggregeerde (anonieme) gebruiksstatistieken van Swiftcord (zoals weergegeven taal, app-versie en functiegebruik) verzameld. De verkregen matrices zullen worden gebruikt om de functies van Swiftcord te verbeteren; we kunnen ze niet naar jou herleiden.";
+"settings.others.about.caption" = "Swiftcord is een open-source software gemaakt met <3. Je kunt de source code vinden op [GitHub](https://github.com/SwiftcordApp/Swiftcord).Contributies en Probleem reportages zijn ook welkom hier! Alstublieft geef Swiftcord een ster, Het geeft ons motivatie op verder te werken :D :D :D <3";
+"settings.others.credits.headDev" = "Hoofd Developer";
+"settings.others.credits.sponsor.engage.body" = "Jouw naam, en een afbeelding en een bio van jouw keuze can hier zijn! Met uw sponsoring steunt u direct de ontwikkeling van Swiftcord. Bovendien krijg je speciale voordelen op de Discord-server en ondersteuning met een hogere prioriteit!";
+"settings.others.credits.contrib" = "bijdragers";
+"settings.others.credits.misc.anim" = "Dank iJayTD op Reddit voor hermaken de discord laden animatie (https://www.reddit.com/r/discordapp/comments/k6s89b/i_recreated_the_discord_loading_animation) en accepteren om het te gebruiken op SwiftCord!";

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import CachedAsyncImage
-import DiscordKitCommon
 import DiscordKitCore
 import DiscordKit
 import os
@@ -26,7 +25,6 @@ struct CurrentUserFooter: View {
 
 	@EnvironmentObject var switcher: AccountSwitcher
 	@EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var rest: DiscordREST
 
 	private static let presenceIconMapping: [PresenceStatus: String] = [
 		.online: "circle.fill",
@@ -52,7 +50,7 @@ struct CurrentUserFooter: View {
 		settingPresence = true
 
 		gateway.send(
-			op: .presenceUpdate,
+			.presenceUpdate,
 			data: GatewayPresenceUpdate(since: 0, activities: activities, status: presence, afk: false)
 		)
 		Task {
@@ -69,13 +67,11 @@ struct CurrentUserFooter: View {
 				Self.log.error("Failed to serialize user proto update! Something's very wrong!")
 				return
 			}
-			guard await rest.updateSettingsProto(proto: serialized) else {
+			do { try await restAPI.updateSettingsProto(proto: serialized) } catch {
 				// Failed to update presence!
 				// Possibly rate-limited
 				Self.log.warning("Failed to patch user settings proto with new presence, possibly rate-limited")
-				settingPresence = false
 				gateway.presences[user.id] = oldPresence // Revert presence, it did not get set successfully
-				return
 			}
 			settingPresence = false
 		}
@@ -83,7 +79,7 @@ struct CurrentUserFooter: View {
 
     var body: some View {
 		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
-		let customStatus = gateway.presences[user.id]?.activities.first(where: { $0.type == .custom })
+		let customStatus = gateway.presences[user.id]?.activities.first { $0.type == .custom }
 
 		Button {
 			userPopoverPresented = true

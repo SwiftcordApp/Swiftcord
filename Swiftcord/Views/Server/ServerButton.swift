@@ -145,8 +145,7 @@ struct ServerButton_Previews: PreviewProvider {
             systemIconName: nil,
             assetIconName: nil,
             serverIconURL: nil,
-            bgColor: nil,
-            onSelect: {}
-        )
+            bgColor: nil
+		) {}
     }
 }

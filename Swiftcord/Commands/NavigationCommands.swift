@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
+import DiscordKitCore
 
 struct NavigationCommands: Commands {
 	@ObservedObject var state: UIState
@@ -17,7 +17,7 @@ struct NavigationCommands: Commands {
 
 	var body: some Commands {
 		CommandMenu("Navigation") {
-			Button("Previous Server") {
+			/*Button("Previous Server") {
 				let guilds = (gateway.cache.guilds.values.filter({
 					!(gateway.cache.userSettings?.guild_positions ?? []).contains($0.id)
 				}).sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! }))
@@ -39,7 +39,7 @@ struct NavigationCommands: Commands {
 				guard let nextGuild = guilds.after(state.serverCtx.guild!, loop: true) else { return }
 
 				state.selectedGuildID = nextGuild.id
-			}.keyboardShortcut(.downArrow, modifiers: [.command, .option])
+			}.keyboardShortcut(.downArrow, modifiers: [.command, .option])*/
 
 			Divider()
 
@@ -90,20 +90,19 @@ struct NavigationCommands: Commands {
 
 		}.discordSorted()
 		if !nsfwShown {
-			filteredChannels = filteredChannels.filter({ $0.nsfw == false })
+			filteredChannels = filteredChannels.filter { $0.nsfw == false }
 		}
 		var sortedChannels = filteredChannels
 
 		let categories = channels
-				.filter { $0.parent_id == nil && $0.type == .category }
-				.discordSorted()
+			.filter { $0.parent_id == nil && $0.type == .category }
+			.discordSorted()
 		for category in categories {
-			let categoryChannels = channels.filter({
-				if !nsfwShown {
-					return $0.parent_id == category.id && $0.type != .category && $0.type != .voice && ($0.nsfw == false || $0.nsfw == nil)
+			let categoryChannels = channels
+				.filter {
+					$0.parent_id == category.id && $0.type != .category && $0.type != .voice && (nsfwShown || $0.nsfw == false || $0.nsfw == nil)
 				}
-				return $0.parent_id == category.id && $0.type != .category && $0.type != .voice
-			}).discordSorted()
+				.discordSorted()
 			sortedChannels.append(contentsOf: categoryChannels)
 		}
 

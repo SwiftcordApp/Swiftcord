@@ -33,9 +33,9 @@ struct DebugSettingsView: View {
 			DebugTableItem(item: "Gateway session established", val: gateway.connected.toString()),
 			DebugTableItem(item: "Network reachable", val: gateway.reachable.toString()),
 			DebugTableItem(item: "Loading stage", val: String(describing: state.loadingState)),
-			DebugTableItem(item: "Base URL", val: GatewayConfig.default.baseURL),
-			DebugTableItem(item: "REST API base URL", val: GatewayConfig.default.restBase),
-			DebugTableItem(item: "Gateway URL", val: GatewayConfig.default.gateway)
+			DebugTableItem(item: "Base URL", val: DiscordKitConfig.default.baseURL.absoluteString),
+			DebugTableItem(item: "REST API base URL", val: DiscordKitConfig.default.restBase.absoluteString),
+			DebugTableItem(item: "Gateway URL", val: DiscordKitConfig.default.gateway)
 		]
 
 		VStack(spacing: 0) {

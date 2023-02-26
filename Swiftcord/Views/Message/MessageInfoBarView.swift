@@ -44,10 +44,12 @@ struct MessageInfoBarView: View {
         .offset(y: isShown ? -48 : -24)
 		.opacity(isShown ? 1 : 0)
         .animation(
-            .interpolatingSpring(mass: 1.2,
-                                 stiffness: 500,
-                                 damping: 30,
-                                 initialVelocity: isShown ? 0.03 : 0),
+            .interpolatingSpring(
+				mass: 1.2,
+				stiffness: 500,
+				damping: 30,
+				initialVelocity: isShown ? 0.03 : 0
+			),
             value: isShown
         )
     }

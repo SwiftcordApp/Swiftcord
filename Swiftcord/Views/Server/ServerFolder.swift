@@ -7,8 +7,10 @@
 
 import SwiftUI
 import DiscordKitCore
-import DiscordKitCommon
 
+/// A single server folder item
+///
+/// Used to render a server folder in the server list
 struct ServerFolder: View {
     let folder: GuildFolder
     @State private var hovered = false
@@ -55,13 +57,14 @@ struct ServerFolder: View {
 
                 VStack {
                     Button("") {
-                        open.toggle()
+                        withAnimation(.interactiveSpring()) { open.toggle() }
                         if open {
                             UserDefaults.standard.setValue(true, forKey: "folders.\(folder.id).open")
                         } else {
                             UserDefaults.standard.removeObject(forKey: "folders.\(folder.id).open")
                         }
-                    }.onAppear {
+                    }
+                    .onAppear {
                         open = UserDefaults.standard.bool(forKey: "folders.\(folder.id).open")
                     }
                     .buttonStyle(
@@ -82,16 +85,16 @@ struct ServerFolder: View {
                     }
 
                     if open {
-                        ForEach(folder.guilds) { [self] guild in
+                        ForEach(folder.guilds, id: \.id) { [self] guild in
                             ServerButton(
                                 selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                                isLoading: loadingGuildID == guild.id,
-                                onSelect: { selectedGuildID = guild.id }
-                            )
-                            // Prevent server buttons from "fading in" during transition
-                            .transition(.identity)
+                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                                isLoading: loadingGuildID == guild.id
+                            ) {
+                                selectedGuildID = guild.id
+                            }
+                            .transition(.move(edge: .top).combined(with: .opacity)) // Prevent server buttons from "fading in" during transition
                         }
                     }
                 }
@@ -122,33 +125,31 @@ struct ServerFolderButtonStyle: ButtonStyle {
     let open: Bool
     let color: Color
     let guilds: [Guild]
-    var filledGuilds: [Guild?] {
-        guilds + [Guild?](repeating: nil, count: 4 - guilds.count)
-    }
     @Binding var hovered: Bool
 
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             if open {
                 Image(systemName: "folder.fill")
-                    .font(.system(size: 16))
+                    .font(.system(size: 18))
                     .foregroundColor(color)
-                    .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .bottom)))
+                    .transition(.move(edge: .top).combined(with: .opacity))
             } else {
-                LazyVGrid(columns: [
-                    GridItem(.fixed(16), spacing: 4),
-                    GridItem(.fixed(16), spacing: 4)
-                ], spacing: 4) {
-                    ForEach(filledGuilds, id: \.?.id) { guild in
-                        if let guild = guild {
-                            MiniServerThumb(guild: guild, animate: hovered)
-                        } else {
-                            Circle().fill(.clear)
-                        }
+                LazyVGrid(
+                    columns: [
+                        GridItem(.fixed(16), spacing: 4),
+                        GridItem(.fixed(16), spacing: 4)
+                    ],
+                    spacing: 4
+                ) {
+                    ForEach(guilds, id: \.id) { guild in
+                        MiniServerThumb(guild: guild, animate: hovered)
                     }
                 }
                 .foregroundColor(hovered ? .white : Color(nsColor: .labelColor))
-                .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(6)
             }
         }
         .frame(width: 48, height: 48)
@@ -165,7 +166,6 @@ struct ServerFolderButtonStyle: ButtonStyle {
         .animation(.none, value: configuration.isPressed)
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }
-        .animation(.linear(duration: 0.1), value: open)
     }
 }
 
@@ -174,7 +174,7 @@ struct MiniServerThumb: View {
     let animate: Bool
 
     var body: some View {
-        if let serverIconPath = guild.icon, let iconURL = URL(string: "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
+        if let serverIconPath = guild.icon, let iconURL = URL(string: "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
             if iconURL.isAnimatable {
                 SwiftyGifView(
                     url: iconURL.modifyingPathExtension("gif"),
@@ -185,12 +185,12 @@ struct MiniServerThumb: View {
                     .frame(width: 16, height: 16)
                     .cornerRadius(8)
             } else {
-                BetterImageView(url: iconURL, imageModifier: { $0.antialiased(true) })
+                BetterImageView(url: iconURL) { image in image.antialiased(true) }
                     .frame(width: 16, height: 16)
                     .cornerRadius(8)
             }
         } else {
-            let iconName = guild.name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+            let iconName = guild.name.split(separator: " ").map { $0.prefix(1) }.joined(separator: "")
             Text(iconName)
                 .font(.system(size: 8))
                 .lineLimit(1)

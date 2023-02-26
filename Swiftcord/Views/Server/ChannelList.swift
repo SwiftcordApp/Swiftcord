@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
+import Introspect
+import DiscordKitCore
 import DiscordKit
 
+/// Renders the channel list on the sidebar
 struct ChannelList: View {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
@@ -17,6 +19,8 @@ struct ChannelList: View {
 
 	var body: some View {
 		List {
+			Spacer(minLength: 52 - 16 + 4) // 52 (header) - 16 (unremovable section top padding) + 4 (spacing)
+
 			let filteredChannels = channels.filter {
 				if !nsfwShown {
 					return $0.parent_id == nil && $0.type != .category && ($0.nsfw == false || $0.nsfw == nil)
@@ -26,9 +30,9 @@ struct ChannelList: View {
 			if !filteredChannels.isEmpty {
 				Section(
 					header: Text(serverCtx.guild?.isDMChannel == true
-								 ? "dm"
-								 : "server.channel.noCategory"
-								).textCase(.uppercase)
+						? "dm"
+						: "server.channel.noCategory"
+					).textCase(.uppercase).padding(.leading, 8)
 				) {
 					let channels = filteredChannels.discordSorted()
 					ForEach(channels, id: \.id) { channel in
@@ -43,15 +47,14 @@ struct ChannelList: View {
 				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				// Channels in this section
-				let channels = channels.filter({
+				let channels = channels.filter {
 					if !nsfwShown {
 						return $0.parent_id == channel.id && ($0.nsfw == false || $0.nsfw == nil)
 					}
 					return $0.parent_id == channel.id
-
-				}).discordSorted()
+				}.discordSorted()
 				if !channels.isEmpty {
-					Section(header: Text(channel.name ?? "").textCase(.uppercase)) {
+					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
 						ForEach(channels, id: \.id) { channel in
 							ChannelButton(channel: channel, selectedCh: $selCh)
 								.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
@@ -60,10 +63,15 @@ struct ChannelList: View {
 				}
 			}
 		}
-		.padding(.top, 10)
+		.environment(\.defaultMinListRowHeight, 1)
+		.padding(.horizontal, -6)
 		.listStyle(.sidebar)
 		.frame(minWidth: 240, maxHeight: .infinity)
-		// this overlay applies a border on the bottom edge of the view
-		.overlay(Rectangle().fill(Color(nsColor: .separatorColor)).frame(width: nil, height: 1, alignment: .bottom), alignment: .top)
+		.introspectTableView { tableView in
+			tableView.enclosingScrollView!.scrollerInsets = .init(top: 0, left: 0, bottom: 0, right: 6)
+			tableView.enclosingScrollView!.automaticallyAdjustsContentInsets = false
+			tableView.enclosingScrollView!.contentInsets = .init()
+		}
+		.environment(\.defaultMinListRowHeight, 1)
 	}
 }

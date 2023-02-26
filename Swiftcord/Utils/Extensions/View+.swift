@@ -23,3 +23,35 @@ extension View {
 		}
 	}
 }
+
+struct PointableModifier: ViewModifier {
+	@Environment(\.isEnabled) var isEnabled
+
+	func body(content: Content) -> some View {
+		content.onHover { $0 && isEnabled ? NSCursor.pointingHand.push() : NSCursor.pop() }
+	}
+}
+
+extension View {
+	func pointable() -> some View {
+		self.modifier(PointableModifier())
+	}
+
+	@ViewBuilder func zeroRowInsets() -> some View {
+		self.listRowInsets(.init())
+	}
+}
+
+extension View {
+	func heightReader(_ binding: Binding<CGFloat>) -> some View {
+		self.overlay {
+			GeometryReader { geometry -> Color in
+				let rect = geometry.frame(in: .local)
+				DispatchQueue.main.async {
+					binding.wrappedValue = rect.size.height
+				}
+				return .clear
+			}
+		}
+	}
+}

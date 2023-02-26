@@ -30,15 +30,15 @@ struct AnalyticsWrapper {
 		case impressionAccountSwitcher = "impression_multi_account_switch_landing"
 	}
 
-	static private func getBaseProps() -> [String: Any?] {
-		return [
+	private static func getBaseProps() -> [String: Any?] {
+		[
 			"cpu_core_count": ProcessInfo().processorCount,
 			"rendered_locale": Bundle.main.preferredLocalizations[0]
 			// More entries will be added in the future
 		]
 	}
 
-	static private let log = Logger(category: "AnalyticsWrapper")
+	private static let log = Logger(category: "AnalyticsWrapper")
 
 	static func event(type: EventType, properties: [String: Any?] = [:]) {
 		let combinedProps = getBaseProps().merging(properties) { $1 }

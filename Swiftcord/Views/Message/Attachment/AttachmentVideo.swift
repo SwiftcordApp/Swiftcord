@@ -13,6 +13,7 @@ struct AttachmentVideo: View {
 	let height: Double
 	let scale: Double
 	let url: URL
+	let thumbnailURL: URL
 
 	@State private var player: AVPlayer?
 
@@ -20,14 +21,14 @@ struct AttachmentVideo: View {
 		if let player = player {
 			VideoPlayer(player: player)
 				.frame(width: CGFloat(width), height: CGFloat(height))
-				.cornerRadius(4)
+				.cornerRadius(8)
 		} else {
 			ZStack {
 				AttachmentImage(
 					width: width,
 					height: height,
 					scale: scale,
-					url: url.appendingQueryItems(URLQueryItem(name: "format", value: "png"))
+					url: thumbnailURL
 				)
 				Button {
 					player = AVPlayer(url: url) // Don't use resizedURL
@@ -38,7 +39,7 @@ struct AttachmentVideo: View {
 						.frame(width: 56, height: 56)
 						.background(.thickMaterial)
 						.clipShape(Circle())
-				}.buttonStyle(.plain)
+				}.buttonStyle(.borderless)
 			}
 		}
 	}

@@ -23,33 +23,34 @@ class WebViewModel: ObservableObject {
 }
 
 struct WebView: NSViewRepresentable {
-	let shrink: Bool
-	let shrunkShowingQR: Bool
+    let shrink: Bool
+    let shrunkShowingQR: Bool
 
     public typealias NSViewType = WKWebView
     @EnvironmentObject var viewModel: WebViewModel
 
     private let webView: WKWebView = WKWebView()
 
-	private func getB64Background(named name: String) -> String? {
-		let image = NSImage(named: name)
-		guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
-		else { return nil }
+    private func getB64Background(named name: String) -> String? {
+        let image = NSImage(named: name)
+        guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        else { return nil }
 
-		let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
-		let jpegData = bitmapRep.representation(using: .png, properties: [:])
-		return jpegData?.base64EncodedString()
-	}
+        let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+        let jpegData = bitmapRep.representation(using: .png, properties: [:])
+        return jpegData?.base64EncodedString()
+    }
 
-	// If someone can split this into smaller chunks, I'm all open
-	// swiftlint:disable function_body_length
+    // If someone can split this into smaller chunks, I'm all open
+    // swiftlint:disable function_body_length
     public func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator as? WKUIDelegate
         webView.configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
 
-		let backgroundImageB64 = getB64Background(named: "LoginBackground")
+        let backgroundImageB64 = getB64Background(named: "LoginBackground")
 
+        // swiftlint:disable indentation_width
         let interceptJS = """
         // Get rid of everything in localStorage for a fresh state
         localStorage.clear();
@@ -131,25 +132,27 @@ struct WebView: NSViewRepresentable {
           document.body.appendChild(s);
         }
         """
+        // swiftlint:enable indentation_width
         webView.configuration.userContentController.addUserScript(WKUserScript(source: interceptJS, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         webView.configuration.userContentController.add(EvtHandler(viewModel), name: "tkEvt")
-#if DEBUG
+        #if DEBUG
         webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
-#endif
+        #endif
 
         webView.load(URLRequest(url: URL(string: viewModel.link)!))
         return webView
     }
 
     public func updateNSView(_ nsView: WKWebView, context: NSViewRepresentableContext<WebView>) {
-		nsView.evaluateJavaScript(shrunkShowingQR
-								  ? "document.body.classList.add('qr-only')"
-								  : "document.body.classList.remove('qr-only')"
-		)
-	}
+        nsView.evaluateJavaScript(
+            shrunkShowingQR
+            ? "document.body.classList.add('qr-only')"
+            : "document.body.classList.remove('qr-only')"
+        )
+    }
 
     public func makeCoordinator() -> Coordinator {
-        return Coordinator(viewModel)
+        Coordinator(viewModel)
     }
 
     // Handles the event that's sent from injected JavaScript once the token is available
@@ -157,8 +160,8 @@ struct WebView: NSViewRepresentable {
         private var viewModel: WebViewModel
 
         init(_ viewModel: WebViewModel) {
-           // Initialise the WebViewModel
-           self.viewModel = viewModel
+            // Initialise the WebViewModel
+            self.viewModel = viewModel
         }
 
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -171,8 +174,8 @@ struct WebView: NSViewRepresentable {
         private let log = Logger(category: "WebViewCoordinator")
 
         init(_ viewModel: WebViewModel) {
-           // Initialise the WebViewModel
-           self.viewModel = viewModel
+            // Initialise the WebViewModel
+            self.viewModel = viewModel
         }
 
         public func webView(_: WKWebView, didFail: WKNavigation!, withError: Error) { }

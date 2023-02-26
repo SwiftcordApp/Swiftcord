@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Lottie
-import DiscordKitCommon
 import CachedAsyncImage
 import DiscordKitCore
 
@@ -35,7 +34,7 @@ struct StickerItemView: View {
     let sticker: StickerItem
     let size: Double // Width and height of sticker
     @State private var error = false
-    @State private var animation: Lottie.Animation?
+	@State private var animation: Lottie.LottieAnimation?
     @Binding var play: Bool
 
     var body: some View {
@@ -45,7 +44,7 @@ struct StickerItemView: View {
 			switch sticker.format_type {
 			case .png:
 				// Literally a walk in the park compared to lottie
-				AsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
+				AsyncImage(url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).png")!) { phase in
 					switch phase {
 					case .empty: StickerLoadingView(size: size)
 					case .success(let image): image.resizable().scaledToFill()
@@ -58,8 +57,8 @@ struct StickerItemView: View {
 			case .lottie:
 				if animation == nil {
 					StickerLoadingView(size: size).onAppear {
-						Lottie.Animation.loadedFrom(
-							url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).json")!,
+						Lottie.LottieAnimation.loadedFrom(
+							url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).json")!,
 							closure: { anim in
 								guard let anim = anim else {
 									error = true
@@ -67,7 +66,7 @@ struct StickerItemView: View {
 								}
 								animation = anim
 							},
-							animationCache: Lottie.LRUAnimationCache.sharedCache
+							animationCache: Lottie.DefaultAnimationCache.sharedCache
 						)
 					}.transition(.customOpacity)
 				} else {
@@ -83,7 +82,7 @@ struct StickerItemView: View {
 				}
 			default:
 				// Well it doesn't animate for some reason
-				CachedAsyncImage(url: URL(string: "\(GatewayConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
+				CachedAsyncImage(url: URL(string: "\(DiscordKitConfig.default.cdnURL)stickers/\(sticker.id).png?passthrough=true")!) { phase in
 					switch phase {
 					case .empty: StickerLoadingView(size: size)
 					case .success(let image): image.resizable().scaledToFill()
@@ -105,8 +104,6 @@ struct StickerView: View {
     @State private var error = false
     @State private var fullSticker: Sticker?
     @State private var packPresenting = false
-
-	@EnvironmentObject var restAPI: DiscordREST
 
 	@AppStorage("stickerAlwaysAnim") private var alwaysAnimStickers = true
 
@@ -134,13 +131,13 @@ struct StickerView: View {
                     }
 
                     if fullSticker.pack_id != nil {
-                        Button(action: { packPresenting = true }) {
+						Button { packPresenting = true } label: {
                             Label("View Sticker Pack", systemImage: "square.on.square")
                                 .frame(maxWidth: .infinity)
                         }
 						.buttonStyle(FlatButtonStyle())
 						.controlSize(.small)
-                        .sheet(isPresented: $packPresenting, content: {
+                        .sheet(isPresented: $packPresenting) {
                             VStack {
                                 Text("Sticker Pack").font(.title)
                                 Text("Unimplemented").font(.footnote)
@@ -148,7 +145,7 @@ struct StickerView: View {
                                     Text("Close")
                                 }
                             }.padding(14)
-                        })
+                        }
                     }
                 } else {
                     Text("Loading sticker...").font(.headline)
@@ -162,7 +159,7 @@ struct StickerView: View {
         .onHover { hovered = $0 }
         .onTapGesture {
             if fullSticker == nil { Task {
-                fullSticker = await restAPI.getSticker(id: sticker.id)
+                fullSticker = try? await restAPI.getSticker(id: sticker.id)
 				openPopoverEvt()
 			}} else {
 				openPopoverEvt()

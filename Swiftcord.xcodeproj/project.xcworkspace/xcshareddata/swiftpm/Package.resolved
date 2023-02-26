@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/appcenter-sdk-apple",
       "state" : {
-        "revision" : "b2dc99cfedead0bad4e6573d86c5228c89cff332",
-        "version" : "4.4.3"
+        "branch" : "develop",
+        "revision" : "2214f9ee2476f28af64cb38359defe59e85197a1"
       }
     },
     {
@@ -14,16 +14,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
-        "revision" : "c904221d392283052dc9d98decc9bc51504ac846"
+        "branch" : "devel",
+        "revision" : "8e44824422213fcbb439f4a25a258c015e54bca0"
       }
     },
     {
-      "identity" : "lottie-ios",
+      "identity" : "lottie-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
       "state" : {
-        "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
-        "version" : "3.4.3"
+        "revision" : "c3852816c622ad35a03ed39c187c1644ece2382b",
+        "version" : "4.1.3"
       }
     },
     {
@@ -31,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/PLCrashReporter.git",
       "state" : {
-        "revision" : "81cdec2b3827feb03286cb297f4c501a8eb98df1",
-        "version" : "1.10.2"
+        "revision" : "b1a342da19ed9b3af61ea2efa7656c2af30aeb7c",
+        "version" : "1.11.0"
       }
     },
     {
@@ -63,6 +64,15 @@
       }
     },
     {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
+        "version" : "1.5.2"
+      }
+    },
+    {
       "identity" : "swift-protobuf",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
@@ -78,6 +88,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "f94be38411297c71aa8df69c6875127e6d8d7a92"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "revision" : "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
+        "version" : "0.2.3"
       }
     },
     {

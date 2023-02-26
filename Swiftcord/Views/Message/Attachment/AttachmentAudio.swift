@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
+import DiscordKitCore
 
 struct AttachmentAudio: View {
 	let attachment: Attachment
@@ -40,7 +40,9 @@ struct AttachmentAudio: View {
 
 				Button { queueSong() } label: {
 					Image(systemName: "text.append").font(.system(size: 18))
-				}.buttonStyle(.plain).help("Append to queue")
+				}
+				.buttonStyle(.borderless)
+				.help("Append to queue")
 
 				Button {
 					queueSong()
@@ -48,7 +50,7 @@ struct AttachmentAudio: View {
 				} label: {
 					Image(systemName: "play.fill").font(.system(size: 20)).frame(width: 36, height: 36)
 				}
-				.buttonStyle(.plain)
+				.buttonStyle(.borderless)
 				.background(Circle().fill(Color.accentColor))
 				.help("Play now")
 			}.padding(4)

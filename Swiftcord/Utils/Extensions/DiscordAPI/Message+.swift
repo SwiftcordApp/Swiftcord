@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import DiscordKitCommon
+import DiscordKitCore
 
 extension Message {
     func messageIsShrunk(prev: Message) -> Bool {
-        return prev.author.id == self.author.id
-        && (prev.type == .defaultMsg || prev.type == .reply)
-        && self.type == .defaultMsg
-		&& (self.timestamp.timeIntervalSince(prev.timestamp) < 400)
+        prev.author.id == self.author.id
+            && (prev.type == .defaultMsg || prev.type == .reply)
+            && self.type == .defaultMsg
+            && (self.timestamp.timeIntervalSince(prev.timestamp) < 400)
     }
 }

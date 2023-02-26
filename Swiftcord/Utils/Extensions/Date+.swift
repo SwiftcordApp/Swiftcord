@@ -9,6 +9,6 @@ import Foundation
 
 extension Date {
 	func isSameDay(as date: Date) -> Bool {
-		return Calendar.current.isDate(self, inSameDayAs: date)
+		Calendar.current.isDate(self, inSameDayAs: date)
 	}
 }

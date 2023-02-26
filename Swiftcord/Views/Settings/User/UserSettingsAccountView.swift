@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
+import DiscordKitCore
 
 struct UserSettingsAccountView: View {
 	let user: CurrentUser
@@ -17,10 +17,7 @@ struct UserSettingsAccountView: View {
 	@State private var confirmNewPw = ""
 
 	var changePwDialog: some View {
-		DialogView(
-			title: "settings.user.chPwd.title",
-			description: "settings.user.chPwd.caption"
-		) {
+        DialogView(title: "settings.user.chPwd.title", description: "settings.user.chPwd.caption") {
 			Button(action: { changePwSheetShown = false }) {
 				Text("action.close")
 			}

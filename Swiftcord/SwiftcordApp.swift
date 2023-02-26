@@ -13,6 +13,9 @@ import OSLog
 // There's probably a better place to put global constants
 let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 
+// MARK: Global Objects
+let restAPI = DiscordREST()
+
 @main
 struct SwiftcordApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -25,7 +28,6 @@ struct SwiftcordApp: App {
 	@StateObject var updaterViewModel = UpdaterViewModel()
 	#endif
 	@StateObject private var gateway = DiscordGateway()
-	@StateObject private var restAPI = DiscordREST()
 	@StateObject private var state = UIState()
 	@StateObject private var acctManager = AccountSwitcher()
 
@@ -39,7 +41,6 @@ struct SwiftcordApp: App {
 				LoginView() // Doesn't matter if login view is big enough
 					.environmentObject(gateway)
 					.environmentObject(state)
-					.environmentObject(restAPI)
 					.environmentObject(acctManager)
 					.navigationTitle("Login")
 			} else {
@@ -47,14 +48,18 @@ struct SwiftcordApp: App {
 					.overlay(LoadingView())
 					.environmentObject(gateway)
 					.environmentObject(state)
-					.environmentObject(restAPI)
 					.environmentObject(acctManager)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 				// .environment(\.managedObjectContext, persistenceController.container.viewContext)
-					.preferredColorScheme(selectedTheme == "dark"
-										  ? .dark
-										  : (selectedTheme == "light" ? .light : nil))
+					.preferredColorScheme(
+						selectedTheme == "dark"
+						? .dark
+						: (selectedTheme == "light" ? .light : nil)
+					)
 					.onAppear {
+						// Fix list assertion errors
+						UserDefaults.standard.set(false, forKey: "NSWindowAssertWhenDisplayCycleLimitReached")
+
 						guard gateway.socket == nil else { return }
 						guard let token = acctManager.getActiveToken() else {
 							state.attemptLogin = true
@@ -94,16 +99,19 @@ struct SwiftcordApp: App {
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
 		}
+		.windowStyle(.hiddenTitleBar)
+		.windowToolbarStyle(.unified)
 
 		Settings {
 			SettingsView()
 				.environmentObject(gateway)
-				.environmentObject(restAPI)
 				.environmentObject(state)
 				.environmentObject(acctManager)
-				.preferredColorScheme(selectedTheme == "dark"
-									  ? .dark
-									  : (selectedTheme == "light" ? .light : .none))
+				.preferredColorScheme(
+					selectedTheme == "dark"
+					? .dark
+					: (selectedTheme == "light" ? .light : .none)
+				)
 				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
 	}

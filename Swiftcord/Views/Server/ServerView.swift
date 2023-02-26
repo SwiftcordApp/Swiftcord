@@ -7,7 +7,6 @@
 
 import SwiftUI
 import DiscordKit
-import DiscordKitCommon
 import DiscordKitCore
 
 class ServerContext: ObservableObject {
@@ -24,7 +23,6 @@ struct ServerView: View {
 
     @EnvironmentObject var state: UIState
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var audioManager: AudioCenterManager
 
 	@StateObject var serverCtx: ServerContext
@@ -35,9 +33,9 @@ struct ServerView: View {
 		else { return }
 
 		if let lastChannel = UserDefaults.standard.string(forKey: "lastCh.\(serverCtx.guild!.id)"),
-		   let lastChObj = channels.first(where: { $0.id == lastChannel }) {
-			   serverCtx.channel = lastChObj
-			   return
+           let lastChObj = channels.first(where: { $0.id == lastChannel }) { // swiftlint:disable:this indentation_width
+            serverCtx.channel = lastChObj
+            return
         }
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
@@ -108,14 +106,16 @@ struct ServerView: View {
 				}
 
                 if !gateway.connected || !gateway.reachable {
-					Label(gateway.reachable
-						  ? "Reconnecting..."
-						  : "No network connectivity",
-						  systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill")
-						.frame(maxWidth: .infinity)
-						.padding(.vertical, 4)
-						.background(gateway.reachable ? .orange : .red)
-						.animation(.easeIn, value: gateway.reachable)
+                    Label(
+                        gateway.reachable
+                        ? "Reconnecting..."
+                        : "No network connectivity",
+                        systemImage: gateway.reachable ? "arrow.clockwise" : "bolt.horizontal.fill"
+                    )
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 4)
+                    .background(gateway.reachable ? .orange : .red)
+                    .animation(.easeIn, value: gateway.reachable)
                 }
 				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
@@ -147,9 +147,10 @@ struct ServerView: View {
 					Button {
 						NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
 					} label: {
-						Image(systemName: serverCtx.channel?.type == .dm
-							  ? "at"
-							  : (serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
+                        Image(
+                            systemName: serverCtx.channel?.type == .dm
+                            ? "at"
+                            : (serverCtx.channel?.type == .groupDM ? "person.2.fill" : "number")
 						).foregroundColor(.primary.opacity(0.8))
 					}
 					Text(serverCtx.channel?.label(gateway.cache.users) ?? "No Channel")
@@ -172,8 +173,7 @@ struct ServerView: View {
         .onAppear {
 			if let guild = guild { bootstrapGuild(with: guild) }
 
-			// swiftlint:disable identifier_name
-            evtID = gateway.onEvent.addHandler { (evt, d) in
+            /* evtID = gateway.onEvent.addHandler { evt in
                 switch evt {
                 /*case .channelUpdate:
                     guard let updatedCh = d as? Channel else { break }
@@ -186,10 +186,8 @@ struct ServerView: View {
                     }
                     // For some reason, updating one element doesnt update the UI
                     // loadChannels()*/
-                case .typingStart:
-                    guard let typingData = d as? TypingStart,
-                          typingData.user_id != gateway.cache.user!.id
-                    else { break }
+				case .typingStart(let typingData):
+                    guard typingData.user_id != gateway.cache.user!.id else { break }
 
 					// Remove existing typing items, if present (prevent duplicates)
 					serverCtx.typingStarted[typingData.channel_id]?.removeAll {
@@ -208,7 +206,7 @@ struct ServerView: View {
                     }
                 default: break
                 }
-            }
+            } */
         }
         .onDisappear {
             if let evtID = evtID { _ = gateway.onEvent.removeHandler(handler: evtID) }

@@ -27,7 +27,7 @@ struct AttachmentImage: View {
 				AttachmentLoading(width: width, height: height).transition(.customOpacity)
 			}
 		}
-		.cornerRadius(4)
+		.cornerRadius(8)
 		.frame(idealWidth: CGFloat(width), idealHeight: CGFloat(height))
 		.fixedSize()
 	}

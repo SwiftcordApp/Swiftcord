@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import DiscordKitCommon
 import DiscordKitCore
+import DiscordKit
 import os
 
 public class AccountSwitcher: NSObject, ObservableObject {
@@ -103,7 +103,9 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			}
 		}
 
-		await DiscordREST(token: token).logOut()
+		let tempAPI = DiscordREST()
+		tempAPI.setToken(token: token)
+		try? await tempAPI.logOut()
 	}
 	/// Mark the current user as invalid - i.e. remove it from the token store and acc
 	///
@@ -211,7 +213,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 			AccountSwitcher.log.warning("Accounts empty! This should never happen!")
 			return
 		}
-		accounts.insert(accounts.remove(at: accounts.firstIndex(where: { $0.id == user.id }) ?? 0), at: 0)
+		accounts.insert(accounts.remove(at: accounts.firstIndex { $0.id == user.id } ?? 0), at: 0)
 	}
 
 	override init() {

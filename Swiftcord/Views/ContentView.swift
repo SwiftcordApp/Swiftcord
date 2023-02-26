@@ -10,76 +10,78 @@ import CoreData
 import os
 import DiscordKit
 import DiscordKitCore
-import DiscordKitCommon
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     /*@FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<MessageItem>*/
+     sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
+     animation: .default)
+     private var items: FetchedResults<MessageItem>*/
 
-	private static var insetOffset: CGFloat {
-		// #available cannot be used in ternary statements (yet)
-		if #available(macOS 13.0, *) { return 0 } else { return -13 }
-	}
-	private static var dividerOffset: CGFloat {
-		// #available cannot be used in ternary statements (yet)
-		if #available(macOS 13.0, *) { return -8 } else { return -13 }
-	}
+    private static var insetOffset: CGFloat {
+        // #available cannot be used in ternary statements (yet)
+        if #available(macOS 13.0, *) { return 0 } else { return -13 }
+    }
+    private static var dividerOffset: CGFloat {
+        // #available cannot be used in ternary statements (yet)
+        if #available(macOS 13.0, *) { return -8 } else { return -13 }
+    }
 
     @State private var loadingGuildID: Snowflake?
-	@State private var presentingOnboarding = false
-	@State private var presentingAddServer = false
-	@State private var skipWhatsNew = false
-	@State private var whatsNewMarkdown: String?
+    @State private var presentingOnboarding = false
+    @State private var presentingAddServer = false
+    @State private var skipWhatsNew = false
+    @State private var whatsNewMarkdown: String?
 
     @StateObject private var audioManager = AudioCenterManager()
 
     @EnvironmentObject var gateway: DiscordGateway
-	@EnvironmentObject var restAPI: DiscordREST
     @EnvironmentObject var state: UIState
-	@EnvironmentObject var accountsManager: AccountSwitcher
+    @EnvironmentObject var accountsManager: AccountSwitcher
 
-	@AppStorage("local.seenOnboarding") private var seenOnboarding = false
-	@AppStorage("local.previousBuild") private var prevBuild: String?
+    @AppStorage("local.seenOnboarding") private var seenOnboarding = false
+    @AppStorage("local.previousBuild") private var prevBuild: String?
 
     private let log = Logger(category: "ContentView")
 
-	private func makeDMGuild() -> Guild {
-		return Guild(id: "@me",
-					 name: "DMs",
-					 owner_id: "",
-					 afk_timeout: 0,
-					 verification_level: .none,
-					 default_message_notifications: .all,
-					 explicit_content_filter: .disabled,
-					 roles: [], emojis: [], features: [],
-					 mfa_level: .none,
-					 system_channel_flags: 0,
-					 channels: gateway.cache.dms,
-					 premium_tier: .none,
-					 preferred_locale: .englishUS,
-					 nsfw_level: .default,
-					 premium_progress_bar_enabled: false)
-	}
+    private func makeDMGuild() -> Guild {
+        Guild(
+            id: "@me",
+            name: "DMs",
+            owner_id: "",
+            afk_timeout: 0,
+            verification_level: .none,
+            default_message_notifications: .all,
+            explicit_content_filter: .disabled,
+            roles: [], emojis: [], features: [],
+            mfa_level: .none,
+            system_channel_flags: 0,
+            channels: gateway.cache.dms,
+            premium_tier: .none,
+            preferred_locale: .englishUS,
+            nsfw_level: .default,
+            premium_progress_bar_enabled: false
+        )
+    }
 
-	private func loadLastSelectedGuild() {
-		if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
-		   gateway.cache.guilds[lGID] != nil || lGID == "@me" {
-			state.selectedGuildID = lGID
-		} else { state.selectedGuildID = "@me" }
-	}
+    private func loadLastSelectedGuild() {
+        if let lGID = UserDefaults.standard.string(forKey: "lastSelectedGuild"),
+            gateway.cache.guilds[lGID] != nil || lGID == "@me" {
+            state.selectedGuildID = lGID
+        } else {
+            state.selectedGuildID = "@me"
+        }
+    }
 
     private var serverListItems: [ServerListItem] {
         let unsortedGuilds = gateway.cache.guilds.values.filter { guild in
             !gateway.guildFolders.contains { folder in
                 folder.guild_ids.contains(guild.id)
-			}
+            }
         }
-			.sorted(by: { lhs, rhs in lhs.joined_at! > rhs.joined_at! })
-            .map({ ServerListItem.guild($0) })
+        .sorted { lhs, rhs in lhs.joined_at! > rhs.joined_at! }
+        .map { ServerListItem.guild($0) }
         return unsortedGuilds + gateway.guildFolders.compactMap { folder -> ServerListItem? in
             if folder.id != nil {
                 let guilds = folder.guild_ids.compactMap {
@@ -103,13 +105,14 @@ struct ContentView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-						selected: state.selectedGuildID == "@me",
+                        selected: state.selectedGuildID == "@me",
                         name: "Home",
-                        assetIconName: "DiscordIcon",
-						onSelect: { state.selectedGuildID = "@me" }
-                    ).padding(.top, 4)
+                        assetIconName: "DiscordIcon"
+                    ) {
+                        state.selectedGuildID = "@me"
+                    }.padding(.top, 4)
 
-					HorizontalDividerView().frame(width: 32)
+                    HorizontalDividerView().frame(width: 32)
 
                     ForEach(self.serverListItems) { item in
                         switch item {
@@ -117,7 +120,7 @@ struct ContentView: View {
                             ServerButton(
                                 selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(GatewayConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                                 isLoading: loadingGuildID == guild.id,
                                 onSelect: { state.selectedGuildID = guild.id }
                             )
@@ -135,83 +138,64 @@ struct ContentView: View {
                         name: "Add a Server",
                         systemIconName: "plus",
                         bgColor: .green,
-                        noIndicator: true,
-                        onSelect: { presentingAddServer = true }
-					).padding(.bottom, 4)
+                        noIndicator: true
+                    ) {
+                        presentingAddServer = true
+                    }.padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-			.background(
-				List {}
-					.listStyle(.sidebar)
-					.overlay(
-						Rectangle()
-							.frame(width: 1, alignment: .bottom)
-							.foregroundColor(Color(nsColor: .separatorColor))
-							.padding(.top, ContentView.dividerOffset),
-						alignment: .trailing
-					)
-					.overlay(.black.opacity(0.2))
-			)
+            .background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
             .frame(maxHeight: .infinity, alignment: .top)
-            .safeAreaInset(edge: .top) {
-                List {}
-					.listStyle(.sidebar)
-					.frame(width: 72, height: 0)
-					.frame(maxHeight: 0)
-					.offset(y: ContentView.insetOffset)
-					.overlay(
-						Rectangle()
-							.frame(height: 1, alignment: .bottom)
-							.foregroundColor(Color(nsColor: .separatorColor)),
-						alignment: .top
-					)
-            }
 
-			ServerView(
-				guild: state.selectedGuildID == nil
-				? nil
-				: (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
-			)
+            ServerView(
+                guild: state.selectedGuildID == nil
+                ? nil
+                : (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
+            )
+        }
+        // Blur the area behind the toolbar so the content doesn't show thru
+        .safeAreaInset(edge: .top) {
+            VStack {
+                Divider().frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.ultraThinMaterial)
         }
         .environmentObject(audioManager)
-		.onChange(of: state.selectedGuildID) { id in
+        .onChange(of: state.selectedGuildID) { id in
             guard let id = id else { return }
-			UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
+            UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
         }
-        .onChange(of: state.loadingState, perform: { state in
-			if state == .gatewayConn { loadLastSelectedGuild() }
-			if state == .messageLoad,
-			   !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-				if !seenOnboarding { presentingOnboarding = true }
-				Task {
-					do {
-						whatsNewMarkdown = try await GitHubAPI
-							.getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
-							.body
-					} catch {
-						skipWhatsNew = true
-					}
-					presentingOnboarding = true
-				}
-			}
-        })
+        .onChange(of: state.loadingState) { state in
+            if state == .gatewayConn { loadLastSelectedGuild() }
+            if state == .messageLoad,
+               !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String { // swiftlint:disable:this indentation_width
+                if !seenOnboarding { presentingOnboarding = true }
+                Task {
+                    do {
+                        whatsNewMarkdown = try await GitHubAPI
+                            .getReleaseByTag(org: "SwiftcordApp", repo: "Swiftcord", tag: "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")")
+                            .body
+                    } catch {
+                        skipWhatsNew = true
+                    }
+                    presentingOnboarding = true
+                }
+            }
+        }
         .onAppear {
-			if state.loadingState == .messageLoad { loadLastSelectedGuild() }
+            if state.loadingState == .messageLoad { loadLastSelectedGuild() }
 
-            _ = gateway.onEvent.addHandler { (evt, data) in
+            _ = gateway.onEvent.addHandler { evt in
                 switch evt {
-                case .ready:
+                case .userReady(let payload):
                     state.loadingState = .gatewayConn
-					guard let payload = data as? ReadyEvt else {
-						log.critical("Could not cast data to ready event! This should never happen!")
-						return
-					}
-					accountsManager.onSignedIn(with: payload.user)
+                    accountsManager.onSignedIn(with: payload.user)
                     fallthrough
                 case .resumed:
-                    gateway.send(op: .voiceStateUpdate, data: GatewayVoiceStateUpdate(
+                    gateway.send(.voiceStateUpdate, data: GatewayVoiceStateUpdate(
                         guild_id: nil,
                         channel_id: nil,
                         self_mute: state.selfMute,
@@ -221,23 +205,23 @@ struct ContentView: View {
                 default: break
                 }
             }
-			_ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
+            _ = gateway.socket?.onSessionInvalid.addHandler { state.loadingState = .initial }
         }
-		.sheet(isPresented: $presentingOnboarding) {
-			seenOnboarding = true
-			prevBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-		} content: {
-			OnboardingView(
-				skipOnboarding: seenOnboarding,
-				skipWhatsNew: skipWhatsNew,
-				newMarkdown: $whatsNewMarkdown,
-				presenting: $presentingOnboarding
-			)
-		}
-		.sheet(isPresented: $presentingAddServer) {
-			ServerJoinView(presented: $presentingAddServer)
-		}
-	}
+        .sheet(isPresented: $presentingOnboarding) {
+            seenOnboarding = true
+            prevBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        } content: {
+            OnboardingView(
+                skipOnboarding: seenOnboarding,
+                skipWhatsNew: skipWhatsNew,
+                newMarkdown: $whatsNewMarkdown,
+                presenting: $presentingOnboarding
+            )
+        }
+        .sheet(isPresented: $presentingAddServer) {
+            ServerJoinView(presented: $presentingAddServer)
+        }
+    }
 
     private enum ServerListItem: Identifiable {
         case guild(Guild), guildFolder(ServerFolder.GuildFolder)
