@@ -9,6 +9,7 @@ import SwiftUI
 import DiscordKitCore
 import DiscordKit
 import os
+import Sentry
 
 public class AccountSwitcher: NSObject, ObservableObject {
 	@Published var accounts: [AccountMeta] = []
@@ -106,6 +107,9 @@ public class AccountSwitcher: NSObject, ObservableObject {
 		let tempAPI = DiscordREST()
 		tempAPI.setToken(token: token)
 		try? await tempAPI.logOut()
+
+		// Clear the current user in the Sentry SDK
+		SentrySDK.setUser(nil)
 	}
 	/// Mark the current user as invalid - i.e. remove it from the token store and acc
 	///
@@ -158,7 +162,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 		if let oldToken = Keychain.load(key: SwiftcordApp.legacyTokenKeychainKey) {
 			Keychain.remove(key: SwiftcordApp.legacyTokenKeychainKey)
 			saveToken(for: user.id, token: oldToken)
-			AccountSwitcher.log.info("Migrated old token to new storage")
+			Self.log.info("Migrated old token to new storage")
 		}
 
 		var inconsistency = false
@@ -181,7 +185,7 @@ public class AccountSwitcher: NSObject, ObservableObject {
 		if accounts[curUserIdx].name != user.username ||
 			accounts[curUserIdx].discrim != user.discriminator ||
 			accounts[curUserIdx].avatar != user.avatarURL(size: 80) {
-			AccountSwitcher.log.info("User meta for current user is outdated, it will be updated")
+			Self.log.info("User meta for current user is outdated, it will be updated")
 			accounts[curUserIdx] = AccountMeta(user: user)
 			inconsistency = true
 		}
@@ -198,22 +202,25 @@ public class AccountSwitcher: NSObject, ObservableObject {
 				// Invalid account
 				accounts.remove(at: idx)
 				inconsistency = true
-				AccountSwitcher.log.warning("Found dupe, or no token found in keychain for account \(account.id)")
+				Self.log.warning("Found dupe, or no token found in keychain for account \(account.id)")
 			} else { accountIDs.append(account.id) }
 		}
 
 		if inconsistency {
-			AccountSwitcher.log.warning("Fixing account meta inconsistencies")
+			Self.log.warning("Fixing account meta inconsistencies")
 			writeAccounts()
 		}
 
 		// Move the current active account to the top
 		// Remove current active account and reinsert it at the top
 		guard !accounts.isEmpty else {
-			AccountSwitcher.log.warning("Accounts empty! This should never happen!")
+			Self.log.warning("Accounts empty! This should never happen!")
 			return
 		}
 		accounts.insert(accounts.remove(at: accounts.firstIndex { $0.id == user.id } ?? 0), at: 0)
+
+		// Set Sentry user ID in the SDK to link bugs with user reports
+		SentrySDK.setUser(.init(userId: user.id))
 	}
 
 	override init() {

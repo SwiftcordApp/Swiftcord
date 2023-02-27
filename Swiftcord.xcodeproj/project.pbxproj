@@ -30,7 +30,6 @@
 		3642994F286801C900483D0A /* LoFiMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */; };
 		36429950286801C900483D0A /* CurrentUserFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520AC627D39A00009FD740 /* CurrentUserFooter.swift */; };
 		36429951286801C900483D0A /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4B27C8BF5000A9ED72 /* TagCloudView.swift */; };
-		36429952286801C900483D0A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889027C0AF3200720909 /* Persistence.swift */; };
 		36429953286801C900483D0A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
 		36429954286801C900483D0A /* CurrentUser+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D5752844B9C500B11857 /* CurrentUser+.swift */; };
 		36429955286801C900483D0A /* DiscordChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53667285AD11000DD9857 /* DiscordChannelButton.swift */; };
@@ -153,7 +152,6 @@
 		DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A888927C0AF3000720909 /* ContentView.swift */; };
 		DA4A888C27C0AF3200720909 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888B27C0AF3200720909 /* Assets.xcassets */; };
 		DA4A888F27C0AF3200720909 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */; };
-		DA4A889127C0AF3200720909 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889027C0AF3200720909 /* Persistence.swift */; };
 		DA4A889C27C0B23C00720909 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A889B27C0B23C00720909 /* WebView.swift */; };
 		DA4A88E527C3482A00720909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A88E427C3482A00720909 /* LoginView.swift */; };
 		DA4A891427C49B1100720909 /* ServerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A891327C49B1000720909 /* ServerButton.swift */; };
@@ -313,7 +311,6 @@
 		DA4A888927C0AF3000720909 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA4A888B27C0AF3200720909 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA4A888E27C0AF3200720909 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DA4A889027C0AF3200720909 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DA4A889527C0AF3200720909 /* Swiftcord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swiftcord.entitlements; sourceTree = "<group>"; };
 		DA4A889B27C0B23C00720909 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA4A88E427C3482A00720909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -555,7 +552,6 @@
 				DA32EF6327CB770E00A9ED72 /* DataModels */,
 				DA4A888727C0AF3000720909 /* SwiftcordApp.swift */,
 				DA2802782808337B00B14E5C /* AppDelegate.swift */,
-				DA4A889027C0AF3200720909 /* Persistence.swift */,
 				900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */,
 				DA4A889527C0AF3200720909 /* Swiftcord.entitlements */,
 				DA23843827CB934D009E15E0 /* Info.plist */,
@@ -1096,7 +1092,6 @@
 				36429950286801C900483D0A /* CurrentUserFooter.swift in Sources */,
 				36429951286801C900483D0A /* TagCloudView.swift in Sources */,
 				DACBD130287BDE9D00CED3EF /* DialogView.swift in Sources */,
-				36429952286801C900483D0A /* Persistence.swift in Sources */,
 				DAA57E21289221A700C9A931 /* SwiftyGifView.swift in Sources */,
 				DA91017128C38E0400DD076B /* CurrentUserFooter+.swift in Sources */,
 				36429953286801C900483D0A /* LoadingView.swift in Sources */,
@@ -1204,7 +1199,6 @@
 				DAAFB5C1282A64CD00807B54 /* LoFiMessageView.swift in Sources */,
 				DA520AC727D39A00009FD740 /* CurrentUserFooter.swift in Sources */,
 				DA32EF4C27C8BF5000A9ED72 /* TagCloudView.swift in Sources */,
-				DA4A889127C0AF3200720909 /* Persistence.swift in Sources */,
 				DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */,
 				DA54D5762844B9C500B11857 /* CurrentUser+.swift in Sources */,
 				DA91017028C38E0400DD076B /* CurrentUserFooter+.swift in Sources */,
