@@ -273,6 +273,8 @@
 		90F77AAA284C87E900166BF3 /* AppCenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
 		9FCE7B1C28C7140100213A3F /* ServerFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFolder.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA03DA3E284F1E9200257790 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		DA0FC06929AC385B00ADB012 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA0FC06A29AC4B6900ADB012 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -963,6 +965,8 @@
 				he,
 				"zh-Hant",
 				tr,
+				nl,
+				pl,
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
@@ -1305,6 +1309,8 @@
 				DAB7792F28F9176400A17F54 /* he */,
 				DAB7793028F9177B00A17F54 /* zh-Hant */,
 				DAB7793128F9179400A17F54 /* tr */,
+				DA0FC06929AC385B00ADB012 /* nl */,
+				DA0FC06A29AC4B6900ADB012 /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
