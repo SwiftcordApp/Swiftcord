@@ -16,6 +16,20 @@ struct ChannelList: View {
 	@Binding var selCh: Channel?
 	@AppStorage("nsfwShown") var nsfwShown: Bool = true
 	@EnvironmentObject var serverCtx: ServerContext
+	@EnvironmentObject var gateway: DiscordGateway
+
+	@_transparent @_optimize(speed) @ViewBuilder
+	private func item(for channel: Channel) -> some View {
+		ChannelButton(channel: channel, selectedCh: $selCh)
+			.equatable()
+			.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
+			.listRowBackground(Spacer().overlay(alignment: .leading) {
+				// Check if we should show unread indicator
+				if let lastID = gateway.readState[channel.id]?.last_message_id, let _chLastID = channel.last_message_id, let chLastID = Int(_chLastID), lastID.intValue < chLastID {
+					Circle().fill(.white).frame(width: 8, height: 8).offset(x: 2)
+				}
+			})
+	}
 
 	var body: some View {
 		List {
@@ -35,10 +49,7 @@ struct ChannelList: View {
 					).textCase(.uppercase).padding(.leading, 8)
 				) {
 					let channels = filteredChannels.discordSorted()
-					ForEach(channels, id: \.id) { channel in
-						ChannelButton(channel: channel, selectedCh: $selCh)
-							.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
-					}
+					ForEach(channels, id: \.id) { channel in item(for: channel) }
 				}
 			}
 
@@ -55,10 +66,7 @@ struct ChannelList: View {
 				}.discordSorted()
 				if !channels.isEmpty {
 					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
-						ForEach(channels, id: \.id) { channel in
-							ChannelButton(channel: channel, selectedCh: $selCh)
-								.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
-						}
+						ForEach(channels, id: \.id) { channel in item(for: channel) }
 					}
 				}
 			}
