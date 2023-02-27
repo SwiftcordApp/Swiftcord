@@ -14,7 +14,7 @@
 
 ---
 
-Swiftcord is beautiful, follows design principals of the official client and most importantly, its fast!
+Swiftcord is beautiful, follows design principals of the official client while keeping the macOS look and feel that you love, and most importantly, its (really) fast!
 
 Powered by [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), a Swift Discord implementation built
 from the ground up.
@@ -24,10 +24,9 @@ me to continue investing time into Swiftcord.**
 
 ## Supporters
 Supporters get feature releases 2 weeks before they are made public! 
-Huge thanks to all my supporters, I'm extremely grateful to every single one of them <3
-### Red-hot Supporter 🔥
-**Be a red-hot supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
-have the skills or time required!** 
+
+**Be a supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
+have the skills or time required! It's a great way of thanking me for my work.** 
 <!--<table>
   <tr>
     <td>
@@ -55,9 +54,7 @@ have the skills or time required!**
   </tr>
 </table>-->
 
-### Extremely Cool Supporter 🧊
-* **`MrDirectory`**
-* An extremely generous anonymous supporter
+<!--### Extremely Cool Supporter 🧊-->
 
 ## Contents
 * [Motivation](#motivation)
@@ -85,7 +82,7 @@ Releases from the channels below are universal bundles, and run natively on
 both Apple Silicon and Intel.
 
 ### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
-[![Nightly build action status](https://img.shields.io/github/actions/workflow/status/SwiftcordApp/Swiftcord/build.yaml.svg?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
+[![Nightly build action status](https://img.shields.io/github/actions/workflow/status/SwiftcordApp/Swiftcord/build.yaml.svg?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/build.yaml/main/swiftcord-canary.zip)
 
 For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 

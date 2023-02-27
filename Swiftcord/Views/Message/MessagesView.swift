@@ -108,6 +108,19 @@ struct DayDividerView: View {
     }
 }
 
+struct UnreadDivider: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            Rectangle().fill(.red).frame(height: 1).frame(maxWidth: .infinity)
+            Text("New")
+                .textCase(.uppercase).font(.headline)
+                .padding(.horizontal, 4).padding(.vertical, 2)
+                .background(RoundedRectangle(cornerRadius: 4).fill(.red))
+                .foregroundColor(.white)
+        }.padding(.vertical, 4)
+    }
+}
+
 struct MessagesView: View {
     @EnvironmentObject var gateway: DiscordGateway
     @EnvironmentObject var state: UIState
@@ -162,8 +175,13 @@ struct MessagesView: View {
 
             cell(for: msg, shrunk: shrunk)
 
-            if !shrunk {
-                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+            if !isLastItem, let channelID = ctx.channel?.id {
+                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx+1].id
+
+                if newMsg { UnreadDivider() }
+                if !shrunk && !newMsg {
+                    Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+                }
             }
 
             if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp) {

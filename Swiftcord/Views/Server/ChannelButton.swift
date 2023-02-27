@@ -10,7 +10,11 @@ import DiscordKitCore
 import DiscordKit
 import CachedAsyncImage
 
-struct ChannelButton: View {
+struct ChannelButton: View, Equatable {
+	static func == (lhs: ChannelButton, rhs: ChannelButton) -> Bool {
+		lhs.selectedCh == rhs.selectedCh && lhs.channel == rhs.channel
+	}
+
     let channel: Channel
     @Binding var selectedCh: Channel?
 
