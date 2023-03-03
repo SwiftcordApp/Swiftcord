@@ -55,18 +55,3 @@ extension View {
 		}
 	}
 }
-
-extension View {
-	
-	/// Embeds the view in a navigation view.
-	/// - Returns: A navigation view containing the original view.
-	func embedInNavigation() -> some View {
-		NavigationView { self }
-	}
-	
-	/// Erases the type of the view and returns an AnyView instance.
-	/// - Returns: An AnyView instance that wraps the original view.
-	func eraseToAnyView() -> AnyView {
-		AnyView(erasing: self)
-	}
-}
