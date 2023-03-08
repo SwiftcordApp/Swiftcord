@@ -16,6 +16,16 @@ let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 // MARK: Global Objects
 let restAPI = DiscordREST()
 
+fileprivate extension Scene {
+	func contentSizedWindowResizability() -> some Scene {
+		if #available(macOS 13.0, *) {
+			return self.windowResizability(.contentSize)
+		} else {
+			return self
+		}
+	}
+}
+
 @main
 struct SwiftcordApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -115,7 +125,7 @@ struct SwiftcordApp: App {
 					? .dark
 					: (selectedTheme == "light" ? .light : .none)
 				)
-		}
+		}.contentSizedWindowResizability()
 	}
 }
 

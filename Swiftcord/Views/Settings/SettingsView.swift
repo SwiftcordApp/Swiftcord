@@ -177,7 +177,7 @@ private extension SettingsView {
 							navigationItem(item: child)
 						}
 					}
-				}.frame(idealWidth: 215)
+				}.navigationSplitViewColumnWidth(215)
 			} detail: {
 				ScrollView {
 					Group {
@@ -194,10 +194,11 @@ private extension SettingsView {
 							Text("Unimplemented view: \(selectedPage.name.rawValue)")
 						}
 					}.padding(20)
-				}
+				}.navigationSplitViewColumnWidth(500)
 			}
 			.searchable(text: $filter, placement: .sidebar)
 			.navigationTitle(selectedPage.nameString)
+			.frame(minHeight: 470)
 		}
 	}
 

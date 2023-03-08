@@ -16,8 +16,6 @@ struct UserSettingsProfileView: View {
 
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
-			Text("User Profile").font(.title)
-
 			HStack(alignment: .top) {
 				VStack(alignment: .leading) {
 					Text("About Me").textCase(.uppercase).font(.headline)

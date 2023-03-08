@@ -51,7 +51,6 @@ struct UserSettingsAccountView: View {
 
             GroupBox {
                 VStack(alignment: .leading, spacing: 4) {
-
                     Text("settings.user.phoneNum").textCase(.uppercase).font(.headline).opacity(0.75)
                     Text(user.phone ?? "You haven't added a phone number yet.")
                         .font(.system(size: 16))
