@@ -75,8 +75,13 @@ private extension SettingsView {
 			let icon: Icon?
 
 			struct Icon: Hashable {
+				enum IconResource: Equatable, Hashable {
+					case system(_ name: String)
+					case asset(_ name: String)
+				}
+
 				let baseColor: Color
-				let icon: String
+				let icon: IconResource
 			}
 
 			enum Name: String {
@@ -110,27 +115,27 @@ private extension SettingsView {
 		}
 		private static let pages: [Page] = [
 			.init(.userSection, children: [
-				.init(.account, icon: .init(baseColor: .blue, icon: "person.fill")),
-				.init(.profile, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.privacy, icon: .init(baseColor: .red, icon: "shield.lefthalf.filled"))
+				.init(.account, icon: .init(baseColor: .blue, icon: .system("person.fill"))),
+				.init(.profile, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.privacy, icon: .init(baseColor: .red, icon: .system("shield.lefthalf.filled")))
 			]),
 			.init(.paymentSection, children: [
-				.init(.nitro, icon: .init(baseColor: .accentColor, icon: "person.crop.circle")),
-				.init(.boost, icon: .init(baseColor: .green, icon: "person.crop.circle")),
-				.init(.subscriptions, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.gift, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.billing, icon: .init(baseColor: .blue, icon: "person.crop.circle"))
+				.init(.nitro, icon: .init(baseColor: .gray, icon: .asset("NitroSubscriber"))),
+				.init(.boost, icon: .init(baseColor: .green, icon: .system("person.crop.circle"))),
+				.init(.subscriptions, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.gift, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.billing, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
 			]),
 			.init(.appSection, children: [
-				.init(.appearance, icon: .init(baseColor: .black, icon: "person.crop.circle")),
-				.init(.accessibility, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.voiceVideo, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.textImages, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.notifs, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.keybinds, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.lang, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.streamer, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
-				.init(.advanced, icon: .init(baseColor: .blue, icon: "person.crop.circle"))
+				.init(.appearance, icon: .init(baseColor: .black, icon: .system("person.crop.circle"))),
+				.init(.accessibility, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.voiceVideo, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.textImages, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.notifs, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.keybinds, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.lang, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.streamer, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.advanced, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
 			])
 		]
 
@@ -156,10 +161,17 @@ private extension SettingsView {
 							Text(item.nameString)
 						} icon: {
 							if let icon = item.icon {
-								Image(systemName: icon.icon)
-									.foregroundColor(.primary)
-									.frame(width: 20, height: 20)
-									.background(RoundedRectangle(cornerRadius: 5, style: .continuous).fill(icon.baseColor.gradient))
+								Group {
+									switch icon.icon {
+									case .system(let name):
+										Image(systemName: name)
+									case .asset(let name):
+										Image(name).resizable().padding(2)
+									}
+								}
+								.foregroundColor(.primary)
+								.frame(width: 20, height: 20)
+								.background(RoundedRectangle(cornerRadius: 5, style: .continuous).fill(icon.baseColor.gradient))
 							} else {
 								EmptyView()
 							}
