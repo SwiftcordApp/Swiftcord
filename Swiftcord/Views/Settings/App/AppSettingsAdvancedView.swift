@@ -10,6 +10,7 @@ import AppCenterAnalytics
 
 struct AppSettingsAdvancedView: View {
 	@AppStorage("local.analytics") private var analyticsEnabled = true
+	@AppStorage("local.newSettingsUI") private var newSettingsUI = true
 	@State private var hasToggledAnalytics = false
 
     var body: some View {
@@ -37,6 +38,23 @@ struct AppSettingsAdvancedView: View {
 			Divider()
 
 			Text("settings.app.advanced.crashes")
+
+			Divider()
+
+			Text("Interface Trial")
+				.font(.headline)
+				.textCase(.uppercase)
+				.opacity(0.75)
+			VStack(alignment: .leading) {
+				Toggle(isOn: $newSettingsUI) {
+					Text("Try new Settings UI beta").frame(maxWidth: .infinity, alignment: .leading)
+				}
+				.toggleStyle(.switch)
+				.tint(.green)
+				if newSettingsUI {
+					Text("Keep in mind that this new UI is not yet fully functional").font(.caption)
+				}
+			}
 		}
     }
 }

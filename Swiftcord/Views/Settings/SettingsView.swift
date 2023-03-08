@@ -12,9 +12,15 @@ import DiscordKitCore
 struct SettingsView: View {
     @EnvironmentObject var gateway: DiscordGateway
 
+	@AppStorage("local.newSettingsUI") private var newUI = true
+
     var body: some View {
         if let user = gateway.cache.user {
-			SettingsWithUserView(user: user)
+			if #available(macOS 13.0, *), newUI {
+				ModernSettings(user: user)
+			} else {
+				LegacySettings(user: user)
+			}
         } else {
 			NoGatewayView()
         }
@@ -22,7 +28,7 @@ struct SettingsView: View {
 }
 
 private extension SettingsView {
-	struct SettingsWithUserView: View {
+	struct LegacySettings: View {
 		let user: CurrentUser
 
 		var body: some View {
@@ -48,6 +54,150 @@ private extension SettingsView {
 				}
 			}
 			.frame(width: 900, height: 600)
+		}
+	}
+	@available(macOS 13, *)
+	struct ModernSettings: View {
+		let user: CurrentUser
+
+		private struct Page: Hashable, Identifiable {
+			internal init(_ name: Name, icon: Icon? = nil, children: [SettingsView.ModernSettings.Page] = []) {
+				self.children = children
+				self.name = name
+				self.icon = icon
+			}
+
+			var id: String { name.rawValue }
+
+			let children: [Page]
+			let name: Name
+			var nameString: LocalizedStringKey { LocalizedStringKey(name.rawValue) }
+			let icon: Icon?
+
+			struct Icon: Hashable {
+				let baseColor: Color
+				let icon: String
+			}
+
+			enum Name: String {
+				// MARK: User Settings
+				case userSection = "User Settings"
+				case account = "My Account"
+				case profile = "User Profile"
+				case privacy = "Privacy & Safety"
+				case apps = "Authorized Apps"
+				case connections = "Connections"
+				case logOut = "Log Out"
+				// MARK: Payment Settings
+				case paymentSection = "Payment Settings"
+				case nitro = "Nitro"
+				case boost = "Server Boost"
+				case subscriptions = "Subscriptions"
+				case gift = "Gift Inventory"
+				case billing = "Billing"
+				// MARK: App Settings
+				case appSection = "App Settings"
+				case appearance = "settings.app.appearance"
+				case accessibility = "settings.app.accessibility"
+				case voiceVideo = "settings.app.voiceVideo"
+				case textImages = "settings.app.textImages"
+				case notifs = "settings.app.notifs"
+				case keybinds = "settings.app.keybinds"
+				case lang = "settings.app.lang"
+				case streamer = "settings.app.streamer"
+				case advanced = "settings.app.advanced"
+			}
+		}
+		private static let pages: [Page] = [
+			.init(.userSection, children: [
+				.init(.account, icon: .init(baseColor: .blue, icon: "person.fill")),
+				.init(.profile, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.privacy, icon: .init(baseColor: .red, icon: "shield.lefthalf.filled"))
+			]),
+			.init(.paymentSection, children: [
+				.init(.nitro, icon: .init(baseColor: .accentColor, icon: "person.crop.circle")),
+				.init(.boost, icon: .init(baseColor: .green, icon: "person.crop.circle")),
+				.init(.subscriptions, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.gift, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.billing, icon: .init(baseColor: .blue, icon: "person.crop.circle"))
+			]),
+			.init(.appSection, children: [
+				.init(.appearance, icon: .init(baseColor: .black, icon: "person.crop.circle")),
+				.init(.accessibility, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.voiceVideo, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.textImages, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.notifs, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.keybinds, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.lang, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.streamer, icon: .init(baseColor: .blue, icon: "person.crop.circle")),
+				.init(.advanced, icon: .init(baseColor: .blue, icon: "person.crop.circle"))
+			])
+		]
+
+		@State private var selectedPage = pages.first!.children.first!
+		@State private var filter = ""
+
+		@ViewBuilder
+		private func navigationItem(item: Page) -> some View {
+			if filter.isEmpty || item.name.rawValue.lowercased().contains(filter.lowercased()) {
+				NavigationLink(value: item) {
+					if item.name == .account {
+						HStack {
+							BetterImageView(url: user.avatarURL(size: 160))
+								.frame(width: 40, height: 40)
+								.clipShape(Circle())
+							VStack(alignment: .leading) {
+								Text(user.username).font(.headline)
+								Text("Discord Account").font(.caption)
+							}
+						}
+					} else {
+						Label {
+							Text(item.nameString)
+						} icon: {
+							if let icon = item.icon {
+								Image(systemName: icon.icon)
+									.foregroundColor(.primary)
+									.frame(width: 20, height: 20)
+									.background(RoundedRectangle(cornerRadius: 5, style: .continuous).fill(icon.baseColor.gradient))
+							} else {
+								EmptyView()
+							}
+						}
+					}
+				}
+			}
+		}
+
+		var body: some View {
+			NavigationSplitView {
+				List(Self.pages, selection: $selectedPage) { category in
+					Section(category.nameString) {
+						ForEach(category.children) { child in
+							navigationItem(item: child)
+						}
+					}
+				}.frame(idealWidth: 215)
+			} detail: {
+				ScrollView {
+					Group {
+						switch selectedPage.name {
+						case .account:
+							UserSettingsAccountView(user: user)
+						case .profile:
+							UserSettingsProfileView(user: user)
+						case .privacy:
+							UserSettingsPrivacySafetyView()
+						case .advanced:
+							AppSettingsAdvancedView()
+						default:
+							Text("Unimplemented view: \(selectedPage.name.rawValue)")
+						}
+					}.padding(20)
+				}
+			}
+			.searchable(text: $filter, placement: .sidebar)
+			.navigationTitle(selectedPage.nameString)
 		}
 	}
 

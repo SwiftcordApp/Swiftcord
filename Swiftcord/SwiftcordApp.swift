@@ -90,11 +90,14 @@ struct SwiftcordApp: App {
 			}
 		}
 		.commands {
-			#if !APP_STORE
 			CommandGroup(after: .appInfo) {
+				#if !APP_STORE
 				CheckForUpdatesView(updaterViewModel: updaterViewModel)
+				#endif
+				if #available(macOS 13, *) {
+					SettingsCommands()
+				}
 			}
-			#endif
 
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
@@ -102,7 +105,7 @@ struct SwiftcordApp: App {
 		.windowStyle(.hiddenTitleBar)
 		.windowToolbarStyle(.unified)
 
-		Settings {
+		WindowGroup(id: "settings") { // Identify the window group.
 			SettingsView()
 				.environmentObject(gateway)
 				.environmentObject(state)
@@ -112,7 +115,18 @@ struct SwiftcordApp: App {
 					? .dark
 					: (selectedTheme == "light" ? .light : .none)
 				)
-				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
+	}
+}
+
+@available(macOS 13, *)
+struct SettingsCommands: View {
+	@Environment(\.openWindow) private var openWindow
+
+	var body: some View {
+		Divider()
+		Button("Settings") {
+			openWindow(id: "settings")
+		}.keyboardShortcut(",", modifiers: .command)
 	}
 }
