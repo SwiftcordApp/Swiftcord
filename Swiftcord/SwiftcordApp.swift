@@ -100,14 +100,11 @@ struct SwiftcordApp: App {
 			}
 		}
 		.commands {
+		#if !APP_STORE
 			CommandGroup(after: .appInfo) {
-				#if !APP_STORE
 				CheckForUpdatesView(updaterViewModel: updaterViewModel)
-				#endif
-				if #available(macOS 13, *) {
-					SettingsCommands()
-				}
 			}
+			#endif
 
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
@@ -115,7 +112,7 @@ struct SwiftcordApp: App {
 		.windowStyle(.hiddenTitleBar)
 		.windowToolbarStyle(.unified)
 
-		WindowGroup(id: "settings") { // Identify the window group.
+		Settings {
 			SettingsView()
 				.environmentObject(gateway)
 				.environmentObject(state)
@@ -125,7 +122,18 @@ struct SwiftcordApp: App {
 					? .dark
 					: (selectedTheme == "light" ? .light : .none)
 				)
-		}.contentSizedWindowResizability()
+			.task {
+				// print("run")
+				let window = NSApp.windows.first { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }!
+				window.toolbarStyle = .unified
+
+				let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
+				let index = window.toolbar?.items.firstIndex { $0.itemIdentifier.rawValue == sidebaritem }
+				if let index {
+					window.toolbar?.removeItem(at: index)
+				}
+			}
+		}
 	}
 }
 
