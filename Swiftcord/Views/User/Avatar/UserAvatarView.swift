@@ -99,6 +99,7 @@ struct UserAvatarView: View, Equatable {
 						)
 						.font(.headline)
 						.textCase(.uppercase)
+						.padding(.top, 6)
 						if !roles.isEmpty {
 							TagCloudView(
 								content: roles.map { role in
@@ -124,7 +125,10 @@ struct UserAvatarView: View, Equatable {
 							.tint(.blue)
 					}
 				}
-				Text("user.note").font(.headline).textCase(.uppercase)
+				Text("user.note")
+					.font(.headline)
+					.textCase(.uppercase)
+					.padding(.top, 6)
 				// Notes are stored locally for now, but eventually will be synced with the Discord API
 				TextField("Add a note to this user (only visible to you)", text: $note)
 					.textFieldStyle(.roundedBorder)

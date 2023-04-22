@@ -125,7 +125,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 							.fixedSize(horizontal: false, vertical: true)
 					}
 
-					contentSlot.padding(.top, 6)
+					contentSlot
 				}
 			}
 			.padding(12)
