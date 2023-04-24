@@ -56,7 +56,7 @@ struct RichEmbedView: View {
 							.cornerRadius(12)
 						}
 
-						if let authorName = author.name {
+						if let authorName = author.name as? String {
 							if let urlStr = author.url, let url = URL(string: urlStr) {
 								Link(destination: url) {
 									Text(authorName).font(.headline)

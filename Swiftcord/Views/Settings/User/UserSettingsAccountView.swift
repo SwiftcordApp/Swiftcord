@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
 
@@ -16,6 +17,10 @@ struct UserSettingsAccountView: View {
 	@State private var oldPw = ""
 	@State private var newPw = ""
 	@State private var confirmNewPw = ""
+    
+    @EnvironmentObject var gateway: DiscordGateway
+    @EnvironmentObject var state: UIState
+    @EnvironmentObject var switcher: AccountSwitcher
 
 	var changePwDialog: some View {
         DialogView(title: "settings.user.chPwd.title", description: "settings.user.chPwd.caption") {
@@ -96,6 +101,28 @@ struct UserSettingsAccountView: View {
                 .padding(10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            GroupBox {
+                VStack(alignment: .leading){
+                    Text("settings.user.logOut").font(.title2)
+                }
+                Divider()
+                VStack(alignment: .center){
+                    Button("settings.user.logOut", role: .destructive) {
+                        Task {
+                            await switcher.logOut(id: user.id)
+                            if switcher.accounts.isEmpty {
+                                gateway.disconnect()
+                                state.attemptLogin = true
+                                state.loadingState = .initial
+                            } else {
+                                switchAccount() // Switch to the next available account
+                            }
+                        }
+                    }
+                }
+                .buttonStyle(FlatButtonStyle())
+                .controlSize(.small)
+            }
 
 			Group {
 				Text("ACCOUNT REMOVAL")
@@ -118,6 +145,16 @@ struct UserSettingsAccountView: View {
 			}
 		}
 	}
+    private func switchAccount() {
+        switcher.setActiveAccount(id: user.id)
+        guard let newToken = switcher.getActiveToken() else {
+            AccountRow.log.error("No active token associated with account. This should never happen!")
+            return
+        }
+        state.loadingState = .initial
+        gateway.disconnect()
+        restAPI.setToken(token: newToken)
+        gateway.connect(token: newToken)    }
 }
 
 private extension UserSettingsAccountView {

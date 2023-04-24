@@ -71,6 +71,8 @@
 "settings.app.lang" = "Sprache";
 "settings.app.streamer" = "Streamer-Modus";
 "settings.app.advanced" = "Erweitert";
+"settings.app.credits" = "Impressum";
+"settings.app.debug" = "Fehlerbehebung";
 "settings.others.debug.actions" = "Aktionen";
 "settings.others.debug.actions.info" = "Verwende hier keine Optionen, außer du weißt was du tust. Einige könnten GeFäHrLiCh sein!";
 "settings.others.debug.actions.crash" = "Lässt Swiftcord abstürzen (Kein Scherz)";

@@ -50,7 +50,22 @@ struct AccountRow: View {
 				}
 			}
 			Spacer()
-
+			Button {
+				Task {
+					await switcher.logOut(id: meta.id)
+					if switcher.accounts.isEmpty {
+						gateway.disconnect()
+						state.attemptLogin = true
+						state.loadingState = .initial
+					} else if isCurrent {
+						switchAccount() // Switch to the next available account
+					}
+				}
+			} label: {
+				Image(systemName: "rectangle.portrait.and.arrow.right")
+			}
+			.buttonStyle(FlatButtonStyle(prominent: false))
+			.controlSize(.small)
 			if !isCurrent {
 				Button {
 					switchAccount()

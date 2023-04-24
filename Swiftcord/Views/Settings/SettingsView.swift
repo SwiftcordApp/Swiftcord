@@ -111,6 +111,8 @@ private extension SettingsView {
 				case lang = "settings.app.lang"
 				case streamer = "settings.app.streamer"
 				case advanced = "settings.app.advanced"
+				case credits = "settings.app.credits"
+				case debug = "settings.app.debug"
 			}
 		}
 		private static let pages: [Page] = [
@@ -135,7 +137,9 @@ private extension SettingsView {
 				.init(.keybinds, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
 				.init(.lang, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
 				.init(.streamer, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.advanced, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
+				.init(.advanced, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.credits, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				.init(.debug, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
 			])
 		]
 
@@ -194,6 +198,10 @@ private extension SettingsView {
 				ScrollView {
 					Group {
 						switch selectedPage.name {
+						case .appearance:
+							AppSettingsAppearanceView()
+						case .accessibility:
+							AppSettingsAccessibilityView()
 						case .account:
 							UserSettingsAccountView(user: user)
 						case .profile:
@@ -202,6 +210,10 @@ private extension SettingsView {
 							UserSettingsPrivacySafetyView()
 						case .advanced:
 							AppSettingsAdvancedView()
+						case .credits:
+							CreditsView()
+						case .debug:
+							DebugSettingsView()
 						default:
 							Text("Unimplemented view: \(selectedPage.name.rawValue)")
 						}

@@ -99,6 +99,8 @@
 "settings.app.lang" = "Language";
 "settings.app.streamer" = "Streamer Mode";
 "settings.app.advanced" = "Advanced";
+"settings.app.credits" = "Credits";
+"settings.app.debug" = "Debug";
 "settings.app.advanced.analytics" = "Usage Matrics";
 "settings.app.advanced.analytics.option" = "Send anonymous statistics to AppCenter Analytics to improve Swiftcord";
 "settings.app.advanced.analytics.caption" = "Through AppCenter, aggregated (anonymous) usage statistics of Swiftcord (such as rendered language, app version and feature usages) are collected. The matrics obtained will be used to improve Swiftcord's features; we can't trace them back to you.";

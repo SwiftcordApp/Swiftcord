@@ -87,7 +87,7 @@ struct UserAvatarView: View, Equatable {
 				loadError: loadFullFailed
 			) {
 				if let profile = profile, guildID != "@me" {
-					if let guildRoles = ctx.roles {
+					if let guildRoles = ctx.roles as? [Role] {
 						let roles = guildRoles.filter {
 							profile.guild_member?.roles.contains($0.id) ?? false
 						}
