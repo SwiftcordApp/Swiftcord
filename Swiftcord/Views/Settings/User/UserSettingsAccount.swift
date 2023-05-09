@@ -1,5 +1,5 @@
 //
-//  UserSettingsAccountView.swift
+//  UserSettingsAccount.swift
 //  Swiftcord
 //
 //  Created by royal on 14/05/2022.
@@ -9,7 +9,7 @@ import SwiftUI
 import DiscordKitCore
 import CachedAsyncImage
 
-struct UserSettingsAccountView: View {
+struct UserSettingsAccount: View {
 	let user: CurrentUser
 
 	@State private var changePwSheetShown = false
@@ -48,15 +48,6 @@ struct UserSettingsAccountView: View {
             .frame(width: 100, height: 100)
             Text(user.username).font(.title2)
             Text(user.email)
-
-            GroupBox {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("settings.user.phoneNum").textCase(.uppercase).font(.headline).opacity(0.75)
-                    Text(user.phone ?? "You haven't added a phone number yet.")
-                        .font(.system(size: 16))
-                        .textSelection(.enabled)
-                }.padding(10).frame(maxWidth: .infinity)
-			}
 
             GroupBox {
                 VStack(alignment: .leading, spacing: 8) {
@@ -120,24 +111,22 @@ struct UserSettingsAccountView: View {
 	}
 }
 
-private extension UserSettingsAccountView {
-	struct PasswordField: View {
-		let placeholder: String
-		let prompt: String
-		@Binding var password: String
+struct PasswordField: View {
+    let placeholder: String
+    let prompt: String
+    @Binding var password: String
 
-		var body: some View {
-			VStack(alignment: .leading, spacing: 8) {
-				Text(placeholder)
-					.font(.headline)
-					.textCase(.uppercase)
-					.foregroundColor(.secondary)
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(placeholder)
+                .font(.headline)
+                .textCase(.uppercase)
+                .foregroundColor(.secondary)
 
-				SecureField(placeholder, text: $password, prompt: Text(prompt))
-					.textFieldStyle(.roundedBorder)
-					.controlSize(.large)
-					.textFieldStyle(.roundedBorder)
-			}
-		}
-	}
+            SecureField(placeholder, text: $password, prompt: Text(prompt))
+                .textFieldStyle(.roundedBorder)
+                .controlSize(.large)
+                .textFieldStyle(.roundedBorder)
+        }
+    }
 }

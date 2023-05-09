@@ -42,7 +42,7 @@ private extension SettingsView {
 
 		var body: some View {
 			TabView {
-				UserSettingsView(user: user).tabItem {
+				UserSettings(user: user).tabItem {
 					Label("User", systemImage: "person.crop.circle")
 				}
 
@@ -69,14 +69,19 @@ private extension SettingsView {
 	struct ModernSettings: View {
 		let user: CurrentUser
 
+		@State private var showingDetail = false
+
 		private struct Page: Hashable, Identifiable {
-			internal init(_ name: Name, icon: Icon? = nil, children: [SettingsView.ModernSettings.Page] = []) {
+			internal init(_ name: Name, icon: Icon? = nil, showName: Bool = true, children: [SettingsView.ModernSettings.Page] = []) {
 				self.children = children
 				self.name = name
 				self.icon = icon
+				self.showName = showName
 			}
 
 			var id: String { name.rawValue }
+
+			let showName: Bool
 
 			let children: [Page]
 			let name: Name
@@ -119,32 +124,46 @@ private extension SettingsView {
 				case keybinds = "settings.app.keybinds"
 				case lang = "settings.app.lang"
 				case streamer = "settings.app.streamer"
+				// MARK: Misc
+				case miscSection = "Misc"
+				case about = "About"
+				case credits = "Credits"
+				// MARK: Developer
+				case devSection = "Dev"
 				case advanced = "settings.app.advanced"
+				case diag = "Diagnostics"
 			}
 		}
 		private static let pages: [Page] = [
-			.init(.userSection, children: [
-				.init(.account, icon: .init(baseColor: .blue, icon: .system("person.fill"))),
-				.init(.profile, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.privacy, icon: .init(baseColor: .red, icon: .system("shield.lefthalf.filled")))
+			Page(.userSection, children: [
+				Page(.account, icon: .init(baseColor: .blue, icon: .system("person.fill"))),
+				Page(.profile, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				Page(.privacy, icon: .init(baseColor: .red, icon: .system("shield.lefthalf.filled")))
 			]),
-			.init(.paymentSection, children: [
-				.init(.nitro, icon: .init(baseColor: .gray, icon: .asset("NitroSubscriber"))),
-				.init(.boost, icon: .init(baseColor: .green, icon: .system("person.crop.circle"))),
-				.init(.subscriptions, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.gift, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.billing, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
+			Page(.paymentSection, children: [
+				Page(.nitro, icon: .init(baseColor: .gray, icon: .asset("NitroSubscriber"))),
+				Page(.boost, icon: .init(baseColor: .init("NitroPink"), icon: .asset("ServerBoost"))),
+				Page(.subscriptions, icon: .init(baseColor: .blue, icon: .system("wallet.pass.fill"))),
+				Page(.gift, icon: .init(baseColor: .blue, icon: .system("gift.fill"))),
+				Page(.billing, icon: .init(baseColor: .blue, icon: .system("creditcard.fill")))
 			]),
-			.init(.appSection, children: [
-				.init(.appearance, icon: .init(baseColor: .black, icon: .system("person.crop.circle"))),
-				.init(.accessibility, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.voiceVideo, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.textImages, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.notifs, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.keybinds, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.lang, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.streamer, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				.init(.advanced, icon: .init(baseColor: .blue, icon: .system("person.crop.circle")))
+			Page(.appSection, children: [
+				Page(.appearance, icon: .init(baseColor: .black, icon: .system("person.crop.circle"))),
+				Page(.accessibility, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				Page(.voiceVideo, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
+				Page(.textImages, icon: .init(baseColor: .blue, icon: .system("text.below.photo.fill"))),
+				Page(.notifs, icon: .init(baseColor: .blue, icon: .system("bell.badge.fill"))),
+				Page(.keybinds, icon: .init(baseColor: .blue, icon: .system("keyboard.fill"))),
+				Page(.lang, icon: .init(baseColor: .blue, icon: .system("globe"))),
+				Page(.streamer, icon: .init(baseColor: .blue, icon: .system("camera.on.rectangle.fill")))
+			]),
+			Page(.miscSection, showName: false, children: [
+				Page(.about, icon: .init(baseColor: .gray, icon: .system("info"))),
+				Page(.credits, icon: .init(baseColor: .gray, icon: .system("person.2.fill")))
+			]),
+			Page(.devSection, showName: false, children: [
+				Page(.advanced, icon: .init(baseColor: .gray, icon: .system("hammer.fill"))),
+				Page(.diag, icon: .init(baseColor: .gray, icon: .system("wrench.adjustable.fill")))
 			])
 		]
 
@@ -175,10 +194,10 @@ private extension SettingsView {
 									case .system(let name):
 										Image(systemName: name)
 									case .asset(let name):
-										Image(name).resizable().padding(2)
+										Image(name).resizable().aspectRatio(contentMode: .fit).padding(2)
 									}
 								}
-								.foregroundColor(.primary)
+								.foregroundColor(.white)
 								.frame(width: 20, height: 20)
 								.background(RoundedRectangle(cornerRadius: 5, style: .continuous).fill(icon.baseColor.gradient))
 							} else {
@@ -193,32 +212,76 @@ private extension SettingsView {
 		var body: some View {
 			NavigationSplitView {
 				List(Self.pages, selection: $selectedPage) { category in
-					Section(category.nameString) {
-						ForEach(category.children) { child in
-							navigationItem(item: child)
+					if category.showName {
+						Section(category.nameString) {
+							ForEach(category.children) { child in
+								navigationItem(item: child)
+							}
+						}
+					} else {
+						Section {
+							ForEach(category.children) { child in
+								navigationItem(item: child)
+							}
 						}
 					}
-				}.navigationSplitViewColumnWidth(215)
+				}
+				.navigationSplitViewColumnWidth(215)
 			} detail: {
 				ScrollView {
-					Group {
+					Form {
 						switch selectedPage.name {
 						case .account:
-							UserSettingsAccountView(user: user)
+							AccountOverview(user: user)
 						case .profile:
 							UserSettingsProfileView(user: user)
 						case .privacy:
 							UserSettingsPrivacySafetyView()
+
+						// MARK: Misc
+						case .about:
+							AboutSwiftcordView()
+						case .credits:
+							CreditsView()
+						// MARK: Developer
 						case .advanced:
 							AppSettingsAdvancedView()
+						case .diag:
+							DebugSettingsView()
 						default:
 							Text("Unimplemented view: \(selectedPage.name.rawValue)")
 						}
-					}.padding(20)
-				}.navigationSplitViewColumnWidth(500)
+					}
+					.formStyle(.grouped)
+				}
+				.navigationSplitViewColumnWidth(500)
+				.onAppear {
+					showingDetail = false
+				}
+				.task {
+					guard let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }) else { return }
+					let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
+					if let index = window.toolbar?.items.firstIndex(where: { $0.itemIdentifier.rawValue == sidebaritem }) {
+						window.toolbar?.removeItem(at: index)
+					}
+				}
+				.onDisappear {
+					showingDetail = true
+				}
 			}
 			.searchable(text: $filter, placement: .sidebar)
 			.navigationTitle(selectedPage.nameString)
+			.toolbar {
+				ToolbarItem(placement: .navigation) {
+					if !showingDetail {
+						Rectangle()
+							.frame(width: 10)
+							.opacity(0)
+					} else {
+						EmptyView()
+					}
+				}
+			}
 			.frame(minHeight: 470)
 		}
 	}

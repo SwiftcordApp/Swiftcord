@@ -9,26 +9,38 @@ import SwiftUI
 
 struct AboutSwiftcordView: View {
     var body: some View {
-		VStack(spacing: 16) {
-			VStack(spacing: 8) {
-				Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 128, height: 128)
-				Text(appName ?? "").font(.largeTitle)
-				Text("settings.others.about.desc")
-
-				// IMO its better to just crash if these are missing in the info dict.
-				// If they are nil there are bigger problems than the app crashing.
+		Section {
+			// IMO its better to just crash if these are missing in the info dict.
+			// If they are nil there are bigger problems than the app crashing.
+			HStack {
+				Text("Version")
+				Spacer()
 				// swiftlint:disable force_cast
-				Text("\(appName ?? "") \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String) \(Bundle.main.infoDictionary!["CFBundleVersion"] as! String) settings.others.about.ver").font(.caption)
+				Text(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String)
+					.foregroundColor(.secondary)
 			}
-
-			Divider()
-
-			Group {
-				Text("settings.others.about.caption").multilineTextAlignment(.center)
-				Text("settings.others.about.supportPkg")
+			HStack {
+				Text("Build")
+				Spacer()
+				// swiftlint:disable force_cast
+				Text(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)
+					.foregroundColor(.secondary)
 			}
-			Spacer()
-		}.padding(40)
+		} header: {
+			VStack(spacing: 4) {
+				Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 128, height: 128)
+				Text(appName ?? "").font(.largeTitle).foregroundColor(.primary)
+				Text("settings.others.about.desc").font(.title3)
+			}
+			.frame(maxWidth: .infinity)
+			.padding(.top, 8)
+			.padding(.bottom, 16)
+		}
+
+		Section {
+			Text("settings.others.about.caption")
+			Text("settings.others.about.supportPkg")
+		}
 	}
 }
 
