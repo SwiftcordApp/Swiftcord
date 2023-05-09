@@ -18,6 +18,15 @@ struct SettingsView: View {
         if let user = gateway.cache.user {
 			if #available(macOS 13.0, *), newUI {
 				ModernSettings(user: user)
+					.task {
+						guard let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }) else { return }
+						window.toolbarStyle = .unified
+
+						let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
+						if let index = window.toolbar?.items.firstIndex(where: { $0.itemIdentifier.rawValue == sidebaritem }) {
+							window.toolbar?.removeItem(at: index)
+						}
+					}
 			} else {
 				LegacySettings(user: user)
 			}

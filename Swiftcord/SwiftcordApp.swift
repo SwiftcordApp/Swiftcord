@@ -122,17 +122,6 @@ struct SwiftcordApp: App {
 					? .dark
 					: (selectedTheme == "light" ? .light : .none)
 				)
-			.task {
-				// print("run")
-				let window = NSApp.windows.first { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }!
-				window.toolbarStyle = .unified
-
-				let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
-				let index = window.toolbar?.items.firstIndex { $0.itemIdentifier.rawValue == sidebaritem }
-				if let index {
-					window.toolbar?.removeItem(at: index)
-				}
-			}
 		}
 	}
 }
