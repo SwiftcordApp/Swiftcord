@@ -99,10 +99,10 @@
 "settings.app.lang" = "Language";
 "settings.app.streamer" = "Streamer Mode";
 "settings.app.advanced" = "Advanced";
-"settings.app.advanced.analytics" = "Usage Matrics";
+"settings.app.advanced.analytics" = "Usage Metrics";
 "settings.app.advanced.analytics.option" = "Send anonymous statistics to AppCenter Analytics to improve Swiftcord";
 "settings.app.advanced.analytics.caption" = "Through AppCenter, aggregated (anonymous) usage statistics of Swiftcord (such as rendered language, app version and feature usages) are collected. The matrics obtained will be used to improve Swiftcord's features; we can't trace them back to you.";
-"settings.app.advanced.crashes" = "Crash traces and prior events will be sent to Sentry after a crash to help diagnose and prevent future crashes. No private or identifiable data will be ever leave your device.";
+"settings.app.advanced.crashes" = "Crash traces and prior events will be sent to Sentry after a crash to help diagnose and prevent future crashes. No private or identifiable data ever leaves your device.";
 "settings.others.debug.actions" = "Actions";
 "settings.others.debug.actions.info" = "Do not use any options here unless you know what you are doing. Some of them might be DaNgErOuS!";
 "settings.others.debug.actions.crash" = "Crash Swiftcord (Not a joke)";
@@ -121,7 +121,7 @@
 "settings.others.credits.sponsor.tier2" = "Amazing Supporter 🤯";
 "settings.others.credits.sponsor.tier3" = "Red-hot Supporter 🔥";
 "settings.others.credits.sponsor" = "Sponsors";
-"settings.others.credits.sponsor.desc" = "Consider supporting Swiftcord! It would help ensure this project has a stable future, and you'll get special privileges too :D";
+"settings.others.credits.sponsor.desc" = "Love Swiftcord? Sponsoring the project is a great way to contribute, even if you're unable to make a code contribution!";
 "settings.others.credits.sponsor.gh" = "GitHub Sponsors";
 "settings.others.credits.sponsor.patreon" = "Patreon";
 "settings.others.credits.sponsor.engage.header" = "Support Swiftcord!";

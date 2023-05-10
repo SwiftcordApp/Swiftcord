@@ -1,5 +1,5 @@
 //
-//  UserSettingsView.swift
+//  UserSettings.swift
 //  Swiftcord
 //
 //  Created by Vincent Kwok on 6/3/22.
@@ -9,7 +9,7 @@ import SwiftUI
 import DiscordKit
 import DiscordKitCore
 
-struct UserSettingsView: View {
+struct UserSettings: View {
     let user: CurrentUser
 
 	@State private var selectedLink: SidebarLink? = .account
@@ -20,7 +20,7 @@ struct UserSettingsView: View {
         NavigationView {
             List {
 				NavigationLink("My Account", tag: .account, selection: $selectedLink) {
-                    ScrollView { UserSettingsAccountView(user: user).padding(40) }
+                    ScrollView { UserSettingsAccount(user: user).padding(40) }
                 }
 
 				NavigationLink("User Profile", tag: .profile, selection: $selectedLink) {
@@ -66,7 +66,7 @@ struct UserSettingsView: View {
     }
 }
 
-private extension UserSettingsView {
+private extension UserSettings {
 	// Raw values are for analytics events
 	enum SidebarLink: String {
 		case account = "My Account"

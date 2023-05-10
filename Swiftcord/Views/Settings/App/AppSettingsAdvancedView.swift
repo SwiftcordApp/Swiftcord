@@ -13,13 +13,7 @@ struct AppSettingsAdvancedView: View {
 	@State private var hasToggledAnalytics = false
 
     var body: some View {
-		VStack(alignment: .leading, spacing: 16) {
-			Text("settings.app.advanced").font(.title)
-
-			Text("settings.app.advanced.analytics")
-				.font(.headline)
-				.textCase(.uppercase)
-				.opacity(0.75)
+		Section("settings.app.advanced.analytics") {
 			Toggle(isOn: $analyticsEnabled) {
 				Text("settings.app.advanced.analytics.option")
 					.frame(maxWidth: .infinity, alignment: .leading)
@@ -32,10 +26,11 @@ struct AppSettingsAdvancedView: View {
 				}
 				Analytics.enabled = enabled
 			}.disabled(hasToggledAnalytics)
-			Text("settings.app.advanced.analytics.caption").font(.caption)
 
-			Divider()
+			Text("settings.app.advanced.analytics.caption").font(.callout).foregroundColor(.secondary)
+		}
 
+		Section {
 			Text("settings.app.advanced.crashes")
 		}
     }

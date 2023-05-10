@@ -58,6 +58,7 @@ struct SwiftcordApp: App {
 					)
 					.onAppear {
 						// Fix list assertion errors
+						// The window has been marked as needing another Update Constraints in Window pass, but it has already had more Update Constraints in Window passes than there are views in the window.
 						UserDefaults.standard.set(false, forKey: "NSWindowAssertWhenDisplayCycleLimitReached")
 
 						guard gateway.socket == nil else { return }
@@ -90,11 +91,11 @@ struct SwiftcordApp: App {
 			}
 		}
 		.commands {
-			#if !APP_STORE
+		#if !APP_STORE
 			CommandGroup(after: .appInfo) {
 				CheckForUpdatesView(updaterViewModel: updaterViewModel)
 			}
-			#endif
+		#endif
 
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
@@ -107,12 +108,24 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(state)
 				.environmentObject(acctManager)
+				.environmentObject(updaterViewModel)
 				.preferredColorScheme(
 					selectedTheme == "dark"
 					? .dark
 					: (selectedTheme == "light" ? .light : .none)
 				)
-				// .environment(\.locale, .init(identifier: "zh-Hans"))
 		}
+	}
+}
+
+@available(macOS 13, *)
+struct SettingsCommands: View {
+	@Environment(\.openWindow) private var openWindow
+
+	var body: some View {
+		Divider()
+		Button("Settings") {
+			openWindow(id: "settings")
+		}.keyboardShortcut(",", modifiers: .command)
 	}
 }
