@@ -31,10 +31,9 @@ struct CreditsView: View {
 					.frame(width: 36)
 				VStack {
 					Text("settings.others.credits.about")
-
-					Text("settings.others.credits.whoAmI")
 				}
 			}
+			Text("settings.others.credits.whoAmI")
 		}
 
 		Section {
@@ -124,7 +123,7 @@ struct CreditsView: View {
 												.clipShape(Circle())
 											Text(verbatim: contributor.username).font(.title3)
 										}
-										.padding(4)
+										.padding(6)
 										.frame(maxWidth: .infinity)
 									}
 								}

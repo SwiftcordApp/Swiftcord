@@ -148,7 +148,7 @@ private extension SettingsView {
 			Page(.appSection, children: [
 				Page(.appearance, icon: .init(baseColor: .black, icon: .system("circle.lefthalf.filled"))),
 				Page(.accessibility, icon: .init(baseColor: .blue, icon: .system("figure.wave.circle"))),
-				Page(.voiceVideo, icon: .init(baseColor: .red, icon: .system("person.crop.circle"))),
+				Page(.voiceVideo, icon: .init(baseColor: .red, icon: .system("waveform"))),
 				Page(.textImages, icon: .init(baseColor: .red, icon: .system("text.below.photo.fill"))),
 				Page(.notifs, icon: .init(baseColor: .blue, icon: .system("bell.badge.fill"))),
 				Page(.keybinds, icon: .init(baseColor: .blue, icon: .system("keyboard.fill"))),
