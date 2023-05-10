@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct FlatButtonStyle: ButtonStyle {
-	// Use vars so not all params have to be supplied all the time
-	var prominent = true
-	var outlined = false
-	var text = false
+	init(prominent: Bool = true, outlined: Bool = false, text: Bool = false, customBase: Color? = nil) {
+		self.prominent = prominent
+		self.outlined = outlined
+		self.text = text
+		self.customBase = customBase
+	}
 
-	var customBase: Color?
+	let prominent: Bool
+	let outlined: Bool
+	let text: Bool
+
+	let customBase: Color?
 
 	@State private var hovered = false
 
