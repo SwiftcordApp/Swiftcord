@@ -141,17 +141,17 @@ private extension SettingsView {
 				Page(.privacy, icon: .init(baseColor: .red, icon: .system("shield.lefthalf.filled")))
 			]),
 			Page(.paymentSection, children: [
-				Page(.nitro, icon: .init(baseColor: .gray, icon: .asset("NitroSubscriber"))),
+				Page(.nitro, icon: .init(baseColor: .white, icon: .asset("NitroSubscriber"))),
 				Page(.boost, icon: .init(baseColor: .init("NitroPink"), icon: .asset("ServerBoost"))),
-				Page(.subscriptions, icon: .init(baseColor: .blue, icon: .system("wallet.pass.fill"))),
-				Page(.gift, icon: .init(baseColor: .blue, icon: .system("gift.fill"))),
-				Page(.billing, icon: .init(baseColor: .blue, icon: .system("creditcard.fill")))
+				Page(.subscriptions, icon: .init(baseColor: .purple, icon: .system("wallet.pass.fill"))),
+				Page(.gift, icon: .init(baseColor: .purple, icon: .system("gift.fill"))),
+				Page(.billing, icon: .init(baseColor: .purple, icon: .system("creditcard.fill")))
 			]),
 			Page(.appSection, children: [
-				Page(.appearance, icon: .init(baseColor: .black, icon: .system("person.crop.circle"))),
-				Page(.accessibility, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				Page(.voiceVideo, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
-				Page(.textImages, icon: .init(baseColor: .blue, icon: .system("text.below.photo.fill"))),
+				Page(.appearance, icon: .init(baseColor: .black, icon: .system("circle.lefthalf.filled"))),
+				Page(.accessibility, icon: .init(baseColor: .blue, icon: .system("figure.wave.circle"))),
+				Page(.voiceVideo, icon: .init(baseColor: .red, icon: .system("person.crop.circle"))),
+				Page(.textImages, icon: .init(baseColor: .red, icon: .system("text.below.photo.fill"))),
 				Page(.notifs, icon: .init(baseColor: .blue, icon: .system("bell.badge.fill"))),
 				Page(.keybinds, icon: .init(baseColor: .blue, icon: .system("keyboard.fill"))),
 				Page(.lang, icon: .init(baseColor: .blue, icon: .system("globe"))),
@@ -249,7 +249,8 @@ private extension SettingsView {
 						case .diag:
 							DebugSettingsView()
 						default:
-							Text("Unimplemented view: \(selectedPage.name.rawValue)")
+							// Concatenate texts so LocalizedStrings work
+							Text("Unimplemented view: ") + Text(selectedPage.nameString)
 						}
 					}
 					.formStyle(.grouped)
