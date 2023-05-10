@@ -87,42 +87,36 @@ struct UserAvatarView: View, Equatable {
 				loadError: loadFullFailed
 			) {
 				if let profile = profile, guildID != "@me" {
-					if let guildRoles = ctx.roles {
-						let roles = guildRoles.filter {
-							profile.guild_member?.roles.contains($0.id) ?? false
-						}
+					let guildRoles = ctx.roles
+					let roles = guildRoles.filter {
+						profile.guild_member?.roles.contains($0.id) ?? false
+					}
 
-						Text(
-							profile.guild_member == nil
-							? "user.roles.loading"
-							: (roles.isEmpty ? "user.roles.none" : (roles.count == 1 ? "user.roles.one" : "user.roles.many"))
-						)
-						.font(.headline)
-						.textCase(.uppercase)
-						.padding(.top, 6)
-						if !roles.isEmpty {
-							TagCloudView(
-								content: roles.map { role in
-									HStack(spacing: 6) {
-										Circle()
-											.fill(Color(hex: role.color))
-											.frame(width: 14, height: 14)
-											.padding(.leading, 6)
-										Text(role.name)
-											.font(.system(size: 12))
-											.padding(.trailing, 8)
-									}
-									.frame(height: 24)
-									.background(.gray.opacity(0.2))
-									.cornerRadius(7)
+					Text(
+						profile.guild_member == nil
+						? "user.roles.loading"
+						: (roles.isEmpty ? "user.roles.none" : (roles.count == 1 ? "user.roles.one" : "user.roles.many"))
+					)
+					.font(.headline)
+					.textCase(.uppercase)
+					.padding(.top, 6)
+					if !roles.isEmpty {
+						TagCloudView(
+							content: roles.map { role in
+								HStack(spacing: 6) {
+									Circle()
+										.fill(Color(hex: role.color))
+										.frame(width: 14, height: 14)
+										.padding(.leading, 6)
+									Text(role.name)
+										.font(.system(size: 12))
+										.padding(.trailing, 8)
 								}
-							).padding(-2)
-						}
-					} else {
-						ProgressView("user.roles.loading")
-							.progressViewStyle(.linear)
-							.frame(maxWidth: .infinity)
-							.tint(.blue)
+								.frame(height: 24)
+								.background(.gray.opacity(0.2))
+								.cornerRadius(7)
+							}
+						).padding(-2)
 					}
 				}
 				Text("user.note")

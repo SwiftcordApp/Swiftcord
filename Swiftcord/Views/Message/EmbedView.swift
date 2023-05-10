@@ -45,27 +45,22 @@ struct RichEmbedView: View {
 							let height = 24.0
 							CachedAsyncImage(url: URL(string: iconURL)) { phase in
 								if let image = phase.image { image.resizable().scaledToFill() } else {
-									Spacer()
-										.frame(width: width, height: height)
+									Spacer().frame(width: width, height: height)
 								}
 							}
-							.frame(
-								width: width,
-								height: height
-							)
+							.frame(width: width, height: height)
 							.cornerRadius(12)
 						}
 
-						if let authorName = author.name {
-							if let urlStr = author.url, let url = URL(string: urlStr) {
-								Link(destination: url) {
-									Text(authorName).font(.headline)
-								}.foregroundColor(.primary)
-							} else {
-								Text(authorName)
-									.font(.headline)
-									.textSelection(.enabled)
-							}
+						let authorName = author.name
+						if let urlStr = author.url, let url = URL(string: urlStr) {
+							Link(destination: url) {
+								Text(authorName).font(.headline)
+							}.foregroundColor(.primary)
+						} else {
+							Text(authorName)
+								.font(.headline)
+								.textSelection(.enabled)
 						}
 					}
 				}
