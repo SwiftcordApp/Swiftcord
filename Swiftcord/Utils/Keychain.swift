@@ -19,7 +19,7 @@ public class Keychain {
             kSecAttrAccount: "\(Bundle.main.bundleIdentifier!).\(key)",
             kSecAttrApplicationTag: tag,
             kSecValueData: data
-        ] as CFDictionary
+		] as [CFString: Any] as CFDictionary
 
         SecItemDelete(query)
 
@@ -33,7 +33,7 @@ public class Keychain {
             kSecAttrAccount: "\(Bundle.main.bundleIdentifier!).\(key)",
             kSecAttrApplicationTag: tag,
             kSecMatchLimit: kSecMatchLimitOne
-        ] as CFDictionary
+		] as [CFString: Any] as CFDictionary
 
         return SecItemDelete(query)
     }
@@ -50,7 +50,7 @@ public class Keychain {
             kSecReturnData: true,
             kSecAttrApplicationTag: tag,
             kSecMatchLimit: kSecMatchLimitOne
-        ] as CFDictionary
+		] as [CFString: Any] as CFDictionary
 
         var dataTypeRef: AnyObject?
 

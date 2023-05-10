@@ -90,7 +90,7 @@ struct OnboardingWelcomeView: View {
 
 struct OnboardingView: View {
 	let skipOnboarding: Bool
-	let skipWhatsNew: Bool
+	@Binding var skipWhatsNew: Bool
 	@Binding var newMarkdown: String?
 
 	@State private var showingNew = false

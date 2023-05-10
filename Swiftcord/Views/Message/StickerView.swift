@@ -159,7 +159,7 @@ struct StickerView: View {
         .onHover { hovered = $0 }
         .onTapGesture {
             if fullSticker == nil { Task {
-                fullSticker = try? await restAPI.getSticker(id: sticker.id)
+                fullSticker = try? await restAPI.getSticker(sticker.id)
 				openPopoverEvt()
 			}} else {
 				openPopoverEvt()

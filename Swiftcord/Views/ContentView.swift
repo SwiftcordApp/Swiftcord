@@ -172,6 +172,7 @@ struct ContentView: View {
             if state == .gatewayConn { loadLastSelectedGuild() }
             if state == .messageLoad,
                !seenOnboarding || prevBuild != Bundle.main.infoDictionary?["CFBundleVersion"] as? String { // swiftlint:disable:this indentation_width
+                // If the user hasn't seen the onboarding (first page), present onboarding immediately
                 if !seenOnboarding { presentingOnboarding = true }
                 Task {
                     do {
@@ -180,7 +181,9 @@ struct ContentView: View {
                             .body
                     } catch {
                         skipWhatsNew = true
+                        return
                     }
+                    // If the user has already seen the onboarding, present the onboarding sheet only after loading the changelog
                     presentingOnboarding = true
                 }
             }
@@ -213,7 +216,7 @@ struct ContentView: View {
         } content: {
             OnboardingView(
                 skipOnboarding: seenOnboarding,
-                skipWhatsNew: skipWhatsNew,
+                skipWhatsNew: $skipWhatsNew,
                 newMarkdown: $whatsNewMarkdown,
                 presenting: $presentingOnboarding
             )
