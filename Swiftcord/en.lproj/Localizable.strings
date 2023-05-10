@@ -121,7 +121,7 @@
 "settings.others.credits.sponsor.tier2" = "Amazing Supporter 🤯";
 "settings.others.credits.sponsor.tier3" = "Red-hot Supporter 🔥";
 "settings.others.credits.sponsor" = "Sponsors";
-"settings.others.credits.sponsor.desc" = "Consider supporting Swiftcord! It would help ensure this project has a stable future, and you'll get special privileges too :D";
+"settings.others.credits.sponsor.desc" = "Love Swiftcord? Sponsoring the project is a great way to contribute, even if you're unable to make a code contribution!";
 "settings.others.credits.sponsor.gh" = "GitHub Sponsors";
 "settings.others.credits.sponsor.patreon" = "Patreon";
 "settings.others.credits.sponsor.engage.header" = "Support Swiftcord!";

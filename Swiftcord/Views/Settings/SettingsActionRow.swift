@@ -34,14 +34,7 @@ struct SettingsActionRow<Dest>: View where Dest: View {
 				}
 			}
 			.navigationTitle("")
-			.task {
-				let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" })!
-				let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
-				if let index = window.toolbar?.items.firstIndex(where: { $0.itemIdentifier.rawValue == sidebaritem }) {
-					window.toolbar?.removeItem(at: index)
-				}
-				window.title = windowTitle
-			}
+			.removeSidebarToggle()
 		}
 	}
 

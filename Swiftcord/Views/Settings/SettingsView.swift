@@ -16,14 +16,8 @@ struct SettingsView: View {
         if let user = gateway.cache.user {
 			if #available(macOS 13.0, *) {
 				ModernSettings(user: user)
-					.task {
-						guard let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }) else { return }
+					.removeSidebarToggle { window in
 						window.toolbarStyle = .unified
-
-						let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
-						if let index = window.toolbar?.items.firstIndex(where: { $0.itemIdentifier.rawValue == sidebaritem }) {
-							window.toolbar?.removeItem(at: index)
-						}
 					}
 			} else {
 				LegacySettings(user: user)
@@ -264,15 +258,9 @@ private extension SettingsView {
 					.formStyle(.grouped)
 				}
 				.navigationSplitViewColumnWidth(500)
+				.removeSidebarToggle()
 				.onAppear {
 					showingDetail = false
-				}
-				.task {
-					guard let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }) else { return }
-					let sidebaritem = "com.apple.SwiftUI.navigationSplitView.toggleSidebar"
-					if let index = window.toolbar?.items.firstIndex(where: { $0.itemIdentifier.rawValue == sidebaritem }) {
-						window.toolbar?.removeItem(at: index)
-					}
 				}
 				.onDisappear {
 					showingDetail = true
