@@ -97,6 +97,7 @@ private extension SettingsView {
 			}
 
 			enum Name: String {
+				case userProfileSection = "Profile"
 				// MARK: User Settings
 				case userSection = "User Settings"
 				case account = "My Account"
@@ -133,8 +134,10 @@ private extension SettingsView {
 			}
 		}
 		private static let pages: [Page] = [
+			Page(.userProfileSection, showName: false, children: [
+				Page(.account, icon: .init(baseColor: .blue, icon: .system("person.fill")))
+			]),
 			Page(.userSection, children: [
-				Page(.account, icon: .init(baseColor: .blue, icon: .system("person.fill"))),
 				Page(.profile, icon: .init(baseColor: .blue, icon: .system("person.crop.circle"))),
 				Page(.privacy, icon: .init(baseColor: .red, icon: .system("shield.lefthalf.filled")))
 			]),
