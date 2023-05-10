@@ -16,16 +16,6 @@ let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
 // MARK: Global Objects
 let restAPI = DiscordREST()
 
-fileprivate extension Scene {
-	func contentSizedWindowResizability() -> some Scene {
-		if #available(macOS 13.0, *) {
-			return self.windowResizability(.contentSize)
-		} else {
-			return self
-		}
-	}
-}
-
 @main
 struct SwiftcordApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -68,6 +58,7 @@ struct SwiftcordApp: App {
 					)
 					.onAppear {
 						// Fix list assertion errors
+						// The window has been marked as needing another Update Constraints in Window pass, but it has already had more Update Constraints in Window passes than there are views in the window.
 						UserDefaults.standard.set(false, forKey: "NSWindowAssertWhenDisplayCycleLimitReached")
 
 						guard gateway.socket == nil else { return }
@@ -104,7 +95,7 @@ struct SwiftcordApp: App {
 			CommandGroup(after: .appInfo) {
 				CheckForUpdatesView(updaterViewModel: updaterViewModel)
 			}
-			#endif
+		#endif
 
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
@@ -117,6 +108,7 @@ struct SwiftcordApp: App {
 				.environmentObject(gateway)
 				.environmentObject(state)
 				.environmentObject(acctManager)
+				.environmentObject(updaterViewModel)
 				.preferredColorScheme(
 					selectedTheme == "dark"
 					? .dark

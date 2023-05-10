@@ -14,13 +14,7 @@ struct AppSettingsAccessibilityView: View {
 	@AppStorage("ttsRate") private var ttsRate = 0.5
 
     var body: some View {
-		VStack(alignment: .leading, spacing: 16) {
-			Text("settings.app.accessibility").font(.title)
-
-			Text("settings.app.accessibility.chatInput")
-				.font(.headline)
-				.textCase(.uppercase)
-				.opacity(0.75)
+		Section("settings.app.accessibility.chatInput") {
 			VStack(alignment: .leading) {
 				Toggle(isOn: $alwaysAnimStickers) {
 					Text("Always animate stickers").frame(maxWidth: .infinity, alignment: .leading)
@@ -31,22 +25,17 @@ struct AppSettingsAccessibilityView: View {
 					Text("settings.animInteraction").font(.caption)
 				}
 			}
+		}
 
-			Divider()
-
-			Text("settings.app.accessibility.chatInput")
-				.font(.headline)
-				.textCase(.uppercase)
-				.opacity(0.75)
+		Section("settings.app.accessibility.chatInput") {
 			Toggle(isOn: $showSendButton) {
 				Text("settings.showSendBtn").frame(maxWidth: .infinity, alignment: .leading)
 			}
 			.toggleStyle(.switch)
 			.tint(.green)
+		}
 
-			Divider()
-
-			Text("settings.tts.rate").font(.headline).textCase(.uppercase).opacity(0.75)
+		Section("settings.tts.rate") {
 			Button {
 				let text = "This is what text-to-speech sounds like at the current speed"
 

@@ -37,9 +37,7 @@ struct UserSecurity: View {
 	}
 
     var body: some View {
-		VStack(alignment: .leading, spacing: 8) {
-			Text("Password and Authenthication").font(.title2)
-			Divider()
+		Section("Password") {
 			Button(action: { changePwSheetShown = true }) {
 				Text("Change Password")
 			}
@@ -49,16 +47,12 @@ struct UserSecurity: View {
 				oldPw = ""
 				newPw = ""
 			}) { changePwDialog }
+		}
 
-			Text("TWO-FACTOR AUTHENTHICATION" + (user.mfa_enabled ? " ENABLED" : ""))
-				.font(.headline)
-				.foregroundColor(user.mfa_enabled ? .green : nil)
-				.padding(.top, 12)
+		Section {
 			Text("Two-Factor authentication (2FA for short) is a good way to add an extra layer of security to your Discord account to make sure that only you have the ability to log in.")
-				.opacity(0.75)
-				.padding(.top, -8)
 
-			HStack(spacing: 16) {
+			HStack {
 				Button("View Backup Codes") {
 
 				}
@@ -70,7 +64,9 @@ struct UserSecurity: View {
 				.buttonStyle(FlatButtonStyle(outlined: true))
 				.controlSize(.small)
 			}
+		} header: {
+			Text("Two-Factor Authentication" + (user.mfa_enabled ? " (Enabled)" : ""))
+				.foregroundColor(user.mfa_enabled ? .green : nil)
 		}
-		.padding(10)
     }
 }

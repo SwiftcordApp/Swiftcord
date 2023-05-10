@@ -12,11 +12,9 @@ import DiscordKitCore
 struct SettingsView: View {
     @EnvironmentObject var gateway: DiscordGateway
 
-	@AppStorage("local.newSettingsUI") private var newUI = true
-
     var body: some View {
         if let user = gateway.cache.user {
-			if #available(macOS 13.0, *), newUI {
+			if #available(macOS 13.0, *) {
 				ModernSettings(user: user)
 					.task {
 						guard let window = NSApp.windows.first(where: { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }) else { return }
@@ -231,12 +229,19 @@ private extension SettingsView {
 				ScrollView {
 					Form {
 						switch selectedPage.name {
+						// MARK: User Settings
 						case .account:
 							AccountOverview(user: user)
 						case .profile:
 							UserSettingsProfileView(user: user)
 						case .privacy:
 							UserSettingsPrivacySafetyView()
+
+						// MARK: App Settings
+						case .appearance:
+							AppSettingsAppearanceView()
+						case .accessibility:
+							AppSettingsAccessibilityView()
 
 						// MARK: Misc
 						case .about:
