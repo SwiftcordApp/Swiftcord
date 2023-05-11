@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: "Update Xcode Team ID"
-          command: sed -i 's/DEVELOPMENT_TEAM = .*;/DEVELOPMENT_TEAM = RJNC97Y8QD;/' Swiftcord.xcodeproj/project.pbxproj
+          command: sed -i '' 's/DEVELOPMENT_TEAM = .*;/DEVELOPMENT_TEAM = RJNC97Y8QD;/' Swiftcord.xcodeproj/project.pbxproj
 
       - run:
           name: Build with xcodebuild
