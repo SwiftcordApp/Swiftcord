@@ -42,7 +42,7 @@ struct WebView: NSViewRepresentable {
     }
 
     // If someone can split this into smaller chunks, I'm all open
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     public func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator as? WKUIDelegate
