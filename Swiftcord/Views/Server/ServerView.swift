@@ -40,8 +40,8 @@ struct ServerView: View {
         let selectableChs = channels.filter { $0.type != .category }
 		serverCtx.channel = selectableChs.first
 
+        // Prevent deadlocking if there are no DMs/channels
 		if serverCtx.channel == nil { state.loadingState = .messageLoad }
-		// Prevent deadlocking if there are no DMs/channels
     }
 
 	private func bootstrapGuild(with guild: Guild) {
@@ -75,13 +75,12 @@ struct ServerView: View {
 	}
 
     private func toggleSidebar() {
-        #if os(macOS)
 		NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
-        #endif
     }
 
     var body: some View {
         NavigationView {
+            // MARK: Channel List
             VStack(spacing: 0) {
 				if let guild = guild {
 					ChannelList(channels: guild.name == "DMs" ? gateway.cache.dms : guild.channels!, selCh: $serverCtx.channel)
@@ -120,6 +119,7 @@ struct ServerView: View {
 				if let user = gateway.cache.user { CurrentUserFooter(user: user) }
             }
 
+            // MARK: Message History
 			if serverCtx.channel != nil {
 				MessagesView()
 			} else {

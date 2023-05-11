@@ -87,6 +87,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            // MARK: Server List
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
@@ -131,7 +132,11 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-            .background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
+            .background(
+                List {}
+                    .listStyle(.sidebar)
+                    .overlay(Color(nsColor: NSColor.controlBackgroundColor).opacity(0.5))
+            )
             .frame(maxHeight: .infinity, alignment: .top)
 
             ServerView(
