@@ -12,6 +12,9 @@ import CachedAsyncImage
 
 struct MiniUserProfileView<RichContentSlot: View>: View {
 	let user: User
+	
+	let pasteboard = NSPasteboard.general
+	
 	@Binding var profile: UserProfile?
 	var guildRoles: [Role]?
 	var isWebhook: Bool = false
@@ -90,6 +93,15 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
 					}
 					Spacer()
+					Button(action: {
+						pasteboard.declareTypes([.string], owner: nil)
+						pasteboard.setString("\(user.username)#\(user.discriminator)", forType: .string)
+					}, label: {
+						Image(systemName: "square.on.square")
+					})
+					.buttonStyle(.plain)
+					.padding()
+					.frame(width: 20, height: 20)
 				}
 
 				// Custom status
