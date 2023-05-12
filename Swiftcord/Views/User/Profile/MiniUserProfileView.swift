@@ -12,9 +12,7 @@ import CachedAsyncImage
 
 struct MiniUserProfileView<RichContentSlot: View>: View {
 	let user: User
-	
 	let pasteboard = NSPasteboard.general
-	
 	@Binding var profile: UserProfile?
 	var guildRoles: [Role]?
 	var isWebhook: Bool = false
