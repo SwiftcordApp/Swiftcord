@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03A188BE2A0FDB7500D5F4BC /* BasicStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A188BD2A0FDB7500D5F4BC /* BasicStickerView.swift */; };
+		03A188C02A0FDB8A00D5F4BC /* MessageStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */; };
 		13A79FC0298C41C800D19AAB /* View+KeyDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A79FBF298C41C800D19AAB /* View+KeyDown.swift */; };
 		13A79FC1298C41C800D19AAB /* View+KeyDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A79FBF298C41C800D19AAB /* View+KeyDown.swift */; };
 		36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
@@ -78,7 +80,6 @@
 		36429981286801C900483D0A /* AppSettingsAccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */; };
 		36429982286801C900483D0A /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
 		36429983286801C900483D0A /* Logger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28027E28095E3000B14E5C /* Logger+.swift */; };
-		36429984286801C900483D0A /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
 		36429985286801C900483D0A /* ProfileAccentMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA54D573284497E400B11857 /* ProfileAccentMask.swift */; };
 		36429986286801C900483D0A /* AudioCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFB5C6282AB56B00807B54 /* AudioCenterManager.swift */; };
 		36429987286801C900483D0A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2927C65D2C00A9ED72 /* LottieView.swift */; };
@@ -135,7 +136,6 @@
 		DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2927C65D2C00A9ED72 /* LottieView.swift */; };
 		DA32EF3027C676B300A9ED72 /* WrapperLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */; };
 		DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */; };
-		DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3327C6861800A9ED72 /* StickerView.swift */; };
 		DA32EF3927C77E3300A9ED72 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */; };
 		DA32EF3F27C7C1D000A9ED72 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */; };
 		DA32EF4827C8ABFF00A9ED72 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32EF4727C8ABFF00A9ED72 /* Date+.swift */; };
@@ -263,6 +263,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03A188B82A0F864500D5F4BC /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
+		03A188BD2A0FDB7500D5F4BC /* BasicStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStickerView.swift; sourceTree = "<group>"; };
+		03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStickerView.swift; sourceTree = "<group>"; };
 		13A79FBF298C41C800D19AAB /* View+KeyDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyDown.swift"; sourceTree = "<group>"; };
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -302,7 +305,6 @@
 		DA32EF2927C65D2C00A9ED72 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DA32EF2F27C676B300A9ED72 /* WrapperLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperLottieView.swift; sourceTree = "<group>"; };
 		DA32EF3127C676FE00A9ED72 /* LottieLoopMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoopMode.swift; sourceTree = "<group>"; };
-		DA32EF3327C6861800A9ED72 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		DA32EF3827C77E3300A9ED72 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		DA32EF4727C8ABFF00A9ED72 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -475,8 +477,9 @@
 				DAB1E47B28A4C1D300645FCD /* MessageRenderViews */,
 				DA32EF2327C6249000A9ED72 /* MessagesView.swift */,
 				DA32EF3E27C7C1D000A9ED72 /* MessageInputView.swift */,
+				03A188BD2A0FDB7500D5F4BC /* BasicStickerView.swift */,
+				03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */,
 				DAB1E48B28A510DC00645FCD /* MessageInputReplyView.swift */,
-				DA32EF3327C6861800A9ED72 /* StickerView.swift */,
 				DA2384BE27CCBB26009E15E0 /* EmbedView.swift */,
 				DAAFB5C2282AA5C700807B54 /* MessageInfoBarView.swift */,
 			);
@@ -532,6 +535,7 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
+				03A188B82A0F864500D5F4BC /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
@@ -1175,7 +1179,6 @@
 				36429982286801C900483D0A /* LottieLoopMode.swift in Sources */,
 				36429983286801C900483D0A /* Logger+.swift in Sources */,
 				DAFD4714289A202F0075D71B /* AttachmentProgress.swift in Sources */,
-				36429984286801C900483D0A /* StickerView.swift in Sources */,
 				36429985286801C900483D0A /* ProfileAccentMask.swift in Sources */,
 				36429986286801C900483D0A /* AudioCenterManager.swift in Sources */,
 				36429987286801C900483D0A /* LottieView.swift in Sources */,
@@ -1237,8 +1240,10 @@
 				DA4A888A27C0AF3000720909 /* ContentView.swift in Sources */,
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
+				03A188C02A0FDB8A00D5F4BC /* MessageStickerView.swift in Sources */,
 				E7AF1C33282FB02A001F78DF /* UserSettingsAccount.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */,
+				03A188BE2A0FDB7500D5F4BC /* BasicStickerView.swift in Sources */,
 				DA2802792808337B00B14E5C /* AppDelegate.swift in Sources */,
 				DA4A891427C49B1100720909 /* ServerButton.swift in Sources */,
 				DAC437792900F3FD00D3A894 /* Snowflake+.swift in Sources */,
@@ -1296,7 +1301,6 @@
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
 				DAFD4710289A1FEB0075D71B /* AttachmentAudio.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
-				DA32EF3427C6861800A9ED72 /* StickerView.swift in Sources */,
 				DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */,
 				DAAFB5C7282AB56B00807B54 /* AudioCenterManager.swift in Sources */,
 				DA32EF2A27C65D2C00A9ED72 /* LottieView.swift in Sources */,
@@ -1407,7 +1411,7 @@
 				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = V4747CQLU2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1665,7 +1669,7 @@
 				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = V4747CQLU2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1699,7 +1703,7 @@
 				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = V4747CQLU2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
