@@ -185,7 +185,7 @@ struct CurrentUserFooter: View {
 					NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
 				}
 			}, label: {
-				Image(systemName: "gearshape.fill")
+				Image(systemName: "gear")
 					.font(.system(size: 18))
 					.opacity(0.75)
 			})
