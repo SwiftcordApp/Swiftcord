@@ -102,6 +102,8 @@ struct CurrentUserFooter: View {
 						Group {
 							if let customStatus = customStatus {
 								Text(customStatus.state ?? "")
+									.lineLimit(1)
+									.truncationMode(.tail)
 							} else {
 								Text("#" + user.discriminator)
 							}
