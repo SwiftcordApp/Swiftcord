@@ -141,7 +141,6 @@ struct MessageStickerView: View {
 		   }
 		   infoShow.toggle()
 		   packPresenting = false
-
 		} label: {
 			StickerItemView(sticker: sticker, size: 160, play: .useDefault)
 				.frame(width: 160, height: 160)
