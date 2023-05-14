@@ -263,7 +263,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03A188B82A0F864500D5F4BC /* DiscordKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DiscordKit; path = ../DiscordKit; sourceTree = "<group>"; };
 		03A188BD2A0FDB7500D5F4BC /* BasicStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStickerView.swift; sourceTree = "<group>"; };
 		03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStickerView.swift; sourceTree = "<group>"; };
 		13A79FBF298C41C800D19AAB /* View+KeyDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyDown.swift"; sourceTree = "<group>"; };
