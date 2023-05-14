@@ -8,9 +8,9 @@
   </a>
 
   <!-- Self-hosted tokei_rs instance, only works for repos in the SwiftcordApp org -->
-  <img alt="" src="http://vinkwok.mywire.org/tokei/github/SwiftcordApp/Swiftcord?style=for-the-badge">
+  <img alt="" src="http://vinkwok.mywire.org/tokei/github/SwiftcordApp/Swiftcord?style=for-the-badge&category=code">
   
-  <a aria-label="Download">
+  <a aria-label="Download" href="https://github.com/SwiftcordApp/Swiftcord/releases/latest">
     <img alt="" src="https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge&labelColor=black&color=eb563c&label=Download">
   </a>
 </p>
