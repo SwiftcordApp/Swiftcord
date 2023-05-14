@@ -9,6 +9,15 @@
         "revision" : "2214f9ee2476f28af64cb38359defe59e85197a1"
       }
     },
+    {	
+      "identity" : "discordkit",	
+      "kind" : "remoteSourceControl",	
+      "location" : "https://github.com/SwiftcordApp/DiscordKit",	
+      "state" : {	
+        "branch" : "main",	
+        "revision" : "c2f7e6a48611fac03456f725f6e4f5d3609d297b"	
+      }	
+    },
     {
       "identity" : "lottie-spm",
       "kind" : "remoteSourceControl",
@@ -52,24 +61,6 @@
       "state" : {
         "revision" : "dda155c7d3ef38c53d29f8584cb2aad2a1a54dba",
         "version" : "2.3.2"
-      }
-    },
-    {
-      "identity" : "swift-docc-plugin",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-docc-plugin",
-      "state" : {
-        "revision" : "9b1258905c21fc1b97bf03d1b4ca12c4ec4e5fda",
-        "version" : "1.2.0"
-      }
-    },
-    {
-      "identity" : "swift-docc-symbolkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-docc-symbolkit",
-      "state" : {
-        "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
-        "version" : "1.0.0"
       }
     },
     {
