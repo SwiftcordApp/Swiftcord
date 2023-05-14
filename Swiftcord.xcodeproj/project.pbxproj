@@ -535,7 +535,6 @@
 		DA4A887B27C0AF3000720909 = {
 			isa = PBXGroup;
 			children = (
-				03A188B82A0F864500D5F4BC /* DiscordKit */,
 				36004E1C283D63E500F0BA73 /* .swiftlint.yml */,
 				DA4A888627C0AF3000720909 /* Swiftcord */,
 				DA4A891727C4B0DF00720909 /* README.md */,
