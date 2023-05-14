@@ -43,9 +43,7 @@ struct StickerItemView: View {
 	@State private var error = false
 	@State private var animation: Lottie.LottieAnimation?
 	@State private var hovered = false
-	
 	@AppStorage("stickerAlwaysAnim") private var alwaysAnimStickers = true
-	
 	private func playAnimation(value: Bool) {
 		// Without this check, the sticker animation restarts if it's hovered
 		if (play == .useDefault && !alwaysAnimStickers) || play == .onHover {
