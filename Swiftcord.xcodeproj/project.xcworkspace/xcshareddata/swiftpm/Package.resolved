@@ -9,14 +9,14 @@
         "revision" : "2214f9ee2476f28af64cb38359defe59e85197a1"
       }
     },
-    {	
-      "identity" : "discordkit",	
-      "kind" : "remoteSourceControl",	
-      "location" : "https://github.com/SwiftcordApp/DiscordKit",	
-      "state" : {	
-        "branch" : "main",	
-        "revision" : "c2f7e6a48611fac03456f725f6e4f5d3609d297b"	
-      }	
+    {
+      "identity" : "discordkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftcordApp/DiscordKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c2f7e6a48611fac03456f725f6e4f5d3609d297b"
+      }
     },
     {
       "identity" : "lottie-spm",
