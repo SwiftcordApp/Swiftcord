@@ -43,7 +43,7 @@ struct DefaultMessageView: View {
 			}
 			if let stickerItems = message.sticker_items {
 				ForEach(stickerItems) { sticker in
-					StickerView(sticker: sticker)
+					MessageStickerView(sticker: sticker)
 				}
 			}
 			ForEach(message.attachments) { attachment in
