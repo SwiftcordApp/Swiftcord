@@ -79,13 +79,9 @@ public class AccountSwitcher: NSObject, ObservableObject {
 
 	// Static to allow using elsewhere
 	static func clearAccountSpecificPrefKeys() {
-		for key in UserDefaults.standard.dictionaryRepresentation().keys {
-			for toRemove in keyPrefixesToRemove {
-				if key.prefix(toRemove.count) == toRemove {
-					UserDefaults.standard.removeObject(forKey: key)
-					break
-				}
-			}
+		for key in UserDefaults.standard.dictionaryRepresentation().keys
+		where keyPrefixesToRemove.contains(where: { key.starts(with: $0) }) {
+			UserDefaults.standard.removeObject(forKey: key)
 		}
 	}
 	func logOut(id: Snowflake) async {

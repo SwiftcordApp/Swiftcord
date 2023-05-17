@@ -14,20 +14,20 @@ struct AboutSwiftcordView: View {
 		Section {
 			// IMO its better to just crash if these are missing in the info dict.
 			// If they are nil there are bigger problems than the app crashing.
+			// swiftlint:disable force_cast
 			HStack {
 				Text("Version")
 				Spacer()
-				// swiftlint:disable force_cast
 				Text(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String)
 					.foregroundColor(.secondary)
 			}
 			HStack {
 				Text("Build")
 				Spacer()
-				// swiftlint:disable force_cast
 				Text(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)
 					.foregroundColor(.secondary)
 			}
+			// swiftlint:enable force_cast
 		} header: {
 			VStack(spacing: 4) {
 				Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 128, height: 128)

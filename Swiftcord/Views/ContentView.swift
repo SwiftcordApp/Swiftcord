@@ -12,23 +12,8 @@ import DiscordKit
 import DiscordKitCore
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    /*@FetchRequest(
-     sortDescriptors: [NSSortDescriptor(keyPath: \MessageItem.timestamp, ascending: true)],
-     animation: .default)
-     private var items: FetchedResults<MessageItem>*/
-
-    private static var insetOffset: CGFloat {
-        // #available cannot be used in ternary statements (yet)
-        if #available(macOS 13.0, *) { return 0 } else { return -13 }
-    }
-    private static var dividerOffset: CGFloat {
-        // #available cannot be used in ternary statements (yet)
-        if #available(macOS 13.0, *) { return -8 } else { return -13 }
-    }
-
     @State private var loadingGuildID: Snowflake?
+
     @State private var presentingOnboarding = false
     @State private var presentingAddServer = false
     @State private var skipWhatsNew = false
@@ -102,6 +87,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            // MARK: Server List
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
@@ -146,7 +132,11 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-            .background(List {}.listStyle(.sidebar).overlay(.black.opacity(0.2)))
+            .background(
+                List {}
+                    .listStyle(.sidebar)
+                    .overlay(Color(nsColor: NSColor.controlBackgroundColor).opacity(0.5))
+            )
             .frame(maxHeight: .infinity, alignment: .top)
 
             ServerView(
@@ -238,41 +228,6 @@ struct ContentView: View {
             }
         }
     }
-
-    /*private func addItem() {
-        withAnimation {
-            let newItem = MessageItem(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate.
-	 You should not use this function in a shipping application, although it may be useful
-	 during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate.
-	 You should not use this function in a shipping application, although it may be useful
-	 during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }*/
 }
 
 private let itemFormatter: DateFormatter = {

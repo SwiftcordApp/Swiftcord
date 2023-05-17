@@ -1,15 +1,25 @@
-<p align="center"><image src="Swiftcord/Assets.xcassets/AppIcon.appiconset/Picture 1.png" width="196px" height="196px" /></p>
+<p align=center><image src="https://raw.githubusercontent.com/SwiftcordApp/.github/main/res/swiftcord_new_icon.png" height="256" /></p>
 
-<h1 align="center">Swiftcord • <img src="https://hitsofcode.com/github/SwiftcordApp/Swiftcord?branch=main" /></h1>
+<h1 align="center">Swiftcord</h1>
+
+<p align="center">
+  <a aria-label="Join the community on Discord" href="https://discord.gg/he7n6MGDXS" target="_blank">
+    <img alt="" src="https://img.shields.io/discord/964741354112577557?style=for-the-badge&labelColor=black&label=Discord">
+  </a>
+
+  <!-- Self-hosted tokei_rs instance, only works for repos in the SwiftcordApp org -->
+  <img alt="" src="http://vinkwok.mywire.org/tokei/github/SwiftcordApp/Swiftcord?style=for-the-badge&category=code">
+  
+  <a aria-label="Download" href="https://github.com/SwiftcordApp/Swiftcord/releases/latest">
+    <img alt="" src="https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge&labelColor=black&color=eb563c&label=Download">
+  </a>
+</p>
+
 <p align="center">Native Discord client for macOS built in Swift</p>
 
 [![](https://github.com/SwiftcordApp/.github/blob/main/res/hero.webp?raw=true)](https://github.com/SwiftcordApp/.github/blob/main/res/swiftcord-promo.mov?raw=true)
 ###### This image doesn't animate properly in Safari, unfortunately. Click on it to view the original video.
 
-[![Discord](https://img.shields.io/discord/964741354112577557?color=rgb%2888%2C101%2C242%29&label=discord&style=for-the-badge)](https://discord.gg/he7n6MGDXS)
-[![GitHub Repo stars](https://img.shields.io/github/stars/cryptoAlgorithm/Swiftcord?color=%23FECF0F&style=for-the-badge)](https://github.com/SwiftcordApp/Swiftcord/stargazers)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=Sponsor%20Me!&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
-[![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dcryptoalgo%26type%3Dpatrons&style=for-the-badge)](https://www.patreon.com/cryptoAlgo)
 [![Weblate project translated](https://img.shields.io/weblate/progress/swiftcord?style=for-the-badge)](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
 
 ---
@@ -26,7 +36,11 @@ me to continue investing time into Swiftcord.**
 Supporters get feature releases 2 weeks before they are made public! 
 
 **Be a supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
-have the skills or time required! It's a great way of thanking me for my work.** 
+have the skills or time required! It's a great way of thanking me for my work. I'll be eternally grateful!**
+
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=Sponsor%20Me!&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
+[![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dcryptoalgo%26type%3Dpatrons&style=for-the-badge)](https://www.patreon.com/cryptoAlgo)
+
 <!--<table>
   <tr>
     <td>
@@ -82,12 +96,12 @@ Releases from the channels below are universal bundles, and run natively on
 both Apple Silicon and Intel.
 
 ### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
-[![Nightly build action status](https://img.shields.io/github/actions/workflow/status/SwiftcordApp/Swiftcord/build.yaml.svg?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/build.yaml/main/swiftcord-canary.zip)
+[![Download latest nightly build](https://img.shields.io/github/actions/workflow/status/SwiftcordApp/Swiftcord/build.yaml.svg?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/build.yaml/main/swiftcord-canary.zip)
 
 For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
 
 ### Alpha (More stable, less updated)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge)](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
+[![Download latest GitHub release](https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge)](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
 
 Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
 
@@ -95,7 +109,7 @@ Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgor
 [![homebrew cask](https://img.shields.io/homebrew/cask/v/swiftcord?style=for-the-badge)](https://formulae.brew.sh/cask/swiftcord)
 
 Swiftcord is also available on homebrew as a cask: `brew install swiftcord`. Versions are
-lock stepped with alpha releases on GitHub releases.
+lock stepped with GitHub releases.
 
 ### TestFlight
 
@@ -148,7 +162,7 @@ to get a rough idea of what's brewing!
 
 ## Copyright Notice
 
-Copyright (c) 2022 Vincent Kwok & Swiftcord Contributors
+Copyright (c) 2023 Vincent Kwok & Swiftcord Contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

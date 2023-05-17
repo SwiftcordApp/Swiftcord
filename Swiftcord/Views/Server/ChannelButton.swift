@@ -53,8 +53,7 @@ struct GuildChButton: View {
 }
 
 struct DMButton: View {
-	// swiftlint:disable identifier_name
-	let dm: Channel
+	let dm: Channel // swiftlint:disable:this identifier_name
 	@Binding var selectedCh: Channel?
 
 	@EnvironmentObject var gateway: DiscordGateway
