@@ -67,39 +67,9 @@ struct AccountOverview: View {
 					List {
 						HStack {
 							VStack(alignment: .leading) {
-								Text("Display Name")
-									.font(.system(.title3, weight: .bold))
-								Text(user.username)
-									.font(.system(.title3, weight: .regular))
-							}
-							Spacer()
-//							Button(action: {}, label: {
-//								HStack {
-//									Text("Learn More")
-//									Image(systemName: "link")
-//								}
-//								.frame(height: 32)
-//								.padding(.leading, 20)
-//								.padding(.trailing, 20)
-//								.background(Color.accentColor)
-//								.cornerRadius(5)
-//							})
-//							.buttonStyle(.plain)
-						}
-						HStack {
-							VStack(alignment: .leading) {
-								Text("Username")
+								Text("Name")
 									.font(.system(.title3, weight: .bold))
 								Text(user.username + "#" + user.discriminator)
-									.font(.system(.title3, weight: .regular))
-							}
-							Spacer()
-						}
-						HStack {
-							VStack(alignment: .leading) {
-								Text("Email")
-									.font(.system(.title3, weight: .bold))
-								Text(user.email)
 									.font(.system(.title3, weight: .regular))
 							}
 							Spacer()
@@ -114,6 +84,25 @@ struct AccountOverview: View {
 								}
 								Spacer()
 							}
+						} else {
+							HStack {
+								VStack(alignment: .leading) {
+									Text("Phone")
+										.font(.system(.title3, weight: .bold))
+									Text("No Phone Number Added")
+										.font(.system(.title3, weight: .regular))
+								}
+								Spacer()
+							}
+						}
+						HStack {
+							VStack(alignment: .leading) {
+								Text("Email")
+									.font(.system(.title3, weight: .bold))
+								Text(user.email)
+									.font(.system(.title3, weight: .regular))
+							}
+							Spacer()
 						}
 					}
 					.cornerRadius(15)
