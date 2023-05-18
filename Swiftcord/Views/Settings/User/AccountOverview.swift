@@ -25,27 +25,108 @@ struct AccountOverview: View {
 				UserInfo()
 			}
 		} header: {
-			VStack(spacing: 0) {
-				CachedAsyncImage(url: user.avatarURL(size: 240)) { image in
-					image.resizable().scaledToFill()
-				} placeholder: {
-					ProgressView().progressViewStyle(.circular)
+			VStack {
+				HStack(spacing: 0) {
+					CachedAsyncImage(url: user.avatarURL(size: 240)) { image in
+						image.resizable().scaledToFill()
+					} placeholder: {
+						ProgressView().progressViewStyle(.circular)
+					}
+					.clipShape(Circle())
+					.frame(width: 70, height: 70)
+					.padding(5)
+					.overlay {
+						Circle()
+							.strokeBorder(.white.opacity(0.5), lineWidth: 2)
+					}
+					.padding()
+					VStack(alignment: .leading) {
+						Text(user.username).font(.title)/*.padding(.top, 6)*/
+						Text("#" + user.discriminator)
+							.font(.system(.title3, weight: .bold))
+					}
+					Spacer()
+					Button(action: {
+						if let url = URL(string: "https://discord.com/channels/@me") {
+								NSWorkspace.shared.open(url)
+							}
+					}, label: {
+						HStack {
+							Text("Edit Profile")
+							Image(systemName: "link")
+						}
+						.frame(width: 131, height: 32)
+						.background(Color.accentColor)
+						.cornerRadius(5)
+					})
+					.buttonStyle(.plain)
 				}
-				.clipShape(Circle())
-				.frame(width: 100, height: 100)
-				Text(user.username).font(.title2).padding(.top, 6)
-				Text(user.email).font(.system(.title3, weight: .regular))
-				if let phone = user.phone {
-					Text(phone)
-						.textSelection(.enabled)
+				.padding()
+				//.background(Color.green.opacity(0.5))
+				VStack {
+					List {
+						HStack {
+							VStack(alignment: .leading) {
+								Text("Display Name")
+									.font(.system(.title3, weight: .bold))
+								Text(user.username)
+									.font(.system(.title3, weight: .regular))
+							}
+							Spacer()
+//							Button(action: {}, label: {
+//								HStack {
+//									Text("Learn More")
+//									Image(systemName: "link")
+//								}
+//								.frame(height: 32)
+//								.padding(.leading, 20)
+//								.padding(.trailing, 20)
+//								.background(Color.accentColor)
+//								.cornerRadius(5)
+//							})
+//							.buttonStyle(.plain)
+						}
+						HStack {
+							VStack(alignment: .leading) {
+								Text("Username")
+									.font(.system(.title3, weight: .bold))
+								Text(user.username + "#" + user.discriminator)
+									.font(.system(.title3, weight: .regular))
+							}
+							Spacer()
+						}
+						HStack {
+							VStack(alignment: .leading) {
+								Text("Email")
+									.font(.system(.title3, weight: .bold))
+								Text(user.email)
+									.font(.system(.title3, weight: .regular))
+							}
+							Spacer()
+						}
+						if let phone = user.phone {
+							HStack {
+								VStack(alignment: .leading) {
+									Text("Phone")
+										.font(.system(.title3, weight: .bold))
+									Text(phone)
+										.font(.system(.title3, weight: .regular))
+								}
+								Spacer()
+							}
+						}
+					}
+					.cornerRadius(15)
+					.padding()
 				}
 			}
 			.foregroundColor(.primary)
 			.frame(maxWidth: .infinity)
 			.padding(.top, -10)
 			.padding(.bottom, 10)
+			.background(Color.black.opacity(0.4))
+			.cornerRadius(15)
 		}
-
 		Section {
 			HStack {
 				Button("Disable Account", role: .destructive) {
