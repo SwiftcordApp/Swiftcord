@@ -122,11 +122,11 @@ struct PasswordField: View {
                 .font(.headline)
                 .textCase(.uppercase)
                 .foregroundColor(.secondary)
-
             SecureField(placeholder, text: $password, prompt: Text(prompt))
                 .textFieldStyle(.roundedBorder)
                 .controlSize(.large)
                 .textFieldStyle(.roundedBorder)
+                .labelsHidden()
         }
     }
 }
