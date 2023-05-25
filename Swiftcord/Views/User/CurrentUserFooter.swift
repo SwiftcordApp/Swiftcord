@@ -102,6 +102,8 @@ struct CurrentUserFooter: View {
 						Group {
 							if let customStatus = customStatus {
 								Text(customStatus.state ?? "")
+									.lineLimit(1)
+									.truncationMode(.tail)
 							} else {
 								Text("#" + user.discriminator)
 							}
@@ -185,7 +187,7 @@ struct CurrentUserFooter: View {
 					NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
 				}
 			}, label: {
-				Image(systemName: "gearshape.fill")
+				Image(systemName: "gear")
 					.font(.system(size: 18))
 					.opacity(0.75)
 			})
