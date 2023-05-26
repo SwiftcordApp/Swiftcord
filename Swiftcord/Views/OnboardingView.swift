@@ -16,11 +16,24 @@ struct OnboardingWelcomeView: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Group {
-				Text("onboarding.title").font(.largeTitle)
-				+ Text(appName ?? "")
+				let highlightStyle = AttributeContainer
 					.foregroundColor(.accentColor)
-					.font(.system(size: 72))
-					.fontWeight(.heavy)
+					.font(.system(size: 72).weight(.heavy))
+
+				var attributedTitle: AttributedString {
+					var attributedString: AttributedString = .init(localized: "onboarding.title \(appName ?? "")")
+
+					attributedString.replaceAttributes(
+						AttributeContainer.inlinePresentationIntent(.stronglyEmphasized),
+						with: highlightStyle
+					)
+
+					return attributedString
+				}
+
+				Text(attributedTitle)
+					.font(.largeTitle)
+
 				Text("onboarding.subtitle").padding(.top, -20)
 			}
 			.padding(.top, 6)
