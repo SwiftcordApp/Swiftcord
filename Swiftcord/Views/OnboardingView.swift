@@ -16,17 +16,15 @@ struct OnboardingWelcomeView: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Group {
-				let highlightStyle = AttributeContainer
-					.foregroundColor(.accentColor)
-					.font(.system(size: 72).weight(.heavy))
-
 				var attributedTitle: AttributedString {
 					var attributedString: AttributedString = .init(localized: "onboarding.title \(appName ?? "")")
 
-					attributedString.replaceAttributes(
-						AttributeContainer.inlinePresentationIntent(.stronglyEmphasized),
-						with: highlightStyle
-					)
+					let appNameRange = attributedString.range(of: appName ?? "")
+
+					if let appNameRange = appNameRange {
+						attributedString[appNameRange].foregroundColor = .accentColor
+						attributedString[appNameRange].font = .system(size: 72).weight(.heavy)
+					}
 
 					return attributedString
 				}
