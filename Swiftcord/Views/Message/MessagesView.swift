@@ -176,7 +176,7 @@ struct MessagesView: View {
             cell(for: msg, shrunk: shrunk)
 
             if !isLastItem, let channelID = ctx.channel?.id {
-                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx+1].id
+                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx+1].id && (gateway.cache.user?.id != msg.author.id)
 
                 if newMsg { UnreadDivider() }
                 if !shrunk && !newMsg {
