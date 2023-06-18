@@ -8,7 +8,7 @@
 "action.close" = "Zamknij";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Witaj w aplikacji\n";
+"onboarding.title %@" = "Witaj w aplikacji\n%@";
 "onboarding.subtitle" = "Będącej klientem Discorda zbudowanym specjalnie dla systemu MacOS";
 "onboarding.lightweight.header" = "Wygodnym i lekkim";
 "onboarding.lightweight.body" = "Zużywającym nawet 7 razy mniej pamięci RAM.";

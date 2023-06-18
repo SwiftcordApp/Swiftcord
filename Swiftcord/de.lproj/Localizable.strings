@@ -2,7 +2,7 @@
 "action.continue" = "Fortfahren";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Willkommen zu\n";
+"onboarding.title %@" = "Willkommen zu\n%@";
 "onboarding.subtitle" = "Ein Discord-Client konzipiert für macOS";
 "onboarding.lightweight.header" = "Effizient — Ressourcen schonend";
 "onboarding.lightweight.body" = "Verbraucht bis zu 7x weniger RAM als Discord bei wenig CPU-Last.";

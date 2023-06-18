@@ -2,7 +2,7 @@
 "action.continue" = "继续";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "欢迎使用\n";
+"onboarding.title %@" = "欢迎使用\n%@";
 "onboarding.subtitle" = "专为macOS打造和设计的Discord客户端";
 "onboarding.lightweight.header" = "高效—轻量级的资源";
 "onboarding.lightweight.body" = "使用的内存比Discord少7倍，CPU使用率低。";

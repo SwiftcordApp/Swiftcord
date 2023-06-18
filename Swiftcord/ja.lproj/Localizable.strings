@@ -111,7 +111,7 @@
 "action.continue" = "続ける";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "へようこそ！\n";
+"onboarding.title %@" = "%@\nへようこそ！";
 "onboarding.lightweight.body" = "CPU 使用率が低く、RAM が Discord の最大 7 分の 1 です。";
 "onboarding.wip.body" = "何か問題がありますか？ GitHub の問題を作成するか、Discord サーバーで問題を報告してください";
 "onboarding.footer" = "Swiftcord はアルファ版ソフトウェアであり、制限やバグがあります。 現時点では、公式クライアントを置き換える予定はありませんが、いつかは置き換えられることを望んでいます。";

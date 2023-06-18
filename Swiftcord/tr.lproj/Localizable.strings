@@ -7,7 +7,7 @@
 "action.close" = "Kapat";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Hoş geldiniz\n";
+"onboarding.title %@" = "Hoş geldiniz\n%@";
 "onboarding.subtitle" = "macOS için tasarlanmış bir Discord istemcisi";
 "onboarding.lightweight.header" = "Verimli - Kaynak Kullanımı Hafif";
 "onboarding.lightweight.body" = "Düşük işlemci kullanımı ile Discord'a göre 7 kat daha az RAM kullanır.";

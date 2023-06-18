@@ -4,7 +4,7 @@
 "action.continue" = "Continuer";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Bienvenue sur\n";
+"onboarding.title %@" = "Bienvenue sur\n%@";
 "onboarding.subtitle" = "Un client Discord construit et conçu pour macOS";
 "onboarding.lightweight.body" = "Utilise jusqu'à 7 fois moins de mémoire vive que Discord, avec très peu d'utilisation du processeur.";
 "onboarding.features.header" = "Riche en fonctionnalités";

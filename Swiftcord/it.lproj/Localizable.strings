@@ -6,7 +6,7 @@
 "action.continue" = "Prosegui";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Benvenuto su\n";
+"onboarding.title %@" = "Benvenuto su\n%@";
 "onboarding.subtitle" = "Un client Discord costruito e disegnato per macOS";
 "user.roles.one" = "Ruolo";
 "user.roles.many" = "Ruoli";

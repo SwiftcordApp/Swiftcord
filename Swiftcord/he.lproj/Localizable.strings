@@ -8,7 +8,7 @@
 "action.continue" = "המשך";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "ברוכים הביים ל\n";
+"onboarding.title %@" = "ברוכים הביים ל\n%@";
 "action.done" = "בוצע";
 "action.close" = "סגור";
 "onboarding.lightweight.header" = "יעיל - פחות מעמיס על המחשב.";

@@ -65,7 +65,7 @@
 "action.continue" = "Fortsett";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Velkommen til\n";
+"onboarding.title %@" = "Velkommen til\n%@";
 "onboarding.wip.body" = "Er noe galt? Opprett en feilrapport på GitHub, eller levn en melding i vår Discord-tjener";
 "onboarding.footer" = "Alfa-programvare, med begrensninger og feil. Tar foreløpig kun sikte å erstatte den offisielle klienten.";
 "dm.group.composeMsg.hint %@" = "Melding %@";

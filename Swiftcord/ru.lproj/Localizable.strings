@@ -9,7 +9,7 @@
 "action.continue" = "Продолжить";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Добро пожаловать в\n";
+"onboarding.title %@" = "Добро пожаловать в\n%@";
 "onboarding.features.body" = "Основные функции присутствуют, и ведется работа над добавлением новых";
 "onboarding.lightweight.header" = "Эффективный - Легкая системная нагрузка";
 "onboarding.lightweight.body" = "Использование оперативной памияти до 7 раз меньше, чем в Discord, при низкой загрузке процессора.";

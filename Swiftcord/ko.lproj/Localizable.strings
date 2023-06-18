@@ -70,7 +70,7 @@
 "server.noChannels.header" = "채팅 채널 없음";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "환영합니다\n";
+"onboarding.title %@" = "환영합니다\n%@";
 "server.channel.title %@" = "#%@에 오신 걸 환영합니다!";
 "server.channel.header %@ %@" = "#%@ 채널의 시작이에요. %@";
 "loader.panic.logout" = "시간이 좀 걸리네요, 로그아웃하시겠어요?";

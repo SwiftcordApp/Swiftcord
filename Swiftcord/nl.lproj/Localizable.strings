@@ -4,7 +4,7 @@
 "action.close" = "Dicht";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "Welkom bij\n";
+"onboarding.title %@" = "Welkom bij\n%@";
 "onboarding.subtitle" = "Een Discord client gemaakt en ontworpen voor macOS";
 "onboarding.lightweight.header" = "Efficiënt - Gebruikt niet veel Bronnen";
 "onboarding.features.header" = "Goed Aanbevolen";

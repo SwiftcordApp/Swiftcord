@@ -24,7 +24,7 @@
 "settings.app.advanced.analytics.caption" = "我們將通過Appcenter收集匯總（匿名）的使用統計資料（如渲染語言，應用程式版本和功能的使用狀態）。所獲取的資料將用於提升Swiftcord的功能體驗；我們無法以此資料追蹤到你身上。";
 
 /* ====== Onboarding ====== */
-"onboarding.title" = "歡迎使用\n";
+"onboarding.title %@" = "歡迎使用\n%@";
 "onboarding.subtitle" = "一個專門為macOS打造和設計的Discord用戶端";
 "onboarding.lightweight.body" = "記憶體使用率較Discord少高達7倍，且CPU使用率亦較低。";
 "onboarding.features.header" = "功能完善";
