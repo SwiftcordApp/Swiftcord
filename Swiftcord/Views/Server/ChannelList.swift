@@ -17,15 +17,23 @@ struct ChannelList: View {
 	@AppStorage("nsfwShown") var nsfwShown: Bool = true
 	@EnvironmentObject var serverCtx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
+	
+	private func hasUnreadMsg(for channel: Channel) -> Bool {
+		if let lastID = gateway.readState[channel.id]?.last_message_id, let _chLastID = channel.last_message_id, let chLastID = Int(_chLastID), lastID.intValue < chLastID {
+			return true
+		} else {
+			return false
+		}
+	}
 
 	@_transparent @_optimize(speed) @ViewBuilder
 	private func item(for channel: Channel) -> some View {
-		ChannelButton(channel: channel, selectedCh: $selCh)
+		ChannelButton(channel: channel, unread: hasUnreadMsg(for: channel), selectedCh: $selCh)
 			.equatable()
 			.listRowInsets(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
 			.listRowBackground(Spacer().overlay(alignment: .leading) {
 				// Check if we should show unread indicator
-				if let lastID = gateway.readState[channel.id]?.last_message_id, let _chLastID = channel.last_message_id, let chLastID = Int(_chLastID), lastID.intValue < chLastID {
+				if hasUnreadMsg(for: channel) {
 					Circle().fill(.primary).frame(width: 8, height: 8).offset(x: 2)
 				}
 			})
