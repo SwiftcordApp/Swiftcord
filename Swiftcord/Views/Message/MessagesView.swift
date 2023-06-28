@@ -361,6 +361,11 @@ struct MessagesView: View {
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status after user sent a message
                     ctx.typingStarted[msg.channel_id]?.removeAll { $0.user_id == msg.author.id }
+                    
+                    // If user sends message, reset last message.
+                    if gateway.cache.user?.id == msg.author.id {
+                        gateway.readState[msg.channel_id] = gateway.readState[msg.channel_id]?.updatingLastMessage(id: msg.id)
+                    }
                 case .messageUpdate(let newMsg):
                     guard newMsg.channel_id == ctx.channel?.id else { break }
                     viewModel.updateMessage(newMsg)
