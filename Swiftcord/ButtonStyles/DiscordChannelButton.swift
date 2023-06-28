@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DiscordChannelButton: ButtonStyle {
 	let isSelected: Bool
+	let unread: Bool
 	@State var isHovered: Bool = false
 
 	@Environment(\.controlSize) var size: ControlSize
@@ -19,8 +20,8 @@ struct DiscordChannelButton: ButtonStyle {
 			.frame(height: size == .large ? 42 : 32)
 			.padding(.horizontal, 2)
 			.font(.system(size: 15))
-			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
-			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
+			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : unread ? Color(nsColor: .labelColor) : .gray)
+			.accentColor(isSelected ? Color(nsColor: .labelColor) : unread ? Color(nsColor: .labelColor) : .gray)
 			.background {
 				RoundedRectangle(cornerRadius: 5)
 					.fill(isSelected ? .gray.opacity(0.3) : (isHovered ? .gray.opacity(0.2) : .clear))
