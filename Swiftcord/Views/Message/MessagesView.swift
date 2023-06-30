@@ -20,6 +20,16 @@ extension View {
     }
 }
 
+extension View {
+    @ViewBuilder public func removeSeparator() -> some View {
+        if #available(macOS 13.0, *) {
+            self.listRowSeparator(.hidden).listSectionSeparator(.hidden)
+        } else {
+            self
+        }
+    }
+}
+
 struct NewAttachmentError: Identifiable {
     var id: String { title + message }
     let title: String
@@ -188,23 +198,25 @@ struct MessagesView: View {
                 DayDividerView(date: msg.timestamp)
             }
         }
-        .flip()
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
+
+    @ViewBuilder
     private var historyList: some View {
         ScrollViewReader { proxy in
             List {
                 Spacer(minLength: max(messageInputHeight-44-7, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
 
-                history
+                history.flip().removeSeparator()
 
                 if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().flip()
+                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().removeSeparator().flip()
                 } else {
                     loadingSkeleton
                         .zeroRowInsets()
                         .flip()
+                        .removeSeparator()
                         .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
                         .onDisappear {
                             if let loadTask = viewModel.fetchMessagesTask {
@@ -260,7 +272,7 @@ struct MessagesView: View {
                 let typingMembers = ctx.channel == nil
                 ? []
                 : ctx.typingStarted[ctx.channel!.id]?
-                    .map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+                    .map { $0.member?.nick ?? $0.member?.user?.username ?? "" } ?? []
 
                 if !typingMembers.isEmpty {
                     HStack {
