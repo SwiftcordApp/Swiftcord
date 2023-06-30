@@ -51,14 +51,21 @@ struct ReferenceMessageView: View {
 								.font(.system(size: 14))
 								.opacity(0.75)
 								.lineLimit(1)
-							if quotedMsg.content.isEmpty {
-								Text("message.reply.attachment")
+							
+							if quotedMsg.type == .chatInputCmd {
+								Text("message.reply.command")
 									.font(.system(size: 14).italic())
 									.opacity(0.75)
-							}
-
-							if !quotedMsg.attachments.isEmpty || !quotedMsg.embeds.isEmpty {
-								Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
+								Image(systemName: "slash.circle.fill").font(.system(size: 16)).opacity(0.75)
+							} else {
+								if quotedMsg.content.isEmpty {
+									Text("message.reply.attachment")
+										.font(.system(size: 14).italic())
+										.opacity(0.75)
+								}
+								if !quotedMsg.attachments.isEmpty || !quotedMsg.embeds.isEmpty {
+									Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
+								}
 							}
 						}
 					} else {

@@ -43,6 +43,7 @@
 "message.edited" = " • Edited: ";
 "message.gone" = "Original message was deleted.";
 "message.reply.attachment" = "Click to see attachment";
+"message.reply.command" = "Click to see command";
 
 /* ====== Server ====== */
 "server.noChannels.header" = "No Text Channels";

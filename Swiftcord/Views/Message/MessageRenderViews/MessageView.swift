@@ -59,7 +59,7 @@ struct MessageView: View, Equatable {
 	static let lineSpacing: CGFloat = 4
 
 	// Messages that can be rendered as "default" messages
-	static let defaultTypes: [MessageType] = [.defaultMsg, .reply]
+    static let defaultTypes: [MessageType] = [.defaultMsg, .reply, .chatInputCmd]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -70,6 +70,9 @@ struct MessageView: View, Equatable {
 						onQuoteClick(referencedID)
 					}
 				}
+            }
+            if message.type == .chatInputCmd {
+                CommandMessageView(message: message)
             }
             HStack(
                 alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
