@@ -11,7 +11,7 @@ import DiscordKitCore
 import DiscordKit
 
 /// Renders the channel list on the sidebar
-struct ChannelList: View {
+struct ChannelList: View, Equatable {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
 	@AppStorage("nsfwShown") var nsfwShown: Bool = true
@@ -31,19 +31,58 @@ struct ChannelList: View {
 			})
 	}
 
+	private static func computeOverwrites(
+		channel: Channel, guildID: Snowflake,
+		member: Member, basePerms: Permissions
+	) -> Permissions {
+		if basePerms.contains(.administrator) {
+			return .all
+		}
+		var permission = basePerms
+		// Apply the overwrite for the @everyone permission
+		if let everyoneOverwrite = channel.permission_overwrites?.first(where: { $0.id == guildID }) {
+			permission.applyOverwrite(everyoneOverwrite)
+		}
+		// Next, apply role-specific overwrites
+		channel.permission_overwrites?.forEach { overwrite in
+			if member.roles.contains(overwrite.id) {
+				permission.applyOverwrite(overwrite)
+			}
+		}
+		// Finally, apply member-specific overwrites - must be done after all roles
+		channel.permission_overwrites?.forEach { overwrite in
+			if member.user_id == overwrite.id {
+				permission.applyOverwrite(overwrite)
+			}
+		}
+		return permission
+	}
+
 	var body: some View {
+		let availableChs = channels.filter { channel in
+			guard let guildID = serverCtx.guild?.id, let member = serverCtx.member else {
+				// print("no guild or member!")
+				return true
+			}
+			guard channel.type != .category else {
+				return true
+			}
+			return Self.computeOverwrites(
+				channel: channel,
+				guildID: guildID,
+				member: member, basePerms: serverCtx.basePermissions
+			)
+			.contains(.viewChannel)
+		}
 		List {
 			Spacer(minLength: 52 - 16 + 4) // 52 (header) - 16 (unremovable section top padding) + 4 (spacing)
 
-			let filteredChannels = channels.filter {
-				if !nsfwShown {
-					return $0.parent_id == nil && $0.type != .category && ($0.nsfw == false || $0.nsfw == nil)
-				}
-				return $0.parent_id == nil && $0.type != .category
+			let filteredChannels = availableChs.filter {
+				$0.parent_id == nil && $0.type != .category && (nsfwShown || ($0.nsfw == false || $0.nsfw == nil))
 			}
 			if !filteredChannels.isEmpty {
 				Section(
-					header: Text(serverCtx.guild?.isDMChannel == true
+					header: Text(serverCtx.guild?.properties.isDMChannel == true
 						? "dm"
 						: "server.channel.noCategory"
 					).textCase(.uppercase).padding(.leading, 8)
@@ -53,16 +92,13 @@ struct ChannelList: View {
 				}
 			}
 
-			let categoryChannels = channels
+			let categoryChannels = availableChs
 				.filter { $0.parent_id == nil && $0.type == .category }
 				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				// Channels in this section
-				let channels = channels.filter {
-					if !nsfwShown {
-						return $0.parent_id == channel.id && ($0.nsfw == false || $0.nsfw == nil)
-					}
-					return $0.parent_id == channel.id
+				let channels = availableChs.filter {
+					$0.parent_id == channel.id && (nsfwShown || ($0.nsfw == false || $0.nsfw == nil))
 				}.discordSorted()
 				if !channels.isEmpty {
 					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
@@ -81,5 +117,9 @@ struct ChannelList: View {
 			tableView.enclosingScrollView!.contentInsets = .init()
 		}
 		.environment(\.defaultMinListRowHeight, 1)
+	}
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.channels == rhs.channels && lhs.selCh == rhs.selCh
 	}
 }
