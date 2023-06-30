@@ -41,6 +41,11 @@ struct CommandMessageView: View {
 						if message.type == .chatInputCmd {
 							Text("/\(interaction.name)")
 								.font(.system(size: 14))
+								.foregroundColor(.accentColor)
+						} else if message.type == .contextMenuCmd {
+							Text(interaction.name)
+								.font(.system(size: 14))
+								.foregroundColor(.accentColor)
 						}
 					}
 				}

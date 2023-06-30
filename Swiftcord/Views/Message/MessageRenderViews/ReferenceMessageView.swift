@@ -43,7 +43,7 @@ struct ReferenceMessageView: View {
 							if quotedMsg.author.bot == true || quotedMsg.webhook_id != nil {
 								NonUserBadge(
 									flags: quotedMsg.author.public_flags,
-									isWebhook: quotedMsg.webhook_id != nil
+									isWebhook: quotedMsg.webhook_id != nil && !MessageView.commandTypes.contains(quotedMsg.type)
 								)
 							}
 
@@ -52,7 +52,7 @@ struct ReferenceMessageView: View {
 								.opacity(0.75)
 								.lineLimit(1)
 							
-							if quotedMsg.type == .chatInputCmd {
+							if MessageView.commandTypes.contains(quotedMsg.type) {
 								Text("message.reply.command")
 									.font(.system(size: 14).italic())
 									.opacity(0.75)
