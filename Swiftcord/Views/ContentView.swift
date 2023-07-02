@@ -105,6 +105,7 @@ struct ContentView: View {
                         case .guild(let guild):
                             ServerButton(
                                 selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
+                                guild: guild,
                                 name: guild.name,
                                 serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
                                 isLoading: loadingGuildID == guild.id,

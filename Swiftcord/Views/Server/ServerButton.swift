@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import DiscordKit
+import DiscordKitCore
 import CachedAsyncImage
 
 struct ServerButton: View {
 	let selected: Bool
+	var guild: Guild?
 	let name: String
 	var systemIconName: String?
 	var assetIconName: String?
@@ -35,6 +38,7 @@ struct ServerButton: View {
 				.buttonStyle(
 					ServerButtonStyle(
 						selected: selected,
+						guild: guild,
 						name: name,
 						bgColor: bgColor,
 						systemName: systemIconName,
@@ -77,6 +81,7 @@ struct ServerButton: View {
 
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
+	var guild: Guild?
     let name: String
     let bgColor: Color?
     let systemName: String?
@@ -84,6 +89,8 @@ struct ServerButtonStyle: ButtonStyle {
     let serverIconURL: String?
     let loading: Bool
     @Binding var hovered: Bool
+	
+	@EnvironmentObject var gateway: DiscordGateway
 
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
@@ -138,18 +145,62 @@ struct ServerButtonStyle: ButtonStyle {
 		.animation(.none, value: configuration.isPressed)
         .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
         .onHover { hover in hovered = hover }
-    }
+		.contextMenu {
+			if guild != nil {
+				Text(name)
+				
+				Divider()
+				
+				Button(action: readAll) {
+					Image(systemName: "message.badge")
+					Text("Mark as read")
+				}
+				
+				Divider()
+				
+				Group {
+					Button(action: copyLink) {
+						Image(systemName: "link")
+						Text("Copy Link")
+					}
+					Button(action: copyId) {
+						Image(systemName: "number.circle.fill")
+						Text("Copy ID")
+					}
+				}
+			}
+		}
+	}
 }
 
-struct ServerButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ServerButton(
-            selected: false,
-            name: "Hello world, discord!",
-            systemIconName: nil,
-            assetIconName: nil,
-            serverIconURL: nil,
-            bgColor: nil
-		) {}
-    }
+private extension ServerButtonStyle {
+	func readAll() {
+		if guild != nil {
+			for channel in guild?.channels ?? [] {
+				gateway.readState[channel.id] = gateway.readState[channel.id]?.updatingLastMessage(id: channel.last_message_id ?? "")
+			}
+		}
+	}
+	
+	func copyLink() {
+		if guild != nil {
+			let pasteboard = NSPasteboard.general
+			pasteboard.clearContents()
+			pasteboard.setString(
+				"https://canary.discord.com/channels/\(guild?.id ?? "@me")",
+				forType: .string
+			)
+		}
+	}
+	
+	func copyId() {
+		if guild != nil {
+			let pasteboard = NSPasteboard.general
+			pasteboard.clearContents()
+			pasteboard.setString(
+				guild?.id ?? "",
+				forType: .string
+			)
+		}
+	}
 }
