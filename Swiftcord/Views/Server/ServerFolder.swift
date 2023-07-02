@@ -80,6 +80,7 @@ struct ServerFolder: View {
                         Text(folder.name)
                             .font(.title3)
                             .padding(10)
+                            .frame(maxWidth: 300)
                             // Prevent popover from blocking clicks to other views
                             .interactiveDismissDisabled()
                     }

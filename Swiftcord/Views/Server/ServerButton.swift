@@ -32,23 +32,27 @@ struct ServerButton: View {
 				.animation(capsuleAnimation, value: hovered)
 
 			Button("", action: onSelect)
-			.buttonStyle(
-				ServerButtonStyle(
-					selected: selected,
-					name: name,
-					bgColor: bgColor,
-					systemName: systemIconName,
-					assetName: assetIconName,
-					serverIconURL: serverIconURL,
-					loading: isLoading,
-					hovered: $hovered
+				.buttonStyle(
+					ServerButtonStyle(
+						selected: selected,
+						name: name,
+						bgColor: bgColor,
+						systemName: systemIconName,
+						assetName: assetIconName,
+						serverIconURL: serverIconURL,
+						loading: isLoading,
+						hovered: $hovered
+					)
 				)
-			)
-			/*.popover(isPresented: .constant(true)) {
-			 Text(name).padding(8)
-			 }*/
-			.padding(.trailing, 8)
-
+				.popover(isPresented: $hovered) {
+					Text(name)
+						.font(.title3)
+						.padding(8)
+						.frame(maxWidth: 300)
+						.interactiveDismissDisabled()
+				}
+				.padding(.trailing, 8)
+			
 			Spacer()
 		}
 		.frame(width: 72, height: 48)
