@@ -13,7 +13,7 @@ import CachedAsyncImage
 struct ReferenceMessageView: View {
 	let referencedMsg: Message?
 
-	@EnvironmentObject var serverCtx: ServerContext
+	@EnvironmentObject var state: UIState
 
     var body: some View {
 		HStack(alignment: .top, spacing: 4) {
@@ -30,7 +30,7 @@ struct ReferenceMessageView: View {
 					if MessageView.defaultTypes.contains(quotedMsg.type) {
 						UserAvatarView(
 							user: quotedMsg.author,
-							guildID: serverCtx.guild?.id,
+							guildID: state.serverCtx.guild?.id,
 							webhookID: quotedMsg.webhook_id,
 							size: 16
 						).equatable()

@@ -81,118 +81,130 @@ struct CurrentUserFooter: View {
 		let curUserPresence = gateway.presences[user.id]?.status ?? .offline
 		let customStatus = gateway.presences[user.id]?.activities.first { $0.type == .custom }
 
-		HStack(spacing: 14) {
-			Button {
-				userPopoverPresented = true
-				AnalyticsWrapper.event(type: .openPopout, properties: [
-					"type": "User Status Menu",
-					"other_user_id": user.id
-				])
-			} label: {
-				HStack(spacing: 8) {
-					AvatarWithPresence(
-						avatarURL: user.avatarURL(),
-						presence: curUserPresence,
-						animate: false
-					)
-					.controlSize(.small)
-
-					VStack(alignment: .leading, spacing: 0) {
-						Text(user.username).font(.headline)
-						Group {
-							if let customStatus = customStatus {
-								Text(customStatus.state ?? "")
-									.lineLimit(1)
-									.truncationMode(.tail)
-							} else {
-								Text("#" + user.discriminator)
-							}
-						}.font(.system(size: 12)).opacity(0.75)
-					}
-				}
-				.padding(2)
-				.contentShape(Rectangle())
-			}
-			.buttonStyle(.plain)
-			.popover(isPresented: $userPopoverPresented) {
-				MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
-					connected_accounts: [],
-					user: User(from: user)
-				))) {
-					VStack(spacing: 4) {
-						if !(user.bio?.isEmpty ?? true) { Divider() }
-
-						// Set presence
-						Menu {
-							ForEach(Self.presences, id: \.icon) { (presence, icon) in
-								Button {
-									updatePresence(with: presence)
-								} label: {
-									// Not possible to set custom image size and color
-									Image(systemName: icon)
-									Text(presence.toLocalizedString())
+			HStack(spacing: 14) {
+				Button {
+					userPopoverPresented = true
+					AnalyticsWrapper.event(type: .openPopout, properties: [
+						"type": "User Status Menu",
+						"other_user_id": user.id
+					])
+				} label: {
+					HStack(spacing: 8) {
+						AvatarWithPresence(
+							avatarURL: user.avatarURL(),
+							presence: curUserPresence,
+							animate: false
+						)
+						.controlSize(.small)
+						
+						VStack(alignment: .leading, spacing: 0) {
+							Text(user.username).font(.headline)
+							Group {
+								if let customStatus = customStatus {
+									Text(customStatus.state ?? "")
+										.lineLimit(1)
+										.truncationMode(.tail)
+								} else {
+									Text("#" + user.discriminator)
 								}
-								if presence == Self.presences.first?.presence { Divider() }
-							}
-						} label: {
-							Text(curUserPresence.toLocalizedString())
+							}.font(.system(size: 12)).opacity(0.75)
 						}
-						.controlSize(.large)
-						.disabled(settingPresence)
-						Button {
-							customStatusPresented = true
-						} label: {
-							if customStatus != nil {
-								HStack {
-									Text("Edit Custom Status")
-									Spacer()
+					}
+					.padding(2)
+					.contentShape(Rectangle())
+				}
+				.buttonStyle(.plain)
+				.popover(isPresented: $userPopoverPresented) {
+					MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
+						connected_accounts: [],
+						user: User(from: user)
+					))) {
+						VStack(spacing: 4) {
+							if !(user.bio?.isEmpty ?? true) { Divider() }
+							
+							// Set presence
+							Menu {
+								ForEach(Self.presences, id: \.icon) { (presence, icon) in
 									Button {
-										updatePresence(with: curUserPresence, clearCustomStatus: true)
+										updatePresence(with: presence)
 									} label: {
-										Image(systemName: "xmark.circle.fill").font(.system(size: 18))
+										// Not possible to set custom image size and color
+										Image(systemName: icon)
+										Text(presence.toLocalizedString())
 									}
-									.buttonStyle(.plain)
-									.help("Clear Custom Status")
+									if presence == Self.presences.first?.presence { Divider() }
 								}
-							} else {
-								Label("Set Custom Status", systemImage: "face.smiling")
+							} label: {
+								Text(curUserPresence.toLocalizedString())
+							}
+							.controlSize(.large)
+							.disabled(settingPresence)
+							Button {
+								customStatusPresented = true
+							} label: {
+								if customStatus != nil {
+									HStack {
+										Text("Edit Custom Status")
+										Spacer()
+										Button {
+											updatePresence(with: curUserPresence, clearCustomStatus: true)
+										} label: {
+											Image(systemName: "xmark.circle.fill").font(.system(size: 18))
+										}
+										.buttonStyle(.plain)
+										.help("Clear Custom Status")
+									}
+								} else {
+									Label("Set Custom Status", systemImage: "face.smiling")
+										.frame(maxWidth: .infinity, alignment: .leading)
+								}
+							}
+							.buttonStyle(FlatButtonStyle(outlined: true, text: true))
+							.controlSize(.small)
+							.disabled(settingPresence)
+							
+							Divider()
+							
+							Button {
+								switcherPresented = true
+								AnalyticsWrapper.event(type: .impressionAccountSwitcher)
+							} label: {
+								Label("Switch Accounts", systemImage: "arrow.left.arrow.right")
 									.frame(maxWidth: .infinity, alignment: .leading)
 							}
+							.buttonStyle(FlatButtonStyle(outlined: true, text: true))
+							.controlSize(.small)
 						}
-						.buttonStyle(FlatButtonStyle(outlined: true, text: true))
-						.controlSize(.small)
-						.disabled(settingPresence)
-
-						Divider()
-
-						Button {
-							switcherPresented = true
-							AnalyticsWrapper.event(type: .impressionAccountSwitcher)
-						} label: {
-							Label("Switch Accounts", systemImage: "arrow.left.arrow.right")
-								.frame(maxWidth: .infinity, alignment: .leading)
-						}
-						.buttonStyle(FlatButtonStyle(outlined: true, text: true))
-						.controlSize(.small)
 					}
 				}
-			}
-
-			Spacer()
-
-			Button(action: {
-				if #available(macOS 13.0, *) {
-					NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-				} else {
-					NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+				
+				Spacer()
+				
+				if #available(macOS 14, *) {
+					SettingsLink {
+						Button(action: {}, label: {
+							Image(systemName: "gear")
+								.font(.system(size: 18))
+								.opacity(0.75)
+						})
+						.buttonStyle(.plain)
+						.frame(width: 32, height: 32)
 				}
-			}, label: {
-				Image(systemName: "gear")
-					.font(.system(size: 18))
-					.opacity(0.75)
-			})
-			.buttonStyle(.plain)
-			.frame(width: 32, height: 32)
+			} else {
+				Button(action: {
+					if #available(macOS 13.0, *) {
+						NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+					} else {
+						NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+					}
+				}, label: {
+					Image(systemName: "gear")
+						.font(.system(size: 18))
+						.opacity(0.75)
+				})
+				.buttonStyle(.plain)
+				.frame(width: 32, height: 32)
+			}
 		}
 		.frame(height: 52)
 		.padding(.horizontal, 8)

@@ -13,6 +13,7 @@ import DiscordKitCore
 
 struct ContentView: View {
     @State private var loadingGuildID: Snowflake?
+    @State private var selectedGuild: Guild?
 
     @State private var presentingOnboarding = false
     @State private var presentingAddServer = false
@@ -91,43 +92,51 @@ struct ContentView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ServerButton(
-                        selected: state.selectedGuildID == "@me",
-                        name: "Home",
-                        assetIconName: "DiscordIcon"
-                    ) {
-                        state.selectedGuildID = "@me"
-                    }.padding(.top, 4)
+                      selectedID: $state.selectedGuildID,
+                      guildID: .constant("@me"),
+                      name: .constant("Home"),
+                      serverIconURL: .constant(nil),
+                      systemIconName: .constant(nil),
+                      assetIconName: .constant("DiscordIcon")
+                    )
+                    .padding(.top, 4)
 
                     HorizontalDividerView().frame(width: 32)
 
                     ForEach(self.serverListItems) { item in
                         switch item {
-                        case .guild(let guild):
-                            ServerButton(
-                                selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
-                                name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                                isLoading: loadingGuildID == guild.id,
-                                onSelect: { state.selectedGuildID = guild.id }
-                            )
-                        case .guildFolder(let folder):
-                            ServerFolder(
+                          case .guild(let guild):
+                              ServerButton(
+                                selectedID: $state.selectedGuildID,
+                                guildID: .constant(guild.id),
+                                name: .constant(guild.name),
+                                serverIconURL: .constant(guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil),
+                                systemIconName: .constant(nil),
+                                assetIconName: .constant(nil),
+                                isLoading: loadingGuildID == guild.id
+                              )
+                              .tag(guild.id)
+                          case .guildFolder(let folder):
+                              ServerFolder(
                                 folder: folder,
+                                open: state.selectedGuildID == folder.id || loadingGuildID == folder.id,
                                 selectedGuildID: $state.selectedGuildID,
                                 loadingGuildID: loadingGuildID
-                            )
+                              )
+                              .tag(folder.id)
                         }
                     }
 
                     ServerButton(
-                        selected: false,
-                        name: "Add a Server",
-                        systemIconName: "plus",
+                        selectedID: $state.selectedGuildID,
+                        guildID: .constant("+"),
+                        name: .constant("Add a Server"),
+                        serverIconURL: .constant(nil),
+                        systemIconName: .constant("plus"),
+                        assetIconName: .constant(nil),
                         bgColor: .green,
                         noIndicator: true
-                    ) {
-                        presentingAddServer = true
-                    }.padding(.bottom, 4)
+                    ).padding(.bottom, 4)
                 }
                 .padding(.bottom, 8)
                 .frame(width: 72)
@@ -139,11 +148,13 @@ struct ContentView: View {
             )
             .frame(maxHeight: .infinity, alignment: .top)
 
-            ServerView(
-                guild: state.selectedGuildID == nil
-                ? nil
-                : (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
-            )
+            ServerView(guild: $selectedGuild)
+              .onAppear()
+              {
+                guard let id = state.selectedGuildID else { selectedGuild = nil; return }
+                
+                selectedGuild = (id == "@me") ? makeDMGuild() : gateway.cache.guilds[id]
+              }
         }
         // Blur the area behind the toolbar so the content doesn't show thru
         .safeAreaInset(edge: .top) {
@@ -157,6 +168,7 @@ struct ContentView: View {
         .onChange(of: state.selectedGuildID) { id in
             guard let id = id else { return }
             UserDefaults.standard.set(id.description, forKey: "lastSelectedGuild")
+            selectedGuild = (id == "@me") ? makeDMGuild() : gateway.cache.guilds[id]
         }
         .onChange(of: state.loadingState) { state in
             if state == .gatewayConn { loadLastSelectedGuild() }

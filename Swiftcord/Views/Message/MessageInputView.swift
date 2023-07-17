@@ -54,26 +54,26 @@ struct MessageAttachmentView: View {
 }
 
 struct MessageInputView: View {
-    let placeholder: LocalizedStringKey
-    @Binding var message: String
-    @Binding var attachments: [URL]
+	let placeholder: LocalizedStringKey
+	@Binding var message: String
+	@Binding var attachments: [URL]
 	@Binding var replying: MessagesViewModel.ReplyRef?
-    let onSend: (String, [URL]) -> Void
+	let onSend: (String, [URL]) -> Void
 	let preAttach: (URL) -> Bool
 
 	@State private var inhibitingSend = false
 	@State private var showingAttachmentErr = false
 	@State private var attachmentErr = ""
-	@EnvironmentObject var ctx: ServerContext
+	@EnvironmentObject var state: UIState
 
 	@AppStorage("showSendBtn") private var showSendButton = false
 
 	@FocusState private var messageFieldFocused: Bool
 
     private func send() {
-        guard message.hasContent() || !attachments.isEmpty else { return }
-        onSend(message, attachments)
-        withAnimation { attachments.removeAll() }
+			guard message.hasContent() || !attachments.isEmpty else { return }
+			onSend(message, attachments)
+			withAnimation { attachments.removeAll() }
     }
 
     var body: some View {
@@ -221,7 +221,7 @@ extension MessageInputView {
 		.lineSpacing(4)
 		.disableAutocorrection(false)
 		.focused($messageFieldFocused)
-		.onChange(of: ctx.channel) { _ in
+		.onChange(of: state.serverCtx.channel) { _ in
 			messageFieldFocused = true
 		}
 		.offset(y: 2)

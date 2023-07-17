@@ -87,13 +87,14 @@ struct ServerFolder: View {
                     if open {
                         ForEach(folder.guilds, id: \.id) { [self] guild in
                             ServerButton(
-                                selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
-                                name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
-                                isLoading: loadingGuildID == guild.id
-                            ) {
-                                selectedGuildID = guild.id
-                            }
+                              selectedID: $selectedGuildID,
+                              guildID: .constant(guild.id),
+                              name: .constant(guild.name),
+                              serverIconURL: .constant(guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil),
+                              systemIconName: .constant(nil),
+                              assetIconName: .constant(nil),
+                              isLoading: loadingGuildID == guild.id
+                            )
                             .transition(.move(edge: .top).combined(with: .opacity)) // Prevent server buttons from "fading in" during transition
                         }
                     }
