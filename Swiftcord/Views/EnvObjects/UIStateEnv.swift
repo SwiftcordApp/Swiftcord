@@ -15,9 +15,9 @@ enum LoadingState {
 }
 
 class UIState: ObservableObject {
-    @Published var loadingState: LoadingState = .initial
-    @Published var attemptLogin = false
-    @Published var selfMute = false
+	@Published var loadingState: LoadingState = .initial
+	@Published var attemptLogin = false
+	@Published var selfMute = false
 	@Published var selfDeaf = false
 	@Published var serverCtx = ServerContext()
 	@Published var selectedGuildID: Snowflake?

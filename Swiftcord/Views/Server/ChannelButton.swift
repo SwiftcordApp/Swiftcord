@@ -34,16 +34,16 @@ struct GuildChButton: View {
 	let channel: Channel
 	@Binding var selectedCh: Channel?
 
-	@EnvironmentObject var serverCtx: ServerContext
+	@EnvironmentObject var state: UIState
 
 	private let chIcons = [
 		ChannelType.voice: "speaker.wave.2.fill",
-		.news: "megaphone.fill"
+		ChannelType.news: "megaphone.fill"
 	]
 
 	var body: some View {
 		Button { selectedCh = channel } label: {
-			let image = (serverCtx.guild?.rules_channel_id != nil && serverCtx.guild?.rules_channel_id! == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
+			let image = (state.serverCtx.guild?.rules_channel_id != nil && state.serverCtx.guild?.rules_channel_id == channel.id) ? "newspaper.fill" : (chIcons[channel.type] ?? "number")
 			Label(channel.label() ?? "nil", systemImage: image)
 				.padding(.vertical, 5)
 				.padding(.horizontal, 4)

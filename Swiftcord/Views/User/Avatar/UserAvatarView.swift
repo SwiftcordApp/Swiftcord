@@ -27,7 +27,7 @@ struct UserAvatarView: View, Equatable {
 	@State private var loadFullFailed = false
 	@State private var note = ""
 
-	@EnvironmentObject var ctx: ServerContext
+	@EnvironmentObject var state: UIState
 	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
@@ -82,12 +82,12 @@ struct UserAvatarView: View, Equatable {
 			MiniUserProfileView(
 				user: user,
 				profile: $profile,
-				guildRoles: ctx.roles,
+				guildRoles: state.serverCtx.roles,
 				isWebhook: webhookID != nil,
 				loadError: loadFullFailed
 			) {
 				if let profile = profile, guildID != "@me" {
-					let guildRoles = ctx.roles
+					let guildRoles = state.serverCtx.roles
 					let roles = guildRoles.filter {
 						profile.guild_member?.roles.contains($0.id) ?? false
 					}

@@ -7,17 +7,24 @@
 
 import SwiftUI
 import CachedAsyncImage
+import DiscordKit
+import DiscordKitCore
 
 struct ServerButton: View {
-	let selected: Bool
-	let name: String
-	var systemIconName: String?
-	var assetIconName: String?
-	var serverIconURL: String?
-	var bgColor: Color?
-	var noIndicator = false // Don't show capsule
-	var isLoading: Bool = false
-	let onSelect: () -> Void
+	@Binding var selectedID: Snowflake?
+	@Binding var guildID: Snowflake?
+	@Binding var name: String
+	@Binding var serverIconURL: String?
+	@Binding var systemIconName: String?
+	@Binding var assetIconName: String?
+	
+	@EnvironmentObject var state: UIState
+	@EnvironmentObject var gateway: DiscordGateway
+	
+	@State var isLoading: Bool = false
+	@State var bgColor: Color?
+	@State var noIndicator = false // Don't show capsule
+
 	@State private var hovered = false
 
 	let capsuleAnimation = Animation.interpolatingSpring(stiffness: 500, damping: 30)
@@ -25,33 +32,79 @@ struct ServerButton: View {
 	var body: some View {
 		HStack {
 			Capsule()
-				.scale((selected || hovered) && !noIndicator ? 1 : 0)
+				.scale(((selectedID == guildID) || hovered) && !noIndicator ? 1 : 0)
 				.fill(Color(nsColor: .labelColor))
-				.frame(width: 8, height: selected ? 40 : (hovered ? 20 : 8))
-				.animation(capsuleAnimation, value: selected)
+				.frame(width: 8, height: (selectedID == guildID) ? 40 : (hovered ? 20 : 8))
+				.animation(capsuleAnimation, value: selectedID == guildID)
 				.animation(capsuleAnimation, value: hovered)
 
-			Button("", action: onSelect)
-			.buttonStyle(
-				ServerButtonStyle(
-					selected: selected,
-					name: name,
-					bgColor: bgColor,
-					systemName: systemIconName,
-					assetName: assetIconName,
-					serverIconURL: serverIconURL,
-					loading: isLoading,
-					hovered: $hovered
-				)
-			)
-			/*.popover(isPresented: .constant(true)) {
-			 Text(name).padding(8)
-			 }*/
+			Button
+			{
+				guard let buttonID = guildID else { return }
+				
+				selectedID = buttonID
+				state.selectedGuildID = buttonID
+			} label:
+			{
+				VStack {
+					if let assetName = assetIconName {
+						Image(assetName)
+							.resizable()
+							.scaledToFit()
+							.frame(width: 26)
+					} else if let systemName = systemIconName {
+						Image(systemName: systemName)
+							.font(.system(size: 24))
+					} else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
+						if iconURL.isAnimatable {
+							SwiftyGifView(
+								url: iconURL.modifyingPathExtension("gif"),
+								animating: hovered,
+								resetWhenNotAnimating: true
+							).transition(.customOpacity)
+						} else {
+							BetterImageView(url: iconURL) {
+								self.font(.system(size: 18))
+							}
+						}
+					} else {
+						let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+						Text(iconName)
+							.font(.system(size: 18))
+							.lineLimit(1)
+							.minimumScaleFactor(0.5)
+							.padding(5)
+					}
+				}
+				.roundedButtonStyle(isSelected: (selectedID == guildID), hovered: hovered, bgColor: bgColor, hasIcon: (serverIconURL != nil))
+				{
+					viewModifiers in viewModifiers
+				}
+				.onHover { hover in hovered = hover }
+			}
+			//.buttonStyle(PlainButtonStyle()) // <- cause for breakage
 			.padding(.trailing, 8)
-
-			Spacer()
 		}
-		.frame(width: 72, height: 48)
+	}
+}
+
+extension SwiftUI.View
+{
+	@ViewBuilder func roundedButtonStyle(isSelected: Bool, hovered: Bool, bgColor: Color?, hasIcon: Bool, transform: (Self) -> some SwiftUI.View) -> some SwiftUI.View
+	{
+		transform(self)
+			.frame(width: 48, height: 48)
+			.background(hovered || isSelected
+									? (hasIcon ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
+									: .gray.opacity(0.25)
+			)
+			.mask(RoundedRectangle(cornerRadius: hovered || isSelected ? 16 : 24, style: .continuous))
+			.offset(y: isSelected ? 1 : 0)
+			.animation(.none, value: isSelected)
+			.animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
+			.foregroundColor(hovered || isSelected ? .white : Color(nsColor: .labelColor))
+			.contentShape(RoundedRectangle(cornerRadius: hovered || isSelected ? 16 : 24, style: .continuous))
+			.cornerRadius(hovered || isSelected ? 16 : 24)
 	}
 }
 
@@ -71,81 +124,16 @@ struct ServerButton: View {
  10			 10
 */
 
-struct ServerButtonStyle: ButtonStyle {
-    let selected: Bool
-    let name: String
-    let bgColor: Color?
-    let systemName: String?
-    let assetName: String?
-    let serverIconURL: String?
-    let loading: Bool
-    @Binding var hovered: Bool
-
-    func makeBody(configuration: Configuration) -> some View {
-        ZStack {
-            if let assetName = assetName {
-                Image(assetName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 26)
-            } else if let systemName = systemName {
-                Image(systemName: systemName)
-                    .font(.system(size: 24))
-            } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
-				if iconURL.isAnimatable {
-					SwiftyGifView(
-						url: iconURL.modifyingPathExtension("gif"),
-						animating: hovered,
-						resetWhenNotAnimating: true
-					).transition(.customOpacity)
-				} else {
-					BetterImageView(url: iconURL) {
-						configuration.label.font(.system(size: 18))
-					}
-				}
-            } else {
-				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
-				Text(iconName)
-					.font(.system(size: 18))
-					.lineLimit(1)
-					.minimumScaleFactor(0.5)
-					.padding(5)
-			}
-        }
-        .frame(width: 48, height: 48)
-		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
-        .background(
-            hovered || selected
-			? (serverIconURL != nil ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
-            : .gray.opacity(0.25)
-        )
-        /*.background(LinearGradient(
-            gradient: hovered || selected
-            ? (bgColor != nil ? Gradient(colors: [bgColor!])
-               : Gradient(stops: [
-                .init(color: .blue, location: 0),
-                .init(color: .yellow, location: 0.5)
-               ]))
-               : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
-		.mask {
-			RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
-		}
-		.offset(y: configuration.isPressed ? 1 : 0)
-		.animation(.none, value: configuration.isPressed)
-        .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
-        .onHover { hover in hovered = hover }
-    }
-}
-
 struct ServerButton_Previews: PreviewProvider {
     static var previews: some View {
         ServerButton(
-            selected: false,
-            name: "Hello world, discord!",
-            systemIconName: nil,
-            assetIconName: nil,
-            serverIconURL: nil,
+						selectedID: .constant(nil),
+						guildID: .constant(nil),
+						name: .constant("Hello world, discord!"),
+						serverIconURL: .constant(nil),
+						systemIconName: .constant(nil),
+						assetIconName: .constant(nil),
             bgColor: nil
-		) {}
+				)
     }
 }
