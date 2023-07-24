@@ -169,38 +169,36 @@ struct MessagesView: View {
     }
 
     private var history: some View {
-        ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-            let isLastItem = idx == viewModel.messages.count-1
-            let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
+        ForEach(Array(viewModel.messages.reversed().enumerated()), id: \.1.id) { (idx, msg) in
+            let isLastItem = idx == 0
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
 
-            cell(for: msg, shrunk: shrunk)
-
+            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp) {
+                DayDividerView(date: msg.timestamp)
+            }
+            
             if !isLastItem, let channelID = ctx.channel?.id {
-                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx+1].id
+                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx-1].id
 
-                if newMsg { UnreadDivider() }
                 if !shrunk && !newMsg {
                     Spacer(minLength: 16 - MessageView.lineSpacing / 2)
                 }
+                if newMsg { UnreadDivider() }
             }
-
-            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp) {
-                DayDividerView(date: msg.timestamp)
-            }
+            
+            cell(for: msg, shrunk: shrunk)
+                .id(msg.id)
         }
-        .flip()
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
     private var historyList: some View {
         ScrollViewReader { proxy in
-            List {
-                Spacer(minLength: max(messageInputHeight-44-7, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-
-                history
-
+            ScrollView {
+                Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                
                 if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().flip()
+                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets()
                 } else {
                     loadingSkeleton
                         .zeroRowInsets()
@@ -213,17 +211,22 @@ struct MessagesView: View {
                             }
                         }
                 }
-
-                Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                
+                history
+                    .onAppear {
+                        withAnimation {
+                            proxy.scrollTo(viewModel.messages.first?.id)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                
+                Spacer(minLength: max(messageInputHeight, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
             }
-            .introspectTableView { tableView in
-                tableView.backgroundColor = .clear
-                tableView.enclosingScrollView!.drawsBackground = false
-                tableView.enclosingScrollView!.rotate(byDegrees: 180)
-                tableView.enclosingScrollView!.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
+            .introspectScrollView { scrollView in
+                scrollView.drawsBackground = false
+                scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
-            .scaleEffect(x: -1, y: 1, anchor: .center)
             .background(.clear)
             .frame(maxHeight: .infinity)
             .padding(.bottom, 24 + 7) // Ensure List doesn't go below text input field (and its border radius)
