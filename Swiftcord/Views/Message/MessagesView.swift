@@ -169,16 +169,17 @@ struct MessagesView: View {
     }
 
     func history(proxy: ScrollViewProxy) -> some View {
-        ForEach(Array(viewModel.messages.reversed().enumerated()), id: \.1.id) { (idx, msg) in
+        let reversed = viewModel.messages.reversed()
+        return ForEach(Array(reversed.enumerated()), id: \.1.id) { (idx, msg) in
             let isLastItem = idx == 0
-            let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
-
-            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx-1].timestamp) {
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: reversed.before(msg)!)
+            
+            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)!.timestamp) {
                 DayDividerView(date: msg.timestamp)
             }
             
             if !isLastItem, let channelID = ctx.channel?.id {
-                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx-1].id
+                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)!.id
 
                 if !shrunk && !newMsg {
                     Spacer(minLength: 16 - MessageView.lineSpacing / 2)
@@ -192,6 +193,7 @@ struct MessagesView: View {
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
+    
     private var historyList: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -220,7 +222,7 @@ struct MessagesView: View {
                         }
                     }
                 
-                Spacer(minLength: max(messageInputHeight-64-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                Spacer(minLength: max(messageInputHeight-74-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
                     .id(1)
             }
             .introspectScrollView { scrollView in
@@ -230,7 +232,7 @@ struct MessagesView: View {
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .background(.clear)
             .frame(maxHeight: .infinity)
-            .padding(.bottom, 64 + 7) // Ensure List doesn't go below text input field (and its border radius)
+            .padding(.bottom, 74 + 7) // Ensure List doesn't go below text input field (and its border radius)
         }
     }
 
