@@ -184,7 +184,10 @@ struct MessagesView: View {
                 if !shrunk && !newMsg {
                     Spacer(minLength: 16 - MessageView.lineSpacing / 2)
                 }
-                if newMsg { UnreadDivider() }
+                if newMsg {
+                    UnreadDivider()
+                        .id("unread")
+                }
             }
             
             cell(for: msg, shrunk: shrunk, proxy: proxy)
@@ -204,7 +207,6 @@ struct MessagesView: View {
                 } else {
                     loadingSkeleton
                         .zeroRowInsets()
-                        .flip()
                         .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
                         .onDisappear {
                             if let loadTask = viewModel.fetchMessagesTask {
@@ -218,12 +220,17 @@ struct MessagesView: View {
                     .padding(.horizontal, 10)
                     .onAppear {
                         withAnimation {
-                            proxy.scrollTo(1, anchor: .bottom)
+                            // Scroll to very bottom if read, otherwise scroll to message
+                            if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
+                                proxy.scrollTo("1", anchor: .bottom)
+                            } else {
+                                proxy.scrollTo("unread", anchor: .bottom)
+                            }
                         }
                     }
                 
                 Spacer(minLength: max(messageInputHeight-74-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-                    .id(1)
+                    .id("1")
             }
             .introspectScrollView { scrollView in
                 scrollView.drawsBackground = false
