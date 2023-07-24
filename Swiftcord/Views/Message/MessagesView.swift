@@ -146,7 +146,7 @@ struct MessagesView: View {
     }
 
     @_transparent @_optimize(speed) @ViewBuilder
-    func cell(for msg: Message, shrunk: Bool) -> some View {
+    func cell(for msg: Message, shrunk: Bool, proxy: ScrollViewProxy) -> some View {
         MessageView(
             message: msg,
             shrunk: shrunk,
@@ -155,7 +155,7 @@ struct MessagesView: View {
                 $0.id == msg.message_reference!.message_id
             } : nil,
             onQuoteClick: { id in
-                // withAnimation { proxy.scrollTo(id, anchor: .center) }
+                withAnimation { proxy.scrollTo(id, anchor: .center) }
                 viewModel.highlightMsg = id
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
@@ -168,7 +168,7 @@ struct MessagesView: View {
         .listRowBackground(msg.mentions(gateway.cache.user?.id) ? Color.orange.opacity(0.1) : .clear)
     }
 
-    private var history: some View {
+    func history(proxy: ScrollViewProxy) -> some View {
         ForEach(Array(viewModel.messages.reversed().enumerated()), id: \.1.id) { (idx, msg) in
             let isLastItem = idx == 0
             let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx-1])
@@ -186,7 +186,7 @@ struct MessagesView: View {
                 if newMsg { UnreadDivider() }
             }
             
-            cell(for: msg, shrunk: shrunk)
+            cell(for: msg, shrunk: shrunk, proxy: proxy)
                 .id(msg.id)
         }
         .zeroRowInsets()
@@ -212,7 +212,7 @@ struct MessagesView: View {
                         }
                 }
                 
-                history
+                history(proxy: proxy)
                     .padding(.horizontal, 10)
                     .onAppear {
                         withAnimation {
