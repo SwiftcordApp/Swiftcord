@@ -213,23 +213,24 @@ struct MessagesView: View {
                 }
                 
                 history
+                    .padding(.horizontal, 10)
                     .onAppear {
                         withAnimation {
-                            proxy.scrollTo(viewModel.messages.first?.id)
+                            proxy.scrollTo(1, anchor: .bottom)
                         }
                     }
-                    .padding(.horizontal, 10)
                 
-                Spacer(minLength: max(messageInputHeight, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                Spacer(minLength: max(messageInputHeight-64-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                    .id(1)
             }
             .introspectScrollView { scrollView in
                 scrollView.drawsBackground = false
-                scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
+                scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .background(.clear)
             .frame(maxHeight: .infinity)
-            .padding(.bottom, 24 + 7) // Ensure List doesn't go below text input field (and its border radius)
+            .padding(.bottom, 64 + 7) // Ensure List doesn't go below text input field (and its border radius)
         }
     }
 
