@@ -252,6 +252,7 @@ struct MessagesView: View {
                     history(proxy: proxy)
                         .onAppear {
                             withAnimation {
+                                // Already starts at very bottom, but just in case anyway
                                 // Scroll to very bottom if read, otherwise scroll to message
                                 if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
                                     proxy.scrollTo("1", anchor: .bottom)
@@ -261,10 +262,11 @@ struct MessagesView: View {
                             }
                         }
                     
-                    Spacer(minLength: max(messageInputHeight-74-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                    Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
                         .id("1")
                 }
                 .padding(.horizontal, 15)
+                .rotationEffect(Angle(degrees: 180))
             }
             .introspectScrollView { scrollView in
                 scrollView.drawsBackground = false
@@ -272,7 +274,8 @@ struct MessagesView: View {
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .background(.clear)
-            .padding(.bottom, 74 + 7) // Ensure List doesn't go below text input field (and its border radius)
+            .padding(.top, 74) // Ensure List doesn't go below text input field (and its border radius)
+            .rotationEffect(Angle(degrees: 180))
         }
     }
 
