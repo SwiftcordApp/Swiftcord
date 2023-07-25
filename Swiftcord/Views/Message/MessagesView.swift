@@ -111,13 +111,38 @@ struct DayDividerView: View {
 struct UnreadDivider: View {
     var body: some View {
         HStack(spacing: 0) {
-            Rectangle().fill(.red).frame(height: 1).frame(maxWidth: .infinity)
+            HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
             Text("New")
                 .textCase(.uppercase).font(.headline)
                 .padding(.horizontal, 4).padding(.vertical, 2)
                 .background(RoundedRectangle(cornerRadius: 4).fill(.red))
                 .foregroundColor(.white)
         }.padding(.vertical, 4)
+    }
+}
+
+struct UnreadDayDividerView: View {
+    let date: Date
+    
+    var body: some View {
+        
+        HStack(spacing: 0) {
+            HStack(spacing: 4) {
+                HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
+                Text(date, style: .date)
+                    .font(.system(size: 12))
+                    .fontWeight(.medium)
+                    .opacity(0.7)
+                HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
+            }
+            .foregroundColor(.red)
+            Text("New")
+                .textCase(.uppercase).font(.headline)
+                .padding(.horizontal, 4).padding(.vertical, 2)
+                .background(RoundedRectangle(cornerRadius: 4).fill(.red))
+                .foregroundColor(.white)
+        }
+        .padding(.top, 16)
     }
 }
 
@@ -174,20 +199,27 @@ struct MessagesView: View {
             let isLastItem = idx == 0
             let shrunk = !isLastItem && msg.messageIsShrunk(prev: reversed.before(msg)!)
             
-            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)!.timestamp) {
+            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)!.timestamp)
+            
+            var newMsg: Bool {
+                if !isLastItem, let channelID = ctx.channel?.id {
+                    return gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)!.id
+                }
+                return false
+            }
+            
+            if newDay && newMsg {
+                UnreadDayDividerView(date: msg.timestamp)
+            } else if newDay {
                 DayDividerView(date: msg.timestamp)
             }
             
-            if !isLastItem, let channelID = ctx.channel?.id {
-                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)!.id
-
-                if !shrunk && !newMsg {
-                    Spacer(minLength: 16 - MessageView.lineSpacing / 2)
-                }
-                if newMsg {
-                    UnreadDivider()
-                        .id("unread")
-                }
+            if !shrunk && !newMsg {
+                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+            }
+            if !newDay && newMsg {
+                UnreadDivider()
+                    .id("unread")
             }
             
             cell(for: msg, shrunk: shrunk, proxy: proxy)
@@ -200,37 +232,39 @@ struct MessagesView: View {
     private var historyList: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
-                
-                if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets()
-                } else {
-                    loadingSkeleton
-                        .zeroRowInsets()
-                        .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-                        .onDisappear {
-                            if let loadTask = viewModel.fetchMessagesTask {
-                                loadTask.cancel()
-                                viewModel.fetchMessagesTask = nil
+                Group {
+//                    Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
+                    
+                    if viewModel.reachedTop {
+                        MessagesViewHeader(chl: ctx.channel).zeroRowInsets()
+                    } else {
+                        loadingSkeleton
+                            .zeroRowInsets()
+                            .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+                            .onDisappear {
+                                if let loadTask = viewModel.fetchMessagesTask {
+                                    loadTask.cancel()
+                                    viewModel.fetchMessagesTask = nil
+                                }
                             }
-                        }
-                }
-                
-                history(proxy: proxy)
-                    .padding(.horizontal, 10)
-                    .onAppear {
-                        withAnimation {
-                            // Scroll to very bottom if read, otherwise scroll to message
-                            if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
-                                proxy.scrollTo("1", anchor: .bottom)
-                            } else {
-                                proxy.scrollTo("unread", anchor: .bottom)
-                            }
-                        }
                     }
-                
-                Spacer(minLength: max(messageInputHeight-74-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-                    .id("1")
+                    
+                    history(proxy: proxy)
+                        .onAppear {
+                            withAnimation {
+                                // Scroll to very bottom if read, otherwise scroll to message
+                                if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
+                                    proxy.scrollTo("1", anchor: .bottom)
+                                } else {
+                                    proxy.scrollTo("unread", anchor: .bottom)
+                                }
+                            }
+                        }
+                    
+                    Spacer(minLength: max(messageInputHeight-74-7, 5) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                        .id("1")
+                }
+                .padding(.horizontal, 15)
             }
             .introspectScrollView { scrollView in
                 scrollView.drawsBackground = false
