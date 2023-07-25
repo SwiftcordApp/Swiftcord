@@ -232,11 +232,11 @@ struct MessagesView: View {
     private var historyList: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                Group {
-//                    Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
-                    
+                Group {                    
                     if viewModel.reachedTop {
-                        MessagesViewHeader(chl: ctx.channel).zeroRowInsets()
+                        MessagesViewHeader(chl: ctx.channel)
+                            .zeroRowInsets()
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
                         loadingSkeleton
                             .zeroRowInsets()
@@ -272,7 +272,6 @@ struct MessagesView: View {
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .background(.clear)
-            .frame(maxHeight: .infinity)
             .padding(.bottom, 74 + 7) // Ensure List doesn't go below text input field (and its border radius)
         }
     }
