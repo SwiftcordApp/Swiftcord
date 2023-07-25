@@ -197,13 +197,13 @@ struct MessagesView: View {
         let reversed = viewModel.messages.reversed()
         return ForEach(Array(reversed.enumerated()), id: \.1.id) { (idx, msg) in
             let isLastItem = idx == 0
-            let shrunk = !isLastItem && msg.messageIsShrunk(prev: reversed.before(msg)!)
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: reversed.before(msg))
             
-            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)!.timestamp)
+            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)?.timestamp)
             
             var newMsg: Bool {
                 if !isLastItem, let channelID = ctx.channel?.id {
-                    return gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)!.id
+                    return gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)?.id ?? "1"
                 }
                 return false
             }
