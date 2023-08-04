@@ -230,56 +230,54 @@ struct MessagesView: View {
     }
     
     private var historyList: some View {
-        GeometryReader { reader in
-            ScrollViewReader { proxy in
-                ScrollView {
-                    Group {
-                        if viewModel.reachedTop {
-                            MessagesViewHeader(chl: ctx.channel)
-                                .zeroRowInsets()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        } else {
-                            loadingSkeleton
-                                .zeroRowInsets()
-                                .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-                                .onDisappear {
-                                    if let loadTask = viewModel.fetchMessagesTask {
-                                        loadTask.cancel()
-                                        viewModel.fetchMessagesTask = nil
-                                    }
-                                }
-                        }
-                        
-                        history(proxy: proxy)
-                            .onAppear {
-                                withAnimation {
-                                    // Already starts at very bottom, but just in case anyway
-                                    // Scroll to very bottom if read, otherwise scroll to message
-                                    if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
-                                        proxy.scrollTo("1", anchor: .bottom)
-                                    } else {
-                                        proxy.scrollTo("unread", anchor: .bottom)
-                                    }
+        ScrollViewReader { proxy in
+            ScrollView {
+                Group {
+                    if viewModel.reachedTop {
+                        MessagesViewHeader(chl: ctx.channel)
+                            .zeroRowInsets()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    } else {
+                        loadingSkeleton
+                            .zeroRowInsets()
+                            .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+                            .onDisappear {
+                                if let loadTask = viewModel.fetchMessagesTask {
+                                    loadTask.cancel()
+                                    viewModel.fetchMessagesTask = nil
                                 }
                             }
-                        
-                        Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-                            .id("1")
                     }
-                    .padding(.horizontal, 15)
-                    .rotationEffect(Angle(degrees: 180))
-                }
-                .introspectScrollView { scrollView in
-                    scrollView.drawsBackground = false
                     
-                    // Move to right side, scrollbar is between 15-20 wide
-                    scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: reader.size.width - 15)
+                    history(proxy: proxy)
+                        .onAppear {
+                            withAnimation {
+                                // Already starts at very bottom, but just in case anyway
+                                // Scroll to very bottom if read, otherwise scroll to message
+                                if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
+                                    proxy.scrollTo("1", anchor: .bottom)
+                                } else {
+                                    proxy.scrollTo("unread", anchor: .bottom)
+                                }
+                            }
+                        }
+                    
+                    Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                        .id("1")
                 }
-                .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
-                .background(.clear)
-                .padding(.top, 74) // Ensure List doesn't go below text input field (and its border radius)
+                .padding(.horizontal, 15)
                 .rotationEffect(Angle(degrees: 180))
             }
+            .introspectScrollView { scrollView in
+                scrollView.drawsBackground = false
+                
+                // Hide scrollbar
+                scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
+            }
+            .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
+            .background(.clear)
+            .padding(.top, 74) // Ensure List doesn't go below text input field (and its border radius)
+            .rotationEffect(Angle(degrees: 180))
         }
     }
 
