@@ -135,7 +135,6 @@ struct UnreadDayDividerView: View {
     let date: Date
     
     var body: some View {
-        
         HStack(spacing: 0) {
             HStack(spacing: 4) {
                 HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
@@ -204,18 +203,29 @@ struct MessagesView: View {
     }
 
     func history(proxy: ScrollViewProxy) -> some View {
-        let reversed = viewModel.messages.reversed()
-        return ForEach(Array(reversed.enumerated()), id: \.1.id) { (idx, msg) in
-            let isLastItem = idx == 0
-            let shrunk = !isLastItem && msg.messageIsShrunk(prev: reversed.before(msg))
+        let messages = viewModel.messages
+        return ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
+            let isLastItem = msg.id == messages.last?.id
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: messages.after(msg))
             
-            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: reversed.before(msg)?.timestamp)
+            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: messages.after(msg)?.timestamp)
             
             var newMsg: Bool {
                 if !isLastItem, let channelID = ctx.channel?.id {
-                    return gateway.readState[channelID]?.last_message_id?.stringValue == reversed.before(msg)?.id ?? "1"
+                    return gateway.readState[channelID]?.last_message_id?.stringValue == messages.after(msg)?.id ?? "1"
                 }
                 return false
+            }
+            
+            cell(for: msg, shrunk: shrunk, proxy: proxy)
+                .id(msg.id)
+            
+            if !newDay && newMsg {
+                UnreadDivider()
+                    .id("unread")
+            }
+            if !shrunk && !newMsg {
+                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
             }
             
             if newDay && newMsg {
@@ -223,17 +233,6 @@ struct MessagesView: View {
             } else if newDay {
                 DayDividerView(date: msg.timestamp)
             }
-            
-            if !shrunk && !newMsg {
-                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
-            }
-            if !newDay && newMsg {
-                UnreadDivider()
-                    .id("unread")
-            }
-            
-            cell(for: msg, shrunk: shrunk, proxy: proxy)
-                .id(msg.id)
         }
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
@@ -242,8 +241,25 @@ struct MessagesView: View {
     @ViewBuilder
     private var historyList: some View {
         ScrollViewReader { proxy in
-            ScrollView {
+            List {
                 Group {
+                    Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                        .id("1")
+                    
+                    history(proxy: proxy)
+                        .onAppear {
+                            withAnimation {
+                                // Already starts at very bottom, but just in case anyway
+                                // Scroll to very bottom if read, otherwise scroll to message
+                                if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
+                                    proxy.scrollTo("1", anchor: .bottom)
+                                } else {
+                                    proxy.scrollTo("unread", anchor: .bottom)
+                                }
+                            }
+                        }
+                    
+                    
                     if viewModel.reachedTop {
                         MessagesViewHeader(chl: ctx.channel)
                             .zeroRowInsets()
@@ -259,35 +275,20 @@ struct MessagesView: View {
                                 }
                             }
                     }
-                    
-                    history(proxy: proxy)
-                        .onAppear {
-                            withAnimation {
-                                // Already starts at very bottom, but just in case anyway
-                                // Scroll to very bottom if read, otherwise scroll to message
-                                if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
-                                    proxy.scrollTo("1", anchor: .bottom)
-                                } else {
-                                    proxy.scrollTo("unread", anchor: .bottom)
-                                }
-                            }
-                        }
-                    
-                    Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-                        .id("1")
                 }
                 .padding(.horizontal, 15)
                 .rotationEffect(Angle(degrees: 180))
             }
-            .introspectScrollView { scrollView in
-                scrollView.drawsBackground = false
-                
-                // Hide scrollbar
-                scrollView.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
-            }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
             .background(.clear)
             .padding(.top, 74) // Ensure List doesn't go below text input field (and its border radius)
+            .introspectTableView { tableView in
+                tableView.enclosingScrollView!.drawsBackground = false
+//                tableView.enclosingScrollView!.rotate(byDegrees: 180)
+                
+                // Hide scrollbar
+                tableView.enclosingScrollView!.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
+            }
             .rotationEffect(Angle(degrees: 180))
         }
     }
