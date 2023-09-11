@@ -20,6 +20,16 @@ extension View {
     }
 }
 
+extension View {
+    @ViewBuilder public func removeSeparator() -> some View {
+        if #available(macOS 13.0, *) {
+            self.listRowSeparator(.hidden).listSectionSeparator(.hidden)
+        } else {
+            self
+        }
+    }
+}
+
 struct NewAttachmentError: Identifiable {
     var id: String { title + message }
     let title: String
@@ -228,7 +238,8 @@ struct MessagesView: View {
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
-    
+
+    @ViewBuilder
     private var historyList: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -311,7 +322,7 @@ struct MessagesView: View {
                 let typingMembers = ctx.channel == nil
                 ? []
                 : ctx.typingStarted[ctx.channel!.id]?
-                    .map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+                    .map { $0.member?.nick ?? $0.member?.user?.username ?? "" } ?? []
 
                 if !typingMembers.isEmpty {
                     HStack {
