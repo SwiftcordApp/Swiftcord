@@ -11,13 +11,15 @@ import DiscordKitCore
 
 class ServerContext: ObservableObject {
     @Published public var channel: Channel?
-    @Published public var guild: Guild?
+    @Published public var guild: PreloadedGuild?
     @Published public var typingStarted: [Snowflake: [TypingStart]] = [:]
 	@Published public var roles: [Role] = []
+    @Published public var basePermissions: Permissions = .init()
+    @Published public var member: Member?
 }
 
 struct ServerView: View {
-	let guild: Guild?
+	let guild: PreloadedGuild?
     @State private var evtID: EventDispatch.HandlerIdentifier?
     @State private var mediaCenterOpen: Bool = false
 
@@ -29,7 +31,7 @@ struct ServerView: View {
 
 	private func loadChannels() {
 		guard state.loadingState != .initial else { return } // Ensure gateway is connected before loading anything
-		guard let channels = serverCtx.guild?.channels?.discordSorted()
+        guard let channels = serverCtx.guild?.channels.discordSorted()
 		else { return }
 
 		if let lastChannel = UserDefaults.standard.string(forKey: "lastCh.\(serverCtx.guild!.id)"),
@@ -44,28 +46,54 @@ struct ServerView: View {
 		if serverCtx.channel == nil { state.loadingState = .messageLoad }
     }
 
-	private func bootstrapGuild(with guild: Guild) {
+    private static func computeBasePermissions(
+        for member: Member,
+        guild: PreloadedGuild, guildRoles: [Role]
+    ) -> Permissions {
+        if member.user_id == guild.properties.owner_id {
+            return .all
+        }
+        guard var basePerms = guildRoles.first(where: { $0.id == guild.id })?.permissions else {
+            return .init()
+        }
+        member.roles.forEach { roleID in
+            if let role = guildRoles.first(where: { $0.id == roleID }) {
+                basePerms.formUnion(role.permissions)
+            }
+        }
+        return basePerms
+    }
+
+	private func bootstrapGuild(with guild: PreloadedGuild) {
 		serverCtx.guild = guild
 		serverCtx.roles = []
+        serverCtx.basePermissions = .init()
 		loadChannels()
 		// Sending malformed IDs causes an instant Gateway session termination
-		guard !guild.isDMChannel else {
+        guard !guild.properties.isDMChannel else {
 			AnalyticsWrapper.event(type: .DMListViewed, properties: [
 				"channel_id": serverCtx.channel?.id ?? "",
 				"channel_type": serverCtx.channel?.type.rawValue ?? 1
 			])
+            serverCtx.basePermissions = .all
 			return
 		}
 
 		AnalyticsWrapper.event(type: .guildViewed, properties: [
 			"guild_id": guild.id,
-			"guild_is_vip": guild.premium_tier != PremiumLevel.none,
-			"guild_num_channels": guild.channels?.count ?? 0
+            "guild_is_vip": guild.premium_subscription_count > 0,
+			"guild_num_channels": guild.channels.count
 		])
 
 		// Subscribe to typing events
 		gateway.subscribeGuildEvents(id: guild.id)
 		serverCtx.roles = guild.roles.compactMap { role in try? role.result.get() }
+        serverCtx.member = gateway.cache.members[guild.id]
+        // print(guild.roles)
+        guard let member = serverCtx.member else { return }
+        print(member)
+        serverCtx.basePermissions = Self.computeBasePermissions(for: member, guild: guild, guildRoles: serverCtx.roles)
+        print(serverCtx.basePermissions)
 		// Retrieve guild roles to update context
 		/*Task {
 			guard let newRoles = await restAPI.getGuildRoles(id: guild.id) else { return }
@@ -79,14 +107,16 @@ struct ServerView: View {
     }
 
     var body: some View {
+        let _ = print("rerender server")
         NavigationView {
             // MARK: Channel List
             VStack(spacing: 0) {
 				if let guild = guild {
-					ChannelList(channels: guild.name == "DMs" ? gateway.cache.dms : guild.channels!, selCh: $serverCtx.channel)
+                    ChannelList(channels: guild.properties.name == "DMs" ? gateway.cache.dms : guild.channels, selCh: $serverCtx.channel)
+                        .equatable()
 						.toolbar {
 							ToolbarItem {
-								Text(guild.name == "DMs" ? "dm" : "\(guild.name)")
+                                Text(guild.properties.name == "DMs" ? "dm" : "\(guild.properties.name)")
 									.font(.title3)
 									.fontWeight(.semibold)
 									.frame(maxWidth: 208) // Largest width before disappearing
@@ -120,7 +150,7 @@ struct ServerView: View {
             }
 
             // MARK: Message History
-			if serverCtx.channel != nil {
+            if serverCtx.channel != nil, serverCtx.guild != nil {
 				MessagesView()
 			} else {
 				VStack(spacing: 24) {
