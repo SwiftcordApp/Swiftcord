@@ -97,27 +97,31 @@ jobs:
       ##########################
       ## Build
       ##########################
-      - name: Build with xcodebuild
+      - name: Build & Archive
+        env:
+          TEAM_ID: RJNC97Y8QD
         run: |
           xcodebuild -project Swiftcord.xcodeproj -scheme Swiftcord -configuration Release archive -archivePath Swiftcord.xcarchive \
-          COMPILER_INDEX_STORE_ENABLE=NO \
+          COMPILER_INDEX_STORE_ENABLE=NO -skipPackagePluginValidation \
+          DEVELOPMENT_TEAM=$TEAM_ID \
           APPCENTER_APP_SECRET="${{ secrets.APPCENTER_APP_SECRET }}" SENTRY_API_TOKEN="${{ secrets.SENTRY_API_TOKEN }}" \
-          OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db"
+          OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db" \
+          archive
 
       ##########################
       ## Sign
       ##########################
-      - name: Export & Sign Release Build
-        uses: devbotsxyz/xcode-export-archive@main
-        with:
-          project: Swiftcord.xcodeproj
-          scheme: Swiftcord
+      #- name: Export & Sign Release Build
+      #  uses: devbotsxyz/xcode-export-archive@main
+      #  with:
+      #    project: Swiftcord.xcodeproj
+      #    scheme: Swiftcord
 
       ##########################
       ## Create DMG
       ##########################
       - name: Create Release DMG
-        run: npm i -g create-dmg && create-dmg Export/Swiftcord.app
+        run: npm i -g create-dmg && create-dmg Swiftcord.xcarchive/Products/Applications/Swiftcord.app
 
       ##########################
       ## Notarize & Staple
