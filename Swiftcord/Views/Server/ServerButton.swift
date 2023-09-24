@@ -8,7 +8,6 @@
 import SwiftUI
 import CachedAsyncImage
 
-
 /*
  Font size of text in server button for servers without an icon
 
@@ -48,58 +47,90 @@ struct ServerButton: View {
 				.animation(capsuleAnimation, value: selected)
 				.animation(capsuleAnimation, value: hovered)
 
-			Button(action: onSelect) {
-				ZStack {
-					if let assetIconName {
-						Image(assetIconName)
-							.resizable()
-							.scaledToFit()
-							.frame(width: 26)
-					} else if let systemIconName {
-						Image(systemName: systemIconName)
-							.font(.system(size: 24))
-					} else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
-						if iconURL.isAnimatable {
-							SwiftyGifView(
-								url: iconURL.modifyingPathExtension("gif"),
-								animating: hovered,
-								resetWhenNotAnimating: true
-							).transition(.customOpacity)
-						} else {
-							BetterImageView(url: iconURL) {
-							}
-						}
-					} else {
-						let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
-						Text(iconName)
-							.font(.system(size: 18))
-							.lineLimit(1)
-							.minimumScaleFactor(0.5)
-							.padding(5)
-					}
-				}
-				.contentShape(Circle())
-				.frame(width: 48, height: 48)
-				.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
-				.background(
-					hovered || selected
-					? (serverIconURL != nil ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
-					: .gray.opacity(0.25)
+			Button(name, action: onSelect)
+				.buttonStyle(
+					ServerButtonStyle(
+						selected: selected,
+						name: name,
+						bgColor: bgColor,
+						systemName: systemIconName,
+						assetName: assetIconName,
+						serverIconURL: serverIconURL,
+						loading: isLoading,
+						hovered: $hovered
+					)
 				)
-				.mask {
-					RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
-				}
-				// .offset(y: configuration.isPressed ? 1 : 0)
-				// .animation(.none, value: configuration.isPressed)
-				.animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
-				.onHover { hover in hovered = hover }
-			}
-			.buttonStyle(.borderless) // .plain is broken in Sonoma (and up?)
-			.padding(.trailing, 8)
+			    .padding(.trailing, 8)
 
 			Spacer()
 		}
 		.frame(width: 72, height: 48)
+	}
+}
+
+struct ServerButtonStyle: ButtonStyle {
+	let selected: Bool
+	let name: String
+	let bgColor: Color?
+	let systemName: String?
+	let assetName: String?
+	let serverIconURL: String?
+	let loading: Bool
+	@Binding var hovered: Bool
+
+	func makeBody(configuration: Configuration) -> some View {
+		ZStack {
+			if let assetName {
+				Image(assetName)
+					.resizable()
+					.scaledToFit()
+					.frame(width: 26)
+			} else if let systemName {
+				Image(systemName: systemName)
+					.font(.system(size: 24))
+			} else if let serverIconURL, let iconURL = URL(string: serverIconURL) {
+				if iconURL.isAnimatable {
+					SwiftyGifView(
+						url: iconURL.modifyingPathExtension("gif"),
+						animating: hovered,
+						resetWhenNotAnimating: true
+					).transition(.customOpacity)
+				} else {
+					BetterImageView(url: iconURL) {
+						configuration.label.font(.system(size: 18))
+					}
+				}
+			} else {
+				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
+				Text(iconName)
+					.font(.system(size: 18))
+					.lineLimit(1)
+					.minimumScaleFactor(0.5)
+					.padding(5)
+			}
+		}
+		.frame(width: 48, height: 48)
+		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
+		.background(
+			hovered || selected
+			? (serverIconURL != nil ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
+			: .gray.opacity(0.25)
+		)
+		/*.background(LinearGradient(
+		 gradient: hovered || selected
+		 ? (bgColor != nil ? Gradient(colors: [bgColor!])
+		 : Gradient(stops: [
+		 .init(color: .blue, location: 0),
+		 .init(color: .yellow, location: 0.5)
+		 ]))
+		 : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
+		.mask {
+			RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
+		}
+		.offset(y: configuration.isPressed ? 1 : 0)
+		.animation(.none, value: configuration.isPressed)
+		.animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
+		.onHover { hover in hovered = hover }
 	}
 }
 

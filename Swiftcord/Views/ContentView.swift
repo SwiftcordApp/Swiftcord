@@ -30,23 +30,26 @@ struct ContentView: View {
 
     private let log = Logger(category: "ContentView")
 
-    private func makeDMGuild() -> Guild {
-        Guild(
-            id: "@me",
-            name: "DMs",
-            owner_id: "",
-            afk_timeout: 0,
-            verification_level: .none,
-            default_message_notifications: .all,
-            explicit_content_filter: .disabled,
-            roles: [], emojis: [], features: [],
-            mfa_level: .none,
-            system_channel_flags: 0,
+    private func makeDMGuild() -> PreloadedGuild {
+        PreloadedGuild(
             channels: gateway.cache.dms,
-            premium_tier: .none,
-            preferred_locale: .englishUS,
-            nsfw_level: .default,
-            premium_progress_bar_enabled: false
+            properties: Guild(
+                id: "@me",
+                name: "DMs",
+                owner_id: "",
+                afk_timeout: 0,
+                verification_level: .none,
+                default_message_notifications: .all,
+                explicit_content_filter: .disabled,
+                roles: [], emojis: [], features: [],
+                mfa_level: .none,
+                system_channel_flags: 0,
+                channels: gateway.cache.dms,
+                premium_tier: .none,
+                preferred_locale: .englishUS,
+                nsfw_level: .default,
+                premium_progress_bar_enabled: false
+            )
         )
     }
 
@@ -96,7 +99,8 @@ struct ContentView: View {
                         assetIconName: "DiscordIcon"
                     ) {
                         state.selectedGuildID = "@me"
-                    }.padding(.top, 4)
+                    }
+                    .padding(.top, 4)
 
                     HorizontalDividerView().frame(width: 32)
 
@@ -107,9 +111,10 @@ struct ContentView: View {
                                 selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 name: guild.properties.name,
                                 serverIconURL: guild.properties.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.properties.icon!).webp?size=240" : nil,
-                                isLoading: loadingGuildID == guild.id,
-                                onSelect: { state.selectedGuildID = guild.id }
-                            )
+                                isLoading: loadingGuildID == guild.id
+                            ) {
+                                state.selectedGuildID = guild.id
+                            }
                         case .guildFolder(let folder):
                             ServerFolder(
                                 folder: folder,
@@ -132,26 +137,16 @@ struct ContentView: View {
                 .padding(.bottom, 8)
                 .frame(width: 72)
             }
-            .background(
-                List {}
-                    .listStyle(.sidebar)
-                    .overlay(Color(nsColor: NSColor.controlBackgroundColor).opacity(0.5))
-            )
             .frame(maxHeight: .infinity, alignment: .top)
+            .background(VisualEffect()
+                .overlay(Color(nsColor: NSColor.controlBackgroundColor).opacity(0.5))
+            )
 
             ServerView(
                 guild: state.selectedGuildID == nil
                 ? nil
-                : ( gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
+                : (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
             )
-        }
-        // Blur the area behind the toolbar so the content doesn't show thru
-        .safeAreaInset(edge: .top) {
-            VStack {
-                Divider().frame(maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity)
-            .background(.ultraThinMaterial)
         }
         .environmentObject(audioManager)
         .onChange(of: state.selectedGuildID) { id in

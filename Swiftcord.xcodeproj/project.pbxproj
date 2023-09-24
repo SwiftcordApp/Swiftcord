@@ -113,6 +113,8 @@
 		9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
+		DA120C5D2ABF172600C9E7CE /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */; };
+		DA120C5E2ABF172600C9E7CE /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */; };
 		DA12FB7C29AB84F500EDBBEE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DA12FB7B29AB84F500EDBBEE /* Lottie */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
@@ -285,6 +287,7 @@
 		DA03DA3E284F1E9200257790 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		DA0FC06929AC385B00ADB012 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0FC06A29AC4B6900ADB012 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -752,6 +755,7 @@
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */,
 				DAB1E46B28A10BB100645FCD /* BetterImageView.swift */,
+				DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1086,6 +1090,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA120C5E2ABF172600C9E7CE /* VisualEffect.swift in Sources */,
 				9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */,
 				DA91017728C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */,
@@ -1303,6 +1308,7 @@
 				DA91017628C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
+				DA120C5D2ABF172600C9E7CE /* VisualEffect.swift in Sources */,
 				DAFD4710289A1FEB0075D71B /* AttachmentAudio.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
 				DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */,
