@@ -35,9 +35,19 @@ struct RichEmbedView: View {
 		return newArray
 	}
 
+	@ViewBuilder
+	private func embedMedia(image: EmbedMedia) -> some View {
+		let width: Double = image.width != nil ? Double(min(384, image.width!)) : 384.0
+		let height: Double = (image.width != nil && image.height != nil)
+		? Double(width) / (Double(image.width!) / Double(image.height!))
+		: 216
+		AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
+	}
+
 	var body: some View {
 		GroupBox {
 			VStack(alignment: .leading, spacing: 8) {
+				// MARK: - Author
 				if let author = embed.author {
 					HStack(alignment: .center, spacing: 8) {
 						if let iconURL = author.icon_url {
@@ -64,7 +74,20 @@ struct RichEmbedView: View {
 						}
 					}
 				}
+				// MARK: Provider
+				if let provider = embed.provider, let providerName = provider.name {
+					if let urlStr = provider.url, let url = URL(string: urlStr) {
+						Link(destination: url) {
+							Text(providerName).font(.headline)
+						}.foregroundColor(.primary)
+					} else {
+						Text(providerName)
+							.font(.headline)
+							.textSelection(.enabled)
+					}
+				}
 
+				// MARK: - Title
 				if let title = embed.title {
 					if let urlStr = embed.url, let url = URL(string: urlStr) {
 						Link(destination: url) {
@@ -79,6 +102,7 @@ struct RichEmbedView: View {
 					}
 				}
 
+				// MARK: - Description
 				if let description = embed.description {
 					Text(markdown: description)
 						.textSelection(.enabled)
@@ -86,6 +110,7 @@ struct RichEmbedView: View {
 						.frame(maxWidth: .infinity, alignment: .leading)
 				}
 
+				// MARK: - Fields
 				if let fields = embed.fields {
 					let grouped_fields = groupFields(_fields: fields)
 
@@ -105,14 +130,16 @@ struct RichEmbedView: View {
 					}
 				}
 
+				// MARK: - Image
 				if let image = embed.image {
-					let width: Double = image.width != nil ? Double(min(384, image.width!)) : 384.0
-					let height: Double = (image.width != nil && image.height != nil)
-					? Double(width) / (Double(image.width!) / Double(image.height!))
-					: 216
-					AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
+					embedMedia(image: image)
+				}
+				// MARK: Thumbnail
+				if let thumb = embed.thumbnail {
+					embedMedia(image: thumb)
 				}
 
+				// MARK: - Footer
 				if let footer = embed.footer {
 					HStack {
 						if let iconURL = footer.icon_url {
