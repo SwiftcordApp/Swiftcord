@@ -37,13 +37,58 @@ struct CreditsView: View {
 		}
 
 		Section {
-			HStack {
+			VStack(alignment: .leading) {
+				Text("settings.others.credits.sponsor.tier3").font(.title3)
+				ScrollView(.horizontal) {
+					HStack(spacing: 8) {
+						GroupBox {
+							VStack {
+								BetterImageView(url: URL(string: "https://cdn.discordapp.com/avatars/539234307625975809/99136da555ca8502ab43774957a43b37.webp?size=240"))
+									.frame(width: 120, height: 120)
+								Text(verbatim: "Duskie").font(.title)
+							}
+							.padding(.bottom, 10)
+						}
+						GroupBox {
+							VStack {
+								Image(systemName: "plus.app")
+									.font(.system(size: 80)) // Font size doesn't correlate to actual dimensions
+									.foregroundColor(.orange)
+								Spacer()
+								Text("Become a Sponsor").font(.title2)
+								Text("More info below!").font(.caption)
+							}
+							.padding(8)
+							.multilineTextAlignment(.center)
+							.frame(width: 120)
+						}
+					}
+				}.frame(maxWidth: .infinity)
+			}
+
+			VStack(alignment: .leading) {
+				Text("settings.others.credits.sponsor.tier2").font(.title3)
+				HStack(spacing: 8) {
+					BetterImageView(url: URL(string: "https://cdn.discordapp.com/avatars/707741882435764236/1de96af4b961415f7da3aab4ed65cd8f.webp?size=80"))
+						.frame(width: 40, height: 40)
+						.clipShape(Circle())
+					Text(verbatim: "TrackMinded").font(.monospaced(.system(size: 18))())
+				}
+			}
+
+			VStack(alignment: .leading) {
+				Text("settings.others.credits.sponsor.tier1").font(.title3)
+
+				Text(verbatim: "aexvir").font(.monospaced(.body)())
+				// Text("settings.others.credits.contrib.anon")
+			}
+			/*HStack {
 				Image(systemName: "dollarsign.circle")
 					.font(.system(size: 30))
 					.foregroundColor(.orange)
 					.frame(width: 36)
 				Text("settings.others.credits.sponsor.desc").padding(.bottom, 4)
-			}
+			}*/
 		} header: {
 			Text("settings.others.credits.sponsor")
 		} footer: {
@@ -175,67 +220,6 @@ struct CreditsView: View {
 		}
 
 		Section {
-			/*HStack(alignment: .top, spacing: 24) {
-				VStack(alignment: .leading, spacing: 8) {
-					Group {
-						Text("settings.others.credits.sponsor.tier3").font(.title3).padding(.top, 8)
-						LazyVGrid(columns: [
-							GridItem(.flexible()),
-							GridItem(.flexible())
-						], spacing: 4) {
-							GroupBox {
-								HStack(alignment: .top, spacing: 8) {
-									BetterImageView(url: URL(string: "https://cdn.discordapp.com/avatars/164066880250839040/454495419ffe4dfeb7ea91f82eecfe47.png"))
-										.frame(width: 128, height: 128)
-									VStack(alignment: .leading) {
-										Text(verbatim: "kallisti").font(.title)
-										Text("[midnight.town](https://midnight.town)")
-										Spacer()
-										Text("First red-hot supporter!").font(.italic(.body)())
-									}.padding(8)
-									Spacer()
-								}
-								.frame(maxWidth: .infinity)
-								.padding(-4)
-							}
-							GroupBox {
-								HStack(spacing: 12) {
-									Image(systemName: "plus.app")
-										.font(.system(size: 64))
-										.foregroundColor(.orange)
-									VStack(alignment: .leading, spacing: 8) {
-										Text("Become a Sponsor").font(.title)
-										Text("Find out how you can [support Swiftcord](https://github.com/sponsors/cryptoAlgorithm)!")
-										Spacer()
-									}
-									Spacer()
-								}
-								.padding(4)
-							}
-						}
-					}
-
-					Group {
-						Text("settings.others.credits.sponsor.tier2").font(.title3).padding(.top, 8)
-						HStack(spacing: 8) {
-							BetterImageView(url: URL(string: "https://cxt.sh/assets/img/pfp.png"))
-								.frame(width: 36, height: 36)
-								.clipShape(Circle())
-							Text(verbatim: "cxt").font(.monospaced(.system(size: 18))())
-						}
-					}
-
-					Group {
-						Text("settings.others.credits.sponsor.tier1").font(.title3).padding(.top, 8)
-
-						Text(verbatim: "selimgr").font(.monospaced(.body)())
-						Text("settings.others.credits.contrib.anon")
-					}
-				}
-			}
-
-			Divider()*/
-
 			Text("settings.others.credits.misc.anim").multilineTextAlignment(.leading)
 			Text("settings.others.credits.misc.discord").font(.callout).foregroundColor(.secondary)
 		}
