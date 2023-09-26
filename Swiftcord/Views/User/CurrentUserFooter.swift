@@ -115,10 +115,7 @@ struct CurrentUserFooter: View {
 			}
 			.buttonStyle(.plain)
 			.popover(isPresented: $userPopoverPresented) {
-				MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
-					connected_accounts: [],
-					user: User(from: user)
-				))) {
+				MiniUserProfileView(user: User(from: user), member: nil) {
 					VStack(spacing: 4) {
 						if !(user.bio?.isEmpty ?? true) { Divider() }
 

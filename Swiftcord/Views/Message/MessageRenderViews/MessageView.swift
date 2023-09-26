@@ -78,7 +78,6 @@ struct MessageView: View, Equatable {
                 if MessageView.defaultTypes.contains(message.type) {
                     if !shrunk {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
-							.equatable()
                     } else {
 						Text(message.timestamp, style: .time)
                             .font(.system(size: 8, weight: .semibold, design: .monospaced))
