@@ -37,15 +37,17 @@ struct RichEmbedView: View {
 
 	@ViewBuilder
 	private func embedMedia(image: EmbedMedia) -> some View {
-		let width: Double = image.width != nil ? Double(min(384, image.width!)) : 384.0
+		let width: Double = image.width != nil ? Double(min(400, image.width!)) : 400.0
 		let height: Double = (image.width != nil && image.height != nil)
 		? Double(width) / (Double(image.width!) / Double(image.height!))
 		: 216
-		AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.url)!)
+		AttachmentImage(width: width, height: height, scale: 1, url: URL(string: image.proxy_url ?? image.url)!)
 	}
 
 	var body: some View {
 		GroupBox {
+			// The width of media present to constrain width to
+			let mediaWidth = embed.image?.width ?? embed.thumbnail?.width
 			VStack(alignment: .leading, spacing: 8) {
 				// MARK: - Author
 				if let author = embed.author {
@@ -172,7 +174,9 @@ struct RichEmbedView: View {
 						}
 					}
 				}
-			}.padding(10)
+			}
+			.frame(maxWidth: mediaWidth != nil ? CGFloat(min(400, mediaWidth!)) : nil)
+			.padding(10)
 		}
 		.background(
 			HStack {
