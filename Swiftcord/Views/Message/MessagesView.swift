@@ -258,7 +258,7 @@ struct MessagesView: View {
             }()
 
             MessageInputView(
-                placeholder: hasSendPermission ? 
+                placeholder: hasSendPermission ?
                 (channel.type == .dm
                  ? "dm.composeMsg.hint \(channel.label(gateway.cache.users) ?? "")"
                  : (channel.type == .groupDM
