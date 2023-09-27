@@ -67,15 +67,15 @@ struct ChannelList: View, Equatable {
 			guard channel.type != .category else {
 				return true
 			}
-			return Self.computeOverwrites(
-				channel: channel,
+			return channel.computedPermissions(
 				guildID: guildID,
-				member: member, basePerms: serverCtx.basePermissions
+				member: member,
+				basePerms: serverCtx.basePermissions
 			)
 			.contains(.viewChannel)
 		}
 		List {
-			Spacer(minLength: 52 - 16 + 4) // 52 (header) - 16 (unremovable section top padding) + 4 (spacing)
+			// Spacer(minLength: 4).listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0)) // 38 (header) - 16 (unremovable section top padding) + 4 (spacing)
 
 			let filteredChannels = availableChs.filter {
 				$0.parent_id == nil && $0.type != .category && (nsfwShown || ($0.nsfw == false || $0.nsfw == nil))

@@ -13,7 +13,7 @@ import CachedAsyncImage
 struct MiniUserProfileView<RichContentSlot: View>: View {
 	let user: User
 	let pasteboard = NSPasteboard.general
-	@Binding var profile: UserProfile?
+	let member: Member?
 	var guildRoles: [Role]?
 	var isWebhook: Bool = false
 	var loadError: Bool = false
@@ -29,7 +29,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 		let presence = gateway.presences[user.id]
 
 		VStack(alignment: .leading, spacing: 0) {
-			if let banner = profile?.user.banner ?? user.banner {
+			if let banner = user.banner {
 				let url = banner.bannerURL(of: user.id, size: 600)
 				Group {
 					if url.isAnimatable {
@@ -37,12 +37,12 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 					} else {
 						CachedAsyncImage(url: url) { image in
 							image.resizable().scaledToFill()
-						} placeholder: { Rectangle().fill(Color(hex: profile?.user.accent_color ?? 0)) }
+						} placeholder: { Rectangle().fill(Color(hex: user.accent_color ?? 0)) }
 					}
 				}
 				.frame(width: 300, height: 120)
 				.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
-			} else if let accentColor = profile?.user.accent_color {
+			} else if let accentColor = user.accent_color {
 				Rectangle().fill(Color(hex: accentColor))
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
 					.clipShape(ProfileAccentMask(insetStart: 14, insetWidth: 92))
@@ -62,10 +62,8 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 				)
 				.padding(6)
 
-				if let fullUser = profile?.user {
-					ProfileBadges(user: fullUser, premiumType: profile?.premium_type)
-						.frame(minHeight: 40, alignment: .topTrailing)
-				}
+				ProfileBadges(user: user, premiumType: user.premium_type)
+					.frame(minHeight: 40, alignment: .topTrailing)
 				Spacer()
 				if loadError {
 					Image(systemName: "exclamationmark.triangle.fill")
@@ -122,14 +120,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 					.buttonStyle(FlatButtonStyle())
 					.controlSize(.small)
 				} else {
-					if profile == nil, !loadError {
-						ProgressView("Loading full profile...")
-							.progressViewStyle(.linear)
-							.frame(maxWidth: .infinity)
-							.tint(.blue)
-					}
-
-					if let bio = profile?.user.bio, !bio.isEmpty {
+					if let bio = user.bio, !bio.isEmpty {
 						Text("user.bio").font(.headline).textCase(.uppercase)
 						Text(markdown: bio)
 							.fixedSize(horizontal: false, vertical: true)

@@ -12,7 +12,6 @@ struct UserSettingsProfileView: View {
 	let user: CurrentUser
 
 	@State private var about = ""
-	@State private var profile: UserProfile?
 
     var body: some View {
 		Section {
@@ -33,7 +32,7 @@ struct UserSettingsProfileView: View {
 				Text("Preview").font(.headline)
 				MiniUserProfileView(
 					user: User(from: user),
-					profile: $profile
+					member: nil
 				) {
 					Text("Customising my profile").font(.headline).textCase(.uppercase)
 
@@ -56,10 +55,6 @@ struct UserSettingsProfileView: View {
 				.cornerRadius(8)
 				.shadow(color: .black.opacity(0.24), radius: 8, x: 0, y: 4)
 				.onAppear {
-					profile = UserProfile(
-						connected_accounts: [],
-						user: User(from: user)
-					)
 					about = user.bio ?? ""
 				}
 			}

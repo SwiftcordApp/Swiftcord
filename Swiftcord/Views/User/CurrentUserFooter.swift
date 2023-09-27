@@ -115,10 +115,7 @@ struct CurrentUserFooter: View {
 			}
 			.buttonStyle(.plain)
 			.popover(isPresented: $userPopoverPresented) {
-				MiniUserProfileView(user: User(from: user), profile: .constant(UserProfile(
-					connected_accounts: [],
-					user: User(from: user)
-				))) {
+				MiniUserProfileView(user: User(from: user), member: nil) {
 					VStack(spacing: 4) {
 						if !(user.bio?.isEmpty ?? true) { Divider() }
 
@@ -180,19 +177,29 @@ struct CurrentUserFooter: View {
 
 			Spacer()
 
-			Button(action: {
-				if #available(macOS 13.0, *) {
-					NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-				} else {
-					NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+			if #available(macOS 14.0, *) {
+				SettingsLink {
+					Image(systemName: "gear")
+						.font(.system(size: 18))
+						.opacity(0.75)
 				}
-			}, label: {
-				Image(systemName: "gear")
-					.font(.system(size: 18))
-					.opacity(0.75)
-			})
-			.buttonStyle(.plain)
-			.frame(width: 32, height: 32)
+				.buttonStyle(.plain)
+				.frame(width: 32, height: 32)
+			} else {
+				Button {
+					if #unavailable(macOS 13.0) {
+						NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+					} else if #unavailable(macOS 14.0) {
+						NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+					}
+				} label: {
+					Image(systemName: "gear")
+						.font(.system(size: 18))
+						.opacity(0.75)
+				}
+				.buttonStyle(.plain)
+				.frame(width: 32, height: 32)
+			}
 		}
 		.frame(height: 52)
 		.padding(.horizontal, 8)

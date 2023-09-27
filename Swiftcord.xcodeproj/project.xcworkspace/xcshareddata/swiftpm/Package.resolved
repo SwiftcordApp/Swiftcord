@@ -6,7 +6,7 @@
       "location" : "https://github.com/microsoft/appcenter-sdk-apple",
       "state" : {
         "branch" : "develop",
-        "revision" : "2214f9ee2476f28af64cb38359defe59e85197a1"
+        "revision" : "0156f967b87b6a67104318baa665776b35be0830"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/SwiftcordApp/DiscordKit",
       "state" : {
         "branch" : "main",
-        "revision" : "1474f71dabb18050cc2422d08643731b7aecf6a4"
+        "revision" : "efd8cd571d85821bc5d622fa50961042c084776a"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-spm.git",
       "state" : {
-        "revision" : "c3852816c622ad35a03ed39c187c1644ece2382b",
-        "version" : "4.1.3"
+        "revision" : "3094834a82a75dae679fbe593f08bf1b168c2afe",
+        "version" : "4.3.1"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/PLCrashReporter.git",
       "state" : {
-        "revision" : "b1a342da19ed9b3af61ea2efa7656c2af30aeb7c",
-        "version" : "1.11.0"
+        "revision" : "1aed8f7dc79ce8e674c61e430ef51ca3db18cea9",
+        "version" : "1.11.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
-        "revision" : "dda155c7d3ef38c53d29f8584cb2aad2a1a54dba",
-        "version" : "2.3.2"
+        "revision" : "f0ceaf5cc9f3f23daa0ccb6dcebd79fc96ccc7d9",
+        "version" : "2.5.0"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
       "state" : {
         "branch" : "main",
-        "revision" : "f94be38411297c71aa8df69c6875127e6d8d7a92"
+        "revision" : "2abb11839f80ebb07a58ac5e146a1da664260c16"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
-        "version" : "0.2.3"
+        "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
+        "version" : "0.12.0"
       }
     },
     {
