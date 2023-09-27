@@ -264,6 +264,7 @@ struct MessagesView: View {
                         MessagesViewHeader(chl: ctx.channel)
                             .zeroRowInsets()
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 15)
                     } else {
                         loadingSkeleton
                             .zeroRowInsets()
@@ -274,9 +275,9 @@ struct MessagesView: View {
                                     viewModel.fetchMessagesTask = nil
                                 }
                             }
+                            .padding(.horizontal, 15)
                     }
                 }
-                .padding(.horizontal, 15)
                 .rotationEffect(Angle(degrees: 180))
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
