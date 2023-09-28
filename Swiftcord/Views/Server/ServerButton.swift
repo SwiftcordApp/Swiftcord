@@ -28,7 +28,7 @@ import CachedAsyncImage
 
 struct ServerButton: View {
 	let selected: Bool
-	var guild: Guild?
+	var guild: PreloadedGuild?
 	let name: String
 	var systemIconName: String?
 	var assetIconName: String?
@@ -81,7 +81,7 @@ struct ServerButton: View {
 
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
-	var guild: Guild?
+	var guild: PreloadedGuild?
     let name: String
     let bgColor: Color?
     let systemName: String?
@@ -151,7 +151,7 @@ struct ServerButtonStyle: ButtonStyle {
 				
 				Divider()
 				
-				Button(action: readAll) {
+				Button(action: { Task { await readAll() } }) {
 					Image(systemName: "message.badge")
 					Text("Mark as read")
 				}
@@ -174,31 +174,33 @@ struct ServerButtonStyle: ButtonStyle {
 }
 
 private extension ServerButtonStyle {
-	func readAll() {
-		if guild != nil {
-			for channel in guild?.channels ?? [] {
-				gateway.readState[channel.id] = gateway.readState[channel.id]?.updatingLastMessage(id: channel.last_message_id ?? "")
+	func readAll() async {
+		if let guild = guild {
+			for channel in guild.channels {
+				do {
+					let _ = try await restAPI.ackMessageRead(id: channel.id, msgID: channel.last_message_id ?? "", manual: true, mention_count: 0)
+				} catch {}
 			}
 		}
 	}
 	
 	func copyLink() {
-		if guild != nil {
+		if let guild = guild {
 			let pasteboard = NSPasteboard.general
 			pasteboard.clearContents()
 			pasteboard.setString(
-				"https://canary.discord.com/channels/\(guild?.id ?? "@me")",
+				"https://canary.discord.com/channels/\(guild.id)",
 				forType: .string
 			)
 		}
 	}
 	
 	func copyId() {
-		if guild != nil {
+		if let guild = guild {
 			let pasteboard = NSPasteboard.general
 			pasteboard.clearContents()
 			pasteboard.setString(
-				guild?.id ?? "",
+				guild.id,
 				forType: .string
 			)
 		}

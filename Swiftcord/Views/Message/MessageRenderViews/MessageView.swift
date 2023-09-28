@@ -159,6 +159,12 @@ struct MessageView: View, Equatable {
 						Text("Edit")
 					}
 				}
+                
+                Button(action: { Task { await readMessage() } }) {
+                    Image(systemName: "message.badge")
+                    Text("Mark as unread")
+                }
+                
 				Button(role: .destructive, action: deleteMessage) {
 					Image(systemName: "xmark.bin.fill")
 					Text("Delete Message").foregroundColor(.red)
@@ -209,6 +215,12 @@ private extension MessageView {
 	func editMessage() {
 		print(#function)
 	}
+    
+    func readMessage() async {
+        do {
+            let _ = try await restAPI.ackMessageRead(id: message.channel_id, msgID: message.id, manual: true, mention_count: 0)
+        } catch {}
+    }
 
 	func deleteMessage() {
 		Task {

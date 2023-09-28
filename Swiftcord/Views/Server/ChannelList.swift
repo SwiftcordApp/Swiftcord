@@ -31,7 +31,7 @@ struct ChannelList: View, Equatable {
 			})
 			.contextMenu {
 				let isRead = gateway.readState[channel.id]?.id == channel.last_message_id
-				Button(action: { readChannel(channel) }) {
+				Button(action: { Task { await readChannel(channel) } }) {
 					Image(systemName: isRead ? "message" : "message.badge")
 					Text("Mark as read")
 				}.disabled(isRead)
@@ -98,7 +98,7 @@ struct ChannelList: View, Equatable {
 						ForEach(channels, id: \.id) { channel in item(for: channel) }
 					}
 					.contextMenu {
-						Button(action: { readChannels(channels) }) {
+						Button(action: { Task { await readChannels(channels) } }) {
 							Image(systemName: "message.badge")
 							Text("Mark as read")
 						}
@@ -131,14 +131,16 @@ struct ChannelList: View, Equatable {
 }
 
 private extension ChannelList {
-	func readChannels(_ channels: [Channel]) {
+	func readChannels(_ channels: [Channel]) async {
 		for channel in channels {
-			readChannel(channel)
+			await readChannel(channel)
 		}
 	}
 	
-	func readChannel(_ channel: Channel) {
-		gateway.readState[channel.id] = gateway.readState[channel.id]?.updatingLastMessage(id: channel.last_message_id ?? "")
+	func readChannel(_ channel: Channel) async {
+		do {
+			let _ = try await restAPI.ackMessageRead(id: channel.id, msgID: channel.last_message_id ?? "", manual: true, mention_count: 0)
+		} catch {}
 	}
 	
 	func copyLink(_ channel: Channel) {
