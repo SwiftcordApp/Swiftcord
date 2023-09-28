@@ -94,26 +94,28 @@ struct UserAvatarView: View {
 						.tint(.blue)
 				}
 
-				Text("Member Since")
+				Text(ctx.guild?.id.isDM == true ? "Discord Member Since" : "Member Since")
 					.font(.headline)
 					.textCase(.uppercase)
 				HStack(spacing: 8) {
 					Image("DiscordIcon").resizable().aspectRatio(contentMode: .fit).frame(width: 16)
 					Text(user.id.createdAt?.formatted(.dateTime.day().month().year()) ?? "Unknown")
 
-					Circle().fill(Color(nsColor: .separatorColor)).frame(width: 4, height: 4)
+					if let guild = ctx.guild, !guild.id.isDM {
+						Circle().fill(Color(nsColor: .separatorColor)).frame(width: 4, height: 4)
 
-					if let iconURL = ctx.guild?.properties.iconURL(size: 32), let url = URL(string: iconURL) {
-						BetterImageView(url: url).frame(width: 16).clipShape(Circle())
-					} else {
-						Text("\(ctx.guild?.properties.name ?? "")")
-							.font(.caption)
-							.fixedSize()
-							.frame(width: 16, height: 16, alignment: .leading)
-							.background(.gray.opacity(0.5))
-							.clipShape(Circle())
+						if let iconURL = guild.properties.iconURL(size: 32), let url = URL(string: iconURL) {
+							BetterImageView(url: url).frame(width: 16).clipShape(Circle())
+						} else {
+							Text("\(guild.properties.name)")
+								.font(.caption)
+								.fixedSize()
+								.frame(width: 16, height: 16, alignment: .leading)
+								.background(.gray.opacity(0.5))
+								.clipShape(Circle())
+						}
+						Text(member?.joined_at.formatted(.dateTime.day().month().year()) ?? "Unknown")
 					}
-					Text(member?.joined_at.formatted(.dateTime.day().month().year()) ?? "Unknown")
 				}
 
 				if guildID != "@me" {
