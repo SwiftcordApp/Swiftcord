@@ -11,7 +11,7 @@ import DiscordKitCore
 import DiscordKit
 
 /// Renders the channel list on the sidebar
-struct ChannelList: View {
+struct ChannelList: View, Equatable {
 	let channels: [Channel]
 	@Binding var selCh: Channel?
 	@AppStorage("nsfwShown") var nsfwShown: Bool = true
@@ -52,18 +52,30 @@ struct ChannelList: View {
 	}
 
 	var body: some View {
+		let availableChs = channels.filter { channel in
+			guard let guildID = serverCtx.guild?.id, let member = serverCtx.member else {
+				// print("no guild or member!")
+				return true
+			}
+			guard channel.type != .category else {
+				return true
+			}
+			return channel.computedPermissions(
+				guildID: guildID,
+				member: member,
+				basePerms: serverCtx.basePermissions
+			)
+			.contains(.viewChannel)
+		}
 		List {
-			Spacer(minLength: 52 - 16 + 4) // 52 (header) - 16 (unremovable section top padding) + 4 (spacing)
+			// Spacer(minLength: 4).listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0)) // 38 (header) - 16 (unremovable section top padding) + 4 (spacing)
 
-			let filteredChannels = channels.filter {
-				if !nsfwShown {
-					return $0.parent_id == nil && $0.type != .category && ($0.nsfw == false || $0.nsfw == nil)
-				}
-				return $0.parent_id == nil && $0.type != .category
+			let filteredChannels = availableChs.filter {
+				$0.parent_id == nil && $0.type != .category && (nsfwShown || ($0.nsfw == false || $0.nsfw == nil))
 			}
 			if !filteredChannels.isEmpty {
 				Section(
-					header: Text(serverCtx.guild?.isDMChannel == true
+					header: Text(serverCtx.guild?.properties.isDMChannel == true
 						? "dm"
 						: "server.channel.noCategory"
 					).textCase(.uppercase).padding(.leading, 8)
@@ -73,16 +85,13 @@ struct ChannelList: View {
 				}
 			}
 
-			let categoryChannels = channels
+			let categoryChannels = availableChs
 				.filter { $0.parent_id == nil && $0.type == .category }
 				.discordSorted()
 			ForEach(categoryChannels, id: \.id) { channel in
 				// Channels in this section
-				let channels = channels.filter {
-					if !nsfwShown {
-						return $0.parent_id == channel.id && ($0.nsfw == false || $0.nsfw == nil)
-					}
-					return $0.parent_id == channel.id
+				let channels = availableChs.filter {
+					$0.parent_id == channel.id && (nsfwShown || ($0.nsfw == false || $0.nsfw == nil))
 				}.discordSorted()
 				if !channels.isEmpty {
 					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
@@ -114,6 +123,10 @@ struct ChannelList: View {
 			tableView.enclosingScrollView!.contentInsets = .init()
 		}
 		.environment(\.defaultMinListRowHeight, 1)
+	}
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.channels == rhs.channels && lhs.selCh == rhs.selCh
 	}
 }
 

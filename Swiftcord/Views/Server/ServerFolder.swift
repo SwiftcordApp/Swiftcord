@@ -90,8 +90,8 @@ struct ServerFolder: View {
                             ServerButton(
                                 selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
                                 guild: guild,
-                                name: guild.name,
-                                serverIconURL: guild.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.icon!).webp?size=240" : nil,
+                                name: guild.properties.name,
+                                serverIconURL: guild.properties.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.properties.icon!).webp?size=240" : nil,
                                 isLoading: loadingGuildID == guild.id
                             ) {
                                 selectedGuildID = guild.id
@@ -114,7 +114,7 @@ struct ServerFolder: View {
 
     struct GuildFolder: Identifiable {
         let name: String
-        let guilds: [Guild]
+        let guilds: [PreloadedGuild]
         let color: Color
 
         var id: Snowflake {
@@ -126,7 +126,7 @@ struct ServerFolder: View {
 struct ServerFolderButtonStyle: ButtonStyle {
     let open: Bool
     let color: Color
-    let guilds: [Guild]
+    let guilds: [PreloadedGuild]
     @Binding var hovered: Bool
 
     func makeBody(configuration: Configuration) -> some View {
@@ -172,11 +172,11 @@ struct ServerFolderButtonStyle: ButtonStyle {
 }
 
 struct MiniServerThumb: View {
-    let guild: Guild
+    let guild: PreloadedGuild
     let animate: Bool
 
     var body: some View {
-        if let serverIconPath = guild.icon, let iconURL = URL(string: "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
+        if let serverIconPath = guild.properties.icon, let iconURL = URL(string: "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(serverIconPath).webp?size=240") {
             if iconURL.isAnimatable {
                 SwiftyGifView(
                     url: iconURL.modifyingPathExtension("gif"),
@@ -192,7 +192,7 @@ struct MiniServerThumb: View {
                     .cornerRadius(8)
             }
         } else {
-            let iconName = guild.name.split(separator: " ").map { $0.prefix(1) }.joined(separator: "")
+            let iconName = guild.properties.name.split(separator: " ").map { $0.prefix(1) }.joined(separator: "")
             Text(iconName)
                 .font(.system(size: 8))
                 .lineLimit(1)

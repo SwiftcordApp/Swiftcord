@@ -13,3 +13,9 @@ extension Snowflake {
 
 	var isDM: Bool { self == Self.DM_GUILD }
 }
+
+extension Snowflake {
+	var createdAt: Date? {
+		decodeToDate()
+	}
+}

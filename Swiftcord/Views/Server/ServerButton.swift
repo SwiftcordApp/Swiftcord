@@ -10,6 +10,22 @@ import DiscordKit
 import DiscordKitCore
 import CachedAsyncImage
 
+/*
+ Font size of text in server button for servers without an icon
+
+ # of chars	 Font size (px)
+ 1			 18
+ 2			 18
+ 3		 	 16
+ 4			 16
+ 5		 	 14
+ 6			 12
+ 7			 10
+ 8			 10
+ 9			 10
+ 10			 10
+ */
+
 struct ServerButton: View {
 	let selected: Bool
 	var guild: Guild?
@@ -34,7 +50,7 @@ struct ServerButton: View {
 				.animation(capsuleAnimation, value: selected)
 				.animation(capsuleAnimation, value: hovered)
 
-			Button("", action: onSelect)
+			Button(name, action: onSelect)
 				.buttonStyle(
 					ServerButtonStyle(
 						selected: selected,
@@ -63,22 +79,6 @@ struct ServerButton: View {
 	}
 }
 
-/*
- Font size of text in server button for servers without an icon
- 
- # of chars	 Font size (px)
- 1			 18
- 2			 18
- 3		 	 16
- 4			 16
- 5		 	 14
- 6			 12
- 7			 10
- 8			 10
- 9			 10
- 10			 10
-*/
-
 struct ServerButtonStyle: ButtonStyle {
     let selected: Bool
 	var guild: Guild?
@@ -92,17 +92,17 @@ struct ServerButtonStyle: ButtonStyle {
 	
 	@EnvironmentObject var gateway: DiscordGateway
 
-    func makeBody(configuration: Configuration) -> some View {
-        ZStack {
-            if let assetName = assetName {
-                Image(assetName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 26)
-            } else if let systemName = systemName {
-                Image(systemName: systemName)
-                    .font(.system(size: 24))
-            } else if let serverIconURL = serverIconURL, let iconURL = URL(string: serverIconURL) {
+	func makeBody(configuration: Configuration) -> some View {
+		ZStack {
+			if let assetName {
+				Image(assetName)
+					.resizable()
+					.scaledToFit()
+					.frame(width: 26)
+			} else if let systemName {
+				Image(systemName: systemName)
+					.font(.system(size: 24))
+			} else if let serverIconURL, let iconURL = URL(string: serverIconURL) {
 				if iconURL.isAnimatable {
 					SwiftyGifView(
 						url: iconURL.modifyingPathExtension("gif"),
@@ -114,7 +114,7 @@ struct ServerButtonStyle: ButtonStyle {
 						configuration.label.font(.system(size: 18))
 					}
 				}
-            } else {
+			} else {
 				let iconName = name.split(separator: " ").map({ $0.prefix(1) }).joined(separator: "")
 				Text(iconName)
 					.font(.system(size: 18))
@@ -122,22 +122,22 @@ struct ServerButtonStyle: ButtonStyle {
 					.minimumScaleFactor(0.5)
 					.padding(5)
 			}
-        }
-        .frame(width: 48, height: 48)
+		}
+		.frame(width: 48, height: 48)
 		.foregroundColor(hovered || selected ? .white : Color(nsColor: .labelColor))
-        .background(
-            hovered || selected
+		.background(
+			hovered || selected
 			? (serverIconURL != nil ? .gray.opacity(0.35) : bgColor ?? Color.accentColor)
-            : .gray.opacity(0.25)
-        )
-        /*.background(LinearGradient(
-            gradient: hovered || selected
-            ? (bgColor != nil ? Gradient(colors: [bgColor!])
-               : Gradient(stops: [
-                .init(color: .blue, location: 0),
-                .init(color: .yellow, location: 0.5)
-               ]))
-               : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
+			: .gray.opacity(0.25)
+		)
+		/*.background(LinearGradient(
+		 gradient: hovered || selected
+		 ? (bgColor != nil ? Gradient(colors: [bgColor!])
+		 : Gradient(stops: [
+		 .init(color: .blue, location: 0),
+		 .init(color: .yellow, location: 0.5)
+		 ]))
+		 : Gradient(colors: [.gray.opacity(0.25)]), startPoint: .top, endPoint: .bottom))*/
 		.mask {
 			RoundedRectangle(cornerRadius: hovered || selected ? 16 : 24, style: .continuous)
 		}
