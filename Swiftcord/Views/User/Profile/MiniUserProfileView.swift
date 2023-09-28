@@ -78,26 +78,24 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 			.padding(.bottom, -8)
 
 			VStack(alignment: .leading, spacing: 6) {
-				HStack(alignment: .center, spacing: 6) {
-					Group {
-						Text(user.username).fontWeight(.bold)
-						// Webhooks don't have discriminators
-						+ Text(isWebhook ? "" : "#\(user.discriminator)")
-							.foregroundColor(.primary.opacity(0.7))
-					}.font(.title2).lineLimit(1)
-					if user.bot == true || isWebhook {
-						NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
+				VStack(alignment: .leading, spacing: 0) {
+					HStack(alignment: .center, spacing: 6) {
+						Text(user.global_name ?? user.username).font(.title2).fontWeight(.bold).lineLimit(1)
+						if user.bot == true || isWebhook {
+							NonUserBadge(flags: user.public_flags, isWebhook: isWebhook)
+						}
+						Spacer()
+						Button {
+							pasteboard.declareTypes([.string], owner: nil)
+							pasteboard.setString("\(user.username)#\(user.discriminator)", forType: .string)
+						} label: {
+							Image(systemName: "square.on.square")
+						}
+						.buttonStyle(.plain)
+						.frame(width: 20, height: 20)
 					}
-					Spacer()
-					Button(action: {
-						pasteboard.declareTypes([.string], owner: nil)
-						pasteboard.setString("\(user.username)#\(user.discriminator)", forType: .string)
-					}, label: {
-						Image(systemName: "square.on.square")
-					})
-					.buttonStyle(.plain)
-					.padding()
-					.frame(width: 20, height: 20)
+					// Webhooks don't have discriminators
+					Text(user.username + (isWebhook || user.discriminator == "0" ? "" : "#\(user.discriminator)"))
 				}
 
 				// Custom status
