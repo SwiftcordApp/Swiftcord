@@ -122,6 +122,7 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						Text("user.bio").font(.headline).textCase(.uppercase)
 						Text(markdown: bio)
 							.fixedSize(horizontal: false, vertical: true)
+							.padding(.bottom, 6)
 					}
 
 					contentSlot

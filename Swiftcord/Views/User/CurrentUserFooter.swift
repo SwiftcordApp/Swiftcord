@@ -116,8 +116,16 @@ struct CurrentUserFooter: View {
 			.buttonStyle(.plain)
 			.popover(isPresented: $userPopoverPresented) {
 				MiniUserProfileView(user: User(from: user), member: nil) {
-					VStack(spacing: 4) {
-						if !(user.bio?.isEmpty ?? true) { Divider() }
+					VStack(alignment: .leading, spacing: 4) {
+						VStack(alignment: .leading, spacing: 6) {
+							Text("Discord Member Since")
+								.font(.headline)
+								.textCase(.uppercase)
+							Text(user.id.createdAt?.formatted(.dateTime.day().month().year()) ?? "Unknown")
+						}
+						.padding(.bottom, 8)
+
+						Divider()
 
 						// Set presence
 						Menu {

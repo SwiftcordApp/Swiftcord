@@ -97,7 +97,6 @@ struct UserAvatarView: View {
 				Text("Member Since")
 					.font(.headline)
 					.textCase(.uppercase)
-					.padding(.top, 6)
 				HStack(spacing: 8) {
 					Image("DiscordIcon").resizable().aspectRatio(contentMode: .fit).frame(width: 16)
 					Text(user.id.createdAt?.formatted(.dateTime.day().month().year()) ?? "Unknown")
