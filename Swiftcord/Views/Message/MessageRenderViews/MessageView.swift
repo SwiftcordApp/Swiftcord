@@ -41,6 +41,7 @@ struct MessageView: View, Equatable {
     }
 
     let message: Message
+    let prevMessage: Message?
     let shrunk: Bool
     let quotedMsg: Message?
     let onQuoteClick: (Snowflake) -> Void
@@ -218,7 +219,15 @@ private extension MessageView {
     
     func readMessage() async {
         do {
-            let _ = try await restAPI.ackMessageRead(id: message.channel_id, msgID: message.id, manual: true, mention_count: 0)
+            let id = Int(floor((message.id as NSString).doubleValue / pow(2, 22)) - 1)
+            var defaultId: Snowflake
+            if id < 0 {
+                defaultId = "0"
+            } else {
+                defaultId = String(id << 22)
+            }
+            
+            let _ = try await restAPI.ackMessageRead(id: message.channel_id, msgID: prevMessage?.id ?? defaultId, manual: true, mention_count: 0)
         } catch {}
     }
 

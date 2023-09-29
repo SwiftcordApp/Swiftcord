@@ -159,6 +159,7 @@ struct MessagesView: View {
     func cell(for msg: Message, shrunk: Bool) -> some View {
         MessageView(
             message: msg,
+            prevMessage: viewModel.messages.after(msg),
             shrunk: shrunk,
             quotedMsg: msg.message_reference != nil
             ? viewModel.messages.first {
