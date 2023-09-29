@@ -31,7 +31,7 @@ struct CommandMessageView: View {
 						guildID: serverCtx.guild?.id,
 						webhookID: nil,
 						size: 16
-					).equatable()
+					)
 					
 					Group {
 						Text("\(interaction.user.username) used")
