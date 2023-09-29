@@ -61,6 +61,16 @@ private extension AppDelegate {
 private extension AppDelegate {
     /// Overwrite shared URLCache with a higher capacity one
     func setupURLCache() {
+        /*let cachePath = (try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true))?.appendingPathComponent("sharedCache", isDirectory: false)
+        if let cachePath {
+            do {
+                try FileManager.default.createDirectory(at: cachePath, withIntermediateDirectories: true)
+            } catch {
+                print("Create new cache dir fail! \(error)")
+                return
+            }
+        }
+        print("Cache path: \(cachePath)")*/
         URLCache.shared = URLCache(
             memoryCapacity: 32 * 1024 * 1024,  // 32MB
             diskCapacity: 256 * 1024 * 1024, // 256MB

@@ -114,6 +114,8 @@
 		9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
+		DA120C5D2ABF172600C9E7CE /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */; };
+		DA120C5E2ABF172600C9E7CE /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */; };
 		DA12FB7C29AB84F500EDBBEE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DA12FB7B29AB84F500EDBBEE /* Lottie */; };
 		DA2384A127CB9714009E15E0 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384A027CB9714009E15E0 /* Font+.swift */; };
 		DA2384BA27CBC2CE009E15E0 /* GintoBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B827CBC2CE009E15E0 /* GintoBold.otf */; };
@@ -185,6 +187,8 @@
 		DA7721FD2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA7721FE2896BD4D0007BE26 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7721FC2896BD4D0007BE26 /* URL+.swift */; };
 		DA8AEA6829029747007BAAEA /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DA8AEA6729029747007BAAEA /* Introspect */; };
+		DA9029572A0CC450008E05FA /* Permissions+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9029562A0CC450008E05FA /* Permissions+.swift */; };
+		DA9029582A0CC454008E05FA /* Permissions+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9029562A0CC450008E05FA /* Permissions+.swift */; };
 		DA91016C28BF8F1F00DD076B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E46928A0A59500645FCD /* CreditsView.swift */; };
 		DA91017028C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
 		DA91017128C38E0400DD076B /* CurrentUserFooter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */; };
@@ -285,6 +289,7 @@
 		DA03DA3E284F1E9200257790 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		DA0FC06929AC385B00ADB012 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0FC06A29AC4B6900ADB012 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		DA23843827CB934D009E15E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA2384A027CB9714009E15E0 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		DA2384B827CBC2CE009E15E0 /* GintoBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoBold.otf; sourceTree = "<group>"; };
@@ -354,6 +359,7 @@
 		DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsAdvancedView.swift; sourceTree = "<group>"; };
 		DA7720CF283F184100D3C335 /* NavigationCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCommands.swift; sourceTree = "<group>"; };
 		DA7721FC2896BD4D0007BE26 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		DA9029562A0CC450008E05FA /* Permissions+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permissions+.swift"; sourceTree = "<group>"; };
 		DA91016F28C38E0400DD076B /* CurrentUserFooter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentUserFooter+.swift"; sourceTree = "<group>"; };
 		DA91017228C38EA300DD076B /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
 		DA91017528C3989E00DD076B /* AccountMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMeta.swift; sourceTree = "<group>"; };
@@ -751,6 +757,7 @@
 				DAAFB5BB282A570D00807B54 /* CircularProgressView.swift */,
 				DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */,
 				DAB1E46B28A10BB100645FCD /* BetterImageView.swift */,
+				DA120C5C2ABF172600C9E7CE /* VisualEffect.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -834,6 +841,7 @@
 				DA32EF5127C8FBB200A9ED72 /* User+.swift */,
 				DA54D5752844B9C500B11857 /* CurrentUser+.swift */,
 				DAC437782900F3FD00D3A894 /* Snowflake+.swift */,
+				DA9029562A0CC450008E05FA /* Permissions+.swift */,
 			);
 			path = DiscordAPI;
 			sourceTree = "<group>";
@@ -957,7 +965,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					DA4A888327C0AF3000720909 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -1049,6 +1057,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/.swiftlint.yml",
+				"$(SRCROOT)/**",
 			);
 			outputFileListPaths = (
 			);
@@ -1085,6 +1095,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA120C5E2ABF172600C9E7CE /* VisualEffect.swift in Sources */,
 				9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */,
 				DA91017728C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DAB1E48828A50D3600645FCD /* DefaultMessageView.swift in Sources */,
@@ -1187,6 +1198,7 @@
 				36429989286801C900483D0A /* UserSettingsProfileView.swift in Sources */,
 				DA91017A28C4726300DD076B /* AccountSwitcher.swift in Sources */,
 				3642998A286801C900483D0A /* ServerView.swift in Sources */,
+				DA9029582A0CC454008E05FA /* Permissions+.swift in Sources */,
 				3642998B286801C900483D0A /* SwiftcordApp.swift in Sources */,
 				368B6730287A20F800E37B33 /* ServerJoinView.swift in Sources */,
 			);
@@ -1274,6 +1286,7 @@
 				DAB1E46C28A10BB100645FCD /* BetterImageView.swift in Sources */,
 				DAA57E242892270800C9A931 /* SwiftyGifNSView.swift in Sources */,
 				9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */,
+				DA9029572A0CC450008E05FA /* Permissions+.swift in Sources */,
 				DA2BD30C284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift in Sources */,
 				DAAFB5C3282AA5C700807B54 /* MessageInfoBarView.swift in Sources */,
 				DA32EF5027C8D7E000A9ED72 /* Message+.swift in Sources */,
@@ -1301,6 +1314,7 @@
 				DA91017628C3989E00DD076B /* AccountMeta.swift in Sources */,
 				DABD8BB72882E9E0008EE28F /* DateFormatter+.swift in Sources */,
 				DA32EF3227C676FE00A9ED72 /* LottieLoopMode.swift in Sources */,
+				DA120C5D2ABF172600C9E7CE /* VisualEffect.swift in Sources */,
 				DAFD4710289A1FEB0075D71B /* AttachmentAudio.swift in Sources */,
 				DA28027F28095E3100B14E5C /* Logger+.swift in Sources */,
 				DA54D574284497E400B11857 /* ProfileAccentMask.swift in Sources */,
@@ -1347,6 +1361,7 @@
 			baseConfigurationReference = 900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1382,6 +1397,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1410,12 +1426,15 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = KYZSZP83JV;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
@@ -1426,7 +1445,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.6.1;
+				MARKETING_VERSION = 0.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_STORE;
@@ -1540,6 +1559,7 @@
 			baseConfigurationReference = 900F6D9E284A1ADE000B6D29 /* Project Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1575,6 +1595,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1605,6 +1626,7 @@
 			baseConfigurationReference = 900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1640,6 +1662,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1668,12 +1691,15 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
 				DEVELOPMENT_TEAM = KYZSZP83JV;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
@@ -1684,7 +1710,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.6.1;
+				MARKETING_VERSION = 0.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1702,12 +1728,14 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = KYZSZP83JV;
+				DEVELOPMENT_TEAM = Q382QLKDG3;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Swiftcord/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Swiftcord;
@@ -1718,7 +1746,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.6.1;
+				MARKETING_VERSION = 0.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cryptoalgo.swiftcord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1806,8 +1834,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 2b6151e35a328d47f9f920c43179c1aa1fabd82c;
 			};
 		};
 		DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

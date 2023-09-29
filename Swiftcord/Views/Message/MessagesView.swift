@@ -20,6 +20,16 @@ extension View {
     }
 }
 
+extension View {
+    @ViewBuilder public func removeSeparator() -> some View {
+        if #available(macOS 13.0, *) {
+            self.listRowSeparator(.hidden).listSectionSeparator(.hidden)
+        } else {
+            self
+        }
+    }
+}
+
 struct NewAttachmentError: Identifiable {
     var id: String { title + message }
     let title: String
@@ -188,23 +198,25 @@ struct MessagesView: View {
                 DayDividerView(date: msg.timestamp)
             }
         }
-        .flip()
         .zeroRowInsets()
         .fixedSize(horizontal: false, vertical: true)
     }
+
+    @ViewBuilder
     private var historyList: some View {
         ScrollViewReader { proxy in
             List {
                 Spacer(minLength: max(messageInputHeight-44-7, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
 
-                history
+                history.flip().removeSeparator()
 
                 if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().flip()
+                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().removeSeparator().flip()
                 } else {
                     loadingSkeleton
                         .zeroRowInsets()
                         .flip()
+                        .removeSeparator()
                         .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
                         .onDisappear {
                             if let loadTask = viewModel.fetchMessagesTask {
@@ -230,21 +242,36 @@ struct MessagesView: View {
         }
     }
 
-    private var inputContainer: some View {
+    @ViewBuilder
+    private func inputContainer(channel: Channel) -> some View {
         ZStack(alignment: .topLeading) {
             MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
 
+            let hasSendPermission: Bool = {
+                guard let guildID = ctx.guild?.id, let member = ctx.member else {
+                    return false
+                }
+                return channel.computedPermissions(
+                    guildID: guildID, member: member, basePerms: ctx.basePermissions
+                )
+                .contains(.sendMessages)
+            }()
+
             MessageInputView(
-                placeholder: ctx.channel?.type == .dm
-                ? "dm.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-                : (ctx.channel?.type == .groupDM
-                    ? "dm.group.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-                    : "server.composeMsg.hint \(ctx.channel?.label(gateway.cache.users) ?? "")"
-                ),
+                placeholder: hasSendPermission ?
+                (channel.type == .dm
+                 ? "dm.composeMsg.hint \(channel.label(gateway.cache.users) ?? "")"
+                 : (channel.type == .groupDM
+                    ? "dm.group.composeMsg.hint \(channel.label(gateway.cache.users) ?? "")"
+                    : "server.composeMsg.hint \(channel.label(gateway.cache.users) ?? "")"
+                   )
+                )
+                : "You do not have permission to send messages in this channel.",
                 message: $viewModel.newMessage, attachments: $viewModel.attachments, replying: $viewModel.replying,
                 onSend: sendMessage,
                 preAttach: preAttachChecks
             )
+            .disabled(!hasSendPermission)
             .onAppear { viewModel.newMessage = "" }
             .onChange(of: viewModel.newMessage) { content in
                 if content.count > viewModel.newMessage.count,
@@ -252,15 +279,13 @@ struct MessagesView: View {
                     // Send typing start msg once every 8s while typing
                     viewModel.lastSentTyping = Date()
                     Task {
-                        _ = try? await restAPI.typingStart(id: ctx.channel!.id)
+                        _ = try? await restAPI.typingStart(id: channel.id)
                     }
                 }
             }
             .overlay {
-                let typingMembers = ctx.channel == nil
-                ? []
-                : ctx.typingStarted[ctx.channel!.id]?
-                    .map { $0.member?.nick ?? $0.member?.user!.username ?? "" } ?? []
+                let typingMembers = ctx.typingStarted[channel.id]?
+                    .map { $0.member?.nick ?? $0.member?.user?.username ?? "" } ?? []
 
                 if !typingMembers.isEmpty {
                     HStack {
@@ -289,7 +314,17 @@ struct MessagesView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             historyList
-            inputContainer
+            if let channel = ctx.channel {
+                inputContainer(channel: channel)
+            }
+        }
+        // Blur the area behind the toolbar so the content doesn't show thru
+        .safeAreaInset(edge: .top) {
+            VStack {
+                Divider().frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.ultraThinMaterial)
         }
         .frame(minWidth: 525, minHeight: 500)
         // .blur(radius: viewModel.dropOver ? 8 : 0)

@@ -13,22 +13,22 @@ struct OnboardingWelcomeView: View {
 	let loadingNew: Bool
 	let hasNew: Bool
 
+	var attributedTitle: AttributedString {
+		var attributedString: AttributedString = .init(localized: "onboarding.title \(appName ?? "")")
+
+		let appNameRange = attributedString.range(of: appName ?? "")
+
+		if let appNameRange = appNameRange {
+			attributedString[appNameRange].foregroundColor = .accentColor
+			attributedString[appNameRange].font = .system(size: 72).weight(.heavy)
+		}
+
+		return attributedString
+	}
+
 	var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Group {
-				var attributedTitle: AttributedString {
-					var attributedString: AttributedString = .init(localized: "onboarding.title \(appName ?? "")")
-
-					let appNameRange = attributedString.range(of: appName ?? "")
-
-					if let appNameRange = appNameRange {
-						attributedString[appNameRange].foregroundColor = .accentColor
-						attributedString[appNameRange].font = .system(size: 72).weight(.heavy)
-					}
-
-					return attributedString
-				}
-
 				Text(attributedTitle)
 					.font(.largeTitle)
 

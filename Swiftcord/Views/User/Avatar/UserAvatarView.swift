@@ -15,14 +15,13 @@ struct ProfileKey: Hashable {
 	let userID: Snowflake
 }
 
-private let profileCache = Cache<ProfileKey, UserProfile>()
-
-struct UserAvatarView: View, Equatable {
+struct UserAvatarView: View {
     let user: User
     let guildID: Snowflake?
     let webhookID: Snowflake?
 	var size: CGFloat = 40
-    @State private var profile: UserProfile? // Lazy-loaded full user
+	@State private var fullUser: User?
+	@State private var member: Member?
     @State private var infoPresenting = false
 	@State private var loadFullFailed = false
 	@State private var note = ""
@@ -30,23 +29,23 @@ struct UserAvatarView: View, Equatable {
 	@EnvironmentObject var ctx: ServerContext
 	@EnvironmentObject var gateway: DiscordGateway
 
+	private static let profileCache = Cache<ProfileKey, (User, Member?)>()
+
     var body: some View {
 		// _ = print("render!")
 		let avatarURL = user.avatarURL(size: size == 40 ? 160 : Int(size)*2)
+	    // This is actually crucial to resolve a SwiftUI bug preventing a required rerender when this property changes
+		let _ = member // swiftlint:disable:this redundant_discardable_let
 
 		Button {
-			if user.id == gateway.cache.user?.id, profile == nil {
-				profile = UserProfile(
-					connected_accounts: [],
-					guild_member: nil,
-					premium_guild_since: nil,
-					premium_since: nil,
-					mutual_guilds: nil,
-					user: User(from: gateway.cache.user!)
-				)
+			if user.id == gateway.cache.user?.id, fullUser == nil {
+				fullUser = User(from: gateway.cache.user!)
 			}
 
-			if let cached = profileCache[ProfileKey(guildID: guildID, userID: user.id)] { profile = cached }
+			if let (cUser, cMember) = Self.profileCache[ProfileKey(guildID: guildID, userID: user.id)] {
+				member = cMember
+				fullUser = cUser
+			}
 
 			infoPresenting.toggle()
 			AnalyticsWrapper.event(type: .openPopout, properties: [
@@ -59,14 +58,16 @@ struct UserAvatarView: View, Equatable {
 			}
 
 			// Get user profile for a fuller User object and roles
-			if profile?.guild_member == nil, webhookID == nil, guildID != "@me" || profile?.user == nil {
+			if member == nil || fullUser == nil, webhookID == nil, guildID != "@me" {
 				Task {
 					do {
-						profile = try await restAPI.getProfile(
+						let profile = try await restAPI.getProfile(
 							user: user.id,
 							guildID: guildID == "@me" ? nil : guildID
 						)
-						profileCache[ProfileKey(guildID: guildID, userID: user.id)] = profile
+						member = profile.guild_member
+						fullUser = profile.user
+						Self.profileCache[ProfileKey(guildID: guildID, userID: user.id)] = (profile.user, profile.guild_member)
 					} catch {
 						loadFullFailed = true
 					}
@@ -80,20 +81,51 @@ struct UserAvatarView: View, Equatable {
 		.buttonStyle(.borderless)
 		.popover(isPresented: $infoPresenting, arrowEdge: .trailing) {
 			MiniUserProfileView(
-				user: user,
-				profile: $profile,
+				user: fullUser ?? user,
+				member: member,
 				guildRoles: ctx.roles,
 				isWebhook: webhookID != nil,
 				loadError: loadFullFailed
 			) {
-				if let profile = profile, guildID != "@me" {
+				if member == nil, !loadFullFailed {
+					ProgressView("Loading full profile...")
+						.progressViewStyle(.linear)
+						.frame(maxWidth: .infinity)
+						.tint(.blue)
+				}
+
+				Text(ctx.guild?.id.isDM == true ? "Discord Member Since" : "Member Since")
+					.font(.headline)
+					.textCase(.uppercase)
+				HStack(spacing: 8) {
+					Image("DiscordIcon").resizable().aspectRatio(contentMode: .fit).frame(width: 16)
+					Text(user.id.createdAt?.formatted(.dateTime.day().month().year()) ?? "Unknown")
+
+					if let guild = ctx.guild, !guild.id.isDM {
+						Circle().fill(Color(nsColor: .separatorColor)).frame(width: 4, height: 4)
+
+						if let iconURL = guild.properties.iconURL(size: 32), let url = URL(string: iconURL) {
+							BetterImageView(url: url).frame(width: 16).clipShape(Circle())
+						} else {
+							Text("\(guild.properties.name)")
+								.font(.caption)
+								.fixedSize()
+								.frame(width: 16, height: 16, alignment: .leading)
+								.background(.gray.opacity(0.5))
+								.clipShape(Circle())
+						}
+						Text(member?.joined_at.formatted(.dateTime.day().month().year()) ?? "Unknown")
+					}
+				}
+
+				if guildID != "@me" {
 					let guildRoles = ctx.roles
 					let roles = guildRoles.filter {
-						profile.guild_member?.roles.contains($0.id) ?? false
+						member?.roles.contains($0.id) ?? false
 					}
 
 					Text(
-						profile.guild_member == nil
+						member == nil
 						? "user.roles.loading"
 						: (roles.isEmpty ? "user.roles.none" : (roles.count == 1 ? "user.roles.one" : "user.roles.many"))
 					)
@@ -119,6 +151,7 @@ struct UserAvatarView: View, Equatable {
 						).padding(-2)
 					}
 				}
+
 				Text("user.note")
 					.font(.headline)
 					.textCase(.uppercase)
@@ -140,7 +173,7 @@ struct UserAvatarView: View, Equatable {
 		}
 	}
 
-	static func == (lhs: UserAvatarView, rhs: UserAvatarView) -> Bool {
-		lhs.user.id == rhs.user.id
-	}
+	/*static func == (lhs: UserAvatarView, rhs: UserAvatarView) -> Bool {
+		lhs.user.id == rhs.user.id && lhs.profile?.user.id == rhs.profile?.user.id
+	}*/
 }

@@ -38,7 +38,7 @@ struct DefaultMessageView: View {
 					.italic()
 					.foregroundColor(Color(NSColor.textColor).opacity(0.4))
 				}
-				.lineSpacing(3)
+				.lineSpacing(4)
 				.textSelection(.enabled)
 			}
 			if let stickerItems = message.sticker_items {
