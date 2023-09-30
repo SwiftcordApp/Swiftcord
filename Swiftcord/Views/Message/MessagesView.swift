@@ -248,9 +248,9 @@ struct MessagesView: View {
             MessageInfoBarView(isShown: $viewModel.showingInfoBar, state: $viewModel.infoBarData)
 
             let hasSendPermission: Bool = {
-                guard let guildID = ctx.guild?.id, let member = ctx.member else {
-                    return false
-                }
+                guard let guildID = ctx.guild?.id else { return false }
+                guard !guildID.isDM else { return true }
+                guard let member = ctx.member else { return false }
                 return channel.computedPermissions(
                     guildID: guildID, member: member, basePerms: ctx.basePermissions
                 )
