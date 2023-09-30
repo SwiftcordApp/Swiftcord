@@ -87,11 +87,9 @@ struct MiniUserProfileView<RichContentSlot: View>: View {
 						Spacer()
 						Button {
 							pasteboard.declareTypes([.string], owner: nil)
-							if user.discriminator != "0" {
-								pasteboard.setString("\(user.username)#\(user.discriminator)", forType: .string)
-							} else {
-								pasteboard.setString("\(user.username)", forType: .string)
-							}
+							pasteboard.setString(user.discriminator == "0"
+												 ? user.username
+												 : "\(user.username)#\(user.discriminator)", forType: .string)
 						} label: {
 							Image(systemName: "square.on.square")
 						}
