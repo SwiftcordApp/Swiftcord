@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-	func isSameDay(as date: Date) -> Bool {
-		Calendar.current.isDate(self, inSameDayAs: date)
+	func isSameDay(as date: Date?) -> Bool {
+		date != nil && Calendar.current.isDate(self, inSameDayAs: date!) // won't force abort
 	}
 }

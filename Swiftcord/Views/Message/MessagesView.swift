@@ -121,13 +121,37 @@ struct DayDividerView: View {
 struct UnreadDivider: View {
     var body: some View {
         HStack(spacing: 0) {
-            Rectangle().fill(.red).frame(height: 1).frame(maxWidth: .infinity)
+            HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
             Text("New")
                 .textCase(.uppercase).font(.headline)
                 .padding(.horizontal, 4).padding(.vertical, 2)
                 .background(RoundedRectangle(cornerRadius: 4).fill(.red))
                 .foregroundColor(.white)
         }.padding(.vertical, 4)
+    }
+}
+
+struct UnreadDayDividerView: View {
+    let date: Date
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            HStack(spacing: 4) {
+                HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
+                Text(date, style: .date)
+                    .font(.system(size: 12))
+                    .fontWeight(.medium)
+                    .opacity(0.7)
+                HorizontalDividerView(color: .red).frame(maxWidth: .infinity)
+            }
+            .foregroundColor(.red)
+            Text("New")
+                .textCase(.uppercase).font(.headline)
+                .padding(.horizontal, 4).padding(.vertical, 2)
+                .background(RoundedRectangle(cornerRadius: 4).fill(.red))
+                .foregroundColor(.white)
+        }
+        .padding(.top, 16)
     }
 }
 
@@ -156,7 +180,7 @@ struct MessagesView: View {
     }
 
     @_transparent @_optimize(speed) @ViewBuilder
-    func cell(for msg: Message, shrunk: Bool) -> some View {
+    func cell(for msg: Message, shrunk: Bool, proxy: ScrollViewProxy) -> some View {
         MessageView(
             message: msg,
             shrunk: shrunk,
@@ -165,7 +189,7 @@ struct MessagesView: View {
                 $0.id == msg.message_reference!.message_id
             } : nil,
             onQuoteClick: { id in
-                // withAnimation { proxy.scrollTo(id, anchor: .center) }
+                withAnimation { proxy.scrollTo(id, anchor: .center) }
                 viewModel.highlightMsg = id
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     if viewModel.highlightMsg == id { viewModel.highlightMsg = nil }
@@ -178,23 +202,35 @@ struct MessagesView: View {
         .listRowBackground(msg.mentions(gateway.cache.user?.id) ? Color.orange.opacity(0.1) : .clear)
     }
 
-    private var history: some View {
-        ForEach(Array(viewModel.messages.enumerated()), id: \.1.id) { (idx, msg) in
-            let isLastItem = idx == viewModel.messages.count-1
-            let shrunk = !isLastItem && msg.messageIsShrunk(prev: viewModel.messages[idx+1])
-
-            cell(for: msg, shrunk: shrunk)
-
-            if !isLastItem, let channelID = ctx.channel?.id {
-                let newMsg = gateway.readState[channelID]?.last_message_id?.stringValue == viewModel.messages[idx+1].id
-
-                if newMsg { UnreadDivider() }
-                if !shrunk && !newMsg {
-                    Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+    func history(proxy: ScrollViewProxy) -> some View {
+        let messages = viewModel.messages
+        return ForEach(Array(messages.enumerated()), id: \.1.id) { (idx, msg) in
+            let isLastItem = msg.id == messages.last?.id
+            let shrunk = !isLastItem && msg.messageIsShrunk(prev: messages.after(msg))
+            
+            let newDay = isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: messages.after(msg)?.timestamp)
+            
+            var newMsg: Bool {
+                if !isLastItem, let channelID = ctx.channel?.id {
+                    return gateway.readState[channelID]?.last_message_id?.stringValue == messages.after(msg)?.id ?? "1"
                 }
+                return false
             }
-
-            if isLastItem && viewModel.reachedTop || !isLastItem && !msg.timestamp.isSameDay(as: viewModel.messages[idx+1].timestamp) {
+            
+            cell(for: msg, shrunk: shrunk, proxy: proxy)
+                .id(msg.id)
+            
+            if !newDay && newMsg {
+                UnreadDivider()
+                    .id("unread")
+            }
+            if !shrunk && !newMsg {
+                Spacer(minLength: 16 - MessageView.lineSpacing / 2)
+            }
+            
+            if newDay && newMsg {
+                UnreadDayDividerView(date: msg.timestamp)
+            } else if newDay {
                 DayDividerView(date: msg.timestamp)
             }
         }
@@ -206,39 +242,55 @@ struct MessagesView: View {
     private var historyList: some View {
         ScrollViewReader { proxy in
             List {
-                Spacer(minLength: max(messageInputHeight-44-7, 0) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
-
-                history.flip().removeSeparator()
-
-                if viewModel.reachedTop {
-                    MessagesViewHeader(chl: ctx.channel).zeroRowInsets().removeSeparator().flip()
-                } else {
-                    loadingSkeleton
-                        .zeroRowInsets()
-                        .flip()
-                        .removeSeparator()
-                        .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
-                        .onDisappear {
-                            if let loadTask = viewModel.fetchMessagesTask {
-                                loadTask.cancel()
-                                viewModel.fetchMessagesTask = nil
+                Group {
+                    Spacer(minLength: max(messageInputHeight-74, 10) + (viewModel.showingInfoBar ? 24 : 0)).zeroRowInsets()
+                        .id("1")
+                    
+                    history(proxy: proxy)
+                        .onAppear {
+                            withAnimation {
+                                // Already starts at very bottom, but just in case anyway
+                                // Scroll to very bottom if read, otherwise scroll to message
+                                if gateway.readState[ctx.channel?.id ?? "1"]?.last_message_id?.stringValue ?? "1" == viewModel.messages.first?.id ?? "1" {
+                                    proxy.scrollTo("1", anchor: .bottom)
+                                } else {
+                                    proxy.scrollTo("unread", anchor: .bottom)
+                                }
                             }
                         }
+                    
+                    
+                    if viewModel.reachedTop {
+                        MessagesViewHeader(chl: ctx.channel)
+                            .zeroRowInsets()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 15)
+                    } else {
+                        loadingSkeleton
+                            .zeroRowInsets()
+                            .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
+                            .onDisappear {
+                                if let loadTask = viewModel.fetchMessagesTask {
+                                    loadTask.cancel()
+                                    viewModel.fetchMessagesTask = nil
+                                }
+                            }
+                            .padding(.horizontal, 15)
+                    }
                 }
-
-                Spacer(minLength: 52).zeroRowInsets() // Ensure content is fully visible and not hidden behind toolbar when scrolled to the top
-            }
-            .introspectTableView { tableView in
-                tableView.backgroundColor = .clear
-                tableView.enclosingScrollView!.drawsBackground = false
-                tableView.enclosingScrollView!.rotate(byDegrees: 180)
-                tableView.enclosingScrollView!.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
+                .rotationEffect(Angle(degrees: 180))
             }
             .environment(\.defaultMinListRowHeight, 1) // By SwiftUI's logic, 0 is negative so we use 1 instead
-            .scaleEffect(x: -1, y: 1, anchor: .center)
             .background(.clear)
-            .frame(maxHeight: .infinity)
-            .padding(.bottom, 24 + 7) // Ensure List doesn't go below text input field (and its border radius)
+            .padding(.top, 74) // Ensure List doesn't go below text input field (and its border radius)
+            .introspectTableView { tableView in
+                tableView.enclosingScrollView!.drawsBackground = false
+//                tableView.enclosingScrollView!.rotate(byDegrees: 180)
+                
+                // Hide scrollbar
+                tableView.enclosingScrollView!.scrollerInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
+            }
+            .rotationEffect(Angle(degrees: 180))
         }
     }
 
@@ -284,7 +336,9 @@ struct MessagesView: View {
                 }
             }
             .overlay {
-                let typingMembers = ctx.typingStarted[channel.id]?
+                let typingMembers = ctx.channel == nil
+                ? []
+                : ctx.typingStarted[ctx.channel!.id]?
                     .map { $0.member?.nick ?? $0.member?.user?.username ?? "" } ?? []
 
                 if !typingMembers.isEmpty {

@@ -145,7 +145,7 @@ struct ContentView: View {
             ServerView(
                 guild: state.selectedGuildID == nil
                 ? nil
-                : (state.selectedGuildID == "@me" ? makeDMGuild() : gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
+                : ( gateway.cache.guilds[state.selectedGuildID!]), serverCtx: state.serverCtx
             )
         }
         .environmentObject(audioManager)

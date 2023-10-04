@@ -65,11 +65,14 @@ struct MessageView: View, Equatable {
         VStack(alignment: .leading, spacing: 6) {
             // This message is a reply!
             if message.type == .reply {
-				ReferenceMessageView(referencedMsg: message.referenced_message).onTapGesture {
-					if let referencedID = message.referenced_message?.id {
-						onQuoteClick(referencedID)
-					}
-				}
+                Button {
+                    if let referencedID = message.referenced_message?.id {
+                        onQuoteClick(referencedID)
+                    }
+                } label: {
+                    ReferenceMessageView(referencedMsg: message.referenced_message)
+                }
+                .buttonStyle(.borderless)
             }
             HStack(
                 alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
@@ -119,6 +122,7 @@ struct MessageView: View, Equatable {
         }
         .padding(.trailing, 32)
 		.padding(.vertical, Self.lineSpacing / 2)
+        .padding(.horizontal, 15)
 		.background(
 			Rectangle()
 				.fill(.blue)

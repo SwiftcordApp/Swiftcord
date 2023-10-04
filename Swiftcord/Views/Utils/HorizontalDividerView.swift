@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct HorizontalDividerView: View {
+	@State var color: Color = Color(NSColor.separatorColor)
+	
 	var body: some View {
-		Rectangle().fill(Color(NSColor.separatorColor)).frame(height: 1)
+		Rectangle().fill(color).frame(height: 1)
 	}
 }
 
