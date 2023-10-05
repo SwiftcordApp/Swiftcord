@@ -285,13 +285,13 @@ struct MessagesView: View {
             }
             .overlay {
                 let typingMembers = ctx.typingStarted[channel.id]?
-                    .map { $0.member?.nick ?? $0.member?.user?.username ?? "" } ?? []
+                    .map { $0.member?.nick ?? $0.member?.user?.displayName ?? "" } ?? []
 
                 if !typingMembers.isEmpty {
                     HStack {
                         // The dimensions are quite arbitrary
                         // FIXME: The animation broke, will have to fix it
-                        LottieView(name: "typing-animatiokn", play: .constant(true), width: 160, height: 160)
+                        LottieView(name: "typing-animation", play: .constant(true), width: 160, height: 160)
                             .lottieLoopMode(.loop)
                             .frame(width: 32, height: 24)
                         Group {

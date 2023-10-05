@@ -87,7 +87,7 @@ struct MessageView: View, Equatable {
 					VStack(alignment: .leading, spacing: Self.lineSpacing) {
                         if !shrunk {
                             HStack(spacing: 6) {
-                                Text(message.member?.nick ?? message.author.username)
+                                Text(message.member?.nick ?? message.author.displayName)
                                     .font(.system(size: 15))
                                     .fontWeight(.medium)
 								if message.author.bot ?? false || message.webhook_id != nil {

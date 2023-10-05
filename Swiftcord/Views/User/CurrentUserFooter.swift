@@ -98,14 +98,14 @@ struct CurrentUserFooter: View {
 					.controlSize(.small)
 
 					VStack(alignment: .leading, spacing: 0) {
-						Text(user.username).font(.headline)
+						Text(user.global_name ?? user.username).font(.headline)
 						Group {
 							if let customStatus = customStatus {
 								Text(customStatus.state ?? "")
 									.lineLimit(1)
 									.truncationMode(.tail)
 							} else {
-								Text("#" + user.discriminator)
+								Text(user.discriminator == "0" ? user.username : "#" + user.discriminator)
 							}
 						}.font(.system(size: 12)).opacity(0.75)
 					}

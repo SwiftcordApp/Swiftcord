@@ -36,7 +36,7 @@ struct ReferenceMessageView: View {
 						)
 
 						Group {
-							Text(quotedMsg.author.username)
+							Text(quotedMsg.author.displayName)
 								.font(.system(size: 14))
 								.opacity(0.9)
 

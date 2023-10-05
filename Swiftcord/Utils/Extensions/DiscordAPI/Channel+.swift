@@ -10,7 +10,7 @@ import DiscordKitCore
 extension Channel {
 	func label(_ users: [Snowflake: User] = [:]) -> String? {
 		name ?? recipient_ids?
-			.compactMap { users[$0]?.username }
+			.compactMap { users[$0]?.displayName }
 			.joined(separator: ", ")
 	}
 }
