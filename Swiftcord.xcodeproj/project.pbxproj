@@ -11,6 +11,7 @@
 		03A188C02A0FDB8A00D5F4BC /* MessageStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */; };
 		13A79FC0298C41C800D19AAB /* View+KeyDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A79FBF298C41C800D19AAB /* View+KeyDown.swift */; };
 		13A79FC1298C41C800D19AAB /* View+KeyDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A79FBF298C41C800D19AAB /* View+KeyDown.swift */; };
+		171617932AD87EC6009B375B /* User+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171617922AD87EC6009B375B /* User+displayName.swift */; };
 		36367146283C1B6500A5CBE6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36367144283C19E500A5CBE6 /* AVKit.framework */; };
 		3642993E286801C900483D0A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB53661285A272D00DD9857 /* OnboardingView.swift */; };
 		3642993F286801C900483D0A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA520ACA27D4A23A009FD740 /* String+.swift */; };
@@ -270,6 +271,7 @@
 		03A188BD2A0FDB7500D5F4BC /* BasicStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStickerView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		03A188BF2A0FDB8A00D5F4BC /* MessageStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStickerView.swift; sourceTree = "<group>"; };
 		13A79FBF298C41C800D19AAB /* View+KeyDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyDown.swift"; sourceTree = "<group>"; };
+		171617922AD87EC6009B375B /* User+displayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+displayName.swift"; sourceTree = "<group>"; };
 		36004E1C283D63E500F0BA73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		36367144283C19E500A5CBE6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		364299A3286801C900483D0A /* Swiftcord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftcord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -836,6 +838,7 @@
 				E7AF1C2A282FA400001F78DF /* Guild+.swift */,
 				DA32EF4F27C8D7E000A9ED72 /* Message+.swift */,
 				DA32EF5127C8FBB200A9ED72 /* User+.swift */,
+				171617922AD87EC6009B375B /* User+displayName.swift */,
 				DA54D5752844B9C500B11857 /* CurrentUser+.swift */,
 				DAC437782900F3FD00D3A894 /* Snowflake+.swift */,
 				DA9029562A0CC450008E05FA /* Permissions+.swift */,
@@ -1251,6 +1254,7 @@
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				03A188C02A0FDB8A00D5F4BC /* MessageStickerView.swift in Sources */,
+				171617932AD87EC6009B375B /* User+displayName.swift in Sources */,
 				E7AF1C33282FB02A001F78DF /* UserSettingsAccount.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */,
 				03A188BE2A0FDB7500D5F4BC /* BasicStickerView.swift in Sources */,
