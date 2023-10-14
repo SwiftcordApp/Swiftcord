@@ -121,6 +121,8 @@
 		DA2384BB27CBC2CE009E15E0 /* GintoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */; };
 		DA2384BF27CCBB26009E15E0 /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384BE27CCBB26009E15E0 /* EmbedView.swift */; };
 		DA2384C627CD1921009E15E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2384C527CD1921009E15E0 /* LoadingView.swift */; };
+		DA251ED72ACF077F0030C845 /* User+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA251ED62ACF077F0030C845 /* User+displayName.swift */; };
+		DA251ED82ACF077F0030C845 /* User+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA251ED62ACF077F0030C845 /* User+displayName.swift */; };
 		DA264C1528C8852900FBB4B5 /* FlatMenuStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */; };
 		DA264C1728C89FE300FBB4B5 /* PresenceStatus+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */; };
 		DA264C1A28C8E27E00FBB4B5 /* CustomStatusDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */; };
@@ -294,6 +296,7 @@
 		DA2384B927CBC2CE009E15E0 /* GintoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GintoMedium.otf; sourceTree = "<group>"; };
 		DA2384BE27CCBB26009E15E0 /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		DA2384C527CD1921009E15E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		DA251ED62ACF077F0030C845 /* User+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+displayName.swift"; sourceTree = "<group>"; };
 		DA264C1428C8852900FBB4B5 /* FlatMenuStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatMenuStyle.swift; sourceTree = "<group>"; };
 		DA264C1628C89FE300FBB4B5 /* PresenceStatus+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresenceStatus+.swift"; sourceTree = "<group>"; };
 		DA264C1928C8E27E00FBB4B5 /* CustomStatusDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatusDialog.swift; sourceTree = "<group>"; };
@@ -839,6 +842,7 @@
 				DA54D5752844B9C500B11857 /* CurrentUser+.swift */,
 				DAC437782900F3FD00D3A894 /* Snowflake+.swift */,
 				DA9029562A0CC450008E05FA /* Permissions+.swift */,
+				DA251ED62ACF077F0030C845 /* User+displayName.swift */,
 			);
 			path = DiscordAPI;
 			sourceTree = "<group>";
@@ -1134,6 +1138,7 @@
 				36429958286801C900483D0A /* AppSettingsView.swift in Sources */,
 				36429959286801C900483D0A /* WebView.swift in Sources */,
 				3642995A286801C900483D0A /* DebugSettingsView.swift in Sources */,
+				DA251ED82ACF077F0030C845 /* User+displayName.swift in Sources */,
 				3642995B286801C900483D0A /* LoginView.swift in Sources */,
 				3642995C286801C900483D0A /* UIStateEnv.swift in Sources */,
 				3642995D286801C900483D0A /* MessageView.swift in Sources */,
@@ -1251,6 +1256,7 @@
 				DA57F44628065209001DC46E /* ChannelButton.swift in Sources */,
 				DA32EF6627CB772300A9ED72 /* CacheModel.xcdatamodeld in Sources */,
 				03A188C02A0FDB8A00D5F4BC /* MessageStickerView.swift in Sources */,
+				DA251ED72ACF077F0030C845 /* User+displayName.swift in Sources */,
 				E7AF1C33282FB02A001F78DF /* UserSettingsAccount.swift in Sources */,
 				DA520AE227D76BEB009FD740 /* Bool+.swift in Sources */,
 				03A188BE2A0FDB7500D5F4BC /* BasicStickerView.swift in Sources */,
@@ -1828,8 +1834,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftcordApp/DiscordKit";
 			requirement = {
-				kind = revision;
-				revision = 2b6151e35a328d47f9f920c43179c1aa1fabd82c;
+				branch = main;
+				kind = branch;
 			};
 		};
 		DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
