@@ -46,7 +46,8 @@ struct MessageInputReplyView: View {
 						replying = nil
 					}
 				} label: {
-					Image(systemName: "x.circle.fill").font(.system(size: 16))
+					Image(systemName: "x.circle.fill")
+						.font(.system(size: 16))
 				}.buttonStyle(.plain)
 			}
 			.fixedSize(horizontal: false, vertical: true)

@@ -35,7 +35,7 @@ struct StickerPackView: View {
 					Text(pack.name).font(.title).fontWeight(.bold)
 					Spacer()
 					Text("􀐅 x\(pack.stickers.count)")
-						.font(.system(size: 16))
+						.font(.title2)
 						.opacity(0.7)
 				}
 				Divider()

@@ -58,7 +58,9 @@ struct ReferenceMessageView: View {
 							}
 
 							if !quotedMsg.attachments.isEmpty || !quotedMsg.embeds.isEmpty {
-								Image(systemName: "photo.fill").font(.system(size: 16)).opacity(0.75)
+								Image(systemName: "photo.fill")
+									.font(.system(size: 16))
+									.opacity(0.75)
 							}
 						}
 					} else {
