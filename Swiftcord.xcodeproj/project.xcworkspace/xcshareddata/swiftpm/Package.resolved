@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "networkimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/NetworkImage",
+      "state" : {
+        "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
+        "version" : "6.0.0"
+      }
+    },
+    {
       "identity" : "opencombine",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OpenCombine/OpenCombine.git",
@@ -97,6 +106,15 @@
       "state" : {
         "revision" : "532d8b529501fb73a2455b179e0bbb6d49b652ed",
         "version" : "1.5.3"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "state" : {
+        "revision" : "5df8a4adedd6ae4eb2455ef60ff75183984daeb8",
+        "version" : "2.2.0"
       }
     },
     {

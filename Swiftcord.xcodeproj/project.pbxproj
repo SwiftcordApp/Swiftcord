@@ -266,6 +266,8 @@
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
 		E7AF1C33282FB02A001F78DF /* UserSettingsAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C32282FB02A001F78DF /* UserSettingsAccount.swift */; };
 		E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */; };
+		EF525CC02ADF2B49006A4558 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = EF525CBF2ADF2B49006A4558 /* MarkdownUI */; };
+		EFA2A1862ADF182D00B98C85 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = EFA2A1852ADF182D00B98C85 /* MarkdownUI */; };
 		EFF342BD2ADEEE100017308D /* AppSettingsTextAndImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF342BC2ADEEE100017308D /* AppSettingsTextAndImagesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -432,6 +434,7 @@
 				3642998D286801C900483D0A /* AVKit.framework in Frameworks */,
 				3642998F286801C900483D0A /* CachedAsyncImage in Frameworks */,
 				364299A62868042F00483D0A /* AppCenterAnalytics in Frameworks */,
+				EF525CC02ADF2B49006A4558 /* MarkdownUI in Frameworks */,
 				DAA0A57628B90DE6007D8351 /* Sentry in Frameworks */,
 				36429991286801C900483D0A /* DiscordKitCommon in Frameworks */,
 				36429993286801C900483D0A /* Lottie in Frameworks */,
@@ -452,6 +455,7 @@
 				DA12FB7C29AB84F500EDBBEE /* Lottie in Frameworks */,
 				DABD8BB52880F653008EE28F /* Sparkle in Frameworks */,
 				DA97BA902849F9C500059FD7 /* AppCenterAnalytics in Frameworks */,
+				EFA2A1862ADF182D00B98C85 /* MarkdownUI in Frameworks */,
 				DA8AEA6829029747007BAAEA /* Introspect in Frameworks */,
 				DAFD470728996DFC0075D71B /* SwiftyGif in Frameworks */,
 			);
@@ -926,6 +930,7 @@
 				364299A52868042F00483D0A /* AppCenterAnalytics */,
 				DAA0A57028B90C7B007D8351 /* SwiftyGif */,
 				DAA0A57528B90DE6007D8351 /* Sentry */,
+				EF525CBF2ADF2B49006A4558 /* MarkdownUI */,
 			);
 			productName = "Native Discord";
 			productReference = 364299A3286801C900483D0A /* Swiftcord.app */;
@@ -956,6 +961,7 @@
 				DA296D8F299CF2AC000A810E /* DiscordKit */,
 				DA296D91299CF2AC000A810E /* DiscordKitCore */,
 				DA12FB7B29AB84F500EDBBEE /* Lottie */,
+				EFA2A1852ADF182D00B98C85 /* MarkdownUI */,
 			);
 			productName = "Native Discord";
 			productReference = DA4A888427C0AF3000720909 /* Swiftcord.app */;
@@ -1007,6 +1013,7 @@
 				DA8AEA6629029747007BAAEA /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				DA63C8D029834E4C00B34D60 /* XCRemoteSwiftPackageReference "DiscordKit" */,
 				DA12FB7A29AB84F500EDBBEE /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				EFA2A1842ADF17CD00B98C85 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = DA4A888527C0AF3000720909 /* Products */;
 			projectDirPath = "";
@@ -1435,7 +1442,7 @@
 				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = YSLGG8X94D;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1699,7 +1706,7 @@
 				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = YSLGG8X94D;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1735,7 +1742,7 @@
 				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
-				DEVELOPMENT_TEAM = Q382QLKDG3;
+				DEVELOPMENT_TEAM = YSLGG8X94D;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1882,6 +1889,14 @@
 				kind = branch;
 			};
 		};
+		EFA2A1842ADF17CD00B98C85 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1964,6 +1979,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DAB1E46D28A202B900645FCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		EF525CBF2ADF2B49006A4558 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFA2A1842ADF17CD00B98C85 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		EFA2A1852ADF182D00B98C85 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFA2A1842ADF17CD00B98C85 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

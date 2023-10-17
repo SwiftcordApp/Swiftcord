@@ -57,15 +57,19 @@ extension Font {
 	
 	// Message
 	public static var appMessage: Self {
+		if #available(macOS 13.0, *) {
+			return .system(size: appMessageFontSize, weight: .regular, design: fontDesign)
+		} else {
+			return .system(size: appMessageFontSize, weight: .regular)
+		}
+	}
+	
+	// Message
+	public static var appMessageFontSize: CGFloat {
 		let defaultFont: NSFont = .labelFont(ofSize: 15)
 		let fontSize = defaultFont.pointSize
 		let scaledFontSize = fontSize * fontScale
-		
-		if #available(macOS 13.0, *) {
-			return .system(size: scaledFontSize, weight: .regular, design: fontDesign)
-		} else {
-			return .system(size: scaledFontSize, weight: .regular)
-		}
+		return scaledFontSize
 	}
 }
 
