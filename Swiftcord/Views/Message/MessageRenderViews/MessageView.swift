@@ -19,7 +19,7 @@ struct NonUserBadge: View {
 		HStack(spacing: 0) {
 			if let flags = flags, flags.contains(.verifiedBot) {
 				Image(systemName: "checkmark")
-					.font(.system(size: 8, weight: .heavy))
+                    .font(.footnote.weight(.heavy))
 					.frame(width: 15)
 					.padding(.leading, -3)
 			}
@@ -80,7 +80,7 @@ struct MessageView: View, Equatable {
                         UserAvatarView(user: message.author, guildID: serverCtx.guild!.id, webhookID: message.webhook_id)
                     } else {
 						Text(message.timestamp, style: .time)
-                            .font(.system(size: 8, weight: .semibold, design: .monospaced))
+                            .font(.footnote.weight(.semibold).monospaced())
                             .frame(width: 40, height: 22, alignment: .center)
                             .opacity(hovered ? 0.5 : 0)
                     }

@@ -34,7 +34,7 @@ struct DefaultMessageView: View {
 						? "message.edited.shrunk"
 						: ""
 					)
-					.font(.system(size: 8))
+					.font(.footnote)
 					.italic()
 					.foregroundColor(Color(NSColor.textColor).opacity(0.4))
 				}
