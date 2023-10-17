@@ -35,7 +35,7 @@ struct MessageInputReplyView: View {
 					} label: {
 						Label(replyingRef.ping ? "On" : "Off", systemImage: "at")
 							.foregroundColor(replyingRef.ping ? .blue : .gray)
-							.font(.system(size: 14, weight: .bold))
+							.font(.body.bold())
 					}.buttonStyle(.plain)
 
 					Divider()

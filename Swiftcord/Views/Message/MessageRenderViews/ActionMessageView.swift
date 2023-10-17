@@ -109,10 +109,10 @@ struct ActionMessageView: View {
 			.padding([.leading, .trailing], mini ? 0 : 12)
 		Group {
 			if mini {
-				Text(data.message).font(.system(size: 14))
+				Text(data.message).font(.body)
 			} else {
-				Text(data.message).font(.system(size: 14))
-				+ Text(" ").font(.system(size: 14))
+				Text(data.message).font(.body)
+				+ Text(" ").font(.body)
 				+ Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
 					.font(.callout)
 			}

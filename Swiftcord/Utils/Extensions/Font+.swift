@@ -40,6 +40,11 @@ extension Font {
 		return .system(size: size, weight: .semibold, design: fontDesign)
 	}
 	
+	public static var body: Font {
+		let size = NSFont.preferredFont(forTextStyle: .body).pointSize * fontScale
+		return .system(size: size, weight: .regular, design: fontDesign)
+	}
+	
 	// Message
 	public static var appMessage: Self {
 		let defaultFont: NSFont = .labelFont(ofSize: 15)

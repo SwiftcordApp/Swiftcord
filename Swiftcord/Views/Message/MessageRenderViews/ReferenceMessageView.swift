@@ -37,7 +37,7 @@ struct ReferenceMessageView: View {
 
 						Group {
 							Text(quotedMsg.author.displayName)
-								.font(.system(size: 14))
+								.font(.body)
 								.opacity(0.9)
 
 							if quotedMsg.author.bot == true || quotedMsg.webhook_id != nil {
@@ -48,12 +48,12 @@ struct ReferenceMessageView: View {
 							}
 
 							Text(markdown: quotedMsg.content.replacingOccurrences(of: "\n", with: " "))
-								.font(.system(size: 14))
+								.font(.body)
 								.opacity(0.75)
 								.lineLimit(1)
 							if quotedMsg.content.isEmpty {
 								Text("message.reply.attachment")
-									.font(.system(size: 14).italic())
+									.font(.body.italic())
 									.opacity(0.75)
 							}
 
@@ -73,7 +73,7 @@ struct ReferenceMessageView: View {
 
 					Text("message.gone")
 						.italic()
-						.font(.system(size: 14))
+						.font(.body)
 						.opacity(0.75)
 				}
 			}
