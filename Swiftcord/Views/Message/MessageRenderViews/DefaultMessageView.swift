@@ -30,6 +30,7 @@ struct DefaultMessageView: View {
 				
 				let messageContent = "\(msg) \(message.edited_timestamp != nil && shrunk ? "message.edited.shrunk": "")"
 				Markdown(messageContent)
+					.font(.appMessage)
 					.markdownBlockStyle(\.codeBlock, body: { configuration in
 						configuration.label
 							.markdownTextStyle {
