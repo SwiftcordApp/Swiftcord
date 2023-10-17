@@ -109,8 +109,7 @@ struct DayDividerView: View {
         HStack(spacing: 4) {
             HorizontalDividerView().frame(maxWidth: .infinity)
             Text(date, style: .date)
-                .font(.system(size: 12))
-                .fontWeight(.medium)
+                .font(.callout)
                 .opacity(0.7)
             HorizontalDividerView().frame(maxWidth: .infinity)
         }

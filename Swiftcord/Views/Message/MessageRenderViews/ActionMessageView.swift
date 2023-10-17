@@ -114,7 +114,7 @@ struct ActionMessageView: View {
 				Text(data.message).font(.system(size: 14))
 				+ Text(" ").font(.system(size: 14))
 				+ Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
-					.font(.system(size: 12))
+					.font(.callout)
 			}
 		}.opacity(0.75)
 	}

@@ -105,7 +105,7 @@ struct MessageView: View, Equatable {
 										Text(edited_timestamp, style: .time)
 									}
 								}
-								.font(.system(size: 12))
+                                .font(.callout)
 								.opacity(0.5)
                             }
                         }

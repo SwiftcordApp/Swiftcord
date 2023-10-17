@@ -159,17 +159,17 @@ struct RichEmbedView: View {
 						}
 
 						Text(footer.text)
-							.font(.system(size: 12, weight: .semibold))
+							.font(.callout)
 							.textSelection(.enabled)
 
 						if let timestamp = embed.timestamp {
 							Text("•")
 								.font(.title3)
-								.font(.system(size: 12, weight: .semibold))
+								.font(.callout)
 								.textSelection(.enabled)
 
 							Text(timestamp, style: .date)
-								.font(.system(size: 12, weight: .semibold))
+								.font(.callout)
 								.textSelection(.enabled)
 						}
 					}

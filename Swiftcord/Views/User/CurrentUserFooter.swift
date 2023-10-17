@@ -107,7 +107,9 @@ struct CurrentUserFooter: View {
 							} else {
 								Text(user.discriminator == "0" ? user.username : "#" + user.discriminator)
 							}
-						}.font(.system(size: 12)).opacity(0.75)
+						}
+						.font(.callout)
+						.opacity(0.75)
 					}
 				}
 				.padding(2)

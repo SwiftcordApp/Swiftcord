@@ -35,6 +35,11 @@ extension Font {
 		return Font.custom("Ginto Medium", size: size, relativeTo: .title3)
     }
 	
+	public static var callout: Font {
+		let size = NSFont.preferredFont(forTextStyle: .callout).pointSize * fontScale
+		return .system(size: size, weight: .semibold, design: fontDesign)
+	}
+	
 	// Message
 	public static var appMessage: Self {
 		let defaultFont: NSFont = .labelFont(ofSize: 15)
@@ -42,7 +47,7 @@ extension Font {
 		let scaledFontSize = fontSize * fontScale
 		
 		if #available(macOS 13.0, *) {
-			return .system(size: scaledFontSize, weight: .regular, design: isEnabledRoundedFont ? .rounded : .none)
+			return .system(size: scaledFontSize, weight: .regular, design: fontDesign)
 		} else {
 			return .system(size: scaledFontSize, weight: .regular)
 		}
@@ -56,8 +61,8 @@ private extension Font {
 		return CGFloat(fontScale)
 	}
 	
-	static var isEnabledRoundedFont: Bool {
+	static var fontDesign: Font.Design {
 		@AppStorage("isEnabledRoundedFont") var isEnabledRoundedFont = false
-		return isEnabledRoundedFont
+		return isEnabledRoundedFont ? .rounded : .rounded
 	}
 }

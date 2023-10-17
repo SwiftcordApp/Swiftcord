@@ -141,7 +141,7 @@ struct UserAvatarView: View {
 										.frame(width: 14, height: 14)
 										.padding(.leading, 6)
 									Text(role.name)
-										.font(.system(size: 12))
+										.font(.callout)
 										.padding(.trailing, 8)
 								}
 								.frame(height: 24)
