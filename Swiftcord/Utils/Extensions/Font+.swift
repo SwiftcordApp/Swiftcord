@@ -50,6 +50,11 @@ extension Font {
 		return .system(size: size, weight: .regular, design: fontDesign)
 	}
 	
+	public static var messageInput: Font {
+		let size = NSFont.preferredFont(forTextStyle: .title2).pointSize * fontScale
+		return .system(size: size, weight: .light, design: fontDesign)
+	}
+	
 	// Message
 	public static var appMessage: Self {
 		let defaultFont: NSFont = .labelFont(ofSize: 15)

@@ -14,8 +14,10 @@ struct AppSettingsTextAndImagesView: View {
 	var body: some View {
 		Section {
 			VStack(alignment: .leading, spacing: 0) {
-				Slider(value: $fontScale, in: 0.4...2, step: 0.1) {
-					Text("Text Size")
+				Slider(value: $fontScale, in: 0.4...1.4, step: 0.1) {
+					Text("Font scale: ") +
+					Text("\(fontScale, specifier: "%.2f")")
+						.bold()
 				} minimumValueLabel: {
 					Text("Small").font(.subheadline).opacity(0.75)
 				} maximumValueLabel: {

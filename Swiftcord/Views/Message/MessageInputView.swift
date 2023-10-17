@@ -161,7 +161,6 @@ extension MessageInputView {
 			if #available(macOS 13, *) {
 				TextField(placeholder, text: $message, axis: .vertical)
 					.onSubmit(send)
-					.font(.title2)
 			} else {
 				TextEditor(
 					text: .init(
@@ -212,9 +211,9 @@ extension MessageInputView {
 						.opacity(message.count == 0 ? 1.0 : 0)
 						.allowsHitTesting(false)
 				)
-				.font(.title2.weight(.light))
 			}
 		}
+		.font(.messageInput)
 		.textFieldStyle(.plain)
 		.fixedSize(horizontal: false, vertical: true)
 		.frame(maxWidth: .infinity)
