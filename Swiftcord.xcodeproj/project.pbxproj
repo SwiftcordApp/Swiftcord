@@ -418,7 +418,6 @@
 		E7AF1C2A282FA400001F78DF /* Guild+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guild+.swift"; sourceTree = "<group>"; };
 		E7AF1C32282FB02A001F78DF /* UserSettingsAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsAccount.swift; sourceTree = "<group>"; usesTabs = 0; };
 		E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+.swift"; sourceTree = "<group>"; };
-		EFF342BB2ADEC45F0017308D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EFF342BC2ADEEE100017308D /* AppSettingsTextAndImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTextAndImagesView.swift; sourceTree = "<group>"; };
 		F421AC52285BACB200034F59 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F421AC52285BACB200034F60 /* nb-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nb-NO"; path = "nb-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -997,7 +996,6 @@
 				tr,
 				nl,
 				pl,
-				"pt-BR",
 			);
 			mainGroup = DA4A887B27C0AF3000720909;
 			packageReferences = (
@@ -1357,7 +1355,6 @@
 				DAB7793128F9179400A17F54 /* tr */,
 				DA0FC06929AC385B00ADB012 /* nl */,
 				DA0FC06A29AC4B6900ADB012 /* pl */,
-				EFF342BB2ADEC45F0017308D /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
