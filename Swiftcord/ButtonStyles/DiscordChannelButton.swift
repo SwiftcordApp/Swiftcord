@@ -18,7 +18,7 @@ struct DiscordChannelButton: ButtonStyle {
 			.buttonStyle(.borderless)
 			.frame(height: size == .large ? 42 : 32)
 			.padding(.horizontal, 2)
-			.font(.system(size: 15))
+			.font(.title3)
 			.foregroundColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.accentColor(isSelected ? Color(nsColor: .labelColor) : .gray)
 			.background {

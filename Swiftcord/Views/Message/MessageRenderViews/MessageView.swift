@@ -88,7 +88,7 @@ struct MessageView: View, Equatable {
                         if !shrunk {
                             HStack(spacing: 6) {
                                 Text(message.member?.nick ?? message.author.displayName)
-                                    .font(.system(size: 15))
+                                    .font(.title3)
                                     .fontWeight(.medium)
 								if message.author.bot ?? false || message.webhook_id != nil {
 									// No idea what's the difference between flags and public_flags,

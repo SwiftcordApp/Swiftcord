@@ -49,7 +49,7 @@ struct AttachmentView: View {
                     .opacity(0.8)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(attachment.filename)
-                        .font(.system(size: 15))
+                        .font(.title3)
                         .fontWeight(.medium)
                         .lineLimit(1)
                     // .fixedSize(horizontal: false, vertical: true)

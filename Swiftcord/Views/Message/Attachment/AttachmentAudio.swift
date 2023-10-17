@@ -28,7 +28,7 @@ struct AttachmentAudio: View {
 			HStack {
 				VStack(alignment: .leading, spacing: 4) {
 					Text(attachment.filename)
-						.font(.system(size: 15))
+						.font(.title3)
 						.fontWeight(.medium)
 						.truncationMode(.middle)
 						.lineLimit(1)
