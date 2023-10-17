@@ -239,7 +239,9 @@ private extension SettingsView {
 							AppSettingsAppearanceView()
 						case .accessibility:
 							AppSettingsAccessibilityView()
-
+						// MARK: Text and Images
+						case .textImages:
+							AppSettingsTextAndImagesView()
 						// MARK: Misc
 						case .about:
 							AboutSwiftcordView()

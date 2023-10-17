@@ -266,6 +266,7 @@
 		E7AF1C2B282FA400001F78DF /* Guild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C2A282FA400001F78DF /* Guild+.swift */; };
 		E7AF1C33282FB02A001F78DF /* UserSettingsAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C32282FB02A001F78DF /* UserSettingsAccount.swift */; };
 		E7AF1C36282FC2E8001F78DF /* NSTextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */; };
+		EFF342BD2ADEEE100017308D /* AppSettingsTextAndImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF342BC2ADEEE100017308D /* AppSettingsTextAndImagesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -418,6 +419,7 @@
 		E7AF1C32282FB02A001F78DF /* UserSettingsAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsAccount.swift; sourceTree = "<group>"; usesTabs = 0; };
 		E7AF1C35282FC2E8001F78DF /* NSTextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+.swift"; sourceTree = "<group>"; };
 		EFF342BB2ADEC45F0017308D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EFF342BC2ADEEE100017308D /* AppSettingsTextAndImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTextAndImagesView.swift; sourceTree = "<group>"; };
 		F421AC52285BACB200034F59 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F421AC52285BACB200034F60 /* nb-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nb-NO"; path = "nb-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F421AC52285BACB200034F62 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 				DA2BD30B284CB38B00EBB8D6 /* AppSettingsAppearanceView.swift */,
 				DAAA22AE284DC0D700C1975E /* AppSettingsAccessibilityView.swift */,
 				DA6E89EF2876BC7E00BB05E7 /* AppSettingsAdvancedView.swift */,
+				EFF342BC2ADEEE100017308D /* AppSettingsTextAndImagesView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1214,6 +1217,7 @@
 			files = (
 				DAB53662285A272D00DD9857 /* OnboardingView.swift in Sources */,
 				DA520ACB27D4A23A009FD740 /* String+.swift in Sources */,
+				EFF342BD2ADEEE100017308D /* AppSettingsTextAndImagesView.swift in Sources */,
 				DA57F44428056718001DC46E /* ChannelList.swift in Sources */,
 				DAB1E46A28A0A59500645FCD /* CreditsView.swift in Sources */,
 				DAB1E48928A50D3600645FCD /* ActionMessageView.swift in Sources */,
