@@ -28,8 +28,7 @@ struct DefaultMessageView: View {
 				? message.content.replacingOccurrences(of: " ", with: " ")
 				: message.content
 				
-				let messageContent = "\(msg) \(message.edited_timestamp != nil && shrunk ? "message.edited.shrunk": "")"
-				Markdown(messageContent)
+				Markdown(msg)
 					.font(.appMessage)
 					.markdownBlockStyle(\.codeBlock, body: { configuration in
 						configuration.label
@@ -51,12 +50,24 @@ struct DefaultMessageView: View {
 						BackgroundColor(.purple.opacity(0.25))
 					}
 					.markdownTextStyle(\.text) {
-						FontFamilyVariant(.normal)
-						FontSize(message.content.containsOnlyEmojiAndSpaces ? 48 : Font.appMessageFontSize)
-						ForegroundColor(Color(NSColor.textColor))
+						FontProperties(
+							family: .system(Font.fontDesign),
+							familyVariant: .normal,
+							capsVariant: .normal,
+							digitVariant: .normal,
+							style: .normal,
+							weight: .regular,
+							size: message.content.containsOnlyEmojiAndSpaces ? 48 : Font.appMessageFontSize
+						)
 					}
 					.lineSpacing(4)
 					.textSelection(.enabled)
+				
+				if message.edited_timestamp != nil && shrunk {
+					Text("message.edited.shrunk")
+						.font(.callout)
+						.foregroundStyle(Color(nsColor: .textColor).opacity(0.4))
+				}
 			}
 			if let stickerItems = message.sticker_items {
 				ForEach(stickerItems) { sticker in

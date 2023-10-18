@@ -71,6 +71,11 @@ extension Font {
 		let scaledFontSize = fontSize * fontScale
 		return scaledFontSize
 	}
+	
+	static var fontDesign: Font.Design {
+		@AppStorage("isEnabledRoundedFont") var isEnabledRoundedFont = false
+		return isEnabledRoundedFont ? .rounded : .default
+	}
 }
 
 // MARK: - Helpers
@@ -78,10 +83,5 @@ private extension Font {
 	static var fontScale: CGFloat {
 		@AppStorage("fontSizeScale") var fontScale = 1.0
 		return CGFloat(fontScale)
-	}
-	
-	static var fontDesign: Font.Design {
-		@AppStorage("isEnabledRoundedFont") var isEnabledRoundedFont = false
-		return isEnabledRoundedFont ? .rounded : .rounded
 	}
 }
