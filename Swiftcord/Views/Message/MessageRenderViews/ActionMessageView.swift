@@ -43,6 +43,12 @@ struct ActionMessageView: View {
 				icon: "arrow.left",
 				color: .red
 			)
+		case .chNameChange:
+			return ActionMessageData(
+				message: "**\(message.author.username)** just changed the channel name: **\(message.content)**.",
+				icon: "pencil",
+				color: .gray
+			)
 		case .userPremiumGuildSub:
 			return ActionMessageData(
 				message: "**\(message.author.username)** just boosted the server!",
@@ -93,6 +99,24 @@ struct ActionMessageView: View {
 					color: .red
 				)
 			}
+		case .chPinnedMsg:
+			return ActionMessageData(
+				message: "**\(message.author.username)** just pinned a message to this channel.",
+				icon: "pin.fill",
+				color: .gray
+			)
+		case .threadCreated:
+			return ActionMessageData(
+				message: "**\(message.author.username)** started a thread: **\(message.content)**.",
+				icon: "number",
+				color: .gray
+			)
+		case .chFollowAdd:
+			return ActionMessageData(
+				message: "**\(message.author.username)** has added **\(message.content)** to this channel. Its most important updates will show up here.",
+				icon: "arrow.right",
+				color: .green
+			)
 		default:
 			return ActionMessageData(
 				message: "Oops, rendering `\(String(describing: message.type))` messages aren't supported yet :(",

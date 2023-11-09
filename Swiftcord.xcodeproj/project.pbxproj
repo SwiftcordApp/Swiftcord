@@ -110,6 +110,7 @@
 		368B6731287A211F00E37B33 /* HorizontalDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4350032879C38C001DEC81 /* HorizontalDividerView.swift */; };
 		36BC29F3285C162500A8B316 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 36BC29F2285C162500A8B316 /* Credits.rtf */; };
 		900F6DA1284A1C0C000B6D29 /* GeneratedBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */; };
+		938A58442A4EA2AC0088A5FC /* CommandMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938A58432A4EA2AC0088A5FC /* CommandMessageView.swift */; };
 		9FCE7B1D28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		9FCE7B1E28C7140100213A3F /* ServerFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCE7B1C28C7140100213A3F /* ServerFolder.swift */; };
 		DA03DA3F284F1E9200257790 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA03DA3E284F1E9200257790 /* Keychain.swift */; };
@@ -285,6 +286,7 @@
 		900F6D9F284A1AE6000B6D29 /* Project Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project Release.xcconfig"; sourceTree = "<group>"; };
 		900F6DA0284A1C0C000B6D29 /* GeneratedBuildSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedBuildSettings.swift; sourceTree = "<group>"; };
 		90F77AAA284C87E900166BF3 /* AppCenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
+		938A58432A4EA2AC0088A5FC /* CommandMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMessageView.swift; sourceTree = "<group>"; };
 		9FCE7B1C28C7140100213A3F /* ServerFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFolder.swift; sourceTree = "<group>"; usesTabs = 0; };
 		DA03DA3E284F1E9200257790 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		DA0FC06929AC385B00ADB012 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -778,6 +780,7 @@
 				DAB1E48528A50D3600645FCD /* DefaultMessageView.swift */,
 				DAAFB5C0282A64CD00807B54 /* LoFiMessageView.swift */,
 				DA54D57E28460F3A00B11857 /* ReferenceMessageView.swift */,
+				938A58432A4EA2AC0088A5FC /* CommandMessageView.swift */,
 				DA32EF2527C62E6900A9ED72 /* MessageView.swift */,
 			);
 			path = MessageRenderViews;
@@ -1277,6 +1280,7 @@
 				DA54D5712841D6CF00B11857 /* MiniUserProfileView.swift in Sources */,
 				DAB1E47628A2189700645FCD /* MessagesViewModel.swift in Sources */,
 				DA4350022879BFCA001DEC81 /* ServerJoinView.swift in Sources */,
+				938A58442A4EA2AC0088A5FC /* CommandMessageView.swift in Sources */,
 				DA32EF5227C8FBB200A9ED72 /* User+.swift in Sources */,
 				DA520AD127D4CFCF009FD740 /* BillingSettingsView.swift in Sources */,
 				DABE05032A0A80FE00722F6F /* UserSecurity.swift in Sources */,
@@ -1431,6 +1435,7 @@
 				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = KYZSZP83JV;
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1695,6 +1700,7 @@
 				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Swiftcord/Preview Content\"";
+				DEVELOPMENT_TEAM = KYZSZP83JV;
 				DEVELOPMENT_TEAM = Q382QLKDG3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
