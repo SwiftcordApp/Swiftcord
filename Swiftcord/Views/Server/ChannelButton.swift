@@ -16,15 +16,16 @@ struct ChannelButton: View, Equatable {
 	}
 
     let channel: Channel
+	var unread: Bool
     @Binding var selectedCh: Channel?
 
     var body: some View {
 		if channel.type == .dm || channel.type == .groupDM {
-			DMButton(dm: channel, selectedCh: $selectedCh)
+			DMButton(dm: channel, unread: unread, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 				.controlSize(.large)
 		} else {
-			GuildChButton(channel: channel, selectedCh: $selectedCh)
+			GuildChButton(channel: channel, unread: unread, selectedCh: $selectedCh)
 				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
 		}
     }
@@ -32,6 +33,7 @@ struct ChannelButton: View, Equatable {
 
 struct GuildChButton: View {
 	let channel: Channel
+	var unread: Bool
 	@Binding var selectedCh: Channel?
 
 	@EnvironmentObject var serverCtx: ServerContext
@@ -48,12 +50,14 @@ struct GuildChButton: View {
 				.padding(.vertical, 5)
 				.padding(.horizontal, 4)
 				.frame(maxWidth: .infinity, alignment: .leading)
+				.foregroundColor(unread ? Color(nsColor: .labelColor) : .gray)
 		}
 	}
 }
 
 struct DMButton: View {
 	let dm: Channel // swiftlint:disable:this identifier_name
+	var unread: Bool
 	@Binding var selectedCh: Channel?
 
 	@EnvironmentObject var gateway: DiscordGateway
@@ -82,6 +86,7 @@ struct DMButton: View {
 							.font(.caption)
 					}
 				}
+				.foregroundColor(unread ? Color(nsColor: .labelColor) : .gray)
 				Spacer()
 			}
 			.padding(.horizontal, 6)
