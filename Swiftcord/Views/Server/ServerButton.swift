@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import DiscordKit
+import DiscordKitCore
 import CachedAsyncImage
 
 /*
@@ -26,6 +28,7 @@ import CachedAsyncImage
 
 struct ServerButton: View {
 	let selected: Bool
+	var guild: PreloadedGuild?
 	let name: String
 	var systemIconName: String?
 	var assetIconName: String?
@@ -51,6 +54,7 @@ struct ServerButton: View {
 				.buttonStyle(
 					ServerButtonStyle(
 						selected: selected,
+						guild: guild,
 						name: name,
 						bgColor: bgColor,
 						systemName: systemIconName,
@@ -60,8 +64,15 @@ struct ServerButton: View {
 						hovered: $hovered
 					)
 				)
-			    .padding(.trailing, 8)
-
+				.popover(isPresented: $hovered) {
+					Text(name)
+						.font(.title3)
+						.padding(8)
+						.frame(maxWidth: 300)
+						.interactiveDismissDisabled()
+				}
+				.padding(.trailing, 8)
+			
 			Spacer()
 		}
 		.frame(width: 72, height: 48)
@@ -69,14 +80,17 @@ struct ServerButton: View {
 }
 
 struct ServerButtonStyle: ButtonStyle {
-	let selected: Bool
-	let name: String
-	let bgColor: Color?
-	let systemName: String?
-	let assetName: String?
-	let serverIconURL: String?
-	let loading: Bool
-	@Binding var hovered: Bool
+    let selected: Bool
+	var guild: PreloadedGuild?
+    let name: String
+    let bgColor: Color?
+    let systemName: String?
+    let assetName: String?
+    let serverIconURL: String?
+    let loading: Bool
+    @Binding var hovered: Bool
+	
+	@EnvironmentObject var gateway: DiscordGateway
 
 	func makeBody(configuration: Configuration) -> some View {
 		ZStack {
@@ -129,20 +143,66 @@ struct ServerButtonStyle: ButtonStyle {
 		}
 		.offset(y: configuration.isPressed ? 1 : 0)
 		.animation(.none, value: configuration.isPressed)
-		.animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
-		.onHover { hover in hovered = hover }
+        .animation(.interpolatingSpring(stiffness: 500, damping: 30), value: hovered)
+        .onHover { hover in hovered = hover }
+		.contextMenu {
+			if guild != nil {
+				Text(name)
+				
+				Divider()
+				
+				Button(action: { Task { await readAll() } }) {
+					Image(systemName: "message.badge")
+					Text("Mark as read")
+				}
+				
+				Divider()
+				
+				Group {
+					Button(action: copyLink) {
+						Image(systemName: "link")
+						Text("Copy Link")
+					}
+					Button(action: copyId) {
+						Image(systemName: "number.circle.fill")
+						Text("Copy ID")
+					}
+				}
+			}
+		}
 	}
 }
 
-struct ServerButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ServerButton(
-            selected: false,
-            name: "Hello world, discord!",
-            systemIconName: nil,
-            assetIconName: nil,
-            serverIconURL: nil,
-            bgColor: nil
-		) {}
-    }
+private extension ServerButtonStyle {
+	func readAll() async {
+		if let guild = guild {
+			for channel in guild.channels {
+				do {
+					let _ = try await restAPI.ackMessageRead(id: channel.id, msgID: channel.last_message_id ?? "", manual: true, mention_count: 0)
+				} catch {}
+			}
+		}
+	}
+	
+	func copyLink() {
+		if let guild = guild {
+			let pasteboard = NSPasteboard.general
+			pasteboard.clearContents()
+			pasteboard.setString(
+				"https://canary.discord.com/channels/\(guild.id)",
+				forType: .string
+			)
+		}
+	}
+	
+	func copyId() {
+		if let guild = guild {
+			let pasteboard = NSPasteboard.general
+			pasteboard.clearContents()
+			pasteboard.setString(
+				guild.id,
+				forType: .string
+			)
+		}
+	}
 }

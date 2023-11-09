@@ -29,6 +29,26 @@ struct ChannelList: View, Equatable {
 					Circle().fill(.primary).frame(width: 8, height: 8).offset(x: 2)
 				}
 			})
+			.contextMenu {
+				let isRead = gateway.readState[channel.id]?.id == channel.last_message_id
+				Button(action: { Task { await readChannel(channel) } }) {
+					Image(systemName: isRead ? "message" : "message.badge")
+					Text("Mark as read")
+				}.disabled(isRead)
+				
+				Divider()
+				
+				Group {
+					Button(action: { copyLink(channel) }) {
+						Image(systemName: "link")
+						Text("Copy Link")
+					}
+					Button(action: { copyId(channel) }) {
+						Image(systemName: "number.circle.fill")
+						Text("Copy ID")
+					}
+				}
+			}
 	}
 
 	var body: some View {
@@ -77,6 +97,19 @@ struct ChannelList: View, Equatable {
 					Section(header: Text(channel.name ?? "").textCase(.uppercase).padding(.leading, 8)) {
 						ForEach(channels, id: \.id) { channel in item(for: channel) }
 					}
+					.contextMenu {
+						Button(action: { Task { await readChannels(channels) } }) {
+							Image(systemName: "message.badge")
+							Text("Mark as read")
+						}
+						
+						Divider()
+						
+						Button(action: { copyId(channel) }) {
+							Image(systemName: "number.circle.fill")
+							Text("Copy ID")
+						}
+					}
 				}
 			}
 		}
@@ -94,5 +127,37 @@ struct ChannelList: View, Equatable {
 
 	static func == (lhs: Self, rhs: Self) -> Bool {
 		lhs.channels == rhs.channels && lhs.selCh == rhs.selCh
+	}
+}
+
+private extension ChannelList {
+	func readChannels(_ channels: [Channel]) async {
+		for channel in channels {
+			await readChannel(channel)
+		}
+	}
+	
+	func readChannel(_ channel: Channel) async {
+		do {
+			let _ = try await restAPI.ackMessageRead(id: channel.id, msgID: channel.last_message_id ?? "", manual: true, mention_count: 0)
+		} catch {}
+	}
+	
+	func copyLink(_ channel: Channel) {
+		let pasteboard = NSPasteboard.general
+		pasteboard.clearContents()
+		pasteboard.setString(
+			"https://canary.discord.com/channels/\(channel.guild_id ?? "@me")/\(channel.id)",
+			forType: .string
+		)
+	}
+	
+	func copyId(_ channel: Channel) {
+		let pasteboard = NSPasteboard.general
+		pasteboard.clearContents()
+		pasteboard.setString(
+			channel.id,
+			forType: .string
+		)
 	}
 }

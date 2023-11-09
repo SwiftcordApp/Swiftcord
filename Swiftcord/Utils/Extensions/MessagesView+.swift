@@ -74,7 +74,7 @@ internal extension MessagesView {
 
 		Task {
 			do {
-				_ = try await restAPI.createChannelMsg(
+				let newMessage = try await restAPI.createChannelMsg(
 					message: NewMessage(
 						content: message,
 						allowed_mentions: allowedMentions,
@@ -90,6 +90,8 @@ internal extension MessagesView {
 					attachments: attachments,
 					id: ctx.channel!.id
 				)
+				
+				_ = try await restAPI.ackMessageRead(id: newMessage.channel_id, msgID: newMessage.id)
 			} catch {
 				viewModel.showingInfoBar = true
 				viewModel.infoBarData = InfoBarData(

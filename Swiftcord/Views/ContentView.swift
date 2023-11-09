@@ -109,6 +109,7 @@ struct ContentView: View {
                         case .guild(let guild):
                             ServerButton(
                                 selected: state.selectedGuildID == guild.id || loadingGuildID == guild.id,
+                                guild: guild,
                                 name: guild.properties.name,
                                 serverIconURL: guild.properties.iconURL(),
                                 isLoading: loadingGuildID == guild.id
