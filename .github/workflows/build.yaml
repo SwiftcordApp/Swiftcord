@@ -1,7 +1,8 @@
 name: Build Swiftcord Nightly
 
 on:
-  push:
+  # Build is broken due to expired certs, disabling the workflow for now
+  # push:
   workflow_dispatch:
 
 concurrency:
