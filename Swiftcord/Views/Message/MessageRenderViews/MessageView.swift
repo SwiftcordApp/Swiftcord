@@ -19,11 +19,13 @@ struct NonUserBadge: View {
 		HStack(spacing: 0) {
 			if let flags = flags, flags.contains(.verifiedBot) {
 				Image(systemName: "checkmark")
+                    .foregroundStyle(.white)
 					.font(.system(size: 8, weight: .heavy))
 					.frame(width: 15)
 					.padding(.leading, -3)
 			}
 			Text(isWebhook ? "Webhook" : "Bot")
+                .foregroundStyle(.white)
                 .font(.system(size: 10))
                 .textCase(.uppercase)
 		}
