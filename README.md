@@ -17,6 +17,12 @@
 
 <p align="center">Native Discord client for macOS built in Swift</p>
 
+> [!WARNING]
+> I have fully moved my development time and attention to the next generation of Swiftcord, which means I will not be
+> frequently monitoring this repository and its issues. Read [this discussion](https://github.com/SwiftcordApp/Swiftcord/discussions/189) to find out more!
+>
+> We are very near to release, and I can't wait to let everyone experience the future of Swiftcord!
+
 [![](https://github.com/SwiftcordApp/.github/blob/main/res/hero.webp?raw=true)](https://github.com/SwiftcordApp/.github/blob/main/res/swiftcord-promo.mov?raw=true)
 ###### This image doesn't animate properly in Safari, unfortunately. Click on it to view the original video.
 
