@@ -80,7 +80,8 @@ struct ServerFolder: View {
                         Text(folder.name)
                             .font(.title3)
                             .padding(10)
-                        // Prevent popover from blocking clicks to other views
+                            .frame(maxWidth: 300)
+                            // Prevent popover from blocking clicks to other views
                             .interactiveDismissDisabled()
                     }
 
@@ -88,6 +89,7 @@ struct ServerFolder: View {
                         ForEach(folder.guilds, id: \.id) { [self] guild in
                             ServerButton(
                                 selected: selectedGuildID == guild.id || loadingGuildID == guild.id,
+                                guild: guild,
                                 name: guild.properties.name,
                                 serverIconURL: guild.properties.icon != nil ? "\(DiscordKitConfig.default.cdnURL)icons/\(guild.id)/\(guild.properties.icon!).webp?size=240" : nil,
                                 isLoading: loadingGuildID == guild.id
