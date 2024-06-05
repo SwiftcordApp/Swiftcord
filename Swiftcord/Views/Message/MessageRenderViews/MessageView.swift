@@ -59,7 +59,8 @@ struct MessageView: View, Equatable {
 	static let lineSpacing: CGFloat = 4
 
 	// Messages that can be rendered as "default" messages
-	static let defaultTypes: [MessageType] = [.defaultMsg, .reply]
+    static let defaultTypes: [MessageType] = [.defaultMsg, .reply, .chatInputCmd, .contextMenuCmd]
+    static let commandTypes: [MessageType] = [.chatInputCmd, .contextMenuCmd]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -70,6 +71,9 @@ struct MessageView: View, Equatable {
 						onQuoteClick(referencedID)
 					}
 				}
+            }
+            if MessageView.commandTypes.contains(message.type) {
+                CommandMessageView(message: message)
             }
             HStack(
                 alignment: MessageView.defaultTypes.contains(message.type) ? .top : .center,
@@ -95,7 +99,7 @@ struct MessageView: View, Equatable {
 									// just try both to see which is present
 									NonUserBadge(
 										flags: message.author.flags ?? message.author.public_flags,
-										isWebhook: message.webhook_id != nil
+										isWebhook: message.webhook_id != nil && !MessageView.commandTypes.contains(message.type)
 									)
                                 }
 								HStack(spacing: 0) {
