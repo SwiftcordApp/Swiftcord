@@ -17,15 +17,18 @@ struct ChannelButton: View, Equatable {
 
     let channel: Channel
     @Binding var selectedCh: Channel?
+	
+	@EnvironmentObject var gateway: DiscordGateway
 
     var body: some View {
+		let unread = gateway.readState[channel.id]?.last_message_id?.intValue ?? 0 < Int(channel.last_message_id ?? "0") ?? 0
 		if channel.type == .dm || channel.type == .groupDM {
 			DMButton(dm: channel, selectedCh: $selectedCh)
-				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
+				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id, unread: unread))
 				.controlSize(.large)
 		} else {
 			GuildChButton(channel: channel, selectedCh: $selectedCh)
-				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id))
+				.buttonStyle(DiscordChannelButton(isSelected: selectedCh?.id == channel.id, unread: unread))
 		}
     }
 }
