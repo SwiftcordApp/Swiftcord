@@ -10,6 +10,10 @@
   </a>
 </p>
 
-Swiftcord is currently in prerelease. Join the waitlist at [swiftcord.app](https://swiftcord.app/) to be the first in line for early access!
+<p align="center">
+  Swiftcord is currently in prerelease.
+  <br>
+  Join the waitlist at <a href="https://swiftcord.app">swiftcord.app</a> to be the first in line for early access!
+</p>
 
 > Source code will be made available following the public release.
