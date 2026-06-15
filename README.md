@@ -2,18 +2,18 @@
 <p align="center">
   The 100% native SwiftUI macOS Discord client, now with Liquid Glass.
   <br>
-  Join the waitlist at <a href="https://swiftcord.app">swiftcord.app</a> to be the first in line for early access!
+  Join the waitlist at <a href="https://swiftcord.app/?utm_source=gh">swiftcord.app</a> to be the first in line for early access!
   <br>
 </p>
 
 <p align="center">
-  <a href="https://swiftcord.app/">
-    <img src="docs-res/hero.png" alt="Native " width="100%">
+  <a href="https://swiftcord.app/?utm_source=gh">
+    <img src="docs-res/hero.png" alt="Swiftcord running on a MacBook and iPad" width="100%">
   </a>
 </p>
 
 <p align="center">
-  <a href="https://swiftcord.app/">
+  <a href="https://swiftcord.app/?utm_source=gh">
     <img src="docs-res/cta.png" alt="Join the Swiftcord waitlist" width="213">
   </a>
 </p>
