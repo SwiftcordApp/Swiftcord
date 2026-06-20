@@ -44,3 +44,5 @@ Follow along on X and Discord for updates. Plus, chat directly with developers a
 ## Open Source
 Swiftcord is under heavy development and is not currently accepting external contributions.
 Source code will be made available following public release.
+
+> Note: Looking for the legacy codebase? It's archived at the `main` branch.
