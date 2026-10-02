@@ -1,20 +1,18 @@
 <h1 align="center">Swiftcord</h1>
 <p align="center">
   The 100% native SwiftUI macOS Discord client, now with Liquid Glass.
-  <br>
-  Join the waitlist at <a href="https://swiftcord.app/?utm_source=gh">swiftcord.app</a> to be the first in line for early access!
-  <br>
-</p>
-
-<p align="center">
+  <br><br>
+  <a href="https://swiftcord.app/download?utm_source=gh">
+    <img src="docs-res/cta-dl.png" alt="Download Swiftcord" height="48">
+  </a>
   <a href="https://swiftcord.app/?utm_source=gh">
-    <img src="docs-res/hero.png" alt="Swiftcord running on a MacBook and iPad" width="100%">
+    <img src="docs-res/cta.png" alt="Learn more about Swiftcord" height="48">
   </a>
 </p>
 
 <p align="center">
   <a href="https://swiftcord.app/?utm_source=gh">
-    <img src="docs-res/cta.png" alt="Join the Swiftcord waitlist" width="213">
+    <img src="docs-res/hero.png" alt="Swiftcord running on a MacBook and iPad" width="100%">
   </a>
 </p>
 
@@ -27,8 +25,8 @@ embeds look exactly like you expect.
 Rebuilt from the ground up with performance at its core, Swiftcord launches in an instant,
 moves effortlessly between conversations, and stays remarkably light on your system.
 
-## Join the Waitlist.
-Swiftcord v2 is currently in prerelease and will be released in phases. Join the waitlist to secure your place - we'll send you an email with a code to install Swiftcord once a spot's available!
+## [Download Now!](https://swiftcord.app/download)
+Currently available for macOS 26+, Apple Silicon. iOS coming soon.
 
 Follow along on X and Discord for updates. Plus, chat directly with developers and other awesome community members! 
 
@@ -40,9 +38,5 @@ Follow along on X and Discord for updates. Plus, chat directly with developers a
     <img alt="" src="https://img.shields.io/twitter/follow/swiftcordapp?style=for-the-badge&labelColor=black&logo=x">
   </a>
 </p>
-
-## Open Source
-Swiftcord is under heavy development and is not currently accepting external contributions.
-Source code will be made available following public release.
 
 > Note: Looking for the legacy codebase? It's archived at the `main` branch.
