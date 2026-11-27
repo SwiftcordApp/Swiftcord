@@ -38,5 +38,3 @@ Follow along on X and Discord for updates. Plus, chat directly with developers a
     <img alt="" src="https://img.shields.io/twitter/follow/swiftcordapp?style=for-the-badge&labelColor=black&logo=x">
   </a>
 </p>
-
-> Note: Looking for the legacy codebase? It's archived at the `main` branch.
